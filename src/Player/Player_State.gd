@@ -42,6 +42,7 @@ export var move_direction = 0
 var direction_p = 0
 var aim_direction = 0
 var velocity = Vector2()
+var shoot_vector_save = Vector2()
 
 # Delays and states memory # handle by Player.gd
 var last_onfloor = 0

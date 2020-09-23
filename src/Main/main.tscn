@@ -62,6 +62,15 @@ scale = Vector2( 2, 1 )
 [node name="Ball" parent="." instance=ExtResource( 3 )]
 position = Vector2( 320, 96 )
 
+[node name="Ball2" parent="." instance=ExtResource( 3 )]
+position = Vector2( 953, 27 )
+
+[node name="Ball4" parent="." instance=ExtResource( 3 )]
+position = Vector2( 477, 167 )
+
+[node name="Ball3" parent="." instance=ExtResource( 3 )]
+position = Vector2( 750, -54 )
+
 [node name="Player" parent="." instance=ExtResource( 1 )]
 position = Vector2( 400, 96 )
 air_friction = 0.15

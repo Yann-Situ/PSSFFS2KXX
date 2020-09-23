@@ -34,7 +34,6 @@ export (float) var walk_accel = 220 # pix/s²
 export (float) var shoot_min_speed = 100 # pix/s
 export (float) var shoot_max_speed = 600 # pix/s
 export (float) var shoot_max_aim_time = 1000 # ms
-var shoot_vector_save = Vector2(0,0)
 
 #export var snap_vector_save = Vector2(0,1)
 #var snap_vector = 
@@ -86,15 +85,13 @@ func get_input(delta):
 
 	if S.is_aiming:
 		var shoot = shoot_vector()
-		$Shoot_predictor.draw(Vector2(0.0,0.0), shoot+S.velocity, Vector2(0,625))
+		$Shoot_predictor.draw(Vector2(0.0,0.0), shoot+0.5*S.velocity, Vector2(0,625))
 		if shoot.x > 0 :
 			S.aim_direction = 1
 		else :
 			S.aim_direction = -1
 			
 	$Sprite/Player_Animation.animate_from_state(S)
-	if S.has_ball and S.active_ball != null and not S.active_ball.physics_enabled:
-		set_has_ball_position()
 	if false : #COLOR INFORMATION
 #		if S.is_aiming:
 #			$Polygon2D.color = Color(1,0,0)
@@ -172,10 +169,10 @@ func move_shoot(delta):
 	S.aim_direction = 0
 	S.is_shooting = true
 	S.last_shoot = S.time
-	shoot_vector_save = shoot_vector()
+	S.shoot_vector_save = shoot_vector()
 	#Engine.time_scale = 1.0
 	$Shoot_predictor.clear()
-	#throw_ball()	#done by animation
+	#throw_ball()+free_ball in Ball_handler	called by animation
 	
 func move_adherence(delta):
 	var friction = 0 #get adh from environment
@@ -191,29 +188,7 @@ func shoot_vector(): # return shoot vector if player not moving
 	t = min(shoot_max_aim_time, t)/shoot_max_aim_time
 	t = shoot_min_speed+t*(shoot_max_speed-shoot_min_speed)
 	return t * ($Camera.get_global_mouse_position() - position).normalized()
-
-func throw_ball(): # called by animation
-	#var new_ball = Ball.instance()
-	#new_ball.position = position
-	#new_ball.set_linear_velocity(shoot_vector_save + 0.8*S.velocity)
-	#get_parent().add_child(new_ball)
-	if S.has_ball and S.active_ball != null :
-		set_has_ball_position()
-		S.active_ball.enable_physics()
-		S.active_ball.set_linear_velocity(shoot_vector_save + 0.8*S.velocity)
-		print("throw ball at "+str(S.active_ball.position.x)+" vs "+str(position.x))
 		
-func set_has_ball_position():
-	#if $Sprite.flip_h :
-	#	S.active_ball.position.x = position.x - $Ball_Pickup/Has_Ball_Position.position.x
-	#	S.active_ball.position.y = position.y + $Ball_Pickup/Has_Ball_Position.position.y
-	#else :
-	#	S.active_ball.set_position(position + $Ball_Pickup/Has_Ball_Position.position)
-	if $Sprite.flip_h :
-		S.active_ball.transform.origin.x = position.x - $Ball_Pickup/Has_Ball_Position.position.x
-		S.active_ball.transform.origin.y = position.y + $Ball_Pickup/Has_Ball_Position.position.y
-	else :
-		S.active_ball.transform.origin = position + $Ball_Pickup/Has_Ball_Position.position
 
 func _physics_process(delta):
 	get_input(delta)

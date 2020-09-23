@@ -5,7 +5,7 @@
 [ext_resource path="res://src/Player/Shoot_predictor.tscn" type="PackedScene" id=3]
 [ext_resource path="res://src/Player/Player_Animation.gd" type="Script" id=4]
 [ext_resource path="res://src/Player/Player_State.tscn" type="PackedScene" id=5]
-[ext_resource path="res://src/Player/Ball_Pickup.gd" type="Script" id=6]
+[ext_resource path="res://src/Player/Ball_Handler.gd" type="Script" id=6]
 
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 4, 26 )
@@ -50,7 +50,7 @@ tracks/2/keys = {
 "values": [ Vector2( 4, 26 ) ]
 }
 tracks/3/type = "value"
-tracks/3/path = NodePath("../Ball_Pickup/Has_Ball_Position:position")
+tracks/3/path = NodePath("../Ball_Handler/Has_Ball_Position:position")
 tracks/3/interp = 1
 tracks/3/loop_wrap = true
 tracks/3/imported = false
@@ -113,42 +113,31 @@ tracks/3/keys = {
 "update": 1,
 "values": [ true, false ]
 }
-tracks/4/type = "method"
-tracks/4/path = NodePath("..")
+tracks/4/type = "value"
+tracks/4/path = NodePath("../Ball_Handler/Has_Ball_Position:position")
 tracks/4/interp = 1
 tracks/4/loop_wrap = true
 tracks/4/imported = false
 tracks/4/enabled = true
 tracks/4/keys = {
-"times": PoolRealArray( 0.15 ),
-"transitions": PoolRealArray( 1 ),
-"values": [ {
-"args": [  ],
-"method": "throw_ball"
-} ]
-}
-tracks/5/type = "value"
-tracks/5/path = NodePath("../Ball_Pickup/Has_Ball_Position:position")
-tracks/5/interp = 1
-tracks/5/loop_wrap = true
-tracks/5/imported = false
-tracks/5/enabled = true
-tracks/5/keys = {
 "times": PoolRealArray( 0, 0.1, 0.11, 0.12, 0.15 ),
 "transitions": PoolRealArray( 1, 1, 1, 1, 1 ),
 "update": 0,
 "values": [ Vector2( -14, -21 ), Vector2( -16, -20 ), Vector2( -14, -22 ), Vector2( 13, -34 ), Vector2( 13, -34 ) ]
 }
-tracks/6/type = "method"
-tracks/6/path = NodePath("../Ball_Pickup")
-tracks/6/interp = 1
-tracks/6/loop_wrap = true
-tracks/6/imported = false
-tracks/6/enabled = true
-tracks/6/keys = {
-"times": PoolRealArray( 0.34 ),
-"transitions": PoolRealArray( 1 ),
+tracks/5/type = "method"
+tracks/5/path = NodePath("../Ball_Handler")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/keys = {
+"times": PoolRealArray( 0.15, 0.34 ),
+"transitions": PoolRealArray( 1, 1 ),
 "values": [ {
+"args": [  ],
+"method": "throw_ball"
+}, {
 "args": [  ],
 "method": "free_ball"
 } ]
@@ -194,7 +183,7 @@ tracks/2/keys = {
 "values": [ Vector2( 5, 26 ) ]
 }
 tracks/3/type = "value"
-tracks/3/path = NodePath("../Ball_Pickup/Has_Ball_Position:position")
+tracks/3/path = NodePath("../Ball_Handler/Has_Ball_Position:position")
 tracks/3/interp = 1
 tracks/3/loop_wrap = true
 tracks/3/imported = false
@@ -246,7 +235,7 @@ tracks/2/keys = {
 "values": [ Vector2( 0, 6 ) ]
 }
 tracks/3/type = "value"
-tracks/3/path = NodePath("../Ball_Pickup/Has_Ball_Position:position")
+tracks/3/path = NodePath("../Ball_Handler/Has_Ball_Position:position")
 tracks/3/interp = 1
 tracks/3/loop_wrap = true
 tracks/3/imported = false
@@ -298,7 +287,7 @@ tracks/2/keys = {
 "values": [ Vector2( 4, 26 ) ]
 }
 tracks/3/type = "value"
-tracks/3/path = NodePath("../Ball_Pickup/Has_Ball_Position:position")
+tracks/3/path = NodePath("../Ball_Handler/Has_Ball_Position:position")
 tracks/3/interp = 1
 tracks/3/loop_wrap = true
 tracks/3/imported = false
@@ -326,7 +315,7 @@ tracks/0/keys = {
 "values": [ 176, 177, 178, 179, 180, 181, 182, 183, 184, 185 ]
 }
 tracks/1/type = "value"
-tracks/1/path = NodePath("../Ball_Pickup/Has_Ball_Position:position")
+tracks/1/path = NodePath("../Ball_Handler/Has_Ball_Position:position")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/imported = false
@@ -390,40 +379,29 @@ tracks/3/keys = {
 "values": [ true, false ]
 }
 tracks/4/type = "method"
-tracks/4/path = NodePath("..")
+tracks/4/path = NodePath("../Ball_Handler")
 tracks/4/interp = 1
 tracks/4/loop_wrap = true
 tracks/4/imported = false
 tracks/4/enabled = true
 tracks/4/keys = {
-"times": PoolRealArray( 0.15 ),
-"transitions": PoolRealArray( 1 ),
+"times": PoolRealArray( 0.15, 0.34 ),
+"transitions": PoolRealArray( 1, 1 ),
 "values": [ {
 "args": [  ],
 "method": "throw_ball"
+}, {
+"args": [  ],
+"method": "free_ball"
 } ]
 }
-tracks/5/type = "method"
-tracks/5/path = NodePath("../Ball_Pickup")
+tracks/5/type = "value"
+tracks/5/path = NodePath("../Ball_Handler/Has_Ball_Position:position")
 tracks/5/interp = 1
 tracks/5/loop_wrap = true
 tracks/5/imported = false
 tracks/5/enabled = true
 tracks/5/keys = {
-"times": PoolRealArray( 0.34 ),
-"transitions": PoolRealArray( 1 ),
-"values": [ {
-"args": [  ],
-"method": "free_ball"
-} ]
-}
-tracks/6/type = "value"
-tracks/6/path = NodePath("../Ball_Pickup/Has_Ball_Position:position")
-tracks/6/interp = 1
-tracks/6/loop_wrap = true
-tracks/6/imported = false
-tracks/6/enabled = true
-tracks/6/keys = {
 "times": PoolRealArray( 0, 0.06, 0.1, 0.11, 0.12, 0.15 ),
 "transitions": PoolRealArray( 1, 1, 1, 1, 1, 1 ),
 "update": 0,
@@ -470,7 +448,7 @@ tracks/2/keys = {
 "values": [ Vector2( 5, 26 ) ]
 }
 tracks/3/type = "value"
-tracks/3/path = NodePath("../Ball_Pickup/Has_Ball_Position:position")
+tracks/3/path = NodePath("../Ball_Handler/Has_Ball_Position:position")
 tracks/3/interp = 1
 tracks/3/loop_wrap = true
 tracks/3/imported = false
@@ -522,7 +500,7 @@ tracks/2/keys = {
 "values": [ Vector2( 4, 26 ) ]
 }
 tracks/3/type = "value"
-tracks/3/path = NodePath("../Ball_Pickup/Has_Ball_Position:position")
+tracks/3/path = NodePath("../Ball_Handler/Has_Ball_Position:position")
 tracks/3/interp = 1
 tracks/3/loop_wrap = true
 tracks/3/imported = false
@@ -585,7 +563,7 @@ tracks/3/keys = {
 "values": [ true, false ]
 }
 tracks/4/type = "value"
-tracks/4/path = NodePath("../Ball_Pickup/Has_Ball_Position:position")
+tracks/4/path = NodePath("../Ball_Handler/Has_Ball_Position:position")
 tracks/4/interp = 1
 tracks/4/loop_wrap = true
 tracks/4/imported = false
@@ -636,7 +614,7 @@ tracks/2/keys = {
 "values": [ Vector2( 4, 26 ) ]
 }
 tracks/3/type = "value"
-tracks/3/path = NodePath("../Ball_Pickup/Has_Ball_Position:position")
+tracks/3/path = NodePath("../Ball_Handler/Has_Ball_Position:position")
 tracks/3/interp = 1
 tracks/3/loop_wrap = true
 tracks/3/imported = false
@@ -688,7 +666,7 @@ tracks/2/keys = {
 "values": [ Vector2( 4, 26 ) ]
 }
 tracks/3/type = "value"
-tracks/3/path = NodePath("../Ball_Pickup/Has_Ball_Position:position")
+tracks/3/path = NodePath("../Ball_Handler/Has_Ball_Position:position")
 tracks/3/interp = 1
 tracks/3/loop_wrap = true
 tracks/3/imported = false
@@ -721,7 +699,7 @@ position = Vector2( -2.18279e-11, 0 )
 texture = ExtResource( 2 )
 vframes = 20
 hframes = 16
-frame = 166
+frame = 132
 
 [node name="Player_Animation" type="AnimationPlayer" parent="Sprite"]
 anims/air_aim = SubResource( 2 )
@@ -750,14 +728,13 @@ current = true
 is_jumping = true
 is_shooting = true
 
-[node name="Ball_Pickup" type="Area2D" parent="."]
+[node name="Ball_Handler" type="Area2D" parent="."]
 script = ExtResource( 6 )
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Ball_Pickup"]
-visible = false
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Ball_Handler"]
 position = Vector2( 0, 5 )
 shape = SubResource( 14 )
 
-[node name="Has_Ball_Position" type="Node2D" parent="Ball_Pickup"]
-position = Vector2( 13, -34 )
-[connection signal="body_entered" from="Ball_Pickup" to="Ball_Pickup" method="_on_Ball_Pickup_body_entered"]
+[node name="Has_Ball_Position" type="Node2D" parent="Ball_Handler"]
+position = Vector2( -14, -21 )
+[connection signal="body_entered" from="Ball_Handler" to="Ball_Handler" method="_on_Ball_Handler_body_entered"]
