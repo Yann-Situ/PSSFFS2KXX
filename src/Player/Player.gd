@@ -7,7 +7,7 @@ const Ball = preload("res://src/Ball/Ball.tscn")
 
 
 # Environment features (should be given by the map)
-export (float) var gravity = 625 # pix/s²
+export (float) var gravity = ProjectSettings.get_setting("physics/2d/default_gravity") # pix/s²
 export (float) var floor_friction = 0.2 # %/frame
 export (float) var air_friction = 0.1 # %/frame
 
@@ -29,11 +29,6 @@ export (float) var run_speed_max = 400 # pix/s
 export (float) var walk_instant_speed = 150 # pix/s
 export (float) var walk_return_thresh_instant_speed = walk_instant_speed*1.5 # pix/s
 export (float) var walk_accel = 220 # pix/s²
-
-# Shoot features
-export (float) var shoot_min_speed = 100 # pix/s
-export (float) var shoot_max_speed = 600 # pix/s
-export (float) var shoot_max_aim_time = 1000 # ms
 
 #export var snap_vector_save = Vector2(0,1)
 #var snap_vector = 
@@ -84,8 +79,9 @@ func get_input(delta):
 	############### Misc and Animation handling
 
 	if S.is_aiming:
-		var shoot = shoot_vector()
-		$Shoot_predictor.draw(Vector2(0.0,0.0), shoot+0.5*S.velocity, Vector2(0,625))
+		var shoot = $Shoot_predictor.shoot_vector()
+		$Shoot_predictor.draw(Vector2(0.0,0.0), shoot+0.5*S.velocity, 
+				S.active_ball.get_gravity_scale()*Vector2(0,gravity))
 		if shoot.x > 0 :
 			S.aim_direction = 1
 		else :
@@ -169,7 +165,7 @@ func move_shoot(delta):
 	S.aim_direction = 0
 	S.is_shooting = true
 	S.last_shoot = S.time
-	S.shoot_vector_save = shoot_vector()
+	$Shoot_predictor.shoot_vector_save = $Shoot_predictor.shoot_vector()
 	#Engine.time_scale = 1.0
 	$Shoot_predictor.clear()
 	#throw_ball()+free_ball in Ball_handler	called by animation
@@ -182,13 +178,6 @@ func move_adherence(delta):
 		friction = air_friction
 	if S.move_direction != S.direction_p: # if not moving in the same dir as input
 		S.velocity.x = lerp(S.velocity.x, 0, friction)
-		
-func shoot_vector(): # return shoot vector if player not moving
-	var t = S.time-S.last_aim_jp
-	t = min(shoot_max_aim_time, t)/shoot_max_aim_time
-	t = shoot_min_speed+t*(shoot_max_speed-shoot_min_speed)
-	return t * ($Camera.get_global_mouse_position() - position).normalized()
-		
 
 func _physics_process(delta):
 	get_input(delta)

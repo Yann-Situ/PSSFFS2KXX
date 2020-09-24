@@ -1,8 +1,10 @@
-[gd_scene load_steps=4 format=2]
+[gd_scene load_steps=6 format=2]
 
 [ext_resource path="res://src/Player/Player.tscn" type="PackedScene" id=1]
 [ext_resource path="res://src/Platform/BasicWall.tscn" type="PackedScene" id=2]
 [ext_resource path="res://src/Ball/Ball.tscn" type="PackedScene" id=3]
+[ext_resource path="res://src/Ball/Ball-constant_energy.tscn" type="PackedScene" id=4]
+[ext_resource path="res://src/Ball/Ball-heavy.tscn" type="PackedScene" id=5]
 
 [node name="main" type="Node2D"]
 
@@ -35,7 +37,7 @@ position = Vector2( 1768, 376 )
 scale = Vector2( 10, 1 )
 
 [node name="BasicWall7" parent="walls" instance=ExtResource( 2 )]
-position = Vector2( 584, 112 )
+position = Vector2( 566, -30 )
 rotation = 1.5708
 scale = Vector2( 2, 1 )
 
@@ -55,7 +57,7 @@ rotation = 1.5708
 scale = Vector2( 4, 1 )
 
 [node name="BasicWall11" parent="walls" instance=ExtResource( 2 )]
-position = Vector2( 2000, 104 )
+position = Vector2( 973, -81 )
 rotation = 0.785398
 scale = Vector2( 2, 1 )
 
@@ -68,11 +70,20 @@ position = Vector2( 953, 27 )
 [node name="Ball4" parent="." instance=ExtResource( 3 )]
 position = Vector2( 477, 167 )
 
-[node name="Ball3" parent="." instance=ExtResource( 3 )]
-position = Vector2( 750, -54 )
-
 [node name="Player" parent="." instance=ExtResource( 1 )]
 position = Vector2( 400, 96 )
 air_friction = 0.15
 jump_speed = -460.0
 vecjump = Vector2( 0.65, -0.9 )
+
+[node name="Ball3" parent="." instance=ExtResource( 4 )]
+position = Vector2( 653.441, 211.268 )
+
+[node name="Ball5" parent="." instance=ExtResource( 5 )]
+position = Vector2( 552.918, 185.783 )
+
+[node name="Ball6" parent="." instance=ExtResource( 4 )]
+position = Vector2( 699.218, 331.612 )
+
+[node name="Ball7" parent="." instance=ExtResource( 5 )]
+position = Vector2( 598.696, 306.127 )

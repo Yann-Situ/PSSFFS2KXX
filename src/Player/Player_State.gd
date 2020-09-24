@@ -42,7 +42,6 @@ export var move_direction = 0
 var direction_p = 0
 var aim_direction = 0
 var velocity = Vector2()
-var shoot_vector_save = Vector2()
 
 # Delays and states memory # handle by Player.gd
 var last_onfloor = 0
@@ -95,7 +94,7 @@ func update_vars(delta_ms):
 	#is_going[0] = is_going[0] and is_moving_fast[0]
 	#is_going[1] = is_going[1] and is_moving_fast[1]
 	is_crouching = is_crouching and not is_jumping
-	is_aiming = is_aiming and has_ball
+	is_aiming = is_aiming and has_ball and active_ball != null
 	
 	direction_p = 0
 	if right_p :
@@ -109,5 +108,5 @@ func update_vars(delta_ms):
 		  and (time - last_jump > jump_countdown)
 	can_go = (time - last_walljump > walljump_move_countdown)
 	can_crouch = is_onfloor
-	can_aim = (time - last_shoot > shoot_countdown) and has_ball
-	can_shoot = is_aiming and has_ball
+	can_aim = (time - last_shoot > shoot_countdown) and has_ball and active_ball != null
+	can_shoot = is_aiming and has_ball and active_ball != null

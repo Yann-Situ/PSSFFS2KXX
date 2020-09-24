@@ -1,4 +1,5 @@
 extends RigidBody2D
+
 # Classical ball
 export (bool) var physics_enabled = true
 var should_throw = false

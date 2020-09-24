@@ -4,6 +4,7 @@
 [ext_resource path="res://src/Ball/Ball.gd" type="Script" id=2]
 
 [sub_resource type="PhysicsMaterial" id=1]
+friction = 0.15
 bounce = 0.5
 
 [sub_resource type="CircleShape2D" id=2]
