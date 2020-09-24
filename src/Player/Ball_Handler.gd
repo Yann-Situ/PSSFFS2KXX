@@ -1,0 +1,50 @@
+extends Area2D
+# Ball pickup
+var S
+# Called when the node enters the scene tree for the first time.
+func _ready():
+	S = get_parent().get_node("Player_State")
+
+# Called every frame. 'delta' is the elapsed time since the previous frame.
+#func _process(delta):
+#	pass
+
+
+func _on_Ball_Handler_body_entered(body):
+	print(body.name)
+	if body.name.substr(0,4)=='Ball':
+		if S.has_ball :
+			pass
+		else :
+			print("pickup "+body.name)
+			S.has_ball = true
+			S.active_ball = body
+			body.disable_physics()
+
+func set_has_ball_position():
+	if get_parent().get_node("Sprite").flip_h :
+		S.active_ball.transform.origin.x = get_parent().position.x - $Has_Ball_Position.position.x
+		S.active_ball.transform.origin.y = get_parent().position.y + $Has_Ball_Position.position.y
+	else :
+		S.active_ball.transform.origin = get_parent().position + $Has_Ball_Position.position
+
+func throw_ball(): # called by animation
+	if S.has_ball and S.active_ball != null :
+		S.active_ball.throw(get_parent().position, 
+							get_parent().get_node("Shoot_predictor").shoot_vector_save + 0.5*S.velocity)
+		S.active_ball.enable_physics()
+		print("throw ball at "+str(S.active_ball.position.x)+" vs "+str(position.x))
+		# free_ball will be called later (soon)
+
+func free_ball(): # set out  active_ball and has_ball
+	if S.has_ball :
+		S.active_ball = null
+		S.has_ball = false
+		print("free_ball")
+	else :
+		print("error, free_ball but doesn't have ball")
+	
+
+func _physics_process(delta):
+	if S.has_ball and S.active_ball != null and not S.active_ball.physics_enabled:
+		set_has_ball_position()
