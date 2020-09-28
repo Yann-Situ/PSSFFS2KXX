@@ -23,8 +23,8 @@ func _on_Ball_Handler_body_entered(body):
 
 func set_has_ball_position():
 	if get_parent().get_node("Sprite").flip_h :
-		S.active_ball.transform.origin.x = get_parent().position.x - $Has_Ball_Position.position.x
-		S.active_ball.transform.origin.y = get_parent().position.y + $Has_Ball_Position.position.y
+		S.active_ball.transform.origin.x = int(get_parent().position.x+0.5) - $Has_Ball_Position.position.x
+		S.active_ball.transform.origin.y = int(get_parent().position.y+0.5) + $Has_Ball_Position.position.y
 	else :
 		S.active_ball.transform.origin = get_parent().position + $Has_Ball_Position.position
 

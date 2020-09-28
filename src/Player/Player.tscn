@@ -508,8 +508,8 @@ tracks/3/enabled = true
 tracks/3/keys = {
 "times": PoolRealArray( 0, 0.8, 0.9, 1, 1.1, 1.2, 1.3, 1.4, 1.5, 1.6, 1.7, 1.9, 2, 2.1, 2.2, 2.3, 2.4, 2.5, 2.6, 2.7, 2.8 ),
 "transitions": PoolRealArray( 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1 ),
-"update": 0,
-"values": [ Vector2( 3, -3 ), Vector2( 3.00001, -3 ), Vector2( 3.00001, -4 ), Vector2( 10, 0 ), Vector2( 11, 6.00001 ), Vector2( 8.99999, 12 ), Vector2( 8, 27 ), Vector2( 4.99999, 16 ), Vector2( 5.00001, 7.99999 ), Vector2( 4.99999, 4 ), Vector2( 5, 2 ), Vector2( 4.99999, 2 ), Vector2( 10, 0 ), Vector2( 11, 6.00001 ), Vector2( 8.99999, 12 ), Vector2( 8, 27 ), Vector2( 4.99999, 16 ), Vector2( 5.00001, 7.99999 ), Vector2( 4.99999, 4 ), Vector2( 5, 2 ), Vector2( 3, -3 ) ]
+"update": 1,
+"values": [ Vector2( 5, 0 ), Vector2( 5.00001, 0 ), Vector2( 5.00001, 0 ), Vector2( 9, -2 ), Vector2( 10, 5.99999 ), Vector2( 8.99999, 12 ), Vector2( 8, 26 ), Vector2( 4.99999, 15 ), Vector2( 5.00001, 7.00001 ), Vector2( 5.99999, 3 ), Vector2( 5, 0 ), Vector2( 4.99999, 0 ), Vector2( 9, -2 ), Vector2( 10, 5.99999 ), Vector2( 8.99999, 12 ), Vector2( 8, 26 ), Vector2( 4.99999, 15 ), Vector2( 5.00001, 7.00001 ), Vector2( 5.99999, 3 ), Vector2( 5, 0 ), Vector2( 5, 0 ) ]
 }
 
 [sub_resource type="Animation" id=11]
@@ -699,7 +699,7 @@ position = Vector2( -2.18279e-11, 0 )
 texture = ExtResource( 2 )
 vframes = 20
 hframes = 16
-frame = 132
+frame = 200
 
 [node name="Player_Animation" type="AnimationPlayer" parent="Sprite"]
 anims/air_aim = SubResource( 2 )
@@ -736,5 +736,5 @@ position = Vector2( 0, 5 )
 shape = SubResource( 14 )
 
 [node name="Has_Ball_Position" type="Node2D" parent="Ball_Handler"]
-position = Vector2( -14, -21 )
+position = Vector2( 5, 0 )
 [connection signal="body_entered" from="Ball_Handler" to="Ball_Handler" method="_on_Ball_Handler_body_entered"]

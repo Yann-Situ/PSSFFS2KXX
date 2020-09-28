@@ -8,10 +8,28 @@
 
 [node name="main" type="Node2D"]
 
+[node name="ColorRect" type="ColorRect" parent="."]
+margin_left = -120.0
+margin_top = -328.0
+margin_right = 968.0
+margin_bottom = 400.0
+color = Color( 0.305882, 0.760784, 0.819608, 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
 [node name="walls" type="Node" parent="."]
 
 [node name="BasicWall" parent="walls" instance=ExtResource( 2 )]
 position = Vector2( 608, 376 )
+scale = Vector2( 10, 1 )
+
+[node name="BasicWall12" parent="walls" instance=ExtResource( 2 )]
+position = Vector2( 608, -288 )
+scale = Vector2( 10, 1 )
+
+[node name="BasicWall13" parent="walls" instance=ExtResource( 2 )]
+position = Vector2( 1784, -288 )
 scale = Vector2( 10, 1 )
 
 [node name="BasicWall2" parent="walls" instance=ExtResource( 2 )]
@@ -20,12 +38,16 @@ rotation = 0.785398
 scale = Vector2( 2, 1 )
 
 [node name="BasicWall3" parent="walls" instance=ExtResource( 2 )]
-position = Vector2( -104, 136 )
+position = Vector2( -104, -16 )
 rotation = 1.5708
 scale = Vector2( 3, 1 )
 
 [node name="BasicWall4" parent="walls" instance=ExtResource( 2 )]
 position = Vector2( 432, 224 )
+scale = Vector2( 2, 1 )
+
+[node name="BasicWall14" parent="walls" instance=ExtResource( 2 )]
+position = Vector2( 1584, -104 )
 scale = Vector2( 2, 1 )
 
 [node name="BasicWall5" parent="walls" instance=ExtResource( 2 )]
@@ -61,29 +83,31 @@ position = Vector2( 973, -81 )
 rotation = 0.785398
 scale = Vector2( 2, 1 )
 
-[node name="Ball" parent="." instance=ExtResource( 3 )]
+[node name="Balls" type="Node" parent="."]
+
+[node name="Ball" parent="Balls" instance=ExtResource( 3 )]
 position = Vector2( 320, 96 )
 
-[node name="Ball2" parent="." instance=ExtResource( 3 )]
+[node name="Ball2" parent="Balls" instance=ExtResource( 3 )]
 position = Vector2( 953, 27 )
 
-[node name="Ball4" parent="." instance=ExtResource( 3 )]
+[node name="Ball4" parent="Balls" instance=ExtResource( 3 )]
 position = Vector2( 477, 167 )
+
+[node name="Ball3" parent="Balls" instance=ExtResource( 4 )]
+position = Vector2( 653.441, 211.268 )
+
+[node name="Ball5" parent="Balls" instance=ExtResource( 5 )]
+position = Vector2( 552.918, 185.783 )
+
+[node name="Ball7" parent="Balls" instance=ExtResource( 5 )]
+position = Vector2( 598.696, 306.127 )
+
+[node name="Ball6" parent="Balls" instance=ExtResource( 4 )]
+position = Vector2( 699.218, 331.612 )
 
 [node name="Player" parent="." instance=ExtResource( 1 )]
 position = Vector2( 400, 96 )
 air_friction = 0.15
 jump_speed = -460.0
 vecjump = Vector2( 0.65, -0.9 )
-
-[node name="Ball3" parent="." instance=ExtResource( 4 )]
-position = Vector2( 653.441, 211.268 )
-
-[node name="Ball5" parent="." instance=ExtResource( 5 )]
-position = Vector2( 552.918, 185.783 )
-
-[node name="Ball6" parent="." instance=ExtResource( 4 )]
-position = Vector2( 699.218, 331.612 )
-
-[node name="Ball7" parent="." instance=ExtResource( 5 )]
-position = Vector2( 598.696, 306.127 )
