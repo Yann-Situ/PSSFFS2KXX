@@ -49,7 +49,8 @@ func animate_from_state(S):
 				set_flip(S.last_wall_normal_direction == 1, S.last_wall_normal_direction == -1)
 				self.play("floor_wall")
 			elif S.is_moving_fast and S.direction_p != 0 :
-				self.play("run")
+				#self.play("run")
+				self.play("walk")
 			elif S.is_idle :
 				self.play("idle")
 			elif S.direction_p != 0 :
