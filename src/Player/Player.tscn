@@ -1,4 +1,4 @@
-[gd_scene load_steps=21 format=2]
+[gd_scene load_steps=22 format=2]
 
 [ext_resource path="res://src/Player/Player.gd" type="Script" id=1]
 [ext_resource path="res://assets/art/player/TilesetBall.png" type="Texture" id=2]
@@ -6,6 +6,7 @@
 [ext_resource path="res://src/Player/Player_Animation.gd" type="Script" id=4]
 [ext_resource path="res://src/Player/Player_State.tscn" type="PackedScene" id=5]
 [ext_resource path="res://src/Player/Ball_Handler.gd" type="Script" id=6]
+[ext_resource path="res://src/Player/Camera.gd" type="Script" id=7]
 
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 4, 26 )
@@ -720,9 +721,11 @@ script = ExtResource( 4 )
 position = Vector2( 0, 0 )
 
 [node name="Camera" type="Camera2D" parent="."]
-visible = false
-position = Vector2( 2.18279e-11, 0 )
+position = Vector2( 0, -35 )
 current = true
+script = ExtResource( 7 )
+
+[node name="Tween" type="Tween" parent="Camera"]
 
 [node name="Player_State" parent="." instance=ExtResource( 5 )]
 is_jumping = true
@@ -737,4 +740,5 @@ shape = SubResource( 14 )
 
 [node name="Has_Ball_Position" type="Node2D" parent="Ball_Handler"]
 position = Vector2( 5, 0 )
+[connection signal="tween_completed" from="Camera/Tween" to="Camera" method="_on_Tween_tween_completed"]
 [connection signal="body_entered" from="Ball_Handler" to="Ball_Handler" method="_on_Ball_Handler_body_entered"]

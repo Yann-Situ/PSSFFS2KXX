@@ -74,6 +74,9 @@ func update_vars(delta_ms):
 	aim_jp = Input.is_action_just_pressed("ui_select")
 	shoot_jr = Input.is_action_just_released("ui_select")
 	
+	if Input.is_action_just_pressed("ui_accept"):
+		get_parent().get_node("Camera").screen_shake(0.2,5)
+	
 	#is_onfloor = (is_on_floor) # changed by PlatformPlayer
 	#is_onwall  = (is_on_wall)  # changed by PlatformPlayer
 	is_falling =  (not is_onfloor) and velocity.y > 0

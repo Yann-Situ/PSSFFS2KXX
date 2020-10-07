@@ -82,10 +82,13 @@ func get_input(delta):
 		var shoot = $Shoot_predictor.shoot_vector()
 		$Shoot_predictor.draw(Vector2(0.0,0.0), shoot+0.5*S.velocity, 
 				S.active_ball.get_gravity_scale()*Vector2(0,gravity))
+		$Camera.set_offset_from_type("aim",shoot.normalized())
 		if shoot.x > 0 :
 			S.aim_direction = 1
 		else :
 			S.aim_direction = -1
+	else :
+		$Camera.set_offset_from_type("normal")
 			
 	$Sprite/Player_Animation.animate_from_state(S)
 	if false : #COLOR INFORMATION
