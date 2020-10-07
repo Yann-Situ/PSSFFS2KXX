@@ -32,4 +32,8 @@ func _integrate_forces(state):
 	else :
 		$Sprite.scale = (Vector2(1,1))
 		$Sprite.rotation = (0)
+	integrate_forces_child(state)
+	
+func integrate_forces_child(state):
+	pass
 		
