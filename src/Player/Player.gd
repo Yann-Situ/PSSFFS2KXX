@@ -21,6 +21,7 @@ export (float) var air_instant_speed = 60 # pix/s
 export (float) var air_return_thresh_instant_speed = air_instant_speed*0.5 # pix/s
 export (float) var sideaerial_accel = 220 # pix/s²
 export (float) var jump_speed = -450 # pix/s
+export (float) var max_speed_fall_onwall = 200
 export (Vector2) var vecjump = Vector2(0.65, -1)
 
 # Walk and run features
@@ -184,5 +185,9 @@ func move_adherence(delta):
 
 func _physics_process(delta):
 	get_input(delta)
-	S.velocity.y += gravity * delta
+	if S.is_onwall and S.velocity.y > 0: #fall on a wall
+		S.velocity.y += gravity/2.0 * delta
+		S.velocity.y = min(S.velocity.y,max_speed_fall_onwall)
+	else:
+		S.velocity.y += gravity * delta
 	S.velocity = move_and_slide(S.velocity, Vector2(0, -1), true, 4, 0.9)

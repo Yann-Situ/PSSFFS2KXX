@@ -7,23 +7,20 @@
 [ext_resource path="res://src/Ball/Ball-heavy.tscn" type="PackedScene" id=5]
 [ext_resource path="res://assets/art/background/pixelBackground1.png" type="Texture" id=6]
 [ext_resource path="res://assets/art/background/pixelBackground2.png" type="Texture" id=7]
-
-[sub_resource type="CanvasItemMaterial" id=1]
+[ext_resource path="res://assets/art/background/pixelBackground3.png" type="Texture" id=8]
 
 [node name="main" type="Node2D"]
 
 [node name="ParallaxBackground" type="ParallaxBackground" parent="."]
 
 [node name="ParallaxLayer" type="ParallaxLayer" parent="ParallaxBackground"]
-motion_scale = Vector2( 0.2, 1 )
-motion_mirroring = Vector2( 2048, 512 )
+motion_scale = Vector2( 0.02, 0 )
+motion_mirroring = Vector2( 1024, 512 )
 
 [node name="TextureRect" type="TextureRect" parent="ParallaxBackground/ParallaxLayer"]
-margin_left = 4.48987
-margin_top = -170.614
-margin_right = 4100.49
-margin_bottom = 853.386
-rect_scale = Vector2( 0.5, 0.5 )
+margin_top = -256.0
+margin_right = 1024.0
+margin_bottom = 256.0
 texture = ExtResource( 6 )
 expand = true
 stretch_mode = 2
@@ -32,21 +29,27 @@ __meta__ = {
 }
 
 [node name="ParallaxLayer2" type="ParallaxLayer" parent="ParallaxBackground"]
-motion_scale = Vector2( 0.5, 1 )
-motion_mirroring = Vector2( 2048, 512 )
+motion_scale = Vector2( 0.05, 0 )
+motion_mirroring = Vector2( 1024, 512 )
 
 [node name="TextureRect" type="TextureRect" parent="ParallaxBackground/ParallaxLayer2"]
-modulate = Color( 0.682353, 0.933333, 1, 1 )
-self_modulate = Color( 0.913725, 0.992157, 1, 1 )
-material = SubResource( 1 )
-margin_left = 8.97974
-margin_top = -67.3477
-margin_right = 4104.98
-margin_bottom = 956.652
-rect_scale = Vector2( 0.5, 0.5 )
+margin_top = -256.0
+margin_right = 1024.0
+margin_bottom = 260.0
 texture = ExtResource( 7 )
-expand = true
-stretch_mode = 2
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="ParallaxLayer3" type="ParallaxLayer" parent="ParallaxBackground"]
+motion_scale = Vector2( 0.08, 0.01 )
+motion_mirroring = Vector2( 1024, 512 )
+
+[node name="TextureRect" type="TextureRect" parent="ParallaxBackground/ParallaxLayer3"]
+margin_top = -256.0
+margin_right = 1024.0
+margin_bottom = 260.0
+texture = ExtResource( 8 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
@@ -65,8 +68,8 @@ __meta__ = {
 [node name="walls" type="Node" parent="."]
 
 [node name="BasicWall" parent="walls" instance=ExtResource( 2 )]
-position = Vector2( 608, 376 )
-scale = Vector2( 10, 1 )
+position = Vector2( 424, 768 )
+scale = Vector2( 10, 50 )
 
 [node name="BasicWall12" parent="walls" instance=ExtResource( 2 )]
 position = Vector2( 608, -288 )
@@ -99,8 +102,8 @@ position = Vector2( 1104, 128 )
 scale = Vector2( 5, 1 )
 
 [node name="BasicWall6" parent="walls" instance=ExtResource( 2 )]
-position = Vector2( 1768, 376 )
-scale = Vector2( 10, 1 )
+position = Vector2( 1840, 768 )
+scale = Vector2( 10, 50 )
 
 [node name="BasicWall7" parent="walls" instance=ExtResource( 2 )]
 position = Vector2( 566, -30 )
@@ -151,7 +154,8 @@ position = Vector2( 598.696, 306.127 )
 position = Vector2( 699.218, 331.612 )
 
 [node name="Player" parent="." instance=ExtResource( 1 )]
-position = Vector2( 400, 96 )
+position = Vector2( 432, 176 )
 air_friction = 0.15
 jump_speed = -460.0
+max_speed_fall_onwall = 100.0
 vecjump = Vector2( 0.65, -0.9 )

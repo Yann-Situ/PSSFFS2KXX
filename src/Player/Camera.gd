@@ -5,7 +5,7 @@ var target_offset = Vector2(0,0)
 var current_shake_power = 0.0
 var shake_offset = Vector2(0,0)
 var offset_no_shake = offset
-# Called when the node enters the scene tree for the first time.
+
 func _ready():
 	pass
 

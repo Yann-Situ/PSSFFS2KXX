@@ -1,4 +1,4 @@
-[gd_scene load_steps=22 format=2]
+[gd_scene load_steps=24 format=2]
 
 [ext_resource path="res://src/Player/Player.gd" type="Script" id=1]
 [ext_resource path="res://assets/art/player/TilesetBall.png" type="Texture" id=2]
@@ -10,6 +10,17 @@
 
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 4, 26 )
+
+[sub_resource type="Shader" id=15]
+code = "shader_type canvas_item;
+
+void fragment() {
+	vec4 t = texture(TEXTURE, UV);
+	COLOR = vec4(t.rgb, t.a);
+}"
+
+[sub_resource type="ShaderMaterial" id=16]
+shader = SubResource( 15 )
 
 [sub_resource type="Animation" id=2]
 resource_name = "air_aim"
@@ -698,6 +709,7 @@ position = Vector2( 2, 6 )
 shape = SubResource( 1 )
 
 [node name="Sprite" type="Sprite" parent="."]
+material = SubResource( 16 )
 position = Vector2( -2.18279e-11, 0 )
 texture = ExtResource( 2 )
 vframes = 20
