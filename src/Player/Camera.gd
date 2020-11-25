@@ -1,6 +1,6 @@
 extends Camera2D
-export (float) var aim_offset = 80
-export (float) var crouch_offset = 80
+export (float) var aim_offset = 100
+export (float) var crouch_offset = 100
 var target_offset = Vector2(0,0)
 var current_shake_power = 0.0
 var shake_offset = Vector2(0,0)
