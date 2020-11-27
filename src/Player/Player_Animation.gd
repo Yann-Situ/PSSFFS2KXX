@@ -26,8 +26,11 @@ func animate_from_state(S):
 				set_flip(S.last_wall_normal_direction == 1, S.last_wall_normal_direction == -1)
 				self.play("air_wall")
 			elif S.is_falling :
-				if assigned_animation != "fall":
+				if assigned_animation != "fall" and assigned_animation != "fall_loop":
 					self.play("fall")
+					self.animation_set_next("fall","fall_loop")
+					#yield (self, "animation_finished")
+					#self.play("fall_loop")
 			elif S.is_jumping :
 				self.play("jump1")
 	else : #on floor
