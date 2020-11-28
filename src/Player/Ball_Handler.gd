@@ -21,6 +21,14 @@ func _on_Ball_Handler_body_entered(body):
 			S.active_ball = body
 			body.disable_physics()
 
+func get_throw_position():
+	# return the global position of the beginning of the throw, depending on the 
+	# position of the player and the flip value :
+	if get_parent().get_node("Sprite").flip_h :
+		return get_parent().position + Vector2(-4.0,-6.0)
+	else :
+		return get_parent().position + Vector2(4.0,-6.0)
+
 func set_has_ball_position():
 	if get_parent().get_node("Sprite").flip_h :
 		S.active_ball.transform.origin.x = int(get_parent().position.x+0.5) - $Has_Ball_Position.position.x
@@ -30,7 +38,7 @@ func set_has_ball_position():
 
 func throw_ball(): # called by animation
 	if S.has_ball and S.active_ball != null :
-		S.active_ball.throw(get_parent().position, 
+		S.active_ball.throw(get_throw_position(), 
 							get_parent().get_node("Shoot_predictor").shoot_vector_save + 0.5*S.velocity)
 		S.active_ball.enable_physics()
 		print("throw ball at "+str(S.active_ball.position.x)+" vs "+str(position.x))

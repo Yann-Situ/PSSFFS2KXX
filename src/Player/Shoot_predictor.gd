@@ -2,7 +2,7 @@ extends Node2D
 
 var points = Array()
 export (int) var nb_points = 50
-export (float) var delta = .05
+export (float) var delta = .03
 
 # Shoot features
 export (float) var shoot_min_speed = 100 # pix/s
@@ -12,6 +12,7 @@ var shoot_vector_save = Vector2()
 
 var white = Color(1,1,1,1)
 var red = Color(1,0,0,1)
+var yellorange = Color(1.0,0.8,0.1,1)
 
 var S
 # Called when the node enters the scene tree for the first time.
@@ -30,16 +31,14 @@ func shoot_vector(): # return shoot vector if player not moving
 func _draw():
 	for i in range(0, points.size() - 1):
 		#draw_line(points[i], points[i+1], red, 1)
-		draw_circle(points[i], 1, white)
+		draw_circle(points[i], 2, yellorange)
 		
 func draw(pos, vel, grav):
 	points.clear()
 	for i in range(nb_points):
 		points.append(pos)
-		vel += grav * delta
-		vel.x *= .999
-		vel.y *= .991
-		pos += vel * delta
+		vel += 1.02*grav * delta
+		pos += 0.975*vel * delta
 	update()
 	
 	
