@@ -54,6 +54,7 @@ var last_aim_jp = 0
 
 # Bool for actions
 export var is_jumping = false
+export var is_walljumping = false
 #export var is_going = [false,false]
 export var is_returning = [false,false]
 export var is_crouching = false
@@ -94,6 +95,7 @@ func update_vars(delta_ms):
 		move_direction = 1
 
 	is_jumping = is_jumping and not is_onfloor and is_mounting
+	is_walljumping = is_walljumping and not is_onfloor and is_mounting
 	#is_going[0] = is_going[0] and is_moving_fast[0]
 	#is_going[1] = is_going[1] and is_moving_fast[1]
 	is_crouching = is_crouching and not is_jumping

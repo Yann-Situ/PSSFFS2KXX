@@ -1,17 +1,148 @@
-[gd_scene load_steps=24 format=2]
+[gd_scene load_steps=61 format=2]
 
 [ext_resource path="res://src/Player/Player.gd" type="Script" id=1]
 [ext_resource path="res://assets/art/player/TilesetBall.png" type="Texture" id=2]
-[ext_resource path="res://src/Player/Shoot_predictor.tscn" type="PackedScene" id=3]
+[ext_resource path="res://src/Player/Shoot_predictor.gd" type="Script" id=3]
 [ext_resource path="res://src/Player/Player_Animation.gd" type="Script" id=4]
 [ext_resource path="res://src/Player/Player_State.tscn" type="PackedScene" id=5]
 [ext_resource path="res://src/Player/Ball_Handler.gd" type="Script" id=6]
 [ext_resource path="res://src/Player/Camera.gd" type="Script" id=7]
+[ext_resource path="res://src/Player/AnimationTree.gd" type="Script" id=8]
 
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 4, 26 )
 
 [sub_resource type="ShaderMaterial" id=2]
+
+[sub_resource type="AnimationNodeAnimation" id=19]
+animation = "air_wall"
+
+[sub_resource type="AnimationNodeAnimation" id=20]
+animation = "fall"
+
+[sub_resource type="AnimationNodeAnimation" id=21]
+animation = "fall_loop"
+
+[sub_resource type="AnimationNodeAnimation" id=22]
+animation = "floor_wall"
+
+[sub_resource type="AnimationNodeAnimation" id=23]
+animation = "idle"
+
+[sub_resource type="AnimationNodeAnimation" id=24]
+animation = "jump1"
+
+[sub_resource type="AnimationNodeAnimation" id=26]
+animation = "walk"
+
+[sub_resource type="AnimationNodeAnimation" id=53]
+animation = "walljump1"
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=27]
+advance_condition = "walking_cond"
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=28]
+advance_condition = "jumping_cond"
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=29]
+switch_mode = 2
+advance_condition = "falling_cond"
+priority = 2
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=30]
+switch_mode = 2
+auto_advance = true
+priority = 3
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=31]
+advance_condition = "on_floor_cond"
+priority = 2
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=32]
+advance_condition = "on_wall_cond"
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=33]
+advance_condition = "on_wall_cond"
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=35]
+advance_condition = "idle_cond"
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=36]
+advance_condition = "not_on_wall_cond"
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=38]
+advance_condition = "on_wall_cond"
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=39]
+advance_condition = "on_wall_cond"
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=40]
+advance_condition = "on_floor_cond"
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=41]
+advance_condition = "jumping_cond"
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=42]
+advance_condition = "not_on_floor_cond"
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=43]
+advance_condition = "not_on_floor_cond"
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=44]
+advance_condition = "not_on_wall_cond"
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=45]
+advance_condition = "on_wall_cond"
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=47]
+advance_condition = "on_floor_cond"
+priority = 2
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=48]
+advance_condition = "not_on_floor_cond"
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=49]
+advance_condition = "on_floor_cond"
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=51]
+advance_condition = "jumping_cond"
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=54]
+advance_condition = "walljumping_cond"
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=55]
+switch_mode = 2
+advance_condition = "falling_cond"
+priority = 2
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=56]
+advance_condition = "on_floor_cond"
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=57]
+advance_condition = "on_wall_cond"
+
+[sub_resource type="AnimationNodeStateMachine" id=17]
+states/air_wall/node = SubResource( 19 )
+states/air_wall/position = Vector2( 93.9985, -254 )
+states/fall/node = SubResource( 20 )
+states/fall/position = Vector2( 673, -312 )
+states/fall_loop/node = SubResource( 21 )
+states/fall_loop/position = Vector2( 604, -216.066 )
+states/floor_wall/node = SubResource( 22 )
+states/floor_wall/position = Vector2( 109.998, 203 )
+states/idle/node = SubResource( 23 )
+states/idle/position = Vector2( 586, 196 )
+states/jump1/node = SubResource( 24 )
+states/jump1/position = Vector2( 350, -111 )
+states/walk/node = SubResource( 26 )
+states/walk/position = Vector2( 275, 83 )
+states/walljump1/node = SubResource( 53 )
+states/walljump1/position = Vector2( 350, -185.976 )
+transitions = [ "idle", "walk", SubResource( 27 ), "idle", "jump1", SubResource( 28 ), "jump1", "fall", SubResource( 29 ), "fall", "fall_loop", SubResource( 30 ), "fall_loop", "idle", SubResource( 31 ), "jump1", "air_wall", SubResource( 32 ), "walk", "floor_wall", SubResource( 33 ), "walk", "idle", SubResource( 35 ), "air_wall", "fall", SubResource( 36 ), "fall", "air_wall", SubResource( 38 ), "fall_loop", "air_wall", SubResource( 39 ), "air_wall", "floor_wall", SubResource( 40 ), "walk", "jump1", SubResource( 41 ), "idle", "fall", SubResource( 42 ), "walk", "fall", SubResource( 43 ), "floor_wall", "idle", SubResource( 44 ), "idle", "floor_wall", SubResource( 45 ), "fall", "idle", SubResource( 47 ), "floor_wall", "air_wall", SubResource( 48 ), "jump1", "idle", SubResource( 49 ), "floor_wall", "jump1", SubResource( 51 ), "air_wall", "walljump1", SubResource( 54 ), "walljump1", "fall", SubResource( 55 ), "walljump1", "idle", SubResource( 56 ), "walljump1", "air_wall", SubResource( 57 ) ]
+start_node = "idle"
+graph_offset = Vector2( -241.002, -307.525 )
+
+[sub_resource type="AnimationNodeStateMachinePlayback" id=18]
 
 [sub_resource type="Animation" id=3]
 length = 0.4
@@ -112,7 +243,7 @@ tracks/3/enabled = true
 tracks/3/keys = {
 "times": PoolRealArray( 0, 0.35 ),
 "transitions": PoolRealArray( 1, 1 ),
-"update": 1,
+"update": 0,
 "values": [ true, false ]
 }
 tracks/4/type = "value"
@@ -428,7 +559,7 @@ tracks/3/enabled = true
 tracks/3/keys = {
 "times": PoolRealArray( 0, 0.35 ),
 "transitions": PoolRealArray( 1, 1 ),
-"update": 1,
+"update": 0,
 "values": [ true, false ]
 }
 tracks/4/type = "method"
@@ -612,7 +743,7 @@ tracks/3/enabled = true
 tracks/3/keys = {
 "times": PoolRealArray( 0, 0.4 ),
 "transitions": PoolRealArray( 1, 1 ),
-"update": 1,
+"update": 0,
 "values": [ true, false ]
 }
 tracks/4/type = "value"
@@ -731,6 +862,71 @@ tracks/3/keys = {
 "values": [ Vector2( 9, -1.99999 ), Vector2( 15, 8.00001 ), Vector2( 15, 12 ), Vector2( 14, 27 ), Vector2( 12, 16 ), Vector2( 4, 7 ), Vector2( 4.00001, 3 ), Vector2( 4, 1 ) ]
 }
 
+[sub_resource type="Animation" id=52]
+resource_name = "walljump1"
+length = 0.4
+step = 0.05
+tracks/0/type = "value"
+tracks/0/path = NodePath(".:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.05, 0.15, 0.25, 0.35 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1 ),
+"update": 1,
+"values": [ 144, 145, 146, 147, 148 ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("../Collision:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Vector2( 0, 6 ) ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath("../Collision:shape:extents")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Vector2( 4, 26 ) ]
+}
+tracks/3/type = "value"
+tracks/3/path = NodePath("../Player_State:is_walljumping")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/keys = {
+"times": PoolRealArray( 0, 0.4 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ true, false ]
+}
+tracks/4/type = "value"
+tracks/4/path = NodePath("../Ball_Handler/Has_Ball_Position:position")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/keys = {
+"times": PoolRealArray( 0, 0.05, 0.15, 0.25, 0.35 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1 ),
+"update": 1,
+"values": [ Vector2( 7, -0.999998 ), Vector2( 4, -0.999998 ), Vector2( 5, -2 ), Vector2( 0, -7 ), Vector2( 3, -6 ) ]
+}
+
 [sub_resource type="CapsuleShape2D" id=16]
 radius = 14.0
 height = 28.0
@@ -755,7 +951,23 @@ position = Vector2( -2.18279e-11, 0 )
 texture = ExtResource( 2 )
 vframes = 20
 hframes = 16
-frame = 202
+frame = 148
+
+[node name="AnimationTree" type="AnimationTree" parent="Sprite"]
+tree_root = SubResource( 17 )
+anim_player = NodePath("../Player_Animation")
+active = true
+parameters/playback = SubResource( 18 )
+parameters/conditions/falling_cond = false
+parameters/conditions/idle_cond = false
+parameters/conditions/jumping_cond = false
+parameters/conditions/not_on_floor_cond = false
+parameters/conditions/not_on_wall_cond = false
+parameters/conditions/on_floor_cond = false
+parameters/conditions/on_wall_cond = false
+parameters/conditions/walking_cond = false
+parameters/conditions/walljumping_cond = false
+script = ExtResource( 8 )
 
 [node name="Player_Animation" type="AnimationPlayer" parent="Sprite"]
 anims/air_aim = SubResource( 3 )
@@ -771,10 +983,11 @@ anims/idle = SubResource( 12 )
 anims/jump1 = SubResource( 13 )
 anims/run = SubResource( 14 )
 anims/walk = SubResource( 15 )
+anims/walljump1 = SubResource( 52 )
 script = ExtResource( 4 )
 
-[node name="Shoot_predictor" parent="." instance=ExtResource( 3 )]
-position = Vector2( 0, 0 )
+[node name="Shoot_predictor" type="Node2D" parent="."]
+script = ExtResource( 3 )
 
 [node name="Camera" type="Camera2D" parent="."]
 position = Vector2( 0, -35 )
@@ -784,6 +997,7 @@ script = ExtResource( 7 )
 [node name="Tween" type="Tween" parent="Camera"]
 
 [node name="Player_State" parent="." instance=ExtResource( 5 )]
+is_jumping = true
 is_shooting = true
 
 [node name="Ball_Handler" type="Area2D" parent="."]
@@ -795,6 +1009,6 @@ position = Vector2( 0, 5 )
 shape = SubResource( 16 )
 
 [node name="Has_Ball_Position" type="Node2D" parent="Ball_Handler"]
-position = Vector2( 5, 0 )
+position = Vector2( 3, -6 )
 [connection signal="tween_completed" from="Camera/Tween" to="Camera" method="_on_Tween_tween_completed"]
 [connection signal="body_entered" from="Ball_Handler" to="Ball_Handler" method="_on_Ball_Handler_body_entered"]

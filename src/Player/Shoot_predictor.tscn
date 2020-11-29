@@ -1,7 +1,0 @@
-[gd_scene load_steps=2 format=2]
-
-[ext_resource path="res://src/Player/Shoot_predictor.gd" type="Script" id=1]
-
-[node name="Shoot_predictor" type="Node2D"]
-position = Vector2( 498, 254 )
-script = ExtResource( 1 )

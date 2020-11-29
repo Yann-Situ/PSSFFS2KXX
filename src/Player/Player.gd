@@ -91,7 +91,8 @@ func get_input(delta):
 	else :
 		$Camera.set_offset_from_type("normal")
 			
-	$Sprite/Player_Animation.animate_from_state(S)
+	$Sprite/AnimationTree.animate_from_state(S)
+	#$Sprite/Player_Animation.animate_from_state(S)
 	if false : #COLOR INFORMATION
 #		if S.is_aiming:
 #			$Polygon2D.color = Color(1,0,0)
@@ -152,7 +153,7 @@ func move_jump(delta):
 func move_walljump(direction,delta):
 	S.velocity.x = -vecjump.x * direction * jump_speed
 	S.velocity.y = -vecjump.y * jump_speed
-	S.is_jumping = true
+	S.is_walljumping = true
 	S.last_walljump = S.time
 	
 func move_crouch(delta):# TODO

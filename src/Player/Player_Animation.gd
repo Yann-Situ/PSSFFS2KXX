@@ -60,6 +60,7 @@ func animate_from_state(S):
 				self.play("walk")
 
 func set_flip(b1,b2):
+	#set flip if b1 true or unset flip if b2 true
 	if b1 :
 		Sprite.set_flip_h(true)
 	elif b2 :
