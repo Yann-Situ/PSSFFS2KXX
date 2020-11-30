@@ -32,24 +32,23 @@ export (float) var walk_return_thresh_instant_speed = walk_instant_speed*1.5 # p
 export (float) var walk_accel = 220 # pix/s²
 
 #export var snap_vector_save = Vector2(0,1)
-#var snap_vector = 
+#var snap_vector =
 
 func get_input(delta):
 	############### Change variables of Player_state.gd
-	S.is_onfloor = is_on_floor()
-	S.is_onwall = is_on_wall()
-	S.is_moving_fast = (abs(S.velocity.x) > run_speed_thresh)
-	S.update_vars(delta*1000)
+	S.update_vars(delta*1000, is_on_floor(), is_on_wall(), (abs(S.velocity.x) > run_speed_thresh))
 	if S.is_onfloor :
 		S.last_onfloor = S.time
+	else :
+		S.last_onair = S.time
 	if S.is_onwall :
 		S.last_onwall = S.time
 		S.last_wall_normal_direction = sign(get_slide_collision(get_slide_count()-1).normal.x)
-		
+
 	############### Move from input
 	if (S.direction_p != 0) and S.can_go :
 		move_side(S.direction_p,delta)
-		
+
 	if S.jump_jp :
 		if S.can_jump :
 			print("jump")
@@ -58,30 +57,35 @@ func get_input(delta):
 			print("walljump")
 			print(S.last_wall_normal_direction)
 			move_walljump(S.last_wall_normal_direction,delta)
-	elif S.jump_jr and S.is_jumping : 
+	elif S.jump_jr and (S.is_jumping or S.is_walljumping) :
 		S.velocity.y = S.velocity.y/3.5
-		
+
 	if S.crouch_p and S.can_crouch :
 		move_crouch(delta)
 	else :
 		S.is_crouching = false # \todo verify if we can stand (maybe rays or is_on_ceil)
-	
+
+	if S.dunk_p and S.can_dunk :
+		move_dunk(delta)
+	else :
+		S.is_dunking = false # \todo verify if we can stand (maybe rays or is_on_ceil)
+
 	if S.shoot_jr and S.can_shoot :
 		print("shoot")
 		move_shoot(delta)
-	
+
 	if S.aim_jp and S.can_aim :
 		print("aim")
 		move_aim(delta)
-	
+
 	if S.can_go :
 		move_adherence(delta)
-	
+
 	############### Misc and Animation handling
 
 	if S.is_aiming:
 		var shoot = $Shoot_predictor.shoot_vector()
-		$Shoot_predictor.draw($Ball_Handler.get_throw_position()-self.position, shoot+0.5*S.velocity, 
+		$Shoot_predictor.draw($Ball_Handler.get_throw_position()-self.position, shoot+0.5*S.velocity,
 				S.active_ball.get_gravity_scale()*Vector2(0,gravity))
 		$Camera.set_offset_from_type("aim",shoot.normalized())
 		if shoot.x > 0 :
@@ -90,7 +94,7 @@ func get_input(delta):
 			S.aim_direction = -1
 	else :
 		$Camera.set_offset_from_type("normal")
-			
+
 	$Sprite/AnimationTree.animate_from_state(S)
 	#$Sprite/Player_Animation.animate_from_state(S)
 	if false : #COLOR INFORMATION
@@ -119,28 +123,29 @@ func get_input(delta):
 func move_side(direction,delta):
 	if S.is_onfloor :
 		if S.is_crouching :
-			if (S.velocity.x*direction > crouch_speed_max) : 
+			if (S.velocity.x*direction > crouch_speed_max) :
 				pass # in the same direction as velocity and faster than max
 			else :
 				S.velocity.x += direction*crouch_accel*delta
-				if (S.velocity.x*direction > crouch_speed_max) : 
+				if (S.velocity.x*direction > crouch_speed_max) :
 					S.velocity.x = direction*crouch_speed_max
 		else : #standing on the floor, maybe moving
-			if (S.velocity.x*direction >= run_speed_max) : 
+			if (S.velocity.x*direction >= run_speed_max) :
 				pass # in the same direction as velocity and faster than max
 			else :
 				S.velocity.x += direction*walk_accel*delta
-				if (S.velocity.x*direction > run_speed_max) : 
+				if (S.velocity.x*direction > run_speed_max) :
 					S.velocity.x = direction*run_speed_max
-					
+
 			if -walk_return_thresh_instant_speed < S.velocity.x*direction and S.velocity.x*direction < walk_instant_speed :
 				S.velocity.x = direction*walk_instant_speed
+
 	else : # is in the air
-		if (S.velocity.x*direction >= sideaerial_speed_max) : 
+		if (S.velocity.x*direction >= sideaerial_speed_max) :
 			pass
 		else :
 			S.velocity.x += direction * sideaerial_accel * delta
-			if (S.velocity.x*direction > sideaerial_speed_max) : 
+			if (S.velocity.x*direction > sideaerial_speed_max) :
 				S.velocity.x = direction * sideaerial_speed_max
 		if -air_return_thresh_instant_speed < S.velocity.x*direction and S.velocity.x*direction < air_instant_speed :
 				S.velocity.x = direction*air_instant_speed
@@ -155,16 +160,25 @@ func move_walljump(direction,delta):
 	S.velocity.y = -vecjump.y * jump_speed
 	S.is_walljumping = true
 	S.last_walljump = S.time
-	
+
 func move_crouch(delta):# TODO
 	# Change hitbox + other animation things like sliding etc.
+	S.is_aiming = false # cancel aiming for the moment
+	S.aim_direction = 0
 	S.is_crouching = true
+
+func move_dunk(delta):# TODO
+	# Change hitbox + other animation things like sliding etc.
+	S.is_aiming = false # cancel aiming for the moment
+	S.aim_direction = 0
+	S.is_dunking = true
+	self.get_node("Camera").screen_shake(0.1,6)
 
 func move_aim(delta):
 	S.is_aiming = true
 	S.last_aim_jp = S.time
 	#Engine.time_scale = 0.5
-	
+
 func move_shoot(delta):
 	S.is_aiming = false
 	S.aim_direction = 0
@@ -174,7 +188,7 @@ func move_shoot(delta):
 	#Engine.time_scale = 1.0
 	$Shoot_predictor.clear()
 	#throw_ball()+free_ball in Ball_handler	called by animation
-	
+
 func move_adherence(delta):
 	var friction = 0 #get adh from environment
 	if S.is_onfloor:
