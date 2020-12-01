@@ -1,4 +1,4 @@
-[gd_scene load_steps=65 format=2]
+[gd_scene load_steps=66 format=2]
 
 [ext_resource path="res://src/Player/Player.gd" type="Script" id=1]
 [ext_resource path="res://assets/art/player/TilesetBall.png" type="Texture" id=2]
@@ -8,11 +8,14 @@
 [ext_resource path="res://src/Player/Ball_Handler.gd" type="Script" id=6]
 [ext_resource path="res://src/Player/Camera.gd" type="Script" id=7]
 [ext_resource path="res://src/Player/AnimationTree.gd" type="Script" id=8]
+[ext_resource path="res://assets/shader/speed.shader" type="Shader" id=9]
 
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 4, 26 )
 
 [sub_resource type="ShaderMaterial" id=2]
+shader = ExtResource( 9 )
+shader_param/speed = Vector2( 400, -100 )
 
 [sub_resource type="AnimationNodeAnimation" id=3]
 animation = "air_wall"
@@ -1182,7 +1185,7 @@ position = Vector2( -2.18279e-11, 0 )
 texture = ExtResource( 2 )
 vframes = 20
 hframes = 16
-frame = 200
+frame = 204
 
 [node name="AnimationTree" type="AnimationTree" parent="Sprite"]
 tree_root = SubResource( 36 )

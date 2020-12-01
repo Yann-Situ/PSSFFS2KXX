@@ -82,7 +82,10 @@ func get_input(delta):
 		move_adherence(delta)
 
 	############### Misc and Animation handling
-
+	
+	#shader :
+	$Sprite.material.set("shader_param/speed",S.velocity)
+	
 	if S.is_aiming:
 		var shoot = $Shoot_predictor.shoot_vector()
 		$Shoot_predictor.draw($Ball_Handler.get_throw_position()-self.position, shoot+0.5*S.velocity,
