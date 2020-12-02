@@ -35,16 +35,13 @@ vec4 hologram_color(vec4 c)
 
 void fragment() {
 	vec4 t = texture(TEXTURE, UV);
-
-	vec4 right = texture(TEXTURE,UV+vec2(2.*TEXTURE_PIXEL_SIZE.x,0.));
-	vec4 left = texture(TEXTURE,UV+vec2(-TEXTURE_PIXEL_SIZE.x,0.));
-
     vec4 col = hologram_color(t);
 
     if (mod(TIME,wavelength1)<= duration1)
     {
         if (random1(floor(0.5*UV.y/TEXTURE_PIXEL_SIZE.y))< proba1)
         {
+            vec4 right = texture(TEXTURE,UV+vec2(2.*TEXTURE_PIXEL_SIZE.x,0.));
             col = hologram_color(right);
         }
     }
@@ -53,6 +50,7 @@ void fragment() {
     {
         if (random1(UV.y+0.9746)< proba2)
         {
+            vec4 left = texture(TEXTURE,UV+vec2(-TEXTURE_PIXEL_SIZE.x,0.));
             col = hologram_color(left);
         }
     }
