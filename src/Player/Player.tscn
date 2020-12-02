@@ -87,6 +87,7 @@ advance_condition = "jumping_cond"
 
 [sub_resource type="AnimationNodeStateMachineTransition" id=24]
 advance_condition = "not_on_floor_cond"
+priority = 2
 
 [sub_resource type="AnimationNodeStateMachineTransition" id=25]
 advance_condition = "not_on_floor_cond"
@@ -143,7 +144,7 @@ states/walljump1/node = SubResource( 10 )
 states/walljump1/position = Vector2( 350, -185.976 )
 transitions = [ "idle", "walk", SubResource( 11 ), "idle", "jump1", SubResource( 12 ), "jump1", "fall", SubResource( 13 ), "fall", "fall_loop", SubResource( 14 ), "fall_loop", "idle", SubResource( 15 ), "jump1", "air_wall", SubResource( 16 ), "walk", "floor_wall", SubResource( 17 ), "walk", "idle", SubResource( 18 ), "air_wall", "fall", SubResource( 19 ), "fall", "air_wall", SubResource( 20 ), "fall_loop", "air_wall", SubResource( 21 ), "air_wall", "floor_wall", SubResource( 22 ), "walk", "jump1", SubResource( 23 ), "idle", "fall", SubResource( 24 ), "walk", "fall", SubResource( 25 ), "floor_wall", "idle", SubResource( 26 ), "idle", "floor_wall", SubResource( 27 ), "fall", "idle", SubResource( 28 ), "floor_wall", "air_wall", SubResource( 29 ), "jump1", "idle", SubResource( 30 ), "floor_wall", "jump1", SubResource( 31 ), "air_wall", "walljump1", SubResource( 32 ), "walljump1", "fall", SubResource( 33 ), "walljump1", "idle", SubResource( 34 ), "walljump1", "air_wall", SubResource( 35 ) ]
 start_node = "idle"
-graph_offset = Vector2( 4.41787, -367.654 )
+graph_offset = Vector2( -279.17, -180.862 )
 
 [sub_resource type="AnimationNodeStateMachinePlayback" id=37]
 
@@ -808,7 +809,7 @@ tracks/4/loop_wrap = true
 tracks/4/imported = false
 tracks/4/enabled = true
 tracks/4/keys = {
-"times": PoolRealArray( 0, 0.5 ),
+"times": PoolRealArray( 0, 0.45 ),
 "transitions": PoolRealArray( 1, 1 ),
 "update": 1,
 "values": [ true, false ]
@@ -1185,7 +1186,7 @@ position = Vector2( -2.18279e-11, 0 )
 texture = ExtResource( 2 )
 vframes = 20
 hframes = 16
-frame = 204
+frame = 200
 
 [node name="AnimationTree" type="AnimationTree" parent="Sprite"]
 tree_root = SubResource( 36 )
@@ -1236,6 +1237,7 @@ script = ExtResource( 7 )
 [node name="Tween" type="Tween" parent="Camera"]
 
 [node name="Player_State" parent="." instance=ExtResource( 5 )]
+is_halfturning = true
 
 [node name="Ball_Handler" type="Area2D" parent="."]
 script = ExtResource( 6 )

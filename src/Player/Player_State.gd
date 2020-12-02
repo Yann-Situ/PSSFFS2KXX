@@ -113,8 +113,8 @@ func update_vars(delta_ms, onfloor, onwall, movingfast):
 	is_walljumping = is_walljumping and not is_onfloor and is_mounting
 	is_landing = is_onfloor and (is_landing or (time-last_onair < land_lag_tolerance))# stop also handled by animation
 	is_dunking = is_dunking and not is_onfloor # handle by player actions (start) and animation (stop but not yet implemented)
-	is_halfturning = is_onfloor and (is_halfturning or direction_p_previous_frame*direction_p == -1)# handle by player actions
-	#is_crouching = # handle by player actions (start)
+	is_halfturning = is_onfloor and direction_p != 0 and (is_halfturning or direction_p_previous_frame == 0)# handle by player actions
+	#is_crouching = # handle by player actions (start)#self.get_parent().get_node("Sprite").flip_h(true)
 	is_aiming = is_aiming and has_ball and active_ball != null
 	#is_shooting handle by shoot animation+Player.gd
 

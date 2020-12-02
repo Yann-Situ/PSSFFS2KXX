@@ -14,6 +14,8 @@
 
 [sub_resource type="ShaderMaterial" id=1]
 shader = ExtResource( 11 )
+shader_param/contour_color = Color( 0.2, 0, 0.1, 1 )
+shader_param/light_thresh = 0.4
 
 [node name="main" type="Node2D"]
 
