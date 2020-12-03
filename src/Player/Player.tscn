@@ -1,4 +1,4 @@
-[gd_scene load_steps=66 format=2]
+[gd_scene load_steps=68 format=2]
 
 [ext_resource path="res://src/Player/Player.gd" type="Script" id=1]
 [ext_resource path="res://assets/art/player/TilesetBall.png" type="Texture" id=2]
@@ -16,6 +16,7 @@ extents = Vector2( 4, 26 )
 [sub_resource type="ShaderMaterial" id=2]
 shader = ExtResource( 9 )
 shader_param/speed = Vector2( 400, -100 )
+shader_param/glow_coeff = 1.2
 
 [sub_resource type="AnimationNodeAnimation" id=3]
 animation = "air_wall"
@@ -30,6 +31,9 @@ animation = "fall_loop"
 animation = "floor_wall"
 
 [sub_resource type="AnimationNodeAnimation" id=7]
+animation = "idle"
+
+[sub_resource type="AnimationNodeAnimation" id=57]
 animation = "idle"
 
 [sub_resource type="AnimationNodeAnimation" id=8]
@@ -125,6 +129,9 @@ advance_condition = "on_floor_cond"
 [sub_resource type="AnimationNodeStateMachineTransition" id=35]
 advance_condition = "on_wall_cond"
 
+[sub_resource type="AnimationNodeStateMachineTransition" id=58]
+auto_advance = true
+
 [sub_resource type="AnimationNodeStateMachine" id=36]
 states/air_wall/node = SubResource( 3 )
 states/air_wall/position = Vector2( 93.9985, -254 )
@@ -136,15 +143,17 @@ states/floor_wall/node = SubResource( 6 )
 states/floor_wall/position = Vector2( 109.998, 203 )
 states/idle/node = SubResource( 7 )
 states/idle/position = Vector2( 586, 196 )
+states/idle_copy/node = SubResource( 57 )
+states/idle_copy/position = Vector2( 635.839, 297.138 )
 states/jump1/node = SubResource( 8 )
 states/jump1/position = Vector2( 350, -111 )
 states/walk/node = SubResource( 9 )
-states/walk/position = Vector2( 275, 83 )
+states/walk/position = Vector2( 288, 62 )
 states/walljump1/node = SubResource( 10 )
 states/walljump1/position = Vector2( 350, -185.976 )
-transitions = [ "idle", "walk", SubResource( 11 ), "idle", "jump1", SubResource( 12 ), "jump1", "fall", SubResource( 13 ), "fall", "fall_loop", SubResource( 14 ), "fall_loop", "idle", SubResource( 15 ), "jump1", "air_wall", SubResource( 16 ), "walk", "floor_wall", SubResource( 17 ), "walk", "idle", SubResource( 18 ), "air_wall", "fall", SubResource( 19 ), "fall", "air_wall", SubResource( 20 ), "fall_loop", "air_wall", SubResource( 21 ), "air_wall", "floor_wall", SubResource( 22 ), "walk", "jump1", SubResource( 23 ), "idle", "fall", SubResource( 24 ), "walk", "fall", SubResource( 25 ), "floor_wall", "idle", SubResource( 26 ), "idle", "floor_wall", SubResource( 27 ), "fall", "idle", SubResource( 28 ), "floor_wall", "air_wall", SubResource( 29 ), "jump1", "idle", SubResource( 30 ), "floor_wall", "jump1", SubResource( 31 ), "air_wall", "walljump1", SubResource( 32 ), "walljump1", "fall", SubResource( 33 ), "walljump1", "idle", SubResource( 34 ), "walljump1", "air_wall", SubResource( 35 ) ]
+transitions = [ "idle", "walk", SubResource( 11 ), "idle", "jump1", SubResource( 12 ), "jump1", "fall", SubResource( 13 ), "fall", "fall_loop", SubResource( 14 ), "fall_loop", "idle", SubResource( 15 ), "jump1", "air_wall", SubResource( 16 ), "walk", "floor_wall", SubResource( 17 ), "walk", "idle", SubResource( 18 ), "air_wall", "fall", SubResource( 19 ), "fall", "air_wall", SubResource( 20 ), "fall_loop", "air_wall", SubResource( 21 ), "air_wall", "floor_wall", SubResource( 22 ), "walk", "jump1", SubResource( 23 ), "idle", "fall", SubResource( 24 ), "walk", "fall", SubResource( 25 ), "floor_wall", "idle", SubResource( 26 ), "idle", "floor_wall", SubResource( 27 ), "fall", "idle", SubResource( 28 ), "floor_wall", "air_wall", SubResource( 29 ), "jump1", "idle", SubResource( 30 ), "floor_wall", "jump1", SubResource( 31 ), "air_wall", "walljump1", SubResource( 32 ), "walljump1", "fall", SubResource( 33 ), "walljump1", "idle", SubResource( 34 ), "walljump1", "air_wall", SubResource( 35 ), "idle_copy", "idle", SubResource( 58 ) ]
 start_node = "idle"
-graph_offset = Vector2( -279.17, -180.862 )
+graph_offset = Vector2( -266.161, -180.862 )
 
 [sub_resource type="AnimationNodeStateMachinePlayback" id=37]
 
@@ -933,7 +942,7 @@ tracks/4/keys = {
 
 [sub_resource type="Animation" id=52]
 resource_name = "land"
-length = 0.4
+length = 0.1
 tracks/0/type = "value"
 tracks/0/path = NodePath(".:frame")
 tracks/0/interp = 1
@@ -941,10 +950,10 @@ tracks/0/loop_wrap = true
 tracks/0/imported = false
 tracks/0/enabled = true
 tracks/0/keys = {
-"times": PoolRealArray( 0, 0.1, 0.2, 0.3 ),
-"transitions": PoolRealArray( 1, 1, 1, 1 ),
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
 "update": 1,
-"values": [ 147, 146, 145, 144 ]
+"values": [ 144 ]
 }
 tracks/1/type = "value"
 tracks/1/path = NodePath("../Collision:position")
@@ -977,10 +986,10 @@ tracks/3/loop_wrap = true
 tracks/3/imported = false
 tracks/3/enabled = true
 tracks/3/keys = {
-"times": PoolRealArray( 0, 0.1, 0.2, 0.3 ),
-"transitions": PoolRealArray( 1, 1, 1, 1 ),
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
 "update": 1,
-"values": [ Vector2( 14, 1 ), Vector2( 5, -3 ), Vector2( 5, -2 ), Vector2( 7, -1 ) ]
+"values": [ Vector2( 7, -1 ) ]
 }
 tracks/4/type = "value"
 tracks/4/path = NodePath("../Player_State:is_landing")
@@ -989,7 +998,7 @@ tracks/4/loop_wrap = true
 tracks/4/imported = false
 tracks/4/enabled = true
 tracks/4/keys = {
-"times": PoolRealArray( 0, 0.4 ),
+"times": PoolRealArray( 0, 0.1 ),
 "transitions": PoolRealArray( 1, 1 ),
 "update": 1,
 "values": [ true, false ]
@@ -1186,7 +1195,7 @@ position = Vector2( -2.18279e-11, 0 )
 texture = ExtResource( 2 )
 vframes = 20
 hframes = 16
-frame = 200
+frame = 203
 
 [node name="AnimationTree" type="AnimationTree" parent="Sprite"]
 tree_root = SubResource( 36 )
@@ -1237,6 +1246,7 @@ script = ExtResource( 7 )
 [node name="Tween" type="Tween" parent="Camera"]
 
 [node name="Player_State" parent="." instance=ExtResource( 5 )]
+is_landing = true
 is_halfturning = true
 
 [node name="Ball_Handler" type="Area2D" parent="."]

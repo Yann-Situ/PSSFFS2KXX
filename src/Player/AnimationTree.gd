@@ -82,9 +82,14 @@ func _ready():
 	#HALFTURN
 	add_state("halfturn",\
 	  ["walk", "idle"],["walk","idle", "floor_wall"], \
-	  ["halfturning_cond","halfturning_cond"],["","not_on_floor_cond", "on_wall_cond"],\
+	  ["halfturning_cond","halfturning_cond"],["","not_halfturning_cond", "on_wall_cond"],\
 	  [0,0],[2, 0, 0])
 
+	#LAND
+	add_state("land",\
+	  ["idle"],["idle_copy", "idle", "floor_wall"], \
+	  ["landing_cond"],["", "not_landing_cond", "on_wall_cond"],\
+	  [0],[2, 0, 0])
 	# var dunk_node = AnimationNodeAnimation.new();
 	# dunk_node.animation = "dunk"
 	# self.tree_root.add_node("dunk", dunk_node, Vector2(8.0,8.0))
@@ -123,12 +128,12 @@ func animate_from_state(S):
 
 	self["parameters/conditions/jumping_cond"] = S.is_jumping
 	self["parameters/conditions/walljumping_cond"] = S.is_walljumping and !S.can_walljump
-	#self["parameters/conditions/landing_cond"] = S.is_landing
-	#self["parameters/conditions/not_landing_cond"] = !S.is_landing
+	self["parameters/conditions/landing_cond"] = S.is_landing
+	self["parameters/conditions/not_landing_cond"] = !S.is_landing
 	self["parameters/conditions/dunking_cond"] = S.is_dunking
 	self["parameters/conditions/not_dunking_cond"] = !S.is_dunking
 	self["parameters/conditions/halfturning_cond"] = S.is_halfturning
-	#self["parameters/conditions/not_halfturning_cond"] = !S.is_halfturning
+	self["parameters/conditions/not_halfturning_cond"] = !S.is_halfturning
 	#self["parameters/conditions/crouching_cond"] = S.is_crouching
 	#self["parameters/conditions/aiming_cond"] = S.is_aiming
 	#self["parameters/conditions/shooting_cond"] = S.is_shooting

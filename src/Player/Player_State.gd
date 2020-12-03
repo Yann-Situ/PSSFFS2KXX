@@ -21,9 +21,9 @@ var shoot_jr = false
 var dunk_p = false
 
 # Bool for physical states
-var is_onfloor = false # form values of Player.gd
-var is_onwall = false # form values of Player.gd
-var is_moving_fast = false # form values of Player.gd
+var is_onfloor = false # from values of Player.gd
+var is_onwall = false # from values of Player.gd
+var is_moving_fast = false # from values of Player.gd
 var is_falling = false
 var is_mounting = false
 var is_moving = false
@@ -101,7 +101,7 @@ func update_vars(delta_ms, onfloor, onwall, movingfast):
 	else :
 		move_direction = 1
 
-	var direction_p_previous_frame = direction_p
+	#var direction_p_previous_frame = direction_p
 	direction_p = 0
 	if right_p :
 		direction_p += 1
@@ -109,12 +109,15 @@ func update_vars(delta_ms, onfloor, onwall, movingfast):
 		direction_p -= 1
 
 
+	var dir_sprite = 1;
+	if self.get_parent().get_node("Sprite").flip_h :
+		dir_sprite = -1;
 	is_jumping = is_jumping and not is_onfloor and is_mounting
 	is_walljumping = is_walljumping and not is_onfloor and is_mounting
 	is_landing = is_onfloor and (is_landing or (time-last_onair < land_lag_tolerance))# stop also handled by animation
 	is_dunking = is_dunking and not is_onfloor # handle by player actions (start) and animation (stop but not yet implemented)
-	is_halfturning = is_onfloor and direction_p != 0 and (is_halfturning or direction_p_previous_frame == 0)# handle by player actions
-	#is_crouching = # handle by player actions (start)#self.get_parent().get_node("Sprite").flip_h(true)
+	is_halfturning = (is_halfturning or dir_sprite*direction_p == -1) and is_onfloor and direction_p != 0 # handle by player actions
+	#is_crouching = # handle by player actions (start)
 	is_aiming = is_aiming and has_ball and active_ball != null
 	#is_shooting handle by shoot animation+Player.gd
 

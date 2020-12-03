@@ -4,9 +4,9 @@ render_mode blend_mix;
 uniform vec2 speed = vec2(100.,100.);// in pix/s
 const int harmonics = 4;
 const float max_speed = 400.;// in pix/s
-const float max_queue_size = 10.;// in pixels
+const float max_queue_size = 8.;// in pixels
 const float harmonics_attenuation = 0.9;// coefficient
-const float glow_coeff = 1.2;// coefficient
+uniform float glow_coeff = 1.2;// coefficient
 
 void fragment() {
 	vec4 t = texture(TEXTURE, UV);
@@ -15,7 +15,7 @@ void fragment() {
 	{
 
 		float l = length(speed);
-		float queue_size = max_queue_size*smoothstep(0.1,1.0,l/max_speed);// in pixels
+		float queue_size = max_queue_size*smoothstep(0.5,1.0,l/max_speed);// in pixels
 		float normalize_value = (1.-pow(harmonics_attenuation, queue_size+1.))/(1.-harmonics_attenuation);
 		vec2 uv_increment = TEXTURE_PIXEL_SIZE*speed/l; // in uv coord
 		uv_increment.x = abs(uv_increment.x);// handle flip_h
