@@ -15,7 +15,7 @@ void fragment() {
 	{
 
 		float l = length(speed);
-		float queue_size = max_queue_size*smoothstep(0.5,1.0,l/max_speed);// in pixels
+		float queue_size = max_queue_size*smoothstep(0.6,1.0,l/max_speed);// in pixels
 		float normalize_value = (1.-pow(harmonics_attenuation, queue_size+1.))/(1.-harmonics_attenuation);
 		vec2 uv_increment = TEXTURE_PIXEL_SIZE*speed/l; // in uv coord
 		uv_increment.x = abs(uv_increment.x);// handle flip_h

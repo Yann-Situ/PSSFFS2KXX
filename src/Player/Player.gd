@@ -168,12 +168,14 @@ func move_crouch(delta):# TODO
 	# Change hitbox + other animation things like sliding etc.
 	S.is_aiming = false # cancel aiming for the moment
 	S.aim_direction = 0
+	$Shoot_predictor.clear()
 	S.is_crouching = true
 
 func move_dunk(delta):# TODO
 	# Change hitbox + other animation things like sliding etc.
 	S.is_aiming = false # cancel aiming for the moment
 	S.aim_direction = 0
+	$Shoot_predictor.clear()
 	S.is_dunking = true
 	self.get_node("Camera").screen_shake(0.1,6)
 
@@ -189,7 +191,7 @@ func move_shoot(delta):
 	S.last_shoot = S.time
 	$Shoot_predictor.shoot_vector_save = $Shoot_predictor.shoot_vector()
 	#Engine.time_scale = 1.0
-	$Shoot_predictor.clear()
+	$Shoot_predictor.clear()	
 	#throw_ball()+free_ball in Ball_handler	called by animation
 
 func move_adherence(delta):

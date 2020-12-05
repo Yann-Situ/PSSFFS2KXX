@@ -1,10 +1,8 @@
-[gd_scene load_steps=14 format=2]
+[gd_scene load_steps=34 format=2]
 
 [ext_resource path="res://src/Player/Player.tscn" type="PackedScene" id=1]
 [ext_resource path="res://src/Platform/Tileset/TileMap1.tres" type="TileSet" id=2]
 [ext_resource path="res://src/Ball/Ball.tscn" type="PackedScene" id=3]
-[ext_resource path="res://src/Ball/Ball-constant_energy.tscn" type="PackedScene" id=4]
-[ext_resource path="res://src/Ball/Ball-heavy.tscn" type="PackedScene" id=5]
 [ext_resource path="res://assets/art/background/pixelBackground1.png" type="Texture" id=6]
 [ext_resource path="res://assets/art/background/pixelBackground2.png" type="Texture" id=7]
 [ext_resource path="res://assets/art/background/pixelBackground3.png" type="Texture" id=8]
@@ -12,6 +10,323 @@
 [ext_resource path="res://src/Platform/TileMap.gd" type="Script" id=10]
 [ext_resource path="res://assets/shader/contour.shader" type="Shader" id=11]
 [ext_resource path="res://src/Platform/Tileset/TileMap3.tres" type="TileSet" id=12]
+
+[sub_resource type="PhysicsMaterial" id=4]
+friction = 0.15
+bounce = 0.5
+
+[sub_resource type="GDScript" id=5]
+script/source = "extends RigidBody2D
+
+# Classical ball
+export (bool) var physics_enabled = true
+var should_throw = false
+var temporary_position = Vector2(0,0)
+var temporary_velocity = Vector2(0,0)
+
+func _ready():
+	self.mass = 1.0
+	self.set_friction(0.15)
+	self.set_bounce(0.5)
+	
+func disable_physics():
+	physics_enabled = false
+	self.set_mode(RigidBody2D.MODE_STATIC)
+	
+	
+func enable_physics():
+	physics_enabled = true
+	self.set_mode(RigidBody2D.MODE_CHARACTER)
+	
+func throw(posi, velo):
+	should_throw = true
+	temporary_position = posi
+	temporary_velocity = velo
+
+func _integrate_forces(state):
+	if should_throw :
+		should_throw = false
+		state.transform.origin = temporary_position
+		state.linear_velocity = temporary_velocity
+	if state.linear_velocity.length() > 400:
+		var d = min(state.linear_velocity.length()/400 - 1, 0.2)
+		$Sprite.scale = (Vector2(1+d,1-d))
+		$Sprite.rotation = (state.linear_velocity.angle())
+	else :
+		$Sprite.scale = (Vector2(1,1))
+		$Sprite.rotation = (0)
+	integrate_forces_child(state)
+	
+func integrate_forces_child(state):
+	pass
+		
+"
+
+[sub_resource type="PhysicsMaterial" id=6]
+friction = 0.15
+bounce = 0.5
+
+[sub_resource type="GDScript" id=7]
+script/source = "extends RigidBody2D
+
+# Classical ball
+export (bool) var physics_enabled = true
+var should_throw = false
+var temporary_position = Vector2(0,0)
+var temporary_velocity = Vector2(0,0)
+
+func _ready():
+	self.mass = 1.0
+	self.set_friction(0.15)
+	self.set_bounce(0.5)
+	
+func disable_physics():
+	physics_enabled = false
+	self.set_mode(RigidBody2D.MODE_STATIC)
+	
+	
+func enable_physics():
+	physics_enabled = true
+	self.set_mode(RigidBody2D.MODE_CHARACTER)
+	
+func throw(posi, velo):
+	should_throw = true
+	temporary_position = posi
+	temporary_velocity = velo
+
+func _integrate_forces(state):
+	if should_throw :
+		should_throw = false
+		state.transform.origin = temporary_position
+		state.linear_velocity = temporary_velocity
+	if state.linear_velocity.length() > 400:
+		var d = min(state.linear_velocity.length()/400 - 1, 0.2)
+		$Sprite.scale = (Vector2(1+d,1-d))
+		$Sprite.rotation = (state.linear_velocity.angle())
+	else :
+		$Sprite.scale = (Vector2(1,1))
+		$Sprite.rotation = (0)
+	integrate_forces_child(state)
+	
+func integrate_forces_child(state):
+	pass
+		
+"
+
+[sub_resource type="PhysicsMaterial" id=8]
+friction = 0.15
+bounce = 0.5
+
+[sub_resource type="GDScript" id=9]
+script/source = "extends RigidBody2D
+
+# Classical ball
+export (bool) var physics_enabled = true
+var should_throw = false
+var temporary_position = Vector2(0,0)
+var temporary_velocity = Vector2(0,0)
+
+func _ready():
+	self.mass = 1.0
+	self.set_friction(0.15)
+	self.set_bounce(0.5)
+	
+func disable_physics():
+	physics_enabled = false
+	self.set_mode(RigidBody2D.MODE_STATIC)
+	
+	
+func enable_physics():
+	physics_enabled = true
+	self.set_mode(RigidBody2D.MODE_CHARACTER)
+	
+func throw(posi, velo):
+	should_throw = true
+	temporary_position = posi
+	temporary_velocity = velo
+
+func _integrate_forces(state):
+	if should_throw :
+		should_throw = false
+		state.transform.origin = temporary_position
+		state.linear_velocity = temporary_velocity
+	if state.linear_velocity.length() > 400:
+		var d = min(state.linear_velocity.length()/400 - 1, 0.2)
+		$Sprite.scale = (Vector2(1+d,1-d))
+		$Sprite.rotation = (state.linear_velocity.angle())
+	else :
+		$Sprite.scale = (Vector2(1,1))
+		$Sprite.rotation = (0)
+	integrate_forces_child(state)
+	
+func integrate_forces_child(state):
+	pass
+		
+"
+
+[sub_resource type="PhysicsMaterial" id=10]
+friction = 0.15
+bounce = 0.5
+
+[sub_resource type="GDScript" id=11]
+script/source = "extends RigidBody2D
+
+# Classical ball
+export (bool) var physics_enabled = true
+var should_throw = false
+var temporary_position = Vector2(0,0)
+var temporary_velocity = Vector2(0,0)
+
+func _ready():
+	self.mass = 1.0
+	self.set_friction(0.15)
+	self.set_bounce(0.5)
+	
+func disable_physics():
+	physics_enabled = false
+	self.set_mode(RigidBody2D.MODE_STATIC)
+	
+	
+func enable_physics():
+	physics_enabled = true
+	self.set_mode(RigidBody2D.MODE_CHARACTER)
+	
+func throw(posi, velo):
+	should_throw = true
+	temporary_position = posi
+	temporary_velocity = velo
+
+func _integrate_forces(state):
+	if should_throw :
+		should_throw = false
+		state.transform.origin = temporary_position
+		state.linear_velocity = temporary_velocity
+	if state.linear_velocity.length() > 400:
+		var d = min(state.linear_velocity.length()/400 - 1, 0.2)
+		$Sprite.scale = (Vector2(1+d,1-d))
+		$Sprite.rotation = (state.linear_velocity.angle())
+	else :
+		$Sprite.scale = (Vector2(1,1))
+		$Sprite.rotation = (0)
+	integrate_forces_child(state)
+	
+func integrate_forces_child(state):
+	pass
+		
+"
+
+[sub_resource type="PhysicsMaterial" id=12]
+friction = 0.15
+bounce = 0.5
+
+[sub_resource type="GDScript" id=13]
+script/source = "extends \"res://src/Ball/Ball.gd\"
+# Constant energy ball, with infinite bouncing and no gravity
+func _ready():
+	$Sprite.texture = preload(\"res://assets/art/ball/ball_nogravity.png\")
+	self.mass = 1.2
+	self.gravity_scale = 0.0
+	self.set_friction(0.0)
+	self.set_bounce(1.0)
+	$Sprite.material = preload(\"res://assets/shader/speed_shadermaterial.tres\")
+	
+func _physics_process(delta):
+	$Sprite.material.set(\"shader_param/speed\",self.linear_velocity)
+"
+
+[sub_resource type="PhysicsMaterial" id=14]
+friction = 0.15
+bounce = 0.5
+
+[sub_resource type="GDScript" id=15]
+script/source = "extends \"res://src/Ball/Ball.gd\"
+# Constant energy ball, with infinite bouncing and no gravity
+func _ready():
+	$Sprite.texture = preload(\"res://assets/art/ball/ball_nogravity.png\")
+	self.mass = 1.2
+	self.gravity_scale = 0.0
+	self.set_friction(0.0)
+	self.set_bounce(1.0)
+	$Sprite.material = preload(\"res://assets/shader/speed_shadermaterial.tres\")
+	
+func _physics_process(delta):
+	$Sprite.material.set(\"shader_param/speed\",self.linear_velocity)
+"
+
+[sub_resource type="PhysicsMaterial" id=16]
+friction = 0.15
+bounce = 0.5
+
+[sub_resource type="GDScript" id=17]
+script/source = "extends \"res://src/Ball/Ball.gd\"
+# Constant energy ball, with infinite bouncing and no gravity
+func _ready():
+	$Sprite.texture = preload(\"res://assets/art/ball/ball_nogravity.png\")
+	self.mass = 1.2
+	self.gravity_scale = 0.0
+	self.set_friction(0.0)
+	self.set_bounce(1.0)
+	$Sprite.material = preload(\"res://assets/shader/speed_shadermaterial.tres\")
+	
+func _physics_process(delta):
+	$Sprite.material.set(\"shader_param/speed\",self.linear_velocity)
+"
+
+[sub_resource type="PhysicsMaterial" id=18]
+friction = 0.15
+bounce = 0.5
+
+[sub_resource type="GDScript" id=19]
+script/source = "extends \"res://src/Ball/Ball.gd\"
+# Heavy ball, with no bouncing and large mass
+func _ready():
+	$Sprite.texture = preload(\"res://assets/art/ball/ball_heavy.png\")
+	self.mass = 3.0
+	self.set_friction(0.4)
+	self.set_bounce(0.1)
+"
+
+[sub_resource type="PhysicsMaterial" id=20]
+friction = 0.15
+bounce = 0.5
+
+[sub_resource type="GDScript" id=21]
+script/source = "extends \"res://src/Ball/Ball.gd\"
+# Heavy ball, with no bouncing and large mass
+func _ready():
+	$Sprite.texture = preload(\"res://assets/art/ball/ball_heavy.png\")
+	self.mass = 3.0
+	self.set_friction(0.4)
+	self.set_bounce(0.1)
+"
+
+[sub_resource type="PhysicsMaterial" id=22]
+friction = 0.15
+bounce = 0.5
+
+[sub_resource type="GDScript" id=23]
+script/source = "extends \"res://src/Ball/Ball.gd\"
+# Rolling Heavy ball, with no bouncing and large mass
+func _ready():
+	$Sprite.texture = preload(\"res://assets/art/ball/ball_heavy.png\")
+	self.mass = 2.0
+	self.set_friction(0.0)
+	self.set_bounce(0.001)
+"
+
+[sub_resource type="PhysicsMaterial" id=24]
+friction = 0.15
+bounce = 0.5
+
+[sub_resource type="GDScript" id=25]
+script/source = "extends \"res://src/Ball/Ball.gd\"
+# Rolling Heavy ball, with no bouncing and large mass
+func _ready():
+	$Sprite.texture = preload(\"res://assets/art/ball/ball_heavy.png\")
+	self.mass = 2.0
+	self.set_friction(0.0)
+	self.set_bounce(0.001)
+"
 
 [sub_resource type="ShaderMaterial" id=1]
 shader = ExtResource( 11 )
@@ -87,27 +402,60 @@ tile_data = PoolIntArray( -1114120, 3, 0, -1179570, 3, 0, -786439, 3, 0, -720903
 
 [node name="Balls" type="Node" parent="."]
 
-[node name="Ball" parent="Balls" instance=ExtResource( 3 )]
-position = Vector2( 884.271, 301.061 )
+[node name="Ball_glitch" parent="Balls" instance=ExtResource( 3 )]
+position = Vector2( 477, 167 )
+physics_material_override = SubResource( 4 )
+script = SubResource( 5 )
+
+[node name="Ball1" parent="Balls" instance=ExtResource( 3 )]
+position = Vector2( 748.708, 490.615 )
+physics_material_override = SubResource( 6 )
+script = SubResource( 7 )
 
 [node name="Ball2" parent="Balls" instance=ExtResource( 3 )]
-position = Vector2( 953, 27 )
+position = Vector2( 919.567, 81.4866 )
+physics_material_override = SubResource( 8 )
+script = SubResource( 9 )
+
+[node name="Ball3" parent="Balls" instance=ExtResource( 3 )]
+position = Vector2( 662.61, 7.40303 )
+physics_material_override = SubResource( 10 )
+script = SubResource( 11 )
 
 [node name="Ball4" parent="Balls" instance=ExtResource( 3 )]
-position = Vector2( 477, 167 )
+position = Vector2( 580.518, 489.948 )
+physics_material_override = SubResource( 12 )
+script = SubResource( 13 )
 
-[node name="Ball3" parent="Balls" instance=ExtResource( 4 )]
-position = Vector2( 653.441, 211.268 )
+[node name="Ball5" parent="Balls" instance=ExtResource( 3 )]
+position = Vector2( 911.558, 507.968 )
+physics_material_override = SubResource( 14 )
+script = SubResource( 15 )
 
-[node name="Ball5" parent="Balls" instance=ExtResource( 5 )]
-position = Vector2( 552.918, 185.783 )
+[node name="Ball6" parent="Balls" instance=ExtResource( 3 )]
+position = Vector2( 679.963, 389.167 )
+physics_material_override = SubResource( 16 )
+script = SubResource( 17 )
 
-[node name="Ball7" parent="Balls" instance=ExtResource( 5 )]
-position = Vector2( 598.696, 306.127 )
+[node name="Ball7" parent="Balls" instance=ExtResource( 3 )]
+position = Vector2( 1099.1, 331.102 )
+physics_material_override = SubResource( 18 )
+script = SubResource( 19 )
 
-[node name="Ball6" parent="Balls" instance=ExtResource( 4 )]
-material = null
-position = Vector2( 699.218, 331.612 )
+[node name="Ball8" parent="Balls" instance=ExtResource( 3 )]
+position = Vector2( 918.9, 307.075 )
+physics_material_override = SubResource( 20 )
+script = SubResource( 21 )
+
+[node name="Ball9" parent="Balls" instance=ExtResource( 3 )]
+position = Vector2( 782.079, 54.7899 )
+physics_material_override = SubResource( 22 )
+script = SubResource( 23 )
+
+[node name="Ball10" parent="Balls" instance=ExtResource( 3 )]
+position = Vector2( 802.769, 257.685 )
+physics_material_override = SubResource( 24 )
+script = SubResource( 25 )
 
 [node name="Player" parent="." instance=ExtResource( 1 )]
 material = SubResource( 1 )

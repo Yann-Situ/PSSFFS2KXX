@@ -6,6 +6,11 @@ var should_throw = false
 var temporary_position = Vector2(0,0)
 var temporary_velocity = Vector2(0,0)
 
+func _ready():
+	self.mass = 1.0
+	self.set_friction(0.15)
+	self.set_bounce(0.5)
+	
 func disable_physics():
 	physics_enabled = false
 	self.set_mode(RigidBody2D.MODE_STATIC)

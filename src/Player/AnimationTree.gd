@@ -68,28 +68,62 @@ func add_state(animation_name, \
 func _ready():
 	state_machine = self.get("parameters/playback")
 
-	#var air_states = [self.tree_root.get_node(x) \
-	#    for x in ["jump1", "fall", "fall_loop", "walljump1", "air_wall"]]
-	#var floor_states = [self.tree_root.get_node(x) \
-	#    for x in ["idle", "walk", "floor_wall"]]
+	var air_states = ["jump1", "fall", "fall_loop", "walljump1", "air_wall"]
+	var floor_states = ["idle", "walk", "floor_wall"]
 
 	#DUNK
 	add_state("dunk",\
 	  ["fall", "fall_loop", "jump1", "walljump1"],["fall", "idle"],\
 	  ["dunking_cond","dunking_cond","dunking_cond","dunking_cond"],["not_dunking_cond","on_floor_cond"],\
 	  [],[]) # is same as all SWITCH_MODE_IMMEDIATE
+	air_states.append("dunk")
 
 	#HALFTURN
 	add_state("halfturn",\
 	  ["walk", "idle"],["walk","idle", "floor_wall"], \
 	  ["halfturning_cond","halfturning_cond"],["","not_halfturning_cond", "on_wall_cond"],\
 	  [0,0],[2, 0, 0])
+	floor_states.append("halfturn")
 
 	#LAND
 	add_state("land",\
 	  ["idle"],["idle_copy", "idle", "floor_wall"], \
 	  ["landing_cond"],["", "not_landing_cond", "on_wall_cond"],\
 	  [0],[2, 0, 0])
+	floor_states.append("land")
+
+	#AIMING
+	# add_state("air_aim",\
+	#   ["fall", "fall_loop", "jump1", "walljump1"],["fall"], \
+	#   ["aiming_cond","aiming_cond","aiming_cond","aiming_cond"],["not_aiming_cond"],\
+	#   [0,0,0,0],[0])
+	#
+	# add_state("floor_idle_aim",\
+	#   ["idle", "land", "air_aim"],["idle", "air_aim"], \
+	#   ["aiming_cond","aiming_cond", "on_floor_cond"],["not_aiming_cond", "not_on_floor_cond"],\
+	#   [0,0,0],[0, 0])
+	#
+	# add_state("floor_run_aim",\
+	#   ["floor_idle_aim", "walk"],["floor_idle_aim", "walk", "air_aim"], \
+	#   ["walking_cond", "aiming_cond"],["idle_cond", "not_aiming_cond", "not_on_floor_cond"],\
+	#   [0,0],[0, 0, 0])
+
+	#SHOOT
+	var shoot_conds = []
+	for i in range(max(len(air_states), len(floor_states))) :
+		shoot_conds.append("shooting_cond")
+	add_state("air_shoot",\
+	  air_states,["fall", "fall_copy"], \
+	  shoot_conds,["","not_shooting_cond"],\
+	  [],[2,0])
+	air_states.append("air_shoot")
+
+	add_state("floor_shoot",\
+	  floor_states,["idle", "idle_copy"], \
+	  shoot_conds,["", "not_shooting_cond"],\
+	  [],[2, 0, 0])
+	floor_states.append("floor_shoot")
+
 	# var dunk_node = AnimationNodeAnimation.new();
 	# dunk_node.animation = "dunk"
 	# self.tree_root.add_node("dunk", dunk_node, Vector2(8.0,8.0))
@@ -128,6 +162,7 @@ func animate_from_state(S):
 
 	self["parameters/conditions/jumping_cond"] = S.is_jumping
 	self["parameters/conditions/walljumping_cond"] = S.is_walljumping and !S.can_walljump
+
 	self["parameters/conditions/landing_cond"] = S.is_landing
 	self["parameters/conditions/not_landing_cond"] = !S.is_landing
 	self["parameters/conditions/dunking_cond"] = S.is_dunking
@@ -136,7 +171,9 @@ func animate_from_state(S):
 	self["parameters/conditions/not_halfturning_cond"] = !S.is_halfturning
 	#self["parameters/conditions/crouching_cond"] = S.is_crouching
 	#self["parameters/conditions/aiming_cond"] = S.is_aiming
-	#self["parameters/conditions/shooting_cond"] = S.is_shooting
+	#self["parameters/conditions/not_aiming_cond"] = !S.is_aiming
+	self["parameters/conditions/shooting_cond"] = S.is_shooting
+	self["parameters/conditions/not_shooting_cond"] = !S.is_shooting
 
 	set_flip(S.move_direction == -1, S.move_direction == 1)
 
