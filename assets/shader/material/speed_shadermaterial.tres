@@ -1,0 +1,10 @@
+[gd_resource type="ShaderMaterial" load_steps=2 format=2]
+
+[ext_resource path="res://assets/shader/speed.shader" type="Shader" id=1]
+
+[resource]
+shader = ExtResource( 1 )
+shader_param/speed = Vector2( 100, 100 )
+shader_param/max_speed = 400.0
+shader_param/thresh_speed_coeff = 0.6
+shader_param/glow_coeff = 1.2

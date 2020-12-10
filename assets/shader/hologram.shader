@@ -32,7 +32,6 @@ vec4 hologram_color(vec4 c)
     return cres + vec4(0.4*c.r,0.5*c.g,0.4*c.b,0.);
 }
 
-
 void fragment() {
 	vec4 t = texture(TEXTURE, UV);
     vec4 col = hologram_color(t);

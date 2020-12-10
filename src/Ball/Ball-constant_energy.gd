@@ -6,7 +6,6 @@ func _ready():
 	self.gravity_scale = 0.0
 	self.set_friction(0.0)
 	self.set_bounce(1.0)
-	$Sprite.material = preload("res://assets/shader/speed_shadermaterial.tres")
-	
-func _physics_process(delta):
-	$Sprite.material.set("shader_param/speed",self.linear_velocity)
+	$Sprite.set_material(preload("res://assets/shader/material/hologram_shadermaterial.tres"))
+	$Sprite.set_material($Sprite.get_material().duplicate())
+

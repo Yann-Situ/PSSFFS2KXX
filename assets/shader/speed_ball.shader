@@ -9,6 +9,10 @@ const float max_queue_size = 8.;// in pixels
 const float harmonics_attenuation = 0.9;// coefficient
 uniform float glow_coeff = 1.2;// coefficient
 
+void vertex() {
+    //VERTEX += (VERTEX - 0.5)*speed/max_speed;
+}
+
 void fragment() {
 	vec4 t = texture(TEXTURE, UV);
 
@@ -18,7 +22,7 @@ void fragment() {
 		float l = length(speed);
 		float queue_size = max_queue_size*smoothstep(thresh_speed_coeff,1.0,l/max_speed);// in pixels
 		vec2 uv_increment = TEXTURE_PIXEL_SIZE*speed/l; // in uv coord
-		uv_increment.x = abs(uv_increment.x);// handle flip_h
+		//uv_increment.x = abs(uv_increment.x);// handle flip_h
 
 		vec2 uv2 = UV;
 		float coeff = 1.;
