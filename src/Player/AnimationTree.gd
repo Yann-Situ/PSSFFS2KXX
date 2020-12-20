@@ -2,7 +2,7 @@ extends AnimationTree
 
 # Declare member variables here :
 var state_machine
-onready var Sprite = get_parent()
+onready var Player = get_parent().get_parent()
 var conds = ["on_wall_cond","not_on_floor_cond","on_floor_cond","idle_cond",\
   	"falling_cond","walking_cond","jumping_cond","walljumping_cond",\
 	"dunking_cond","not_dunking_cond","halfturning_cond"\
@@ -180,6 +180,6 @@ func animate_from_state(S):
 func set_flip(b1,b2):
 	#set flip if b1 true or unset flip if b2 true
 	if b1 :
-		Sprite.set_flip_h(true)
+		Player.set_flip_h(true)
 	elif b2 :
-		Sprite.set_flip_h(false)
+		Player.set_flip_h(false)

@@ -110,7 +110,7 @@ func update_vars(delta_ms, onfloor, onwall, movingfast):
 
 
 	var dir_sprite = 1;
-	if self.get_parent().get_node("Sprite").flip_h :
+	if self.get_parent().flip_h :
 		dir_sprite = -1;
 	is_jumping = is_jumping and not is_onfloor and is_mounting
 	is_walljumping = is_walljumping and not is_onfloor and is_mounting

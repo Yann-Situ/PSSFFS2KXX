@@ -14,6 +14,7 @@ var white = Color(1,1,1,1)
 var red = Color(1,0,0,1)
 var yellorange = Color(1.0,0.8,0.1,1)
 
+export (bool) var flip_h = false
 var S
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -45,3 +46,6 @@ func draw(pos, vel, grav):
 func clear():
 	points.clear()
 	update()
+
+func set_flip_h(b):
+	flip_h = b

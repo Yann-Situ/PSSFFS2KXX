@@ -5,7 +5,6 @@ onready var S = get_node("Player_State")
 #balls
 const Ball = preload("res://src/Ball/Ball.tscn")
 
-
 # Environment features (should be given by the map)
 export (float) var gravity = ProjectSettings.get_setting("physics/2d/default_gravity") # pix/s²
 export (float) var floor_friction = 0.2 # %/frame
@@ -31,19 +30,29 @@ export (float) var walk_instant_speed = 150 # pix/s
 export (float) var walk_return_thresh_instant_speed = walk_instant_speed*1.5 # pix/s
 export (float) var walk_accel = 220 # pix/s²
 
+export (bool) var flip_h = false
 #export var snap_vector_save = Vector2(0,1)
 #var snap_vector =
 
+func set_flip_h(b):
+	flip_h  = b
+	$Sprite.set_flip_h(b)
+	$Shoot_predictor.set_flip_h(b)	
+	$Special_Action_Handler.set_flip_h(b)
+
 func get_input(delta):
 	############### Change variables of Player_state.gd
-	S.update_vars(delta*1000, is_on_floor(), is_on_wall(), (abs(S.velocity.x) > run_speed_thresh))
+	#S.update_vars(delta*1000, is_on_floor(), is_on_wall(), (abs(S.velocity.x) > run_speed_thresh))
+	S.update_vars(delta*1000, is_on_floor(), is_on_wall() and $Special_Action_Handler.is_on_wall(), (abs(S.velocity.x) > run_speed_thresh))
 	if S.is_onfloor :
 		S.last_onfloor = S.time
 	else :
 		S.last_onair = S.time
 	if S.is_onwall :
 		S.last_onwall = S.time
-		S.last_wall_normal_direction = sign(get_slide_collision(get_slide_count()-1).normal.x)
+		S.last_wall_normal_direction = -1#sign(get_slide_collision(get_slide_count()-1).normal.x)
+		if $Sprite.flip_h:
+			S.last_wall_normal_direction = 1
 
 	############### Move from input
 	if (S.direction_p != 0) and S.can_go :
@@ -84,7 +93,7 @@ func get_input(delta):
 	############### Misc and Animation handling
 	
 	#shader :
-	$Sprite.material.set("shader_param/speed",S.velocity)
+	#$Sprite.material.set("shader_param/speed",S.velocity)
 	
 	if S.is_aiming:
 		var shoot = $Shoot_predictor.shoot_vector()

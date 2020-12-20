@@ -8,17 +8,11 @@
 [ext_resource path="res://src/Player/Ball_Handler.gd" type="Script" id=6]
 [ext_resource path="res://src/Player/Camera.gd" type="Script" id=7]
 [ext_resource path="res://src/Player/AnimationTree.gd" type="Script" id=8]
-[ext_resource path="res://assets/shader/speed.shader" type="Shader" id=9]
+[ext_resource path="res://src/Player/Special_Action_Handler.gd" type="Script" id=9]
+[ext_resource path="res://src/Player/Ray.gd" type="Script" id=10]
 
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 4, 26 )
-
-[sub_resource type="ShaderMaterial" id=2]
-shader = ExtResource( 9 )
-shader_param/speed = Vector2( 400, -100 )
-shader_param/max_speed = 400.0
-shader_param/thresh_speed_coeff = 0.6
-shader_param/glow_coeff = 1.2
 
 [sub_resource type="AnimationNodeAnimation" id=3]
 animation = "air_wall"
@@ -264,7 +258,7 @@ tracks/3/loop_wrap = true
 tracks/3/imported = false
 tracks/3/enabled = true
 tracks/3/keys = {
-"times": PoolRealArray( 0, 0.35 ),
+"times": PoolRealArray( 0, 0.34 ),
 "transitions": PoolRealArray( 1, 1 ),
 "update": 0,
 "values": [ true, false ]
@@ -682,7 +676,7 @@ tracks/3/loop_wrap = true
 tracks/3/imported = false
 tracks/3/enabled = true
 tracks/3/keys = {
-"times": PoolRealArray( 0, 0.35 ),
+"times": PoolRealArray( 0, 0.34 ),
 "transitions": PoolRealArray( 1, 1 ),
 "update": 0,
 "values": [ true, false ]
@@ -973,7 +967,7 @@ tracks/1/keys = {
 "times": PoolRealArray( 0 ),
 "transitions": PoolRealArray( 1 ),
 "update": 0,
-"values": [ Vector2( 2, 6 ) ]
+"values": [ Vector2( 0, 6 ) ]
 }
 tracks/2/type = "value"
 tracks/2/path = NodePath("../Collision:shape:extents")
@@ -1197,12 +1191,11 @@ position = Vector2( 0, 6 )
 shape = SubResource( 1 )
 
 [node name="Sprite" type="Sprite" parent="."]
-material = SubResource( 2 )
 position = Vector2( -2.18279e-11, 0 )
 texture = ExtResource( 2 )
 vframes = 20
 hframes = 16
-frame = 200
+frame = 203
 
 [node name="AnimationTree" type="AnimationTree" parent="Sprite"]
 tree_root = SubResource( 40 )
@@ -1268,5 +1261,32 @@ shape = SubResource( 60 )
 
 [node name="Has_Ball_Position" type="Node2D" parent="Ball_Handler"]
 position = Vector2( 5, 0 )
+
+[node name="Special_Action_Handler" type="Node2D" parent="."]
+script = ExtResource( 9 )
+
+[node name="Ray_fwd_up" type="RayCast2D" parent="Special_Action_Handler"]
+position = Vector2( 0, -16 )
+cast_to = Vector2( 8, 0 )
+script = ExtResource( 10 )
+
+[node name="Ray_fwd_down" type="RayCast2D" parent="Special_Action_Handler"]
+position = Vector2( 0, 16 )
+cast_to = Vector2( 8, 0 )
+script = ExtResource( 10 )
+
+[node name="Ray_fwd_up_f" type="RayCast2D" parent="Special_Action_Handler"]
+position = Vector2( 0, -16 )
+cast_to = Vector2( -8, 0 )
+script = ExtResource( 10 )
+
+[node name="Ray_fwd_down_f" type="RayCast2D" parent="Special_Action_Handler"]
+position = Vector2( 0, 16 )
+cast_to = Vector2( -8, 0 )
+script = ExtResource( 10 )
+
+[node name="Ray_up" type="RayCast2D" parent="Special_Action_Handler"]
+cast_to = Vector2( 0, -20 )
+script = ExtResource( 10 )
 [connection signal="tween_completed" from="Camera/Tween" to="Camera" method="_on_Tween_tween_completed"]
 [connection signal="body_entered" from="Ball_Handler" to="Ball_Handler" method="_on_Ball_Handler_body_entered"]

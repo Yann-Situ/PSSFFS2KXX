@@ -1,4 +1,4 @@
-[gd_scene load_steps=17 format=2]
+[gd_scene load_steps=18 format=2]
 
 [ext_resource path="res://src/Player/Player.tscn" type="PackedScene" id=1]
 [ext_resource path="res://src/Platform/Tileset/TileMap1.tres" type="TileSet" id=2]
@@ -13,6 +13,7 @@
 [ext_resource path="res://assets/shader/contour.shader" type="Shader" id=11]
 [ext_resource path="res://src/Platform/Tileset/TileMap3.tres" type="TileSet" id=12]
 [ext_resource path="res://src/Ball/Ball-heavy.tscn" type="PackedScene" id=13]
+[ext_resource path="res://src/Platform/Basket.tscn" type="PackedScene" id=14]
 
 [sub_resource type="PhysicsMaterial" id=1]
 friction = 0.15
@@ -135,7 +136,10 @@ script = ExtResource( 10 )
 tile_set = ExtResource( 12 )
 cell_size = Vector2( 32, 32 )
 format = 1
-tile_data = PoolIntArray( -1114120, 3, 0, -1179570, 3, 0, -786439, 3, 0, -720903, 3, 0, -393211, 1, 0, -327675, 1, 0, 77, 3, 0, 131097, 4, 0, 131105, 1, 0, 393294, 3, 0, 589817, 3, 0, 786433, 3, 0, 852021, 1, 0, 917509, 3, 0, 983046, 3, 0, 1048587, 4, 0, 1048588, 0, 0, 1048614, 2, 0, 1048615, 2, 0, 1048616, 0, 0, 1048617, 2, 0, 1048632, 4, 0, 1179673, 3, 0, 1179714, 3, 0, 1179724, 3, 0, 1245184, 3, 0, 1245191, 3, 0, 1245195, 3, 0, 1245226, 3, 0, 1245241, 3, 0, 1245253, 3, 0, 1310775, 3, 0, 1376258, 3, 0, 1441837, 1, 0, 1507379, 3, 0, 1638414, 3, 0 )
+tile_data = PoolIntArray( -1114120, 3, 0, -1179570, 3, 0, -786439, 3, 0, -720903, 3, 0, -393211, 1, 0, 27, 5, 0, 77, 3, 0, 65569, 1, 0, 131097, 4, 0, 131105, 1, 0, 393294, 3, 0, 589817, 3, 0, 589868, 536870914, 0, 589872, 0, 0, 589874, 4, 0, 589875, 4, 0, 589876, 4, 0, 589877, 4, 0, 655388, 4, 0, 786433, 3, 0, 851979, 536870917, 0, 852021, 1, 0, 852025, 536870917, 0, 917509, 3, 0, 983046, 3, 0, 1048587, 4, 0, 1048588, 536870912, 0, 1048614, 2, 0, 1048615, 2, 0, 1048616, 0, 0, 1048617, 2, 0, 1048632, 4, 0, 1048633, 536870914, 0, 1179673, 3, 0, 1179714, 3, 0, 1179724, 3, 0, 1245184, 3, 0, 1245191, 3, 0, 1245195, 3, 0, 1245226, 3, 0, 1245241, 3, 0, 1245253, 3, 0, 1310775, 3, 0, 1376258, 3, 0, 1441837, 1, 0, 1507379, 3, 0, 1638414, 3, 0 )
+
+[node name="Basket" parent="Map" instance=ExtResource( 14 )]
+position = Vector2( 368, 392 )
 
 [node name="Balls" type="Node" parent="."]
 
