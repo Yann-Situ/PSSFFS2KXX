@@ -153,12 +153,6 @@ script = SubResource( 2 )
 [node name="Ball" parent="Balls" instance=ExtResource( 5 )]
 position = Vector2( 612.288, 319.115 )
 
-[node name="Ball2" parent="Balls" instance=ExtResource( 4 )]
-position = Vector2( 746.41, 351.596 )
-
-[node name="Ball6" parent="Balls" instance=ExtResource( 4 )]
-position = Vector2( 941.19, 337.362 )
-
 [node name="Ball3" parent="Balls" instance=ExtResource( 13 )]
 position = Vector2( 670.963, 347.38 )
 
@@ -167,6 +161,12 @@ position = Vector2( 800.567, 272.464 )
 
 [node name="Ball5" parent="Balls" instance=ExtResource( 3 )]
 position = Vector2( 511.393, 166.834 )
+
+[node name="Ball2" parent="Balls" instance=ExtResource( 4 )]
+position = Vector2( 960, 480 )
+
+[node name="Ball6" parent="Balls" instance=ExtResource( 4 )]
+position = Vector2( 944, 296 )
 
 [node name="Player" parent="." instance=ExtResource( 1 )]
 material = SubResource( 3 )
