@@ -1189,7 +1189,7 @@ position = Vector2( -2.18279e-11, 0 )
 texture = ExtResource( 2 )
 vframes = 20
 hframes = 16
-frame = 203
+frame = 204
 
 [node name="AnimationTree" type="AnimationTree" parent="Sprite"]
 tree_root = SubResource( 39 )
@@ -1257,6 +1257,7 @@ shape = SubResource( 59 )
 position = Vector2( 5, 0 )
 
 [node name="Special_Action_Handler" type="Node2D" parent="."]
+visible = false
 script = ExtResource( 9 )
 
 [node name="Ray_fwd_up" type="RayCast2D" parent="Special_Action_Handler"]

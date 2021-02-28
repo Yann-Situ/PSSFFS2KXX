@@ -1,4 +1,4 @@
-[gd_scene load_steps=20 format=2]
+[gd_scene load_steps=22 format=2]
 
 [ext_resource path="res://src/Player/Player.tscn" type="PackedScene" id=1]
 [ext_resource path="res://src/Platform/Tileset/TileMap1.tres" type="TileSet" id=2]
@@ -15,6 +15,7 @@
 [ext_resource path="res://src/Ball/Ball-heavy.tscn" type="PackedScene" id=13]
 [ext_resource path="res://src/Platform/Basket.tscn" type="PackedScene" id=14]
 [ext_resource path="res://assets/art/tileset/parallax-background1.png" type="Texture" id=15]
+[ext_resource path="res://src/Ball/Ball-bouncy.tscn" type="PackedScene" id=16]
 
 [sub_resource type="TileSet" id=1]
 1/name = "parallax-background1.png 1"
@@ -573,6 +574,11 @@ func integrate_forces_child(state):
 		
 "
 
+[sub_resource type="PhysicsMaterial" id=5]
+resource_local_to_scene = true
+friction = 0.15
+bounce = 0.5
+
 [sub_resource type="ShaderMaterial" id=4]
 shader = ExtResource( 11 )
 shader_param/contour_color = Color( 0.2, 0, 0.1, 1 )
@@ -678,23 +684,39 @@ position = Vector2( 477, 167 )
 physics_material_override = SubResource( 2 )
 script = SubResource( 3 )
 
-[node name="Ball" parent="Balls" instance=ExtResource( 5 )]
-position = Vector2( 612.288, 319.115 )
-
-[node name="Ball3" parent="Balls" instance=ExtResource( 13 )]
-position = Vector2( 670.963, 347.38 )
-
 [node name="Ball4" parent="Balls" instance=ExtResource( 3 )]
 position = Vector2( 800.567, 272.464 )
 
 [node name="Ball5" parent="Balls" instance=ExtResource( 3 )]
 position = Vector2( 511.393, 166.834 )
 
-[node name="Ball2" parent="Balls" instance=ExtResource( 4 )]
-position = Vector2( 960, 480 )
+[node name="Ball" parent="Balls" instance=ExtResource( 5 )]
+position = Vector2( 920, 328 )
+
+[node name="Ball2" parent="Balls" instance=ExtResource( 5 )]
+position = Vector2( 264, 136 )
+
+[node name="Ball3" parent="Balls" instance=ExtResource( 4 )]
+position = Vector2( 232, 328 )
 
 [node name="Ball6" parent="Balls" instance=ExtResource( 4 )]
-position = Vector2( 944, 296 )
+position = Vector2( 888, 520 )
+physics_material_override = SubResource( 5 )
+
+[node name="Ball7" parent="Balls" instance=ExtResource( 4 )]
+position = Vector2( 760, 72 )
+
+[node name="Ball8" parent="Balls" instance=ExtResource( 3 )]
+position = Vector2( 1408, 272 )
+
+[node name="Ball9" parent="Balls" instance=ExtResource( 16 )]
+position = Vector2( 1040, 256 )
+
+[node name="Ball10" parent="Balls" instance=ExtResource( 16 )]
+position = Vector2( 672, 384 )
+
+[node name="Ball11" parent="Balls" instance=ExtResource( 13 )]
+position = Vector2( 368, 320 )
 
 [node name="Player" parent="." instance=ExtResource( 1 )]
 material = SubResource( 4 )

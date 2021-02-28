@@ -1,27 +1,12 @@
-[gd_scene load_steps=5 format=2]
+[gd_scene load_steps=4 format=2]
 
 [ext_resource path="res://src/Ball/Ball-rolling_heavy.gd" type="Script" id=1]
 [ext_resource path="res://assets/art/ball/ball_rolling.png" type="Texture" id=2]
+[ext_resource path="res://src/Ball/Ball.tscn" type="PackedScene" id=3]
 
-[sub_resource type="PhysicsMaterial" id=1]
-friction = 0.15
-bounce = 0.5
-
-[sub_resource type="CircleShape2D" id=2]
-radius = 6.0
-
-[node name="Ball" type="RigidBody2D"]
-position = Vector2( 417, 241 )
-z_index = 1
-collision_layer = 2
-collision_mask = 3
-mode = 2
-physics_material_override = SubResource( 1 )
-angular_damp = 0.0
+[node name="Ball" instance=ExtResource( 3 )]
+mass = 2.0
 script = ExtResource( 1 )
 
-[node name="collision" type="CollisionShape2D" parent="."]
-shape = SubResource( 2 )
-
-[node name="Sprite" type="Sprite" parent="."]
+[node name="Sprite" parent="." index="1"]
 texture = ExtResource( 2 )

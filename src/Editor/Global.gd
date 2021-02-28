@@ -2,6 +2,7 @@ extends Node
 
 var playing = false
 var list_of_physical_nodes = []
+var mouse_ball = null #pointer to the last selectable item that called mouse_entered
 
 # Called when the node enters the scene tree for the first time.
 func _ready():

@@ -1,4 +1,5 @@
 extends KinematicBody2D
+class_name Player, "res://assets/art/icons/popol.png"
 
 onready var S = get_node("Player_State")
 
@@ -93,6 +94,10 @@ func get_input(delta):
 
 	if S.can_go :
 		move_adherence(delta)
+		
+	if S.select_jp and Global.mouse_ball != null :
+		S.selected_ball = Global.mouse_ball
+		S.selected_ball.toggle_selection(!S.selected_ball.selected)
 
 	############### Misc and Animation handling
 	

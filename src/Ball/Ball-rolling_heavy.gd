@@ -1,4 +1,4 @@
-extends "res://src/Ball/Ball.gd"
+extends Ball
 # Rolling Heavy ball, with no bouncing and large mass
 func _ready():
 	$Sprite.texture = preload("res://assets/art/ball/ball_rolling.png")

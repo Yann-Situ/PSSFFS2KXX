@@ -1,7 +1,12 @@
 extends RigidBody2D
+class_name Ball, "res://assets/art/ball/ball.png"
 
 # Classical ball
 export (bool) var physics_enabled = true
+export (bool) var selected = false
+export (Color) var selection_color = Color(1.0,1.0,1.0) #setget set_selection_color
+var selection_color_mid = Color(selection_color.r*0.5, selection_color.g*0.5, selection_color.b*0.5)
+
 onready var collision = $collision
 onready var start_position = global_position
 var should_reset = false
@@ -64,3 +69,28 @@ func _integrate_forces(state):
 
 func integrate_forces_child(state):
 	pass
+
+#########################################################################
+
+func set_selection_color(col):
+	$Sprite_Selection.modulate = col
+
+func toggle_selection(b):
+	selected = b
+	if selected :
+		set_selection_color(selection_color)
+		$Sprite_Selection.visible = true
+	else :
+		$Sprite_Selection.visible = false
+	
+func _on_Ball_mouse_entered():
+	if !selected:
+		set_selection_color(selection_color_mid)
+		$Sprite_Selection.visible = true
+	Global.mouse_ball = self
+
+func _on_Ball_mouse_exited():
+	if !selected:
+		$Sprite_Selection.visible = false
+	if Global.mouse_ball == self:
+		Global.mouse_ball = null

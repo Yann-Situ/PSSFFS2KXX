@@ -1,28 +1,11 @@
-[gd_scene load_steps=5 format=2]
+[gd_scene load_steps=4 format=2]
 
 [ext_resource path="res://assets/art/ball/ball_nogravity.png" type="Texture" id=1]
 [ext_resource path="res://src/Ball/Ball-constant_energy.gd" type="Script" id=2]
+[ext_resource path="res://src/Ball/Ball.tscn" type="PackedScene" id=3]
 
-[sub_resource type="PhysicsMaterial" id=1]
-friction = 0.0
-bounce = 1.0
-
-[sub_resource type="CircleShape2D" id=2]
-radius = 6.0
-
-[node name="Ball" type="RigidBody2D"]
-position = Vector2( 417, 241 )
-z_index = 1
-collision_layer = 2
-collision_mask = 3
-mode = 2
-physics_material_override = SubResource( 1 )
-gravity_scale = 0.0
-angular_damp = 0.0
+[node name="Ball" instance=ExtResource( 3 )]
 script = ExtResource( 2 )
 
-[node name="collision" type="CollisionShape2D" parent="."]
-shape = SubResource( 2 )
-
-[node name="Sprite" type="Sprite" parent="."]
+[node name="Sprite" parent="." index="1"]
 texture = ExtResource( 1 )

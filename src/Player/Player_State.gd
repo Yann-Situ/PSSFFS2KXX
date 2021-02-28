@@ -19,6 +19,7 @@ var crouch_p = false
 var aim_jp = false
 var shoot_jr = false
 var dunk_p = false
+var select_jp = false
 
 # Bool for physical states
 var is_onfloor = false # from values of Player.gd
@@ -69,6 +70,7 @@ export var is_shooting = false # handle by Player.gd (for start) and animations 
 # Bool var
 export var has_ball = false
 var active_ball = null#pointer to a ball
+var selected_ball = null#pointer to the selected ball
 
 func update_vars(delta_ms, onfloor, onwall, movingfast):
 	#
@@ -93,6 +95,7 @@ func update_vars(delta_ms, onfloor, onwall, movingfast):
 	aim_jp = Input.is_action_just_pressed("ui_select")
 	shoot_jr = Input.is_action_just_released("ui_select")
 	dunk_p = Input.is_action_pressed("ui_accept")
+	select_jp = Input.is_action_just_pressed("ui_select_alter")
 
 	if (velocity.x == 0):
 		move_direction = 0
