@@ -34,6 +34,10 @@ export (bool) var flip_h = false
 #export var snap_vector_save = Vector2(0,1)
 #var snap_vector =
 
+func _ready():
+	if !Global.playing:
+		Global.toggle_playing()
+
 func set_flip_h(b):
 	flip_h  = b
 	$Sprite.set_flip_h(b)

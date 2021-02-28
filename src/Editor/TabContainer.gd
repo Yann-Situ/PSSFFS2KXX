@@ -6,6 +6,11 @@ onready var object_cursor = get_node("/root/Editor/Editor_Object")
 func _ready():
 	pass # Replace with function body.
 	
+func _process(delta):
+	if Input.is_action_just_pressed("ui_e"):
+		Global.toggle_playing()
+		visible = !Global.playing
+	
 # temporary implementation due to https://github.com/godotengine/godot/issues/16854
 #########################
 func update_can_place():

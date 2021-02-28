@@ -14,154 +14,154 @@
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 4, 26 )
 
-[sub_resource type="AnimationNodeAnimation" id=3]
+[sub_resource type="AnimationNodeAnimation" id=2]
 animation = "air_wall"
+
+[sub_resource type="AnimationNodeAnimation" id=3]
+animation = "fall"
 
 [sub_resource type="AnimationNodeAnimation" id=4]
 animation = "fall"
 
 [sub_resource type="AnimationNodeAnimation" id=5]
-animation = "fall"
-
-[sub_resource type="AnimationNodeAnimation" id=6]
 animation = "fall_loop"
 
-[sub_resource type="AnimationNodeAnimation" id=7]
+[sub_resource type="AnimationNodeAnimation" id=6]
 animation = "floor_wall"
+
+[sub_resource type="AnimationNodeAnimation" id=7]
+animation = "idle"
 
 [sub_resource type="AnimationNodeAnimation" id=8]
 animation = "idle"
 
 [sub_resource type="AnimationNodeAnimation" id=9]
-animation = "idle"
-
-[sub_resource type="AnimationNodeAnimation" id=10]
 animation = "jump1"
 
-[sub_resource type="AnimationNodeAnimation" id=11]
+[sub_resource type="AnimationNodeAnimation" id=10]
 animation = "walk"
 
-[sub_resource type="AnimationNodeAnimation" id=12]
+[sub_resource type="AnimationNodeAnimation" id=11]
 animation = "walljump1"
 
-[sub_resource type="AnimationNodeStateMachineTransition" id=13]
+[sub_resource type="AnimationNodeStateMachineTransition" id=12]
 advance_condition = "walking_cond"
 
-[sub_resource type="AnimationNodeStateMachineTransition" id=14]
+[sub_resource type="AnimationNodeStateMachineTransition" id=13]
 advance_condition = "jumping_cond"
 
-[sub_resource type="AnimationNodeStateMachineTransition" id=15]
+[sub_resource type="AnimationNodeStateMachineTransition" id=14]
 switch_mode = 2
 advance_condition = "falling_cond"
 priority = 2
 
-[sub_resource type="AnimationNodeStateMachineTransition" id=16]
+[sub_resource type="AnimationNodeStateMachineTransition" id=15]
 switch_mode = 2
 auto_advance = true
 priority = 3
 
-[sub_resource type="AnimationNodeStateMachineTransition" id=17]
+[sub_resource type="AnimationNodeStateMachineTransition" id=16]
 advance_condition = "on_floor_cond"
 priority = 2
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=17]
+advance_condition = "on_wall_cond"
 
 [sub_resource type="AnimationNodeStateMachineTransition" id=18]
 advance_condition = "on_wall_cond"
 
 [sub_resource type="AnimationNodeStateMachineTransition" id=19]
-advance_condition = "on_wall_cond"
-
-[sub_resource type="AnimationNodeStateMachineTransition" id=20]
 advance_condition = "idle_cond"
 
-[sub_resource type="AnimationNodeStateMachineTransition" id=21]
+[sub_resource type="AnimationNodeStateMachineTransition" id=20]
 advance_condition = "not_on_wall_cond"
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=21]
+advance_condition = "on_wall_cond"
 
 [sub_resource type="AnimationNodeStateMachineTransition" id=22]
 advance_condition = "on_wall_cond"
 
 [sub_resource type="AnimationNodeStateMachineTransition" id=23]
-advance_condition = "on_wall_cond"
-
-[sub_resource type="AnimationNodeStateMachineTransition" id=24]
 advance_condition = "on_floor_cond"
 
-[sub_resource type="AnimationNodeStateMachineTransition" id=25]
+[sub_resource type="AnimationNodeStateMachineTransition" id=24]
 advance_condition = "jumping_cond"
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=25]
+advance_condition = "not_on_floor_cond"
+priority = 2
 
 [sub_resource type="AnimationNodeStateMachineTransition" id=26]
 advance_condition = "not_on_floor_cond"
-priority = 2
 
 [sub_resource type="AnimationNodeStateMachineTransition" id=27]
-advance_condition = "not_on_floor_cond"
-
-[sub_resource type="AnimationNodeStateMachineTransition" id=28]
 advance_condition = "not_on_wall_cond"
 
-[sub_resource type="AnimationNodeStateMachineTransition" id=29]
+[sub_resource type="AnimationNodeStateMachineTransition" id=28]
 advance_condition = "on_wall_cond"
 
-[sub_resource type="AnimationNodeStateMachineTransition" id=30]
+[sub_resource type="AnimationNodeStateMachineTransition" id=29]
 advance_condition = "on_floor_cond"
 priority = 2
 
-[sub_resource type="AnimationNodeStateMachineTransition" id=31]
+[sub_resource type="AnimationNodeStateMachineTransition" id=30]
 advance_condition = "not_on_floor_cond"
 
-[sub_resource type="AnimationNodeStateMachineTransition" id=32]
+[sub_resource type="AnimationNodeStateMachineTransition" id=31]
 advance_condition = "on_floor_cond"
 
-[sub_resource type="AnimationNodeStateMachineTransition" id=33]
+[sub_resource type="AnimationNodeStateMachineTransition" id=32]
 advance_condition = "jumping_cond"
 
-[sub_resource type="AnimationNodeStateMachineTransition" id=34]
+[sub_resource type="AnimationNodeStateMachineTransition" id=33]
 advance_condition = "walljumping_cond"
 
-[sub_resource type="AnimationNodeStateMachineTransition" id=35]
+[sub_resource type="AnimationNodeStateMachineTransition" id=34]
 switch_mode = 2
 advance_condition = "falling_cond"
 priority = 2
 
-[sub_resource type="AnimationNodeStateMachineTransition" id=36]
+[sub_resource type="AnimationNodeStateMachineTransition" id=35]
 advance_condition = "on_floor_cond"
 
-[sub_resource type="AnimationNodeStateMachineTransition" id=37]
+[sub_resource type="AnimationNodeStateMachineTransition" id=36]
 advance_condition = "on_wall_cond"
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=37]
+auto_advance = true
 
 [sub_resource type="AnimationNodeStateMachineTransition" id=38]
 auto_advance = true
 
-[sub_resource type="AnimationNodeStateMachineTransition" id=39]
-auto_advance = true
-
-[sub_resource type="AnimationNodeStateMachine" id=40]
-states/air_wall/node = SubResource( 3 )
+[sub_resource type="AnimationNodeStateMachine" id=39]
+states/air_wall/node = SubResource( 2 )
 states/air_wall/position = Vector2( 93.9985, -254 )
-states/fall/node = SubResource( 4 )
+states/fall/node = SubResource( 3 )
 states/fall/position = Vector2( 673, -312 )
-states/fall_copy/node = SubResource( 5 )
+states/fall_copy/node = SubResource( 4 )
 states/fall_copy/position = Vector2( 627.839, -399.582 )
-states/fall_loop/node = SubResource( 6 )
+states/fall_loop/node = SubResource( 5 )
 states/fall_loop/position = Vector2( 604, -216.066 )
-states/floor_wall/node = SubResource( 7 )
+states/floor_wall/node = SubResource( 6 )
 states/floor_wall/position = Vector2( 109.998, 203 )
-states/idle/node = SubResource( 8 )
+states/idle/node = SubResource( 7 )
 states/idle/position = Vector2( 586, 196 )
-states/idle_copy/node = SubResource( 9 )
+states/idle_copy/node = SubResource( 8 )
 states/idle_copy/position = Vector2( 635.839, 297.138 )
-states/jump1/node = SubResource( 10 )
+states/jump1/node = SubResource( 9 )
 states/jump1/position = Vector2( 350, -111 )
-states/walk/node = SubResource( 11 )
+states/walk/node = SubResource( 10 )
 states/walk/position = Vector2( 288, 62 )
-states/walljump1/node = SubResource( 12 )
+states/walljump1/node = SubResource( 11 )
 states/walljump1/position = Vector2( 350, -185.976 )
-transitions = [ "idle", "walk", SubResource( 13 ), "idle", "jump1", SubResource( 14 ), "jump1", "fall", SubResource( 15 ), "fall", "fall_loop", SubResource( 16 ), "fall_loop", "idle", SubResource( 17 ), "jump1", "air_wall", SubResource( 18 ), "walk", "floor_wall", SubResource( 19 ), "walk", "idle", SubResource( 20 ), "air_wall", "fall", SubResource( 21 ), "fall", "air_wall", SubResource( 22 ), "fall_loop", "air_wall", SubResource( 23 ), "air_wall", "floor_wall", SubResource( 24 ), "walk", "jump1", SubResource( 25 ), "idle", "fall", SubResource( 26 ), "walk", "fall", SubResource( 27 ), "floor_wall", "idle", SubResource( 28 ), "idle", "floor_wall", SubResource( 29 ), "fall", "idle", SubResource( 30 ), "floor_wall", "air_wall", SubResource( 31 ), "jump1", "idle", SubResource( 32 ), "floor_wall", "jump1", SubResource( 33 ), "air_wall", "walljump1", SubResource( 34 ), "walljump1", "fall", SubResource( 35 ), "walljump1", "idle", SubResource( 36 ), "walljump1", "air_wall", SubResource( 37 ), "idle_copy", "idle", SubResource( 38 ), "fall_copy", "fall", SubResource( 39 ) ]
+transitions = [ "idle", "walk", SubResource( 12 ), "idle", "jump1", SubResource( 13 ), "jump1", "fall", SubResource( 14 ), "fall", "fall_loop", SubResource( 15 ), "fall_loop", "idle", SubResource( 16 ), "jump1", "air_wall", SubResource( 17 ), "walk", "floor_wall", SubResource( 18 ), "walk", "idle", SubResource( 19 ), "air_wall", "fall", SubResource( 20 ), "fall", "air_wall", SubResource( 21 ), "fall_loop", "air_wall", SubResource( 22 ), "air_wall", "floor_wall", SubResource( 23 ), "walk", "jump1", SubResource( 24 ), "idle", "fall", SubResource( 25 ), "walk", "fall", SubResource( 26 ), "floor_wall", "idle", SubResource( 27 ), "idle", "floor_wall", SubResource( 28 ), "fall", "idle", SubResource( 29 ), "floor_wall", "air_wall", SubResource( 30 ), "jump1", "idle", SubResource( 31 ), "floor_wall", "jump1", SubResource( 32 ), "air_wall", "walljump1", SubResource( 33 ), "walljump1", "fall", SubResource( 34 ), "walljump1", "idle", SubResource( 35 ), "walljump1", "air_wall", SubResource( 36 ), "idle_copy", "idle", SubResource( 37 ), "fall_copy", "fall", SubResource( 38 ) ]
 start_node = "idle"
 graph_offset = Vector2( -266.161, -421.582 )
 
-[sub_resource type="AnimationNodeStateMachinePlayback" id=41]
+[sub_resource type="AnimationNodeStateMachinePlayback" id=40]
 
-[sub_resource type="Animation" id=42]
+[sub_resource type="Animation" id=41]
 length = 0.4
 tracks/0/type = "value"
 tracks/0/path = NodePath(".:frame")
@@ -212,7 +212,7 @@ tracks/3/keys = {
 "values": [ Vector2( 2, -7 ), Vector2( 1, -7 ), Vector2( -6, -6 ), Vector2( -8, -6 ) ]
 }
 
-[sub_resource type="Animation" id=43]
+[sub_resource type="Animation" id=42]
 length = 0.35
 step = 0.01
 tracks/0/type = "value"
@@ -282,18 +282,15 @@ tracks/5/loop_wrap = true
 tracks/5/imported = false
 tracks/5/enabled = true
 tracks/5/keys = {
-"times": PoolRealArray( 0.15, 0.34 ),
-"transitions": PoolRealArray( 1, 1 ),
+"times": PoolRealArray( 0.16 ),
+"transitions": PoolRealArray( 1 ),
 "values": [ {
 "args": [  ],
 "method": "throw_ball"
-}, {
-"args": [  ],
-"method": "free_ball"
 } ]
 }
 
-[sub_resource type="Animation" id=44]
+[sub_resource type="Animation" id=43]
 length = 0.1
 tracks/0/type = "value"
 tracks/0/path = NodePath(".:frame")
@@ -344,7 +341,7 @@ tracks/3/keys = {
 "values": [ Vector2( -4, -5 ) ]
 }
 
-[sub_resource type="Animation" id=45]
+[sub_resource type="Animation" id=44]
 length = 0.6
 loop = true
 tracks/0/type = "value"
@@ -396,7 +393,7 @@ tracks/3/keys = {
 "values": [ Vector2( 14, 1 ), Vector2( 16, -19 ) ]
 }
 
-[sub_resource type="Animation" id=46]
+[sub_resource type="Animation" id=45]
 length = 0.5
 tracks/0/type = "value"
 tracks/0/path = NodePath(".:frame")
@@ -447,7 +444,7 @@ tracks/3/keys = {
 "values": [ Vector2( 9, 6 ), Vector2( 11, -14 ), Vector2( 6, -31 ), Vector2( -3, -35 ), Vector2( -12, -30 ) ]
 }
 
-[sub_resource type="Animation" id=47]
+[sub_resource type="Animation" id=46]
 length = 0.38
 step = 0.05
 tracks/0/type = "value"
@@ -499,7 +496,7 @@ tracks/3/keys = {
 "values": [ Vector2( 3, -6 ), Vector2( 3, -6 ), Vector2( 2, -8 ) ]
 }
 
-[sub_resource type="Animation" id=48]
+[sub_resource type="Animation" id=47]
 length = 0.5
 loop = true
 step = 0.125
@@ -552,7 +549,7 @@ tracks/3/keys = {
 "values": [ Vector2( 2, -8 ) ]
 }
 
-[sub_resource type="Animation" id=49]
+[sub_resource type="Animation" id=48]
 length = 0.4
 tracks/0/type = "value"
 tracks/0/path = NodePath(".:frame")
@@ -603,7 +600,7 @@ tracks/3/keys = {
 "values": [ Vector2( 7, -8 ), Vector2( 1, -7 ), Vector2( -5, -5 ), Vector2( -6, -5 ) ]
 }
 
-[sub_resource type="Animation" id=50]
+[sub_resource type="Animation" id=49]
 loop = true
 tracks/0/type = "value"
 tracks/0/path = NodePath(".:frame")
@@ -630,7 +627,7 @@ tracks/1/keys = {
 "values": [ Vector2( -12, -4 ), Vector2( -10, -6 ) ]
 }
 
-[sub_resource type="Animation" id=51]
+[sub_resource type="Animation" id=50]
 length = 0.35
 step = 0.01
 tracks/0/type = "value"
@@ -688,14 +685,11 @@ tracks/4/loop_wrap = true
 tracks/4/imported = false
 tracks/4/enabled = true
 tracks/4/keys = {
-"times": PoolRealArray( 0.15, 0.34 ),
-"transitions": PoolRealArray( 1, 1 ),
+"times": PoolRealArray( 0.16 ),
+"transitions": PoolRealArray( 1 ),
 "values": [ {
 "args": [  ],
 "method": "throw_ball"
-}, {
-"args": [  ],
-"method": "free_ball"
 } ]
 }
 tracks/5/type = "value"
@@ -711,7 +705,7 @@ tracks/5/keys = {
 "values": [ Vector2( -14, -21 ), Vector2( -14, -21 ), Vector2( -16, -20 ), Vector2( -12, -23 ), Vector2( 13, -34 ), Vector2( 13, -34 ) ]
 }
 
-[sub_resource type="Animation" id=52]
+[sub_resource type="Animation" id=51]
 length = 0.1
 tracks/0/type = "value"
 tracks/0/path = NodePath(".:frame")
@@ -762,7 +756,7 @@ tracks/3/keys = {
 "values": [ Vector2( -4, -5 ) ]
 }
 
-[sub_resource type="Animation" id=53]
+[sub_resource type="Animation" id=52]
 length = 0.45
 step = 0.025
 tracks/0/type = "value"
@@ -826,7 +820,7 @@ tracks/4/keys = {
 "values": [ true, false ]
 }
 
-[sub_resource type="Animation" id=54]
+[sub_resource type="Animation" id=53]
 length = 9.0
 loop = true
 tracks/0/type = "value"
@@ -878,7 +872,7 @@ tracks/3/keys = {
 "values": [ Vector2( 5, 0 ), Vector2( 10, 5.99999 ), Vector2( 8.99999, 12 ), Vector2( 8, 26 ), Vector2( 4.99999, 15 ), Vector2( 5.00001, 7.00001 ), Vector2( 5.99999, 3 ), Vector2( 5, 0 ), Vector2( 5.00001, 0 ), Vector2( 5.00001, 0 ), Vector2( 9, -2 ), Vector2( 10, 5.99999 ), Vector2( 8.99999, 12 ), Vector2( 8, 26 ), Vector2( 4.99999, 15 ), Vector2( 5.00001, 7.00001 ), Vector2( 5.99999, 3 ), Vector2( 5, 0 ), Vector2( 4.99999, 0 ), Vector2( 9, -2 ), Vector2( 10, 5.99999 ), Vector2( 8.99999, 12 ), Vector2( 8, 26 ), Vector2( 4.99999, 15 ), Vector2( 5.00001, 7.00001 ), Vector2( 5.99999, 3 ), Vector2( 5, 0 ), Vector2( 5, 0 ) ]
 }
 
-[sub_resource type="Animation" id=55]
+[sub_resource type="Animation" id=54]
 length = 0.4
 step = 0.05
 tracks/0/type = "value"
@@ -942,7 +936,7 @@ tracks/4/keys = {
 "values": [ Vector2( 7, -0.999998 ), Vector2( 4, -0.999998 ), Vector2( 5, -2 ), Vector2( 0, -7 ), Vector2( 3, -6 ) ]
 }
 
-[sub_resource type="Animation" id=56]
+[sub_resource type="Animation" id=55]
 length = 0.25
 step = 0.05
 tracks/0/type = "value"
@@ -1006,7 +1000,7 @@ tracks/4/keys = {
 "values": [ true, false ]
 }
 
-[sub_resource type="Animation" id=57]
+[sub_resource type="Animation" id=56]
 loop = true
 tracks/0/type = "value"
 tracks/0/path = NodePath(".:frame")
@@ -1057,7 +1051,7 @@ tracks/3/keys = {
 "values": [ Vector2( 24, 7 ), Vector2( 22, 16 ), Vector2( 21, 25 ), Vector2( 22, 28 ), Vector2( 22, 17 ), Vector2( 24, 9.00001 ), Vector2( 23, 16 ), Vector2( 23, 23 ), Vector2( 23, 27 ), Vector2( 23, 16 ) ]
 }
 
-[sub_resource type="Animation" id=58]
+[sub_resource type="Animation" id=57]
 length = 0.8
 loop = true
 tracks/0/type = "value"
@@ -1109,7 +1103,7 @@ tracks/3/keys = {
 "values": [ Vector2( 9, -1.99999 ), Vector2( 15, 8.00001 ), Vector2( 15, 12 ), Vector2( 14, 27 ), Vector2( 12, 16 ), Vector2( 4, 7 ), Vector2( 4.00001, 3 ), Vector2( 4, 1 ) ]
 }
 
-[sub_resource type="Animation" id=59]
+[sub_resource type="Animation" id=58]
 length = 0.4
 step = 0.05
 tracks/0/type = "value"
@@ -1173,7 +1167,7 @@ tracks/4/keys = {
 "values": [ Vector2( 7, -0.999998 ), Vector2( 4, -0.999998 ), Vector2( 5, -2 ), Vector2( 0, -7 ), Vector2( 3, -6 ) ]
 }
 
-[sub_resource type="CapsuleShape2D" id=60]
+[sub_resource type="CapsuleShape2D" id=59]
 radius = 14.0
 height = 28.0
 
@@ -1198,10 +1192,10 @@ hframes = 16
 frame = 203
 
 [node name="AnimationTree" type="AnimationTree" parent="Sprite"]
-tree_root = SubResource( 40 )
+tree_root = SubResource( 39 )
 anim_player = NodePath("../Player_Animation")
 active = true
-parameters/playback = SubResource( 41 )
+parameters/playback = SubResource( 40 )
 parameters/conditions/falling_cond = false
 parameters/conditions/idle_cond = false
 parameters/conditions/jumping_cond = false
@@ -1214,24 +1208,24 @@ parameters/conditions/walljumping_cond = false
 script = ExtResource( 8 )
 
 [node name="Player_Animation" type="AnimationPlayer" parent="Sprite"]
-anims/air_aim = SubResource( 42 )
-anims/air_shoot = SubResource( 43 )
-anims/air_wall = SubResource( 44 )
-anims/crouch = SubResource( 45 )
-anims/dunk = SubResource( 46 )
-anims/fall = SubResource( 47 )
-anims/fall_loop = SubResource( 48 )
-anims/floor_idle_aim = SubResource( 49 )
-anims/floor_run_aim = SubResource( 50 )
-anims/floor_shoot = SubResource( 51 )
-anims/floor_wall = SubResource( 52 )
-anims/halfturn = SubResource( 53 )
-anims/idle = SubResource( 54 )
-anims/jump1 = SubResource( 55 )
-anims/land = SubResource( 56 )
-anims/run = SubResource( 57 )
-anims/walk = SubResource( 58 )
-anims/walljump1 = SubResource( 59 )
+anims/air_aim = SubResource( 41 )
+anims/air_shoot = SubResource( 42 )
+anims/air_wall = SubResource( 43 )
+anims/crouch = SubResource( 44 )
+anims/dunk = SubResource( 45 )
+anims/fall = SubResource( 46 )
+anims/fall_loop = SubResource( 47 )
+anims/floor_idle_aim = SubResource( 48 )
+anims/floor_run_aim = SubResource( 49 )
+anims/floor_shoot = SubResource( 50 )
+anims/floor_wall = SubResource( 51 )
+anims/halfturn = SubResource( 52 )
+anims/idle = SubResource( 53 )
+anims/jump1 = SubResource( 54 )
+anims/land = SubResource( 55 )
+anims/run = SubResource( 56 )
+anims/walk = SubResource( 57 )
+anims/walljump1 = SubResource( 58 )
 script = ExtResource( 4 )
 
 [node name="Shoot_predictor" type="Node2D" parent="."]
@@ -1257,7 +1251,7 @@ script = ExtResource( 6 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Ball_Handler"]
 position = Vector2( 0, 5 )
-shape = SubResource( 60 )
+shape = SubResource( 59 )
 
 [node name="Has_Ball_Position" type="Node2D" parent="Ball_Handler"]
 position = Vector2( 5, 0 )

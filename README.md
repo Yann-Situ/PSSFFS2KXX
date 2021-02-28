@@ -12,12 +12,13 @@ Popol Super Slam Fusion Full Speed 2KXX
    - add dunk
    - handle crouch
    - add landing anim
-   - add turn back anim
+   - [.] add turn back anim
    - add slide
    - with and without balls anim
-   - improve wall jump (feet must be on wall ?)
+   - [x] improve wall jump (feet must be on wall ?)
    - add multiple shoot types
 * Add interactive elements (baskets, pipes, jumping platform, doors and warps, wind, enemies...)
+   - [.] baskets
 * Add point system
 * Improve shooter
 * Balls :
@@ -31,6 +32,7 @@ Popol Super Slam Fusion Full Speed 2KXX
    - add UBER mode with new animations
    - add sound (music + effect and stylish voice)
 * Add UIs
+   - Complete editor by adding tilemapping in it
 * Add levels
 
 ## Issues

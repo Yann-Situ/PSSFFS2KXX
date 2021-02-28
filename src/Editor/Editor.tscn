@@ -6,10 +6,6 @@
 [node name="Editor" type="Node2D"]
 
 [node name="Item_Select" parent="." instance=ExtResource( 2 )]
-margin_left = 570.1
-margin_top = 23.5969
-margin_right = 610.1
-margin_bottom = 63.5969
 
 [node name="Editor_Object" type="Node2D" parent="."]
 script = ExtResource( 1 )
@@ -17,3 +13,7 @@ script = ExtResource( 1 )
 [node name="Sprite" type="Sprite" parent="Editor_Object"]
 
 [node name="Level" type="Node2D" parent="."]
+
+[node name="Cam_Container" type="Node2D" parent="."]
+
+[node name="Camera2D" type="Camera2D" parent="Cam_Container"]

@@ -13,7 +13,7 @@ func _ready():
 func _on_Ball_Handler_body_entered(body):
 	print(body.name)
 	if body.name.substr(0,4)=='Ball':
-		if S.has_ball :
+		if S.has_ball or S.is_shooting :
 			pass
 		else :
 			print("pickup "+body.name)
@@ -42,7 +42,7 @@ func throw_ball(): # called by animation
 							get_parent().get_node("Shoot_predictor").shoot_vector_save + 0.5*S.velocity)
 		S.active_ball.enable_physics()
 		print("throw ball at "+str(S.active_ball.position.x)+" vs "+str(position.x))
-		# free_ball will be called later (soon)
+		free_ball()
 
 func free_ball(): # set out  active_ball and has_ball
 	if S.has_ball :

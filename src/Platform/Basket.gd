@@ -2,14 +2,16 @@ extends Node2D
 
 export var color1 = Color(0.8,0.5,0.1,0.5)
 export var color2 = Color(0.9,0.1,0.3,1.0)
-# Declare member variables here. Examples:
-# var a = 2
-# var b = "text"
-
+onready var start_position = global_position
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	pass # Replace with function body.
+
+# Should be in any items that can be picked/placed :
+func set_start_position(posi):
+	start_position = posi
+	global_position = posi
 
 func _draw():
 	draw_circle($dunk_area/CollisionShape2D.position, $dunk_area/CollisionShape2D.shape.radius, color1)

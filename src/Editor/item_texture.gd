@@ -3,6 +3,7 @@ extends TextureRect
 export(PackedScene) var this_scene
 onready var object_cursor = get_node("/root/Editor/Editor_Object")
 
+export (bool) var is_tile = false
 onready var cursor_sprite = object_cursor.get_node("Sprite")
 
 func _ready():

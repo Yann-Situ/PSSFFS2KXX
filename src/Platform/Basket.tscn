@@ -46,11 +46,11 @@ radius = 50.0
 [node name="Basket" type="Node2D"]
 position = Vector2( 195.994, 193.696 )
 script = ExtResource( 2 )
+color1 = Color( 0.8, 0.501961, 0.101961, 0.0588235 )
 
 [node name="AnimatedSprite" type="AnimatedSprite" parent="."]
 position = Vector2( 0, -32 )
 frames = SubResource( 6 )
-frame = 4
 playing = true
 
 [node name="basket_area" type="Area2D" parent="."]
