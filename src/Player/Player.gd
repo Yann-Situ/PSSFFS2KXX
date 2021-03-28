@@ -10,6 +10,7 @@ const Ball = preload("res://src/Ball/Ball.tscn")
 export (float) var gravity = ProjectSettings.get_setting("physics/2d/default_gravity") # pix/s²
 export (float) var floor_friction = 0.2 # %/frame
 export (float) var air_friction = 0.1 # %/frame
+export (float) var attract_force = 800 # m.pix/s²
 
 # Crouch features
 export (float) var crouch_speed_max = 200 # pix/s
@@ -38,6 +39,7 @@ export (bool) var flip_h = false
 func _ready():
 	if !Global.playing:
 		Global.toggle_playing()
+	Global.camera = $Camera
 
 func set_flip_h(b):
 	flip_h  = b
@@ -96,9 +98,13 @@ func get_input(delta):
 		move_adherence(delta)
 		
 	if S.select_jp and Global.mouse_ball != null :
-		S.selected_ball = Global.mouse_ball
-		S.selected_ball.toggle_selection(!S.selected_ball.selected)
-
+		move_select_ball(delta)
+		
+	if S.selected_ball != null:
+		S.selected_ball.applied_force = Vector2(0,0)
+	if S.power_p :
+		move_attract(delta)
+		
 	############### Misc and Animation handling
 	
 	#shader :
@@ -106,7 +112,11 @@ func get_input(delta):
 	
 	if S.is_aiming:
 		var shoot = $Shoot_predictor.shoot_vector()
-		$Shoot_predictor.draw($Ball_Handler.get_throw_position()-self.position, shoot+0.5*S.velocity,
+		if S.power_p and S.selected_ball == S.active_ball :
+			$Shoot_predictor.draw_attract($Ball_Handler.get_throw_position()-self.position, shoot+0.5*S.velocity,
+				S.active_ball.get_gravity_scale()*Vector2(0,gravity), attract_force/S.active_ball.mass)
+		else :
+			$Shoot_predictor.draw($Ball_Handler.get_throw_position()-self.position, shoot+0.5*S.velocity,
 				S.active_ball.get_gravity_scale()*Vector2(0,gravity))
 		$Camera.set_offset_from_type("aim",shoot.normalized())
 		if shoot.x > 0 :
@@ -211,6 +221,15 @@ func move_shoot(delta):
 	#Engine.time_scale = 1.0
 	$Shoot_predictor.clear()	
 	#throw_ball()+free_ball in Ball_handler	called by animation
+
+func move_select_ball(delta):
+	S.selected_ball = Global.mouse_ball
+	S.selected_ball.toggle_selection(!S.selected_ball.selected)
+
+func move_attract(delta):
+	if S.selected_ball != null:
+		#S.selected_ball.add_central_force( 100000.0/(d.x*d.x + d.y*d.y)*(d))
+		S.selected_ball.add_central_force(attract_force*(position - S.selected_ball.position).normalized())
 
 func move_adherence(delta):
 	var friction = 0 #get adh from environment

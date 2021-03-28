@@ -1,8 +1,10 @@
 extends Node2D
 
 var points = Array()
-export (int) var nb_points = 50
-export (float) var delta = .03
+export (int) var nb_points_display = 50
+export (int) var coeff_display = 6
+var nb_points = coeff_display * nb_points_display
+export (float) var delta = .03 / coeff_display
 
 # Shoot features
 export (float) var shoot_min_speed = 100 # pix/s
@@ -30,7 +32,7 @@ func shoot_vector(): # return shoot vector if player not moving
 					get_parent().position).normalized()
 
 func _draw():
-	for i in range(0, points.size() - 1):
+	for i in range(0, points.size() - 1, coeff_display):
 		#draw_line(points[i], points[i+1], red, 1)
 		draw_circle(points[i], 2, yellorange)
 		
@@ -38,10 +40,18 @@ func draw(pos, vel, grav):
 	points.clear()
 	for i in range(nb_points):
 		points.append(pos)
-		vel += 1.02*grav * delta
-		pos += 0.975*vel * delta
+		vel += 1.002*grav * delta
+		pos += 0.998*vel * delta
 	update()
-	
+
+func draw_attract(pos, vel, grav, power):
+	points.clear()
+	var pos_init = pos
+	for i in range(nb_points):
+		points.append(pos)
+		vel += (1.002*grav + 1.002*power * (pos_init-pos).normalized()) * delta
+		pos += 0.998*vel * delta
+	update()
 	
 func clear():
 	points.clear()
