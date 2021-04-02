@@ -4,7 +4,7 @@ class_name Player, "res://assets/art/icons/popol.png"
 onready var S = get_node("Player_State")
 
 #balls
-const Ball = preload("res://src/Ball/Ball.tscn")
+const Ball = preload("res://src/Items/Ball/Ball.tscn")
 
 # Environment features (should be given by the map)
 export (float) var gravity = ProjectSettings.get_setting("physics/2d/default_gravity") # pix/s²
@@ -224,13 +224,19 @@ func move_shoot(delta):
 
 func move_select_ball(delta):
 	S.selected_ball = Global.mouse_ball
-	S.selected_ball.toggle_selection(!S.selected_ball.selected)
+	if !(S.selected_ball is PhysicBody) :
+		S.selected_ball.toggle_selection(!S.selected_ball.selected)
+	else :
+		S.selected_ball.selector.toggle_selection(!S.selected_ball.selector.selected)
 
 func move_attract(delta):
 	if S.selected_ball != null:
 		#S.selected_ball.add_central_force( 100000.0/(d.x*d.x + d.y*d.y)*(d))
-		S.selected_ball.add_central_force(attract_force*(position - S.selected_ball.position).normalized())
-
+		if !(S.selected_ball is PhysicBody) :
+			S.selected_ball.add_central_force(attract_force*(position - S.selected_ball.position).normalized())
+		else :
+			S.selected_ball.add_force(attract_force*(position - S.selected_ball.position).normalized())
+			
 func move_adherence(delta):
 	var friction = 0 #get adh from environment
 	if S.is_onfloor:

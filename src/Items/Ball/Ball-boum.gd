@@ -1,4 +1,4 @@
-extends "res://src/Ball/Ball.gd"
+extends Ball
 export (float) var boum_min = 100
 export (float) var boum_max = 1000
 export (float) var distance_max = 48

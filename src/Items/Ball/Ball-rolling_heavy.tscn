@@ -1,8 +1,10 @@
 [gd_scene load_steps=4 format=2]
 
-[ext_resource path="res://src/Ball/Ball-rolling_heavy.gd" type="Script" id=1]
+[ext_resource path="res://src/Items/Ball/Ball-rolling_heavy.gd" type="Script" id=1]
 [ext_resource path="res://assets/art/ball/ball_rolling.png" type="Texture" id=2]
-[ext_resource path="res://src/Ball/Ball.tscn" type="PackedScene" id=3]
+[ext_resource path="res://src/Items/Ball/Ball.tscn" type="PackedScene" id=3]
+
+
 
 [node name="Ball" instance=ExtResource( 3 )]
 mass = 2.0

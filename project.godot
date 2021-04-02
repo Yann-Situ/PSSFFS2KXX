@@ -12,12 +12,17 @@ _global_script_classes=[ {
 "base": "RigidBody2D",
 "class": "Ball",
 "language": "GDScript",
-"path": "res://src/Ball/Ball.gd"
+"path": "res://src/Items/Ball/Ball.gd"
 }, {
-"base": "KinematicBody2D",
+"base": "PhysicBody",
 "class": "KinematicBall",
 "language": "GDScript",
-"path": "res://src/Ball/KinematicBall/KinematicBall.gd"
+"path": "res://src/Items/Ball/KinematicBall.gd"
+}, {
+"base": "KinematicBody2D",
+"class": "PhysicBody",
+"language": "GDScript",
+"path": "res://src/Items/PhysicBody.gd"
 }, {
 "base": "KinematicBody2D",
 "class": "Player",
@@ -26,7 +31,8 @@ _global_script_classes=[ {
 } ]
 _global_script_class_icons={
 "Ball": "res://assets/art/ball/ball.png",
-"KinematicBall": "res://assets/art/ball/ball.png",
+"KinematicBall": "res://assets/art/ball/ball_test.png",
+"PhysicBody": "",
 "Player": "res://assets/art/icons/popol.png"
 }
 
