@@ -24,7 +24,7 @@ func _process(delta):
 
 func _on_basket_area_body_entered(body):
 	print("basket :"+body.name)
-	if body is Ball:
+	if body is Ball or body is KinematicBall:
 		if body.linear_velocity.y > 0.0:
 			print("GOOOAL!")
 			print(body.linear_velocity.y)

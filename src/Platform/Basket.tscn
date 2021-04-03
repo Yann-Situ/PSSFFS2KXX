@@ -55,7 +55,7 @@ color1 = Color( 0.8, 0.501961, 0.101961, 0.0588235 )
 
 [node name="AnimatedSprite" type="AnimatedSprite" parent="."]
 frames = SubResource( 6 )
-frame = 6
+frame = 2
 playing = true
 
 [node name="basket_area" type="Area2D" parent="."]

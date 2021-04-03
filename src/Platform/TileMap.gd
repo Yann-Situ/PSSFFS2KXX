@@ -20,15 +20,15 @@ func set_cell(x, y, tile, flip_x=false, flip_y=false, transpose=false, autotile_
 	#print("CELL : "+str(tile))
 	# to check stairs	
 	if autotile_coord in next_to_stairs_to_change:
-		print("cell "+str(Vector2(x,y))+"  auto_tile_coord : "+str(autotile_coord))
+		#print("cell "+str(Vector2(x,y))+"  auto_tile_coord : "+str(autotile_coord))
 		var indleft = get_cell_autotile_coord(x-1,y)
 		var indrigh = get_cell_autotile_coord(x+1,y)
-		print("change! "+str(indrigh)+"   "+str(indleft)+"   "+str(tile))
+		#print("change! "+str(indrigh)+"   "+str(indleft)+"   "+str(tile))
 		if (indrigh in stairs_at_righ):
-			print("change! right ")
+			#print("change! right ")
 			autotile_coord = next_to_stairs[0]
 		elif (indleft in stairs_at_left):
-			print("change! left ")
+			#print("change! left ")
 			autotile_coord = next_to_stairs[1]
 		print(autotile_coord)
 	.set_cell(x, y, tile, flip_x, flip_y, transpose, autotile_coord)

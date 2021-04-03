@@ -17,7 +17,7 @@ radius = 16.0
 colors = PoolColorArray( 1, 1, 1, 1, 1, 0.615234, 0, 1 )
 
 [sub_resource type="CircleShape2D" id=4]
-radius = 32.0
+radius = 64.0
 
 [node name="KinematicBall" type="KinematicBody2D"]
 position = Vector2( 417, 241 )
@@ -26,7 +26,6 @@ input_pickable = true
 collision_layer = 2
 collision_mask = 3
 script = ExtResource( 2 )
-mass = 1.0
 bounce = 0.3
 
 [node name="collision" type="CollisionShape2D" parent="."]

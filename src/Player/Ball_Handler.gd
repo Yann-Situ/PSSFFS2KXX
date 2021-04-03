@@ -12,7 +12,7 @@ func _ready():
 
 func _on_Ball_Handler_body_entered(body):
 	print(body.name)
-	if body is Ball:
+	if body is Ball or body is KinematicBall:
 		if S.has_ball or S.is_shooting :
 			pass
 		else :

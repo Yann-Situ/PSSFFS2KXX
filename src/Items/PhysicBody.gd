@@ -6,9 +6,9 @@ onready var start_position = global_position
 var should_reset = false
 
 #physics :
-var velocity = Vector2(0.0,0.0)
-export (float) var gravity_coeff = 1.0
-var gravity = gravity_coeff*ProjectSettings.get_setting("physics/2d/default_gravity") # pix/s²
+var linear_velocity = Vector2(0.0,0.0)
+export (float) var gravity_scale = 1.0
+var gravity = gravity_scale*ProjectSettings.get_setting("physics/2d/default_gravity") # pix/s²
 export (float) var mass = 1.0
 export (float) var friction = 0.15 setget set_friction
 export (float) var bounce = 0.5 setget set_bounce
@@ -24,7 +24,7 @@ func _ready():
 
 func disable_physics():
 	physics_enabled = false
-	velocity *= 0
+	linear_velocity *= 0
 
 func enable_physics():
 	physics_enabled = true
@@ -36,3 +36,6 @@ func reset_position():
 func set_start_position(posi):
 	start_position = posi
 	global_position = posi
+
+func get_gravity_scale():
+	return gravity_scale
