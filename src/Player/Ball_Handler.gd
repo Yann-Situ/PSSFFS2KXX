@@ -20,6 +20,17 @@ func _on_Ball_Handler_body_entered(body):
 			S.has_ball = true
 			S.active_ball = body
 			body.disable_physics()
+			
+			#TEMPORARY CONTROL NODE
+			var ui = get_parent().get_node("Camera/Control/RichTextLabel")
+			ui.clear()
+			ui.add_text("Name : "+body.name)
+			ui.newline() 
+			ui.add_text("Ball mass  : "+str(body.mass))
+			ui.newline() 
+			ui.add_text("Ball frict : "+str(body.friction))
+			ui.newline() 
+			ui.add_text("Ball bounc : "+str(body.bounce))
 
 func get_throw_position():
 	# return the global position of the beginning of the throw, depending on the 

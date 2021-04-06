@@ -1189,7 +1189,7 @@ position = Vector2( -2.18279e-11, 0 )
 texture = ExtResource( 2 )
 vframes = 20
 hframes = 16
-frame = 203
+frame = 199
 
 [node name="AnimationTree" type="AnimationTree" parent="Sprite"]
 tree_root = SubResource( 39 )
@@ -1232,12 +1232,39 @@ script = ExtResource( 4 )
 script = ExtResource( 3 )
 
 [node name="Camera" type="Camera2D" parent="."]
-visible = false
 position = Vector2( 0, -35 )
 current = true
 script = ExtResource( 7 )
 
 [node name="Tween" type="Tween" parent="Camera"]
+
+[node name="Control" type="Control" parent="Camera"]
+margin_top = 35.0
+margin_right = 40.0
+margin_bottom = 75.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="ColorRect" type="ColorRect" parent="Camera/Control"]
+margin_left = -390.0
+margin_top = -251.0
+margin_right = -133.0
+margin_bottom = -185.0
+color = Color( 0.164706, 0.164706, 0.164706, 1 )
+
+[node name="RichTextLabel" type="RichTextLabel" parent="Camera/Control"]
+margin_left = -388.0
+margin_top = -249.0
+margin_right = -134.0
+margin_bottom = -186.0
+text = "Ball name:
+Ball mass :
+Ball friction :
+Ball bounce :"
+__meta__ = {
+"_edit_use_anchors_": false
+}
 
 [node name="Player_State" parent="." instance=ExtResource( 5 )]
 is_jumping = true
