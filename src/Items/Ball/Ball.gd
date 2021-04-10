@@ -1,96 +1,87 @@
-extends RigidBody2D
-class_name Ball, "res://assets/art/ball/ball.png"
+extends PhysicBody
+class_name Ball, "res://assets/art/ball/ball_test.png"
 
-# Classical ball
-export (bool) var physics_enabled = true
-export (bool) var selected = false
-export (Color) var selection_color = Color(1.0,1.0,1.0) #setget set_selection_color
-var selection_color_mid = Color(selection_color.r*0.5, selection_color.g*0.5, selection_color.b*0.5)
+var applied_force = Vector2(0.0,0.0) setget set_applied_force
+onready var invmass = 1/mass
+onready var selector = $Selector
+var normal_colision = Vector2(0.0,0.0)
+#var color1 = Color(1.0,0.2,0.3)
+#var color2 = Color(1.0,0.8,0.0)
+#var color3 = Color(0.4,1.0,0.2)
+#var color_colision = color1
 
-onready var collision = $collision
-onready var start_position = global_position
-var should_reset = false
-var temporary_position = Vector2(0,0)
-var temporary_velocity = Vector2(0,0)
+export (float) var dust_threshold = 400
 
 func _ready():
-	self.mass = 1.0
-	self.set_friction(0.15)
-	self.set_bounce(0.5)
-	Global.list_of_physical_nodes.append(self)
-	if !Global.playing :
-		disable_physics()
-
-############################################
-# The three following functions should be in any physical item that can be picked/placed.
-
-func disable_physics():
-	physics_enabled = false
-	self.set_mode(RigidBody2D.MODE_STATIC)
-	collision.disabled = true
-	#Just In Case
-	linear_velocity *= 0
-	angular_velocity *= 0
-
-
-func enable_physics():
-	physics_enabled = true
-	self.set_mode(RigidBody2D.MODE_CHARACTER)
-	collision.disabled = false
-
-func reset_position():
-	throw(start_position, Vector2(0.0,0.0))
-
-# Should be in any items that can be picked/placed
-func set_start_position(posi):
-	start_position = posi
-	global_position = posi
-
-###########################################################
-
-func throw(posi, velo):
-	should_reset = true
-	temporary_position = posi
-	temporary_velocity = velo
-
-func _integrate_forces(state):
-	if should_reset :
-		should_reset = false
-		state.transform.origin = temporary_position
-		state.linear_velocity = temporary_velocity
-	# if state.linear_velocity.length() > 400:
-	# 	var d = min(state.linear_velocity.length()/400 - 1, 0.2)
-	# 	$Sprite.scale = (Vector2(1+d,1-d))
-	# 	$Sprite.rotation = (state.linear_velocity.angle())
-	# else :
-	# 	$Sprite.scale = (Vector2(1,1))
-	# 	$Sprite.rotation = (0)
-	integrate_forces_child(state)
-
-func integrate_forces_child(state):
 	pass
 
-#########################################################################
+#func _draw():
+#	# draw collision normal
+#	draw_line(Vector2(0.0,0.0), Vector2(0.0,0.0)+50.0*normal_colision, color_colision)
 
-func set_selection_color(col):
-	$Sprite_Selection.modulate = col
-
-func toggle_selection(b):
-	selected = b
-	if selected :
-		set_selection_color(selection_color)
-		$Sprite_Selection.visible = true
+func _physics_process(delta):
+	if not physics_enabled:
+		return
+	update_linear_velocity(delta)
+	var collision = move_and_collide(linear_velocity * delta, false)
+	if collision and collision_effect(collision) :
+		var n = collision.normal
+		var t = n.tangent()
+		normal_colision = n
+		if collision.collider is PhysicBody :
+			#color_colision = color3
+			var m2 = collision.collider.mass
+			var summass = m2 + mass
+			var dist_vect = position-collision.collider.get_position()
+			var speeddist = (linear_velocity - collision.collider_velocity).dot(dist_vect)
+			linear_velocity -= 2*m2/summass*(speeddist/dist_vect.length_squared())*dist_vect
+			collision.collider.set_linear_velocity(collision.collider_velocity + 2*mass/summass*(speeddist/dist_vect.length_squared())*dist_vect)
+			#collision.collider.apply_impulse(m2/summass*(2*mass * linear_velocity + (m2-mass) * collision.collider_velocity))
+			move_and_collide(collision.remainder.bounce(collision.normal),false)#may cause pb on corners ?
+		else:
+			var bounce_linear_velocity = bounce*linear_velocity.bounce(n)
+			var vel_n = n.dot(bounce_linear_velocity)
+			var vel_t
+			var motion
+			if vel_n < 2.5*gravity*delta:
+				#TODO seuil à déterminer
+				#sliding
+				#color_colision = color1
+				vel_t = lerp(t.dot(linear_velocity), 0, friction)
+				linear_velocity = vel_t*t
+				motion = collision.remainder.dot(t)*t
+				move_and_collide(motion,false)
+				#linear_velocity = move_and_slide(linear_velocity,n,false,4,0.79,false)
+			else :
+				#bouncing
+				#color_colision = color2
+				vel_t = lerp(t.dot(bounce_linear_velocity), 0, friction)
+				linear_velocity = vel_n*n + vel_t*t
+				motion = collision.remainder.bounce(n)
+				move_and_collide(motion,false)#may cause pb on corners ?
 	else :
-		$Sprite_Selection.visible = false
-	
-func _on_Ball_mouse_entered():
-	if !selected:
-		set_selection_color(selection_color_mid)
-		$Sprite_Selection.visible = true
-	Global.mouse_ball = self
+		normal_colision = Vector2(0.0,0.0)
+	#update() # to draw collision
 
-func _on_Ball_mouse_exited():
-	if !selected:
-		$Sprite_Selection.visible = false
-	if Global.mouse_ball == self:
-		Global.mouse_ball = null
+###########################################################
+func update_linear_velocity(delta):
+	linear_velocity.y += gravity * delta
+	linear_velocity += invmass * applied_force * delta
+
+func collision_effect(collision):
+	if linear_velocity.length() > dust_threshold:
+		$DustParticle.restart()
+	return true
+
+func throw(posi, velo):
+	position = posi
+	linear_velocity = velo
+
+func set_applied_force(force):
+	applied_force=force
+
+func apply_impulse(impulse):
+	linear_velocity += invmass * impulse
+
+func add_force(force):
+	applied_force += force

@@ -1,4 +1,5 @@
 extends Ball
+
 # Constant energy ball, with infinite bouncing and no gravity
 func _ready():
 	$Sprite.texture = preload("res://assets/art/ball/ball_bouncy.png")

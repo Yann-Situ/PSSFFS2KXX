@@ -9,7 +9,7 @@
 config_version=4
 
 _global_script_classes=[ {
-"base": "RigidBody2D",
+"base": "PhysicBody",
 "class": "Ball",
 "language": "GDScript",
 "path": "res://src/Items/Ball/Ball.gd"
@@ -30,7 +30,7 @@ _global_script_classes=[ {
 "path": "res://src/Player/Player.gd"
 } ]
 _global_script_class_icons={
-"Ball": "res://assets/art/ball/ball.png",
+"Ball": "res://assets/art/ball/ball_test.png",
 "KinematicBall": "res://assets/art/ball/ball_test.png",
 "PhysicBody": "",
 "Player": "res://assets/art/icons/popol.png"

@@ -1,4 +1,4 @@
-extends KinematicBall
+extends Ball
 
 export (float) var boum_min = 250
 export (float) var boum_max = 400 # m*pix/s
@@ -12,7 +12,7 @@ func _ready():
 func collision_effect(collision):
 	if (linear_velocity-collision.collider_velocity).length()>speed_threshold:
 		boum()
-		
+
 func boum():
 	$BoumParticle.restart()
 	Global.camera.screen_shake(0.3,5)

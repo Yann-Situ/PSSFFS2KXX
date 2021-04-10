@@ -1,10 +1,10 @@
-[gd_scene load_steps=32 format=2]
+[gd_scene load_steps=21 format=2]
 
 [ext_resource path="res://src/Player/Player.tscn" type="PackedScene" id=1]
 [ext_resource path="res://src/Platform/Tileset/TileMap1.tres" type="TileSet" id=2]
-[ext_resource path="res://src/Items/Ball/Ball.tscn" type="PackedScene" id=3]
-[ext_resource path="res://src/Items/Ball/Ball-rolling_heavy.tscn" type="PackedScene" id=4]
-[ext_resource path="res://src/Items/Ball/Ball-constant_energy.tscn" type="PackedScene" id=5]
+[ext_resource path="res://src/Items/Ball/Ball-slime.tscn" type="PackedScene" id=3]
+[ext_resource path="res://src/Items/Ball/Ball-bouncy.tscn" type="PackedScene" id=4]
+[ext_resource path="res://src/Items/Ball/Ball.tscn" type="PackedScene" id=5]
 [ext_resource path="res://assets/art/background/pixelBackground1.png" type="Texture" id=6]
 [ext_resource path="res://assets/art/background/pixelBackground2.png" type="Texture" id=7]
 [ext_resource path="res://assets/art/background/pixelBackground3.png" type="Texture" id=8]
@@ -15,9 +15,9 @@
 [ext_resource path="res://src/Items/Ball/Ball-heavy.tscn" type="PackedScene" id=13]
 [ext_resource path="res://src/Platform/Basket.tscn" type="PackedScene" id=14]
 [ext_resource path="res://assets/art/tileset/parallax-background1.png" type="Texture" id=15]
-[ext_resource path="res://src/Items/Ball/Ball-bouncy.tscn" type="PackedScene" id=16]
-[ext_resource path="res://src/Items/Ball/KinematicBall-boum.tscn" type="PackedScene" id=17]
-[ext_resource path="res://src/Items/Ball/KinematicBall.tscn" type="PackedScene" id=18]
+[ext_resource path="res://src/Items/Ball/Ball-rolling.tscn" type="PackedScene" id=16]
+[ext_resource path="res://src/Items/Ball/Ball-bubble.tscn" type="PackedScene" id=17]
+[ext_resource path="res://src/Items/Ball/Ball-boum.tscn" type="PackedScene" id=18]
 
 [sub_resource type="TileSet" id=1]
 1/name = "parallax-background1.png 1"
@@ -525,62 +525,7 @@
 26/shapes = [  ]
 26/z_index = 0
 
-[sub_resource type="PhysicsMaterial" id=2]
-resource_local_to_scene = true
-friction = 0.15
-bounce = 0.5
-
-[sub_resource type="PhysicsMaterial" id=3]
-resource_local_to_scene = true
-friction = 0.15
-bounce = 0.5
-
-[sub_resource type="PhysicsMaterial" id=4]
-resource_local_to_scene = true
-friction = 0.15
-bounce = 0.5
-
-[sub_resource type="PhysicsMaterial" id=5]
-resource_local_to_scene = true
-friction = 0.15
-bounce = 0.5
-
-[sub_resource type="PhysicsMaterial" id=6]
-resource_local_to_scene = true
-friction = 0.15
-bounce = 0.5
-
-[sub_resource type="PhysicsMaterial" id=7]
-resource_local_to_scene = true
-friction = 0.15
-bounce = 0.5
-
-[sub_resource type="PhysicsMaterial" id=8]
-resource_local_to_scene = true
-friction = 0.15
-bounce = 0.5
-
-[sub_resource type="PhysicsMaterial" id=9]
-resource_local_to_scene = true
-friction = 0.15
-bounce = 0.5
-
-[sub_resource type="PhysicsMaterial" id=10]
-resource_local_to_scene = true
-friction = 0.15
-bounce = 0.5
-
-[sub_resource type="PhysicsMaterial" id=11]
-resource_local_to_scene = true
-friction = 0.15
-bounce = 0.5
-
-[sub_resource type="PhysicsMaterial" id=12]
-resource_local_to_scene = true
-friction = 0.15
-bounce = 0.5
-
-[sub_resource type="ShaderMaterial" id=13]
+[sub_resource type="ShaderMaterial" id=2]
 shader = ExtResource( 11 )
 shader_param/contour_color = Color( 0.2, 0, 0.1, 1 )
 shader_param/light_thresh = 0.4
@@ -677,94 +622,26 @@ tile_data = PoolIntArray( 131104, 17, 0, 196654, 25, 0, 262188, 23, 65536, 26219
 
 [node name="Balls" type="Node" parent="Map"]
 
-[node name="Ball4" parent="Map/Balls" instance=ExtResource( 3 )]
-position = Vector2( 1384, 208 )
-physics_material_override = SubResource( 2 )
-
-[node name="Ball5" parent="Map/Balls" instance=ExtResource( 3 )]
-position = Vector2( 264, 288 )
-physics_material_override = SubResource( 3 )
-
 [node name="Ball" parent="Map/Balls" instance=ExtResource( 5 )]
-position = Vector2( 1208, 424 )
-z_index = 1
-physics_material_override = SubResource( 4 )
+position = Vector2( 448, 528 )
 
-[node name="Ball2" parent="Map/Balls" instance=ExtResource( 5 )]
-position = Vector2( 264, 136 )
-z_index = 1
-physics_material_override = SubResource( 5 )
+[node name="Ball-Boum" parent="Map/Balls" instance=ExtResource( 18 )]
+position = Vector2( 480, 528 )
 
-[node name="Ball3" parent="Map/Balls" instance=ExtResource( 4 )]
-position = Vector2( 752, 40 )
-z_index = 1
-physics_material_override = SubResource( 6 )
+[node name="Ball-heavy" parent="Map/Balls" instance=ExtResource( 13 )]
+position = Vector2( 512, 528 )
 
-[node name="Ball6" parent="Map/Balls" instance=ExtResource( 4 )]
-position = Vector2( 1216, 336 )
-z_index = 1
-physics_material_override = SubResource( 7 )
+[node name="Ball2" parent="Map/Balls" instance=ExtResource( 3 )]
+position = Vector2( 544, 528 )
 
-[node name="Ball7" parent="Map/Balls" instance=ExtResource( 4 )]
-position = Vector2( 408, 40 )
-z_index = 1
-physics_material_override = SubResource( 8 )
+[node name="Ball-bouncy" parent="Map/Balls" instance=ExtResource( 4 )]
+position = Vector2( 576, 528 )
 
-[node name="Ball8" parent="Map/Balls" instance=ExtResource( 3 )]
-position = Vector2( 1296, 312 )
-physics_material_override = SubResource( 9 )
+[node name="Ball-bubble" parent="Map/Balls" instance=ExtResource( 17 )]
+position = Vector2( 608, 528 )
 
-[node name="Ball9" parent="Map/Balls" instance=ExtResource( 16 )]
-position = Vector2( 1160, 56 )
-z_index = 1
-physics_material_override = SubResource( 10 )
-
-[node name="Ball10" parent="Map/Balls" instance=ExtResource( 16 )]
-position = Vector2( 1272, 440 )
-z_index = 1
-physics_material_override = SubResource( 11 )
-
-[node name="Ball11" parent="Map/Balls" instance=ExtResource( 13 )]
-position = Vector2( 168, 368 )
-z_index = 1
-physics_material_override = SubResource( 12 )
-
-[node name="KinematicBall" parent="Map/Balls" instance=ExtResource( 18 )]
-position = Vector2( 2104, 512 )
-bounce = 1.0
-
-[node name="KinematicBall6" parent="Map/Balls" instance=ExtResource( 18 )]
-position = Vector2( 1832, 528 )
-friction = 0.01
-bounce = 0.0
-
-[node name="KinematicBall8" parent="Map/Balls" instance=ExtResource( 18 )]
-position = Vector2( 1960, 536 )
-friction = 0.01
-bounce = 0.0
-
-[node name="KinematicBall7" parent="Map/Balls" instance=ExtResource( 18 )]
-position = Vector2( 2112, 504 )
-friction = 0.05
-bounce = 1.0
-
-[node name="KinematicBall2" parent="Map/Balls" instance=ExtResource( 18 )]
-position = Vector2( 2064, 376 )
-mass = 6.0
-friction = 0.0
-bounce = 0.0
-
-[node name="KinematicBall3" parent="Map/Balls" instance=ExtResource( 18 )]
-position = Vector2( 2112, 528 )
-friction = 0.05
-bounce = 1.0
-
-[node name="KinematicBall4" parent="Map/Balls" instance=ExtResource( 17 )]
-position = Vector2( 464, 48 )
-
-[node name="KinematicBall5" parent="Map/Balls" instance=ExtResource( 17 )]
-position = Vector2( 608, 520 )
-friction = 0.05
+[node name="Ball3" parent="Map/Balls" instance=ExtResource( 16 )]
+position = Vector2( 640, 528 )
 
 [node name="Basket" parent="Map" instance=ExtResource( 14 )]
 position = Vector2( 256, 448 )
@@ -786,8 +663,8 @@ color1 = Color( 0.8, 0.501961, 0.101961, 0 )
 position = Vector2( 880, 408 )
 
 [node name="Player" parent="." instance=ExtResource( 1 )]
-material = SubResource( 13 )
-position = Vector2( 1744, 512 )
+material = SubResource( 2 )
+position = Vector2( 384, 504 )
 air_friction = 0.15
 jump_speed = -460.0
 max_speed_fall_onwall = 100.0
