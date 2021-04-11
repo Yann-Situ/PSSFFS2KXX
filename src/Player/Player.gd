@@ -97,13 +97,16 @@ func get_input(delta):
 	if S.can_go :
 		move_adherence(delta)
 		
+	if S.selected_ball != null:
+		if S.power_p :
+			S.selected_ball.power_p(self,delta)
+		if S.power_jp :
+			S.selected_ball.power_jp(self,delta)
+		elif S.power_jr :
+			S.selected_ball.power_jr(self,delta)
+	
 	if S.select_jp and Global.mouse_ball != null :
 		move_select_ball(delta)
-		
-	if S.selected_ball != null:
-		S.selected_ball.applied_force = Vector2(0,0)
-	if S.power_p :
-		move_attract(delta)
 		
 	############### Misc and Animation handling
 	
@@ -127,28 +130,6 @@ func get_input(delta):
 		$Camera.set_offset_from_type("normal")
 
 	$Sprite/AnimationTree.animate_from_state(S)
-	#$Sprite/Player_Animation.animate_from_state(S)
-	if false : #COLOR INFORMATION
-#		if S.is_aiming:
-#			$Polygon2D.color = Color(1,0,0)
-#		elif S.is_onfloor:
-#			if S.is_moving_fast[0] or S.is_moving_fast[1] :
-#				$Polygon2D.color = Color(1,1,0.6)
-#			elif S.is_moving :
-#				$Polygon2D.color = Color(0.8,0.8,0.3)
-#			else :
-#				$Polygon2D.color = Color(0.5,0.5,0)
-#		elif S.is_onwall:
-#			$Polygon2D.color = Color(0,1,1)
-#		elif S.is_mounting:
-#			$Polygon2D.color = Color(0,0,1)
-#		elif S.is_falling:
-#			$Polygon2D.color = Color(0.5,0.5,1)
-#		elif S.is_crouching:
-#			$Polygon2D.color = Color(0.5,0.5,0)
-#		else :
-#			$Polygon2D.color = Color(1,1,1)
-		pass
 
 ####################################### Utilities
 func move_side(direction,delta):
@@ -223,20 +204,21 @@ func move_shoot(delta):
 	#throw_ball()+free_ball in Ball_handler	called by animation
 
 func move_select_ball(delta):
-	S.selected_ball = Global.mouse_ball
-	if !(S.selected_ball is PhysicBody) :
-		S.selected_ball.toggle_selection(!S.selected_ball.selected)
-	else :
-		S.selected_ball.selector.toggle_selection(!S.selected_ball.selector.selected)
-
-func move_attract(delta):
-	if S.selected_ball != null:
-		#S.selected_ball.add_central_force( 100000.0/(d.x*d.x + d.y*d.y)*(d))
-		if !(S.selected_ball is PhysicBody) :
-			S.selected_ball.add_central_force(attract_force*(position - S.selected_ball.position).normalized())
-		else :
-			S.selected_ball.add_force(attract_force*(position - S.selected_ball.position).normalized())
-			
+	if S.selected_ball == null:
+		S.selected_ball = Global.mouse_ball
+		S.selected_ball.selector.toggle_selection(true)
+	elif S.selected_ball != Global.mouse_ball :
+		S.selected_ball.selector.toggle_selection(false)
+		if S.power_p:
+			S.selected_ball.power_jr(self,delta)
+		S.selected_ball = Global.mouse_ball
+		S.selected_ball.selector.toggle_selection(true)
+	else : #S.selected_ball == Global.mouse_ball
+		S.selected_ball.selector.toggle_selection(false)
+		if S.power_p:
+			S.selected_ball.power_jr(self,delta)
+		S.selected_ball = null
+		
 func move_adherence(delta):
 	var friction = 0 #get adh from environment
 	if S.is_onfloor:
@@ -246,6 +228,7 @@ func move_adherence(delta):
 	if S.move_direction != S.direction_p: # if not moving in the same dir as input
 		S.velocity.x = lerp(S.velocity.x, 0, friction)
 
+################################################################################
 func _physics_process(delta):
 	get_input(delta)
 	if S.is_onwall and S.velocity.y > 0: #fall on a wall

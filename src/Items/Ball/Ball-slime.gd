@@ -22,3 +22,13 @@ func collision_effect(collision):
 func enable_physics():
 	physics_enabled = true
 	stuck = false
+
+
+func power_p(player,delta):
+	pass
+	
+func power_jp(player,delta):
+	stuck = false
+	
+func power_jr(player,delta):
+	pass

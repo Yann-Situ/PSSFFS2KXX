@@ -1,4 +1,4 @@
-[gd_scene load_steps=21 format=2]
+[gd_scene load_steps=22 format=2]
 
 [ext_resource path="res://src/Player/Player.tscn" type="PackedScene" id=1]
 [ext_resource path="res://src/Platform/Tileset/TileMap1.tres" type="TileSet" id=2]
@@ -13,11 +13,12 @@
 [ext_resource path="res://assets/shader/contour.shader" type="Shader" id=11]
 [ext_resource path="res://src/Platform/Tileset/TileMap3.tres" type="TileSet" id=12]
 [ext_resource path="res://src/Items/Ball/Ball-heavy.tscn" type="PackedScene" id=13]
-[ext_resource path="res://src/Platform/Basket.tscn" type="PackedScene" id=14]
+[ext_resource path="res://src/Items/Basket.tscn" type="PackedScene" id=14]
 [ext_resource path="res://assets/art/tileset/parallax-background1.png" type="Texture" id=15]
 [ext_resource path="res://src/Items/Ball/Ball-rolling.tscn" type="PackedScene" id=16]
 [ext_resource path="res://src/Items/Ball/Ball-bubble.tscn" type="PackedScene" id=17]
 [ext_resource path="res://src/Items/Ball/Ball-boum.tscn" type="PackedScene" id=18]
+[ext_resource path="res://src/Items/Spawner.tscn" type="PackedScene" id=19]
 
 [sub_resource type="TileSet" id=1]
 1/name = "parallax-background1.png 1"
@@ -622,26 +623,26 @@ tile_data = PoolIntArray( 131104, 17, 0, 196654, 25, 0, 262188, 23, 65536, 26219
 
 [node name="Balls" type="Node" parent="Map"]
 
-[node name="Ball" parent="Map/Balls" instance=ExtResource( 5 )]
-position = Vector2( 448, 528 )
-
 [node name="Ball-Boum" parent="Map/Balls" instance=ExtResource( 18 )]
-position = Vector2( 480, 528 )
-
-[node name="Ball-heavy" parent="Map/Balls" instance=ExtResource( 13 )]
-position = Vector2( 512, 528 )
-
-[node name="Ball2" parent="Map/Balls" instance=ExtResource( 3 )]
-position = Vector2( 544, 528 )
+position = Vector2( 704, 512 )
 
 [node name="Ball-bouncy" parent="Map/Balls" instance=ExtResource( 4 )]
-position = Vector2( 576, 528 )
+position = Vector2( 664, 512 )
 
 [node name="Ball-bubble" parent="Map/Balls" instance=ExtResource( 17 )]
-position = Vector2( 608, 528 )
+position = Vector2( 624, 512 )
 
-[node name="Ball3" parent="Map/Balls" instance=ExtResource( 16 )]
-position = Vector2( 640, 528 )
+[node name="Ball-heavy" parent="Map/Balls" instance=ExtResource( 13 )]
+position = Vector2( 464, 512 )
+
+[node name="Ball-rolling" parent="Map/Balls" instance=ExtResource( 16 )]
+position = Vector2( 584, 512 )
+
+[node name="Ball-slime" parent="Map/Balls" instance=ExtResource( 3 )]
+position = Vector2( 504, 512 )
+
+[node name="Ball" parent="Map/Balls" instance=ExtResource( 5 )]
+position = Vector2( 544, 512 )
 
 [node name="Basket" parent="Map" instance=ExtResource( 14 )]
 position = Vector2( 256, 448 )
@@ -661,6 +662,14 @@ color1 = Color( 0.8, 0.501961, 0.101961, 0 )
 
 [node name="Basket3" parent="Map" instance=ExtResource( 14 )]
 position = Vector2( 880, 408 )
+
+[node name="Spawner" parent="Map" instance=ExtResource( 19 )]
+position = Vector2( 24, 544 )
+rotation = 0.785398
+
+[node name="Spawner2" parent="Map" instance=ExtResource( 19 )]
+position = Vector2( -32, 368 )
+ball = ExtResource( 5 )
 
 [node name="Player" parent="." instance=ExtResource( 1 )]
 material = SubResource( 2 )

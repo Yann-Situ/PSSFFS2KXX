@@ -8,7 +8,7 @@
 [sub_resource type="CircleShape2D" id=1]
 radius = 6.0
 
-[sub_resource type="GDScript" id=3]
+[sub_resource type="GDScript" id=4]
 script/source = "extends Area2D
 #Selector
 onready var ball = get_parent()
@@ -45,7 +45,7 @@ func _on_Selector_mouse_exited():
 		Global.mouse_ball = null
 "
 
-[sub_resource type="CircleShape2D" id=2]
+[sub_resource type="CircleShape2D" id=3]
 radius = 16.0
 
 [node name="Ball" type="KinematicBody2D"]
@@ -59,20 +59,21 @@ script = ExtResource( 2 )
 [node name="collision" type="CollisionShape2D" parent="."]
 shape = SubResource( 1 )
 
+[node name="DustParticle" parent="." instance=ExtResource( 5 )]
+
 [node name="Sprite" type="Sprite" parent="."]
 texture = ExtResource( 3 )
 
 [node name="Selector" type="Area2D" parent="."]
-script = SubResource( 3 )
+script = SubResource( 4 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Selector"]
-shape = SubResource( 2 )
+visible = false
+shape = SubResource( 3 )
 
 [node name="Sprite_Selection" type="Sprite" parent="Selector"]
 visible = false
 modulate = Color( 0.980392, 0.803922, 0.498039, 1 )
 texture = ExtResource( 1 )
-
-[node name="DustParticle" parent="." instance=ExtResource( 5 )]
 [connection signal="mouse_entered" from="Selector" to="Selector" method="_on_Selector_mouse_entered"]
 [connection signal="mouse_exited" from="Selector" to="Selector" method="_on_Selector_mouse_exited"]

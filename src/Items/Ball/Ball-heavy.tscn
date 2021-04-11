@@ -8,10 +8,10 @@
 [sub_resource type="CircleShape2D" id=1]
 radius = 6.0
 
-[sub_resource type="StreamTexture" id=3]
+[sub_resource type="StreamTexture" id=2]
 load_path = "res://.import/ball_heavy.png-af2c90a9ffe6e27451156dd4263f7c27.stex"
 
-[sub_resource type="CircleShape2D" id=2]
+[sub_resource type="CircleShape2D" id=3]
 radius = 16.0
 
 [node name="Ball-heavy" type="KinematicBody2D"]
@@ -25,20 +25,20 @@ script = ExtResource( 1 )
 [node name="collision" type="CollisionShape2D" parent="."]
 shape = SubResource( 1 )
 
+[node name="DustParticle" parent="." instance=ExtResource( 5 )]
+
 [node name="Sprite" type="Sprite" parent="."]
-texture = SubResource( 3 )
+texture = SubResource( 2 )
 
 [node name="Selector" type="Area2D" parent="."]
 script = ExtResource( 3 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Selector"]
-shape = SubResource( 2 )
+shape = SubResource( 3 )
 
 [node name="Sprite_Selection" type="Sprite" parent="Selector"]
 visible = false
 modulate = Color( 0.980392, 0.803922, 0.498039, 1 )
 texture = ExtResource( 2 )
-
-[node name="DustParticle" parent="." instance=ExtResource( 5 )]
 [connection signal="mouse_entered" from="Selector" to="Selector" method="_on_Selector_mouse_entered"]
 [connection signal="mouse_exited" from="Selector" to="Selector" method="_on_Selector_mouse_exited"]

@@ -5,16 +5,16 @@
 [ext_resource path="res://src/Items/Ball/Selector.gd" type="Script" id=4]
 [ext_resource path="res://src/Effects/DustParticle.tscn" type="PackedScene" id=5]
 
-[sub_resource type="CircleShape2D" id=2]
+[sub_resource type="CircleShape2D" id=1]
 radius = 6.0
 
-[sub_resource type="StreamTexture" id=3]
+[sub_resource type="StreamTexture" id=2]
 load_path = "res://.import/ball.png-356c348ca24561433f8ec89830ba12f9.stex"
 
-[sub_resource type="CircleShape2D" id=4]
+[sub_resource type="CircleShape2D" id=3]
 radius = 16.0
 
-[node name="Ball" type="KinematicBody2D"]
+[node name="Ball-slime" type="KinematicBody2D"]
 position = Vector2( 417, 241 )
 z_index = 2
 input_pickable = true
@@ -23,22 +23,22 @@ collision_mask = 3
 script = ExtResource( 2 )
 
 [node name="collision" type="CollisionShape2D" parent="."]
-shape = SubResource( 2 )
+shape = SubResource( 1 )
+
+[node name="DustParticle" parent="." instance=ExtResource( 5 )]
 
 [node name="Sprite" type="Sprite" parent="."]
-texture = SubResource( 3 )
+texture = SubResource( 2 )
 
 [node name="Selector" type="Area2D" parent="."]
 script = ExtResource( 4 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Selector"]
-shape = SubResource( 4 )
+shape = SubResource( 3 )
 
 [node name="Sprite_Selection" type="Sprite" parent="Selector"]
 visible = false
 modulate = Color( 0.980392, 0.803922, 0.498039, 1 )
 texture = ExtResource( 1 )
-
-[node name="DustParticle" parent="." instance=ExtResource( 5 )]
 [connection signal="mouse_entered" from="Selector" to="Selector" method="_on_Selector_mouse_entered"]
 [connection signal="mouse_exited" from="Selector" to="Selector" method="_on_Selector_mouse_exited"]

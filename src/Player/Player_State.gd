@@ -21,6 +21,8 @@ var shoot_jr = false
 var dunk_p = false
 var select_jp = false
 var power_p = false
+var power_jp = false
+var power_jr = false
 
 # Bool for physical states
 var is_onfloor = false # from values of Player.gd
@@ -98,6 +100,8 @@ func update_vars(delta_ms, onfloor, onwall, movingfast):
 	dunk_p = Input.is_action_pressed("ui_accept")
 	select_jp = Input.is_action_just_pressed("ui_select_alter")
 	power_p =  Input.is_action_pressed("ui_power")
+	power_jp =  Input.is_action_just_pressed("ui_power")
+	power_jr =  Input.is_action_just_released("ui_power")
 
 	if (velocity.x == 0):
 		move_direction = 0

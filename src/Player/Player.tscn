@@ -1189,7 +1189,7 @@ position = Vector2( -2.18279e-11, 0 )
 texture = ExtResource( 2 )
 vframes = 20
 hframes = 16
-frame = 203
+frame = 200
 
 [node name="AnimationTree" type="AnimationTree" parent="Sprite"]
 tree_root = SubResource( 39 )
@@ -1233,6 +1233,7 @@ script = ExtResource( 3 )
 
 [node name="Camera" type="Camera2D" parent="."]
 position = Vector2( 0, -35 )
+z_index = 100
 current = true
 script = ExtResource( 7 )
 
@@ -1250,14 +1251,14 @@ __meta__ = {
 margin_left = -390.0
 margin_top = -251.0
 margin_right = -133.0
-margin_bottom = -185.0
+margin_bottom = -168.0
 color = Color( 0.164706, 0.164706, 0.164706, 1 )
 
 [node name="RichTextLabel" type="RichTextLabel" parent="Camera/Control"]
 margin_left = -388.0
 margin_top = -249.0
 margin_right = -134.0
-margin_bottom = -186.0
+margin_bottom = -168.0
 text = "Ball name:
 Ball mass :
 Ball friction :

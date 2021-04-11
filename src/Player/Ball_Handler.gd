@@ -12,7 +12,7 @@ func _ready():
 
 func _on_Ball_Handler_body_entered(body):
 	print(body.name)
-	if body is Ball or body is KinematicBall:
+	if body is Ball:
 		if S.has_ball or S.is_shooting :
 			pass
 		else :
@@ -31,6 +31,8 @@ func _on_Ball_Handler_body_entered(body):
 			ui.add_text("Ball frict : "+str(body.friction))
 			ui.newline() 
 			ui.add_text("Ball bounc : "+str(body.bounce))
+			ui.newline() 
+			ui.add_text("Ball posit : "+str(body.position - get_parent().position))
 
 func get_throw_position():
 	# return the global position of the beginning of the throw, depending on the 
@@ -49,9 +51,9 @@ func set_has_ball_position():
 
 func throw_ball(): # called by animation
 	if S.has_ball and S.active_ball != null :
+		S.active_ball.enable_physics()
 		S.active_ball.throw(get_throw_position(), 
 							get_parent().get_node("Shoot_predictor").shoot_vector_save + 0.5*S.velocity)
-		S.active_ball.enable_physics()
 		print("throw ball at "+str(S.active_ball.position.x)+" vs "+str(position.x))
 		free_ball()
 

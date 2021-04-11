@@ -8,3 +8,12 @@ func _ready():
 	self.set_bounce(1.0)
 	$Sprite.set_material(preload("res://assets/shader/material/hologram_shadermaterial.tres"))
 	$Sprite.set_material($Sprite.get_material().duplicate())
+
+func power_p(player,delta):
+	pass
+	
+func power_jp(player,delta):
+	position = player.position
+	
+func power_jr(player,delta):
+	pass

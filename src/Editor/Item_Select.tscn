@@ -8,7 +8,8 @@
 [ext_resource path="res://src/Ball/Ball-constant_energy.tscn" type="PackedScene" id=6]
 [ext_resource path="res://src/Editor/item_texture.tscn" type="PackedScene" id=7]
 [ext_resource path="res://assets/art/ball/ball_rolling.png" type="Texture" id=8]
-[ext_resource path="res://src/Platform/Basket.tscn" type="PackedScene" id=9]
+[ext_resource path="res://src/Items/Basket.tscn" type="PackedScene" id=9]
+
 
 [node name="Item_Select" type="CanvasLayer"]
 
