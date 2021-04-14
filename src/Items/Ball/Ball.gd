@@ -35,6 +35,6 @@ func power_p(player,delta):
 
 func power_jp(player,delta):
 	pass
-	
+
 func power_jr(player,delta):
 	set_applied_force(Vector2(0.0,0.0))

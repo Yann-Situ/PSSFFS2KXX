@@ -24,7 +24,7 @@ func get_gravity_scale():
 func set_mass(m):
 	mass = m
 	invmass = 1/mass
-	
+
 func set_friction(new_value):
 	friction = new_value
 func set_bounce(new_value):
@@ -40,6 +40,7 @@ func _ready():
 	Global.list_of_physical_nodes.append(self)
 	if !Global.playing :
 		disable_physics()
+	add_to_group("physicbodies")
 
 func disable_physics():
 	physics_enabled = false
@@ -61,7 +62,7 @@ func apply_impulse(impulse):
 
 func add_force(force):
 	applied_force += force
-	
+
 ###############PHYSICALPROCESS######################
 
 func _physics_process(delta):
@@ -79,12 +80,12 @@ func update_linear_velocity(delta):# apply gravity and forces
 func collision_effect(collision):
 	pass
 	return true
-	
+
 func collision_handle(collision, delta):
 	var n = collision.normal
 	var t = n.tangent()
 	#normal_colision = n
-	if collision.collider is KinematicBody2D : # TODO rather use PhysicBody but not allowed
+	if collision.collider.is_in_group("physicbodies") : # TODO rather use PhysicBody but not allowed
 		#color_colision = color3
 		var m2 = collision.collider.mass
 		var summass = m2 + mass

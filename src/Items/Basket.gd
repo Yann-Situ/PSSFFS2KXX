@@ -17,19 +17,19 @@ func set_start_position(posi):
 func _draw():
 	draw_circle($dunk_area/CollisionShape2D.position, $dunk_area/CollisionShape2D.shape.radius, color1)
 	#draw_line(position+$basket_area/CollisionShape2D.shape.a, position+$basket_area/CollisionShape2D.shape.b, color2)
-			
+
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
 	update()
 
 func _on_basket_area_body_entered(body):
 	print("basket :"+body.name)
-	if body is Ball:
+	if body.is_in_group("balls"):
 		if body.linear_velocity.y > 0.0:
 			print("GOOOAL!")
 			print(body.linear_velocity.y)
 			goal(body)
-			
+
 func goal(body):
 	if body.linear_velocity.y > speed_ball_threshold:
 		$CPUParticles2D.initial_velocity = 60.0

@@ -12,7 +12,7 @@ func _ready():
 
 func _on_Ball_Handler_body_entered(body):
 	print(body.name)
-	if body is Ball:
+	if body.is_in_group("balls"):
 		if S.has_ball or S.is_shooting :
 			pass
 		else :
@@ -20,22 +20,22 @@ func _on_Ball_Handler_body_entered(body):
 			S.has_ball = true
 			S.active_ball = body
 			body.disable_physics()
-			
+
 			#TEMPORARY CONTROL NODE
 			var ui = get_parent().get_node("Camera/Control/RichTextLabel")
 			ui.clear()
 			ui.add_text("Name : "+body.name)
-			ui.newline() 
+			ui.newline()
 			ui.add_text("Ball mass  : "+str(body.mass))
-			ui.newline() 
+			ui.newline()
 			ui.add_text("Ball frict : "+str(body.friction))
-			ui.newline() 
+			ui.newline()
 			ui.add_text("Ball bounc : "+str(body.bounce))
-			ui.newline() 
+			ui.newline()
 			ui.add_text("Ball posit : "+str(body.position - get_parent().position))
 
 func get_throw_position():
-	# return the global position of the beginning of the throw, depending on the 
+	# return the global position of the beginning of the throw, depending on the
 	# position of the player and the flip value :
 	if get_parent().get_node("Sprite").flip_h :
 		return get_parent().position + Vector2(-4.0,-6.0)
@@ -52,7 +52,7 @@ func set_has_ball_position():
 func throw_ball(): # called by animation
 	if S.has_ball and S.active_ball != null :
 		S.active_ball.enable_physics()
-		S.active_ball.throw(get_throw_position(), 
+		S.active_ball.throw(get_throw_position(),
 							get_parent().get_node("Shoot_predictor").shoot_vector_save + 0.5*S.velocity)
 		print("throw ball at "+str(S.active_ball.position.x)+" vs "+str(position.x))
 		free_ball()
@@ -64,7 +64,7 @@ func free_ball(): # set out  active_ball and has_ball
 		print("free_ball")
 	else :
 		print("error, free_ball but doesn't have ball")
-	
+
 
 func _physics_process(delta):
 	if S.has_ball and S.active_ball != null and not S.active_ball.physics_enabled:

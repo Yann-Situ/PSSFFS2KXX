@@ -644,6 +644,15 @@ position = Vector2( 504, 512 )
 [node name="Ball" parent="Map/Balls" instance=ExtResource( 5 )]
 position = Vector2( 544, 512 )
 
+[node name="Spawner" parent="Map/Balls" instance=ExtResource( 19 )]
+position = Vector2( 208, 416 )
+ball = ExtResource( 5 )
+initial_velocity = Vector2( 0, -100 )
+
+[node name="Timer" type="Timer" parent="Map/Balls/Spawner"]
+wait_time = 30.0
+autostart = true
+
 [node name="Basket" parent="Map" instance=ExtResource( 14 )]
 position = Vector2( 256, 448 )
 color1 = Color( 0.992157, 0.996078, 1, 0 )
@@ -663,14 +672,6 @@ color1 = Color( 0.8, 0.501961, 0.101961, 0 )
 [node name="Basket3" parent="Map" instance=ExtResource( 14 )]
 position = Vector2( 880, 408 )
 
-[node name="Spawner" parent="Map" instance=ExtResource( 19 )]
-position = Vector2( 24, 544 )
-rotation = 0.785398
-
-[node name="Spawner2" parent="Map" instance=ExtResource( 19 )]
-position = Vector2( -32, 368 )
-ball = ExtResource( 5 )
-
 [node name="Player" parent="." instance=ExtResource( 1 )]
 material = SubResource( 2 )
 position = Vector2( 384, 504 )
@@ -678,3 +679,4 @@ air_friction = 0.15
 jump_speed = -460.0
 max_speed_fall_onwall = 100.0
 vecjump = Vector2( 0.65, -0.9 )
+[connection signal="timeout" from="Map/Balls/Spawner/Timer" to="Map/Balls/Spawner" method="enable"]

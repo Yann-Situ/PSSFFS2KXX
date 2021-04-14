@@ -8,7 +8,7 @@
 [sub_resource type="CircleShape2D" id=1]
 radius = 6.0
 
-[sub_resource type="GDScript" id=4]
+[sub_resource type="GDScript" id=2]
 script/source = "extends Area2D
 #Selector
 onready var ball = get_parent()
@@ -65,7 +65,7 @@ shape = SubResource( 1 )
 texture = ExtResource( 3 )
 
 [node name="Selector" type="Area2D" parent="."]
-script = SubResource( 4 )
+script = SubResource( 2 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Selector"]
 visible = false
