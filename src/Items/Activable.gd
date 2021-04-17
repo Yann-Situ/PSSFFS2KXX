@@ -1,7 +1,7 @@
 extends Node2D
 class_name Activable
 
-export (bool) var activated = true setget set_activated, is_activated
+export (bool) var activated = false setget set_activated, is_activated
 
 func _ready():
 	add_to_group("activables")
