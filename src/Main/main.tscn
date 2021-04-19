@@ -645,7 +645,8 @@ position = Vector2( 504, 512 )
 [node name="Ball" parent="Map/Balls" instance=ExtResource( 5 )]
 position = Vector2( 544, 512 )
 
-[node name="Environment" type="Node" parent="Map"]
+[node name="Environment" type="Node2D" parent="Map"]
+z_index = 2
 
 [node name="Baskets" type="Node" parent="Map/Environment"]
 
@@ -690,20 +691,20 @@ rotation = 3.14159
 ball = ExtResource( 18 )
 
 [node name="Button0" parent="Map/Environment" instance=ExtResource( 20 )]
-position = Vector2( 720, 88 )
+position = Vector2( 720, -96 )
 wait_time = 2.0
 
 [node name="Button1" parent="Map/Environment" instance=ExtResource( 20 )]
-position = Vector2( 672, 88 )
+position = Vector2( 672, -96 )
 button_type = 0
 wait_time = 2.0
 
 [node name="Button2" parent="Map/Environment" instance=ExtResource( 20 )]
-position = Vector2( 624, 88 )
+position = Vector2( 624, -96 )
 wait_time = 10.0
 
 [node name="Button3" parent="Map/Environment" instance=ExtResource( 20 )]
-position = Vector2( 576, 88 )
+position = Vector2( 576, -96 )
 button_type = 2
 wait_time = 2.0
 

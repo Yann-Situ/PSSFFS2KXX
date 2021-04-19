@@ -21,6 +21,7 @@ func spawn():
 	newball.position = position+($SpawnPosition.position+rand_range(-2.0,2.0)*Vector2(1.0,0.0)).rotated(self.rotation_degrees)
 	newball.set_linear_velocity(initial_velocity.rotated(self.rotation_degrees))
 	newball.enable_physics()
+	newball.z_index = 0 #TODO change to set ball_z_index
 	get_parent().add_child(newball) # Add it as a child of this node.
 
 #func _process(delta):	
