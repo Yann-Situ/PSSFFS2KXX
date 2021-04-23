@@ -6,35 +6,36 @@ Popol Super Slam Fusion Full Speed 2KXX
 * Graphism :
    - [.] environment elements
    - [.] other tilesets
-   - other background
-   - all movement sprites
+   - [ ]other background
+   - [ ]all movement sprites
 * Moveset improvment :
-   - add dunk
-   - handle crouch
-   - add landing anim
+   - [ ]add dunk
+   - [ ]handle crouch
+   - [ ]add landing anim
    - [.] add turn back anim
-   - add slide
-   - with and without balls anim
+   - [ ]add slide
+   - [ ]with and without balls anim
    - [x] improve wall jump (feet must be on wall ?)
-   - add multiple shoot types
+   - [ ]add multiple shoot types
 * Add interactive elements (baskets, pipes, jumping platform, doors and warps, wind, enemies...)
    - [.] baskets
    - [.] spawners
    - [.] activable
+   - [.] ziplines
 * Add point system
 * Improve shooter
 * Balls :
-   - improve animation of balls
-   - squish anim for squish balls
+   - [ ]improve animation of balls
+   - [ ]squish anim for squish balls
    - [x] add several balls (bouncy ball, fire ball, linked ball, phantom ball)
-   - handle interactions with environment elements
+   - [ ]handle interactions with environment elements
 * Juice :
-   - Camera shake on heavy ball, dunks and other style action
+   - [ ]Camera shake on heavy ball, dunks and other style action
    - [.] particles on balls, dust on footsteps & slide
-   - add UBER mode with new animations
-   - add sound (music + effect and stylish voice)
+   - [ ]add UBER mode with new animations
+   - [ ]add sound (music + effect and stylish voice)
 * Add UIs
-   - Complete editor by adding tilemapping in it
+   - [ ]Complete editor by adding tilemapping in it
 * Add levels
 
 ## Issues
@@ -43,3 +44,5 @@ Popol Super Slam Fusion Full Speed 2KXX
 * [FIXED] Weird straight jump on a corner. Don't know why it happens and what to do.
 * Energy loss of _constant_energy_balls_.
 * The `shoot_previewer` shows a trajectory slightly above the real one.
+* Zipline drop inside collision places results in stucked player
+* Spawner rotation position is weird.

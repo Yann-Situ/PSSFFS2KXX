@@ -3,8 +3,7 @@ class_name Player, "res://assets/art/icons/popol.png"
 
 onready var S = get_node("Player_State")
 
-#balls
-const Ball = preload("res://src/Items/Ball/Ball.tscn")
+export (bool) var physics_enabled = true
 
 # Environment features (should be given by the map)
 export (float) var gravity = ProjectSettings.get_setting("physics/2d/default_gravity") # pix/s²
@@ -33,8 +32,14 @@ export (float) var walk_return_thresh_instant_speed = walk_instant_speed*1.5 # p
 export (float) var walk_accel = 220 # pix/s²
 
 export (bool) var flip_h = false
-#export var snap_vector_save = Vector2(0,1)
-#var snap_vector =
+
+func disable_physics():
+	physics_enabled = false
+	S.velocity *= 0
+	#S.applied_force *= 0
+
+func enable_physics():
+	physics_enabled = true
 
 func _ready():
 	if !Global.playing:
@@ -67,10 +72,10 @@ func get_input(delta):
 
 	if S.jump_jp :
 		if S.can_jump :
-			print("jump")
+			#print("jump")
 			move_jump(delta)
 		elif S.can_walljump :
-			print("walljump")
+			#print("walljump")
 			print(S.last_wall_normal_direction)
 			move_walljump(S.last_wall_normal_direction,delta)
 	elif S.jump_jr and (S.is_jumping or S.is_walljumping) :
@@ -87,11 +92,11 @@ func get_input(delta):
 		S.is_dunking = false # \todo verify if we can stand (maybe rays or is_on_ceil)
 
 	if S.shoot_jr and S.can_shoot :
-		print("shoot")
+		#print("shoot")
 		move_shoot(delta)
 
 	if S.aim_jp and S.can_aim :
-		print("aim")
+		#print("aim")
 		move_aim(delta)
 
 	if S.can_go :
@@ -236,4 +241,5 @@ func _physics_process(delta):
 		S.velocity.y = min(S.velocity.y,max_speed_fall_onwall)
 	else:
 		S.velocity.y += gravity * delta
-	S.velocity = move_and_slide(S.velocity, Vector2(0, -1), true, 4, 0.9)
+	if physics_enabled:
+		S.velocity = move_and_slide(S.velocity, Vector2(0, -1), true, 4, 0.9)

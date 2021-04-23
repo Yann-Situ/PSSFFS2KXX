@@ -1,6 +1,6 @@
 extends Node
 
-var playing = false
+var playing = true
 var list_of_physical_nodes = []
 var mouse_ball = null #pointer to the last selectable item that called mouse_entered
 var camera = null

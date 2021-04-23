@@ -135,6 +135,14 @@ ui_power={
  ]
 }
 
+[layer_names]
+
+2d_physics/layer_1="player"
+2d_physics/layer_2="world"
+2d_physics/layer_3="balls"
+2d_physics/layer_4="environment_special"
+2d_physics/layer_5="explosion"
+
 [physics]
 
 2d/default_gravity=625

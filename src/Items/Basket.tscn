@@ -4,29 +4,29 @@
 [ext_resource path="res://src/Items/Basket.gd" type="Script" id=2]
 [ext_resource path="res://assets/art/ball/ball_particle.png" type="Texture" id=3]
 
-[sub_resource type="AtlasTexture" id=13]
+[sub_resource type="AtlasTexture" id=1]
 atlas = ExtResource( 1 )
 region = Rect2( 0, 0, 32, 16 )
 
-[sub_resource type="AtlasTexture" id=14]
+[sub_resource type="AtlasTexture" id=2]
 atlas = ExtResource( 1 )
 region = Rect2( 32, 0, 32, 16 )
 
-[sub_resource type="AtlasTexture" id=15]
+[sub_resource type="AtlasTexture" id=3]
 atlas = ExtResource( 1 )
 region = Rect2( 64, 0, 32, 16 )
 
-[sub_resource type="AtlasTexture" id=16]
+[sub_resource type="AtlasTexture" id=4]
 atlas = ExtResource( 1 )
 region = Rect2( 96, 0, 32, 16 )
 
-[sub_resource type="AtlasTexture" id=17]
+[sub_resource type="AtlasTexture" id=5]
 atlas = ExtResource( 1 )
 region = Rect2( 128, 0, 32, 16 )
 
-[sub_resource type="SpriteFrames" id=9]
+[sub_resource type="SpriteFrames" id=6]
 animations = [ {
-"frames": [ SubResource( 13 ), SubResource( 14 ), SubResource( 15 ), SubResource( 16 ), SubResource( 13 ), SubResource( 17 ), SubResource( 13 ) ],
+"frames": [ SubResource( 1 ), SubResource( 2 ), SubResource( 3 ), SubResource( 4 ), SubResource( 1 ), SubResource( 5 ), SubResource( 1 ) ],
 "loop": true,
 "name": "default",
 "speed": 4.0
@@ -37,14 +37,14 @@ animations = [ {
 "speed": 5.0
 } ]
 
-[sub_resource type="SegmentShape2D" id=10]
+[sub_resource type="SegmentShape2D" id=7]
 a = Vector2( -16, -6 )
 b = Vector2( 16, -6 )
 
-[sub_resource type="CircleShape2D" id=11]
+[sub_resource type="CircleShape2D" id=8]
 radius = 50.0
 
-[sub_resource type="Gradient" id=12]
+[sub_resource type="Gradient" id=9]
 colors = PoolColorArray( 1, 1, 1, 1, 1, 0.615234, 0, 1 )
 
 [node name="Basket" type="Node2D"]
@@ -54,22 +54,25 @@ script = ExtResource( 2 )
 color1 = Color( 0.8, 0.501961, 0.101961, 0.0588235 )
 
 [node name="AnimatedSprite" type="AnimatedSprite" parent="."]
-frames = SubResource( 9 )
-frame = 1
+frames = SubResource( 6 )
+frame = 5
 playing = true
 
 [node name="basket_area" type="Area2D" parent="."]
+collision_layer = 8
+collision_mask = 4
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="basket_area"]
 visible = false
-shape = SubResource( 10 )
+shape = SubResource( 7 )
 
 [node name="dunk_area" type="Area2D" parent="."]
 visible = false
+collision_layer = 8
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="dunk_area"]
 position = Vector2( 0, -40 )
-shape = SubResource( 11 )
+shape = SubResource( 8 )
 
 [node name="CPUParticles2D" type="CPUParticles2D" parent="."]
 position = Vector2( 0, -4.33823 )
@@ -88,5 +91,5 @@ gravity = Vector2( 0, 0 )
 initial_velocity = 32.26
 initial_velocity_random = 0.36
 tangential_accel = -0.69
-color_ramp = SubResource( 12 )
+color_ramp = SubResource( 9 )
 [connection signal="body_entered" from="basket_area" to="." method="_on_basket_area_body_entered"]

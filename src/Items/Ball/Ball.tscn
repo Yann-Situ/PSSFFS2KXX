@@ -52,8 +52,8 @@ radius = 16.0
 position = Vector2( 417, 241 )
 z_index = 2
 input_pickable = true
-collision_layer = 2
-collision_mask = 3
+collision_layer = 4
+collision_mask = 6
 script = ExtResource( 2 )
 
 [node name="collision" type="CollisionShape2D" parent="."]
@@ -68,7 +68,7 @@ texture = ExtResource( 3 )
 script = SubResource( 2 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Selector"]
-visible = false
+modulate = Color( 0.913725, 1, 0.721569, 1 )
 shape = SubResource( 3 )
 
 [node name="Sprite_Selection" type="Sprite" parent="Selector"]
