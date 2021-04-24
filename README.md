@@ -6,7 +6,7 @@ Popol Super Slam Fusion Full Speed 2KXX
 * Graphism :
    - [.] environment elements
    - [.] other tilesets
-   - [ ]other background
+   - [.]other background
    - [ ]all movement sprites
 * Moveset improvment :
    - [ ]add dunk
@@ -45,4 +45,4 @@ Popol Super Slam Fusion Full Speed 2KXX
 * Energy loss of _constant_energy_balls_.
 * The `shoot_previewer` shows a trajectory slightly above the real one.
 * Zipline drop inside collision places results in stucked player
-* Spawner rotation position is weird.
+* [FIXED] Spawner rotation position is weird.

@@ -16,7 +16,7 @@ func _ready():
 		timer.one_shot = true
 		timer.autostart = false
 		timer.wait_time = wait_time
-		timer.connect("timeout", self, "disable")
+		timer.connect("timeout", self, "_on_Timer_timeout")
 		self.add_child(timer)
 		
 	elif button_type == BUTTON0_TYPE.PHYSICAL :
@@ -40,7 +40,7 @@ func on_disable():
 	emit_signal("activated_change_signal",activated)
 
 func _on_Area2D_body_exited(body):
-	if $Area2D.get_overlapping_bodies().empty():
+	if $Area2D.get_overlapping_bodies().size() <= 1:
 		disable()
 
 func _on_Area2D_body_entered(body):
