@@ -7,9 +7,10 @@ var selection_color_mid = Color(selection_color.r*0.5, selection_color.g*0.5, se
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	connect("mouse_entered", self, "_on_Selector_mouse_entered")
-	connect("mouse_exited", self, "_on_Selector_mouse_exited")
-	input_pickable = true
+	#connect("mouse_entered", self, "_on_Selector_mouse_entered")
+	#connect("mouse_exited", self, "_on_Selector_mouse_exited")
+	#input_pickable = true
+	pass
 
 func set_selection_color(col):
 	$Sprite_Selection.modulate = col

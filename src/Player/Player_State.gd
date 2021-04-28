@@ -1,19 +1,22 @@
 extends Node
 
-var frame_time_ms = 1000/60 #ms
-export var time = 0 #ms
+var frame_time_ms = 1.0/60.0 #s
+export var time = 0 #s
 
 # Countdowns and delays between actions
-export (float) var jump_lag_tolerance = 8*frame_time_ms #ms
-export (float) var walljump_move_countdown = 22*frame_time_ms #ms
-export (float) var jump_countdown = 10*frame_time_ms #ms
-export (float) var shoot_countdown = 30*frame_time_ms #ms
-export (float) var land_lag_tolerance = 3*frame_time_ms #ms
+export (float) var tolerance_jump_floor = 9*frame_time_ms #s
+export (float) var tolerance_jump_press = 9*frame_time_ms #s
+export (float) var tolerance_wall_jump = 9*frame_time_ms #s
+export (float) var walljump_move_countdown = 22*frame_time_ms #s
+export (float) var jump_countdown = 10*frame_time_ms #s
+export (float) var shoot_countdown = 30*frame_time_ms #s
+export (float) var land_lag_tolerance = 3*frame_time_ms #s
 
 # Bool for inputs ('p' is for 'pressed', 'jp' 'just_pressed', 'jr' 'just_released')
 var right_p = false
 var left_p = false
 var jump_jp = false
+var jump_p = false
 var jump_jr = false
 var crouch_p = false
 var aim_jp = false
@@ -75,12 +78,12 @@ export var has_ball = false
 var active_ball = null#pointer to a ball
 var selected_ball = null#pointer to the selected ball
 
-func update_vars(delta_ms, onfloor, onwall, movingfast):
+func update_vars(delta, onfloor, onwall, movingfast):
 	#
 	# Delays and states memory should be updated after calling update_vars()
 	# in Player.gd
 	#
-	time += delta_ms
+	time += delta
 
 	is_onfloor = onfloor
 	is_onwall = onwall
@@ -93,6 +96,7 @@ func update_vars(delta_ms, onfloor, onwall, movingfast):
 	right_p = Input.is_action_pressed('ui_right')
 	left_p = Input.is_action_pressed('ui_left')
 	jump_jp = Input.is_action_just_pressed('ui_up')
+	jump_p = Input.is_action_pressed('ui_up')
 	jump_jr = Input.is_action_just_released('ui_up')
 	crouch_p = Input.is_action_pressed('ui_down')
 	aim_jp = Input.is_action_just_pressed("ui_select")
@@ -102,7 +106,10 @@ func update_vars(delta_ms, onfloor, onwall, movingfast):
 	power_p =  Input.is_action_pressed("ui_power")
 	power_jp =  Input.is_action_just_pressed("ui_power")
 	power_jr =  Input.is_action_just_released("ui_power")
-
+	
+	if jump_jp:
+		$ToleranceJumpPressTimer.start(tolerance_jump_press)
+	
 	if (velocity.x == 0):
 		move_direction = 0
 	elif (velocity.x < 0):
@@ -131,12 +138,12 @@ func update_vars(delta_ms, onfloor, onwall, movingfast):
 	#is_shooting handle by shoot animation+Player.gd
 
 
-	can_jump = (time - last_onfloor < jump_lag_tolerance) \
-			  and (time - last_jump > jump_countdown)
-	can_walljump = (time - last_onwall < jump_lag_tolerance) \
-		  and (time - last_jump > jump_countdown)
-	can_go = (time - last_walljump > walljump_move_countdown)
+	can_jump = not $ToleranceJumpFloorTimer.is_stopped() \
+			  and $CanJumpTimer.is_stopped()
+	can_walljump = not $ToleranceWallJumpTimer.is_stopped() \
+		  and $CanJumpTimer.is_stopped()
+	can_go = $CanGoTimer.is_stopped()
 	can_crouch = is_onfloor
-	can_aim = (time - last_shoot > shoot_countdown) and has_ball and active_ball != null
+	can_aim = $CanShootTimer.is_stopped() and has_ball and active_ball != null
 	can_shoot = is_aiming and has_ball and active_ball != null
 	can_dunk = not is_onfloor

@@ -54,14 +54,15 @@ func set_flip_h(b):
 
 func get_input(delta):
 	############### Change variables of Player_state.gd
-	#S.update_vars(delta*1000, is_on_floor(), is_on_wall(), (abs(S.velocity.x) > run_speed_thresh))
-	S.update_vars(delta*1000, is_on_floor(), is_on_wall() and $Special_Action_Handler.is_on_wall(), (abs(S.velocity.x) > run_speed_thresh))
+	S.update_vars(delta, is_on_floor(), is_on_wall() and $Special_Action_Handler.is_on_wall(), (abs(S.velocity.x) > run_speed_thresh))
 	if S.is_onfloor :
-		S.last_onfloor = S.time
+		S.get_node("ToleranceJumpFloorTimer").start(S.tolerance_jump_floor)
+		 #S.last_onfloor = S.time
 	else :
 		S.last_onair = S.time
 	if S.is_onwall :
-		S.last_onwall = S.time
+		#S.last_onwall = S.time
+		S.get_node("ToleranceWallJumpTimer").start(S.tolerance_wall_jump)
 		S.last_wall_normal_direction = -1#sign(get_slide_collision(get_slide_count()-1).normal.x)
 		if $Sprite.flip_h:
 			S.last_wall_normal_direction = 1
@@ -70,15 +71,19 @@ func get_input(delta):
 	if (S.direction_p != 0) and S.can_go :
 		move_side(S.direction_p,delta)
 
-	if S.jump_jp :
+	if not S.get_node("ToleranceJumpPressTimer").is_stopped() :
 		if S.can_jump :
 			#print("jump")
 			move_jump(delta)
+			if not S.jump_p:
+				S.velocity.y = S.velocity.y/3.5
 		elif S.can_walljump :
 			#print("walljump")
-			print(S.last_wall_normal_direction)
+			#print(S.last_wall_normal_direction)
 			move_walljump(S.last_wall_normal_direction,delta)
-	elif S.jump_jr and (S.is_jumping or S.is_walljumping) :
+			if not S.jump_p:
+				S.velocity.y = S.velocity.y/3.5
+	if S.jump_jr and (S.is_jumping or S.is_walljumping) :
 		S.velocity.y = S.velocity.y/3.5
 
 	if S.crouch_p and S.can_crouch :
@@ -170,13 +175,16 @@ func move_side(direction,delta):
 func move_jump(delta):
 	S.velocity.y = jump_speed
 	S.is_jumping = true
-	S.last_jump = S.time
+	S.get_node("ToleranceJumpPressTimer").stop()
+	S.get_node("CanJumpTimer").start(S.jump_countdown)
 
 func move_walljump(direction,delta):
 	S.velocity.x = -vecjump.x * direction * jump_speed
 	S.velocity.y = -vecjump.y * jump_speed
 	S.is_walljumping = true
-	S.last_walljump = S.time
+	S.get_node("ToleranceJumpPressTimer").stop()
+	S.get_node("CanJumpTimer").start(S.jump_countdown)
+	S.get_node("CanGoTimer").start(S.walljump_move_countdown)
 
 func move_crouch(delta):# TODO
 	# Change hitbox + other animation things like sliding etc.
@@ -202,7 +210,7 @@ func move_shoot(delta):
 	S.is_aiming = false
 	S.aim_direction = 0
 	S.is_shooting = true
-	S.last_shoot = S.time
+	S.get_node("CanShootTimer").start(S.shoot_countdown)
 	$Shoot_predictor.shoot_vector_save = $Shoot_predictor.shoot_vector()
 	#Engine.time_scale = 1.0
 	$Shoot_predictor.clear()	

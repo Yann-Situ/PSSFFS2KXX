@@ -39,7 +39,7 @@ func on_disable():
 	update_Sprite(activated)
 	emit_signal("activated_change_signal",activated)
 
-func _on_Area2D_body_exited(body):
+func _on_Area2D_body_exited(_body):
 	if $Area2D.get_overlapping_bodies().size() <= 1:
 		disable()
 

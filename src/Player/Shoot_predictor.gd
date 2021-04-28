@@ -7,9 +7,9 @@ var nb_points = coeff_display * nb_points_display
 export (float) var delta = .03 / coeff_display
 
 # Shoot features
-export (float) var shoot_min_speed = 100 # pix/s
-export (float) var shoot_max_speed = 600 # pix/s
-export (float) var shoot_max_aim_time = 1000 # ms
+export (float) var shoot_min_speed = 100 # kg*pix/s
+export (float) var shoot_max_speed = 600 # kg*pix/s
+export (float) var shoot_max_aim_time = 1 # s
 var shoot_vector_save = Vector2()
 
 var white = Color(1,1,1,1)

@@ -40,7 +40,7 @@ _global_script_class_icons={
 
 config/name="PSSFFS2KXX"
 run/main_scene="res://src/Main/main.tscn"
-config/icon="res://icon.png"
+config/icon="res://assets/art/icons/popol.png"
 
 [autoload]
 

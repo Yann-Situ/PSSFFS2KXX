@@ -1189,7 +1189,7 @@ position = Vector2( -2.18279e-11, 0 )
 texture = ExtResource( 2 )
 vframes = 20
 hframes = 16
-frame = 197
+frame = 200
 
 [node name="AnimationTree" type="AnimationTree" parent="Sprite"]
 tree_root = SubResource( 39 )
@@ -1284,7 +1284,7 @@ position = Vector2( 0, 5 )
 shape = SubResource( 59 )
 
 [node name="Has_Ball_Position" type="Node2D" parent="Ball_Handler"]
-position = Vector2( 5.00001, 7.00001 )
+position = Vector2( 5, 0 )
 
 [node name="Special_Action_Handler" type="Node2D" parent="."]
 visible = false

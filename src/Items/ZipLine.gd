@@ -6,12 +6,18 @@ export (ZIPLINE_TYPE) var zipline_type = ZIPLINE_TYPE.ROPE_CATCH
 export (Vector2) var init_point  setget set_init_point, get_init_point
 export (Vector2) var final_point setget set_final_point, get_final_point
 var path_body_list = []
-export (Vector2) var player_position_offset = Vector2(0.0,10.0)
+export (Vector2) var player_position_offset = Vector2(0.0,5.0)
+export (Vector2) var rope_offset = Vector2(0.0,10.0)
 export (float,1.0, 20.0) var handle_catch_radius = 10.0
 export (float, 0.0, 1.0) var handle_catch_init_unit_offset = 0.0 setget set_handle_catch_init_unit_offset
 
 var linear_velocity = Vector2(0.0,0.0)
+var real_rope_offset = Vector2.ZERO
+var real_player_offset = Vector2.ZERO
+var relative_position_offset = Vector2.ZERO
+
 onready var gravity = ProjectSettings.get_setting("physics/2d/default_gravity") # pix/s²
+onready var player_offset = player_position_offset+rope_offset
 
 func set_init_point(v):
 	print("set_init")
@@ -40,6 +46,7 @@ func set_final_point(v):
 	else :
 		$Path2D.curve.set_point_position(1,v)
 	$Line2D.set_point_position(1,v)
+	$Line2D.set_point_position(2,v)
 
 func get_init_point():
 	return init_point
@@ -73,22 +80,41 @@ func _ready():
 		$Path2D/PathFollow2D/Sprite.visible = true
 		$Path2D/PathFollow2D.set_unit_offset(handle_catch_init_unit_offset)
 	
+	relative_position_offset = $Path2D/PathFollow2D.get_unit_offset()*(final_point-init_point)+init_point
+	
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
 	if not path_body_list.empty():
 		linear_velocity.y += gravity * delta
 		var fi =(final_point-init_point).normalized()
 		var veldotfi = linear_velocity.dot(fi)
-		$Path2D/PathFollow2D.set_offset($Path2D/PathFollow2D.get_offset()+veldotfi*delta)
-		path_body_list[0].position = player_position_offset+self.global_position+$Path2D/PathFollow2D.get_unit_offset()*(final_point-init_point)+init_point
+		
 		path_body_list[0].S.velocity = veldotfi*fi
+		
+		$Path2D/PathFollow2D.set_offset($Path2D/PathFollow2D.get_offset()+veldotfi*delta)
+		relative_position_offset = $Path2D/PathFollow2D.get_unit_offset()*(final_point-init_point)+init_point
+		real_rope_offset = lerp(real_rope_offset, rope_offset, 0.1)
+		real_player_offset = lerp(real_player_offset, player_offset, 0.1)
+		
+		path_body_list[0].position = real_player_offset+self.global_position+relative_position_offset
+		$Line2D.set_point_position(1,relative_position_offset+real_rope_offset)
+		$Path2D/PathFollow2D/Sprite.offset = real_rope_offset
+		
 		if $Path2D/PathFollow2D.get_unit_offset() > 0.999 or $Path2D/PathFollow2D.get_unit_offset() < 0.001 or path_body_list[0].S.crouch_p :
 			path_body_list[0].enable_physics()
 			path_body_list[0].S.velocity = (veldotfi*fi)
 			#call_deferred("reparent",path_body_list[0], save_parent)
 			path_body_list.remove(0)
+			real_player_offset = Vector2.ZERO
+			#$Line2D.set_point_position(1,$Line2D.get_point_position(2))
+			#$Path2D/PathFollow2D/Sprite.offset = Vector2.ZERO
 			$Timer.start()
 			print("player quit zip")
+	else :
+		relative_position_offset = $Path2D/PathFollow2D.get_unit_offset()*(final_point-init_point)+init_point
+		real_rope_offset = lerp(real_rope_offset, Vector2.ZERO, 0.1)
+		$Line2D.set_point_position(1,relative_position_offset+real_rope_offset)
+		$Path2D/PathFollow2D/Sprite.offset = real_rope_offset
 			
 
 func _on_PlayerDetector_body_exited(body):
@@ -96,13 +122,10 @@ func _on_PlayerDetector_body_exited(body):
 		print("player on zip")
 		var bi =body.position-global_position-init_point
 		var fi =final_point-init_point
-		#print(bi)
-		#print(fi)
-		#print(bi.dot(fi.normalized()))
-		
 		linear_velocity = body.S.velocity
 		body.disable_physics()
 		path_body_list.append(body)
 		$Path2D/PathFollow2D.set_offset(bi.dot(fi.normalized()))
-		#body.position = (Vector2(0.0,0.0))
+		relative_position_offset = $Path2D/PathFollow2D.get_unit_offset()*(final_point-init_point)+init_point
+		real_player_offset = bi - relative_position_offset
 
