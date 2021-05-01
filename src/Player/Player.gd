@@ -49,7 +49,7 @@ func _ready():
 func set_flip_h(b):
 	flip_h  = b
 	$Sprite.set_flip_h(b)
-	$Shoot_predictor.set_flip_h(b)	
+	$Shoot_predictor.set_flip_h(b)
 	$Special_Action_Handler.set_flip_h(b)
 
 func get_input(delta):
@@ -60,6 +60,7 @@ func get_input(delta):
 		 #S.last_onfloor = S.time
 	else :
 		S.last_onair = S.time
+		S.last_onair_velocity_y = S.velocity.y
 	if S.is_onwall :
 		#S.last_onwall = S.time
 		S.get_node("ToleranceWallJumpTimer").start(S.tolerance_wall_jump)

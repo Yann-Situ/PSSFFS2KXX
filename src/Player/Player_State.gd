@@ -60,6 +60,7 @@ var last_onwall = 0
 var last_jump = 0
 var last_walljump = 0
 var last_wall_normal_direction = 0 # handle by Player.gd
+var last_onair_velocity_y = 0
 var last_shoot = 0
 var last_aim_jp = 0
 
@@ -132,7 +133,7 @@ func update_vars(delta, onfloor, onwall, movingfast):
 	is_walljumping = is_walljumping and not is_onfloor and is_mounting
 	is_dunking = is_dunking and not is_onfloor # handle by player actions (start) and animation (stop but not yet implemented)
 	is_halfturning = (is_halfturning or dir_sprite*direction_p == -1) and is_onfloor and direction_p != 0 and not is_shooting # handle by player actions
-	is_landing = is_onfloor and not is_onwall and (is_landing or (time-last_onair < land_lag_tolerance)) and not is_halfturning# stop also handled by animation
+	is_landing = is_onfloor and not is_onwall and (is_landing or (time-last_onair < land_lag_tolerance and last_onair_velocity_y > 400)) and not is_halfturning# stop also handled by animation
 	#is_crouching = # handle by player actions (start)
 	is_aiming = is_aiming and has_ball and active_ball != null and not is_dunking
 	#is_shooting handle by shoot animation+Player.gd

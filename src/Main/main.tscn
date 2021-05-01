@@ -215,15 +215,21 @@ button_type = 2
 [node name="ZipLine" parent="Environment" instance=ExtResource( 21 )]
 position = Vector2( 928, 128 )
 zipline_type = 1
+init_point = Vector2( 0, 0 )
 final_point = Vector2( -735, 160 )
 player_position_offset = Vector2( 0, 15 )
 rope_offset = Vector2( 0, 30 )
 handle_catch_radius = 10.0
+handle_catch_init_unit_offset = 0.0
 
 [node name="ZipLine2" parent="Environment" instance=ExtResource( 21 )]
 position = Vector2( -328, -328 )
+zipline_type = 0
+init_point = Vector2( 0, 0 )
 final_point = Vector2( 2300, 280 )
 player_position_offset = Vector2( 0, -23 )
+rope_offset = Vector2( 0, 10 )
+handle_catch_init_unit_offset = 0.0
 
 [node name="Balls" type="Node2D" parent="Environment"]
 
@@ -253,7 +259,7 @@ position = Vector2( -248, -160 )
 rotation = 0.785397
 
 [node name="Jumper2" parent="Environment" instance=ExtResource( 15 )]
-position = Vector2( 2152, 216 )
+position = Vector2( 2128, 232 )
 rotation = -0.785397
 jump_velocity = 1000
 cant_go_time = 0.3
