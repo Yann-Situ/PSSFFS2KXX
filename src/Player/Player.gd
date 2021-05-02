@@ -12,8 +12,10 @@ export (float) var air_friction = 0.1 # %/frame
 export (float) var attract_force = 800 # m.pix/s²
 
 # Crouch features
-export (float) var crouch_speed_max = 200 # pix/s
-export (float) var crouch_accel = 150 # pix/s²
+export (float) var crouch_speed_max = 300 # pix/s
+export (float) var crouch_instant_speed = 60 # pix/s
+export (float) var crouch_return_thresh_instant_speed = crouch_instant_speed*1.5 # pix/s
+export (float) var crouch_accel = 200 # pix/s²
 
 # Aerial features
 export (float) var sideaerial_speed_max = 400 # pix/s
@@ -90,12 +92,13 @@ func get_input(delta):
 	if S.crouch_p and S.can_crouch :
 		move_crouch(delta)
 	else :
-		S.is_crouching = false # \todo verify if we can stand (maybe rays or is_on_ceil)
+		if S.can_stand:
+			S.is_crouching = false # \todo verify if we can stand (maybe rays or is_on_ceil)
 
 	if S.dunk_p and S.can_dunk :
 		move_dunk(delta)
 	else :
-		S.is_dunking = false # \todo verify if we can stand (maybe rays or is_on_ceil)
+		S.is_dunking = false
 
 	if S.shoot_jr and S.can_shoot :
 		#print("shoot")
@@ -123,6 +126,13 @@ func get_input(delta):
 	
 	#shader :
 	#$Sprite.material.set("shader_param/speed",S.velocity)
+	
+	if S.is_crouching or S.is_landing or not S.can_stand:
+		$Collision.shape.set_extents(Vector2(6,22))
+		$Collision.position.y = 10
+	else :
+		$Collision.shape.set_extents(Vector2(6,26))
+		$Collision.position.y = 6
 	
 	if S.is_aiming:
 		var shoot = $Shoot_predictor.shoot_vector()
@@ -152,6 +162,9 @@ func move_side(direction,delta):
 				S.velocity.x += direction*crouch_accel*delta
 				if (S.velocity.x*direction > crouch_speed_max) :
 					S.velocity.x = direction*crouch_speed_max
+					
+			if -crouch_return_thresh_instant_speed < S.velocity.x*direction and S.velocity.x*direction < crouch_instant_speed :
+				S.velocity.x = direction*crouch_instant_speed
 		else : #standing on the floor, maybe moving
 			if (S.velocity.x*direction >= run_speed_max) :
 				pass # in the same direction as velocity and faster than max

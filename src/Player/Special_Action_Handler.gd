@@ -12,8 +12,8 @@ var rays_res = []
 var space_state
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	rays_not_flip = [$Ray_fwd_down, $Ray_fwd_up, $Ray_up]
-	rays_flip = [$Ray_fwd_down_f, $Ray_fwd_up_f, $Ray_up]
+	rays_not_flip = [$Ray_fwd_down, $Ray_fwd_up, $Ray_up_fwd, $Ray_up_bwd]
+	rays_flip = [$Ray_fwd_down_f, $Ray_fwd_up_f, $Ray_up_bwd, $Ray_up_fwd]
 	self.set_flip_h(get_parent().get_node("Sprite").flip_h)
 
 func _draw():
@@ -36,21 +36,22 @@ func cast(r): #we must have updated the space_state before
 #############################
 func is_on_wall():
 	update_space_state()
-	cast(rays[0])#down_fwd
+	cast(rays[0])#fwd down
 	return rays[0].result
 
 func can_wall_dive():
 	update_space_state()
-	cast(rays[0])#down_fwd
+	cast(rays[0])#fwd down
 	if rays[0].result:
-		cast(rays[1])#up_fwd
+		cast(rays[1])#fwd up
 		return !rays[1].result
 	return false
 		
 func can_stand():
 	update_space_state()
-	cast(rays[2])#up
-	return !rays[1].result
+	cast(rays[2])#up fwd
+	cast(rays[3])#up bwd
+	return !(rays[2].result or rays[3].result)
 
 #############################
 func set_flip_h(b):

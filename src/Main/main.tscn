@@ -44,6 +44,9 @@ shader_param/light_thresh = 0.4
 [node name="ParallaxLayer" type="ParallaxLayer" parent="ParallaxBackground"]
 motion_scale = Vector2( 0, 0 )
 motion_offset = Vector2( -400, -228 )
+__meta__ = {
+"_edit_group_": true
+}
 
 [node name="TextureRect" type="TextureRect" parent="ParallaxBackground/ParallaxLayer"]
 margin_left = -2.0
@@ -63,6 +66,9 @@ __meta__ = {
 motion_scale = Vector2( 0.08, 0 )
 motion_offset = Vector2( 0, -30 )
 motion_mirroring = Vector2( 1024, 512 )
+__meta__ = {
+"_edit_group_": true
+}
 
 [node name="TextureRect" type="TextureRect" parent="ParallaxBackground/ParallaxLayer2"]
 modulate = Color( 1, 0.847059, 0.847059, 1 )
@@ -79,6 +85,9 @@ __meta__ = {
 motion_scale = Vector2( 0.15, 0.15 )
 motion_offset = Vector2( 0, -80 )
 motion_mirroring = Vector2( 1540, 0 )
+__meta__ = {
+"_edit_group_": true
+}
 
 [node name="TextureRect" type="TextureRect" parent="ParallaxBackground/ParallaxLayer3"]
 modulate = Color( 0.752941, 0.560784, 0.670588, 1 )
@@ -108,13 +117,15 @@ light_mask = -2147483647
 material = SubResource( 3 )
 motion_scale = Vector2( 0.3, 0.3 )
 motion_mirroring = Vector2( 2300, 0 )
+__meta__ = {
+"_edit_group_": true
+}
 
 [node name="TextureRect" type="TextureRect" parent="ParallaxBackground/ParallaxLayer4"]
 modulate = Color( 0.592157, 0.439216, 0.596078, 1 )
-margin_left = 2.51978
-margin_top = -242.097
-margin_right = 2178.52
-margin_bottom = 781.903
+margin_top = -240.0
+margin_right = 2176.0
+margin_bottom = 784.0
 mouse_filter = 2
 texture = ExtResource( 6 )
 __meta__ = {

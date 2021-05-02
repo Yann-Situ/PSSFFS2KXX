@@ -27,6 +27,16 @@ var power_p = false
 var power_jp = false
 var power_jr = false
 
+# Bool for action permission
+var can_jump = false
+var can_walljump = false
+var can_go = false
+var can_crouch = false
+var can_aim = false
+var can_shoot = false
+var can_dunk = false
+var can_stand = false
+
 # Bool for physical states
 var is_onfloor = false # from values of Player.gd
 var is_onwall = false # from values of Player.gd
@@ -37,15 +47,6 @@ var is_moving = false
 var is_idle = false
 #var is_slowing = false
 #var is_speeding = false
-
-# Bool for action permission
-var can_jump = false
-var can_walljump = false
-var can_go = false
-var can_crouch = false
-var can_aim = false
-var can_shoot = false
-var can_dunk = false
 
 # Utilities
 export var move_direction = 0
@@ -68,6 +69,7 @@ var last_aim_jp = 0
 export var is_jumping = false # handle also by Player.gd
 export var is_walljumping = false # handle also by Player.gd
 export var is_landing = false # handle also by animations (for stop)
+export var is_landing_roll = false # handle also by animations (for stop)
 export var is_dunking = false # handle also by Player.gd
 export var is_halfturning = false # handle also by Player.gd
 export var is_crouching = false # handle also by Player.gd
@@ -92,7 +94,7 @@ func update_vars(delta, onfloor, onwall, movingfast):
 	is_falling =  (not is_onfloor) and velocity.y > 0
 	is_mounting = (not is_onfloor) and velocity.y < 0
 	is_moving = (abs(velocity.x) > 5.0) or (abs(velocity.y) > 5.0)
-	is_idle = (abs(velocity.x) < 5.0)
+	is_idle = (abs(velocity.x) <= 5.0)
 
 	right_p = Input.is_action_pressed('ui_right')
 	left_p = Input.is_action_pressed('ui_left')
@@ -125,20 +127,6 @@ func update_vars(delta, onfloor, onwall, movingfast):
 	if left_p :
 		direction_p -= 1
 
-
-	var dir_sprite = 1;
-	if self.get_parent().flip_h :
-		dir_sprite = -1;
-	is_jumping = is_jumping and not is_onfloor and is_mounting
-	is_walljumping = is_walljumping and not is_onfloor and is_mounting
-	is_dunking = is_dunking and not is_onfloor # handle by player actions (start) and animation (stop but not yet implemented)
-	is_halfturning = (is_halfturning or dir_sprite*direction_p == -1) and is_onfloor and direction_p != 0 and not is_shooting # handle by player actions
-	is_landing = is_onfloor and not is_onwall and (is_landing or (time-last_onair < land_lag_tolerance and last_onair_velocity_y > 400)) and not is_halfturning# stop also handled by animation
-	#is_crouching = # handle by player actions (start)
-	is_aiming = is_aiming and has_ball and active_ball != null and not is_dunking
-	#is_shooting handle by shoot animation+Player.gd
-
-
 	can_jump = not $ToleranceJumpFloorTimer.is_stopped() \
 			  and $CanJumpTimer.is_stopped()
 	can_walljump = not $ToleranceWallJumpTimer.is_stopped() \
@@ -148,3 +136,20 @@ func update_vars(delta, onfloor, onwall, movingfast):
 	can_aim = $CanShootTimer.is_stopped() and has_ball and active_ball != null
 	can_shoot = is_aiming and has_ball and active_ball != null
 	can_dunk = not is_onfloor
+	can_stand = get_parent().get_node("Special_Action_Handler").can_stand()
+	
+	var dir_sprite = 1;
+	if self.get_parent().flip_h :
+		dir_sprite = -1;
+	is_jumping = is_jumping and not is_onfloor and is_mounting
+	is_walljumping = is_walljumping and not is_onfloor and is_mounting
+	is_dunking = is_dunking and not is_onfloor # handle by player actions (start) and animation (stop but not yet implemented)
+	is_halfturning = (is_halfturning or dir_sprite*direction_p == -1) and is_onfloor and direction_p != 0 and not is_shooting # handle by player actions
+	is_landing = is_onfloor and not is_onwall and (is_landing or (time-last_onair < land_lag_tolerance and last_onair_velocity_y > 400)) and not is_halfturning# stop also handled by animation
+	is_landing_roll = is_landing and (abs(velocity.x) > 100.0)
+	is_crouching = (is_onfloor and is_crouching) or not can_stand# handle by player actions (start)
+	is_aiming = is_aiming and has_ball and active_ball != null and not is_dunking
+	#is_shooting handle by shoot animation+Player.gd
+
+
+
