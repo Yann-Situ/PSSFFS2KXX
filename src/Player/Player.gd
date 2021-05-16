@@ -14,23 +14,24 @@ export (float) var attract_force = 800 # m.pix/s²
 # Crouch features
 export (float) var crouch_speed_max = 300 # pix/s
 export (float) var crouch_instant_speed = 60 # pix/s
-export (float) var crouch_return_thresh_instant_speed = crouch_instant_speed*1.5 # pix/s
+export (float) var crouch_return_thresh_instant_speed = 100 # pix/s
 export (float) var crouch_accel = 200 # pix/s²
 
 # Aerial features
 export (float) var sideaerial_speed_max = 400 # pix/s
 export (float) var air_instant_speed = 60 # pix/s
-export (float) var air_return_thresh_instant_speed = air_instant_speed*0.5 # pix/s
+export (float) var air_return_thresh_instant_speed = 50 # pix/s
 export (float) var sideaerial_accel = 220 # pix/s²
-export (float) var jump_speed = -450 # pix/s
-export (float) var max_speed_fall_onwall = 200
+export (float) var jump_speed = -400 # pix/s
+export (float) var max_speed_fall = 800 # pix/s
+export (float) var max_speed_fall_onwall = 200 # pix/s
 export (Vector2) var vecjump = Vector2(0.65, -1)
 
 # Walk and run features
 export (float) var run_speed_thresh = 350 # pix/s
 export (float) var run_speed_max = 400 # pix/s
 export (float) var walk_instant_speed = 150 # pix/s
-export (float) var walk_return_thresh_instant_speed = walk_instant_speed*1.5 # pix/s
+export (float) var walk_return_thresh_instant_speed = 300 # pix/s
 export (float) var walk_accel = 220 # pix/s²
 
 export (bool) var flip_h = false
@@ -147,6 +148,10 @@ func get_input(delta):
 			S.aim_direction = 1
 		else :
 			S.aim_direction = -1
+	elif S.is_crouching :
+		$Camera.set_offset_from_type("crouch")
+	elif S.is_moving :
+		$Camera.set_offset_from_type("move", Vector2(0.1*S.velocity.x, 0.0), 0.4)
 	else :
 		$Camera.set_offset_from_type("normal")
 
@@ -191,6 +196,7 @@ func move_jump(delta):
 	S.is_jumping = true
 	S.get_node("ToleranceJumpPressTimer").stop()
 	S.get_node("CanJumpTimer").start(S.jump_countdown)
+	$DustParticle.restart()
 
 func move_walljump(direction,delta):
 	S.velocity.x = -vecjump.x * direction * jump_speed
@@ -199,6 +205,7 @@ func move_walljump(direction,delta):
 	S.get_node("ToleranceJumpPressTimer").stop()
 	S.get_node("CanJumpTimer").start(S.jump_countdown)
 	S.get_node("CanGoTimer").start(S.walljump_move_countdown)
+	$DustParticle.restart()
 
 func move_crouch(delta):# TODO
 	# Change hitbox + other animation things like sliding etc.
@@ -214,6 +221,7 @@ func move_dunk(delta):# TODO
 	$Shoot_predictor.clear()
 	S.is_dunking = true
 	self.get_node("Camera").screen_shake(0.1,6)
+	$DustParticle.restart()
 
 func move_aim(delta):
 	S.is_aiming = true
@@ -261,7 +269,9 @@ func _physics_process(delta):
 	if S.is_onwall and S.velocity.y > 0: #fall on a wall
 		S.velocity.y += gravity/2.0 * delta
 		S.velocity.y = min(S.velocity.y,max_speed_fall_onwall)
-	else:
+	else :
 		S.velocity.y += gravity * delta
+		if S.velocity.y > max_speed_fall:
+			S.velocity.y = max_speed_fall
 	if physics_enabled:
 		S.velocity = move_and_slide(S.velocity, Vector2(0, -1), true, 4, 0.9)

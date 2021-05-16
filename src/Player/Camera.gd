@@ -22,14 +22,19 @@ func _on_Tween_tween_completed(object, key):
 		shake_offset = Vector2(0,0)
 		current_shake_power = 0.0
 
-func set_offset_from_type(type, direction = Vector2(0,0)):
+func set_offset_from_type(type, direction = Vector2(0,0), tween_speed = 0.2):
 	if type == "aim":
 		target_offset = direction*aim_offset
 	elif type == "crouch":
 		target_offset = Vector2(0,1)*crouch_offset
 	elif type == "normal":
 		target_offset = Vector2(0,0)
-	$Tween.interpolate_property(self, "offset_no_shake", offset_no_shake, target_offset, 0.2,
+	elif type == "move":
+		target_offset = direction
+	set_target(target_offset, tween_speed)
+
+func set_target(target_offset, tween_speed = 0.2):
+	$Tween.interpolate_property(self, "offset_no_shake", offset_no_shake, target_offset, tween_speed,
 		 $Tween.TRANS_LINEAR, $Tween.EASE_OUT_IN, 0)
 	$Tween.start()
 
