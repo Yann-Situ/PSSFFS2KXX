@@ -2,7 +2,7 @@ extends Node2D
 
 onready var Player = get_parent()
 
-export var distaction = Vector2(8,0)
+export var distaction = Vector2(8.1,0)
 export var color = Color(1.0,0.3,0.1)
 export (bool) var flip_h = false
 var rays = []
