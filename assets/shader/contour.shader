@@ -1,7 +1,8 @@
 shader_type canvas_item;
 render_mode blend_mix;
 
-uniform vec4 contour_color : hint_color = vec4(0.2,0.0,0.1,1.);
+uniform bool activated : true;
+uniform vec4 contour_color : hint_color = vec4(1.2,1.0,0.9,0.65);
 uniform float light_thresh : hint_range(0., 1.,0.05) = 0.4;
 float lightness(vec4 x)
 {
@@ -12,7 +13,7 @@ float lightness(vec4 x)
 void fragment() {
 	vec4 t = texture(TEXTURE, UV);
 
-	if (t.a < 0.5)
+	if (activated && t.a < 0.5)
 	{
 		vec4 right = texture(TEXTURE,UV+vec2(TEXTURE_PIXEL_SIZE.x,0.));
 		vec4 left = texture(TEXTURE,UV+vec2(-TEXTURE_PIXEL_SIZE.x,0.));

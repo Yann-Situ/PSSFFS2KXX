@@ -1,4 +1,4 @@
-[gd_scene load_steps=75 format=2]
+[gd_scene load_steps=77 format=2]
 
 [ext_resource path="res://src/Player/Player.gd" type="Script" id=1]
 [ext_resource path="res://assets/art/player/TilesetBall.png" type="Texture" id=2]
@@ -335,7 +335,46 @@ tracks/1/keys = {
 }
 
 [sub_resource type="Animation" id=47]
-length = 0.5
+resource_name = "dunk"
+length = 0.6
+tracks/0/type = "value"
+tracks/0/path = NodePath(".:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.1, 0.2, 0.3, 0.4, 0.5 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1 ),
+"update": 1,
+"values": [ 52, 53, 54, 55, 56, 57 ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("../Ball_Handler/Has_Ball_Position:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 0.1, 0.2, 0.3, 0.4, 0.5 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1 ),
+"update": 0,
+"values": [ Vector2( -16, -31 ), Vector2( 2, -40 ), Vector2( 12, -32 ), Vector2( 11, -18 ), Vector2( 8, 5 ), Vector2( 8, 26 ) ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath("../Player_State:is_dunking")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0, 0.6 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 1,
+"values": [ true, false ]
+}
+
+[sub_resource type="Animation" id=48]
 tracks/0/type = "value"
 tracks/0/path = NodePath(".:frame")
 tracks/0/interp = 1
@@ -360,8 +399,20 @@ tracks/1/keys = {
 "update": 1,
 "values": [ Vector2( 9, 6 ), Vector2( 11, -14 ), Vector2( 6, -31 ), Vector2( -3, -35 ), Vector2( -12, -30 ) ]
 }
+tracks/2/type = "value"
+tracks/2/path = NodePath("../Player_State:is_dunkjumping")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ true ]
+}
 
-[sub_resource type="Animation" id=48]
+[sub_resource type="Animation" id=49]
 length = 0.38
 step = 0.05
 tracks/0/type = "value"
@@ -389,7 +440,7 @@ tracks/1/keys = {
 "values": [ Vector2( 3, -6 ), Vector2( 3, -6 ), Vector2( 2, -8 ) ]
 }
 
-[sub_resource type="Animation" id=49]
+[sub_resource type="Animation" id=50]
 length = 0.5
 loop = true
 step = 0.125
@@ -418,7 +469,7 @@ tracks/1/keys = {
 "values": [ Vector2( 2, -8 ) ]
 }
 
-[sub_resource type="Animation" id=50]
+[sub_resource type="Animation" id=51]
 length = 0.4
 tracks/0/type = "value"
 tracks/0/path = NodePath(".:frame")
@@ -445,7 +496,7 @@ tracks/1/keys = {
 "values": [ Vector2( 7, -8 ), Vector2( 1, -7 ), Vector2( -5, -5 ), Vector2( -6, -5 ) ]
 }
 
-[sub_resource type="Animation" id=51]
+[sub_resource type="Animation" id=52]
 loop = true
 tracks/0/type = "value"
 tracks/0/path = NodePath(".:frame")
@@ -472,7 +523,7 @@ tracks/1/keys = {
 "values": [ Vector2( -12, -4 ), Vector2( -10, -6 ) ]
 }
 
-[sub_resource type="Animation" id=52]
+[sub_resource type="Animation" id=53]
 length = 0.35
 step = 0.01
 tracks/0/type = "value"
@@ -526,7 +577,7 @@ tracks/3/keys = {
 "values": [ Vector2( -14, -21 ), Vector2( -14, -21 ), Vector2( -16, -20 ), Vector2( -12, -23 ), Vector2( 13, -34 ), Vector2( 13, -34 ) ]
 }
 
-[sub_resource type="Animation" id=53]
+[sub_resource type="Animation" id=54]
 length = 0.1
 tracks/0/type = "value"
 tracks/0/path = NodePath(".:frame")
@@ -553,7 +604,7 @@ tracks/1/keys = {
 "values": [ Vector2( -4, -5 ) ]
 }
 
-[sub_resource type="Animation" id=54]
+[sub_resource type="Animation" id=55]
 length = 0.45
 step = 0.025
 tracks/0/type = "value"
@@ -593,7 +644,7 @@ tracks/2/keys = {
 "values": [ true, false ]
 }
 
-[sub_resource type="Animation" id=55]
+[sub_resource type="Animation" id=56]
 length = 9.0
 loop = true
 tracks/0/type = "value"
@@ -621,7 +672,7 @@ tracks/1/keys = {
 "values": [ Vector2( 5, 0 ), Vector2( 10, 5.99999 ), Vector2( 8.99999, 12 ), Vector2( 8, 26 ), Vector2( 4.99999, 15 ), Vector2( 5.00001, 7.00001 ), Vector2( 5.99999, 3 ), Vector2( 5, 0 ), Vector2( 5.00001, 0 ), Vector2( 5.00001, 0 ), Vector2( 9, -2 ), Vector2( 10, 5.99999 ), Vector2( 8.99999, 12 ), Vector2( 8, 26 ), Vector2( 4.99999, 15 ), Vector2( 5.00001, 7.00001 ), Vector2( 5.99999, 3 ), Vector2( 5, 0 ), Vector2( 4.99999, 0 ), Vector2( 9, -2 ), Vector2( 10, 5.99999 ), Vector2( 8.99999, 12 ), Vector2( 8, 26 ), Vector2( 4.99999, 15 ), Vector2( 5.00001, 7.00001 ), Vector2( 5.99999, 3 ), Vector2( 5, 0 ), Vector2( 5, 0 ) ]
 }
 
-[sub_resource type="Animation" id=56]
+[sub_resource type="Animation" id=57]
 length = 0.4
 step = 0.05
 tracks/0/type = "value"
@@ -661,7 +712,7 @@ tracks/2/keys = {
 "values": [ Vector2( 7, -0.999998 ), Vector2( 4, -0.999998 ), Vector2( 5, -2 ), Vector2( 0, -7 ), Vector2( 3, -6 ) ]
 }
 
-[sub_resource type="Animation" id=57]
+[sub_resource type="Animation" id=58]
 length = 0.25
 step = 0.05
 tracks/0/type = "value"
@@ -701,7 +752,7 @@ tracks/2/keys = {
 "values": [ true, false ]
 }
 
-[sub_resource type="Animation" id=58]
+[sub_resource type="Animation" id=59]
 length = 0.42
 step = 0.07
 tracks/0/type = "value"
@@ -741,7 +792,7 @@ tracks/2/keys = {
 "values": [ true, false ]
 }
 
-[sub_resource type="Animation" id=59]
+[sub_resource type="Animation" id=60]
 loop = true
 tracks/0/type = "value"
 tracks/0/path = NodePath(".:frame")
@@ -768,7 +819,7 @@ tracks/1/keys = {
 "values": [ Vector2( 24, 7 ), Vector2( 22, 16 ), Vector2( 21, 25 ), Vector2( 22, 28 ), Vector2( 22, 17 ), Vector2( 24, 9.00001 ), Vector2( 23, 16 ), Vector2( 23, 23 ), Vector2( 23, 27 ), Vector2( 23, 16 ) ]
 }
 
-[sub_resource type="Animation" id=60]
+[sub_resource type="Animation" id=61]
 length = 0.8
 loop = true
 tracks/0/type = "value"
@@ -796,7 +847,7 @@ tracks/1/keys = {
 "values": [ Vector2( 9, -1.99999 ), Vector2( 15, 8.00001 ), Vector2( 15, 12 ), Vector2( 14, 27 ), Vector2( 12, 16 ), Vector2( 4, 7 ), Vector2( 4.00001, 3 ), Vector2( 4, 1 ) ]
 }
 
-[sub_resource type="Animation" id=61]
+[sub_resource type="Animation" id=62]
 length = 0.4
 step = 0.05
 tracks/0/type = "value"
@@ -836,9 +887,12 @@ tracks/2/keys = {
 "values": [ Vector2( 7, -0.999998 ), Vector2( 4, -0.999998 ), Vector2( 5, -2 ), Vector2( 0, -7 ), Vector2( 3, -6 ) ]
 }
 
-[sub_resource type="CapsuleShape2D" id=62]
+[sub_resource type="CapsuleShape2D" id=63]
 radius = 14.0
 height = 28.0
+
+[sub_resource type="CircleShape2D" id=64]
+radius = 180.0
 
 [node name="Player" type="KinematicBody2D"]
 position = Vector2( 416, 144 )
@@ -846,10 +900,8 @@ z_index = 1
 z_as_relative = false
 collision_mask = 3
 script = ExtResource( 1 )
-floor_friction = 0.3
-jump_speed = -425.0
+air_friction = 0.1
 max_speed_fall = 700.0
-walk_return_thresh_instant_speed = 1000.0
 
 [node name="Collision" type="CollisionShape2D" parent="."]
 position = Vector2( 0, 6 )
@@ -877,7 +929,7 @@ texture = ExtResource( 2 )
 offset = Vector2( 0.5, 0 )
 vframes = 20
 hframes = 16
-frame = 197
+frame = 203
 __meta__ = {
 "_edit_lock_": true
 }
@@ -905,20 +957,21 @@ anims/air_wall = SubResource( 44 )
 anims/crouch = SubResource( 45 )
 anims/crouch_idle = SubResource( 46 )
 anims/dunk = SubResource( 47 )
-anims/fall = SubResource( 48 )
-anims/fall_loop = SubResource( 49 )
-anims/floor_idle_aim = SubResource( 50 )
-anims/floor_run_aim = SubResource( 51 )
-anims/floor_shoot = SubResource( 52 )
-anims/floor_wall = SubResource( 53 )
-anims/halfturn = SubResource( 54 )
-anims/idle = SubResource( 55 )
-anims/jump1 = SubResource( 56 )
-anims/land = SubResource( 57 )
-anims/land_roll = SubResource( 58 )
-anims/run = SubResource( 59 )
-anims/walk = SubResource( 60 )
-anims/walljump1 = SubResource( 61 )
+anims/dunkjump = SubResource( 48 )
+anims/fall = SubResource( 49 )
+anims/fall_loop = SubResource( 50 )
+anims/floor_idle_aim = SubResource( 51 )
+anims/floor_run_aim = SubResource( 52 )
+anims/floor_shoot = SubResource( 53 )
+anims/floor_wall = SubResource( 54 )
+anims/halfturn = SubResource( 55 )
+anims/idle = SubResource( 56 )
+anims/jump1 = SubResource( 57 )
+anims/land = SubResource( 58 )
+anims/land_roll = SubResource( 59 )
+anims/run = SubResource( 60 )
+anims/walk = SubResource( 61 )
+anims/walljump1 = SubResource( 62 )
 script = ExtResource( 4 )
 
 [node name="Shoot_predictor" type="Node2D" parent="."]
@@ -927,17 +980,14 @@ script = ExtResource( 3 )
 [node name="Ball_Handler" type="Area2D" parent="."]
 collision_mask = 4
 script = ExtResource( 6 )
-__meta__ = {
-"_edit_group_": true
-}
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Ball_Handler"]
 visible = false
 position = Vector2( 0, 5 )
-shape = SubResource( 62 )
+shape = SubResource( 63 )
 
 [node name="Has_Ball_Position" type="Node2D" parent="Ball_Handler"]
-position = Vector2( 5.00001, 7.00001 )
+position = Vector2( 5, 0 )
 
 [node name="Camera" type="Camera2D" parent="."]
 visible = false
@@ -983,6 +1033,8 @@ __meta__ = {
 
 [node name="Player_State" parent="." instance=ExtResource( 5 )]
 is_walljumping = true
+is_dunkjumping = true
+is_dunking = true
 is_halfturning = true
 
 [node name="Special_Action_Handler" type="Node2D" parent="."]
@@ -1017,5 +1069,13 @@ script = ExtResource( 10 )
 position = Vector2( -8, 0 )
 cast_to = Vector2( 0, -20 )
 script = ExtResource( 10 )
+
+[node name="dunk_area" type="Area2D" parent="Special_Action_Handler"]
+collision_layer = 0
+collision_mask = 32
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Special_Action_Handler/dunk_area"]
+modulate = Color( 0.945098, 1, 0, 1 )
+shape = SubResource( 64 )
 [connection signal="body_entered" from="Ball_Handler" to="Ball_Handler" method="_on_Ball_Handler_body_entered"]
 [connection signal="tween_completed" from="Camera/Tween" to="Camera" method="_on_Tween_tween_completed"]

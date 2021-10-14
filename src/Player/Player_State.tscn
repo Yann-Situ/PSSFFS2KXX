@@ -8,6 +8,12 @@ script = ExtResource( 1 )
 [node name="CanJumpTimer" type="Timer" parent="."]
 one_shot = true
 
+[node name="CanDunkJumpTimer" type="Timer" parent="."]
+one_shot = true
+
+[node name="CanDunkTimer" type="Timer" parent="."]
+one_shot = true
+
 [node name="CanGoTimer" type="Timer" parent="."]
 one_shot = true
 

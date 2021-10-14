@@ -15,7 +15,7 @@ func set_start_position(posi):
 	global_position = posi
 
 func _draw():
-	draw_circle($dunk_area/CollisionShape2D.position, $dunk_area/CollisionShape2D.shape.radius, color1)
+	pass
 	#draw_line(position+$basket_area/CollisionShape2D.shape.a, position+$basket_area/CollisionShape2D.shape.b, color2)
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
@@ -40,3 +40,9 @@ func goal(body):
 		$CPUParticles2D.amount = 20
 	$CPUParticles2D.restart()
 	#$CPUParticles2D.emitting = true
+
+func enable_contour():
+	get_material().set_shader_param("activated", true)
+
+func disable_contour():
+	get_material().set_shader_param("activated", false)

@@ -9,6 +9,7 @@ export (float) var tolerance_jump_press = 9*frame_time_ms #s
 export (float) var tolerance_wall_jump = 9*frame_time_ms #s
 export (float) var walljump_move_countdown = 22*frame_time_ms #s
 export (float) var jump_countdown = 10*frame_time_ms #s
+export (float) var dunk_countdown = 100*frame_time_ms #s
 export (float) var shoot_countdown = 30*frame_time_ms #s
 export (float) var land_lag_tolerance = 3*frame_time_ms #s
 
@@ -22,6 +23,7 @@ var crouch_p = false
 var aim_jp = false
 var shoot_jr = false
 var dunk_p = false
+var dunk_jr = false
 var select_jp = false
 var power_p = false
 var power_jp = false
@@ -34,6 +36,7 @@ var can_go = false
 var can_crouch = false
 var can_aim = false
 var can_shoot = false
+var can_dunkjump = false
 var can_dunk = false
 var can_stand = false
 
@@ -70,6 +73,7 @@ export var is_jumping = false # handle also by Player.gd
 export var is_walljumping = false # handle also by Player.gd
 export var is_landing = false # handle also by animations (for stop)
 export var is_landing_roll = false # handle also by animations (for stop)
+export var is_dunkjumping = false # handle also by Player.gd
 export var is_dunking = false # handle also by Player.gd
 export var is_halfturning = false # handle also by Player.gd
 export var is_crouching = false # handle also by Player.gd
@@ -80,6 +84,7 @@ export var is_shooting = false # handle by Player.gd (for start) and animations 
 export var has_ball = false
 var active_ball = null#pointer to a ball
 var selected_ball = null#pointer to the selected ball
+var selected_basket = null#pointer to the basket to dunk
 
 func update_vars(delta, onfloor, onwall, movingfast):
 	#
@@ -105,6 +110,7 @@ func update_vars(delta, onfloor, onwall, movingfast):
 	aim_jp = Input.is_action_just_pressed("ui_select")
 	shoot_jr = Input.is_action_just_released("ui_select")
 	dunk_p = Input.is_action_pressed("ui_accept")
+	dunk_jr =  Input.is_action_just_released("ui_accept")
 	select_jp = Input.is_action_just_pressed("ui_select_alter")
 	power_p =  Input.is_action_pressed("ui_power")
 	power_jp =  Input.is_action_just_pressed("ui_power")
@@ -131,11 +137,13 @@ func update_vars(delta, onfloor, onwall, movingfast):
 			  and $CanJumpTimer.is_stopped()
 	can_walljump = not $ToleranceWallJumpTimer.is_stopped() \
 		  and $CanJumpTimer.is_stopped()
-	can_go = $CanGoTimer.is_stopped()
+	can_go = $CanGoTimer.is_stopped() and not is_dunkjumping
 	can_crouch = is_onfloor
 	can_aim = $CanShootTimer.is_stopped() and has_ball and active_ball != null
 	can_shoot = is_aiming and has_ball and active_ball != null
-	can_dunk = not is_onfloor
+	get_parent().get_node("Special_Action_Handler").update_basket()
+	can_dunkjump = $CanDunkJumpTimer.is_stopped() and get_parent().get_node("Special_Action_Handler").can_dunkjump()
+	can_dunk = $CanDunkTimer.is_stopped() and (is_dunkjumping or (not is_onfloor and crouch_p)) and get_parent().get_node("Special_Action_Handler").can_dunk()
 	can_stand = get_parent().get_node("Special_Action_Handler").can_stand()
 	
 	var dir_sprite = 1;
@@ -143,12 +151,13 @@ func update_vars(delta, onfloor, onwall, movingfast):
 		dir_sprite = -1;
 	is_jumping = is_jumping and not is_onfloor and is_mounting
 	is_walljumping = is_walljumping and not is_onfloor and is_mounting
-	is_dunking = is_dunking and not is_onfloor # handle by player actions (start) and animation (stop but not yet implemented)
+	is_dunkjumping = is_dunkjumping and not is_onfloor and not dunk_jr
+	is_dunking = is_dunking # handle by player actions (start) and animation (stop but not yet implemented)
 	is_halfturning = (is_halfturning or dir_sprite*direction_p == -1) and is_onfloor and direction_p != 0 and not is_shooting # handle by player actions
 	is_landing = is_onfloor and not is_onwall and (is_landing or (time-last_onair < land_lag_tolerance and last_onair_velocity_y > 400)) and not is_halfturning# stop also handled by animation
 	is_landing_roll = is_landing and (abs(velocity.x) > 100.0)
 	is_crouching = (is_onfloor and is_crouching) or not can_stand# handle by player actions (start)
-	is_aiming = is_aiming and has_ball and active_ball != null and not is_dunking
+	is_aiming = is_aiming and has_ball and active_ball != null and not is_dunkjumping
 	#is_shooting handle by shoot animation+Player.gd
 
 
