@@ -32,8 +32,12 @@ width = 516
 [sub_resource type="CanvasItemMaterial" id=3]
 blend_mode = 1
 
-[sub_resource type="CanvasItemMaterial" id=4]
-blend_mode = 1
+[sub_resource type="ShaderMaterial" id=4]
+resource_local_to_scene = true
+shader = ExtResource( 11 )
+shader_param/activated = false
+shader_param/contour_color = Color( 0.866667, 0.360784, 0.109804, 0.65098 )
+shader_param/light_thresh = 0.5
 
 [sub_resource type="ShaderMaterial" id=5]
 resource_local_to_scene = true
@@ -63,12 +67,21 @@ shader_param/activated = false
 shader_param/contour_color = Color( 0.866667, 0.360784, 0.109804, 0.65098 )
 shader_param/light_thresh = 0.5
 
-[sub_resource type="ShaderMaterial" id=9]
-resource_local_to_scene = true
-shader = ExtResource( 11 )
-shader_param/activated = false
-shader_param/contour_color = Color( 0.866667, 0.360784, 0.109804, 0.65098 )
-shader_param/light_thresh = 0.5
+[sub_resource type="Environment" id=9]
+background_mode = 4
+dof_blur_near_distance = 1.51
+glow_enabled = true
+glow_intensity = 1.22
+glow_strength = 1.03
+glow_bloom = 0.01
+glow_blend_mode = 1
+glow_hdr_threshold = 0.73
+glow_hdr_luminance_cap = 3.0
+glow_hdr_scale = 1.6
+glow_bicubic_upscale = true
+adjustment_enabled = true
+adjustment_contrast = 1.08
+adjustment_saturation = 1.01
 
 [node name="main" type="Node2D"]
 
@@ -167,7 +180,6 @@ __meta__ = {
 }
 
 [node name="Player" parent="." instance=ExtResource( 1 )]
-material = SubResource( 4 )
 position = Vector2( 776, 512 )
 walk_return_thresh_instant_speed = 150.0
 
@@ -211,27 +223,27 @@ z_index = 2
 [node name="Baskets" type="Node2D" parent="Environment"]
 
 [node name="Basket" parent="Environment/Baskets" instance=ExtResource( 14 )]
-material = SubResource( 5 )
+material = SubResource( 4 )
 position = Vector2( 256, 448 )
 color1 = Color( 0.992157, 0.996078, 1, 0 )
 color2 = Color( 0.901961, 0.101961, 0.301961, 1 )
 
 [node name="Basket2" parent="Environment/Baskets" instance=ExtResource( 14 )]
-material = SubResource( 6 )
+material = SubResource( 5 )
 position = Vector2( 304, 160 )
 
 [node name="Basket4" parent="Environment/Baskets" instance=ExtResource( 14 )]
-material = SubResource( 7 )
+material = SubResource( 6 )
 position = Vector2( 1040, 320 )
 color1 = Color( 0.8, 0.501961, 0.101961, 0 )
 
 [node name="Basket5" parent="Environment/Baskets" instance=ExtResource( 14 )]
-material = SubResource( 8 )
+material = SubResource( 7 )
 position = Vector2( 1744, 432 )
 color1 = Color( 0.8, 0.501961, 0.101961, 0 )
 
 [node name="Basket3" parent="Environment/Baskets" instance=ExtResource( 14 )]
-material = SubResource( 9 )
+material = SubResource( 8 )
 position = Vector2( 880, 408 )
 
 [node name="Spawner" parent="Environment" instance=ExtResource( 19 )]
@@ -275,21 +287,15 @@ button_type = 2
 [node name="ZipLine" parent="Environment" instance=ExtResource( 21 )]
 position = Vector2( 928, 128 )
 zipline_type = 1
-init_point = Vector2( 0, 0 )
 final_point = Vector2( -735, 160 )
 player_position_offset = Vector2( 0, 15 )
 rope_offset = Vector2( 0, 30 )
 handle_catch_radius = 10.0
-handle_catch_init_unit_offset = 0.0
 
 [node name="ZipLine2" parent="Environment" instance=ExtResource( 21 )]
 position = Vector2( -328, -328 )
-zipline_type = 0
-init_point = Vector2( 0, 0 )
 final_point = Vector2( 2300, 280 )
 player_position_offset = Vector2( 0, -23 )
-rope_offset = Vector2( 0, 10 )
-handle_catch_init_unit_offset = 0.0
 
 [node name="Balls" type="Node2D" parent="Environment"]
 
@@ -333,6 +339,10 @@ cant_go_time = 0.1
 [node name="Jumper3" parent="Environment" instance=ExtResource( 15 )]
 position = Vector2( -80, 560 )
 jump_velocity = 1000
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource( 9 )
+
 [connection signal="activated_change_signal" from="Environment/Button0" to="Environment/Spawner" method="set_activated"]
 [connection signal="activated_change_signal" from="Environment/Button1" to="Environment/Spawner2" method="set_activated"]
 [connection signal="activated_change_signal" from="Environment/Button2" to="Environment/Spawner3" method="set_activated"]

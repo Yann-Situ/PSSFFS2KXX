@@ -23,7 +23,7 @@ export (float) var air_instant_speed = 60 # pix/s
 export (float) var air_return_thresh_instant_speed = 50 # pix/s
 export (float) var sideaerial_accel = 220 # pix/s²
 export (float) var jump_speed = -425 # pix/s
-export (float) var dunk_speed = -425 # pix/s
+export (float) var dunk_speed = -500 # pix/s
 export (float) var max_speed_fall = 800 # pix/s
 export (float) var max_speed_fall_onwall = 200 # pix/s
 export (Vector2) var vecjump = Vector2(0.65, -1)
@@ -197,7 +197,7 @@ func move_jump(delta):
 	S.is_jumping = true
 	S.get_node("ToleranceJumpPressTimer").stop()
 	S.get_node("CanJumpTimer").start(S.jump_countdown)
-	$DustParticle.restart()
+	$Player_Effects/DustParticle.restart()
 
 func move_walljump(direction,delta):
 	S.velocity.x = -vecjump.x * direction * jump_speed
@@ -206,7 +206,7 @@ func move_walljump(direction,delta):
 	S.get_node("ToleranceJumpPressTimer").stop()
 	S.get_node("CanJumpTimer").start(S.jump_countdown)
 	S.get_node("CanGoTimer").start(S.walljump_move_countdown)
-	$DustParticle.restart()
+	$Player_Effects/DustParticle.restart()
 
 func move_crouch(delta):# TODO
 	# Change hitbox + other animation things like sliding etc.
@@ -221,7 +221,8 @@ func move_dunkjump(delta):# TODO
 	S.aim_direction = 0
 	$Shoot_predictor.clear()
 	S.is_dunkjumping = true
-	$DustParticle.restart()	
+	$Player_Effects/DustParticle.restart()
+	$Player_Effects.ghost_start(0.35,0.07)
 	#print(S.selected_basket)
 	var q = S.selected_basket.position - position
 	var B = dunk_speed * q.x / q.y
