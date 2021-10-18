@@ -39,7 +39,10 @@ func update_basket():
 		# choose by priority baskets that are in direction_p, closest above player
 		var b = baskets[0].get_parent()
 		var q = (b.position-Player.position)
-		var dir = Player.S.direction_p # not 0 in order to make Player.S.direction_p*d=1 if q.x=0
+		var dir_sprite = 1
+		if Player.flip_h:
+			dir_sprite = -1
+		var dir = dir_sprite # not 0 in order to make dir_sprite*d=1 if q.x=0
 		if q.x > 0.0:
 			dir = 1
 		if q.x < 0.0:
@@ -49,13 +52,13 @@ func update_basket():
 		Delta += 2*Player.gravity * q.x*q.x/q.y
 		var best_y = q.y 
 		var best_dist2 = q.length_squared()
-		var best_direction = Player.S.direction_p*dir
+		var best_direction = dir_sprite*dir
 		if Delta >= 0:
 			Player.S.selected_basket = b
 		for i in range(1,baskets.size()):
 			b = baskets[i].get_parent()
 			q = (b.position-Player.position)
-			dir = Player.S.direction_p
+			dir = dir_sprite
 			if q.x > 0.0:
 				dir = 1
 			if q.x < 0.0:
@@ -64,13 +67,13 @@ func update_basket():
 			Delta = Delta*Delta
 			Delta += 2*Player.gravity * q.x*q.x/q.y
 			if Delta >= 0: # if it can be reached by dunkjump
-				if Player.S.direction_p*dir >= best_direction: # if it's in a better direction
+				if dir_sprite*dir >= best_direction: # if it's in a better direction
 					if q.y < 10.0 or (best_y >= 10.0 and q.y <= best_y): # if it's above or better than best
 						if (best_y >= 10.0 and q.y < 10.0) or q.length_squared() < best_dist2: # if it's closer
 							Player.S.selected_basket = b
 							best_y = q.y
 							best_dist2 = q.length_squared()
-							best_direction = Player.S.direction_p*dir
+							best_direction = dir_sprite*dir
 	
 	if Player.S.selected_basket != null:
 		Player.S.selected_basket.enable_contour()

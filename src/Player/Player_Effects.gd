@@ -8,6 +8,11 @@ var ghost_sprite
 func process_effects():
 	pass
 
+# DUST
+
+func dust_start():
+	$DustParticle.restart()
+
 # GHOST / UBER
 func instance_ghost():
 	var ghost: Sprite = ghost_anim.instance()

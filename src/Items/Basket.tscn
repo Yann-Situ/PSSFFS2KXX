@@ -1,15 +1,17 @@
-[gd_scene load_steps=14 format=2]
+[gd_scene load_steps=23 format=2]
 
 [ext_resource path="res://assets/art/environment/environment-interactive.png" type="Texture" id=1]
 [ext_resource path="res://src/Items/Basket.gd" type="Script" id=2]
 [ext_resource path="res://assets/art/ball/ball_particle.png" type="Texture" id=3]
 [ext_resource path="res://assets/shader/contour.shader" type="Shader" id=4]
+[ext_resource path="res://assets/art/effects/floaty_32.png" type="Texture" id=5]
+[ext_resource path="res://assets/art/effects/vertical.png" type="Texture" id=6]
 
-[sub_resource type="ShaderMaterial" id=10]
+[sub_resource type="ShaderMaterial" id=1]
 resource_local_to_scene = true
 shader = ExtResource( 4 )
 shader_param/activated = false
-shader_param/contour_color = Color( 1, 0.709804, 0.4, 0.65098 )
+shader_param/contour_color = Color( 1.2, 0.81, 0.5, 1 )
 shader_param/light_thresh = 0.5
 
 [sub_resource type="AtlasTexture" id=2]
@@ -52,8 +54,65 @@ b = Vector2( 16, -6 )
 [sub_resource type="Gradient" id=9]
 colors = PoolColorArray( 1, 1, 1, 1, 1, 0.615234, 0, 1 )
 
+[sub_resource type="CanvasItemMaterial" id=10]
+blend_mode = 1
+particles_animation = true
+particles_anim_h_frames = 4
+particles_anim_v_frames = 1
+particles_anim_loop = true
+
+[sub_resource type="Curve" id=11]
+min_value = -1.0
+_data = [ Vector2( 0.5, 0.00454545 ), 0.0, 0.0, 0, 0, Vector2( 1, 1 ), 0.0, 0.0, 0, 0 ]
+
+[sub_resource type="CurveTexture" id=12]
+curve = SubResource( 11 )
+
+[sub_resource type="ParticlesMaterial" id=13]
+flag_disable_z = true
+direction = Vector3( 0, 1, 0 )
+spread = 180.0
+gravity = Vector3( 0, -10, 0 )
+initial_velocity = 40.0
+initial_velocity_random = 0.55
+orbit_velocity = 0.0
+orbit_velocity_random = 0.0
+linear_accel = -11.87
+linear_accel_random = 0.13
+radial_accel = -10.17
+angle = 720.0
+angle_random = 1.0
+hue_variation = 0.12
+hue_variation_random = 0.36
+hue_variation_curve = SubResource( 12 )
+anim_speed = 1.0
+
+[sub_resource type="Gradient" id=14]
+offsets = PoolRealArray( 0, 0.0466321, 0.0829016, 0.704663, 0.979275 )
+colors = PoolColorArray( 0, 0, 0, 1, 0.60396, 0.397842, 0.353883, 1, 0.962799, 1, 0.585938, 1, 0.511364, 0.299627, 0.391435, 1, 0, 0, 0, 1 )
+
+[sub_resource type="GradientTexture" id=15]
+gradient = SubResource( 14 )
+
+[sub_resource type="ParticlesMaterial" id=16]
+emission_shape = 2
+emission_box_extents = Vector3( 5, 0, 0 )
+flag_disable_z = true
+direction = Vector3( 0, 1, 0 )
+spread = 0.0
+gravity = Vector3( 0, -200, 0 )
+initial_velocity = 100.0
+orbit_velocity = 0.0
+orbit_velocity_random = 0.0
+linear_accel = 10.0
+scale = 0.5
+scale_random = 0.5
+color_ramp = SubResource( 15 )
+anim_offset = 1.0
+anim_offset_random = 1.0
+
 [node name="Basket" type="Node2D"]
-material = SubResource( 10 )
+material = SubResource( 1 )
 position = Vector2( 192.282, 191.751 )
 z_index = 3
 script = ExtResource( 2 )
@@ -62,7 +121,7 @@ color1 = Color( 0.8, 0.501961, 0.101961, 0.0588235 )
 [node name="AnimatedSprite" type="AnimatedSprite" parent="."]
 use_parent_material = true
 frames = SubResource( 7 )
-frame = 3
+frame = 4
 playing = true
 
 [node name="basket_area" type="Area2D" parent="."]
@@ -91,4 +150,26 @@ initial_velocity = 32.26
 initial_velocity_random = 0.36
 tangential_accel = -0.69
 color_ramp = SubResource( 9 )
+
+[node name="GlowParticles" type="Particles2D" parent="."]
+material = SubResource( 10 )
+emitting = false
+lifetime = 2.0
+process_material = SubResource( 13 )
+texture = ExtResource( 5 )
+
+[node name="DunkParticles" type="Particles2D" parent="."]
+modulate = Color( 1, 1, 1, 0.75 )
+show_behind_parent = true
+material = SubResource( 10 )
+position = Vector2( 1.718, -12.751 )
+z_index = -1
+emitting = false
+amount = 9
+lifetime = 1.5
+one_shot = true
+explosiveness = 0.3
+process_material = SubResource( 16 )
+texture = ExtResource( 6 )
+
 [connection signal="body_entered" from="basket_area" to="." method="_on_basket_area_body_entered"]

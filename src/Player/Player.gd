@@ -16,6 +16,7 @@ export (float) var crouch_speed_max = 300 # pix/s
 export (float) var crouch_instant_speed = 60 # pix/s
 export (float) var crouch_return_thresh_instant_speed = 100 # pix/s
 export (float) var crouch_accel = 200 # pix/s²
+export (float) var landing_velocity_thresh = 400 # pix/s
 
 # Aerial features
 export (float) var sideaerial_speed_max = 400 # pix/s
@@ -61,12 +62,9 @@ func get_input(delta): #delta in s
 	S.update_vars(delta, is_on_floor(), is_on_wall() and $Special_Action_Handler.is_on_wall(), (abs(S.velocity.x) > run_speed_thresh))
 	if S.is_onfloor :
 		S.get_node("ToleranceJumpFloorTimer").start(S.tolerance_jump_floor)
-		 #S.last_onfloor = S.time
 	else :
-		S.last_onair = S.time
 		S.last_onair_velocity_y = S.velocity.y
 	if S.is_onwall :
-		#S.last_onwall = S.time
 		S.get_node("ToleranceWallJumpTimer").start(S.tolerance_wall_jump)
 		S.last_wall_normal_direction = -1#sign(get_slide_collision(get_slide_count()-1).normal.x)
 		if $Sprite.flip_h:
@@ -78,13 +76,10 @@ func get_input(delta): #delta in s
 
 	if not S.get_node("ToleranceJumpPressTimer").is_stopped() :
 		if S.can_jump :
-			#print("jump")
 			move_jump(delta)
 			if not S.jump_p:
 				S.velocity.y = S.velocity.y/3.5
 		elif S.can_walljump :
-			#print("walljump")
-			#print(S.last_wall_normal_direction)
 			move_walljump(S.last_wall_normal_direction,delta)
 			if not S.jump_p:
 				S.velocity.y = S.velocity.y/3.5
@@ -197,7 +192,7 @@ func move_jump(delta):
 	S.is_jumping = true
 	S.get_node("ToleranceJumpPressTimer").stop()
 	S.get_node("CanJumpTimer").start(S.jump_countdown)
-	$Player_Effects/DustParticle.restart()
+	$Player_Effects.dust_start()
 
 func move_walljump(direction,delta):
 	S.velocity.x = -vecjump.x * direction * jump_speed
@@ -221,7 +216,7 @@ func move_dunkjump(delta):# TODO
 	S.aim_direction = 0
 	$Shoot_predictor.clear()
 	S.is_dunkjumping = true
-	$Player_Effects/DustParticle.restart()
+	$Player_Effects.dust_start()
 	$Player_Effects.ghost_start(0.35,0.07)
 	#print(S.selected_basket)
 	var q = S.selected_basket.position - position
@@ -255,6 +250,7 @@ func move_dunk(delta): #TODO
 	S.get_node("CanGoTimer").start(0.3)
 	yield(get_tree().create_timer(0.3), "timeout")
 	self.get_node("Camera").screen_shake(0.3,30)
+	S.selected_basket.get_node("DunkParticles").restart()
 
 func move_aim(delta):
 	S.is_aiming = true

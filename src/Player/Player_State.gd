@@ -1,17 +1,18 @@
 extends Node
 
+onready var Player = get_parent()
 var frame_time_ms = 1.0/60.0 #s
-export var time = 0 #s
+var time = 0.0#s
 
 # Countdowns and delays between actions
 export (float) var tolerance_jump_floor = 9*frame_time_ms #s
 export (float) var tolerance_jump_press = 9*frame_time_ms #s
 export (float) var tolerance_wall_jump = 9*frame_time_ms #s
+export (float) var tolerance_land_lag = 3*frame_time_ms #s
 export (float) var walljump_move_countdown = 22*frame_time_ms #s
 export (float) var jump_countdown = 10*frame_time_ms #s
 export (float) var dunk_countdown = 100*frame_time_ms #s
 export (float) var shoot_countdown = 30*frame_time_ms #s
-export (float) var land_lag_tolerance = 3*frame_time_ms #s
 
 # Bool for inputs ('p' is for 'pressed', 'jp' 'just_pressed', 'jr' 'just_released')
 var right_p = false
@@ -58,15 +59,15 @@ var aim_direction = 0
 var velocity = Vector2()
 
 # Delays and states memory # handle by Player.gd
-var last_onfloor = 0
-var last_onair = 0
-var last_onwall = 0
-var last_jump = 0
-var last_walljump = 0
+#var last_onfloor = 0
+var last_frame_onair = false
+#var last_onwall = 0
+#var last_jump = 0
+#var last_walljump = 0
 var last_wall_normal_direction = 0 # handle by Player.gd
 var last_onair_velocity_y = 0
-var last_shoot = 0
-var last_aim_jp = 0
+#var last_shoot = 0
+var last_aim_jp = 0 # still used for shoot vector
 
 # Bool for actions
 export var is_jumping = false # handle also by Player.gd
@@ -91,8 +92,10 @@ func update_vars(delta, onfloor, onwall, movingfast):
 	# Delays and states memory should be updated after calling update_vars()
 	# in Player.gd
 	#
-	time += delta
-
+	time += delta # still used in the current shoot vector implementation... to change
+	
+	last_frame_onair = not is_onfloor
+	
 	is_onfloor = onfloor
 	is_onwall = onwall
 	is_moving_fast = movingfast
@@ -154,7 +157,7 @@ func update_vars(delta, onfloor, onwall, movingfast):
 	is_dunkjumping = is_dunkjumping and not is_onfloor and not dunk_jr
 	is_dunking = is_dunking # handle by player actions (start) and animation (stop but not yet implemented)
 	is_halfturning = (is_halfturning or dir_sprite*direction_p == -1) and is_onfloor and direction_p != 0 and not is_shooting # handle by player actions
-	is_landing = is_onfloor and not is_onwall and (is_landing or (time-last_onair < land_lag_tolerance and last_onair_velocity_y > 400)) and not is_halfturning# stop also handled by animation
+	is_landing = is_onfloor and not is_onwall and (is_landing or (last_frame_onair and last_onair_velocity_y > Player.landing_velocity_thresh)) and not is_halfturning# stop also handled by animation
 	is_landing_roll = is_landing and (abs(velocity.x) > 100.0)
 	is_crouching = (is_onfloor and is_crouching) or not can_stand# handle by player actions (start)
 	is_aiming = is_aiming and has_ball and active_ball != null and not is_dunkjumping

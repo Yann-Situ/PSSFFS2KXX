@@ -47,4 +47,5 @@ Popol Super Slam Fusion Full Speed 2KXX
 * Zipline drop inside collision places results in stucked player
 * [FIXED] Spawner rotation position is weird.
 * [FIXED] Sometimes the dunkjump gives a velocity of `(-nan, dunkjump_speed)`. This is due to it's calculation with a square root
-* Dunking while pushing a direction button toward another basket above results in no dunk on the current basket. -> change the criteria for the basket by taking into account a very close basket
+* [FIXED?] Dunking while pushing a direction button toward another basket above results in no dunk on the current basket. -> change the criteria for the basket by taking into account a very close basket
+* Aiming shooting right after dunk results in strange animation behaviour.
