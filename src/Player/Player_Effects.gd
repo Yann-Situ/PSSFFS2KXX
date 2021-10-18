@@ -1,6 +1,7 @@
 extends Node2D
 
-const dash_delay = 0.4
+onready var Player = get_parent()
+onready var S = Player.get_node("Player_State")
 
 var ghost_anim = preload("res://src/Effects/GhostAnim.tscn")
 var ghost_sprite

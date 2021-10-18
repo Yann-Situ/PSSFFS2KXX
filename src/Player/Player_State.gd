@@ -1,6 +1,7 @@
 extends Node
 
 onready var Player = get_parent()
+
 var frame_time_ms = 1.0/60.0 #s
 var time = 0.0#s
 
@@ -144,10 +145,10 @@ func update_vars(delta, onfloor, onwall, movingfast):
 	can_crouch = is_onfloor
 	can_aim = $CanShootTimer.is_stopped() and has_ball and active_ball != null
 	can_shoot = is_aiming and has_ball and active_ball != null
-	get_parent().get_node("Special_Action_Handler").update_basket()
-	can_dunkjump = $CanDunkJumpTimer.is_stopped() and get_parent().get_node("Special_Action_Handler").can_dunkjump()
-	can_dunk = $CanDunkTimer.is_stopped() and (is_dunkjumping or (not is_onfloor and crouch_p)) and get_parent().get_node("Special_Action_Handler").can_dunk()
-	can_stand = get_parent().get_node("Special_Action_Handler").can_stand()
+	Player.SpecialActionHandler.update_basket()
+	can_dunkjump = $CanDunkJumpTimer.is_stopped() and Player.SpecialActionHandler.can_dunkjump()
+	can_dunk = $CanDunkTimer.is_stopped() and (is_dunkjumping or (not is_onfloor and crouch_p)) and Player.SpecialActionHandler.can_dunk()
+	can_stand = Player.SpecialActionHandler.can_stand()
 	
 	var dir_sprite = 1;
 	if self.get_parent().flip_h :

@@ -1,6 +1,7 @@
 extends Node2D
 
-onready var Player = get_parent()
+onready var Player = get_parent().get_parent()
+onready var S = Player.get_node("Player_State")
 
 export var distaction = Vector2(8.1,0)
 export var color = Color(1.0,0.3,0.1)
@@ -14,7 +15,7 @@ var space_state
 func _ready():
 	rays_not_flip = [$Ray_fwd_down, $Ray_fwd_up, $Ray_up_fwd, $Ray_up_bwd]
 	rays_flip = [$Ray_fwd_down_f, $Ray_fwd_up_f, $Ray_up_bwd, $Ray_up_fwd]
-	self.set_flip_h(get_parent().get_node("Sprite").flip_h)
+	self.set_flip_h(Player.flip_h)
 
 func _draw():
 	for r in rays:
@@ -30,10 +31,10 @@ func update_space_state():
 	space_state = get_world_2d().direct_space_state
 	
 func update_basket():
-	if Player.S.selected_basket != null:
-		Player.S.selected_basket.disable_contour()
+	if S.selected_basket != null:
+		S.selected_basket.disable_contour()
 		
-	Player.S.selected_basket = null
+	S.selected_basket = null
 	var baskets = $dunk_area.get_overlapping_areas()
 	if !baskets.empty():
 		# choose by priority baskets that are in direction_p, closest above player
@@ -54,7 +55,7 @@ func update_basket():
 		var best_dist2 = q.length_squared()
 		var best_direction = dir_sprite*dir
 		if Delta >= 0:
-			Player.S.selected_basket = b
+			S.selected_basket = b
 		for i in range(1,baskets.size()):
 			b = baskets[i].get_parent()
 			q = (b.position-Player.position)
@@ -70,13 +71,13 @@ func update_basket():
 				if dir_sprite*dir >= best_direction: # if it's in a better direction
 					if q.y < 10.0 or (best_y >= 10.0 and q.y <= best_y): # if it's above or better than best
 						if (best_y >= 10.0 and q.y < 10.0) or q.length_squared() < best_dist2: # if it's closer
-							Player.S.selected_basket = b
+							S.selected_basket = b
 							best_y = q.y
 							best_dist2 = q.length_squared()
 							best_direction = dir_sprite*dir
 	
-	if Player.S.selected_basket != null:
-		Player.S.selected_basket.enable_contour()
+	if S.selected_basket != null:
+		S.selected_basket.enable_contour()
 		
 func cast(r): #we must have updated the space_state before
 	r.result = space_state.intersect_ray(Player.position+r.position, Player.position+r.position+r.cast_to, 
@@ -103,14 +104,14 @@ func can_stand():
 	return !(rays[2].result or rays[3].result)
 
 func can_dunkjump():
-	return Player.S.selected_basket != null
+	return S.selected_basket != null
 	
 func can_dunk():
-	var b = Player.S.selected_basket
+	var b = S.selected_basket
 	if b != null:
 		var q = (b.position-Player.position)
 		return q.y > -5 and q.y < 20 and abs(q.x) < 32
-		#print(Player.S.selected_basket)
+		#print(S.selected_basket)
 	return false
 
 #############################

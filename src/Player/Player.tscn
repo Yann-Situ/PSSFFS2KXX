@@ -14,6 +14,9 @@
 [ext_resource path="res://src/Effects/DustParticle.tscn" type="PackedScene" id=12]
 [ext_resource path="res://src/Player/Player_Effects.gd" type="Script" id=13]
 
+[sub_resource type="CircleShape2D" id=64]
+radius = 180.0
+
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 8, 26 )
 
@@ -892,9 +895,6 @@ particles_anim_loop = false
 radius = 14.0
 height = 28.0
 
-[sub_resource type="CircleShape2D" id=64]
-radius = 180.0
-
 [node name="Player" type="KinematicBody2D"]
 position = Vector2( 416, 144 )
 z_index = 1
@@ -910,9 +910,60 @@ is_dunkjumping = true
 is_dunking = true
 is_halfturning = true
 
-[node name="Actions" type="Node" parent="."]
+[node name="Actions" type="Node2D" parent="."]
+
+[node name="Special_Action_Handler" type="Node2D" parent="Actions"]
+script = ExtResource( 9 )
+__meta__ = {
+"_edit_group_": true
+}
+
+[node name="Ray_fwd_up" type="RayCast2D" parent="Actions/Special_Action_Handler"]
+position = Vector2( 0, -16 )
+cast_to = Vector2( 9, 0 )
+script = ExtResource( 10 )
+
+[node name="Ray_fwd_down" type="RayCast2D" parent="Actions/Special_Action_Handler"]
+position = Vector2( 0, 16 )
+cast_to = Vector2( 9, 0 )
+script = ExtResource( 10 )
+
+[node name="Ray_fwd_up_f" type="RayCast2D" parent="Actions/Special_Action_Handler"]
+position = Vector2( 0, -16 )
+cast_to = Vector2( -9, 0 )
+script = ExtResource( 10 )
+
+[node name="Ray_fwd_down_f" type="RayCast2D" parent="Actions/Special_Action_Handler"]
+position = Vector2( 0, 16 )
+cast_to = Vector2( -9, 0 )
+script = ExtResource( 10 )
+
+[node name="Ray_up_fwd" type="RayCast2D" parent="Actions/Special_Action_Handler"]
+position = Vector2( 8, 0 )
+cast_to = Vector2( 0, -20 )
+script = ExtResource( 10 )
+
+[node name="Ray_up_bwd" type="RayCast2D" parent="Actions/Special_Action_Handler"]
+position = Vector2( -8, 0 )
+cast_to = Vector2( 0, -20 )
+script = ExtResource( 10 )
+
+[node name="dunk_area" type="Area2D" parent="Actions/Special_Action_Handler"]
+collision_layer = 0
+collision_mask = 32
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Actions/Special_Action_Handler/dunk_area"]
+visible = false
+modulate = Color( 0.945098, 1, 0, 1 )
+position = Vector2( 0, -50 )
+shape = SubResource( 64 )
+
+[node name="Shoot_predictor" type="Node2D" parent="Actions"]
+position = Vector2( 1, 1 )
+script = ExtResource( 3 )
 
 [node name="Collision" type="CollisionShape2D" parent="."]
+visible = false
 position = Vector2( 0, 6 )
 shape = SubResource( 1 )
 
@@ -921,7 +972,7 @@ texture = ExtResource( 2 )
 offset = Vector2( 0.5, 0 )
 hframes = 16
 vframes = 20
-frame = 197
+frame = 204
 __meta__ = {
 "_edit_lock_": true
 }
@@ -993,9 +1044,6 @@ wait_time = 0.2
 
 [node name="Ghost_Timer" type="Timer" parent="Player_Effects/Ghost_Timers"]
 
-[node name="Shoot_predictor" type="Node2D" parent="."]
-script = ExtResource( 3 )
-
 [node name="Ball_Handler" type="Area2D" parent="."]
 collision_mask = 4
 script = ExtResource( 6 )
@@ -1006,7 +1054,7 @@ position = Vector2( 0, 5 )
 shape = SubResource( 63 )
 
 [node name="Has_Ball_Position" type="Node2D" parent="Ball_Handler"]
-position = Vector2( 5.00001, 7.00001 )
+position = Vector2( 5, 0 )
 
 [node name="Camera" type="Camera2D" parent="."]
 visible = false
@@ -1049,49 +1097,6 @@ Ball bounce :"
 __meta__ = {
 "_edit_use_anchors_": false
 }
-
-[node name="Special_Action_Handler" type="Node2D" parent="."]
-script = ExtResource( 9 )
-
-[node name="Ray_fwd_up" type="RayCast2D" parent="Special_Action_Handler"]
-position = Vector2( 0, -16 )
-cast_to = Vector2( 9, 0 )
-script = ExtResource( 10 )
-
-[node name="Ray_fwd_down" type="RayCast2D" parent="Special_Action_Handler"]
-position = Vector2( 0, 16 )
-cast_to = Vector2( 9, 0 )
-script = ExtResource( 10 )
-
-[node name="Ray_fwd_up_f" type="RayCast2D" parent="Special_Action_Handler"]
-position = Vector2( 0, -16 )
-cast_to = Vector2( -9, 0 )
-script = ExtResource( 10 )
-
-[node name="Ray_fwd_down_f" type="RayCast2D" parent="Special_Action_Handler"]
-position = Vector2( 0, 16 )
-cast_to = Vector2( -9, 0 )
-script = ExtResource( 10 )
-
-[node name="Ray_up_fwd" type="RayCast2D" parent="Special_Action_Handler"]
-position = Vector2( 8, 0 )
-cast_to = Vector2( 0, -20 )
-script = ExtResource( 10 )
-
-[node name="Ray_up_bwd" type="RayCast2D" parent="Special_Action_Handler"]
-position = Vector2( -8, 0 )
-cast_to = Vector2( 0, -20 )
-script = ExtResource( 10 )
-
-[node name="dunk_area" type="Area2D" parent="Special_Action_Handler"]
-collision_layer = 0
-collision_mask = 32
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Special_Action_Handler/dunk_area"]
-visible = false
-modulate = Color( 0.945098, 1, 0, 1 )
-position = Vector2( 0, -50 )
-shape = SubResource( 64 )
 
 [connection signal="timeout" from="Player_Effects/Ghost_Timers/Ghost_Tick_Timer" to="Player_Effects" method="_on_Ghost_Tick_Timer_timeout"]
 [connection signal="timeout" from="Player_Effects/Ghost_Timers/Ghost_Timer" to="Player_Effects" method="_on_Ghost_Timer_timeout"]

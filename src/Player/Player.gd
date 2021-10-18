@@ -2,6 +2,8 @@ extends KinematicBody2D
 class_name Player, "res://assets/art/icons/popol.png"
 
 onready var S = get_node("Player_State")
+onready var SpecialActionHandler = get_node("Actions/Special_Action_Handler")
+onready var ShootPredictor = get_node("Actions/Shoot_predictor")
 
 export (bool) var physics_enabled = true
 
@@ -54,12 +56,12 @@ func _ready():
 func set_flip_h(b):
 	flip_h  = b
 	$Sprite.set_flip_h(b)
-	$Shoot_predictor.set_flip_h(b)
-	$Special_Action_Handler.set_flip_h(b)
+	ShootPredictor.set_flip_h(b)
+	SpecialActionHandler.set_flip_h(b)
 
 func get_input(delta): #delta in s
 	############### Change variables of Player_state.gd
-	S.update_vars(delta, is_on_floor(), is_on_wall() and $Special_Action_Handler.is_on_wall(), (abs(S.velocity.x) > run_speed_thresh))
+	S.update_vars(delta, is_on_floor(), is_on_wall() and SpecialActionHandler.is_on_wall(), (abs(S.velocity.x) > run_speed_thresh))
 	if S.is_onfloor :
 		S.get_node("ToleranceJumpFloorTimer").start(S.tolerance_jump_floor)
 	else :
@@ -132,12 +134,12 @@ func get_input(delta): #delta in s
 		$Collision.position.y = 6
 	
 	if S.is_aiming:
-		var shoot = $Shoot_predictor.shoot_vector()
+		var shoot = ShootPredictor.shoot_vector()
 		if S.power_p and S.selected_ball == S.active_ball :
-			$Shoot_predictor.draw_attract($Ball_Handler.get_throw_position()-self.position, shoot+0.5*S.velocity,
+			ShootPredictor.draw_attract($Ball_Handler.get_throw_position()-self.position, shoot+0.5*S.velocity,
 				S.active_ball.get_gravity_scale()*Vector2(0,gravity), attract_force/S.active_ball.mass)
 		else :
-			$Shoot_predictor.draw($Ball_Handler.get_throw_position()-self.position, shoot+0.5*S.velocity,
+			ShootPredictor.draw($Ball_Handler.get_throw_position()-self.position, shoot+0.5*S.velocity,
 				S.active_ball.get_gravity_scale()*Vector2(0,gravity))
 		$Camera.set_offset_from_type("aim",shoot.normalized())
 		if shoot.x > 0 :
@@ -201,20 +203,20 @@ func move_walljump(direction,delta):
 	S.get_node("ToleranceJumpPressTimer").stop()
 	S.get_node("CanJumpTimer").start(S.jump_countdown)
 	S.get_node("CanGoTimer").start(S.walljump_move_countdown)
-	$Player_Effects/DustParticle.restart()
+	$Player_Effects.dust_start()
 
 func move_crouch(delta):# TODO
 	# Change hitbox + other animation things like sliding etc.
 	S.is_aiming = false # cancel aiming for the moment
 	S.aim_direction = 0
-	$Shoot_predictor.clear()
+	ShootPredictor.clear()
 	S.is_crouching = true
 
 func move_dunkjump(delta):# TODO
 	# Change hitbox + other animation things like sliding etc.
 	S.is_aiming = false # cancel aiming for the moment
 	S.aim_direction = 0
-	$Shoot_predictor.clear()
+	ShootPredictor.clear()
 	S.is_dunkjumping = true
 	$Player_Effects.dust_start()
 	$Player_Effects.ghost_start(0.35,0.07)
@@ -240,7 +242,7 @@ func move_dunk(delta): #TODO
 	# Change hitbox + other animation things like sliding etc.
 	S.is_aiming = false # cancel aiming for the moment
 	S.aim_direction = 0
-	$Shoot_predictor.clear()
+	ShootPredictor.clear()
 	S.is_dunking = true
 	S.is_dunkjumping = false
 	S.velocity.x = 0
@@ -262,9 +264,9 @@ func move_shoot(delta):
 	S.aim_direction = 0
 	S.is_shooting = true
 	S.get_node("CanShootTimer").start(S.shoot_countdown)
-	$Shoot_predictor.shoot_vector_save = $Shoot_predictor.shoot_vector()
+	ShootPredictor.shoot_vector_save = ShootPredictor.shoot_vector()
 	#Engine.time_scale = 1.0
-	$Shoot_predictor.clear()	
+	ShootPredictor.clear()	
 	#throw_ball()+free_ball in Ball_handler	called by animation
 
 func move_select_ball(delta):

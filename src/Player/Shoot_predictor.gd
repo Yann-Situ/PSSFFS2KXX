@@ -1,5 +1,8 @@
 extends Node2D
 
+onready var Player = get_parent().get_parent()
+onready var S = Player.get_node("Player_State")
+
 var points = Array()
 export (int) var nb_points_display = 50
 export (int) var coeff_display = 6
@@ -17,10 +20,9 @@ var red = Color(1,0,0,1)
 var yellorange = Color(1.0,0.8,0.1,1)
 
 export (bool) var flip_h = false
-var S
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	S = get_parent().get_node("Player_State")
+	pass
 
 func shoot_vector(): # return shoot vector if player not moving
 	var t = S.time-S.last_aim_jp
@@ -28,8 +30,8 @@ func shoot_vector(): # return shoot vector if player not moving
 	t = shoot_min_speed+t*(shoot_max_speed-shoot_min_speed)
 	if S.active_ball != null: # to be sure
 		t = t/S.active_ball.mass
-	return t * (get_parent().get_node("Camera").get_global_mouse_position() - 
-					get_parent().position).normalized()
+	return t * (Player.get_node("Camera").get_global_mouse_position() - 
+					Player.position).normalized()
 
 func _draw():
 	for i in range(0, points.size() - 1, coeff_display):
