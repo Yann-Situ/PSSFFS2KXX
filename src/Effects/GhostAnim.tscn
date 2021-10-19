@@ -3,7 +3,7 @@
 [ext_resource path="res://src/Effects/GhostAnim.gd" type="Script" id=1]
 
 [node name="Ghost_Anim" type="Sprite"]
-self_modulate = Color( 1.4, 1.8, 2.2, 0.39 )
+use_parent_material = true
 script = ExtResource( 1 )
 
 [node name="Tween" type="Tween" parent="."]

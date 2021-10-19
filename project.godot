@@ -9,6 +9,11 @@
 config_version=4
 
 _global_script_classes=[ {
+"base": "Node",
+"class": "Action",
+"language": "GDScript",
+"path": "res://src/Player/Actions/Action.gd"
+}, {
 "base": "Node2D",
 "class": "Activable",
 "language": "GDScript",
@@ -30,6 +35,7 @@ _global_script_classes=[ {
 "path": "res://src/Player/Player.gd"
 } ]
 _global_script_class_icons={
+"Action": "res://assets/art/icons/action.png",
 "Activable": "",
 "Ball": "res://assets/art/ball/ball_test.png",
 "PhysicBody": "",

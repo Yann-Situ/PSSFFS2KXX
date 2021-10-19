@@ -23,7 +23,7 @@
 [ext_resource path="res://src/Items/ZipLine.tscn" type="PackedScene" id=21]
 
 [sub_resource type="Gradient" id=1]
-colors = PoolColorArray( 1, 0.888611, 0.714844, 1, 1, 0.436035, 0.0625, 1 )
+colors = PoolColorArray( 1.25, 1.03, 0.8, 1, 1, 0.436035, 0.0625, 1 )
 
 [sub_resource type="GradientTexture" id=2]
 gradient = SubResource( 1 )
