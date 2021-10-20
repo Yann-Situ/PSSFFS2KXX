@@ -1,0 +1,14 @@
+[gd_scene load_steps=2 format=2]
+
+[ext_resource path="res://src/Effects/TrailHandler.gd" type="Script" id=1]
+
+[node name="TrailHandler" type="Node2D"]
+script = ExtResource( 1 )
+
+[node name="TrailTickTimer" type="Timer" parent="."]
+wait_time = 0.2
+
+[node name="TrailTimer" type="Timer" parent="."]
+
+[connection signal="timeout" from="TrailTickTimer" to="." method="_on_TrailTickTimer_timeout"]
+[connection signal="timeout" from="TrailTimer" to="." method="_on_TrailTimer_timeout"]

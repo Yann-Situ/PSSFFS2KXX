@@ -25,6 +25,8 @@ func collision_effect(collision):
 	return true
 
 func throw(posi, velo):
+	#$TrailHandler.set_node_to_trail(self)
+	#$TrailHandler.start(2.0,0.1)
 	position = posi
 	linear_velocity = velo
 

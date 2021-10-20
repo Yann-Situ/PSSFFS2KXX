@@ -26,11 +26,18 @@ func _on_basket_area_body_entered(body):
 	#print("basket :"+body.name)
 	if body.is_in_group("balls"):
 		if body.linear_velocity.y > 0.0:
-			print("GOOOAL!")
 			print(body.linear_velocity.y)
 			goal(body)
 
+func dunk():
+	print("DUUUNK!")
+	$CPUParticles2D.initial_velocity = 80.0
+	$CPUParticles2D.amount = 60
+	$CPUParticles2D.restart()
+	Global.camera.screen_shake(0.3,5)
+
 func goal(body):
+	print("GOOOAL!")
 	if body.linear_velocity.y > speed_ball_threshold:
 		$CPUParticles2D.initial_velocity = 60.0
 		$CPUParticles2D.amount = 40
@@ -39,7 +46,6 @@ func goal(body):
 		$CPUParticles2D.initial_velocity = 30.0
 		$CPUParticles2D.amount = 20
 	$CPUParticles2D.restart()
-	#$CPUParticles2D.emitting = true
 
 func enable_contour():
 	get_material().set_shader_param("activated", true)

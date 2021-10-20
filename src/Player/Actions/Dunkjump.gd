@@ -1,5 +1,7 @@
 extends Action
 
+var b = true
+
 func move(delta):
 	# Change hitbox + other animation things like sliding etc.
 	S.is_aiming = false # cancel aiming for the moment

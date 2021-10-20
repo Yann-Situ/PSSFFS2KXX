@@ -23,8 +23,13 @@ func instance_ghost():
 	ghost.global_position = self.global_position
 	
 func start(duration, tick_delay):
-	$Ghost_Timer.start(duration)
+	if duration > 0.0:
+		$Ghost_Timer.start(duration)
 	$Ghost_Tick_Timer.start(tick_delay)
+	
+func stop():
+	$Ghost_Timer.stop()
+	_on_Ghost_Timer_timeout()
 
 func _on_Ghost_Timer_timeout():
 	$Ghost_Tick_Timer.stop()

@@ -14,4 +14,4 @@ func move(delta):
 	S.get_node("CanGoTimer").start(0.3)
 	yield(get_tree().create_timer(0.3), "timeout")
 	P.get_node("Camera").screen_shake(0.3,30)
-	S.selected_basket.get_node("DunkParticles").restart()
+	S.selected_basket.dunk()

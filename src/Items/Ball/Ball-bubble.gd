@@ -6,8 +6,8 @@ func _ready():
 	self.gravity = 0.0
 	self.set_friction(0.0)
 	self.set_bounce(1.0)
-	$Sprite.set_material(preload("res://assets/shader/material/hologram_shadermaterial.tres"))
-	$Sprite.set_material($Sprite.get_material().duplicate())
+	#$Sprite.set_material(preload("res://assets/shader/material/hologram_shadermaterial.tres"))
+	#$Sprite.set_material($Sprite.get_material().duplicate())
 
 func power_p(player,delta):
 	pass

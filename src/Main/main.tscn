@@ -306,10 +306,10 @@ player_position_offset = Vector2( 0, -23 )
 position = Vector2( 728, 648 )
 
 [node name="Ball-bouncy" parent="Environment/Balls" instance=ExtResource( 4 )]
-position = Vector2( 664, 512 )
+position = Vector2( 1280, 432 )
 
 [node name="Ball-bubble" parent="Environment/Balls" instance=ExtResource( 17 )]
-position = Vector2( 624, 512 )
+position = Vector2( 424, 512 )
 
 [node name="Ball-heavy" parent="Environment/Balls" instance=ExtResource( 13 )]
 position = Vector2( 464, 512 )
