@@ -6,6 +6,7 @@ export (float) var wait_time = 1#s
 var timer = null
 
 signal activated_change_signal(b)
+
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	if button_type != BUTTON0_TYPE.PERMANENT :
