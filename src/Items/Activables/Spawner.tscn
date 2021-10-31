@@ -1,8 +1,8 @@
 [gd_scene load_steps=6 format=2]
 
 [ext_resource path="res://assets/art/environment/environment-interactive.png" type="Texture" id=1]
-[ext_resource path="res://src/Items/Spawner.gd" type="Script" id=2]
-[ext_resource path="res://src/Items/Ball/Ball-bouncy.tscn" type="PackedScene" id=3]
+[ext_resource path="res://src/Items/Activables/Spawner.gd" type="Script" id=2]
+[ext_resource path="res://src/Items/Balls/Ball.tscn" type="PackedScene" id=3]
 
 [sub_resource type="Animation" id=1]
 resource_name = "spawn"
@@ -25,8 +25,10 @@ tracks/0/keys = {
 extents = Vector2( 16, 16 )
 
 [node name="Spawner" type="Node2D"]
-position = Vector2( 112, 56 )
 script = ExtResource( 2 )
+__meta__ = {
+"_edit_group_": true
+}
 ball = ExtResource( 3 )
 
 [node name="Sprite" type="Sprite" parent="."]
@@ -43,6 +45,7 @@ collision_layer = 2
 collision_mask = 7
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D"]
+visible = false
 shape = SubResource( 2 )
 
 [node name="SpawnPosition" type="Position2D" parent="."]

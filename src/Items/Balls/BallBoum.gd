@@ -26,11 +26,25 @@ func boum():
 			b.apply_impulse(((1-smoothstep(0, distance_max, d.length())) * (boum_max-boum_min)+boum_min)*d.normalized())
 	print("BOUM !")
 
+func megaboum():
+	$BoumParticle.restart()
+	Global.camera.screen_shake(0.4,8)
+	var bodies = $BoumZone.get_overlapping_bodies()
+	var d = Vector2(0,0)
+	for b in bodies :
+		if b is PhysicBody:
+			d = b.position - position
+			b.apply_impulse(((1-smoothstep(0, distance_max, d.length())) * (2*boum_max-2*boum_min)+2*boum_min)*d.normalized())
+	print("MEGABOUM !")
+
 func power_p(player,delta):
 	pass
 	
 func power_jp(player,delta):
-	boum()
+	if active:
+		megaboum()
+	else :
+		boum()
 	
 func power_jr(player,delta):
 	pass

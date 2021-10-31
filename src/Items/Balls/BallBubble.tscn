@@ -1,0 +1,39 @@
+[gd_scene load_steps=7 format=2]
+
+[ext_resource path="res://src/Items/Balls/Ball.tscn" type="PackedScene" id=1]
+[ext_resource path="res://src/Items/Balls/BallBubble.gd" type="Script" id=2]
+[ext_resource path="res://assets/art/ball/ball_nogravity.png" type="Texture" id=3]
+
+[sub_resource type="CircleShape2D" id=1]
+resource_local_to_scene = true
+radius = 6.0
+
+[sub_resource type="Gradient" id=2]
+offsets = PoolRealArray( 0, 0.00904977, 0.954751, 1 )
+colors = PoolColorArray( 1, 1, 1, 0, 1, 1, 1, 0.645502, 1, 1.5, 2, 0.7, 0, 1, 1, 0 )
+
+[sub_resource type="Curve" id=3]
+_data = [ Vector2( 0, 0 ), 0.0, 0.0, 0, 0, Vector2( 1, 1 ), 0.0, 0.0, 0, 0 ]
+
+[node name="BallBubble" instance=ExtResource( 1 )]
+script = ExtResource( 2 )
+
+[node name="collision" parent="." index="0"]
+shape = SubResource( 1 )
+
+[node name="Sprite" parent="." index="2"]
+self_modulate = Color( 1, 1.2, 1.2, 1 )
+texture = ExtResource( 3 )
+
+[node name="TrailHandler" parent="." index="4"]
+wildness = 250.0
+min_spawn_distance = 4.0
+gradient_col = SubResource( 2 )
+width = 10.0
+width_curve = SubResource( 3 )
+point_lifetime = 0.2
+tick_speed = 0.03
+
+[node name="Tween" type="Tween" parent="." index="5"]
+
+[connection signal="tween_all_completed" from="Tween" to="." method="_on_Tween_tween_all_completed"]

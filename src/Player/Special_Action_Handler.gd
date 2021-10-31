@@ -11,6 +11,10 @@ var rays_flip = []
 var rays_not_flip = []
 var rays_res = []
 var space_state
+
+var dunkjump_y_lim = 10
+var dunk_dist_squared = 32*32
+
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	rays_not_flip = [$Ray_fwd_down, $Ray_fwd_up, $Ray_up_fwd, $Ray_up_bwd]
@@ -51,11 +55,14 @@ func update_basket():
 		var Delta = Player.dunk_speed*q.x/q.y
 		Delta = Delta*Delta
 		Delta += 2*Player.gravity * q.x*q.x/q.y
-		var best_y = q.y 
-		var best_dist2 = q.length_squared()
-		var best_direction = dir_sprite*dir
+		var best_y = dunkjump_y_lim
+		var best_dist2 = 2 * $dunk_area/CollisionShape2D.shape.radius
+		var best_direction = -2
 		if Delta >= 0:
 			S.selected_basket = b
+			best_y = q.y
+			best_dist2 = q.length_squared()
+			best_direction = dir_sprite*dir
 		for i in range(1,baskets.size()):
 			b = baskets[i].get_parent()
 			q = (b.position-Player.position)
@@ -67,14 +74,23 @@ func update_basket():
 			Delta = Player.dunk_speed*q.x/q.y
 			Delta = Delta*Delta
 			Delta += 2*Player.gravity * q.x*q.x/q.y
-			if Delta >= 0: # if it can be reached by dunkjump
-				if dir_sprite*dir >= best_direction: # if it's in a better direction
-					if q.y < 10.0 or (best_y >= 10.0 and q.y <= best_y): # if it's above or better than best
-						if (best_y >= 10.0 and q.y < 10.0) or q.length_squared() < best_dist2: # if it's closer
-							S.selected_basket = b
-							best_y = q.y
-							best_dist2 = q.length_squared()
-							best_direction = dir_sprite*dir
+			
+			if best_dist2 < dunk_dist_squared:
+				continue
+			
+			if q.length_squared() > dunk_dist_squared :
+				if Delta < 0 or \
+					dir_sprite*dir < best_direction:
+					continue
+				
+				if dir_sprite*dir == best_direction and \
+					q.y > best_y:
+					continue
+				
+			S.selected_basket = b
+			best_y = q.y
+			best_dist2 = q.length_squared()
+			best_direction = dir_sprite*dir
 	
 	if S.selected_basket != null:
 		S.selected_basket.enable_contour()

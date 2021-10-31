@@ -1,5 +1,5 @@
 extends Ball
-# Heavy ball, with no bouncing and large mass
+# Metal ball, with no bouncing and large mass
 func _ready():
 	self.mass = 3.0
 	self.set_friction(0.4)

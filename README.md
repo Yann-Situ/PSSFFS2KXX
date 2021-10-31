@@ -51,3 +51,4 @@ Popol Super Slam Fusion Full Speed 2KXX
 * Walljumping at the same time that dunking results in dunking called on a wrong basket (if multiple baskets around)
 * Aiming shooting right after dunk results in strange animation behaviour.
 * Dunkjumping while only moving with floor adherence a bit far from basket results in missing the basket.
+* Problems with physics on slopes

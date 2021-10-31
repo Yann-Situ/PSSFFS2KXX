@@ -1,10 +1,9 @@
-[gd_scene load_steps=31 format=2]
+[gd_scene load_steps=30 format=2]
 
 [ext_resource path="res://src/Player/Player.tscn" type="PackedScene" id=1]
 [ext_resource path="res://src/Platform/Tileset/TileMap1.tres" type="TileSet" id=2]
-[ext_resource path="res://src/Items/Ball/Ball-slime.tscn" type="PackedScene" id=3]
-[ext_resource path="res://src/Items/Ball/Ball-bouncy.tscn" type="PackedScene" id=4]
-[ext_resource path="res://src/Items/Ball/Ball.tscn" type="PackedScene" id=5]
+[ext_resource path="res://src/Items/Balls/BallBoum.tscn" type="PackedScene" id=3]
+[ext_resource path="res://src/Items/Balls/Ball.tscn" type="PackedScene" id=5]
 [ext_resource path="res://assets/art/background/pixelBackground7.png" type="Texture" id=6]
 [ext_resource path="res://assets/art/background/pixelBackground3.png" type="Texture" id=7]
 [ext_resource path="res://assets/art/background/pixelBackground6.png" type="Texture" id=8]
@@ -12,15 +11,15 @@
 [ext_resource path="res://src/Platform/TileMap.gd" type="Script" id=10]
 [ext_resource path="res://assets/shader/contour.shader" type="Shader" id=11]
 [ext_resource path="res://src/Platform/Tileset/TileMap3.tres" type="TileSet" id=12]
-[ext_resource path="res://src/Items/Ball/Ball-heavy.tscn" type="PackedScene" id=13]
-[ext_resource path="res://src/Items/Basket.tscn" type="PackedScene" id=14]
-[ext_resource path="res://src/Items/Jumper.tscn" type="PackedScene" id=15]
-[ext_resource path="res://src/Items/Ball/Ball-rolling.tscn" type="PackedScene" id=16]
-[ext_resource path="res://src/Items/Ball/Ball-bubble.tscn" type="PackedScene" id=17]
-[ext_resource path="res://src/Items/Ball/Ball-boum.tscn" type="PackedScene" id=18]
-[ext_resource path="res://src/Items/Spawner.tscn" type="PackedScene" id=19]
-[ext_resource path="res://src/Items/Button0.tscn" type="PackedScene" id=20]
-[ext_resource path="res://src/Items/ZipLine.tscn" type="PackedScene" id=21]
+[ext_resource path="res://src/Items/Baskets/Basket.tscn" type="PackedScene" id=14]
+[ext_resource path="res://src/Items/Dynamics/Jumper.tscn" type="PackedScene" id=15]
+[ext_resource path="res://src/Items/Activables/Spawner.tscn" type="PackedScene" id=19]
+[ext_resource path="res://src/Items/Activables/Button0.tscn" type="PackedScene" id=20]
+[ext_resource path="res://src/Items/Dynamics/ZipLine.tscn" type="PackedScene" id=21]
+[ext_resource path="res://src/Items/Balls/BallBouncy.tscn" type="PackedScene" id=25]
+[ext_resource path="res://src/Items/Balls/BallBubble.tscn" type="PackedScene" id=26]
+[ext_resource path="res://src/Items/Balls/BallRolling.tscn" type="PackedScene" id=27]
+[ext_resource path="res://src/Items/Balls/BallMetal.tscn" type="PackedScene" id=28]
 
 [sub_resource type="Gradient" id=1]
 colors = PoolColorArray( 1.25, 1.03, 0.8, 1, 1, 0.436035, 0.0625, 1 )
@@ -36,35 +35,35 @@ blend_mode = 1
 resource_local_to_scene = true
 shader = ExtResource( 11 )
 shader_param/activated = false
-shader_param/contour_color = Color( 0.866667, 0.360784, 0.109804, 0.65098 )
+shader_param/contour_color = Color( 1, 0.780392, 0.670588, 1 )
 shader_param/light_thresh = 0.5
 
 [sub_resource type="ShaderMaterial" id=5]
 resource_local_to_scene = true
 shader = ExtResource( 11 )
 shader_param/activated = false
-shader_param/contour_color = Color( 0.866667, 0.360784, 0.109804, 0.65098 )
+shader_param/contour_color = Color( 1, 0.780392, 0.670588, 1 )
 shader_param/light_thresh = 0.5
 
 [sub_resource type="ShaderMaterial" id=6]
 resource_local_to_scene = true
 shader = ExtResource( 11 )
 shader_param/activated = false
-shader_param/contour_color = Color( 0.866667, 0.360784, 0.109804, 0.65098 )
+shader_param/contour_color = Color( 1, 0.780392, 0.670588, 1 )
 shader_param/light_thresh = 0.5
 
 [sub_resource type="ShaderMaterial" id=7]
 resource_local_to_scene = true
 shader = ExtResource( 11 )
 shader_param/activated = false
-shader_param/contour_color = Color( 0.866667, 0.360784, 0.109804, 0.65098 )
+shader_param/contour_color = Color( 1, 0.780392, 0.670588, 1 )
 shader_param/light_thresh = 0.5
 
 [sub_resource type="ShaderMaterial" id=8]
 resource_local_to_scene = true
 shader = ExtResource( 11 )
 shader_param/activated = false
-shader_param/contour_color = Color( 0.866667, 0.360784, 0.109804, 0.65098 )
+shader_param/contour_color = Color( 1, 0.780392, 0.670588, 1 )
 shader_param/light_thresh = 0.5
 
 [sub_resource type="Environment" id=9]
@@ -220,133 +219,102 @@ collision_mask = 7
 format = 1
 tile_data = PoolIntArray( 131104, 17, 0, 196654, 25, 0, 262188, 23, 65536, 262190, 24, 65536, 327722, 24, 65537, 327724, 23, 1, 327751, 536870922, 0, 327752, 7, 0, 327753, 11, 0, 327754, 7, 0, 327755, 7, 0, 327756, 7, 0, 327757, 7, 0, 327758, 536870922, 0, 327759, 536870921, 0, 327760, 536870921, 0, 327761, 536870921, 0, 327762, 536870921, 0, 327763, 536870921, 0, 327764, 536870921, 0, 327765, 10, 0, 327766, 7, 0, 327767, 7, 0, 327768, 536870923, 0, 327769, 7, 0, 327770, 536870922, 0, 327771, 7, 0, 327772, 11, 0, 393270, 536870923, 0, 393271, 536870919, 0, 393272, 536870919, 0, 393273, 536870922, 0, 393288, 536870924, 0, 393289, 6, 0, 393294, 536870920, 0, 393299, 536870920, 0, 393304, 536870920, 0, 393305, 12, 0, 458825, 6, 65536, 458830, 536870920, 0, 458835, 536870920, 0, 458840, 536870920, 0, 524361, 6, 0, 524366, 536870920, 0, 524371, 536870920, 0, 524376, 536870920, 0, 655354, 9, 0, 655355, 9, 0, 655356, 8, 0, 655357, 8, 0, 655358, 9, 0, 655359, 9, 0, 589824, 9, 0, 589825, 9, 0, 589826, 9, 0, 589827, 9, 0, 589828, 9, 0, 589829, 9, 0, 589830, 9, 0, 589831, 9, 0, 589832, 9, 0, 589833, 9, 0, 589834, 9, 0, 589835, 9, 0, 589836, 10, 0, 589837, 7, 0, 589838, 7, 0, 589839, 7, 0, 589840, 7, 0, 589841, 10, 0, 589897, 536870922, 0, 589898, 536870921, 0, 589899, 536870921, 0, 589900, 536870921, 0, 589901, 536870921, 0, 589902, 536870920, 0, 589903, 536870921, 0, 589904, 536870921, 0, 589905, 536870921, 0, 589906, 536870921, 0, 589907, 536870922, 0, 589908, 536870919, 0, 589909, 536870919, 0, 589910, 536870919, 0, 589911, 536870919, 0, 589912, 536870922, 0, 589913, 7, 0, 589914, 7, 0, 589915, 7, 0, 589916, 10, 0, 720891, 536870924, 0, 720892, 8, 0, 720893, 8, 0, 720894, 12, 0, 655370, 8, 0, 655371, 8, 0, 655372, 12, 0, 655422, 536870922, 0, 655423, 536870919, 0, 655424, 536870919, 0, 655425, 536870922, 0, 655426, 11, 0, 655433, 536870920, 0, 655438, 536870920, 0, 655443, 536870920, 0, 655448, 536870920, 0, 786428, 8, 0, 786429, 8, 0, 720906, 10, 0, 720907, 11, 0, 720961, 536870924, 0, 720962, 6, 0, 720969, 536870920, 0, 720974, 536870920, 0, 720978, 1073741846, 0, 720979, 536870920, 0, 720984, 536870920, 0, 851964, 8, 0, 851965, 8, 0, 786442, 8, 0, 786443, 8, 0, 786498, 6, 1, 786505, 536870920, 0, 786510, 536870920, 0, 786515, 536870920, 0, 786517, 536870931, 0, 786518, 536870928, 2, 786520, 536870920, 0, 917500, 8, 0, 917501, 8, 0, 851978, 8, 0, 851979, 8, 0, 852034, 6, 0, 852041, 536870920, 0, 852046, 536870920, 0, 852051, 536870920, 0, 852056, 536870920, 0, 983036, 8, 0, 983037, 8, 0, 917506, 10, 0, 917507, 7, 0, 917508, 7, 0, 917509, 7, 0, 917510, 10, 0, 917514, 8, 0, 917515, 8, 0, 917570, 6, 65536, 917571, 536870921, 0, 917572, 536870921, 0, 917573, 536870921, 0, 917574, 536870921, 0, 917575, 536870921, 0, 1048572, 8, 0, 1048573, 8, 0, 983043, 536870924, 0, 983044, 8, 0, 983045, 12, 0, 983050, 8, 0, 983051, 8, 0, 983106, 6, 1, 983107, 12, 0, 1114108, 8, 0, 1114109, 8, 0, 1048580, 8, 0, 1048586, 8, 0, 1048587, 8, 0, 1048642, 6, 65536, 1048648, 536870924, 0, 1048649, 536870920, 0, 1048650, 17, 0, 1048654, 536870920, 0, 1048659, 536870920, 0, 1048664, 536870920, 0, 1048665, 12, 0, 1179644, 8, 0, 1179645, 8, 0, 1114116, 8, 0, 1114122, 8, 0, 1114123, 8, 0, 1114178, 6, 0, 1114179, -1073741812, 0, 1114185, 536870920, 0, 1114190, 536870920, 0, 1114195, 536870920, 0, 1114200, 536870920, 0, 1245180, 10, 0, 1245181, 11, 0, 1245182, 10, 0, 1179652, 8, 0, 1179658, 8, 0, 1179659, 8, 0, 1179714, 6, 1, 1179715, 536870921, 0, 1179716, 536870921, 0, 1179717, 536870921, 0, 1179718, 536870921, 0, 1179719, 536870921, 0, 1179720, 536870921, 0, 1179721, 536870920, 0, 1179726, 536870920, 0, 1179731, 536870920, 0, 1179736, 536870920, 0, 1310716, 6, 0, 1310717, 8, 0, 1245188, 8, 0, 1245194, 8, 0, 1245195, 8, 0, 1245250, 10, 0, 1245257, 536870920, 0, 1245262, 536870920, 0, 1245267, 536870920, 0, 1245269, 25, 0, 1245272, 536870920, 0, 1376252, 6, 65536, 1376253, 8, 0, 1310724, 8, 0, 1310730, 8, 0, 1310731, 8, 0, 1310793, 536870920, 0, 1310798, 536870920, 0, 1310803, 536870920, 0, 1310804, 23, 0, 1310807, 536870931, 0, 1310808, 536870920, 0, 1441788, 6, 0, 1441789, 8, 0, 1376260, 8, 0, 1376266, 8, 0, 1376267, 8, 0, 1376329, 536870920, 0, 1376334, 536870920, 0, 1376339, 536870920, 0, 1376341, 20, 0, 1376344, 536870920, 0, 1507324, 6, 65536, 1507325, 8, 0, 1441796, 8, 0, 1441802, 8, 0, 1441803, 8, 0, 1572860, 6, 0, 1572861, 8, 0, 1572863, 20, 0, 1507332, 8, 0, 1507338, 8, 0, 1507339, 8, 0, 1507401, 8, 0, 1638394, 9, 0, 1638395, 9, 0, 1638396, 11, 0, 1638397, 7, 0, 1638398, 7, 0, 1638399, 7, 0, 1572864, 7, 0, 1572865, 9, 0, 1572866, 9, 0, 1572867, 9, 0, 1572868, 9, 0, 1572869, 9, 0, 1572870, 9, 0, 1572871, 9, 0, 1572872, 9, 0, 1572873, 10, 0, 1572876, 9, 0, 1572877, 9, 0, 1572878, 9, 0, 1572879, 9, 0, 1572880, 9, 0, 1572881, 9, 0, 1572936, 536870924, 0, 1572937, 8, 0, 1572942, 11, 0, 1572943, 7, 0, 1572944, 7, 0, 1572945, 7, 0, 1572946, 7, 0, 1572947, 7, 0, 1572948, 7, 0, 1572949, 11, 0, 1572952, 8, 0, 1572953, 12, 0, 1703931, 536870924, 0, 1703932, 6, 65536, 1703933, 12, 0, 1638473, 8, 0, 1638474, 9, 0, 1638475, 9, 0, 1638476, 9, 0, 1638477, 9, 0, 1638478, 6, 1, 1638479, 9, 0, 1638480, 9, 0, 1638481, 9, 0, 1638482, 9, 0, 1638483, -1073741815, 0, 1638484, 9, 0, 1638485, 9, 0, 1638486, 9, 0, 1638487, 9, 0, 1638488, 8, 0, 1638509, 536870930, 0, 1769468, 6, 0, 1704009, 8, 0, 1704014, 6, 65536, 1704019, -1073741815, 0, 1704020, 15, 0, 1704024, 8, 0, 1835004, 6, 65536, 1769484, 7, 0, 1769485, 7, 0, 1769486, 10, 0, 1769545, 8, 0, 1769550, 6, 65537, 1769555, -1073741815, 0, 1769560, 8, 0, 1900540, 6, 0, 1835041, 13, 0, 1835043, 13, 1, 1835045, 13, 3, 1835047, 13, 2, 1835049, 13, 1, 1835051, 13, 3, 1835053, 13, 1, 1835055, 13, 1, 1835057, 536870925, 0, 1835081, 8, 0, 1835096, 8, 0, 1835121, 14, 131073, 1835140, 11, 0, 1835141, 11, 0, 1966076, 10, 0, 1900576, 14, 65536, 1900577, 536870926, 65538, 1900578, 536870926, 65536, 1900589, 11, 0, 1900590, 11, 0, 1900594, 21, 0, 1900606, 23, 1, 1900656, 14, 131072, 1900657, 14, 65537, 1900658, 536870926, 131072, 1900672, 22, 0, 2031612, 8, 0, 1966092, 19, 0, 1966103, -536870891, 0, 1966113, 13, 65536, 1966115, 13, 65537, 1966117, 13, 65537, 1966119, 13, 65538, 1966121, 13, 4, 1966123, 536870925, 65537, 1966125, 13, 65538, 1966127, 536870925, 65537, 1966129, 536870925, 65536, 1966141, 23, 0, 1966152, 536870924, 0, 1966153, 8, 0, 1966157, 536870924, 0, 1966158, 8, 0, 1966159, 12, 0, 1966162, 536870924, 0, 1966163, 8, 0, 1966164, 12, 0, 1966168, 8, 0, 1966169, 12, 0, 1966186, 13, 0, 1966188, 13, 1, 1966192, 13, 3, 1966193, 14, 131073, 1966194, 13, 1, 1966196, 13, 1, 1966198, 13, 3, 2097148, 8, 0, 2031689, 8, 0, 2031694, 8, 0, 2031699, 8, 0, 2031704, 8, 0, 2031729, 14, 131073, 2031741, 23, 2, 2162684, 8, 0, 2097182, 15, 0, 2097185, 13, 65536, 2097187, 13, 65537, 2097189, 13, 65537, 2097191, 13, 65538, 2097193, 536870925, 65539, 2097194, 19, 0, 2097195, 536870925, 4, 2097197, 13, 65538, 2097199, 536870925, 65537, 2097201, 536870925, 65536, 2097202, 15, 0, 2097225, 8, 0, 2097230, 8, 0, 2097235, 8, 0, 2097240, 8, 0, 2097251, 536870931, 0, 2097253, 536870927, 0, 2097258, 13, 65536, 2097260, 13, 65537, 2097264, 13, 65537, 2097265, 14, 131073, 2097266, 13, 65537, 2097268, 13, 65537, 2097270, 13, 65539, 2097279, 23, 0, 2228220, 8, 0, 2162752, 24, 65536, 2162761, 8, 0, 2162766, 8, 0, 2162771, 8, 0, 2162776, 8, 0, 2162801, 14, 131073, 2228224, 9, 0, 2228225, 9, 0, 2228226, 9, 0, 2228227, 9, 0, 2228228, 9, 0, 2228229, 9, 0, 2228230, 9, 0, 2228231, 9, 0, 2228268, 1073741835, 0, 2228297, 8, 0, 2228298, 8, 0, 2228312, 8, 0, 2293761, 12, 0, 2293767, 536870924, 0, 2293804, 1073741834, 0, 2359340, 1073741834, 0, 2424876, 1073741834, 0, 2424928, 8, 0, 2490412, 1073741834, 0, 2490464, 8, 0, 2555948, 1073741834, 0, 2556000, 8, 0, 2621484, 1073741834, 0, 2621536, 8, 0, 2687020, 1073741835, 0, 2687021, 10, 0, 2687072, 8, 0, 2752527, 22, 0, 2752529, 1073741845, 0, 2752536, 8, 0, 2752548, 8, 0, 2752560, 8, 0, 2752572, 8, 0, 2752596, 8, 0, 2752608, 8, 0, 2818072, 8, 0, 2818078, 536870935, 0, 2818084, 8, 0, 2818096, 8, 0, 2818108, 8, 0, 2818132, 8, 0, 2818144, 8, 0, 2883608, 8, 0, 2883620, 8, 0, 2883631, 24, 0, 2883632, 8, 0, 2883644, 8, 0, 2883668, 8, 0, 2883680, 8, 0, 2949144, 8, 0, 2949152, 1073741847, 0, 2949154, 23, 1, 2949156, 8, 0, 2949165, 25, 0, 2949168, 8, 0, 2949180, 8, 0, 2949204, 8, 0, 2949216, 8, 0, 3014680, 8, 0, 3014691, 536870935, 1, 3014692, 8, 0, 3014704, 8, 0, 3014716, 8, 0, 3014740, 8, 0, 3014752, 8, 0, 3080216, 8, 0, 3080225, 23, 0, 3080228, 8, 0, 3080240, 8, 0, 3080252, 8, 0, 3080276, 8, 0, 3080288, 8, 0 )
 
-[node name="Environment" type="Node2D" parent="."]
+[node name="Environment" type="Node" parent="."]
+
+[node name="Activables" type="Node2D" parent="Environment"]
 z_index = 2
 
-[node name="Baskets" type="Node2D" parent="Environment"]
+[node name="Button0" parent="Environment/Activables" instance=ExtResource( 20 )]
+position = Vector2( 600, -96 )
+button_type = 0
+
+[node name="Button1" parent="Environment/Activables" instance=ExtResource( 20 )]
+position = Vector2( 464, -96 )
+
+[node name="Spawner" parent="Environment/Activables" instance=ExtResource( 19 )]
+position = Vector2( 752, 80 )
+rotation = -1.57079
+initial_velocity = Vector2( -200, -20 )
+
+[node name="Spawner2" parent="Environment/Activables" instance=ExtResource( 19 )]
+position = Vector2( 560, -48 )
+rotation = -3.14159
+ball = ExtResource( 3 )
+
+[node name="Button2" parent="Environment/Activables" instance=ExtResource( 20 )]
+position = Vector2( 640, -96 )
+button_type = 2
+
+[node name="Balls" type="Node" parent="Environment"]
+
+[node name="Ball" parent="Environment/Balls" instance=ExtResource( 5 )]
+position = Vector2( 640, 448 )
+
+[node name="BallBubble" parent="Environment/Balls" instance=ExtResource( 26 )]
+position = Vector2( 568, 440 )
+
+[node name="BallBouncy" parent="Environment/Balls" instance=ExtResource( 25 )]
+position = Vector2( 488, 432 )
+
+[node name="BallBoum" parent="Environment/Balls" instance=ExtResource( 3 )]
+position = Vector2( 448, 424 )
+
+[node name="BallRolling" parent="Environment/Balls" instance=ExtResource( 27 )]
+position = Vector2( 144, 504 )
+
+[node name="BallMetal" parent="Environment/Balls" instance=ExtResource( 28 )]
+position = Vector2( 896, 232 )
+
+[node name="Baskets" type="Node" parent="Environment"]
 
 [node name="Basket" parent="Environment/Baskets" instance=ExtResource( 14 )]
 material = SubResource( 4 )
-position = Vector2( 256, 448 )
-color1 = Color( 0.992157, 0.996078, 1, 0 )
-color2 = Color( 0.901961, 0.101961, 0.301961, 1 )
+position = Vector2( 880, 408 )
 
 [node name="Basket2" parent="Environment/Baskets" instance=ExtResource( 14 )]
 material = SubResource( 5 )
-position = Vector2( 304, 160 )
-
-[node name="Basket4" parent="Environment/Baskets" instance=ExtResource( 14 )]
-material = SubResource( 6 )
-position = Vector2( 1040, 320 )
-color1 = Color( 0.8, 0.501961, 0.101961, 0 )
-
-[node name="Basket5" parent="Environment/Baskets" instance=ExtResource( 14 )]
-material = SubResource( 7 )
-position = Vector2( 1744, 432 )
-color1 = Color( 0.8, 0.501961, 0.101961, 0 )
+position = Vector2( 1040, 328 )
 
 [node name="Basket3" parent="Environment/Baskets" instance=ExtResource( 14 )]
+material = SubResource( 6 )
+position = Vector2( 1504, 96 )
+
+[node name="Basket4" parent="Environment/Baskets" instance=ExtResource( 14 )]
+material = SubResource( 7 )
+position = Vector2( 1744, 432 )
+
+[node name="Basket5" parent="Environment/Baskets" instance=ExtResource( 14 )]
 material = SubResource( 8 )
-position = Vector2( 880, 408 )
+position = Vector2( -272, 64 )
 
-[node name="Spawner" parent="Environment" instance=ExtResource( 19 )]
-position = Vector2( 720, -48 )
-rotation = 3.14159
-ball = ExtResource( 5 )
-initial_velocity = Vector2( 0, -100 )
+[node name="Dynamics" type="Node2D" parent="Environment"]
+z_index = 2
 
-[node name="Spawner2" parent="Environment" instance=ExtResource( 19 )]
-position = Vector2( 672, -48 )
-rotation = -3.14159
-ball = ExtResource( 17 )
-
-[node name="Spawner3" parent="Environment" instance=ExtResource( 19 )]
-position = Vector2( 624, -48 )
-rotation = 3.14159
-ball = ExtResource( 13 )
-
-[node name="Spawner4" parent="Environment" instance=ExtResource( 19 )]
-position = Vector2( 576, -48 )
-rotation = 3.14159
-ball = ExtResource( 18 )
-
-[node name="Button0" parent="Environment" instance=ExtResource( 20 )]
-position = Vector2( 720, -96 )
-wait_time = 2.0
-
-[node name="Button1" parent="Environment" instance=ExtResource( 20 )]
-position = Vector2( 672, -96 )
-button_type = 0
-wait_time = 2.0
-
-[node name="Button2" parent="Environment" instance=ExtResource( 20 )]
-position = Vector2( 624, -96 )
-wait_time = 10.0
-
-[node name="Button3" parent="Environment" instance=ExtResource( 20 )]
-position = Vector2( 576, -96 )
-button_type = 2
-
-[node name="ZipLine" parent="Environment" instance=ExtResource( 21 )]
-position = Vector2( 928, 128 )
-zipline_type = 1
-final_point = Vector2( -735, 160 )
-player_position_offset = Vector2( 0, 15 )
-rope_offset = Vector2( 0, 30 )
-handle_catch_radius = 10.0
-
-[node name="ZipLine2" parent="Environment" instance=ExtResource( 21 )]
-position = Vector2( -328, -328 )
-final_point = Vector2( 2300, 280 )
-player_position_offset = Vector2( 0, -23 )
-
-[node name="Balls" type="Node2D" parent="Environment"]
-
-[node name="Ball-Boum" parent="Environment/Balls" instance=ExtResource( 18 )]
-position = Vector2( 728, 648 )
-
-[node name="Ball-bouncy" parent="Environment/Balls" instance=ExtResource( 4 )]
-position = Vector2( 1280, 432 )
-
-[node name="Ball-bubble" parent="Environment/Balls" instance=ExtResource( 17 )]
-position = Vector2( 424, 512 )
-
-[node name="Ball-heavy" parent="Environment/Balls" instance=ExtResource( 13 )]
-position = Vector2( 464, 512 )
-
-[node name="Ball-rolling" parent="Environment/Balls" instance=ExtResource( 16 )]
-position = Vector2( 584, 512 )
-
-[node name="Ball" parent="Environment/Balls" instance=ExtResource( 5 )]
-position = Vector2( 744, 528 )
-
-[node name="Ball-slime" parent="Environment/Balls" instance=ExtResource( 3 )]
-position = Vector2( 504, 512 )
-
-[node name="Jumper" parent="Environment" instance=ExtResource( 15 )]
-position = Vector2( -248, -160 )
+[node name="Jumper" parent="Environment/Dynamics" instance=ExtResource( 15 )]
+position = Vector2( 840, -72 )
 rotation = 0.785397
+cant_go_time = 1.0
 
-[node name="Jumper2" parent="Environment" instance=ExtResource( 15 )]
-position = Vector2( 2128, 232 )
-rotation = -0.785397
-jump_velocity = 1000
-cant_go_time = 0.3
+[node name="ZipLine" parent="Environment/Dynamics" instance=ExtResource( 21 )]
+position = Vector2( -232, -232 )
+final_point = Vector2( 2000, 200 )
+player_position_offset = Vector2( 0, -10 )
 
-[node name="Jumper4" parent="Environment" instance=ExtResource( 15 )]
-position = Vector2( 1504, 752 )
-rotation = -1.57079
+[node name="ZipLine2" parent="Environment/Dynamics" instance=ExtResource( 21 )]
+position = Vector2( 288, 152 )
+zipline_type = 1
+final_point = Vector2( 510, 160 )
+rope_offset = Vector2( 0, 50 )
+handle_catch_radius = 20.0
+handle_catch_init_unit_offset = 0.096
+
+[node name="Jumper2" parent="Environment/Dynamics" instance=ExtResource( 15 )]
+position = Vector2( -112, 560 )
 jump_velocity = 800
-cant_go_time = 0.1
-
-[node name="Jumper3" parent="Environment" instance=ExtResource( 15 )]
-position = Vector2( -80, 560 )
-jump_velocity = 1000
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
 environment = SubResource( 9 )
 
-[connection signal="activated_change_signal" from="Environment/Button0" to="Environment/Spawner" method="set_activated"]
-[connection signal="activated_change_signal" from="Environment/Button1" to="Environment/Spawner2" method="set_activated"]
-[connection signal="activated_change_signal" from="Environment/Button2" to="Environment/Spawner3" method="set_activated"]
-[connection signal="activated_change_signal" from="Environment/Button3" to="Environment/Spawner4" method="set_activated"]
+[connection signal="activated_change_signal" from="Environment/Activables/Button0" to="Environment/Activables/Spawner" method="set_activated"]
+[connection signal="activated_change_signal" from="Environment/Activables/Button1" to="Environment/Activables/Spawner2" method="set_activated"]
+[connection signal="activated_change_signal" from="Environment/Activables/Button2" to="Environment/Activables/Spawner" method="set_activated"]

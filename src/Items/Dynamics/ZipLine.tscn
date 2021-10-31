@@ -1,6 +1,6 @@
 [gd_scene load_steps=5 format=2]
 
-[ext_resource path="res://src/Items/ZipLine.gd" type="Script" id=1]
+[ext_resource path="res://src/Items/Dynamics/ZipLine.gd" type="Script" id=1]
 [ext_resource path="res://assets/art/environment/environment-decor.png" type="Texture" id=2]
 
 [sub_resource type="Curve2D" id=1]

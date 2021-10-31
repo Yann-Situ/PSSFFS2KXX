@@ -1,0 +1,23 @@
+[gd_scene load_steps=5 format=2]
+
+[ext_resource path="res://src/Items/Balls/Ball.tscn" type="PackedScene" id=1]
+[ext_resource path="res://src/Items/Balls/BallMetal.gd" type="Script" id=2]
+[ext_resource path="res://assets/art/ball/ball_heavy.png" type="Texture" id=3]
+
+[sub_resource type="CircleShape2D" id=1]
+resource_local_to_scene = true
+radius = 6.0
+
+[node name="BallMetal" instance=ExtResource( 1 )]
+script = ExtResource( 2 )
+dust_threshold = 200.0
+
+[node name="collision" parent="." index="0"]
+shape = SubResource( 1 )
+
+[node name="DustParticle" parent="." index="1"]
+amount = 20
+lifetime = 0.7
+
+[node name="Sprite" parent="." index="2"]
+texture = ExtResource( 3 )

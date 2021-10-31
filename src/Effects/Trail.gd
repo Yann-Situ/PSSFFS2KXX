@@ -5,8 +5,8 @@ var min_spawn_distance := 5.0
 var gravity := Vector2.UP
 var trail_fade_time := 1.0
 var point_lifetime = 0.5
-
 var tick_speed := 0.04
+
 var tick := 0.0
 var wild_speed := 0.1
 var point_age := [0.0]

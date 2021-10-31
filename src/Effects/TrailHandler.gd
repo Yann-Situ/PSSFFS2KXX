@@ -8,6 +8,7 @@ export var width := 20.0
 export var width_curve : Curve = Curve.new()
 export var trail_fade_time := 1.0
 export var point_lifetime = 0.5
+export var tick_speed := 0.04
 export var texture : Texture = load("res://assets/art/effects/trail.png")
 
 var TrailScene = preload("res://src/Effects/Trail.tscn")
@@ -32,6 +33,7 @@ func start(duration, tick_delay):
 	trail_instance.width_curve = width_curve
 	trail_instance.trail_fade_time = trail_fade_time
 	trail_instance.point_lifetime = point_lifetime
+	trail_instance.tick_speed = tick_speed
 	trail_instance.texture = texture
 	
 	node_to_trail.add_child(trail_instance)

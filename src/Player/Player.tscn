@@ -903,14 +903,14 @@ particles_anim_h_frames = 4
 particles_anim_v_frames = 1
 particles_anim_loop = false
 
-[sub_resource type="Gradient" id=66]
+[sub_resource type="Gradient" id=64]
 offsets = PoolRealArray( 0.00858369, 0.424893, 0.824034, 1 )
 colors = PoolColorArray( 0, 0, 0, 0, 0.582031, 0.316025, 0.316025, 1, 1, 0.803528, 0.660156, 1, 2, 1, 2, 1 )
 
-[sub_resource type="Curve" id=67]
+[sub_resource type="Curve" id=65]
 _data = [ Vector2( 0, 1 ), 0.0, -1.46686, 0, 0, Vector2( 1, 0.481818 ), 0.95065, 0.0, 0, 0 ]
 
-[sub_resource type="CapsuleShape2D" id=65]
+[sub_resource type="CapsuleShape2D" id=66]
 radius = 14.0
 height = 28.0
 
@@ -968,11 +968,11 @@ cast_to = Vector2( 0, -20 )
 script = ExtResource( 10 )
 
 [node name="dunk_area" type="Area2D" parent="Actions/Special_Action_Handler"]
+visible = false
 collision_layer = 0
 collision_mask = 32
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Actions/Special_Action_Handler/dunk_area"]
-visible = false
 modulate = Color( 0.945098, 1, 0, 1 )
 position = Vector2( 0, -50 )
 shape = SubResource( 1 )
@@ -1021,7 +1021,7 @@ texture = ExtResource( 2 )
 offset = Vector2( 0.5, 0 )
 hframes = 16
 vframes = 20
-frame = 196
+frame = 200
 __meta__ = {
 "_edit_lock_": true
 }
@@ -1090,8 +1090,8 @@ anim_offset_random = 1.0
 
 [node name="TrailHandler" parent="Player_Effects" instance=ExtResource( 25 )]
 wildness = 50.0
-gradient_col = SubResource( 66 )
-width_curve = SubResource( 67 )
+gradient_col = SubResource( 64 )
+width_curve = SubResource( 65 )
 texture = ExtResource( 26 )
 
 [node name="Ball_Handler" type="Area2D" parent="."]
@@ -1101,10 +1101,10 @@ script = ExtResource( 6 )
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Ball_Handler"]
 visible = false
 position = Vector2( 0, 5 )
-shape = SubResource( 65 )
+shape = SubResource( 66 )
 
 [node name="Has_Ball_Position" type="Node2D" parent="Ball_Handler"]
-position = Vector2( 4.99999, 15 )
+position = Vector2( 5, 0 )
 
 [node name="Camera" type="Camera2D" parent="."]
 visible = false

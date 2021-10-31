@@ -1,6 +1,6 @@
 extends Ball
 
-export (float) var stuck_force = 1000
+export (float) var stuck_force = 900
 var stuck = false
 
 func _ready():
@@ -13,6 +13,8 @@ func update_linear_velocity(delta):
 		linear_velocity.y += gravity * delta
 		linear_velocity += invmass * applied_force * delta
 		stuck = false
+	else :
+		linear_velocity = Vector2(0.0,0.0)
 
 func collision_effect(collision):
 	linear_velocity = Vector2(0.0,0.0)

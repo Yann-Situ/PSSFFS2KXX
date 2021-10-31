@@ -1,6 +1,8 @@
 extends PhysicBody
 class_name Ball, "res://assets/art/ball/ball_test.png"
 
+var selected = false # if selected by mouse
+var active = false # if hold by player
 onready var selector = $Selector
 #var normal_colision = Vector2(0.0,0.0)
 #var color1 = Color(1.0,0.2,0.3)
@@ -24,11 +26,17 @@ func collision_effect(collision):
 		$DustParticle.restart()
 	return true
 
+func pickup():
+	self.disable_physics()
+	active = true
+
 func throw(posi, velo):
 	#$TrailHandler.set_node_to_trail(self)
 	#$TrailHandler.start(2.0,0.1)
+	self.enable_physics()
 	position = posi
 	linear_velocity = velo
+	active = false
 
 ################################################################################
 

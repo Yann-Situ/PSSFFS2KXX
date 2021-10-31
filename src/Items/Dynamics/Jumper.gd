@@ -1,6 +1,6 @@
 extends Node2D
 
-export (PackedScene) var ball = null
+export (PackedScene) var ball = null # not yet used
 export var jump_velocity = 500#pix/s
 export (float) var cant_go_time = 0#s
 
