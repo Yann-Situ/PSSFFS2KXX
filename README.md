@@ -8,6 +8,7 @@ Popol Super Slam Fusion Full Speed 2KXX
    - [.] other tilesets
    - [.]other background
    - [ ]all movement sprites
+   - [ ] UI graphism such as tag-police
 * Moveset improvment :
    - [ ]add dunk
    - [ ]handle crouch
@@ -15,20 +16,28 @@ Popol Super Slam Fusion Full Speed 2KXX
    - [.] add turn back anim
    - [ ]add slide
    - [ ]with and without balls anim
-   - [x] improve wall jump (feet must be on wall ?)
+   - [x]improve wall jump (feet must be on wall ?)
    - [ ]add multiple shoot types
+   - [ ]Death and life system
 * Add interactive elements (baskets, pipes, jumping platform, doors and warps, wind, enemies...)
    - [.] baskets
    - [.] spawners
    - [.] activable
    - [.] ziplines
+   - [ ] Add enemies and NPC
+   - [ ] Add destroyable blocks
+   - [ ] Add one way platforms and ball-doors / player-doors
 * Add point system
+   - [ ] UI for combos
+   - [ ] Combo and point system
 * Improve shooter
+   - [ ] Auto aim on baskets
 * Balls :
    - [ ]improve animation of balls
    - [ ]squish anim for squish balls
    - [x] add several balls (bouncy ball, fire ball, linked ball, phantom ball)
    - [ ]handle interactions with environment elements
+   - [ ] Add new powers when selection+active (such as megaBOUM, dash, RollingDestroying...)
 * Juice :
    - [ ]Camera shake on heavy ball, dunks and other style action
    - [.] particles on balls, dust on footsteps & slide
