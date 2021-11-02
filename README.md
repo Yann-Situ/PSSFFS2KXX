@@ -6,8 +6,8 @@ Popol Super Slam Fusion Full Speed 2KXX
 * Graphism :
    - [.] environment elements
    - [.] other tilesets
-   - [.]other background
-   - [ ]all movement sprites
+   - [.] other background
+   - [ ] all movement sprites
    - [ ] UI graphism such as tag-police
 * Moveset improvment :
    - [ ]add dunk
@@ -27,6 +27,7 @@ Popol Super Slam Fusion Full Speed 2KXX
    - [ ] Add enemies and NPC
    - [ ] Add destroyable blocks
    - [ ] Add one way platforms and ball-doors / player-doors
+   - [.] pipes (TODO : change bounding box + handle multiple sides + be careful on exit_throw)
 * Add point system
    - [ ] UI for combos
    - [ ] Combo and point system
@@ -61,3 +62,20 @@ Popol Super Slam Fusion Full Speed 2KXX
 * Aiming shooting right after dunk results in strange animation behaviour.
 * Dunkjumping while only moving with floor adherence a bit far from basket results in missing the basket.
 * Problems with physics on slopes
+* Air dunkjump when dunking can result in `S.selected_basket.dunk()` called on `null` instance (basket is not selected anymore)
+
+
+## Groups
+
+### physicbodies
+Must inherit from `physicbodies.gd`.
+
+### balls
+Must inherit from `ball.gd`.
+
+### holders
+Must have a `free_ball(ball : node)` method.
+They can act and hold balls (example: player or pipeball).
+
+### activables
+Must inherit from `activable.gd`.

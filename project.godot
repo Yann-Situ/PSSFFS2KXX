@@ -37,7 +37,7 @@ _global_script_classes=[ {
 _global_script_class_icons={
 "Action": "res://assets/art/icons/action.png",
 "Activable": "",
-"Ball": "",
+"Ball": "res://assets/art/ball/ball_test.png",
 "PhysicBody": "",
 "Player": "res://assets/art/icons/popol.png"
 }

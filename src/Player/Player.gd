@@ -50,6 +50,7 @@ func enable_physics():
 	physics_enabled = true
 
 func _ready():
+	add_to_group("holders")
 	if !Global.playing:
 		Global.toggle_playing()
 	Global.camera = $Camera
@@ -167,3 +168,9 @@ func _physics_process(delta):
 			S.velocity.y = max_speed_fall
 	if physics_enabled:
 		S.velocity = move_and_slide(S.velocity, Vector2(0, -1), true, 4, 0.9)
+
+################################################################################
+# For `holders` group
+func free_ball(ball):
+	# set out  active_ball and has_ball
+	$Ball_Handler.free_ball(ball)

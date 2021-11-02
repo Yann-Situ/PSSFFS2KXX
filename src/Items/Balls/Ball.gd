@@ -2,7 +2,7 @@ extends PhysicBody
 class_name Ball, "res://assets/art/ball/ball_test.png"
 
 var selected = false # if selected by mouse
-var active = false # if hold by player
+var holder = null # if hold by player
 onready var selector = $Selector
 #var normal_colision = Vector2(0.0,0.0)
 #var color1 = Color(1.0,0.2,0.3)
@@ -26,9 +26,13 @@ func collision_effect(collision):
 		$DustParticle.restart()
 	return true
 
-func pickup():
+func pickup(holder_node):
+	if not holder_node.is_in_group("holders"):
+		print("error, holder_node os not in group `holders`.")
+	if holder != null:
+		holder.free_ball(self)
 	self.disable_physics()
-	active = true
+	holder = holder_node
 
 func throw(posi, velo):
 	#$TrailHandler.set_node_to_trail(self)
@@ -36,15 +40,19 @@ func throw(posi, velo):
 	self.enable_physics()
 	position = posi
 	linear_velocity = velo
-	active = false
+	if holder != null:
+		holder.free_ball(self)
+	holder = null
 
 ################################################################################
 
 func power_p(player,delta):
-	set_applied_force(player.attract_force*(player.position - position).normalized())
+	if holder == null :
+		set_applied_force(player.attract_force*(player.position - position).normalized())
 
 func power_jp(player,delta):
 	pass
 
 func power_jr(player,delta):
-	set_applied_force(Vector2(0.0,0.0))
+	if holder == null :
+		set_applied_force(Vector2(0.0,0.0))

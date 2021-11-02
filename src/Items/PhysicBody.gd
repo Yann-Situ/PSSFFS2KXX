@@ -3,6 +3,7 @@ class_name PhysicBody
 
 export (bool) var physics_enabled = true
 onready var start_position = global_position
+onready var collision_layer_save = layers
 var should_reset = false
 
 #physics :
@@ -12,6 +13,7 @@ export (float) var friction = 0.05 setget set_friction
 export (float) var bounce = 0.5 setget set_bounce
 var linear_velocity = Vector2(0.0,0.0) setget set_linear_velocity
 var applied_force = Vector2(0.0,0.0) setget set_applied_force
+
 
 onready var invmass = 1/mass
 onready var gravity = gravity_scale*ProjectSettings.get_setting("physics/2d/default_gravity") # pix/s²
@@ -46,9 +48,11 @@ func disable_physics():
 	physics_enabled = false
 	linear_velocity *= 0
 	applied_force *= 0
+	layers = 0
 
 func enable_physics():
 	physics_enabled = true
+	layers = collision_layer_save
 
 func reset_position():
 	position = start_position

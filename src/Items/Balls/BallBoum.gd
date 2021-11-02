@@ -41,7 +41,7 @@ func power_p(player,delta):
 	pass
 	
 func power_jp(player,delta):
-	if active:
+	if holder == player:
 		megaboum()
 	else :
 		boum()

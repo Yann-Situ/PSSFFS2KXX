@@ -37,7 +37,7 @@ func pickup_ball(ball):
 	print("pickup "+ball.name)
 	S.has_ball = true
 	S.active_ball = ball
-	ball.pickup()
+	ball.pickup(Player)
 
 	#TEMPORARY CONTROL NODE
 	var ui = Player.get_node("Camera/Control/RichTextLabel")
@@ -54,16 +54,18 @@ func pickup_ball(ball):
 	
 func throw_ball(): # called by animation
 	if S.has_ball and S.active_ball != null :
+		print("throw ball")
 		S.active_ball.throw(get_throw_position(),
 							Player.ShootPredictor.shoot_vector_save + 0.5*S.velocity)
-		print("throw ball at "+str(S.active_ball.position.x))
-		free_ball()
 
-func free_ball(): # set out  active_ball and has_ball
-	if S.has_ball :
+func free_ball(ball): # set out  active_ball and has_ball 
+	# called by ball when thrown or deleted
+	if S.has_ball and S.active_ball == ball:
 		S.active_ball = null
 		S.has_ball = false
-		print("free_ball")
+		print("Player free_ball")
+	elif S.has_ball :
+		print("error, free_ball on other ball")
 	else :
 		print("error, free_ball but doesn't have ball")
 

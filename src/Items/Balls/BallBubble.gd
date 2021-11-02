@@ -15,7 +15,8 @@ func power_p(player,delta):
 	pass
 	
 func power_jp(player,delta):
-	if not active :
+	if holder != player :
+		throw(position, Vector2.ZERO)
 		disable_physics()
 		#$Tween.interpolate_property(self, "position", position, player.position, 0.1)
 		$Tween.follow_property(self, "position", position, player, "position", 0.1)
@@ -28,6 +29,6 @@ func power_jr(player,delta):
 	pass
 
 func _on_Tween_tween_all_completed():
-	if not active :
+	if holder == null :
 		enable_physics()
 	#position == player.position

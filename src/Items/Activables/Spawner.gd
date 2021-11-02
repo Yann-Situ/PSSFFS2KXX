@@ -17,13 +17,15 @@ func _ready():
 func spawn():
 	$Sprite/AnimationPlayer.play("spawn")
 	var newball = ball.instance() # Create a new ball
-	#newball.set_start_position(spawn_position)
-	newball.position = position+($SpawnPosition.position+rand_range(-2.0,2.0)*Vector2(1.0,0.0)).rotated(deg2rad(self.rotation_degrees))
-	newball.set_linear_velocity(initial_velocity.rotated(deg2rad(self.rotation_degrees)))
-	newball.enable_physics()
 	newball.z_index = 0 #TODO change to set ball_z_index
 	get_parent().add_child(newball) # Add it as a child of this node.
 
+	newball.throw(position+($SpawnPosition.position+rand_range(-2.0,2.0)*Vector2(1.0,0.0)).rotated(deg2rad(self.rotation_degrees)), \
+				initial_velocity.rotated(deg2rad(self.rotation_degrees)))
+	#newball.position = position+($SpawnPosition.position+rand_range(-2.0,2.0)*Vector2(1.0,0.0)).rotated(deg2rad(self.rotation_degrees))
+	#newball.set_linear_velocity(initial_velocity.rotated(deg2rad(self.rotation_degrees)))
+	#newball.enable_physics()
+	
 #func _process(delta):	
 #	if Input.is_action_just_pressed('ui_select_alter'):
 #		spawn()

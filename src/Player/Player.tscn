@@ -1148,5 +1148,17 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
+[node name="Combos" type="Node" parent="."]
+
+[node name="UI" type="Control" parent="."]
+visible = false
+margin_left = -82.0
+margin_top = -71.0
+margin_right = -42.0
+margin_bottom = -31.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
 [connection signal="body_entered" from="Ball_Handler" to="Ball_Handler" method="_on_Ball_Handler_body_entered"]
 [connection signal="tween_completed" from="Camera/Tween" to="Camera" method="_on_Tween_tween_completed"]
