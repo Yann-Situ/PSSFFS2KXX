@@ -82,12 +82,12 @@ _data = {
 "points": PoolVector2Array( 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, -144 )
 }
 
-[sub_resource type="Curve2D" id=13]
+[sub_resource type="Curve2D" id=12]
 _data = {
 "points": PoolVector2Array( 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, -24, 0, 0, 0, 0, -32, -24, 0, 0, 0, 0, -32, 24, 0, 0, 0, 0, -96, 24, 0, 0, 0, 0, -96, -152, 0, 0, 0, 0, -248, -152 )
 }
 
-[sub_resource type="Environment" id=12]
+[sub_resource type="Environment" id=13]
 background_mode = 4
 auto_exposure_scale = 1.0
 auto_exposure_min_luma = 0.9
@@ -369,14 +369,14 @@ speed_inside = 388.973
 
 [node name="PipeBall4" parent="Environment/Dynamics" instance=ExtResource( 4 )]
 position = Vector2( 728, 144 )
-curve = SubResource( 13 )
+curve = SubResource( 12 )
 activated = true
 speed_at_exit = 20.0
 speed_inside = 327.978
 pipe_z = 1
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
-environment = SubResource( 12 )
+environment = SubResource( 13 )
 
 [connection signal="activated_change_signal" from="Environment/Activables/Button0" to="Environment/Activables/Spawner" method="set_activated"]
 [connection signal="activated_change_signal" from="Environment/Activables/Button1" to="Environment/Activables/Spawner2" method="set_activated"]

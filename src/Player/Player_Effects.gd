@@ -14,6 +14,10 @@ func _ready():
 func process_effects():
 	pass
 
+func jump_start():
+	$JumpParticles0.restart()
+func jump_stop():
+	$JumpParticles0.stop()
 
 func dust_start():
 	$DustParticle.restart()

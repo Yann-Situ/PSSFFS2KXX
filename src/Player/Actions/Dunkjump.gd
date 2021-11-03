@@ -10,6 +10,7 @@ func move(delta):
 	S.is_dunkjumping = true
 	P.PlayerEffects.dust_start()
 	P.PlayerEffects.ghost_start(0.35,0.07)
+	P.PlayerEffects.jump_start()
 	#print(S.selected_basket)
 	var q = S.selected_basket.position - P.position
 	var B = P.dunk_speed * q.x / q.y
