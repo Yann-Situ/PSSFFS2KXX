@@ -21,6 +21,7 @@ func instance_ghost():
 	ghost.flip_h = ghost_sprite.flip_h
 	ghost.self_modulate = self.self_modulate
 	ghost.global_position = self.global_position
+	ghost.z_index = ghost_sprite.z_index - 1
 	
 func start(duration, tick_delay):
 	if duration > 0.0:

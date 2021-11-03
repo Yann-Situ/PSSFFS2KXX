@@ -5,9 +5,8 @@ export var color2 = Color(0.9,0.1,0.3,1.0)
 export var speed_ball_threshold = 380 #velocity value
 onready var start_position = global_position
 
-# Called when the node enters the scene tree for the first time.
 func _ready():
-	pass # Replace with function body.
+	self.z_index = Global.z_indices["foreground_1"]
 
 # Should be in any items that can be picked/placed :
 func set_start_position(posi):

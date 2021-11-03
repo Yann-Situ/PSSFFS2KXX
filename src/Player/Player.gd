@@ -50,6 +50,7 @@ func enable_physics():
 	physics_enabled = true
 
 func _ready():
+	self.z_index = Global.z_indices["player_0"]
 	add_to_group("holders")
 	if !Global.playing:
 		Global.toggle_playing()

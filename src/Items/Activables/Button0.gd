@@ -9,6 +9,7 @@ signal activated_change_signal(b)
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
+	self.z_index = Global.z_indices["background_4"]
 	if button_type != BUTTON0_TYPE.PERMANENT :
 		$Sprite.set_region_rect(Rect2(64,80,64,16)) 
 	

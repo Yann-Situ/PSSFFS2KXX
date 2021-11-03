@@ -9,6 +9,7 @@ resource_local_to_scene = true
 radius = 6.0
 
 [node name="BallMetal" instance=ExtResource( 1 )]
+z_as_relative = false
 script = ExtResource( 2 )
 dust_threshold = 200.0
 

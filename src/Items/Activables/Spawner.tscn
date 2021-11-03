@@ -25,6 +25,8 @@ tracks/0/keys = {
 extents = Vector2( 16, 16 )
 
 [node name="Spawner" type="Node2D"]
+z_index = 16
+z_as_relative = false
 script = ExtResource( 2 )
 __meta__ = {
 "_edit_group_": true

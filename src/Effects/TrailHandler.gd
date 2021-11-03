@@ -36,6 +36,12 @@ func start(duration, tick_delay):
 	trail_instance.tick_speed = tick_speed
 	trail_instance.texture = texture
 	
+	# [BUG] https://github.com/godotengine/godot/issues/45416
+	# z_as_relative doesn't work through code... so we do not do like this :
+	#trail_instance.z_as_relative = true
+	#trail_instance.z_index = -1
+	trail_instance.z_index = node_to_trail.z_index-1
+	
 	node_to_trail.add_child(trail_instance)
 	trail = trail_instance
 	if duration > 0.0:

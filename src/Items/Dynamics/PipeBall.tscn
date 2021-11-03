@@ -2,10 +2,12 @@
 
 [ext_resource path="res://src/Items/Dynamics/PipeBall.gd" type="Script" id=1]
 
-[sub_resource type="CircleShape2D" id=2]
+[sub_resource type="CircleShape2D" id=1]
 radius = 8.0
 
 [node name="PipeBall" type="Path2D"]
+z_index = 16
+z_as_relative = false
 curve = null
 script = ExtResource( 1 )
 speed_at_exit = 101.72
@@ -18,12 +20,12 @@ collision_layer = 8
 collision_mask = 4
 
 [node name="CollisionShape" type="CollisionShape2D" parent="Entrance"]
-shape = SubResource( 2 )
+shape = SubResource( 1 )
 
 [node name="Exit" type="Area2D" parent="."]
 
 [node name="CollisionShape" type="CollisionShape2D" parent="Exit"]
-shape = SubResource( 2 )
+shape = SubResource( 1 )
 
 [connection signal="body_entered" from="Entrance" to="." method="_on_Entrance_body_entered"]
 [connection signal="body_entered" from="Exit" to="." method="_on_Exit_body_entered"]

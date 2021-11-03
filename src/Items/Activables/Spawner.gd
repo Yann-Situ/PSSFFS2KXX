@@ -5,6 +5,7 @@ export var initial_velocity = Vector2(0.0,20.0)
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
+	self.z_index = Global.z_indices["foreground_1"]
 	if ball == null:
 		ball = preload("res://src/Items/Balls/Ball.tscn")
 	var texture = ball.instance().get_node("Sprite").get_texture()

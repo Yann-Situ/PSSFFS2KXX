@@ -16,6 +16,7 @@ colors = PoolColorArray( 1, 1, 1, 1, 1, 0.615234, 0, 1 )
 radius = 64.0
 
 [node name="BallBoum" instance=ExtResource( 1 )]
+z_as_relative = false
 script = ExtResource( 3 )
 
 [node name="collision" parent="." index="0"]

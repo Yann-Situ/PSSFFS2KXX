@@ -63,7 +63,7 @@ Popol Super Slam Fusion Full Speed 2KXX
 * Dunkjumping while only moving with floor adherence a bit far from basket results in missing the basket.
 * Problems with physics on slopes
 * Air dunkjump when dunking can result in `S.selected_basket.dunk()` called on `null` instance (basket is not selected anymore)
-
+* Z_as_relative doesn't work through script... https://github.com/godotengine/godot/issues/45416
 
 ## Groups
 

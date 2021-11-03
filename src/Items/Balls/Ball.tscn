@@ -60,7 +60,8 @@ colors = PoolColorArray( 1, 0.876984, 0.457031, 0, 0.882812, 0.353093, 0.282776,
 _data = [ Vector2( 0, 0 ), 0.0, 0.0, 0, 0, Vector2( 1, 1 ), 0.0, 0.0, 0, 0 ]
 
 [node name="Ball" type="KinematicBody2D"]
-z_index = 2
+z_index = 11
+z_as_relative = false
 input_pickable = true
 collision_layer = 4
 collision_mask = 6

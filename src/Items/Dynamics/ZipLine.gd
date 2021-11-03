@@ -58,6 +58,7 @@ func set_handle_catch_init_unit_offset(v):
 	$Path2D/PathFollow2D.set_unit_offset(v)
 
 func _ready():
+	self.z_index = Global.z_indices["foreground_1"]
 	set_init_point(init_point)
 	set_final_point(final_point)
 	

@@ -5,6 +5,27 @@ var list_of_physical_nodes = []
 var mouse_ball = null #pointer to the last selectable item that called mouse_entered
 var camera = null
 
+var z_indices = {\
+	"parallax_0" : 0, \
+	"parallax_1" : 1, \
+	"parallax_2" : 2, \
+	"parallax_3" : 3, \
+	"parallax_4" : 4, \
+	"background_0" : 5, \
+	"background_1" : 6, \
+	"background_2" : 7, \
+	"background_3" : 8, \
+	"background_4" : 9, \
+	"player_0" : 10, \
+	"ball_0" : 11, \
+	"player_1" : 12, \
+	"foreground_0" : 15, \
+	"foreground_1" : 16, \
+	"foreground_2" : 17, \
+	"foreground_3" : 18, \
+	"foreground_4" : 19 \
+}
+
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	pass # Replace with function body.

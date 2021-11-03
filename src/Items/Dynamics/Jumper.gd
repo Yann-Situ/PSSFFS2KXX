@@ -6,7 +6,7 @@ export (float) var cant_go_time = 0#s
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	pass
+	self.z_index = Global.z_indices["foreground_1"]
 
 
 
