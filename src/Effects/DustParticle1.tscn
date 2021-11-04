@@ -1,0 +1,40 @@
+[gd_scene load_steps=4 format=2]
+
+[ext_resource path="res://assets/art/effects/dust_0.png" type="Texture" id=1]
+
+[sub_resource type="CanvasItemMaterial" id=1]
+particles_animation = true
+particles_anim_h_frames = 10
+particles_anim_v_frames = 1
+particles_anim_loop = true
+
+[sub_resource type="ParticlesMaterial" id=2]
+emission_shape = 1
+emission_sphere_radius = 21.84
+flag_disable_z = true
+direction = Vector3( 0, 1, 0 )
+spread = 180.0
+gravity = Vector3( 0, -10, 0 )
+orbit_velocity = 0.0
+orbit_velocity_random = 0.0
+linear_accel = -11.87
+linear_accel_random = 0.13
+radial_accel = -10.17
+angle_random = 0.56
+scale = 0.5
+scale_random = 1.0
+color = Color( 1, 1, 1, 0.839216 )
+anim_speed = 1.0
+
+[node name="DustParticles1" type="Particles2D"]
+material = SubResource( 1 )
+emitting = false
+amount = 6
+lifetime = 0.8
+one_shot = true
+explosiveness = 0.37
+process_material = SubResource( 2 )
+texture = ExtResource( 1 )
+__meta__ = {
+"_editor_description_": ""
+}
