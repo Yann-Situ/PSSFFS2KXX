@@ -17,8 +17,10 @@ var dunk_dist_squared = 32*32
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	rays_not_flip = [$Ray_fwd_down, $Ray_fwd_up, $Ray_up_fwd, $Ray_up_bwd]
-	rays_flip = [$Ray_fwd_down_f, $Ray_fwd_up_f, $Ray_up_bwd, $Ray_up_fwd]
+	rays_not_flip = [$Ray_fwd_down, $Ray_fwd_up, $Ray_up_fwd, $Ray_up_bwd, \
+		$Ray_down_fwd, $Ray_down_bwd, $Ray_slope_fwd, $Ray_slope_bwd]
+	rays_flip = [$Ray_fwd_down_f, $Ray_fwd_up_f, $Ray_up_bwd, $Ray_up_fwd, \
+		$Ray_down_bwd, $Ray_down_fwd, $Ray_slope_bwd, $Ray_slope_fwd]
 	self.set_flip_h(Player.flip_h)
 
 func _draw():
@@ -28,11 +30,13 @@ func _draw():
 			draw_line(r.position, r.position+r.cast_to, color)
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
-#func _process(delta):
-#	update()
+func _process(delta):
+	update()
 	
 func update_space_state():
 	space_state = get_world_2d().direct_space_state
+	for r in rays:
+		r.updated = false
 	
 func update_basket():
 	if S.selected_basket != null:
@@ -96,17 +100,35 @@ func update_basket():
 		S.selected_basket.enable_contour()
 		
 func cast(r): #we must have updated the space_state before
-	r.result = space_state.intersect_ray(Player.position+r.position, Player.position+r.position+r.cast_to, 
-	[Player], Player.collision_mask, true, false)
+	if not r.updated:
+		r.result = space_state.intersect_ray(Player.position+r.position, \
+			Player.position+r.position+r.cast_to, \
+			[Player], Player.collision_mask, true, false)
+		r.updated = true
 
 #############################
 func is_on_wall():
-	update_space_state()
+	# update_space_state()
 	cast(rays[0])#fwd down
 	return rays[0].result
 
+func is_on_floor():
+	# update_space_state()
+	cast(rays[4])#down fwd
+	cast(rays[5])#down bwd
+	return (rays[4].result or rays[5].result)
+	
+func is_on_slope():
+	# update_space_state()
+	cast(rays[4])#down fwd
+	cast(rays[5])#down bwd
+	cast(rays[6])#slope fwd
+	cast(rays[7])#slope bwd
+	return (rays[4].result and not rays[5].result and rays[7].result) or \
+			(rays[5].result and not rays[4].result and rays[6].result)
+	
 func can_wall_dive():
-	update_space_state()
+	# update_space_state()
 	cast(rays[0])#fwd down
 	if rays[0].result:
 		cast(rays[1])#fwd up
@@ -114,15 +136,17 @@ func can_wall_dive():
 	return false
 		
 func can_stand():
-	update_space_state()
+	# update_space_state()
 	cast(rays[2])#up fwd
 	cast(rays[3])#up bwd
 	return !(rays[2].result or rays[3].result)
 
 func can_dunkjump():
+	# update_basket()
 	return S.selected_basket != null
 	
 func can_dunk():
+	# update_basket()
 	var b = S.selected_basket
 	if b != null:
 		var q = (b.position-Player.position)

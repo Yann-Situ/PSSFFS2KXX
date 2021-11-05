@@ -64,7 +64,7 @@ func set_flip_h(b):
 
 func get_input(delta): #delta in s
 	############### Change variables of Player_state.gd
-	S.update_vars(delta, is_on_floor(), is_on_wall() and SpecialActionHandler.is_on_wall(), (abs(S.velocity.x) > run_speed_thresh))
+	S.update_vars(delta)
 	if S.is_onfloor :
 		S.get_node("ToleranceJumpFloorTimer").start(S.tolerance_jump_floor)
 	else :
@@ -168,7 +168,10 @@ func _physics_process(delta):
 		if S.velocity.y > max_speed_fall:
 			S.velocity.y = max_speed_fall
 	if physics_enabled:
-		S.velocity = move_and_slide(S.velocity, Vector2(0, -1), true, 4, 0.9)
+		if SpecialActionHandler.is_on_slope() and S.velocity.y > - abs(S.velocity.x) :
+			S.velocity.y = 0.5*sqrt(2) * move_and_slide_with_snap(S.velocity, 33*Vector2.DOWN, Vector2.UP, true, 4, 0.785398, false).y
+		else :
+			S.velocity = move_and_slide(S.velocity, Vector2.UP, true, 4, 0.785398, false)
 
 ################################################################################
 # For `holders` group

@@ -52,18 +52,19 @@ Popol Super Slam Fusion Full Speed 2KXX
 * [x] TileMap hitboxes (bounce on corners of each tile + balls pass through 2 adjacent tiles). **size up the hitboxes smartly**
 * [x] Physic of balls when picked up (stay phisically on the ground...). **complicated** see rigidbody functions and how `integrate_force()` works.
 * [x] Weird straight jump on a corner. Don't know why it happens and what to do.
-* [ ] Energy loss of _constant_energy_balls_.
+* [ ] Energy loss of `constant_energy_balls`.
 * [ ] The `shoot_previewer` shows a trajectory slightly above the real one.
-* [ ] Zipline drop inside collision places results in stucked player
+* [ ] **Zipline** drop inside collision places results in stucked player
 * [x] Spawner rotation position is weird.
 * [x] Sometimes the dunkjump gives a velocity of `(-nan, dunkjump_speed)`. This is due to it's calculation with a square root
 * [x] Dunking while pushing a direction button toward another basket above results in no dunk on the current basket. -> change the criteria for the basket by taking into account a very close basket.
-* [ ] Walljumping at the same time that dunking results in dunking called on a wrong basket (if multiple baskets around)
-* [ ] Aiming shooting right after dunk results in strange animation behaviour.
-* [ ] Dunkjumping while only moving with floor adherence a bit far from basket results in missing the basket.
-* [ ] Problems with physics on slopes
-* [ ] Air dunkjump when dunking can result in `S.selected_basket.dunk()` called on `null` instance (basket is not selected anymore)
-* [ ] Z_as_relative doesn't work through script... https://github.com/godotengine/godot/issues/45416
+* [ ] Walljumping at the same time that dunking results in dunking called on a **wrong basket** (if multiple baskets around)
+* [ ] Aiming shooting right after dunk results in **strange animation behaviour**.
+* [ ] **Dunkjumping** while only moving with floor adherence a bit far from basket results in missing the basket.
+* [ ] Problems with physics on **slopes**.
+* [ ] **Air dunkjump** when dunking can result in `S.selected_basket.dunk()` called on `null` instance (basket is not selected anymore)
+* [ ] `Z_as_relative` doesn't work through script... https://github.com/godotengine/godot/issues/45416
+* [ ] Get out from **zipline** just on flat floor results in sliding (like on ice).
 
 ## Groups
 

@@ -88,7 +88,7 @@ var active_ball = null#pointer to a ball
 var selected_ball = null#pointer to the selected ball
 var selected_basket = null#pointer to the basket to dunk
 
-func update_vars(delta, onfloor, onwall, movingfast):
+func update_vars(delta):
 	#
 	# Delays and states memory should be updated after calling update_vars()
 	# in Player.gd
@@ -97,9 +97,12 @@ func update_vars(delta, onfloor, onwall, movingfast):
 	
 	last_frame_onair = not is_onfloor
 	
-	is_onfloor = onfloor
-	is_onwall = onwall
-	is_moving_fast = movingfast
+	Player.SpecialActionHandler.update_space_state()
+	Player.SpecialActionHandler.update_basket()
+	
+	is_onfloor = Player.SpecialActionHandler.is_on_floor()
+	is_onwall = Player.SpecialActionHandler.is_on_wall()
+	is_moving_fast = (abs(velocity.x) > Player.run_speed_thresh)
 	is_falling =  (not is_onfloor) and velocity.y > 0
 	is_mounting = (not is_onfloor) and velocity.y < 0
 	is_moving = (abs(velocity.x) > 5.0) or (abs(velocity.y) > 5.0)
@@ -137,17 +140,19 @@ func update_vars(delta, onfloor, onwall, movingfast):
 	if left_p :
 		direction_p -= 1
 
-	can_jump = not $ToleranceJumpFloorTimer.is_stopped() \
-			  and $CanJumpTimer.is_stopped()
-	can_walljump = not $ToleranceWallJumpTimer.is_stopped() \
-		  and $CanJumpTimer.is_stopped()
+	can_jump = not $ToleranceJumpFloorTimer.is_stopped() and \
+		$CanJumpTimer.is_stopped()
+	can_walljump = not $ToleranceWallJumpTimer.is_stopped() and \
+		$CanJumpTimer.is_stopped()
 	can_go = $CanGoTimer.is_stopped() and not is_dunkjumping
 	can_crouch = is_onfloor
 	can_aim = $CanShootTimer.is_stopped() and has_ball and active_ball != null
 	can_shoot = is_aiming and has_ball and active_ball != null
-	Player.SpecialActionHandler.update_basket()
-	can_dunkjump = $CanDunkJumpTimer.is_stopped() and Player.SpecialActionHandler.can_dunkjump()
-	can_dunk = $CanDunkTimer.is_stopped() and (is_dunkjumping or (not is_onfloor and crouch_p)) and Player.SpecialActionHandler.can_dunk()
+	can_dunkjump = $CanDunkJumpTimer.is_stopped() and \
+		Player.SpecialActionHandler.can_dunkjump()
+	can_dunk = $CanDunkTimer.is_stopped() and \
+		(is_dunkjumping or (not is_onfloor and crouch_p)) and \
+		Player.SpecialActionHandler.can_dunk()
 	can_stand = Player.SpecialActionHandler.can_stand()
 	
 	var dir_sprite = 1;
@@ -155,7 +160,7 @@ func update_vars(delta, onfloor, onwall, movingfast):
 		dir_sprite = -1;
 	is_jumping = is_jumping and not is_onfloor and is_mounting
 	is_walljumping = is_walljumping and not is_onfloor and is_mounting
-	is_dunkjumping = is_dunkjumping and not is_onfloor and not dunk_jr
+	is_dunkjumping = is_dunkjumping and not is_onfloor and dunk_p
 	is_dunking = is_dunking # handle by player actions (start) and animation (stop but not yet implemented)
 	is_halfturning = (is_halfturning or dir_sprite*direction_p == -1) and is_onfloor and direction_p != 0 and not is_shooting # handle by player actions
 	is_landing = is_onfloor and not is_onwall and (is_landing or (last_frame_onair and last_onair_velocity_y > Player.landing_velocity_thresh)) and not is_halfturning# stop also handled by animation

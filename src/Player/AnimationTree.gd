@@ -5,7 +5,8 @@ var state_machine
 onready var Player = get_parent().get_parent()
 var conds = ["on_wall_cond","not_on_floor_cond","on_floor_cond","idle_cond",\
   	"falling_cond","walking_cond","jumping_cond","walljumping_cond",\
-	"dunkjumping_cond","not_dunkjumping_cond","halfturning_cond"\
+	"dunkjumping_cond","not_dunkjumping_cond", "dunking_cond", "not_dunking_cond", \
+	"halfturning_cond"\
   #"not_halfturning_cond","crouching_cond","aiming_cond","shooting_cond"\#"landing_cond"\"not_landing_cond",
 	]
 func add_from_transition(animation_name,
