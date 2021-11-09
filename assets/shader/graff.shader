@@ -22,6 +22,6 @@ vec3 blendOverlay_op(vec3 base, vec3 blend, float opacity) {
 void fragment() {
 	vec4 t = texture(TEXTURE, UV);
     vec3 c = textureLod(SCREEN_TEXTURE, SCREEN_UV, 0.0).rgb;
-    COLOR = 0.9*mix(vec4(blendOverlay_3(c,t.rgb),t.a),t,0.3);
+    COLOR = 0.9*mix(vec4(blendOverlay_3(c,0.2+0.8*t.rgb),t.a),t,0.2);
 
 }
