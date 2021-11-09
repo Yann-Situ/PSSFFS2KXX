@@ -56,8 +56,7 @@ Global="*res://src/Editor/Global.gd"
 
 window/size/width=800
 window/size/height=450
-window/size/test_width=1600
-window/size/test_height=900
+window/dpi/allow_hidpi=true
 window/stretch/mode="viewport"
 window/stretch/aspect="keep"
 

@@ -23,15 +23,15 @@ func _ready():
 		$Ray_down_bwd, $Ray_down_fwd, $Ray_slope_bwd, $Ray_slope_fwd]
 	self.set_flip_h(Player.flip_h)
 
-func _draw():
-	for r in rays:
-		if r.result:#r.is_colliding():
-			draw_circle(r.result.position-Player.position, 2, color)
-			draw_line(r.position, r.position+r.cast_to, color)
+#func _draw():
+#	for r in rays:
+#		if r.result:#r.is_colliding():
+#			draw_circle(r.result.position-Player.position, 2, color)
+#			draw_line(r.position, r.position+r.cast_to, color)
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta):
-	update()
+#func _process(delta):
+#	update()
 	
 func update_space_state():
 	space_state = get_world_2d().direct_space_state
