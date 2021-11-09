@@ -805,6 +805,8 @@ tracks/2/keys = {
 }
 
 [sub_resource type="Animation" id=60]
+resource_name = "run"
+length = 0.8
 loop = true
 tracks/0/type = "value"
 tracks/0/path = NodePath(".:frame")
@@ -813,25 +815,14 @@ tracks/0/loop_wrap = true
 tracks/0/imported = false
 tracks/0/enabled = true
 tracks/0/keys = {
-"times": PoolRealArray( 0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9 ),
-"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1, 1, 1, 1, 1 ),
+"times": PoolRealArray( 0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1, 1, 1 ),
 "update": 1,
-"values": [ 16, 17, 18, 19, 20, 21, 22, 23, 24, 25 ]
-}
-tracks/1/type = "value"
-tracks/1/path = NodePath("../Ball_Handler/Has_Ball_Position:position")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/keys = {
-"times": PoolRealArray( 0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9 ),
-"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1, 1, 1, 1, 1 ),
-"update": 0,
-"values": [ Vector2( 24, 7 ), Vector2( 22, 16 ), Vector2( 21, 25 ), Vector2( 22, 28 ), Vector2( 22, 17 ), Vector2( 24, 9.00001 ), Vector2( 23, 16 ), Vector2( 23, 23 ), Vector2( 23, 27 ), Vector2( 23, 16 ) ]
+"values": [ 16, 17, 18, 19, 20, 21, 22, 23 ]
 }
 
 [sub_resource type="Animation" id=61]
+resource_name = "walk"
 length = 0.8
 loop = true
 tracks/0/type = "value"
@@ -936,6 +927,7 @@ air_friction = 0.1
 max_speed_fall = 700.0
 
 [node name="Player_State" parent="." instance=ExtResource( 5 )]
+visible = false
 is_walljumping = true
 is_dunkjumping = true
 is_dunking = true
@@ -944,6 +936,7 @@ is_halfturning = true
 [node name="Actions" type="Node2D" parent="."]
 
 [node name="Special_Action_Handler" type="Node2D" parent="Actions"]
+visible = false
 script = ExtResource( 9 )
 __meta__ = {
 "_edit_group_": true
@@ -1143,7 +1136,7 @@ position = Vector2( 0, 5 )
 shape = SubResource( 67 )
 
 [node name="Has_Ball_Position" type="Node2D" parent="Ball_Handler"]
-position = Vector2( 5, 0 )
+position = Vector2( 9, -1.99999 )
 
 [node name="Camera" type="Camera2D" parent="."]
 visible = false
