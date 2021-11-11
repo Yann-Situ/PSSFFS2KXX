@@ -110,7 +110,7 @@ func cast(r): #we must have updated the space_state before
 func is_on_wall():
 	# update_space_state()
 	cast(rays[0])#fwd down
-	return rays[0].result
+	return rays[0].result and Player.is_on_wall()
 
 func is_on_floor():
 	# update_space_state()

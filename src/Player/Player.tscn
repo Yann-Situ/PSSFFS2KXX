@@ -1,4 +1,4 @@
-[gd_scene load_steps=97 format=2]
+[gd_scene load_steps=98 format=2]
 
 [ext_resource path="res://src/Player/Player.gd" type="Script" id=1]
 [ext_resource path="res://assets/art/player/TilesetBall.png" type="Texture" id=2]
@@ -28,6 +28,7 @@
 [ext_resource path="res://assets/art/effects/trail.png" type="Texture" id=26]
 [ext_resource path="res://src/Effects/JumpParticles0.tscn" type="PackedScene" id=27]
 [ext_resource path="res://assets/art/effects/offset_glow.png" type="Texture" id=28]
+[ext_resource path="res://src/Player/Release.gd" type="Script" id=29]
 
 [sub_resource type="CircleShape2D" id=1]
 radius = 180.0
@@ -573,7 +574,7 @@ tracks/2/keys = {
 "transitions": PoolRealArray( 1 ),
 "values": [ {
 "args": [  ],
-"method": "throw_ball"
+"method": "shoot_ball"
 } ]
 }
 tracks/3/type = "value"
@@ -890,6 +891,9 @@ tracks/2/keys = {
 "values": [ Vector2( 7, -0.999998 ), Vector2( 4, -0.999998 ), Vector2( 5, -2 ), Vector2( 0, -7 ), Vector2( 3, -6 ) ]
 }
 
+[sub_resource type="CanvasItemMaterial" id=68]
+blend_mode = 1
+
 [sub_resource type="CanvasItemMaterial" id=63]
 particles_animation = true
 particles_anim_h_frames = 4
@@ -914,9 +918,6 @@ particles_anim_loop = true
 radius = 14.0
 height = 28.0
 
-[sub_resource type="CanvasItemMaterial" id=68]
-blend_mode = 1
-
 [node name="Player" type="KinematicBody2D"]
 position = Vector2( 416, 144 )
 z_index = 1
@@ -932,6 +933,7 @@ is_walljumping = true
 is_dunkjumping = true
 is_dunking = true
 is_halfturning = true
+is_shooting = true
 
 [node name="Actions" type="Node2D" parent="."]
 
@@ -1036,6 +1038,9 @@ script = ExtResource( 23 )
 [node name="SelectBall" type="Node" parent="Actions"]
 script = ExtResource( 22 )
 
+[node name="Release" type="Node" parent="Actions"]
+script = ExtResource( 29 )
+
 [node name="Collision" type="CollisionShape2D" parent="."]
 position = Vector2( 0, 6 )
 shape = SubResource( 2 )
@@ -1092,6 +1097,16 @@ anims/walk = SubResource( 61 )
 anims/walljump1 = SubResource( 62 )
 script = ExtResource( 4 )
 
+[node name="light" type="Sprite" parent="Sprite"]
+modulate = Color( 1, 1, 1, 0.227451 )
+material = SubResource( 68 )
+scale = Vector2( 4, 4 )
+z_index = 9
+z_as_relative = false
+texture = ExtResource( 28 )
+region_enabled = true
+region_rect = Rect2( 0, 96, 32, 32 )
+
 [node name="Player_Effects" type="Node2D" parent="."]
 script = ExtResource( 13 )
 
@@ -1136,7 +1151,7 @@ position = Vector2( 0, 5 )
 shape = SubResource( 67 )
 
 [node name="Has_Ball_Position" type="Node2D" parent="Ball_Handler"]
-position = Vector2( 9, -1.99999 )
+position = Vector2( 5, 0 )
 
 [node name="Camera" type="Camera2D" parent="."]
 visible = false
@@ -1191,16 +1206,6 @@ margin_bottom = -31.0
 __meta__ = {
 "_edit_use_anchors_": false
 }
-
-[node name="light" type="Sprite" parent="."]
-modulate = Color( 1, 1, 1, 0.227451 )
-material = SubResource( 68 )
-scale = Vector2( 4, 4 )
-z_index = 9
-z_as_relative = false
-texture = ExtResource( 28 )
-region_enabled = true
-region_rect = Rect2( 0, 96, 32, 32 )
 
 [connection signal="body_entered" from="Ball_Handler" to="Ball_Handler" method="_on_Ball_Handler_body_entered"]
 [connection signal="tween_completed" from="Camera/Tween" to="Camera" method="_on_Tween_tween_completed"]

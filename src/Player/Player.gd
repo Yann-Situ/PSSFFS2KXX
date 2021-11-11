@@ -5,6 +5,7 @@ onready var S = get_node("Player_State")
 onready var SpecialActionHandler = get_node("Actions/Special_Action_Handler")
 onready var ShootPredictor = get_node("Actions/Shoot_predictor")
 onready var PlayerEffects = get_node("Player_Effects")
+onready var BallHandler = get_node("Ball_Handler")
 
 export (bool) var physics_enabled = true
 
@@ -98,8 +99,10 @@ func get_input(delta): #delta in s
 			S.is_crouching = false
 
 	if S.can_dunk :
-			$Actions/Dunk.move(delta)
-	if S.dunk_p and S.can_dunkjump :
+		$Actions/Dunk.move(delta)
+
+	if not S.get_node("ToleranceDunkJumpPressTimer").is_stopped() :
+		if S.can_dunkjump :
 			$Actions/Dunkjump.move(delta)
 
 	if S.shoot_jr and S.can_shoot :
@@ -122,6 +125,8 @@ func get_input(delta): #delta in s
 	if S.select_jp and Global.mouse_ball != null :
 		$Actions/SelectBall.move(delta)
 		
+	if S.release_jp :
+		$Actions/Release.move(delta)
 	# SHADER:
 	#$Sprite.material.set("shader_param/speed",S.velocity)
 	
@@ -156,6 +161,17 @@ func get_input(delta): #delta in s
 
 	# ANIMATION:
 	$Sprite/AnimationTree.animate_from_state(S)
+	
+	S.jump_jp = false
+	S.jump_jr = false
+	S.aim_jp = false
+	S.shoot_jr = false
+	S.dunk_jr = false
+	S.dunk_jp = false
+	S.select_jp = false
+	S.power_jp = false
+	S.power_jr = false
+	S.release_jp = false
 
 ################################################################################
 func _physics_process(delta):

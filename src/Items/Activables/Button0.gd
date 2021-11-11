@@ -1,3 +1,4 @@
+tool
 extends Activable
 
 enum BUTTON0_TYPE {PERMANENT, TIMER, PHYSICAL}
@@ -10,10 +11,9 @@ signal activated_change_signal(b)
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	self.z_index = Global.z_indices["background_4"]
-	if button_type != BUTTON0_TYPE.PERMANENT :
-		$Sprite.set_region_rect(Rect2(64,80,64,16)) 
 	
 	if button_type == BUTTON0_TYPE.TIMER :
+		$Sprite.set_region_rect(Rect2(64,80,64,16)) 
 		timer = Timer.new()
 		timer.one_shot = true
 		timer.autostart = false
@@ -22,6 +22,7 @@ func _ready():
 		self.add_child(timer)
 		
 	elif button_type == BUTTON0_TYPE.PHYSICAL :
+		$Sprite.set_region_rect(Rect2(128,80,64,16)) 
 		$Area2D.connect("body_exited", self, "_on_Area2D_body_exited")
 	
 func update_Sprite(b):
@@ -35,14 +36,17 @@ func update_Sprite(b):
 
 func on_enable():
 	update_Sprite(activated)
-	emit_signal("activated_change_signal",activated)
+	if not Engine.editor_hint:
+		emit_signal("activated_change_signal",activated)
 
 func on_disable():
 	update_Sprite(activated)
-	emit_signal("activated_change_signal",activated)
+	if not Engine.editor_hint:
+		emit_signal("activated_change_signal",activated)
 
+# only if PHYSICAL button :
 func _on_Area2D_body_exited(_body):
-	if $Area2D.get_overlapping_bodies().size() <= 1:
+	if $Area2D.get_overlapping_bodies().size() < 1:
 		disable()
 
 func _on_Area2D_body_entered(body):
@@ -51,10 +55,11 @@ func _on_Area2D_body_entered(body):
 		
 		print("collision : "+body.name)
 		if not activated :
-			self.enable()
+			enable()
 			if button_type == BUTTON0_TYPE.TIMER:
 				timer.start()
 
+# only if TIMER button :
 func _on_Timer_timeout():
-	self.disable()
+	disable()
 

@@ -11,6 +11,10 @@ func _ready():
 func _on_Ball_Handler_body_entered(body):
 	print(body.name)
 	if body.is_in_group("balls"):
+		if body == S.released_ball:
+			S.released_ball = null
+			print("ignore")
+			return
 		if S.has_ball or S.is_shooting :
 			pass
 		else :
@@ -52,11 +56,17 @@ func pickup_ball(ball):
 	ui.newline()
 	ui.add_text("Ball posit : "+str(ball.position - Player.position))
 	
-func throw_ball(): # called by animation
+func throw_ball(pos, speed):
 	if S.has_ball and S.active_ball != null :
 		print("throw ball")
-		S.active_ball.throw(get_throw_position(),
-							Player.ShootPredictor.shoot_vector_save + 0.5*S.velocity)
+		S.released_ball = S.active_ball
+		S.active_ball.throw(pos, speed)
+		yield(get_tree().create_timer(0.1), "timeout")
+		S.released_ball = null
+		
+func shoot_ball(): # called by animation
+	throw_ball(get_throw_position(), Player.ShootPredictor.shoot_vector_save + 0.5*S.velocity)
+		
 
 func free_ball(ball): # set out  active_ball and has_ball 
 	# called by ball when thrown or deleted

@@ -46,7 +46,7 @@ anims/spawn = SubResource( 1 )
 collision_layer = 2
 collision_mask = 7
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D"]
+[node name="CollisionShape" type="CollisionShape2D" parent="StaticBody2D"]
 visible = false
 shape = SubResource( 2 )
 

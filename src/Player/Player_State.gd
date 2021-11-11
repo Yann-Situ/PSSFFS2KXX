@@ -26,10 +26,12 @@ var aim_jp = false
 var shoot_jr = false
 var dunk_p = false
 var dunk_jr = false
+var dunk_jp = false
 var select_jp = false
 var power_p = false
 var power_jp = false
 var power_jr = false
+var release_jp = false
 
 # Bool for action permission
 var can_jump = false
@@ -85,8 +87,34 @@ export var is_shooting = false # handle by Player.gd (for start) and animations 
 # Bool var
 export var has_ball = false
 var active_ball = null#pointer to a ball
+var released_ball = null # useful because when the ball is released (or thrown)
+# it is immediatly detected by area_body_enter...
 var selected_ball = null#pointer to the selected ball
 var selected_basket = null#pointer to the basket to dunk
+
+func _input(event):
+	
+	right_p = Input.is_action_pressed('ui_right')
+	left_p = Input.is_action_pressed('ui_left')
+	jump_jp = Input.is_action_just_pressed('ui_up')
+	jump_p = Input.is_action_pressed('ui_up')
+	jump_jr = Input.is_action_just_released('ui_up')
+	crouch_p = Input.is_action_pressed('ui_down')
+	aim_jp = Input.is_action_just_pressed("ui_select")
+	shoot_jr = Input.is_action_just_released("ui_select")
+	dunk_p = Input.is_action_pressed("ui_accept")
+	dunk_jp = Input.is_action_just_pressed("ui_accept")
+	dunk_jr =  Input.is_action_just_released("ui_accept")
+	select_jp = Input.is_action_just_pressed("ui_select_alter")
+	power_p =  Input.is_action_pressed("ui_power")
+	power_jp =  Input.is_action_just_pressed("ui_power")
+	power_jr =  Input.is_action_just_released("ui_power")
+	release_jp =  Input.is_action_just_pressed("ui_release")
+	
+	if jump_jp:
+		$ToleranceJumpPressTimer.start(tolerance_jump_press)
+	if dunk_jp:
+		$ToleranceDunkJumpPressTimer.start(tolerance_jump_press)
 
 func update_vars(delta):
 	#
@@ -108,24 +136,6 @@ func update_vars(delta):
 	is_moving = (abs(velocity.x) > 5.0) or (abs(velocity.y) > 5.0)
 	is_idle = (abs(velocity.x) <= 5.0)
 
-	right_p = Input.is_action_pressed('ui_right')
-	left_p = Input.is_action_pressed('ui_left')
-	jump_jp = Input.is_action_just_pressed('ui_up')
-	jump_p = Input.is_action_pressed('ui_up')
-	jump_jr = Input.is_action_just_released('ui_up')
-	crouch_p = Input.is_action_pressed('ui_down')
-	aim_jp = Input.is_action_just_pressed("ui_select")
-	shoot_jr = Input.is_action_just_released("ui_select")
-	dunk_p = Input.is_action_pressed("ui_accept")
-	dunk_jr =  Input.is_action_just_released("ui_accept")
-	select_jp = Input.is_action_just_pressed("ui_select_alter")
-	power_p =  Input.is_action_pressed("ui_power")
-	power_jp =  Input.is_action_just_pressed("ui_power")
-	power_jr =  Input.is_action_just_released("ui_power")
-	
-	if jump_jp:
-		$ToleranceJumpPressTimer.start(tolerance_jump_press)
-	
 	if (velocity.x == 0):
 		move_direction = 0
 	elif (velocity.x < 0):
@@ -148,10 +158,9 @@ func update_vars(delta):
 	can_crouch = is_onfloor
 	can_aim = $CanShootTimer.is_stopped() and has_ball and active_ball != null
 	can_shoot = is_aiming and has_ball and active_ball != null
-	can_dunkjump = $CanDunkJumpTimer.is_stopped() and \
-		Player.SpecialActionHandler.can_dunkjump()
+	can_dunkjump = can_jump and Player.SpecialActionHandler.can_dunkjump()
 	can_dunk = $CanDunkTimer.is_stopped() and \
-		(is_dunkjumping or (not is_onfloor and crouch_p)) and \
+		(is_dunkjumping or (not is_onfloor and dunk_p)) and \
 		Player.SpecialActionHandler.can_dunk()
 	can_stand = Player.SpecialActionHandler.can_stand()
 	
@@ -168,6 +177,3 @@ func update_vars(delta):
 	is_crouching = (is_onfloor and is_crouching) or not can_stand# handle by player actions (start)
 	is_aiming = is_aiming and has_ball and active_ball != null and not is_dunkjumping
 	#is_shooting handle by shoot animation+Player.gd
-
-
-

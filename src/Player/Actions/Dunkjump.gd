@@ -23,8 +23,6 @@ func move(delta):
 		S.velocity.x = vox1
 	S.velocity.y = P.dunk_speed
 	print("Velocity: "+str(S.velocity))
-	S.get_node("CanDunkJumpTimer").start(S.dunk_countdown)
-	#S.get_node("CanGoTimer").start(1.0) # can_go always false if is dunkjumping (to change ?)
+	S.get_node("ToleranceDunkJumpPressTimer").stop()
+	S.get_node("CanJumpTimer").start(S.jump_countdown)
 	P.get_node("Camera").screen_shake(0.2,10)
-	#yield(get_tree().create_timer(0.2), "timeout")
-	#self.get_node("Camera").screen_shake(0.8,5)

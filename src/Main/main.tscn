@@ -280,6 +280,10 @@ ball = ExtResource( 3 )
 position = Vector2( 640, -96 )
 button_type = 2
 
+[node name="Button3" parent="Environment/Activables" instance=ExtResource( 20 )]
+position = Vector2( 368, 544 )
+button_type = 2
+
 [node name="Balls" type="Node2D" parent="Environment"]
 
 [node name="Ball" parent="Environment/Balls" instance=ExtResource( 5 )]
@@ -353,13 +357,14 @@ jump_velocity = 800
 [node name="PipeBall" parent="Environment/Dynamics" instance=ExtResource( 4 )]
 position = Vector2( 688, 88 )
 curve = SubResource( 9 )
-activated = true
 speed_at_exit = 902.723
 speed_inside = 217.805
 
 [node name="PipeBall2" parent="Environment/Dynamics" instance=ExtResource( 4 )]
 position = Vector2( 272, 504 )
+z_index = 16
 curve = SubResource( 10 )
+activated = false
 speed_at_exit = 258.31
 speed_inside = 241.274
 pipe_z = 1
@@ -372,8 +377,8 @@ speed_inside = 388.973
 
 [node name="PipeBall4" parent="Environment/Dynamics" instance=ExtResource( 4 )]
 position = Vector2( 728, 144 )
+z_index = 16
 curve = SubResource( 12 )
-activated = true
 speed_at_exit = 327.978
 speed_inside = 327.978
 pipe_z = 1
@@ -384,3 +389,4 @@ environment = SubResource( 13 )
 [connection signal="activated_change_signal" from="Environment/Activables/Button0" to="Environment/Activables/Spawner" method="set_activated"]
 [connection signal="activated_change_signal" from="Environment/Activables/Button1" to="Environment/Activables/Spawner2" method="set_activated"]
 [connection signal="activated_change_signal" from="Environment/Activables/Button2" to="Environment/Activables/Spawner" method="set_activated"]
+[connection signal="activated_change_signal" from="Environment/Activables/Button3" to="Environment/Dynamics/PipeBall2" method="toggle_activated"]

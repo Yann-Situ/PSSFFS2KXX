@@ -9,7 +9,6 @@ func move(delta):
 	S.is_dunkjumping = false
 	S.velocity.x = 0
 	S.velocity.y = 0
-	S.get_node("CanDunkJumpTimer").start(S.dunk_countdown)
 	S.get_node("CanDunkTimer").start(S.dunk_countdown)
 	S.get_node("CanGoTimer").start(0.3)
 	yield(get_tree().create_timer(0.3), "timeout")
