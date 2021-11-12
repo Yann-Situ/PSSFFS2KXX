@@ -6,36 +6,36 @@
 [ext_resource path="res://assets/shader/contour.shader" type="Shader" id=4]
 [ext_resource path="res://assets/art/effects/vertical.png" type="Texture" id=6]
 
-[sub_resource type="ShaderMaterial" id=1]
+[sub_resource type="ShaderMaterial" id=11]
 resource_local_to_scene = true
 shader = ExtResource( 4 )
 shader_param/activated = false
 shader_param/contour_color = Color( 1, 0.780392, 0.670588, 1 )
 shader_param/light_thresh = 0.5
 
-[sub_resource type="AtlasTexture" id=2]
+[sub_resource type="AtlasTexture" id=12]
 atlas = ExtResource( 1 )
 region = Rect2( 0, 0, 32, 16 )
 
-[sub_resource type="AtlasTexture" id=3]
+[sub_resource type="AtlasTexture" id=13]
 atlas = ExtResource( 1 )
 region = Rect2( 32, 0, 32, 16 )
 
-[sub_resource type="AtlasTexture" id=4]
+[sub_resource type="AtlasTexture" id=14]
 atlas = ExtResource( 1 )
 region = Rect2( 64, 0, 32, 16 )
 
-[sub_resource type="AtlasTexture" id=5]
+[sub_resource type="AtlasTexture" id=15]
 atlas = ExtResource( 1 )
 region = Rect2( 96, 0, 32, 16 )
 
-[sub_resource type="AtlasTexture" id=6]
+[sub_resource type="AtlasTexture" id=16]
 atlas = ExtResource( 1 )
 region = Rect2( 128, 0, 32, 16 )
 
-[sub_resource type="SpriteFrames" id=7]
+[sub_resource type="SpriteFrames" id=17]
 animations = [ {
-"frames": [ SubResource( 2 ), SubResource( 3 ), SubResource( 4 ), SubResource( 5 ), SubResource( 2 ), SubResource( 6 ), SubResource( 2 ) ],
+"frames": [ SubResource( 12 ), SubResource( 13 ), SubResource( 14 ), SubResource( 15 ), SubResource( 12 ), SubResource( 16 ), SubResource( 12 ) ],
 "loop": true,
 "name": "default",
 "speed": 4.0
@@ -46,32 +46,32 @@ animations = [ {
 "speed": 5.0
 } ]
 
-[sub_resource type="SegmentShape2D" id=8]
+[sub_resource type="SegmentShape2D" id=18]
 a = Vector2( -16, -6 )
 b = Vector2( 16, -6 )
 
 [sub_resource type="Curve" id=9]
-_data = [ Vector2( 0, 0.481818 ), 0.0, 0.0, 0, 0, Vector2( 1, 0.965909 ), 0.0, 0.0, 0, 0 ]
+_data = [ Vector2( 0, 0.425 ), 0.0, 0.0, 0, 0, Vector2( 0.987288, 0.725 ), 0.0, 0.0, 0, 0 ]
 
 [sub_resource type="Gradient" id=10]
-offsets = PoolRealArray( 0, 0.713615, 0.99061 )
-colors = PoolColorArray( 2, 1, 1.4, 1, 1, 0.615234, 0, 1, 0.363281, 0.00709534, 0.00709534, 0 )
+offsets = PoolRealArray( 0.00469484, 0.525822, 0.751174, 0.99061 )
+colors = PoolColorArray( 2, 1, 1.4, 0, 1, 1, 1, 1, 1, 0.882874, 0.605469, 0.67451, 0.363281, 0.00709534, 0.00709534, 0 )
 
-[sub_resource type="CanvasItemMaterial" id=11]
+[sub_resource type="CanvasItemMaterial" id=19]
 blend_mode = 1
 particles_animation = true
 particles_anim_h_frames = 4
 particles_anim_v_frames = 1
 particles_anim_loop = true
 
-[sub_resource type="Gradient" id=12]
+[sub_resource type="Gradient" id=20]
 offsets = PoolRealArray( 0, 0.0466321, 0.0829016, 0.704663, 0.979275 )
 colors = PoolColorArray( 0, 0, 0, 1, 0.60396, 0.397842, 0.353883, 1, 0.962799, 1, 0.585938, 1, 0.511364, 0.299627, 0.391435, 1, 0, 0, 0, 1 )
 
-[sub_resource type="GradientTexture" id=13]
-gradient = SubResource( 12 )
+[sub_resource type="GradientTexture" id=21]
+gradient = SubResource( 20 )
 
-[sub_resource type="ParticlesMaterial" id=14]
+[sub_resource type="ParticlesMaterial" id=22]
 emission_shape = 2
 emission_box_extents = Vector3( 5, 0, 0 )
 flag_disable_z = true
@@ -84,12 +84,12 @@ orbit_velocity_random = 0.0
 linear_accel = 10.0
 scale = 0.5
 scale_random = 0.5
-color_ramp = SubResource( 13 )
+color_ramp = SubResource( 21 )
 anim_offset = 1.0
 anim_offset_random = 1.0
 
 [node name="Basket" type="Node2D"]
-material = SubResource( 1 )
+material = SubResource( 11 )
 z_index = 16
 z_as_relative = false
 script = ExtResource( 2 )
@@ -100,8 +100,7 @@ color1 = Color( 0.8, 0.501961, 0.101961, 0.0588235 )
 
 [node name="AnimatedSprite" type="AnimatedSprite" parent="."]
 use_parent_material = true
-frames = SubResource( 7 )
-frame = 6
+frames = SubResource( 17 )
 playing = true
 
 [node name="basket_area" type="Area2D" parent="."]
@@ -110,7 +109,7 @@ collision_mask = 4
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="basket_area"]
 visible = false
-shape = SubResource( 8 )
+shape = SubResource( 18 )
 
 [node name="CPUParticles2D" type="CPUParticles2D" parent="."]
 position = Vector2( 0, -4.33823 )
@@ -137,7 +136,7 @@ color_ramp = SubResource( 10 )
 [node name="DunkParticles" type="Particles2D" parent="."]
 modulate = Color( 1, 1, 1, 0.75 )
 show_behind_parent = true
-material = SubResource( 11 )
+material = SubResource( 19 )
 position = Vector2( 1.718, -12.751 )
 z_index = -1
 emitting = false
@@ -145,7 +144,7 @@ amount = 9
 lifetime = 1.5
 one_shot = true
 explosiveness = 0.3
-process_material = SubResource( 14 )
+process_material = SubResource( 22 )
 texture = ExtResource( 6 )
 
 [connection signal="body_entered" from="basket_area" to="." method="_on_basket_area_body_entered"]

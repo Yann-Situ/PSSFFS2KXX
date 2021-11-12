@@ -46,8 +46,10 @@ func _process(delta):
 func update_entrance_sprite():
 	if self.activated :
 		$Entrance/Sprite.set_animation("active")
+		$Entrance/Particles.emitting = true
 	else :
 		$Entrance/Sprite.set_animation("not_active")
+		$Entrance/Particles.emitting = false
 
 func update_entrance_rotation():
 	if self.curve.get_point_count() >= 2:

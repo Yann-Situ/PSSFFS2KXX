@@ -24,7 +24,10 @@ var z_indices = {\
 	"foreground_1" : 16, \
 	"foreground_2" : 17, \
 	"foreground_3" : 18, \
-	"foreground_4" : 19 \
+	"foreground_4" : 19, \
+	"foreparallax_0" : 20, \
+	"foreparallax_1" : 21, \
+	"foreparallax_2" : 22 \
 }
 
 # Called when the node enters the scene tree for the first time.
