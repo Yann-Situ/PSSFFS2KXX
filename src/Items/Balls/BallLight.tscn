@@ -1,0 +1,111 @@
+[gd_scene load_steps=10 format=2]
+
+[ext_resource path="res://src/Items/Balls/Ball.tscn" type="PackedScene" id=1]
+[ext_resource path="res://assets/art/effects/light5_4.png" type="Texture" id=2]
+[ext_resource path="res://assets/art/effects/light5_5.png" type="Texture" id=3]
+[ext_resource path="res://assets/art/effects/light5_1.png" type="Texture" id=4]
+[ext_resource path="res://assets/art/effects/light5_3.png" type="Texture" id=5]
+[ext_resource path="res://assets/art/effects/light5_2.png" type="Texture" id=6]
+[ext_resource path="res://src/Items/Balls/BallLight.gd" type="Script" id=7]
+
+[sub_resource type="CircleShape2D" id=2]
+resource_local_to_scene = true
+radius = 6.0
+
+[sub_resource type="AnimatedTexture" id=1]
+frames = 5
+fps = 8.0
+frame_0/texture = ExtResource( 4 )
+frame_1/texture = ExtResource( 6 )
+frame_1/delay_sec = 0.0
+frame_2/texture = ExtResource( 5 )
+frame_2/delay_sec = 0.0
+frame_3/texture = ExtResource( 2 )
+frame_3/delay_sec = 0.0
+frame_4/texture = ExtResource( 3 )
+frame_4/delay_sec = 0.0
+
+[node name="BallLight" instance=ExtResource( 1 )]
+script = ExtResource( 7 )
+mass = 0.9
+friction = 0.04
+bounce = 0.6
+
+[node name="collision" parent="." index="0"]
+shape = SubResource( 2 )
+
+[node name="Sprite" parent="." index="2"]
+self_modulate = Color( 1.25, 1.05, 0.2, 1 )
+
+[node name="LightPlayer" type="Light2D" parent="." index="5"]
+position = Vector2( -1.14441e-05, 1.14441e-05 )
+scale = Vector2( 1.64187, 1.64187 )
+z_as_relative = false
+enabled = false
+texture = SubResource( 1 )
+texture_scale = 2.56
+color = Color( 1, 0.827451, 0.968627, 1 )
+energy = 0.7
+range_z_min = 10
+range_z_max = 12
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="LightSmall" type="Light2D" parent="." index="6"]
+position = Vector2( -3.8147e-06, 7.62939e-06 )
+scale = Vector2( 1.11855, 1.11855 )
+z_as_relative = false
+texture = SubResource( 1 )
+texture_scale = 2.56
+color = Color( 1, 0.854902, 0.419608, 1 )
+energy = 0.6
+range_z_max = 12
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="LightFront" type="Light2D" parent="." index="7"]
+position = Vector2( 7.62939e-06, 0 )
+scale = Vector2( 2.28671, 2.28671 )
+z_as_relative = false
+enabled = false
+texture = SubResource( 1 )
+texture_scale = 2.56
+color = Color( 1, 0.909804, 0.827451, 1 )
+energy = 0.7
+range_z_min = 16
+range_z_max = 16
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="LightBack" type="Light2D" parent="." index="8"]
+scale = Vector2( 2.5, 2.5 )
+z_as_relative = false
+enabled = false
+texture = SubResource( 1 )
+texture_scale = 2.56
+color = Color( 1, 0.901961, 0.709804, 1 )
+range_z_max = 6
+shadow_enabled = true
+shadow_gradient_length = 3.0
+shadow_filter = 1
+shadow_filter_smooth = 30.0
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="LightBack2" type="Light2D" parent="." index="9"]
+scale = Vector2( 2.5, 2.5 )
+z_as_relative = false
+enabled = false
+texture = SubResource( 1 )
+texture_scale = 2.56
+color = Color( 1, 0.901961, 0.709804, 1 )
+energy = 0.8
+range_z_min = 8
+range_z_max = 9
+__meta__ = {
+"_edit_lock_": true
+}
