@@ -1,4 +1,4 @@
-[gd_scene load_steps=98 format=2]
+[gd_scene load_steps=99 format=2]
 
 [ext_resource path="res://src/Player/Player.gd" type="Script" id=1]
 [ext_resource path="res://assets/art/player/TilesetBall.png" type="Texture" id=2]
@@ -31,7 +31,12 @@
 [ext_resource path="res://src/Player/Release.gd" type="Script" id=29]
 
 [sub_resource type="CircleShape2D" id=1]
+resource_local_to_scene = true
 radius = 180.0
+
+[sub_resource type="CircleShape2D" id=69]
+resource_local_to_scene = true
+radius = 30.0
 
 [sub_resource type="RectangleShape2D" id=2]
 extents = Vector2( 8, 26 )
@@ -260,7 +265,7 @@ tracks/3/keys = {
 "transitions": PoolRealArray( 1 ),
 "values": [ {
 "args": [  ],
-"method": "throw_ball"
+"method": "shoot_ball"
 } ]
 }
 
@@ -891,30 +896,30 @@ tracks/2/keys = {
 "values": [ Vector2( 7, -0.999998 ), Vector2( 4, -0.999998 ), Vector2( 5, -2 ), Vector2( 0, -7 ), Vector2( 3, -6 ) ]
 }
 
-[sub_resource type="CanvasItemMaterial" id=68]
+[sub_resource type="CanvasItemMaterial" id=63]
 blend_mode = 1
 
-[sub_resource type="CanvasItemMaterial" id=63]
+[sub_resource type="CanvasItemMaterial" id=64]
 particles_animation = true
 particles_anim_h_frames = 4
 particles_anim_v_frames = 1
 particles_anim_loop = false
 
-[sub_resource type="Gradient" id=64]
+[sub_resource type="Gradient" id=65]
 offsets = PoolRealArray( 0.00858369, 0.424893, 0.824034, 1 )
 colors = PoolColorArray( 0, 0, 0, 0, 0.582031, 0.316025, 0.316025, 1, 1, 0.803528, 0.660156, 1, 2, 1, 2, 1 )
 
-[sub_resource type="Curve" id=65]
+[sub_resource type="Curve" id=66]
 _data = [ Vector2( 0, 1 ), 0.0, -1.46686, 0, 0, Vector2( 1, 0.481818 ), 0.95065, 0.0, 0, 0 ]
 
-[sub_resource type="CanvasItemMaterial" id=66]
+[sub_resource type="CanvasItemMaterial" id=67]
 resource_local_to_scene = true
 particles_animation = true
 particles_anim_h_frames = 4
 particles_anim_v_frames = 1
 particles_anim_loop = true
 
-[sub_resource type="CapsuleShape2D" id=67]
+[sub_resource type="CapsuleShape2D" id=68]
 radius = 14.0
 height = 28.0
 
@@ -994,15 +999,22 @@ position = Vector2( -8, 32 )
 cast_to = Vector2( 0, 17 )
 script = ExtResource( 10 )
 
+[node name="dunkjump_area" type="Area2D" parent="Actions/Special_Action_Handler"]
+collision_layer = 0
+collision_mask = 32
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Actions/Special_Action_Handler/dunkjump_area"]
+modulate = Color( 0.945098, 1, 0, 1 )
+position = Vector2( 0, -50 )
+shape = SubResource( 1 )
+
 [node name="dunk_area" type="Area2D" parent="Actions/Special_Action_Handler"]
-visible = false
 collision_layer = 0
 collision_mask = 32
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Actions/Special_Action_Handler/dunk_area"]
-modulate = Color( 0.945098, 1, 0, 1 )
-position = Vector2( 0, -50 )
-shape = SubResource( 1 )
+modulate = Color( 1, 0.490196, 0.870588, 1 )
+shape = SubResource( 69 )
 
 [node name="Shoot_predictor" type="Node2D" parent="Actions"]
 position = Vector2( 1, 1 )
@@ -1052,7 +1064,7 @@ texture = ExtResource( 2 )
 offset = Vector2( 0.5, 0 )
 hframes = 16
 vframes = 20
-frame = 194
+frame = 200
 __meta__ = {
 "_edit_lock_": true
 }
@@ -1099,7 +1111,7 @@ script = ExtResource( 4 )
 
 [node name="light" type="Sprite" parent="Sprite"]
 modulate = Color( 1, 1, 1, 0.227451 )
-material = SubResource( 68 )
+material = SubResource( 63 )
 scale = Vector2( 4, 4 )
 z_index = 9
 z_as_relative = false
@@ -1112,7 +1124,7 @@ script = ExtResource( 13 )
 
 [node name="DustParticle" parent="Player_Effects" instance=ExtResource( 12 )]
 modulate = Color( 0.85098, 0.85098, 0.85098, 1 )
-material = SubResource( 63 )
+material = SubResource( 64 )
 position = Vector2( 0, 28 )
 lifetime = 0.4
 explosiveness = 0.67
@@ -1131,12 +1143,12 @@ anim_offset_random = 1.0
 
 [node name="TrailHandler" parent="Player_Effects" instance=ExtResource( 25 )]
 wildness = 50.0
-gradient_col = SubResource( 64 )
-width_curve = SubResource( 65 )
+gradient_col = SubResource( 65 )
+width_curve = SubResource( 66 )
 texture = ExtResource( 26 )
 
 [node name="JumpParticles0" parent="Player_Effects" instance=ExtResource( 27 )]
-material = SubResource( 66 )
+material = SubResource( 67 )
 position = Vector2( -4, 20 )
 lifetime = 0.45
 local_coords = false
@@ -1148,10 +1160,10 @@ script = ExtResource( 6 )
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Ball_Handler"]
 visible = false
 position = Vector2( 0, 5 )
-shape = SubResource( 67 )
+shape = SubResource( 68 )
 
 [node name="Has_Ball_Position" type="Node2D" parent="Ball_Handler"]
-position = Vector2( 8.99999, 12 )
+position = Vector2( 5, 0 )
 
 [node name="Camera" type="Camera2D" parent="."]
 visible = false

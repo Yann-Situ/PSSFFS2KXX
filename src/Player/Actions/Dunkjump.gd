@@ -11,8 +11,8 @@ func move(delta):
 	P.PlayerEffects.dust_start()
 	P.PlayerEffects.ghost_start(0.35,0.07)
 	P.PlayerEffects.jump_start()
-	#print(S.selected_basket)
-	var q = S.selected_basket.position - P.position
+	#print(S.dunkjump_basket)
+	var q = S.dunkjump_basket.position - P.position
 	var B = P.dunk_speed * q.x / q.y
 	var C = -P.gravity * 0.5 * q.x*q.x/q.y
 	var vox1 = 0.5*(B - sqrt(B*B-4*C))

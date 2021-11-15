@@ -12,9 +12,6 @@ var rays_not_flip = []
 var rays_res = []
 var space_state
 
-var dunkjump_y_lim = 10
-var dunk_dist_squared = 32*32
-
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	rays_not_flip = [$Ray_fwd_down, $Ray_fwd_up, $Ray_up_fwd, $Ray_up_bwd, \
@@ -39,14 +36,15 @@ func update_space_state():
 		r.updated = false
 	
 func update_basket():
-	if S.selected_basket != null:
-		S.selected_basket.disable_contour()
+	if S.dunkjump_basket != null:
+		S.dunkjump_basket.disable_contour()
 		
-	S.selected_basket = null
-	var baskets = $dunk_area.get_overlapping_areas()
+	S.dunkjump_basket = null
+	var baskets = $dunkjump_area.get_overlapping_areas()
 	if !baskets.empty():
 		# choose by priority baskets that are in direction_p, closest above player
-		var b = baskets[0].get_parent()
+		var b = baskets[0].get_parent() # `get_parent` because we're 
+		# detecting the basket_area node
 		var q = (b.position-Player.position)
 		var dir_sprite = 1
 		if Player.flip_h:
@@ -59,17 +57,22 @@ func update_basket():
 		var Delta = Player.dunk_speed*q.x/q.y
 		Delta = Delta*Delta
 		Delta += 2*Player.gravity * q.x*q.x/q.y
-		var best_y = dunkjump_y_lim
-		var best_dist2 = 2 * $dunk_area/CollisionShape2D.shape.radius
+		var best_y = 0.0
+		var best_dist2 = $dunkjump_area/CollisionShape2D.shape.radius
+		best_dist2 *= 2 * best_dist2
 		var best_direction = -2
-		if Delta >= 0:
-			S.selected_basket = b
+		if Delta >= 0.0 and q.y < 0.0:
+			S.dunkjump_basket = b
 			best_y = q.y
 			best_dist2 = q.length_squared()
 			best_direction = dir_sprite*dir
 		for i in range(1,baskets.size()):
-			b = baskets[i].get_parent()
+			b = baskets[i].get_parent() # `get_parent` because we're 
+		# detecting the basket_area node
 			q = (b.position-Player.position)
+			if q.y >= 0.0:
+				continue
+				
 			dir = dir_sprite
 			if q.x > 0.0:
 				dir = 1
@@ -79,25 +82,18 @@ func update_basket():
 			Delta = Delta*Delta
 			Delta += 2*Player.gravity * q.x*q.x/q.y
 			
-			if best_dist2 < dunk_dist_squared:
+			if Delta < 0.0 or dir_sprite*dir < best_direction:
+				continue
+			if dir_sprite*dir == best_direction and q.y > best_y:
 				continue
 			
-			if q.length_squared() > dunk_dist_squared :
-				if Delta < 0 or \
-					dir_sprite*dir < best_direction:
-					continue
-				
-				if dir_sprite*dir == best_direction and \
-					q.y > best_y:
-					continue
-				
-			S.selected_basket = b
+			S.dunkjump_basket = b
 			best_y = q.y
 			best_dist2 = q.length_squared()
 			best_direction = dir_sprite*dir
 	
-	if S.selected_basket != null:
-		S.selected_basket.enable_contour()
+	if S.dunkjump_basket != null:
+		S.dunkjump_basket.enable_contour()
 		
 func cast(r): #we must have updated the space_state before
 	if not r.updated:
@@ -143,15 +139,24 @@ func can_stand():
 
 func can_dunkjump():
 	# update_basket()
-	return S.selected_basket != null
+	return S.dunkjump_basket != null
 	
 func can_dunk():
-	# update_basket()
-	var b = S.selected_basket
-	if b != null:
-		var q = (b.position-Player.position)
-		return q.y > -5 and q.y < 20 and abs(q.x) < 32
-		#print(S.selected_basket)
+	var baskets = $dunk_area.get_overlapping_areas()
+	if !baskets.empty():
+		var b = baskets[0].get_parent() # `get_parent` because we're 
+		# detecting the basket_area node
+		S.dunk_basket = b
+		var min_len_sq = \
+		(b.position - Player.position).length_squared()
+		for i in range(1,baskets.size()):
+			b = baskets[i].get_parent() # `get_parent` because we're 
+		# detecting the basket_area node
+			var l2 = (b.position - Player.position).length_squared()
+			if l2 < min_len_sq :
+				S.dunk_basket = b
+				min_len_sq = l2
+		return true
 	return false
 
 #############################

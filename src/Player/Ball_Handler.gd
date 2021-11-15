@@ -58,7 +58,7 @@ func pickup_ball(ball):
 	
 func throw_ball(pos, speed):
 	if S.has_ball and S.active_ball != null :
-		print("throw ball")
+		print("throw "+S.active_ball.name)
 		S.released_ball = S.active_ball
 		S.active_ball.throw(pos, speed)
 		yield(get_tree().create_timer(0.1), "timeout")

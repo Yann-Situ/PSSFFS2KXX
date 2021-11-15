@@ -38,7 +38,7 @@ Popol Super Slam Fusion Full Speed 2KXX
    - [ ] squish anim for squish balls
    - [x] add several balls (bouncy ball, fire ball, linked ball, phantom ball)
    - [ ] handle interactions with environment elements
-   - [ ] Add new powers when selection+active (such as megaBOUM, dash, RollingDestroying...)
+   - [.] Add new powers when selection+active (such as megaBOUM, dash, RollingDestroying...)
 * Juice :
    - [ ] Camera shake on heavy ball, dunks and other style action
    - [.] particles on balls, dust on footsteps & slide
@@ -65,6 +65,7 @@ Popol Super Slam Fusion Full Speed 2KXX
 * [ ] **Air dunkjump** when dunking can result in `S.selected_basket.dunk()` called on `null` instance (basket is not selected anymore)
 * [ ] `Z_as_relative` doesn't work through script... https://github.com/godotengine/godot/issues/45416
 * [ ] Get out from **zipline** just on flat floor results in sliding (like on ice).
+* [ ] Get out from **low ceiling** (crouched) when returning can result in infinite returning **animation**.
 
 ## Groups
 

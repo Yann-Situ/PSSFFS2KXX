@@ -90,7 +90,8 @@ var active_ball = null#pointer to a ball
 var released_ball = null # useful because when the ball is released (or thrown)
 # it is immediatly detected by area_body_enter...
 var selected_ball = null#pointer to the selected ball
-var selected_basket = null#pointer to the basket to dunk
+var dunkjump_basket = null#pointer to the basket to dunkjump
+var dunk_basket = null
 
 func _input(event):
 	
