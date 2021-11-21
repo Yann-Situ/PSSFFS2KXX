@@ -43,7 +43,7 @@ animations = [ {
 [sub_resource type="CircleShape2D" id=8]
 radius = 16.0
 
-[sub_resource type="Gradient" id=10]
+[sub_resource type="Gradient" id=9]
 offsets = PoolRealArray( 0.00469484, 0.525822, 0.751174, 0.99061 )
 colors = PoolColorArray( 2, 1, 1.4, 0, 1, 1, 1, 1, 1, 0.882874, 0.605469, 0.67451, 0.363281, 0.00709534, 0.00709534, 0 )
 
@@ -71,7 +71,7 @@ shape = SubResource( 1 )
 [node name="Sprite" type="AnimatedSprite" parent="Entrance"]
 frames = SubResource( 7 )
 animation = "active"
-frame = 3
+frame = 2
 playing = true
 
 [node name="Area" type="Area2D" parent="Entrance"]
@@ -103,7 +103,7 @@ initial_velocity_random = 0.36
 linear_accel = 12.8
 tangential_accel = -0.69
 scale_amount_random = 0.95
-color_ramp = SubResource( 10 )
+color_ramp = SubResource( 9 )
 __meta__ = {
 "_editor_description_": ""
 }

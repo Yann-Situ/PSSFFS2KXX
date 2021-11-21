@@ -67,6 +67,7 @@ Popol Super Slam Fusion Full Speed 2KXX
 * [ ] Get out from **zipline** just on flat floor results in sliding (like on ice).
 * [ ] Get out from **low ceiling** (crouched) when returning can result in infinite returning **animation**.
 * [ ] (Not problematic) Pressing jump and dunkjump just before landing can result in small dunkjump/jump.
+* [ ] **release** ball when **aiming** results in error
 
 ## Groups
 
@@ -79,6 +80,8 @@ Must inherit from `ball.gd`.
 ### holders
 Must have a `free_ball(ball : node)` method.
 They can act and hold balls (example: player or pipeball).
+
+### playerholders
 
 ### activables
 Must inherit from `activable.gd`.

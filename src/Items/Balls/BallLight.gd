@@ -13,13 +13,11 @@ func set_enabled(b):
 	if b :
 		$LightSmall.enabled = false
 		$LightBack.enabled = true
-		$LightBack2.enabled = true
 		$LightFront.enabled = true
 		$LightPlayer.enabled = true
 	else :
 		$LightSmall.enabled = true
 		$LightBack.enabled = false
-		$LightBack2.enabled = false
 		$LightFront.enabled = false
 		$LightPlayer.enabled = false
 

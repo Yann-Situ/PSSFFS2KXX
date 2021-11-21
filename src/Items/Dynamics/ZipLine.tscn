@@ -42,6 +42,7 @@ rotate = false
 loop = false
 
 [node name="Sprite" type="Sprite" parent="Path2D/PathFollow2D"]
+visible = false
 texture = ExtResource( 2 )
 region_enabled = true
 region_rect = Rect2( 16, 160, 16, 16 )
