@@ -149,9 +149,13 @@ ui_release={
 
 [layer_names]
 
+2d_render/layer_1="world"
 2d_physics/layer_1="player"
+2d_render/layer_2="background"
 2d_physics/layer_2="world"
+2d_render/layer_3="player"
 2d_physics/layer_3="balls"
+2d_render/layer_4="graff"
 2d_physics/layer_4="environment_special"
 2d_physics/layer_5="explosion"
 2d_physics/layer_6="basket"
