@@ -1046,7 +1046,7 @@ texture = ExtResource( 2 )
 offset = Vector2( 0.5, 0 )
 hframes = 16
 vframes = 20
-frame = 201
+frame = 199
 __meta__ = {
 "_edit_lock_": true
 }
@@ -1145,10 +1145,11 @@ position = Vector2( 0, 5 )
 shape = SubResource( 69 )
 
 [node name="Has_Ball_Position" type="Node2D" parent="Ball_Handler"]
-position = Vector2( 5, 0 )
+position = Vector2( 5.00001, 0 )
 
 [node name="AI" type="Node" parent="."]
 script = ExtResource( 4 )
+ai_timer_min = 0.1
 
 [node name="Action" type="Timer" parent="AI"]
 one_shot = true

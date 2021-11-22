@@ -1,11 +1,13 @@
 #tool
 extends Path2D
 
+export (bool) var invert_line_direction = false
 var init_point = Vector2.ZERO
-export var final_point = Vector2.ZERO
+var final_point = Vector2.ZERO
 #export (Vector2) var final_point = Vector2.ZERO setget set_final_point
 #export(NodePath) var final_point_node = null setget set_final_point_node_path
-var rail_dir = Vector2.ZERO
+#var rail_dir = Vector2.ZERO
+var collision_segments = []
 
 var inside_bodies = []
 var path_follows = []
@@ -41,27 +43,51 @@ onready var player_offset = Vector2(0.0,player_position_offset)
 #	rail_dir = (final_point-init_point).normalized()
 #	if is_inside_tree():
 #		_update_points()
+#
+#func _update_points():
+#	rail_dir = (final_point-init_point).normalized()
+#	curve.clear_points()
+#	curve.add_point(init_point)
+#	curve.add_point(final_point)
+#	$Line2D.clear_points()
+#	$Line2D.add_point(init_point)
+#	$Line2D.add_point(final_point)
+#
+#	$Area/CollisionShape2D.shape.set_a(init_point+player_offset)
+#	$Area/CollisionShape2D.shape.set_b(final_point+player_offset)
 
 func _update_points():
-		rail_dir = (final_point-init_point).normalized()
-		curve.clear_points()
-		curve.add_point(init_point)
-		curve.add_point(final_point)
-		$Line2D.clear_points()
-		$Line2D.add_point(init_point)
-		$Line2D.add_point(final_point)
+	#rail_dir = (final_point-init_point).normalized()
+	$Line2D.clear_points()
+	var p0
+	var p1
+	for i in range(curve.get_point_count()-1):
+		if invert_line_direction:
+			p0 = curve.get_point_position(curve.get_point_count()-i-1)
+			p1 = curve.get_point_position(curve.get_point_count()-i-2)
+		else :
+			p0 = curve.get_point_position(i)
+			p1 = curve.get_point_position(i+1)
+		$Line2D.add_point(p0)
+		$Line2D.add_point(p1)
 		
-		$Area/CollisionShape2D.shape.set_a(init_point+player_offset)
-		$Area/CollisionShape2D.shape.set_b(final_point+player_offset)
-
+		var new_segment = CollisionShape2D.new()
+		new_segment.shape = SegmentShape2D.new()
+		new_segment.shape.set_a(p0+player_offset)
+		new_segment.shape.set_b(p1+player_offset)
+		collision_segments.push_back(new_segment)
+		$Area.add_child(new_segment)
+		
 ###############################################################################
 
 func _ready():
 	self.z_index = Global.z_indices["foreground_1"]
 	if curve.get_point_count() >= 2:
 		print("setcurve")
-		final_point = curve.get_point_position(1)
+		final_point = curve.get_point_position(curve.get_point_count()-1)
 		print(final_point)
+	else :
+		print("Error")
 	_update_points()
 	
 # Called every frame. 'delta' is the elapsed time since the previous frame.
@@ -72,7 +98,8 @@ func _process(delta):
 		var path_follow = path_follows[i-j]
 		var velocity = linear_velocities[i-j]
 		var position_offset = position_offsets[i-j]
-		
+		var rail_dir = path_follow.transform.x
+		# transform.x is the direction (vec2D) of the pathfollow
 		velocity.y += gravity * delta
 		velocity = velocity.dot(rail_dir) * rail_dir
 		position_offset = lerp(position_offset, player_offset, 0.5)
@@ -110,14 +137,16 @@ func _on_Area_body_exited(body):
 		var new_path_follow : PathFollow2D = PathFollow2D.new()
 		
 		var bi = body.global_position-global_position-init_point
-		new_path_follow.offset = bi.dot(rail_dir)
-
 		new_path_follow.loop = false
 		self.add_child(new_path_follow)
 		print(body.name+" on trail")
+		
+		new_path_follow.offset = curve.get_closest_offset(bi) # approximate where the player is
+		var rail_dir = new_path_follow.transform.x
+
 		inside_bodies.push_back(body)
 		path_follows.push_back(new_path_follow)
 		body.S.velocity = body.S.velocity.dot(rail_dir) * rail_dir
 		linear_velocities.push_back(body.S.velocity)
-		position_offsets.push_back(bi - new_path_follow.offset * rail_dir)
+		position_offsets.push_back(body.global_position-new_path_follow.global_position)
 		body.disable_physics()

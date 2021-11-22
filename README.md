@@ -67,7 +67,8 @@ Popol Super Slam Fusion Full Speed 2KXX
 * [ ] Get out from **zipline** just on flat floor results in sliding (like on ice).
 * [ ] Get out from **low ceiling** (crouched) when returning can result in infinite returning **animation**.
 * [ ] (Not problematic) Pressing jump and dunkjump just before landing can result in small dunkjump/jump.
-* [ ] **release** ball when **aiming** results in error
+* [ ] **release** ball when **aiming** results in error.
+* [ ] Stuck colliding on a **trail** can result in building speed.
 
 ## Groups
 

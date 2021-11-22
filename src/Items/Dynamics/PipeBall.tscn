@@ -71,7 +71,6 @@ shape = SubResource( 1 )
 [node name="Sprite" type="AnimatedSprite" parent="Entrance"]
 frames = SubResource( 7 )
 animation = "active"
-frame = 2
 playing = true
 
 [node name="Area" type="Area2D" parent="Entrance"]
