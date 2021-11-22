@@ -1,7 +1,7 @@
 extends Node2D
 
 onready var Player = get_parent().get_parent()
-onready var S = Player.get_node("Player_State")
+onready var S = Player.get_node("State")
 
 var points = Array()
 export (int) var nb_points_display = 50
@@ -30,14 +30,14 @@ func shoot_vector(): # return shoot vector if player not moving
 	t = shoot_min_speed+t*(shoot_max_speed-shoot_min_speed)
 	if S.active_ball != null: # to be sure
 		t = t/S.active_ball.mass
-	return t * (Player.get_node("Camera").get_global_mouse_position() - 
+	return t * (Player.get_node("Camera").get_global_mouse_position() -
 					Player.position).normalized()
 
 func _draw():
 	for i in range(0, points.size() - 1, coeff_display):
 		#draw_line(points[i], points[i+1], red, 1)
 		draw_circle(points[i], 2, yellorange)
-		
+
 func draw(pos, vel, grav):
 	points.clear()
 	for i in range(nb_points):
@@ -54,7 +54,7 @@ func draw_attract(pos, vel, grav, power):
 		vel += (1.002*grav + 1.002*power * (pos_init-pos).normalized()) * delta
 		pos += 0.998*vel * delta
 	update()
-	
+
 func clear():
 	points.clear()
 	update()

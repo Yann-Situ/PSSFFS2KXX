@@ -1,33 +1,31 @@
-[gd_scene load_steps=98 format=2]
+[gd_scene load_steps=96 format=2]
 
-[ext_resource path="res://src/Player/Player.gd" type="Script" id=1]
-[ext_resource path="res://assets/art/characters/Player.png" type="Texture" id=2]
-[ext_resource path="res://src/Player/Shoot_predictor.gd" type="Script" id=3]
-[ext_resource path="res://src/Player/Player_State.tscn" type="PackedScene" id=5]
-[ext_resource path="res://src/Player/Ball_Handler.gd" type="Script" id=6]
-[ext_resource path="res://src/Player/Camera.gd" type="Script" id=7]
-[ext_resource path="res://src/Player/AnimationTree.gd" type="Script" id=8]
-[ext_resource path="res://src/Player/Special_Action_Handler.gd" type="Script" id=9]
-[ext_resource path="res://src/Player/Ray.gd" type="Script" id=10]
+[ext_resource path="res://src/Characters/Character.gd" type="Script" id=1]
+[ext_resource path="res://assets/art/characters/Character.png" type="Texture" id=2]
+[ext_resource path="res://src/Characters/State.gd" type="Script" id=3]
+[ext_resource path="res://src/Characters/State.tscn" type="PackedScene" id=5]
+[ext_resource path="res://src/Characters/AnimationTree.gd" type="Script" id=6]
+[ext_resource path="res://src/Characters/Effects.gd" type="Script" id=7]
+[ext_resource path="res://src/Characters/Camera.gd" type="Script" id=8]
+[ext_resource path="res://src/Characters/Action_Handler.gd" type="Script" id=9]
+[ext_resource path="res://src/Characters/Ray.gd" type="Script" id=10]
 [ext_resource path="res://assets/art/ball/dust.png" type="Texture" id=11]
 [ext_resource path="res://src/Effects/DustParticle.tscn" type="PackedScene" id=12]
-[ext_resource path="res://src/Player/Player_Effects.gd" type="Script" id=13]
+[ext_resource path="res://src/Characters/Ball_Handler.gd" type="Script" id=13]
 [ext_resource path="res://src/Effects/GhostHandler.tscn" type="PackedScene" id=14]
-[ext_resource path="res://src/Player/Actions/Side.gd" type="Script" id=15]
-[ext_resource path="res://src/Player/Actions/Jump.gd" type="Script" id=16]
-[ext_resource path="res://src/Player/Actions/Walljump.gd" type="Script" id=17]
-[ext_resource path="res://src/Player/Actions/Aim.gd" type="Script" id=18]
-[ext_resource path="res://src/Player/Actions/Dunk.gd" type="Script" id=19]
-[ext_resource path="res://src/Player/Actions/Shoot.gd" type="Script" id=20]
-[ext_resource path="res://src/Player/Actions/Dunkjump.gd" type="Script" id=21]
-[ext_resource path="res://src/Player/Actions/SelectBall.gd" type="Script" id=22]
-[ext_resource path="res://src/Player/Actions/Adherence.gd" type="Script" id=23]
-[ext_resource path="res://src/Player/Actions/Crouch.gd" type="Script" id=24]
+[ext_resource path="res://src/Characters/Actions/Side.gd" type="Script" id=15]
+[ext_resource path="res://src/Characters/Actions/Jump.gd" type="Script" id=16]
+[ext_resource path="res://src/Characters/Actions/Walljump.gd" type="Script" id=17]
+[ext_resource path="res://src/Characters/Actions/Dunk.gd" type="Script" id=19]
+[ext_resource path="res://src/Characters/Actions/Shoot.gd" type="Script" id=20]
+[ext_resource path="res://src/Characters/Actions/Dunkjump.gd" type="Script" id=21]
+[ext_resource path="res://src/Characters/Actions/Adherence.gd" type="Script" id=23]
+[ext_resource path="res://src/Characters/Actions/Crouch.gd" type="Script" id=24]
 [ext_resource path="res://src/Effects/TrailHandler.tscn" type="PackedScene" id=25]
 [ext_resource path="res://assets/art/effects/trail.png" type="Texture" id=26]
 [ext_resource path="res://src/Effects/JumpParticles0.tscn" type="PackedScene" id=27]
 [ext_resource path="res://assets/art/effects/offset_glow.png" type="Texture" id=28]
-[ext_resource path="res://src/Player/Actions/Release.gd" type="Script" id=29]
+[ext_resource path="res://src/Characters/Actions/Release.gd" type="Script" id=29]
 
 [sub_resource type="CircleShape2D" id=1]
 resource_local_to_scene = true
@@ -201,18 +199,6 @@ tracks/0/keys = {
 "update": 1,
 "values": [ 160, 161, 162, 163 ]
 }
-tracks/1/type = "value"
-tracks/1/path = NodePath("../Ball_Handler/Has_Ball_Position:position")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/keys = {
-"times": PoolRealArray( 0, 0.1, 0.2, 0.3 ),
-"transitions": PoolRealArray( 1, 1, 1, 1 ),
-"update": 0,
-"values": [ Vector2( 2, -7 ), Vector2( 1, -7 ), Vector2( -6, -6 ), Vector2( -8, -6 ) ]
-}
 
 [sub_resource type="Animation" id=44]
 length = 0.35
@@ -241,32 +227,6 @@ tracks/1/keys = {
 "update": 0,
 "values": [ true, false ]
 }
-tracks/2/type = "value"
-tracks/2/path = NodePath("../Ball_Handler/Has_Ball_Position:position")
-tracks/2/interp = 1
-tracks/2/loop_wrap = true
-tracks/2/imported = false
-tracks/2/enabled = true
-tracks/2/keys = {
-"times": PoolRealArray( 0, 0.1, 0.11, 0.12, 0.15 ),
-"transitions": PoolRealArray( 1, 1, 1, 1, 1 ),
-"update": 0,
-"values": [ Vector2( -14, -21 ), Vector2( -16, -20 ), Vector2( -14, -22 ), Vector2( 13, -34 ), Vector2( 13, -34 ) ]
-}
-tracks/3/type = "method"
-tracks/3/path = NodePath("../Ball_Handler")
-tracks/3/interp = 1
-tracks/3/loop_wrap = true
-tracks/3/imported = false
-tracks/3/enabled = true
-tracks/3/keys = {
-"times": PoolRealArray( 0.16 ),
-"transitions": PoolRealArray( 1 ),
-"values": [ {
-"args": [  ],
-"method": "shoot_ball"
-} ]
-}
 
 [sub_resource type="Animation" id=45]
 length = 0.1
@@ -281,18 +241,6 @@ tracks/0/keys = {
 "transitions": PoolRealArray( 1 ),
 "update": 1,
 "values": [ 209 ]
-}
-tracks/1/type = "value"
-tracks/1/path = NodePath("../Ball_Handler/Has_Ball_Position:position")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/keys = {
-"times": PoolRealArray( 0 ),
-"transitions": PoolRealArray( 1 ),
-"update": 0,
-"values": [ Vector2( -10, 12 ) ]
 }
 
 [sub_resource type="Animation" id=46]
@@ -309,18 +257,6 @@ tracks/0/keys = {
 "transitions": PoolRealArray( 1, 1, 1, 1, 1, 1, 1, 1 ),
 "update": 1,
 "values": [ 112, 113, 114, 115, 116, 117, 118, 119 ]
-}
-tracks/1/type = "value"
-tracks/1/path = NodePath("../Ball_Handler/Has_Ball_Position:position")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/keys = {
-"times": PoolRealArray( 0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7 ),
-"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1, 1, 1 ),
-"update": 1,
-"values": [ Vector2( 11, 6 ), Vector2( 11, 12 ), Vector2( 10, 15 ), Vector2( 11, 24 ), Vector2( 9, 30 ), Vector2( 6, 21 ), Vector2( 6, 12 ), Vector2( 6, 8 ) ]
 }
 
 [sub_resource type="Animation" id=47]
@@ -339,18 +275,6 @@ tracks/0/keys = {
 "update": 1,
 "values": [ 80 ]
 }
-tracks/1/type = "value"
-tracks/1/path = NodePath("../Ball_Handler/Has_Ball_Position:position")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/keys = {
-"times": PoolRealArray( 0 ),
-"transitions": PoolRealArray( 1 ),
-"update": 1,
-"values": [ Vector2( -12, 15 ) ]
-}
 
 [sub_resource type="Animation" id=48]
 length = 0.6
@@ -367,24 +291,12 @@ tracks/0/keys = {
 "values": [ 52, 53, 54, 55, 56, 57 ]
 }
 tracks/1/type = "value"
-tracks/1/path = NodePath("../Ball_Handler/Has_Ball_Position:position")
+tracks/1/path = NodePath("../State:is_dunking")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/imported = false
 tracks/1/enabled = true
 tracks/1/keys = {
-"times": PoolRealArray( 0, 0.1, 0.2, 0.3, 0.4, 0.5 ),
-"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1 ),
-"update": 0,
-"values": [ Vector2( -16, -31 ), Vector2( 2, -40 ), Vector2( 12, -32 ), Vector2( 11, -18 ), Vector2( 8, 5 ), Vector2( 8, 26 ) ]
-}
-tracks/2/type = "value"
-tracks/2/path = NodePath("../State:is_dunking")
-tracks/2/interp = 1
-tracks/2/loop_wrap = true
-tracks/2/imported = false
-tracks/2/enabled = true
-tracks/2/keys = {
 "times": PoolRealArray( 0, 0.6 ),
 "transitions": PoolRealArray( 1, 1 ),
 "update": 1,
@@ -405,24 +317,12 @@ tracks/0/keys = {
 "values": [ 48, 49, 50, 51, 52 ]
 }
 tracks/1/type = "value"
-tracks/1/path = NodePath("../Ball_Handler/Has_Ball_Position:position")
+tracks/1/path = NodePath("../State:is_dunkjumping")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/imported = false
 tracks/1/enabled = true
 tracks/1/keys = {
-"times": PoolRealArray( 0, 0.1, 0.2, 0.3, 0.4 ),
-"transitions": PoolRealArray( 1, 1, 1, 1, 1 ),
-"update": 1,
-"values": [ Vector2( 9, 6 ), Vector2( 11, -14 ), Vector2( 6, -31 ), Vector2( -3, -35 ), Vector2( -12, -30 ) ]
-}
-tracks/2/type = "value"
-tracks/2/path = NodePath("../State:is_dunkjumping")
-tracks/2/interp = 1
-tracks/2/loop_wrap = true
-tracks/2/imported = false
-tracks/2/enabled = true
-tracks/2/keys = {
 "times": PoolRealArray( 0 ),
 "transitions": PoolRealArray( 1 ),
 "update": 1,
@@ -444,18 +344,6 @@ tracks/0/keys = {
 "update": 1,
 "values": [ 148, 149 ]
 }
-tracks/1/type = "value"
-tracks/1/path = NodePath("../Ball_Handler/Has_Ball_Position:position")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/keys = {
-"times": PoolRealArray( 0, 0.2, 0.35 ),
-"transitions": PoolRealArray( 1, 1, 1 ),
-"update": 0,
-"values": [ Vector2( 3, -6 ), Vector2( 3, -6 ), Vector2( 2, -8 ) ]
-}
 
 [sub_resource type="Animation" id=51]
 length = 0.5
@@ -473,18 +361,6 @@ tracks/0/keys = {
 "update": 1,
 "values": [ 149, 150, 151, 152 ]
 }
-tracks/1/type = "value"
-tracks/1/path = NodePath("../Ball_Handler/Has_Ball_Position:position")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/keys = {
-"times": PoolRealArray( 0 ),
-"transitions": PoolRealArray( 1 ),
-"update": 0,
-"values": [ Vector2( 2, -8 ) ]
-}
 
 [sub_resource type="Animation" id=52]
 length = 0.4
@@ -500,18 +376,6 @@ tracks/0/keys = {
 "update": 1,
 "values": [ 128, 129, 130, 131 ]
 }
-tracks/1/type = "value"
-tracks/1/path = NodePath("../Ball_Handler/Has_Ball_Position:position")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/keys = {
-"times": PoolRealArray( 0, 0.1, 0.2, 0.3 ),
-"transitions": PoolRealArray( 1, 1, 1, 1 ),
-"update": 0,
-"values": [ Vector2( 7, -8 ), Vector2( 1, -7 ), Vector2( -5, -5 ), Vector2( -6, -5 ) ]
-}
 
 [sub_resource type="Animation" id=53]
 loop = true
@@ -526,18 +390,6 @@ tracks/0/keys = {
 "transitions": PoolRealArray( 1, 1, 1, 1, 1, 1, 1, 1, 1, 1 ),
 "update": 1,
 "values": [ 176, 177, 178, 179, 180, 181, 182, 183, 184, 185 ]
-}
-tracks/1/type = "value"
-tracks/1/path = NodePath("../Ball_Handler/Has_Ball_Position:position")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/keys = {
-"times": PoolRealArray( 0, 0.3 ),
-"transitions": PoolRealArray( 1, 1 ),
-"update": 0,
-"values": [ Vector2( -12, -4 ), Vector2( -10, -6 ) ]
 }
 
 [sub_resource type="Animation" id=54]
@@ -567,32 +419,6 @@ tracks/1/keys = {
 "update": 0,
 "values": [ true, false ]
 }
-tracks/2/type = "method"
-tracks/2/path = NodePath("../Ball_Handler")
-tracks/2/interp = 1
-tracks/2/loop_wrap = true
-tracks/2/imported = false
-tracks/2/enabled = true
-tracks/2/keys = {
-"times": PoolRealArray( 0.16 ),
-"transitions": PoolRealArray( 1 ),
-"values": [ {
-"args": [  ],
-"method": "shoot_ball"
-} ]
-}
-tracks/3/type = "value"
-tracks/3/path = NodePath("../Ball_Handler/Has_Ball_Position:position")
-tracks/3/interp = 1
-tracks/3/loop_wrap = true
-tracks/3/imported = false
-tracks/3/enabled = true
-tracks/3/keys = {
-"times": PoolRealArray( 0, 0.06, 0.1, 0.11, 0.12, 0.15 ),
-"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1 ),
-"update": 0,
-"values": [ Vector2( -14, -21 ), Vector2( -14, -21 ), Vector2( -16, -20 ), Vector2( -12, -23 ), Vector2( 13, -34 ), Vector2( 13, -34 ) ]
-}
 
 [sub_resource type="Animation" id=55]
 length = 0.1
@@ -607,18 +433,6 @@ tracks/0/keys = {
 "transitions": PoolRealArray( 1 ),
 "update": 1,
 "values": [ 208 ]
-}
-tracks/1/type = "value"
-tracks/1/path = NodePath("../Ball_Handler/Has_Ball_Position:position")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/keys = {
-"times": PoolRealArray( 0 ),
-"transitions": PoolRealArray( 1 ),
-"update": 0,
-"values": [ Vector2( -4, -5 ) ]
 }
 
 [sub_resource type="Animation" id=56]
@@ -637,24 +451,12 @@ tracks/0/keys = {
 "values": [ 64, 65, 66 ]
 }
 tracks/1/type = "value"
-tracks/1/path = NodePath("../Ball_Handler/Has_Ball_Position:position")
+tracks/1/path = NodePath("../State:is_halfturning")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/imported = false
 tracks/1/enabled = true
 tracks/1/keys = {
-"times": PoolRealArray( 0, 0.15, 0.3 ),
-"transitions": PoolRealArray( 1, 1, 1 ),
-"update": 1,
-"values": [ Vector2( -10, -1 ), Vector2( -8, -2 ), Vector2( -1, -3 ) ]
-}
-tracks/2/type = "value"
-tracks/2/path = NodePath("../State:is_halfturning")
-tracks/2/interp = 1
-tracks/2/loop_wrap = true
-tracks/2/imported = false
-tracks/2/enabled = true
-tracks/2/keys = {
 "times": PoolRealArray( 0, 0.45 ),
 "transitions": PoolRealArray( 1, 1 ),
 "update": 1,
@@ -675,18 +477,6 @@ tracks/0/keys = {
 "transitions": PoolRealArray( 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1 ),
 "update": 1,
 "values": [ 201, 202, 203, 203, 204, 200, 201, 202, 203, 203, 204, 200, 201, 202, 203, 203, 204, 200, 201, 202, 203, 203, 204, 200, 192, 193, 194, 195, 196, 197, 198, 199, 192, 193, 194, 195, 196, 197, 198, 199, 192, 193, 194, 195, 196, 197, 198, 199, 200 ]
-}
-tracks/1/type = "value"
-tracks/1/path = NodePath("../Ball_Handler/Has_Ball_Position:position")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/keys = {
-"times": PoolRealArray( 0, 6.1, 6.2, 6.3, 6.4, 6.5, 6.6, 6.7, 6.8, 6.9, 7, 7.1, 7.2, 7.3, 7.4, 7.5, 7.6, 7.7, 7.9, 8, 8.1, 8.2, 8.3, 8.4, 8.5, 8.6, 8.7, 8.8 ),
-"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1 ),
-"update": 1,
-"values": [ Vector2( 5, 0 ), Vector2( 10, 5.99999 ), Vector2( 8.99999, 12 ), Vector2( 8, 26 ), Vector2( 4.99999, 15 ), Vector2( 5.00001, 7.00001 ), Vector2( 5.99999, 3 ), Vector2( 5, 0 ), Vector2( 5.00001, 0 ), Vector2( 5.00001, 0 ), Vector2( 9, -2 ), Vector2( 10, 5.99999 ), Vector2( 8.99999, 12 ), Vector2( 8, 26 ), Vector2( 4.99999, 15 ), Vector2( 5.00001, 7.00001 ), Vector2( 5.99999, 3 ), Vector2( 5, 0 ), Vector2( 4.99999, 0 ), Vector2( 9, -2 ), Vector2( 10, 5.99999 ), Vector2( 8.99999, 12 ), Vector2( 8, 26 ), Vector2( 4.99999, 15 ), Vector2( 5.00001, 7.00001 ), Vector2( 5.99999, 3 ), Vector2( 5, 0 ), Vector2( 5, 0 ) ]
 }
 
 [sub_resource type="Animation" id=58]
@@ -716,18 +506,6 @@ tracks/1/keys = {
 "update": 0,
 "values": [ true, false ]
 }
-tracks/2/type = "value"
-tracks/2/path = NodePath("../Ball_Handler/Has_Ball_Position:position")
-tracks/2/interp = 1
-tracks/2/loop_wrap = true
-tracks/2/imported = false
-tracks/2/enabled = true
-tracks/2/keys = {
-"times": PoolRealArray( 0, 0.05, 0.15, 0.25, 0.35 ),
-"transitions": PoolRealArray( 1, 1, 1, 1, 1 ),
-"update": 1,
-"values": [ Vector2( 7, -0.999998 ), Vector2( 4, -0.999998 ), Vector2( 5, -2 ), Vector2( 0, -7 ), Vector2( 3, -6 ) ]
-}
 
 [sub_resource type="Animation" id=59]
 length = 0.25
@@ -745,24 +523,12 @@ tracks/0/keys = {
 "values": [ 80 ]
 }
 tracks/1/type = "value"
-tracks/1/path = NodePath("../Ball_Handler/Has_Ball_Position:position")
+tracks/1/path = NodePath("../State:is_landing")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/imported = false
 tracks/1/enabled = true
 tracks/1/keys = {
-"times": PoolRealArray( 0 ),
-"transitions": PoolRealArray( 1 ),
-"update": 1,
-"values": [ Vector2( -12, 15 ) ]
-}
-tracks/2/type = "value"
-tracks/2/path = NodePath("../State:is_landing")
-tracks/2/interp = 1
-tracks/2/loop_wrap = true
-tracks/2/imported = false
-tracks/2/enabled = true
-tracks/2/keys = {
 "times": PoolRealArray( 0, 0.25 ),
 "transitions": PoolRealArray( 1, 1 ),
 "update": 1,
@@ -785,24 +551,12 @@ tracks/0/keys = {
 "values": [ 96, 97, 98, 99, 100, 101 ]
 }
 tracks/1/type = "value"
-tracks/1/path = NodePath("../Ball_Handler/Has_Ball_Position:position")
+tracks/1/path = NodePath("../State:is_landing")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/imported = false
 tracks/1/enabled = true
 tracks/1/keys = {
-"times": PoolRealArray( 0, 0.07, 0.14, 0.21, 0.28, 0.35, 0.42 ),
-"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1, 1 ),
-"update": 1,
-"values": [ Vector2( -15, -5 ), Vector2( -7, -20 ), Vector2( -2, -24 ), Vector2( 7, -17 ), Vector2( 13, -8 ), Vector2( 12, 2 ), Vector2( 9, 12 ) ]
-}
-tracks/2/type = "value"
-tracks/2/path = NodePath("../State:is_landing")
-tracks/2/interp = 1
-tracks/2/loop_wrap = true
-tracks/2/imported = false
-tracks/2/enabled = true
-tracks/2/keys = {
 "times": PoolRealArray( 0, 0.42 ),
 "transitions": PoolRealArray( 1, 1 ),
 "update": 1,
@@ -840,18 +594,6 @@ tracks/0/keys = {
 "update": 1,
 "values": [ 0, 1, 2, 3, 4, 5, 6, 7 ]
 }
-tracks/1/type = "value"
-tracks/1/path = NodePath("../Ball_Handler/Has_Ball_Position:position")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/keys = {
-"times": PoolRealArray( 0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7 ),
-"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1, 1, 1 ),
-"update": 1,
-"values": [ Vector2( 9, -1.99999 ), Vector2( 15, 8.00001 ), Vector2( 15, 12 ), Vector2( 14, 27 ), Vector2( 12, 16 ), Vector2( 4, 7 ), Vector2( 4.00001, 3 ), Vector2( 4, 1 ) ]
-}
 
 [sub_resource type="Animation" id=63]
 length = 0.4
@@ -879,18 +621,6 @@ tracks/1/keys = {
 "transitions": PoolRealArray( 1, 1 ),
 "update": 0,
 "values": [ true, false ]
-}
-tracks/2/type = "value"
-tracks/2/path = NodePath("../Ball_Handler/Has_Ball_Position:position")
-tracks/2/interp = 1
-tracks/2/loop_wrap = true
-tracks/2/imported = false
-tracks/2/enabled = true
-tracks/2/keys = {
-"times": PoolRealArray( 0, 0.05, 0.15, 0.25, 0.35 ),
-"transitions": PoolRealArray( 1, 1, 1, 1, 1 ),
-"update": 1,
-"values": [ Vector2( 7, -0.999998 ), Vector2( 4, -0.999998 ), Vector2( 5, -2 ), Vector2( 0, -7 ), Vector2( 3, -6 ) ]
 }
 
 [sub_resource type="CanvasItemMaterial" id=64]
@@ -920,102 +650,94 @@ particles_anim_loop = true
 radius = 14.0
 height = 28.0
 
-[node name="Player" type="KinematicBody2D"]
-position = Vector2( 416, 144 )
+[node name="Character" type="KinematicBody2D"]
 z_index = 1
 z_as_relative = false
 collision_mask = 3
 script = ExtResource( 1 )
-air_friction = 0.1
-max_speed_fall = 700.0
+__meta__ = {
+"_edit_group_": true
+}
 
 [node name="State" parent="." instance=ExtResource( 5 )]
 visible = false
-is_walljumping = true
-is_dunkjumping = true
-is_dunking = true
-is_halfturning = true
-is_shooting = true
+script = ExtResource( 3 )
 
 [node name="Actions" type="Node2D" parent="."]
 
-[node name="Special_Action_Handler" type="Node2D" parent="Actions"]
+[node name="Action_Handler" type="Node2D" parent="Actions"]
 visible = false
 script = ExtResource( 9 )
 __meta__ = {
 "_edit_group_": true
 }
 
-[node name="Ray_fwd_up" type="RayCast2D" parent="Actions/Special_Action_Handler"]
+[node name="Ray_fwd_up" type="RayCast2D" parent="Actions/Action_Handler"]
 position = Vector2( 0, -16 )
 cast_to = Vector2( 9, 0 )
 script = ExtResource( 10 )
 
-[node name="Ray_fwd_down" type="RayCast2D" parent="Actions/Special_Action_Handler"]
+[node name="Ray_fwd_down" type="RayCast2D" parent="Actions/Action_Handler"]
 position = Vector2( 0, 16 )
 cast_to = Vector2( 9, 0 )
 script = ExtResource( 10 )
 
-[node name="Ray_fwd_up_f" type="RayCast2D" parent="Actions/Special_Action_Handler"]
+[node name="Ray_fwd_up_f" type="RayCast2D" parent="Actions/Action_Handler"]
 position = Vector2( 0, -16 )
 cast_to = Vector2( -9, 0 )
 script = ExtResource( 10 )
 
-[node name="Ray_fwd_down_f" type="RayCast2D" parent="Actions/Special_Action_Handler"]
+[node name="Ray_fwd_down_f" type="RayCast2D" parent="Actions/Action_Handler"]
 position = Vector2( 0, 16 )
 cast_to = Vector2( -9, 0 )
 script = ExtResource( 10 )
 
-[node name="Ray_up_fwd" type="RayCast2D" parent="Actions/Special_Action_Handler"]
+[node name="Ray_up_fwd" type="RayCast2D" parent="Actions/Action_Handler"]
 position = Vector2( 8, 0 )
 cast_to = Vector2( 0, -20 )
 script = ExtResource( 10 )
 
-[node name="Ray_up_bwd" type="RayCast2D" parent="Actions/Special_Action_Handler"]
+[node name="Ray_up_bwd" type="RayCast2D" parent="Actions/Action_Handler"]
 position = Vector2( -8, 0 )
 cast_to = Vector2( 0, -20 )
 script = ExtResource( 10 )
 
-[node name="Ray_down_fwd" type="RayCast2D" parent="Actions/Special_Action_Handler"]
+[node name="Ray_down_fwd" type="RayCast2D" parent="Actions/Action_Handler"]
 position = Vector2( 8, 0 )
 cast_to = Vector2( 0, 33 )
 script = ExtResource( 10 )
 
-[node name="Ray_down_bwd" type="RayCast2D" parent="Actions/Special_Action_Handler"]
+[node name="Ray_down_bwd" type="RayCast2D" parent="Actions/Action_Handler"]
 position = Vector2( -8, 0 )
 cast_to = Vector2( 0, 33 )
 script = ExtResource( 10 )
 
-[node name="Ray_slope_fwd" type="RayCast2D" parent="Actions/Special_Action_Handler"]
+[node name="Ray_slope_fwd" type="RayCast2D" parent="Actions/Action_Handler"]
 position = Vector2( 8, 32 )
 cast_to = Vector2( 0, 17 )
 script = ExtResource( 10 )
 
-[node name="Ray_slope_bwd" type="RayCast2D" parent="Actions/Special_Action_Handler"]
+[node name="Ray_slope_bwd" type="RayCast2D" parent="Actions/Action_Handler"]
 position = Vector2( -8, 32 )
 cast_to = Vector2( 0, 17 )
 script = ExtResource( 10 )
 
-[node name="dunkjump_area" type="Area2D" parent="Actions/Special_Action_Handler"]
+[node name="dunkjump_area" type="Area2D" parent="Actions/Action_Handler"]
 collision_layer = 0
 collision_mask = 32
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Actions/Special_Action_Handler/dunkjump_area"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Actions/Action_Handler/dunkjump_area"]
 modulate = Color( 0.945098, 1, 0, 1 )
 position = Vector2( 0, -50 )
 shape = SubResource( 1 )
 
-[node name="dunk_area" type="Area2D" parent="Actions/Special_Action_Handler"]
+[node name="dunk_area" type="Area2D" parent="Actions/Action_Handler"]
 collision_layer = 0
 collision_mask = 32
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Actions/Special_Action_Handler/dunk_area"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Actions/Action_Handler/dunk_area"]
 modulate = Color( 1, 0.490196, 0.870588, 1 )
 shape = SubResource( 2 )
-
-[node name="Shoot_predictor" type="Node2D" parent="Actions"]
-position = Vector2( 1, 1 )
-script = ExtResource( 3 )
 
 [node name="Side" type="Node" parent="Actions"]
 script = ExtResource( 15 )
@@ -1035,17 +757,11 @@ script = ExtResource( 19 )
 [node name="Dunkjump" type="Node" parent="Actions"]
 script = ExtResource( 21 )
 
-[node name="Aim" type="Node" parent="Actions"]
-script = ExtResource( 18 )
-
 [node name="Shoot" type="Node" parent="Actions"]
 script = ExtResource( 20 )
 
 [node name="Adherence" type="Node" parent="Actions"]
 script = ExtResource( 23 )
-
-[node name="SelectBall" type="Node" parent="Actions"]
-script = ExtResource( 22 )
 
 [node name="Release" type="Node" parent="Actions"]
 script = ExtResource( 29 )
@@ -1061,7 +777,7 @@ texture = ExtResource( 2 )
 offset = Vector2( 0.5, 0 )
 hframes = 16
 vframes = 20
-frame = 192
+frame = 198
 __meta__ = {
 "_edit_lock_": true
 }
@@ -1080,7 +796,7 @@ parameters/conditions/on_floor_cond = false
 parameters/conditions/on_wall_cond = false
 parameters/conditions/walking_cond = false
 parameters/conditions/walljumping_cond = false
-script = ExtResource( 8 )
+script = ExtResource( 6 )
 
 [node name="Player_Animation" type="AnimationPlayer" parent="Sprite"]
 anims/air_aim = SubResource( 43 )
@@ -1116,10 +832,10 @@ texture = ExtResource( 28 )
 region_enabled = true
 region_rect = Rect2( 0, 96, 32, 32 )
 
-[node name="Player_Effects" type="Node2D" parent="."]
-script = ExtResource( 13 )
+[node name="Effects" type="Node2D" parent="."]
+script = ExtResource( 7 )
 
-[node name="DustParticle" parent="Player_Effects" instance=ExtResource( 12 )]
+[node name="DustParticle" parent="Effects" instance=ExtResource( 12 )]
 modulate = Color( 0.85098, 0.85098, 0.85098, 1 )
 material = SubResource( 65 )
 position = Vector2( 0, 28 )
@@ -1136,23 +852,35 @@ scale_amount = 1.0
 anim_offset = 1.0
 anim_offset_random = 1.0
 
-[node name="GhostHandler" parent="Player_Effects" instance=ExtResource( 14 )]
+[node name="GhostHandler" parent="Effects" instance=ExtResource( 14 )]
 
-[node name="TrailHandler" parent="Player_Effects" instance=ExtResource( 25 )]
+[node name="TrailHandler" parent="Effects" instance=ExtResource( 25 )]
 wildness = 50.0
 gradient_col = SubResource( 66 )
 width_curve = SubResource( 67 )
 texture = ExtResource( 26 )
 
-[node name="JumpParticles0" parent="Player_Effects" instance=ExtResource( 27 )]
+[node name="JumpParticles0" parent="Effects" instance=ExtResource( 27 )]
 material = SubResource( 68 )
 position = Vector2( -4, 20 )
 lifetime = 0.45
 local_coords = false
 
+[node name="Camera" type="Camera2D" parent="."]
+visible = false
+position = Vector2( 0, -35 )
+z_index = 100
+current = true
+script = ExtResource( 8 )
+__meta__ = {
+"_edit_group_": true
+}
+
+[node name="Tween" type="Tween" parent="Camera"]
+
 [node name="Ball_Handler" type="Area2D" parent="."]
 collision_mask = 4
-script = ExtResource( 6 )
+script = ExtResource( 13 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Ball_Handler"]
 visible = false
@@ -1160,61 +888,7 @@ position = Vector2( 0, 5 )
 shape = SubResource( 69 )
 
 [node name="Has_Ball_Position" type="Node2D" parent="Ball_Handler"]
-position = Vector2( 9, -2 )
+position = Vector2( 8, 26 )
 
-[node name="Camera" type="Camera2D" parent="."]
-visible = false
-position = Vector2( 0, -35 )
-z_index = 100
-current = true
-script = ExtResource( 7 )
-__meta__ = {
-"_edit_group_": true
-}
-crouch_offset = 65.0
-
-[node name="Tween" type="Tween" parent="Camera"]
-
-[node name="Control" type="Control" parent="Camera"]
-margin_top = 35.0
-margin_right = 40.0
-margin_bottom = 75.0
-mouse_filter = 2
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
-[node name="ColorRect" type="ColorRect" parent="Camera/Control"]
-margin_left = -390.0
-margin_top = -251.0
-margin_right = -133.0
-margin_bottom = -168.0
-color = Color( 0.164706, 0.164706, 0.164706, 1 )
-
-[node name="RichTextLabel" type="RichTextLabel" parent="Camera/Control"]
-margin_left = -388.0
-margin_top = -249.0
-margin_right = -134.0
-margin_bottom = -168.0
-text = "Ball name:
-Ball mass :
-Ball friction :
-Ball bounce :"
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
-[node name="Combos" type="Node" parent="."]
-
-[node name="UI" type="Control" parent="."]
-visible = false
-margin_left = -82.0
-margin_top = -71.0
-margin_right = -42.0
-margin_bottom = -31.0
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
-[connection signal="body_entered" from="Ball_Handler" to="Ball_Handler" method="_on_Ball_Handler_body_entered"]
 [connection signal="tween_completed" from="Camera/Tween" to="Camera" method="_on_Tween_tween_completed"]
+[connection signal="body_entered" from="Ball_Handler" to="Ball_Handler" method="_on_Ball_Handler_body_entered"]

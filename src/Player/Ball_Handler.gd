@@ -2,18 +2,18 @@ extends Area2D
 # Ball pickup
 
 onready var Player = get_parent()
-onready var S = Player.get_node("Player_State")
+onready var S = Player.get_node("State")
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	pass
 
 func _on_Ball_Handler_body_entered(body):
-	print(body.name)
+	print(body.name+" entering "+Player.name+" ballhandler area")
 	if body.is_in_group("balls"):
 		if body == S.released_ball:
 			S.released_ball = null
-			print("ignore")
+			print("but "+body.name+" is ignored")
 			return
 		if S.has_ball or S.is_shooting :
 			pass
@@ -38,7 +38,7 @@ func set_has_ball_position():
 #####################
 
 func pickup_ball(ball):
-	print("pickup "+ball.name)
+	print(Player.name+" pickup "+ball.name)
 	S.has_ball = true
 	S.active_ball = ball
 	ball.pickup(Player)
@@ -55,7 +55,7 @@ func pickup_ball(ball):
 	ui.add_text("Ball bounc : "+str(ball.bounce))
 	ui.newline()
 	ui.add_text("Ball posit : "+str(ball.position - Player.position))
-	
+
 func throw_ball(pos, speed):
 	if S.has_ball and S.active_ball != null :
 		print("throw "+S.active_ball.name)
@@ -63,21 +63,21 @@ func throw_ball(pos, speed):
 		S.active_ball.throw(pos, speed)
 		yield(get_tree().create_timer(0.1), "timeout")
 		S.released_ball = null
-		
+
 func shoot_ball(): # called by animation
 	throw_ball(get_throw_position(), Player.ShootPredictor.shoot_vector_save + 0.5*S.velocity)
-		
 
-func free_ball(ball): # set out  active_ball and has_ball 
+
+func free_ball(ball): # set out  active_ball and has_ball
 	# called by ball when thrown or deleted
 	if S.has_ball and S.active_ball == ball:
 		S.active_ball = null
 		S.has_ball = false
-		print("Player free_ball")
+		print(Player.name+" free_ball")
 	elif S.has_ball :
-		print("error, free_ball on other ball")
+		print("error, "+Player.name+" free_ball on other ball")
 	else :
-		print("error, free_ball but doesn't have ball")
+		print("error, "+Player.name+" free_ball but doesn't have ball")
 
 
 func _physics_process(delta):

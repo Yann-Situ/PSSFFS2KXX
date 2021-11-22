@@ -1,10 +1,9 @@
 extends KinematicBody2D
-class_name Player, "res://assets/art/icons/popol.png"
+class_name Character #, "res://assets/art/icons/popol.png"
 
 onready var S = get_node("State")
-onready var SpecialActionHandler = get_node("Actions/Special_Action_Handler")
-onready var ShootPredictor = get_node("Actions/Shoot_predictor")
-onready var PlayerEffects = get_node("Player_Effects")
+onready var ActionHandler = get_node("Actions/Action_Handler")
+onready var Effects = get_node("Effects")
 onready var BallHandler = get_node("Ball_Handler")
 
 export (bool) var physics_enabled = true
@@ -53,15 +52,11 @@ func enable_physics():
 func _ready():
 	self.z_index = Global.z_indices["player_0"]
 	add_to_group("holders")
-	if !Global.playing:
-		Global.toggle_playing()
-	Global.camera = $Camera
 
 func set_flip_h(b):
 	flip_h  = b
 	$Sprite.set_flip_h(b)
-	ShootPredictor.set_flip_h(b)
-	SpecialActionHandler.set_flip_h(b)
+	ActionHandler.set_flip_h(b)
 
 func get_input(delta): #delta in s
 	############### Change variables of Player_state.gd
@@ -108,9 +103,6 @@ func get_input(delta): #delta in s
 	if S.shoot_jr and S.can_shoot :
 		$Actions/Shoot.move(delta)
 
-	if S.aim_jp and S.can_aim :
-		$Actions/Aim.move(delta)
-
 	if S.can_go :
 		$Actions/Adherence.move(delta)
 
@@ -139,32 +131,13 @@ func get_input(delta): #delta in s
 		$Collision.position.y = 6
 
 	# CAMERA:
-	if S.is_aiming:
-		var shoot = ShootPredictor.shoot_vector()
-		if S.power_p and S.selected_ball == S.active_ball :
-			ShootPredictor.draw_attract($Ball_Handler.get_throw_position()-self.position, shoot+0.5*S.velocity,
-				S.active_ball.get_gravity_scale()*Vector2(0,gravity), attract_force/S.active_ball.mass)
-		else :
-			ShootPredictor.draw($Ball_Handler.get_throw_position()-self.position, shoot+0.5*S.velocity,
-				S.active_ball.get_gravity_scale()*Vector2(0,gravity))
-		$Camera.set_offset_from_type("aim",shoot.normalized())
-		if shoot.x > 0 :
-			S.aim_direction = 1
-		else :
-			S.aim_direction = -1
-	elif S.is_crouching :
-		$Camera.set_offset_from_type("crouch")
-	elif S.is_moving :
-		$Camera.set_offset_from_type("move", Vector2(0.1*S.velocity.x, 0.0), 0.4)
-	else :
-		$Camera.set_offset_from_type("normal")
 
 	# ANIMATION:
 	$Sprite/AnimationTree.animate_from_state(S)
 
 	S.jump_jp = false
 	S.jump_jr = false
-	S.aim_jp = false
+	#S.aim_jp = false
 	S.shoot_jr = false
 	S.dunk_jr = false
 	S.dunk_jp = false
@@ -184,7 +157,7 @@ func _physics_process(delta):
 		if S.velocity.y > max_speed_fall:
 			S.velocity.y = max_speed_fall
 	if physics_enabled:
-		if SpecialActionHandler.is_on_slope() and S.velocity.y > - abs(S.velocity.x) :
+		if ActionHandler.is_on_slope() and S.velocity.y > - abs(S.velocity.x) :
 			S.velocity.y = 0.5*sqrt(2) * move_and_slide_with_snap(S.velocity, 33*Vector2.DOWN, Vector2.UP, true, 4, 0.785398, false).y
 		else :
 			S.velocity = move_and_slide(S.velocity, Vector2.UP, true, 4, 0.785398, false)
@@ -192,5 +165,5 @@ func _physics_process(delta):
 ################################################################################
 # For `holders` group
 func free_ball(ball):
-	# set out  active_ball and has_ball
+	# set out  held_ball and has_ball
 	BallHandler.free_ball(ball)

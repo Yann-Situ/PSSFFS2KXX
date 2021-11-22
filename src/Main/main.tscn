@@ -1,4 +1,4 @@
-[gd_scene load_steps=48 format=2]
+[gd_scene load_steps=49 format=2]
 
 [ext_resource path="res://src/Player/Player.tscn" type="PackedScene" id=1]
 [ext_resource path="res://src/Platform/Tileset/TileMap1.tres" type="TileSet" id=2]
@@ -33,6 +33,7 @@
 [ext_resource path="res://src/Platform/Tileset/World16.tres" type="TileSet" id=31]
 [ext_resource path="res://src/Platform/Tileset/Graff.tres" type="TileSet" id=32]
 [ext_resource path="res://src/Items/Dynamics/TrailLine.tscn" type="PackedScene" id=33]
+[ext_resource path="res://src/Characters/Character.tscn" type="PackedScene" id=34]
 
 [sub_resource type="Gradient" id=1]
 colors = PoolColorArray( 1.25, 1.03, 0.8, 1, 1, 0.436035, 0.0625, 1 )
@@ -96,12 +97,12 @@ _data = {
 "points": PoolVector2Array( 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, -24, 0, 0, 0, 0, -32, -24, 0, 0, 0, 0, -32, 24, 0, 0, 0, 0, -96, 24, 0, 0, 0, 0, -96, -152, 0, 0, 0, 0, -240, -152, 0, 0, 0, 0, -240, -232, 0, 0, 0, 0, -32, -232, 0, 0, 0, 0, -32, -192 )
 }
 
-[sub_resource type="Curve2D" id=14]
+[sub_resource type="Curve2D" id=12]
 _data = {
 "points": PoolVector2Array( 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 288, 128, 0, 0, 0, 0, 0, 0 )
 }
 
-[sub_resource type="Environment" id=12]
+[sub_resource type="Environment" id=13]
 background_mode = 4
 auto_exposure_scale = 1.0
 auto_exposure_min_luma = 0.9
@@ -120,7 +121,7 @@ adjustment_enabled = true
 adjustment_contrast = 1.08
 adjustment_saturation = 1.01
 
-[sub_resource type="AnimatedTexture" id=13]
+[sub_resource type="AnimatedTexture" id=14]
 frames = 5
 fps = 8.0
 frame_0/texture = ExtResource( 18 )
@@ -254,13 +255,11 @@ cell_size = Vector2( 128, 128 )
 format = 1
 tile_data = PoolIntArray( -196616, 536870913, 0, -196615, 0, 0, -131082, 1, 0, -65544, 1, 0, 65526, 1, 0, 65528, 536870913, 0, 262136, 1, 0, 262137, 1, 0, 262162, 0, 0, 327696, 536870912, 0, 393231, -536870912, 0 )
 
+[node name="Character" parent="." instance=ExtResource( 34 )]
+position = Vector2( 1584, 96 )
+
 [node name="Player" parent="." instance=ExtResource( 1 )]
 position = Vector2( 1464, 192 )
-z_index = 10
-walk_return_thresh_instant_speed = 150.0
-
-[node name="Player2" parent="." instance=ExtResource( 1 )]
-position = Vector2( 1472, 48 )
 z_index = 10
 walk_return_thresh_instant_speed = 150.0
 
@@ -476,18 +475,18 @@ pipe_z = 1
 
 [node name="TrailLine" parent="Environment/Dynamics" instance=ExtResource( 33 )]
 position = Vector2( 1472, 232 )
-curve = SubResource( 14 )
+curve = SubResource( 12 )
 final_point = Vector2( -608, 0 )
 player_position_offset = -40.0
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
-environment = SubResource( 12 )
+environment = SubResource( 13 )
 
 [node name="Light2D" type="Light2D" parent="."]
 position = Vector2( 848, 728 )
 z_index = 9
 z_as_relative = false
-texture = SubResource( 13 )
+texture = SubResource( 14 )
 texture_scale = 2.56
 color = Color( 1, 0.901961, 0.709804, 1 )
 energy = 0.4
@@ -497,7 +496,7 @@ shadow_enabled = true
 [node name="Light2D2" type="Light2D" parent="."]
 position = Vector2( -336, 192 )
 z_as_relative = false
-texture = SubResource( 13 )
+texture = SubResource( 14 )
 texture_scale = 2.56
 color = Color( 1, 0.901961, 0.709804, 1 )
 energy = 0.6
@@ -523,7 +522,7 @@ shadow_filter_smooth = 30.0
 position = Vector2( 1896, 544 )
 scale = Vector2( 1.99752, 1.99752 )
 z_as_relative = false
-texture = SubResource( 13 )
+texture = SubResource( 14 )
 texture_scale = 2.56
 color = Color( 1, 0.901961, 0.709804, 1 )
 energy = 0.81

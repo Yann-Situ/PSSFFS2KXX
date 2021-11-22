@@ -12,7 +12,7 @@ _global_script_classes=[ {
 "base": "Node",
 "class": "Action",
 "language": "GDScript",
-"path": "res://src/Player/Actions/Action.gd"
+"path": "res://src/Characters/Actions/Action.gd"
 }, {
 "base": "Node2D",
 "class": "Activable",
@@ -23,6 +23,11 @@ _global_script_classes=[ {
 "class": "Ball",
 "language": "GDScript",
 "path": "res://src/Items/Balls/Ball.gd"
+}, {
+"base": "KinematicBody2D",
+"class": "Character",
+"language": "GDScript",
+"path": "res://src/Characters/Character.gd"
 }, {
 "base": "KinematicBody2D",
 "class": "PhysicBody",
@@ -38,6 +43,7 @@ _global_script_class_icons={
 "Action": "res://assets/art/icons/action.png",
 "Activable": "res://assets/art/icons/activable.png",
 "Ball": "res://assets/art/ball/ball_test.png",
+"Character": "",
 "PhysicBody": "",
 "Player": "res://assets/art/icons/popol.png"
 }
