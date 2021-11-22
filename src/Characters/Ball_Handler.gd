@@ -4,7 +4,7 @@ extends Area2D
 onready var Character = get_parent()
 onready var S = Character.get_node("State")
 
-export (float) var shoot_max_speed = 600.0 # kg*pix/s
+export (float) var shoot_max_speed = 1000.0 # kg*pix/s
 var shoot_vector_save = Vector2() setget set_shoot_vector, get_shoot_vector
 
 ################## Shoot features
@@ -22,7 +22,7 @@ func _ready():
 ################## pickup and throw
 
 func _on_Ball_Handler_body_entered(body):
-	print(body.name+" entering "+Character.name+" ballhandler area")
+	#print(body.name+" entering "+Character.name+" ballhandler area")
 	if body.is_in_group("balls"):
 		if body == S.released_ball:
 			S.released_ball = null
@@ -56,24 +56,11 @@ func pickup_ball(ball):
 	S.held_ball = ball
 	ball.pickup(Character)
 
-	#TEMPORARY CONTROL NODE
-	var ui = Character.get_node("Camera/Control/RichTextLabel")
-	ui.clear()
-	ui.add_text("Name : "+ball.name)
-	ui.newline()
-	ui.add_text("Ball mass  : "+str(ball.mass))
-	ui.newline()
-	ui.add_text("Ball frict : "+str(ball.friction))
-	ui.newline()
-	ui.add_text("Ball bounc : "+str(ball.bounce))
-	ui.newline()
-	ui.add_text("Ball posit : "+str(ball.position - Character.position))
-
-func throw_ball(pos, speed):
+func throw_ball(pos, momentum):
 	if S.has_ball and S.held_ball != null :
 		print(Character.name+" throw "+S.held_ball.name)
 		S.released_ball = S.held_ball
-		S.held_ball.throw(pos, speed)
+		S.held_ball.throw(pos, 1.0/S.held_ball.mass * momentum)
 		yield(get_tree().create_timer(0.1), "timeout")
 		S.released_ball = null
 

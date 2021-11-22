@@ -53,6 +53,7 @@ func enable_physics():
 func _ready():
 	self.z_index = Global.z_indices["player_0"]
 	add_to_group("holders")
+	add_to_group("characters")
 	if !Global.playing:
 		Global.toggle_playing()
 	Global.camera = $Camera

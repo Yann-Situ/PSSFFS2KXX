@@ -4,13 +4,10 @@ var b = true
 
 func move(delta):
 	# Change hitbox + other animation things like sliding etc.
-	S.is_aiming = false # cancel aiming for the moment
-	S.aim_direction = 0
-	P.ShootPredictor.clear()
 	S.is_dunkjumping = true
-	P.PlayerEffects.dust_start()
-	P.PlayerEffects.ghost_start(0.35,0.07)
-	P.PlayerEffects.jump_start()
+	P.Effects.dust_start()
+	P.Effects.ghost_start(0.35,0.07)
+	P.Effects.jump_start()
 	#print(S.dunkjump_basket)
 	var q = S.dunkjump_basket.position - P.position
 	var B = P.dunk_speed * q.x / q.y
@@ -25,4 +22,4 @@ func move(delta):
 	print("Velocity: "+str(S.velocity))
 	S.get_node("ToleranceDunkJumpPressTimer").stop()
 	S.get_node("CanJumpTimer").start(S.jump_countdown)
-	P.get_node("Camera").screen_shake(0.2,10)
+	#P.get_node("Camera").screen_shake(0.2,10)

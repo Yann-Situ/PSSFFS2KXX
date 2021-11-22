@@ -13,10 +13,8 @@ func _ready():
 func _on_Area2D_body_entered(body):
 	print("body_entered")
 	if body.is_in_group("physicbodies"):
-		print("balls")
 		body.set_linear_velocity(jump_velocity*Vector2(0.0,-1.0).rotated(deg2rad(self.rotation_degrees)))
-	elif body is Player:
-		print("player")
+	elif body.is_in_group("characters"):
 		body.S.velocity = (jump_velocity*Vector2(0.0,-1.0).rotated(deg2rad(self.rotation_degrees)))
 		if cant_go_time != 0:
 			body.S.get_node("CanGoTimer").start(cant_go_time)

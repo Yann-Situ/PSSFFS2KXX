@@ -9,7 +9,7 @@ func _ready():
 	pass
 
 func _on_Ball_Handler_body_entered(body):
-	print(body.name+" entering "+Player.name+" ballhandler area")
+	#print(body.name+" entering "+Player.name+" ballhandler area")
 	if body.is_in_group("balls"):
 		if body == S.released_ball:
 			S.released_ball = null

@@ -7,4 +7,4 @@ func move(delta,direction):
 	S.get_node("ToleranceJumpPressTimer").stop()
 	S.get_node("CanJumpTimer").start(S.jump_countdown)
 	S.get_node("CanGoTimer").start(S.walljump_move_countdown)
-	P.PlayerEffects.dust_start()
+	P.Effects.dust_start()

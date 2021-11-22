@@ -3,7 +3,7 @@
 [ext_resource path="res://src/Items/Dynamics/TrailLine.gd" type="Script" id=1]
 [ext_resource path="res://assets/art/environment/railline.png" type="Texture" id=3]
 
-[sub_resource type="Curve2D" id=3]
+[sub_resource type="Curve2D" id=1]
 resource_local_to_scene = true
 _data = {
 "points": PoolVector2Array(  )
@@ -17,9 +17,8 @@ b = Vector2( 0, 0 )
 position = Vector2( 72, 96 )
 z_index = 16
 z_as_relative = false
-curve = SubResource( 3 )
+curve = SubResource( 1 )
 script = ExtResource( 1 )
-player_position_offset = Vector2( 0, 5 )
 
 [node name="Line2D" type="Line2D" parent="."]
 points = PoolVector2Array( 0, 0, 0, 0 )
@@ -36,6 +35,7 @@ rotate = false
 loop = false
 
 [node name="Timer" type="Timer" parent="."]
+wait_time = 0.5
 one_shot = true
 
 [node name="Area" type="Area2D" parent="."]

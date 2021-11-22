@@ -51,7 +51,7 @@ func _on_Area2D_body_exited(_body):
 
 func _on_Area2D_body_entered(body):
 	print("collision : "+body.name)
-	if body.is_in_group("physicbodies") or body is Player:
+	if body.is_in_group("physicbodies") or body.is_in_group("characters"):
 		
 		print("collision : "+body.name)
 		if not activated :

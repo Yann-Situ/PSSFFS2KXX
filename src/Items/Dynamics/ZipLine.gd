@@ -119,7 +119,7 @@ func _process(delta):
 			
 
 func _on_PlayerDetector_body_exited(body):
-	if path_body_list.empty() and body is Player and body.S.velocity.y > 0 and $Timer.is_stopped() :
+	if path_body_list.empty() and body.is_in_group("characters") and body.S.velocity.y > 0 and $Timer.is_stopped() :
 		print("player on zip")
 		var bi =body.position-global_position-init_point
 		var fi =final_point-init_point

@@ -8,4 +8,4 @@ func move(delta, jump_speed = 0.0):
 	S.is_jumping = true
 	S.get_node("ToleranceJumpPressTimer").stop()
 	S.get_node("CanJumpTimer").start(S.jump_countdown)
-	P.PlayerEffects.dust_start()
+	P.Effects.dust_start()

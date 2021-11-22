@@ -100,11 +100,11 @@ func _process(delta):
 			j += 1 # because we deleted a node in the list we're browsing
 
 func _on_Area_body_exited(body):
-	if body is Player and body.S.velocity.y > 0 and $Timer.is_stopped():
+	if body.is_in_group("characters") and body.S.velocity.y > 0 and $Timer.is_stopped():
 
 		for b in inside_bodies:
 			if b == body:
-				print("body already in pipe")
+				print(body.name+" already in pipe")
 				return 1
 		
 		var new_path_follow : PathFollow2D = PathFollow2D.new()
@@ -114,7 +114,7 @@ func _on_Area_body_exited(body):
 
 		new_path_follow.loop = false
 		self.add_child(new_path_follow)
-		print("player on trail")
+		print(body.name+" on trail")
 		inside_bodies.push_back(body)
 		path_follows.push_back(new_path_follow)
 		body.S.velocity = body.S.velocity.dot(rail_dir) * rail_dir

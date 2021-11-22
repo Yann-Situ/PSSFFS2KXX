@@ -52,14 +52,20 @@ func enable_physics():
 func _ready():
 	self.z_index = Global.z_indices["player_0"]
 	add_to_group("holders")
+	add_to_group("characters")
 
 func set_flip_h(b):
 	flip_h  = b
 	$Sprite.set_flip_h(b)
 	ActionHandler.set_flip_h(b)
 
+func behaviour(delta):
+	pass
+
+#################### Get input calls actions depending on inputs. It calls S.update_vars
+
 func get_input(delta): #delta in s
-	############### Change variables of Player_state.gd
+	# Change variables of Player_state.gd
 	S.update_vars(delta)
 	if S.is_onfloor :
 		S.get_node("ToleranceJumpFloorTimer").start(S.tolerance_jump_floor)
@@ -105,17 +111,17 @@ func get_input(delta): #delta in s
 
 	if S.can_go :
 		$Actions/Adherence.move(delta)
-
-	if S.selected_ball != null:
-		if S.power_p :
-			S.selected_ball.power_p(self,delta)
-		if S.power_jp :
-			S.selected_ball.power_jp(self,delta)
-		elif S.power_jr :
-			S.selected_ball.power_jr(self,delta)
-
-	if S.select_jp and Global.mouse_ball != null :
-		$Actions/SelectBall.move(delta)
+#
+#	if S.selected_ball != null:
+#		if S.power_p :
+#			S.selected_ball.power_p(self,delta)
+#		if S.power_jp :
+#			S.selected_ball.power_jp(self,delta)
+#		elif S.power_jr :
+#			S.selected_ball.power_jr(self,delta)
+#
+#	if S.select_jp and Global.mouse_ball != null :
+#		$Actions/SelectBall.move(delta)
 
 	if S.release_jp :
 		$Actions/Release.move(delta)
@@ -141,13 +147,14 @@ func get_input(delta): #delta in s
 	S.shoot_jr = false
 	S.dunk_jr = false
 	S.dunk_jp = false
-	S.select_jp = false
+#	S.select_jp = false
 	S.power_jp = false
 	S.power_jr = false
 	S.release_jp = false
 
 ################################################################################
 func _physics_process(delta):
+	behaviour(delta)
 	get_input(delta)
 	if S.is_onwall and S.velocity.y > 0: #fall on a wall
 		S.velocity.y += gravity/2.0 * delta

@@ -924,7 +924,7 @@ height = 28.0
 position = Vector2( 416, 144 )
 z_index = 1
 z_as_relative = false
-collision_mask = 3
+collision_mask = 2
 script = ExtResource( 1 )
 air_friction = 0.1
 max_speed_fall = 700.0
@@ -1061,7 +1061,7 @@ texture = ExtResource( 2 )
 offset = Vector2( 0.5, 0 )
 hframes = 16
 vframes = 20
-frame = 192
+frame = 201
 __meta__ = {
 "_edit_lock_": true
 }
@@ -1160,7 +1160,7 @@ position = Vector2( 0, 5 )
 shape = SubResource( 69 )
 
 [node name="Has_Ball_Position" type="Node2D" parent="Ball_Handler"]
-position = Vector2( 9, -2 )
+position = Vector2( 5, 0 )
 
 [node name="Camera" type="Camera2D" parent="."]
 visible = false

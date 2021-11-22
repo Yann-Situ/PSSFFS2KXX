@@ -27,7 +27,7 @@ var shoot_jr = false
 var dunk_p = false
 var dunk_jr = false
 var dunk_jp = false
-var select_jp = false
+#var select_jp = false
 var power_p = false
 var power_jp = false
 var power_jr = false
@@ -89,7 +89,7 @@ export var has_ball = false
 var held_ball = null#pointer to a ball
 var released_ball = null # useful because when the ball is released (or thrown)
 # it is immediatly detected by area_body_enter...
-var selected_ball = null#pointer to the selected ball
+#var selected_ball = null#pointer to the selected ball
 var dunkjump_basket = null#pointer to the basket to dunkjump
 var dunk_basket = null
 
@@ -112,16 +112,17 @@ var dunk_basket = null
 	# power_jr =  Input.is_action_just_released("ui_power")
 	# release_jp =  Input.is_action_just_pressed("ui_release")
 	#
-	# if jump_jp:
-	# 	$ToleranceJumpPressTimer.start(tolerance_jump_press)
-	# if dunk_jp:
-	# 	$ToleranceDunkJumpPressTimer.start(tolerance_jump_press)
 
 func update_vars(delta):
 	#
 	# Delays and states memory should be updated after calling update_vars()
 	# in Character.gd
 	#
+	if jump_jp:
+		$ToleranceJumpPressTimer.start(tolerance_jump_press)
+	if dunk_jp:
+		$ToleranceDunkJumpPressTimer.start(tolerance_jump_press)
+	
 	time += delta # still used in the current shoot vector implementation... to change
 
 	last_frame_onair = not is_onfloor
