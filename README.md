@@ -49,26 +49,37 @@ Popol Super Slam Fusion Full Speed 2KXX
 * Add levels
 
 ## Issues
+### Physical movement
+* [x] Weird straight **jump** on a corner. Don't know why it happens and what to do.
+* [x] Sometimes the **dunkjump** gives a velocity of `(-nan, dunkjump_speed)`. This is due to it's calculation with a square root
+* [x] **Dunking** while pushing a direction button toward another basket above results in no dunk on the current basket. -> change the criteria for the basket by taking into account a very close basket.
+* [ ] **Walljumping** at the same time that dunking results in dunking called on a **wrong basket** (if multiple baskets around)
+* [ ] **Aiming shooting** right after dunk results in **strange animation behaviour**.
+* [ ] **Dunkjumping** while only moving with floor adherence a bit far from basket results in missing the basket.
+* [ ] **Air dunkjump** when dunking can result in `S.selected_basket.dunk()` called on `null` instance (basket is not selected anymore)
+* [ ] Get out from **low ceiling** (crouched) when returning can result in infinite returning **animation**.
+* [ ] (Not problematic) Pressing **jump** and **dunkjump** just before landing can result in small dunkjump/jump.
+* [ ] **release** ball when **aiming** results in error.
+
+### Dynamic items
+* [ ] **Zipline** drop inside collision places results in stucked player
+* [ ] Get out from **zipline** just on flat floor results in sliding (like on ice).
+* [ ] Stuck colliding on a **trail** can result in building speed.
+* [ ] Weird behaviour on leaving a **zipline** to a **trail** (there is a moment when the character is on both of them)
+    - Implement character holder group with `free_character` and `pickup_character` methods.
+* [ ] Characters can leave **trail** if Player press **crouch** on it.
+    - Implement the `riding` and `hanging` states.
+
+### Misc physics
 * [x] TileMap hitboxes (bounce on corners of each tile + balls pass through 2 adjacent tiles). **size up the hitboxes smartly**
 * [x] Physic of balls when picked up (stay phisically on the ground...). **complicated** see rigidbody functions and how `integrate_force()` works.
-* [x] Weird straight jump on a corner. Don't know why it happens and what to do.
+* [.] Problems with physics on **slopes**.
+
+### Other
+* [x] Spawner rotation position is weird.
 * [ ] Energy loss of `constant_energy_balls`.
 * [ ] The `shoot_previewer` shows a trajectory slightly above the real one.
-* [ ] **Zipline** drop inside collision places results in stucked player
-* [x] Spawner rotation position is weird.
-* [x] Sometimes the dunkjump gives a velocity of `(-nan, dunkjump_speed)`. This is due to it's calculation with a square root
-* [x] Dunking while pushing a direction button toward another basket above results in no dunk on the current basket. -> change the criteria for the basket by taking into account a very close basket.
-* [ ] Walljumping at the same time that dunking results in dunking called on a **wrong basket** (if multiple baskets around)
-* [ ] Aiming shooting right after dunk results in **strange animation behaviour**.
-* [ ] **Dunkjumping** while only moving with floor adherence a bit far from basket results in missing the basket.
-* [ ] Problems with physics on **slopes**.
-* [ ] **Air dunkjump** when dunking can result in `S.selected_basket.dunk()` called on `null` instance (basket is not selected anymore)
 * [ ] `Z_as_relative` doesn't work through script... https://github.com/godotengine/godot/issues/45416
-* [ ] Get out from **zipline** just on flat floor results in sliding (like on ice).
-* [ ] Get out from **low ceiling** (crouched) when returning can result in infinite returning **animation**.
-* [ ] (Not problematic) Pressing jump and dunkjump just before landing can result in small dunkjump/jump.
-* [ ] **release** ball when **aiming** results in error.
-* [ ] Stuck colliding on a **trail** can result in building speed.
 
 ## Groups
 

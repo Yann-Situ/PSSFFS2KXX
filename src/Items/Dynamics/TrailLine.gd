@@ -2,19 +2,20 @@
 extends Path2D
 
 export (bool) var invert_line_direction = false
+export (float) var character_position_offset = -32.0
+export (float) var character_collision_offset = -52.0
+
+var _particle = preload("res://src/Effects/RideParticles.tscn")
+
 var init_point = Vector2.ZERO
 var final_point = Vector2.ZERO
-#export (Vector2) var final_point = Vector2.ZERO setget set_final_point
-#export(NodePath) var final_point_node = null setget set_final_point_node_path
-#var rail_dir = Vector2.ZERO
+
 var collision_segments = []
 
 var inside_bodies = []
 var path_follows = []
 var linear_velocities = []
 var position_offsets = []
-export (float) var character_position_offset = -32.0
-export (float) var character_collision_offset = -52.0
 
 var real_character_offset = Vector2.ZERO
 
@@ -95,6 +96,8 @@ func _ready():
 	
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
+	var paths_to_remove = []
+	
 	var j = 0 # int because we're deleting nodes in a list we're browsing
 	for i in range(inside_bodies.size()):
 		var body = inside_bodies[i-j]
@@ -119,16 +122,33 @@ func _process(delta):
 			body.enable_physics()
 			body.S.velocity = velocity
 			inside_bodies.remove(i-j)
+			paths_to_remove.push_back(path_follows[i-j])
 			path_follows.remove(i-j)
 			linear_velocities.remove(i-j)
 			position_offsets.remove(i-j)
 			$Timer.start()
-			print("player quit zip")
-			
+			print(body.name+" quit trail")
 			#body.throw(path_follow.global_position,
 			#			path_follow.transform.x * speed_at_exit)
 			j += 1 # because we deleted a node in the list we're browsing
+			
+			# the following code can result in wrong j and i values if there are
+			# multiple character on trail... 
+			# A workaround would be to queue_free and stop emitting after the
+			# for loop.
+#			temp_particles.emitting = false
+#			yield(get_tree().create_timer(temp_particles.lifetime), "timeout") 
+#			temp_path_follow.call_deferred("queue_free") 
 
+	# Ugly but it works :
+	if not paths_to_remove.empty():
+		var lifetime = paths_to_remove[0].get_node("Particles").lifetime
+		for p in paths_to_remove:
+			p.get_node("Particles").emitting = false
+		yield(get_tree().create_timer(lifetime), "timeout") 
+		for p in paths_to_remove:
+			p.call_deferred("queue_free") 
+	
 func _on_Area_body_exited(body):
 	if body.is_in_group("characters") and body.S.velocity.y > 0 and $Timer.is_stopped():
 
@@ -137,13 +157,18 @@ func _on_Area_body_exited(body):
 				print(body.name+" already in pipe")
 				return 1
 		
-		var new_path_follow : PathFollow2D = PathFollow2D.new()
-		
-		var bi = body.global_position-global_position-init_point
-		new_path_follow.loop = false
-		self.add_child(new_path_follow)
 		print(body.name+" on trail")
 		
+		var new_path_follow : PathFollow2D = PathFollow2D.new()
+		new_path_follow.loop = false
+		var ride_particle : Particles2D = _particle.instance()
+		ride_particle.name = "Particles"
+		if invert_line_direction:
+			ride_particle.process_material.direction.y = 1
+		new_path_follow.add_child(ride_particle)
+		self.add_child(new_path_follow)
+		
+		var bi = body.global_position-global_position-init_point
 		new_path_follow.offset = curve.get_closest_offset(bi) # approximate where the player is
 		var rail_dir = new_path_follow.transform.x
 
