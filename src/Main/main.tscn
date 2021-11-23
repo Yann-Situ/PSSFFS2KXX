@@ -1,4 +1,4 @@
-[gd_scene load_steps=50 format=2]
+[gd_scene load_steps=52 format=2]
 
 [ext_resource path="res://src/Player/Player.tscn" type="PackedScene" id=1]
 [ext_resource path="res://src/Platform/Tileset/TileMap1.tres" type="TileSet" id=2]
@@ -97,19 +97,31 @@ _data = {
 "points": PoolVector2Array( 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, -24, 0, 0, 0, 0, -32, -24, 0, 0, 0, 0, -32, 24, 0, 0, 0, 0, -96, 24, 0, 0, 0, 0, -96, -152, 0, 0, 0, 0, -240, -152, 0, 0, 0, 0, -240, -232, 0, 0, 0, 0, -32, -232, 0, 0, 0, 0, -32, -192 )
 }
 
-[sub_resource type="Curve2D" id=16]
+[sub_resource type="Curve2D" id=12]
 resource_local_to_scene = true
 _data = {
 "points": PoolVector2Array( 0, 0, 0, 0, 288, 120, 0, 0, 0, 0, 0, -8 )
 }
 
-[sub_resource type="Curve2D" id=15]
+[sub_resource type="Curve2D" id=13]
 resource_local_to_scene = true
 _data = {
-"points": PoolVector2Array( 0, 0, 0, 0, 576, -8, 0, 0, 0, 0, 416, 72, 0, 0, 0, 0, 256, 72, 0, 0, 0, 0, 80, -8, 0, 0, 0, 0, 0, -8 )
+"points": PoolVector2Array( 0, 0, 0, 0, 704, -240, 0, 0, 0, 0, 616, -24, 0, 0, 0, 0, 464, 88, 0, 0, 0, 0, 152, 112, 0, 0, 0, 0, 16, 80 )
 }
 
-[sub_resource type="Environment" id=13]
+[sub_resource type="Curve2D" id=16]
+resource_local_to_scene = true
+_data = {
+"points": PoolVector2Array( 0, 0, 0, 0, 216, -296, 0, 0, 0, 0, 272, -48, 0, 0, 0, 0, 416, 64, 0, 0, 0, 0, 704, 72 )
+}
+
+[sub_resource type="Curve2D" id=17]
+resource_local_to_scene = true
+_data = {
+"points": PoolVector2Array( 0, 0, 0, 0, 504, -200, 0, 0, 0, 0, 144, 0 )
+}
+
+[sub_resource type="Environment" id=14]
 background_mode = 4
 auto_exposure_scale = 1.0
 auto_exposure_min_luma = 0.9
@@ -128,7 +140,7 @@ adjustment_enabled = true
 adjustment_contrast = 1.08
 adjustment_saturation = 1.01
 
-[sub_resource type="AnimatedTexture" id=14]
+[sub_resource type="AnimatedTexture" id=15]
 frames = 5
 fps = 8.0
 frame_0/texture = ExtResource( 18 )
@@ -474,24 +486,31 @@ pipe_z = 1
 
 [node name="TrailLine" parent="Environment/Dynamics" instance=ExtResource( 33 )]
 position = Vector2( 1472, 232 )
-curve = SubResource( 16 )
+curve = SubResource( 12 )
 invert_line_direction = true
-player_position_offset = -40.0
 
 [node name="TrailLine2" parent="Environment/Dynamics" instance=ExtResource( 33 )]
-position = Vector2( 1440, 456 )
-curve = SubResource( 15 )
+position = Vector2( 1440, -336 )
+curve = SubResource( 13 )
 invert_line_direction = true
-player_position_offset = -40.0
+
+[node name="TrailLine3" parent="Environment/Dynamics" instance=ExtResource( 33 )]
+position = Vector2( 1008, -192 )
+curve = SubResource( 16 )
+
+[node name="TrailLine4" parent="Environment/Dynamics" instance=ExtResource( 33 )]
+position = Vector2( 1640, -48 )
+curve = SubResource( 17 )
+invert_line_direction = true
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
-environment = SubResource( 13 )
+environment = SubResource( 14 )
 
 [node name="Light2D" type="Light2D" parent="."]
 position = Vector2( 848, 728 )
 z_index = 9
 z_as_relative = false
-texture = SubResource( 14 )
+texture = SubResource( 15 )
 texture_scale = 2.56
 color = Color( 1, 0.901961, 0.709804, 1 )
 energy = 0.4
@@ -501,7 +520,7 @@ shadow_enabled = true
 [node name="Light2D2" type="Light2D" parent="."]
 position = Vector2( -336, 192 )
 z_as_relative = false
-texture = SubResource( 14 )
+texture = SubResource( 15 )
 texture_scale = 2.56
 color = Color( 1, 0.901961, 0.709804, 1 )
 energy = 0.6
@@ -527,7 +546,7 @@ shadow_filter_smooth = 30.0
 position = Vector2( 1896, 544 )
 scale = Vector2( 1.99752, 1.99752 )
 z_as_relative = false
-texture = SubResource( 14 )
+texture = SubResource( 15 )
 texture_scale = 2.56
 color = Color( 1, 0.901961, 0.709804, 1 )
 energy = 0.81
@@ -537,7 +556,6 @@ shadow_enabled = true
 [node name="Character" parent="." instance=ExtResource( 34 )]
 modulate = Color( 1, 0.988235, 0.666667, 1 )
 position = Vector2( 728, 512 )
-physics_enabled = false
 jump_speed = -300.0
 run_speed_max = 250.0
 walk_instant_speed = 100.0
@@ -547,7 +565,6 @@ walk_accel = 170.0
 [node name="Character2" parent="." instance=ExtResource( 34 )]
 modulate = Color( 0.529412, 0.941176, 1, 1 )
 position = Vector2( 1008, 80 )
-physics_enabled = false
 jump_speed = -300.0
 run_speed_max = 250.0
 walk_instant_speed = 100.0
@@ -557,7 +574,6 @@ walk_accel = 170.0
 [node name="Character3" parent="." instance=ExtResource( 34 )]
 modulate = Color( 1, 0.694118, 0.996078, 1 )
 position = Vector2( 1384, 128 )
-physics_enabled = false
 jump_speed = -300.0
 run_speed_max = 250.0
 walk_instant_speed = 100.0
@@ -565,7 +581,7 @@ walk_return_thresh_instant_speed = 120.0
 walk_accel = 170.0
 
 [node name="Player" parent="." instance=ExtResource( 1 )]
-position = Vector2( 1464, 192 )
+position = Vector2( 2232, -608 )
 z_index = 10
 walk_return_thresh_instant_speed = 150.0
 

@@ -13,12 +13,14 @@ var inside_bodies = []
 var path_follows = []
 var linear_velocities = []
 var position_offsets = []
-export (float) var player_position_offset = -32.0
+export (float) var character_position_offset = -32.0
+export (float) var character_collision_offset = -52.0
 
-var real_player_offset = Vector2.ZERO
+var real_character_offset = Vector2.ZERO
 
 onready var gravity = ProjectSettings.get_setting("physics/2d/default_gravity") # pix/s²
-onready var player_offset = Vector2(0.0,player_position_offset)
+onready var character_offset = Vector2(0.0,character_position_offset)
+onready var collision_offset = Vector2(0.0,character_collision_offset)
 
 #
 #func set_final_point_node_path(path):
@@ -53,14 +55,15 @@ onready var player_offset = Vector2(0.0,player_position_offset)
 #	$Line2D.add_point(init_point)
 #	$Line2D.add_point(final_point)
 #
-#	$Area/CollisionShape2D.shape.set_a(init_point+player_offset)
-#	$Area/CollisionShape2D.shape.set_b(final_point+player_offset)
+#	$Area/CollisionShape2D.shape.set_a(init_point+character_offset)
+#	$Area/CollisionShape2D.shape.set_b(final_point+character_offset)
 
 func _update_points():
 	#rail_dir = (final_point-init_point).normalized()
 	$Line2D.clear_points()
 	var p0
 	var p1
+	var w = Vector2(0.0, 0.5 * $Line2D.width)
 	for i in range(curve.get_point_count()-1):
 		if invert_line_direction:
 			p0 = curve.get_point_position(curve.get_point_count()-i-1)
@@ -68,13 +71,13 @@ func _update_points():
 		else :
 			p0 = curve.get_point_position(i)
 			p1 = curve.get_point_position(i+1)
-		$Line2D.add_point(p0)
-		$Line2D.add_point(p1)
+		$Line2D.add_point(p0+w)
+		$Line2D.add_point(p1+w)
 		
 		var new_segment = CollisionShape2D.new()
 		new_segment.shape = SegmentShape2D.new()
-		new_segment.shape.set_a(p0+player_offset)
-		new_segment.shape.set_b(p1+player_offset)
+		new_segment.shape.set_a(p0+collision_offset)
+		new_segment.shape.set_b(p1+collision_offset)
 		collision_segments.push_back(new_segment)
 		$Area.add_child(new_segment)
 		
@@ -102,7 +105,7 @@ func _process(delta):
 		# transform.x is the direction (vec2D) of the pathfollow
 		velocity.y += gravity * delta
 		velocity = velocity.dot(rail_dir) * rail_dir
-		position_offset = lerp(position_offset, player_offset, 0.5)
+		position_offset = lerp(position_offset, character_offset, 0.5)
 		
 		path_follow.offset += velocity.dot(rail_dir) * delta
 		body.global_position = path_follow.global_position + position_offset

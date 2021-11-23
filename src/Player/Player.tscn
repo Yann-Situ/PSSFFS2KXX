@@ -926,6 +926,9 @@ z_index = 1
 z_as_relative = false
 collision_mask = 2
 script = ExtResource( 1 )
+__meta__ = {
+"_edit_group_": true
+}
 air_friction = 0.1
 max_speed_fall = 700.0
 
@@ -1061,7 +1064,7 @@ texture = ExtResource( 2 )
 offset = Vector2( 0.5, 0 )
 hframes = 16
 vframes = 20
-frame = 201
+frame = 203
 __meta__ = {
 "_edit_lock_": true
 }

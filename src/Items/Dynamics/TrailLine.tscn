@@ -14,7 +14,6 @@ resource_local_to_scene = true
 b = Vector2( 0, 0 )
 
 [node name="TrailLine" type="Path2D"]
-position = Vector2( 72, 96 )
 z_index = 16
 z_as_relative = false
 curve = SubResource( 1 )
