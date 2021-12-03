@@ -105,12 +105,12 @@ func _process(delta):
 			path_body_list[0].enable_physics()
 			path_body_list[0].S.velocity = (veldotfi*fi)
 			#call_deferred("reparent",path_body_list[0], save_parent)
+			print(path_body_list[0].name+" quit "+self.name)
 			path_body_list.remove(0)
 			real_player_offset = Vector2.ZERO
 			#$Line2D.set_point_position(1,$Line2D.get_point_position(2))
 			#$Path2D/PathFollow2D/Sprite.offset = Vector2.ZERO
 			$Timer.start()
-			print("player quit zip")
 	else :
 		relative_position_offset = $Path2D/PathFollow2D.get_unit_offset()*(final_point-init_point)+init_point
 		real_rope_offset = lerp(real_rope_offset, Vector2.ZERO, 0.1)
@@ -120,7 +120,7 @@ func _process(delta):
 
 func _on_PlayerDetector_body_exited(body):
 	if path_body_list.empty() and body.is_in_group("characters") and body.S.velocity.y > 0 and $Timer.is_stopped() :
-		print("player on zip")
+		print(body.name+" on "+self.name)
 		var bi =body.position-global_position-init_point
 		var fi =final_point-init_point
 		linear_velocity = body.S.velocity

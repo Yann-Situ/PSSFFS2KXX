@@ -79,6 +79,7 @@ func _update_points():
 		new_segment.shape = SegmentShape2D.new()
 		new_segment.shape.set_a(p0+collision_offset)
 		new_segment.shape.set_b(p1+collision_offset)
+		#print("segment : "+str(p0+collision_offset)+" - "+str(p1+collision_offset))
 		collision_segments.push_back(new_segment)
 		$Area.add_child(new_segment)
 		
@@ -87,11 +88,11 @@ func _update_points():
 func _ready():
 	self.z_index = Global.z_indices["foreground_1"]
 	if curve.get_point_count() >= 2:
-		print("setcurve")
+		#print(self.name + " setcurve")
 		final_point = curve.get_point_position(curve.get_point_count()-1)
-		print(final_point)
+		#print(final_point)
 	else :
-		print("Error")
+		print(self.name+" Error: not enough points in the curve!")
 	_update_points()
 	
 # Called every frame. 'delta' is the elapsed time since the previous frame.
@@ -127,7 +128,7 @@ func _process(delta):
 			linear_velocities.remove(i-j)
 			position_offsets.remove(i-j)
 			$Timer.start()
-			print(body.name+" quit trail")
+			print(body.name+" quit "+self.name)
 			#body.throw(path_follow.global_position,
 			#			path_follow.transform.x * speed_at_exit)
 			j += 1 # because we deleted a node in the list we're browsing
@@ -154,10 +155,10 @@ func _on_Area_body_exited(body):
 
 		for b in inside_bodies:
 			if b == body:
-				print(body.name+" already in pipe")
+				print(body.name+" already in "+self.name)
 				return 1
 		
-		print(body.name+" on trail")
+		print(body.name+" on "+self.name)
 		
 		var new_path_follow : PathFollow2D = PathFollow2D.new()
 		new_path_follow.loop = false
@@ -178,3 +179,4 @@ func _on_Area_body_exited(body):
 		linear_velocities.push_back(body.S.velocity)
 		position_offsets.push_back(body.global_position-new_path_follow.global_position)
 		body.disable_physics()
+

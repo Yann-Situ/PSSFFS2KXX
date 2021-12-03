@@ -1064,7 +1064,7 @@ texture = ExtResource( 2 )
 offset = Vector2( 0.5, 0 )
 hframes = 16
 vframes = 20
-frame = 203
+frame = 193
 __meta__ = {
 "_edit_lock_": true
 }
@@ -1163,7 +1163,7 @@ position = Vector2( 0, 5 )
 shape = SubResource( 69 )
 
 [node name="Has_Ball_Position" type="Node2D" parent="Ball_Handler"]
-position = Vector2( 5, 0 )
+position = Vector2( 10, 5.99999 )
 
 [node name="Camera" type="Camera2D" parent="."]
 visible = false

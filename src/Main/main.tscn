@@ -406,7 +406,7 @@ position = Vector2( 144, 504 )
 position = Vector2( 1008, 136 )
 
 [node name="BallLight" parent="Environment/Balls" instance=ExtResource( 24 )]
-position = Vector2( 872, 264 )
+position = Vector2( 880, 248 )
 
 [node name="Baskets" type="Node2D" parent="Environment"]
 
@@ -439,7 +439,7 @@ rotation = 0.785397
 cant_go_time = 1.0
 
 [node name="ZipLine" parent="Environment/Dynamics" instance=ExtResource( 21 )]
-position = Vector2( -232, -232 )
+position = Vector2( -248, -216 )
 final_point = Vector2( 2000, 200 )
 player_position_offset = Vector2( 0, -10 )
 
@@ -555,7 +555,8 @@ shadow_enabled = true
 
 [node name="Character" parent="." instance=ExtResource( 34 )]
 modulate = Color( 1, 0.988235, 0.666667, 1 )
-position = Vector2( 2016, -696 )
+position = Vector2( 1224, 64 )
+physics_enabled = false
 jump_speed = -300.0
 run_speed_max = 250.0
 walk_instant_speed = 100.0
@@ -564,7 +565,8 @@ walk_accel = 170.0
 
 [node name="Character2" parent="." instance=ExtResource( 34 )]
 modulate = Color( 0.529412, 0.941176, 1, 1 )
-position = Vector2( 2080, -704 )
+position = Vector2( 1096, -48 )
+physics_enabled = false
 jump_speed = -300.0
 run_speed_max = 250.0
 walk_instant_speed = 100.0
@@ -572,8 +574,10 @@ walk_return_thresh_instant_speed = 120.0
 walk_accel = 170.0
 
 [node name="Character3" parent="." instance=ExtResource( 34 )]
+visible = false
 modulate = Color( 1, 0.694118, 0.996078, 1 )
-position = Vector2( 2080, -704 )
+position = Vector2( 1432, 48 )
+physics_enabled = false
 jump_speed = -300.0
 run_speed_max = 250.0
 walk_instant_speed = 100.0
@@ -581,7 +585,7 @@ walk_return_thresh_instant_speed = 120.0
 walk_accel = 170.0
 
 [node name="Player" parent="." instance=ExtResource( 1 )]
-position = Vector2( 2232, -608 )
+position = Vector2( 1832, 280 )
 z_index = 10
 walk_return_thresh_instant_speed = 150.0
 
