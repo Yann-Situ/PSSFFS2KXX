@@ -38,6 +38,16 @@ _global_script_classes=[ {
 "class": "Player",
 "language": "GDScript",
 "path": "res://src/Player/Player.gd"
+}, {
+"base": "Path2D",
+"class": "TrailLine",
+"language": "GDScript",
+"path": "res://src/Items/Dynamics/TrailLine.gd"
+}, {
+"base": "Node2D",
+"class": "ZipLine",
+"language": "GDScript",
+"path": "res://src/Items/Dynamics/ZipLine.gd"
 } ]
 _global_script_class_icons={
 "Action": "res://assets/art/icons/action.png",
@@ -45,7 +55,9 @@ _global_script_class_icons={
 "Ball": "res://assets/art/ball/ball_test.png",
 "Character": "",
 "PhysicBody": "",
-"Player": "res://assets/art/icons/popol.png"
+"Player": "res://assets/art/icons/popol.png",
+"TrailLine": "res://assets/art/icons/trailline.png",
+"ZipLine": "res://assets/art/icons/zipline.png"
 }
 
 [application]

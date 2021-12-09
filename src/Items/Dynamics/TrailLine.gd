@@ -1,5 +1,6 @@
 #tool
 extends Path2D
+class_name TrailLine, "res://assets/art/icons/trailline.png"
 
 export (bool) var invert_line_direction = false
 export (float) var character_position_offset = -32.0

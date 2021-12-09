@@ -8,10 +8,7 @@ export (float) var cant_go_time = 0#s
 func _ready():
 	self.z_index = Global.z_indices["foreground_1"]
 
-
-
 func _on_Area2D_body_entered(body):
-	print("body_entered")
 	if body.is_in_group("physicbodies"):
 		body.set_linear_velocity(jump_velocity*Vector2(0.0,-1.0).rotated(deg2rad(self.rotation_degrees)))
 	elif body.is_in_group("characters"):

@@ -1,4 +1,5 @@
 extends Node2D
+class_name Basket, "res://assets/art/icons/basket.png"
 
 export var color1 = Color(0.8,0.5,0.1,0.5)
 export var color2 = Color(0.9,0.1,0.3,1.0)
