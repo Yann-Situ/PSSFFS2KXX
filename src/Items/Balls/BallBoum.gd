@@ -9,6 +9,7 @@ func _ready():
 	self.mass = 1.2
 	self.set_friction(0.15)
 	self.set_bounce(0.3)
+	$BoumZone/CollisionShape2D.shape.radius = distance_max
 
 func collision_effect(collision):
 	if (linear_velocity-collision.collider_velocity).length()>speed_threshold:
@@ -23,7 +24,11 @@ func boum():
 	for b in bodies :
 		if b is PhysicBody:
 			d = b.position - position
-			b.apply_impulse(((1-smoothstep(0, distance_max, d.length())) * (boum_max-boum_min)+boum_min)*d.normalized())
+#			b.apply_impulse(((1-smoothstep(0, distance_max, d.length())) * (boum_max-boum_min)+boum_min)*d.normalized())
+			b.apply_impulse(boum_max*d.normalized())
+		elif b.is_in_group("breakables"):
+			print("BREAKOUT")
+			b.apply_impulse(boum_max*d.normalized())
 	print("BOUM !")
 
 func megaboum():

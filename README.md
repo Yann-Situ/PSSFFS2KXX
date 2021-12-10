@@ -86,6 +86,9 @@ Popol Super Slam Fusion Full Speed 2KXX
 ### physicbodies
 Must inherit from `physicbodies.gd`.
 
+### breakables
+Must have an `apply_impulse(momentum : Vector2)` function that handles explosion.
+
 ### balls
 Must inherit from `ball.gd`.
 

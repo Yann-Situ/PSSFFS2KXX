@@ -1,0 +1,53 @@
+[gd_scene load_steps=9 format=2]
+
+[ext_resource path="res://src/Items/Dynamics/BreakableBloc.gd" type="Script" id=1]
+[ext_resource path="res://assets/art/environment/environment-decor.png" type="Texture" id=2]
+[ext_resource path="res://src/Effects/DebrisParticule.tscn" type="PackedScene" id=3]
+
+[sub_resource type="OccluderPolygon2D" id=5]
+resource_local_to_scene = true
+polygon = PoolVector2Array( -16, -16, 16, -16, 16, 16, -16, 16 )
+
+[sub_resource type="RectangleShape2D" id=1]
+extents = Vector2( 16, 16 )
+
+[sub_resource type="CanvasItemMaterial" id=2]
+resource_local_to_scene = true
+particles_animation = true
+particles_anim_h_frames = 5
+particles_anim_v_frames = 1
+particles_anim_loop = false
+
+[sub_resource type="StreamTexture" id=3]
+load_path = "res://.import/debris_4x4.png-2bc39207aab215b4ef9451d3c9ec4627.stex"
+
+[sub_resource type="Gradient" id=4]
+resource_local_to_scene = true
+offsets = PoolRealArray( 0.0375587, 0.516432, 0.995305, 1 )
+colors = PoolColorArray( 0.435547, 0.248763, 0.173538, 1, 0.429688, 0.280094, 0.12085, 1, 0.163086, 0.111312, 0.0904617, 0.0328639, 1, 1, 1, 0 )
+
+[node name="BreakableBloc" type="StaticBody2D"]
+z_index = 10
+z_as_relative = false
+collision_layer = 6
+collision_mask = 7
+script = ExtResource( 1 )
+
+[node name="Sprite" type="Sprite" parent="."]
+texture = ExtResource( 2 )
+region_enabled = true
+region_rect = Rect2( 96, 32, 32, 32 )
+
+[node name="LightOccluder2D" type="LightOccluder2D" parent="."]
+occluder = SubResource( 5 )
+
+[node name="Collision" type="CollisionShape2D" parent="."]
+shape = SubResource( 1 )
+
+[node name="DebrisParticle" parent="." instance=ExtResource( 3 )]
+material = SubResource( 2 )
+z_as_relative = false
+explosiveness = 0.92
+texture = SubResource( 3 )
+emission_rect_extents = Vector2( 16, 16 )
+color_ramp = SubResource( 4 )

@@ -24,6 +24,11 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://src/Items/Balls/Ball.gd"
 }, {
+"base": "Node2D",
+"class": "Basket",
+"language": "GDScript",
+"path": "res://src/Items/Baskets/Basket.gd"
+}, {
 "base": "KinematicBody2D",
 "class": "Character",
 "language": "GDScript",
@@ -53,8 +58,9 @@ _global_script_class_icons={
 "Action": "res://assets/art/icons/action.png",
 "Activable": "res://assets/art/icons/activable.png",
 "Ball": "res://assets/art/ball/ball_test.png",
+"Basket": "res://assets/art/icons/basket.png",
 "Character": "",
-"PhysicBody": "",
+"PhysicBody": "res://assets/art/icons/physicbody.png",
 "Player": "res://assets/art/icons/popol.png",
 "TrailLine": "res://assets/art/icons/trailline.png",
 "ZipLine": "res://assets/art/icons/zipline.png"

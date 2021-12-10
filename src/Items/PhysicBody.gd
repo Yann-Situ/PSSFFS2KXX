@@ -1,5 +1,5 @@
 extends KinematicBody2D
-class_name PhysicBody
+class_name PhysicBody, "res://assets/art/icons/physicbody.png"
 
 export (bool) var physics_enabled = true
 onready var start_position = global_position
@@ -49,10 +49,12 @@ func disable_physics():
 	linear_velocity *= 0
 	applied_force *= 0
 	layers = 0
+	set_physics_process(false)
 
 func enable_physics():
 	physics_enabled = true
 	layers = collision_layer_save
+	set_physics_process(true)
 
 func reset_position():
 	position = start_position
@@ -70,8 +72,6 @@ func add_force(force):
 ###############PHYSICALPROCESS######################
 
 func _physics_process(delta):
-	if not physics_enabled:
-		return
 	update_linear_velocity(delta)
 	var collision = move_and_collide(linear_velocity * delta, false)
 	if collision and collision_effect(collision) :
