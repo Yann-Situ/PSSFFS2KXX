@@ -28,7 +28,7 @@ offsets = PoolRealArray( 0.0375587, 0.516432, 0.995305, 1 )
 colors = PoolColorArray( 0.435547, 0.248763, 0.173538, 1, 0.429688, 0.280094, 0.12085, 1, 0.163086, 0.111312, 0.0904617, 0.0328639, 1, 1, 1, 0 )
 
 [node name="BreakableBloc" type="Node2D"]
-z_index = 10
+z_index = 190
 z_as_relative = false
 script = ExtResource( 1 )
 
@@ -50,6 +50,7 @@ shape = SubResource( 2 )
 
 [node name="DebrisParticle" parent="." instance=ExtResource( 3 )]
 material = SubResource( 3 )
+z_index = 90
 z_as_relative = false
 explosiveness = 0.92
 texture = SubResource( 4 )

@@ -24,11 +24,13 @@ func apply_boum_impulse(boum_force : float):
 	var d = Vector2(0,0)
 	for b in bodies :
 		d = b.global_position - self.global_position
-		if b is PhysicBody:
+		if b.is_in_group("physicbodies"):
 #			b.apply_impulse(((1-smoothstep(0, distance_max, d.length())) * (boum_max-boum_min)+boum_min)*d.normalized())
 			b.apply_impulse(boum_force*d.normalized())
 		elif b.is_in_group("breakables"):
 			b.apply_impulse(boum_force*d.normalized())
+		elif b is Player:
+			b.S.velocity += boum_force*d.normalized()
 
 func boum():
 	$BoumParticle.restart()

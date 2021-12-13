@@ -61,7 +61,7 @@ speed_inside = 102.835
 position = Vector2( 928, 528 )
 
 [node name="Entrance" type="StaticBody2D" parent="."]
-collision_layer = 2
+collision_layer = 130
 collision_mask = 7
 
 [node name="CollisionShape" type="CollisionShape2D" parent="Entrance"]
@@ -71,6 +71,7 @@ shape = SubResource( 1 )
 [node name="Sprite" type="AnimatedSprite" parent="Entrance"]
 frames = SubResource( 7 )
 animation = "active"
+frame = 1
 playing = true
 
 [node name="Area" type="Area2D" parent="Entrance"]

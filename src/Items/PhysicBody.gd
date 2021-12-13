@@ -2,8 +2,6 @@ extends KinematicBody2D
 class_name PhysicBody, "res://assets/art/icons/physicbody.png"
 
 export (bool) var physics_enabled = true
-onready var start_position = global_position
-onready var collision_layer_save = layers
 var should_reset = false
 
 #physics :
@@ -14,7 +12,9 @@ export (float) var bounce = 0.5 setget set_bounce
 var linear_velocity = Vector2(0.0,0.0) setget set_linear_velocity
 var applied_force = Vector2(0.0,0.0) setget set_applied_force
 
-
+onready var start_position = global_position
+onready var collision_layer_save = collision_layer
+onready var collision_mask_save = collision_mask
 onready var invmass = 1/mass
 onready var gravity = gravity_scale*ProjectSettings.get_setting("physics/2d/default_gravity") # pix/s²
 
@@ -40,7 +40,7 @@ func set_applied_force(force):
 ################################################################################
 func _ready():
 	Global.list_of_physical_nodes.append(self)
-	if !Global.playing :
+	if !Global.playing or !physics_enabled:
 		disable_physics()
 	add_to_group("physicbodies")
 
@@ -53,7 +53,8 @@ func disable_physics():
 
 func enable_physics():
 	physics_enabled = true
-	layers = collision_layer_save
+	collision_layer = collision_layer_save
+	collision_mask = collision_mask_save
 	set_physics_process(true)
 
 func reset_position():
@@ -72,20 +73,23 @@ func add_force(force):
 ###############PHYSICALPROCESS######################
 
 func _physics_process(delta):
+	physics_process(delta)
+
+func physics_process(delta):
+	update_linear_velocity(delta)
 	var collision = move_and_collide(linear_velocity * delta, false)
-	if collision and collision_effect(collision.collider, 
+	if collision and collision_effect(collision.collider,
 		collision.collider_velocity, collision.position, collision.normal) :
 		collision_handle(collision, delta)
-	update_linear_velocity(delta)
 
 func update_linear_velocity(delta):# apply gravity and forces
 	linear_velocity.y += gravity * delta
 	linear_velocity += invmass * applied_force * delta
 
-func collision_effect(collider : Object, collider_velocity : Vector2, 
+func collision_effect(collider : Object, collider_velocity : Vector2,
 	collision_point : Vector2, collision_normal : Vector2):
 	pass
-	# this function does NOT aim to change self.linear_velocity, this can result in 
+	# this function does NOT aim to change self.linear_velocity, this can result in
 	# wrong behaviours
 	return true
 
@@ -101,15 +105,15 @@ func collision_handle(collision, delta):
 		linear_velocity -= 2*m2/summass*(speeddist/dist_vect.length_squared())*dist_vect
 		collision.collider.set_linear_velocity(collision.collider_velocity + 2*mass/summass*(speeddist/dist_vect.length_squared())*dist_vect)
 		#collision.collider.apply_impulse(2*m2*mass/summass*(speeddist/dist_vect.length_squared())*dist_vect)#doesn't work don't know Y
-		
+
 		# see https://docs.godotengine.org/fr/stable/classes/class_kinematiccollision2d.html#class-kinematiccollision2d-property-collider
 		# and call `collision_effect` on the collider with the right `collision`
 		# object. This requires to change collider, angle, normal etc.
 		collision.collider.collision_effect(self,linear_velocity, \
 			collision.position, collision.normal)
-		
+
 		move_and_collide(collision.remainder.bounce(collision.normal),false)#may cause pb on corners ?
-		
+
 	else:
 		var bounce_linear_velocity = bounce*linear_velocity.bounce(n)
 		var vel_n = n.dot(bounce_linear_velocity)

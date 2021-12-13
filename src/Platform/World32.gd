@@ -12,7 +12,8 @@ var next_to_stairs_to_change = [Vector2(9,0), Vector2(5,0), Vector2(6,0)]
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	pass
+	self.z_as_relative = false
+	self.z_index = Global.z_indices["foreground_0"]
 	
 
 func set_cell(x, y, tile, flip_x=false, flip_y=false, transpose=false, autotile_coord=Vector2()):

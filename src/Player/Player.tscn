@@ -1053,13 +1053,11 @@ position = Vector2( 0, 6 )
 shape = SubResource( 3 )
 
 [node name="Sprite" type="Sprite" parent="."]
-z_index = 10
-z_as_relative = false
 texture = ExtResource( 2 )
 offset = Vector2( 0.5, 0 )
 hframes = 16
 vframes = 20
-frame = 192
+frame = 198
 __meta__ = {
 "_edit_lock_": true
 }
@@ -1158,7 +1156,7 @@ position = Vector2( 0, 5 )
 shape = SubResource( 69 )
 
 [node name="Has_Ball_Position" type="Node2D" parent="Ball_Handler"]
-position = Vector2( 9, -2 )
+position = Vector2( 5.99999, 3 )
 
 [node name="Camera" type="Camera2D" parent="."]
 visible = false

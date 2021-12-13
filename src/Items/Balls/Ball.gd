@@ -13,6 +13,7 @@ onready var selector = $Selector
 export (float) var dust_threshold = 400
 
 func _ready():
+	self.z_as_relative = false
 	self.z_index = Global.z_indices["ball_0"]
 	add_to_group("balls")
 
@@ -34,6 +35,7 @@ func pickup(holder_node):
 		holder.free_ball(self)
 	self.disable_physics()
 	holder = holder_node
+	self.z_index = holder_node.z_index+1
 
 func throw(posi, velo):
 	#$TrailHandler.set_node_to_trail(self)
@@ -44,6 +46,7 @@ func throw(posi, velo):
 	if holder != null:
 		holder.free_ball(self)
 	holder = null
+	self.z_index = Global.z_indices["ball_0"]
 
 ################################################################################
 

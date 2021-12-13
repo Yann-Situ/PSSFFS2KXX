@@ -13,6 +13,7 @@ var only_breakable_collision_layer = 64 # only breakable
 
 func _ready():
 	self.z_index = Global.z_indices["background_4"]
+	set_activated(activated)
 
 func update_sprite(b):
 	if b:
@@ -29,6 +30,7 @@ func apply_impulse(momentum : Vector2):
 
 func on_enable():
 	update_sprite(activated)
+	$Occluder.visible = false
 	$Breakable.collision_layer = only_breakable_collision_layer
 	$Breakable.collision_mask = 0
 
@@ -47,5 +49,6 @@ func explode(momentum : Vector2):
 
 func on_disable():
 	update_sprite(activated)
+	$Occluder.visible = true
 	$Breakable.collision_layer = collision_layer_save
 	$Breakable.collision_mask = collision_mask_save

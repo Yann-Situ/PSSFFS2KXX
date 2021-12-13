@@ -18,6 +18,7 @@ func set_content(temp):
 			if inst.has_node("Sprite"):
 				var s = inst.get_node("Sprite").duplicate()
 				s.name = "ContentIcon"
+				s.scale = Vector2(0.5,0.5)
 				add_child(s)
 			else :
 				print("test")

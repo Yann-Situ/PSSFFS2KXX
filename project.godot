@@ -29,7 +29,7 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://src/Items/Baskets/Basket.gd"
 }, {
-"base": "KinematicBody2D",
+"base": "PhysicBody",
 "class": "Character",
 "language": "GDScript",
 "path": "res://src/Characters/Character.gd"
@@ -59,7 +59,7 @@ _global_script_class_icons={
 "Activable": "res://assets/art/icons/activable.png",
 "Ball": "res://assets/art/ball/ball_test.png",
 "Basket": "res://assets/art/icons/basket.png",
-"Character": "",
+"Character": "res://assets/art/icons/character.png",
 "PhysicBody": "res://assets/art/icons/physicbody.png",
 "Player": "res://assets/art/icons/popol.png",
 "TrailLine": "res://assets/art/icons/trailline.png",
@@ -184,6 +184,7 @@ ui_release={
 2d_physics/layer_5="explosion"
 2d_physics/layer_6="basket"
 2d_physics/layer_7="breakable"
+2d_physics/layer_8="electric"
 
 [physics]
 

@@ -39,7 +39,6 @@ region_enabled = true
 region_rect = Rect2( 96, 160, 32, 128 )
 
 [node name="Occluder" type="LightOccluder2D" parent="."]
-visible = false
 position = Vector2( 5, 0 )
 occluder = SubResource( 1 )
 
@@ -53,11 +52,10 @@ shape = SubResource( 2 )
 
 [node name="DebrisParticle" parent="." instance=ExtResource( 3 )]
 material = SubResource( 3 )
-z_index = 9
-z_as_relative = false
+amount = 40
 explosiveness = 0.92
 texture = SubResource( 4 )
-emission_rect_extents = Vector2( 16, 16 )
+emission_rect_extents = Vector2( 16, 32 )
 spread = 60.48
 initial_velocity = 86.0
 color_ramp = SubResource( 5 )

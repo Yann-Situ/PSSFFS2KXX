@@ -2,18 +2,34 @@ tool
 extends Activable
 
 enum BUTTON0_TYPE {PERMANENT, TIMER, PHYSICAL}
-export (BUTTON0_TYPE) var button_type = BUTTON0_TYPE.PERMANENT
+export (BUTTON0_TYPE) var button_type = BUTTON0_TYPE.PERMANENT setget set_button_type
 export (float) var wait_time = 1#s
 var timer = null
 
 signal activated_change_signal(b)
 
+func set_button_type(t):
+	button_type = t
+	if Engine.editor_hint:
+		if button_type == BUTTON0_TYPE.PERMANENT :
+			$Sprite.set_region_rect(Rect2(0,80,64,16))
+			
+		elif button_type == BUTTON0_TYPE.TIMER :
+			$Sprite.set_region_rect(Rect2(64,80,64,16))
+			
+		elif button_type == BUTTON0_TYPE.PHYSICAL :
+			$Sprite.set_region_rect(Rect2(128,80,64,16))
+		
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	self.z_index = Global.z_indices["background_4"]
 	
-	if button_type == BUTTON0_TYPE.TIMER :
-		$Sprite.set_region_rect(Rect2(64,80,64,16)) 
+	if button_type == BUTTON0_TYPE.PERMANENT :
+		$Sprite.set_region_rect(Rect2(0,80,64,16))
+		pass
+		
+	elif button_type == BUTTON0_TYPE.TIMER :
+		$Sprite.set_region_rect(Rect2(64,80,64,16))
 		timer = Timer.new()
 		timer.one_shot = true
 		timer.autostart = false
@@ -22,9 +38,9 @@ func _ready():
 		self.add_child(timer)
 		
 	elif button_type == BUTTON0_TYPE.PHYSICAL :
-		$Sprite.set_region_rect(Rect2(128,80,64,16)) 
+		$Sprite.set_region_rect(Rect2(128,80,64,16))
 		$Area2D.connect("body_exited", self, "_on_Area2D_body_exited")
-	
+		
 func update_Sprite(b):
 	if b:
 		$Sprite.set_frame(1)

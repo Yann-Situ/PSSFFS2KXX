@@ -72,8 +72,11 @@ func _on_Area_body_entered(ball):
 		new_path_follow.offset = 0
 		new_path_follow.loop = false
 		self.add_child(new_path_follow)
+		print("BALL : "+str(ball.z_index))
 		ball.pickup(self)
+		print("BALL : "+str(ball.z_index))
 		ball.z_index = z_index-1
+		print("BALL : "+str(ball.z_index))
 
 		inside_bodies.push_back(ball)
 		path_follows.push_back(new_path_follow)
