@@ -183,6 +183,7 @@ ui_release={
 2d_physics/layer_4="environment_special"
 2d_physics/layer_5="explosion"
 2d_physics/layer_6="basket"
+2d_physics/layer_7="breakable"
 
 [physics]
 

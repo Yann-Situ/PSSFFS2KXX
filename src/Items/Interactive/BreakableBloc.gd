@@ -1,5 +1,5 @@
 tool
-extends StaticBody2D
+extends Node2D
 
 export var mass = 5.0 # kg
 export var momentum_threshold = 0.0 # m*pix/s
@@ -32,7 +32,6 @@ func set_content(temp):
 func _ready():
 	self.z_index = Global.z_indices["foreground_4"]
 	$DebrisParticle.z_index = Global.z_indices["background_4"]
-	add_to_group("breakables")
 	
 func apply_impulse(momentum : Vector2):
 	if momentum.length_squared() >= momentum_threshold2:
@@ -43,8 +42,9 @@ func explode(momentum : Vector2):
 	$DebrisParticle.initial_velocity = inv_mass * momentum.length()
 	$DebrisParticle.restart()
 	$Sprite.visible = false
-	collision_layer = 0
-	collision_mask = 0
+	$Occluder.visible = false
+	$Breakable.collision_layer = 0
+	$Breakable.collision_mask = 0
 	if content != null and content.can_instance():
 		var inst = content.instance()
 		if inst is Node2D:
