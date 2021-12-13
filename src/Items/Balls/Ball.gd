@@ -22,8 +22,8 @@ func _ready():
 
 ###########################################################
 
-func collision_effect(collision):
-	if linear_velocity.length() > dust_threshold:
+func collision_effect(collider, collider_velocity, collision_point, collision_normal):
+	if (linear_velocity-collider_velocity).length() > dust_threshold:
 		$DustParticle.restart()
 	return true
 

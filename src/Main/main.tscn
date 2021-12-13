@@ -34,8 +34,8 @@
 [ext_resource path="res://src/Platform/Tileset/Graff.tres" type="TileSet" id=32]
 [ext_resource path="res://src/Items/Dynamics/TrailLine.tscn" type="PackedScene" id=33]
 [ext_resource path="res://src/Characters/Character.tscn" type="PackedScene" id=34]
-[ext_resource path="res://src/Items/Dynamics/BreakableBloc.tscn" type="PackedScene" id=35]
-[ext_resource path="res://src/Items/Dynamics/BreakableHollowBloc.tscn" type="PackedScene" id=36]
+[ext_resource path="res://src/Items/Interactive/BreakableBloc.tscn" type="PackedScene" id=35]
+[ext_resource path="res://src/Items/Interactive/BreakableHollowBloc.tscn" type="PackedScene" id=36]
 
 [sub_resource type="Gradient" id=1]
 colors = PoolColorArray( 1.25, 1.03, 0.8, 1, 1, 0.436035, 0.0625, 1 )
@@ -390,22 +390,22 @@ button_type = 2
 position = Vector2( 640, 448 )
 
 [node name="BallBubble" parent="Environment/Balls" instance=ExtResource( 26 )]
-position = Vector2( 800, 504 )
+position = Vector2( 728, 528 )
 
 [node name="BallBubble2" parent="Environment/Balls" instance=ExtResource( 26 )]
 position = Vector2( 688, 48 )
 
 [node name="BallBouncy" parent="Environment/Balls" instance=ExtResource( 25 )]
-position = Vector2( 1304, 424 )
+position = Vector2( 1312, 432 )
 
 [node name="BallBoum" parent="Environment/Balls" instance=ExtResource( 3 )]
-position = Vector2( 824, 224 )
+position = Vector2( 830, 368 )
 
 [node name="BallRolling" parent="Environment/Balls" instance=ExtResource( 27 )]
 position = Vector2( 144, 504 )
 
 [node name="BallMetal" parent="Environment/Balls" instance=ExtResource( 28 )]
-position = Vector2( 1008, 136 )
+position = Vector2( 1008, 175.385 )
 
 [node name="BallLight" parent="Environment/Balls" instance=ExtResource( 24 )]
 position = Vector2( 1040, 304 )
@@ -507,30 +507,69 @@ invert_line_direction = true
 
 [node name="BreakableBloc" parent="Environment/Dynamics" instance=ExtResource( 35 )]
 position = Vector2( 912, 400 )
+z_index = 19
 
 [node name="BreakableBloc2" parent="Environment/Dynamics" instance=ExtResource( 35 )]
 position = Vector2( 944, 400 )
+z_index = 19
+
+[node name="BreakableBloc8" parent="Environment/Dynamics" instance=ExtResource( 35 )]
+position = Vector2( -208, 80 )
+z_index = 19
+
+[node name="BreakableBloc10" parent="Environment/Dynamics" instance=ExtResource( 35 )]
+position = Vector2( -176, 80 )
+z_index = 19
+
+[node name="BreakableBloc12" parent="Environment/Dynamics" instance=ExtResource( 35 )]
+position = Vector2( 368, 112 )
+z_index = 19
+
+[node name="BreakableBloc11" parent="Environment/Dynamics" instance=ExtResource( 35 )]
+position = Vector2( -240, 80 )
+z_index = 19
 
 [node name="BreakableBloc3" parent="Environment/Dynamics" instance=ExtResource( 35 )]
 position = Vector2( 976, 400 )
-
-[node name="BreakableBloc4" parent="Environment/Dynamics" instance=ExtResource( 35 )]
-position = Vector2( 1008, 400 )
-
-[node name="BreakableBloc5" parent="Environment/Dynamics" instance=ExtResource( 35 )]
-position = Vector2( 1008, 336 )
+z_index = 19
 
 [node name="BreakableBloc6" parent="Environment/Dynamics" instance=ExtResource( 35 )]
 position = Vector2( 976, 368 )
+z_index = 19
+
+[node name="BreakableBloc4" parent="Environment/Dynamics" instance=ExtResource( 35 )]
+position = Vector2( 1008, 400 )
+z_index = 19
+
+[node name="BreakableBloc5" parent="Environment/Dynamics" instance=ExtResource( 35 )]
+position = Vector2( 1008, 336 )
+z_index = 19
+content = ExtResource( 35 )
 
 [node name="BreakableBloc7" parent="Environment/Dynamics" instance=ExtResource( 35 )]
 position = Vector2( 1008, 368 )
+z_index = 19
+content = ExtResource( 26 )
 
 [node name="BreakableBloc9" parent="Environment/Dynamics" instance=ExtResource( 35 )]
 position = Vector2( 880, 400 )
+z_index = 19
 
 [node name="BreakableHollowBloc" parent="Environment/Dynamics" instance=ExtResource( 36 )]
 position = Vector2( 1040, 304 )
+z_index = 19
+
+[node name="BreakableHollowBloc3" parent="Environment/Dynamics" instance=ExtResource( 36 )]
+position = Vector2( 1312, 432 )
+z_index = 19
+
+[node name="BreakableHollowBloc4" parent="Environment/Dynamics" instance=ExtResource( 36 )]
+position = Vector2( 1008, 175.385 )
+z_index = 19
+
+[node name="BreakableHollowBloc2" parent="Environment/Dynamics" instance=ExtResource( 36 )]
+position = Vector2( 728, 528 )
+z_index = 19
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
 environment = SubResource( 16 )
@@ -583,8 +622,10 @@ range_z_max = 13
 shadow_enabled = true
 
 [node name="Character" parent="." instance=ExtResource( 34 )]
+visible = false
 modulate = Color( 1, 0.988235, 0.666667, 1 )
 position = Vector2( 2088, -648 )
+physics_enabled = false
 jump_speed = -300.0
 run_speed_max = 250.0
 walk_instant_speed = 100.0
@@ -592,8 +633,10 @@ walk_return_thresh_instant_speed = 120.0
 walk_accel = 170.0
 
 [node name="Character2" parent="." instance=ExtResource( 34 )]
+visible = false
 modulate = Color( 0.529412, 0.941176, 1, 1 )
 position = Vector2( 1912, -544 )
+physics_enabled = false
 jump_speed = -300.0
 run_speed_max = 250.0
 walk_instant_speed = 100.0
@@ -601,8 +644,10 @@ walk_return_thresh_instant_speed = 120.0
 walk_accel = 170.0
 
 [node name="Character3" parent="." instance=ExtResource( 34 )]
+visible = false
 modulate = Color( 1, 0.694118, 0.996078, 1 )
 position = Vector2( 1316, -456 )
+physics_enabled = false
 jump_speed = -300.0
 run_speed_max = 250.0
 walk_instant_speed = 100.0
@@ -610,7 +655,7 @@ walk_return_thresh_instant_speed = 120.0
 walk_accel = 170.0
 
 [node name="Player" parent="." instance=ExtResource( 1 )]
-position = Vector2( 1992, -720 )
+position = Vector2( 824, 232 )
 z_index = 10
 walk_return_thresh_instant_speed = 150.0
 

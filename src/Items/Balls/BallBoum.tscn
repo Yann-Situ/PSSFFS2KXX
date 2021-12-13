@@ -58,3 +58,6 @@ shape = SubResource( 3 )
 
 [node name="BoumParticle" parent="." index="7" instance=ExtResource( 5 )]
 position = Vector2( 6, -3 )
+
+[node name="Timer" type="Timer" parent="." index="8"]
+one_shot = true
