@@ -3,6 +3,7 @@ extends Activable
 export var mass = 5.0 # kg
 export var momentum_threshold = 0.0 # m*pix/s
 export var explode_threshold = 600.0 # m*pix/s
+export(int, "type0", "type1") var door_visual_type
 
 onready var momentum_threshold2 = momentum_threshold*momentum_threshold
 onready var explode_threshold2 = explode_threshold*explode_threshold
@@ -12,14 +13,15 @@ onready var collision_mask_save = $Breakable.collision_mask
 var only_breakable_collision_layer = 64 # only breakable
 
 func _ready():
+	self.z_as_relative = false
 	self.z_index = Global.z_indices["background_4"]
 	set_activated(activated)
 
 func update_sprite(b):
 	if b:
-		$Sprite.set_frame(1)
+		$Sprite.set_frame(door_visual_type*2+1)
 	else:
-		$Sprite.set_frame(0)
+		$Sprite.set_frame(door_visual_type*2+0)
 
 func apply_impulse(momentum : Vector2):
 	var m2=momentum.length_squared()

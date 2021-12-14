@@ -598,6 +598,7 @@ position = Vector2( 1232, 416 )
 
 [node name="Door2" parent="Environment/Interactive" instance=ExtResource( 37 )]
 position = Vector2( 1200, 192 )
+door_visual_type = 1
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
 environment = SubResource( 16 )

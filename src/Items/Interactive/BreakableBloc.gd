@@ -42,10 +42,13 @@ func explode(momentum : Vector2):
 	$DebrisParticle.direction = momentum
 	$DebrisParticle.initial_velocity = inv_mass * momentum.length()
 	$DebrisParticle.restart()
-	$Sprite.visible = false
 	$Occluder.visible = false
 	$Breakable.collision_layer = 0
 	$Breakable.collision_mask = 0
+	
+	#$Sprite.visible = false
+	$Sprite/AnimationPlayer.play("explode")
+	
 	if content != null and content.can_instance():
 		var inst = content.instance()
 		if inst is Node2D:
