@@ -386,13 +386,11 @@ z_as_relative = false
 
 [node name="Button0" parent="Environment/Activables" instance=ExtResource( 20 )]
 position = Vector2( 600, -94 )
-z_index = 90
 locked = false
 button_type = 0
 
 [node name="Button1" parent="Environment/Activables" instance=ExtResource( 20 )]
 position = Vector2( 464, -94 )
-z_index = 90
 locked = false
 
 [node name="Spawner" parent="Environment/Activables" instance=ExtResource( 19 )]
@@ -407,29 +405,24 @@ ball = ExtResource( 3 )
 
 [node name="Button2" parent="Environment/Activables" instance=ExtResource( 20 )]
 position = Vector2( 640, -94 )
-z_index = 90
 locked = false
 button_type = 2
 
 [node name="Button3" parent="Environment/Activables" instance=ExtResource( 20 )]
-position = Vector2( 368, 544 )
-z_index = 90
+position = Vector2( 368, 546 )
 locked = false
 button_type = 2
 
 [node name="Button4" parent="Environment/Activables" instance=ExtResource( 20 )]
 position = Vector2( 1168, 226 )
-z_index = 90
 locked = false
 
 [node name="Button5" parent="Environment/Activables" instance=ExtResource( 20 )]
-position = Vector2( 1232, 226 )
-z_index = 90
+position = Vector2( 1216, 226 )
 locked = false
 
 [node name="Button6" parent="Environment/Activables" instance=ExtResource( 20 )]
 position = Vector2( 1200, 98 )
-z_index = 90
 locked = false
 
 [node name="Balls" type="Node2D" parent="Environment"]
@@ -449,6 +442,9 @@ position = Vector2( 1312, 432 )
 [node name="BallBoum" parent="Environment/Balls" instance=ExtResource( 3 )]
 position = Vector2( 830, 368 )
 
+[node name="BallBoum2" parent="Environment/Balls" instance=ExtResource( 3 )]
+position = Vector2( 272, 368 )
+
 [node name="BallRolling" parent="Environment/Balls" instance=ExtResource( 27 )]
 position = Vector2( 144, 504 )
 
@@ -456,7 +452,7 @@ position = Vector2( 144, 504 )
 position = Vector2( 1008, 175.385 )
 
 [node name="BallLight" parent="Environment/Balls" instance=ExtResource( 24 )]
-position = Vector2( 1048, 320 )
+position = Vector2( 1040, 320 )
 
 [node name="Baskets" type="Node2D" parent="Environment"]
 
@@ -567,12 +563,75 @@ position = Vector2( 912, 400 )
 [node name="BreakableBloc3" parent="Environment/Interactive" instance=ExtResource( 35 )]
 position = Vector2( 944, 368 )
 
+[node name="BreakableBloc11" parent="Environment/Interactive" instance=ExtResource( 35 )]
+position = Vector2( 1264, 432 )
+
+[node name="BreakableBloc12" parent="Environment/Interactive" instance=ExtResource( 35 )]
+position = Vector2( 1032, 528 )
+
+[node name="BreakableBloc13" parent="Environment/Interactive" instance=ExtResource( 35 )]
+position = Vector2( 984, 528 )
+
+[node name="BreakableBloc14" parent="Environment/Interactive" instance=ExtResource( 35 )]
+position = Vector2( 728, 432 )
+
+[node name="BreakableBloc15" parent="Environment/Interactive" instance=ExtResource( 35 )]
+position = Vector2( 760, 432 )
+
+[node name="BreakableBloc16" parent="Environment/Interactive" instance=ExtResource( 35 )]
+position = Vector2( 528, 528 )
+
+[node name="BreakableBloc17" parent="Environment/Interactive" instance=ExtResource( 35 )]
+position = Vector2( 368, 528 )
+
+[node name="BreakableBloc18" parent="Environment/Interactive" instance=ExtResource( 35 )]
+position = Vector2( 400, 528 )
+
+[node name="BreakableBloc19" parent="Environment/Interactive" instance=ExtResource( 35 )]
+position = Vector2( 336, 528 )
+
+[node name="BreakableBloc20" parent="Environment/Interactive" instance=ExtResource( 35 )]
+position = Vector2( 336, 496 )
+
+[node name="BreakableBloc21" parent="Environment/Interactive" instance=ExtResource( 35 )]
+position = Vector2( 208, 432 )
+
+[node name="BreakableBloc22" parent="Environment/Interactive" instance=ExtResource( 35 )]
+position = Vector2( 208, 496 )
+
+[node name="BreakableBloc23" parent="Environment/Interactive" instance=ExtResource( 35 )]
+position = Vector2( 144, 528 )
+
+[node name="BreakableBloc24" parent="Environment/Interactive" instance=ExtResource( 35 )]
+position = Vector2( -32, 368 )
+
+[node name="BreakableBloc25" parent="Environment/Interactive" instance=ExtResource( 35 )]
+position = Vector2( -32, 336 )
+
+[node name="BreakableBloc26" parent="Environment/Interactive" instance=ExtResource( 35 )]
+position = Vector2( -144, 240 )
+
+[node name="BreakableBloc27" parent="Environment/Interactive" instance=ExtResource( 35 )]
+position = Vector2( -112, 240 )
+
+[node name="BreakableBloc28" parent="Environment/Interactive" instance=ExtResource( 35 )]
+position = Vector2( -80, 240 )
+
+[node name="BreakableBloc29" parent="Environment/Interactive" instance=ExtResource( 35 )]
+position = Vector2( -112, 528 )
+
 [node name="BreakableBloc4" parent="Environment/Interactive" instance=ExtResource( 35 )]
 position = Vector2( 976, 368 )
 content = ExtResource( 15 )
 
 [node name="BreakableBloc5" parent="Environment/Interactive" instance=ExtResource( 35 )]
 position = Vector2( 1008, 336 )
+
+[node name="BreakableBloc30" parent="Environment/Interactive" instance=ExtResource( 35 )]
+position = Vector2( 1008, 240 )
+
+[node name="BreakableBloc31" parent="Environment/Interactive" instance=ExtResource( 35 )]
+position = Vector2( 352, 752 )
 
 [node name="BreakableBloc6" parent="Environment/Interactive" instance=ExtResource( 35 )]
 position = Vector2( 1008, 368 )
@@ -595,10 +654,27 @@ position = Vector2( 728, 528 )
 
 [node name="Door" parent="Environment/Interactive" instance=ExtResource( 37 )]
 position = Vector2( 1232, 416 )
+z_index = 90
+
+[node name="Door5" parent="Environment/Interactive" instance=ExtResource( 37 )]
+position = Vector2( -16, 352 )
+z_index = 90
+visual_type = 1
+flip_h = true
 
 [node name="Door2" parent="Environment/Interactive" instance=ExtResource( 37 )]
-position = Vector2( 1200, 192 )
-door_visual_type = 1
+position = Vector2( 1192, 192 )
+z_index = 90
+
+[node name="Door3" parent="Environment/Interactive" instance=ExtResource( 37 )]
+position = Vector2( 1008, 288 )
+z_index = 90
+
+[node name="Door4" parent="Environment/Interactive" instance=ExtResource( 37 )]
+position = Vector2( 1192, 416 )
+z_index = 90
+activated = true
+visual_type = 1
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
 environment = SubResource( 16 )
@@ -679,7 +755,7 @@ walk_return_thresh_instant_speed = 120.0
 walk_accel = 170.0
 
 [node name="Player" parent="." instance=ExtResource( 1 )]
-position = Vector2( 256, 187.385 )
+position = Vector2( 272, 416 )
 z_index = 10
 walk_return_thresh_instant_speed = 150.0
 

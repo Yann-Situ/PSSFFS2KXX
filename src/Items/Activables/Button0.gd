@@ -40,6 +40,7 @@ func _ready():
 	elif button_type == BUTTON0_TYPE.PHYSICAL :
 		$Sprite.set_region_rect(Rect2(128,80,64,16))
 		$Area2D.connect("body_exited", self, "_on_Area2D_body_exited")
+		_on_Area2D_body_exited(null)
 		
 func update_Sprite(b):
 	if b:

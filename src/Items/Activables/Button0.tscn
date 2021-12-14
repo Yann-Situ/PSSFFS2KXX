@@ -7,7 +7,7 @@
 extents = Vector2( 10, 6 )
 
 [node name="Button0" type="Node2D"]
-z_index = 9
+z_index = 90
 z_as_relative = false
 script = ExtResource( 2 )
 __meta__ = {
@@ -25,7 +25,7 @@ region_rect = Rect2( 64, 80, 64, 16 )
 
 [node name="Area2D" type="Area2D" parent="."]
 collision_layer = 136
-collision_mask = 5
+collision_mask = 69
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
 position = Vector2( 0, -6 )
