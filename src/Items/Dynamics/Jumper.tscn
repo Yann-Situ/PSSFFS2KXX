@@ -38,13 +38,13 @@ extents = Vector2( 8, 8 )
 extents = Vector2( 16, 16 )
 
 [node name="Jumper" type="Node2D"]
-z_index = 16
+z_index = 160
 z_as_relative = false
 script = ExtResource( 2 )
 
 [node name="Sprite" type="AnimatedSprite" parent="."]
 frames = SubResource( 6 )
-frame = 7
+frame = 11
 playing = true
 
 [node name="Area2D" type="Area2D" parent="."]
@@ -58,7 +58,7 @@ shape = SubResource( 7 )
 
 [node name="StaticBody2D" type="StaticBody2D" parent="."]
 collision_layer = 2
-collision_mask = 7
+collision_mask = 135
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D"]
 visible = false

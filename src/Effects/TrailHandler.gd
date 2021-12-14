@@ -8,17 +8,18 @@ export var width := 20.0
 export var width_curve : Curve = Curve.new()
 export var trail_fade_time := 1.0
 export var point_lifetime = 0.5
-export var tick_speed := 0.04
+export var tick_age := 0.04
 export var texture : Texture = load("res://assets/art/effects/trail.png")
 
 var TrailScene = preload("res://src/Effects/Trail.tscn")
 var node_to_trail
 var trail = null
+var last_tick = 0.0
+var tick_delay_save = 0.0
 
 func set_node_to_trail(node):
 	node_to_trail = node
 	
-
 ################################################################################
 
 func start(duration, tick_delay):
@@ -33,7 +34,7 @@ func start(duration, tick_delay):
 	trail_instance.width_curve = width_curve
 	trail_instance.trail_fade_time = trail_fade_time
 	trail_instance.point_lifetime = point_lifetime
-	trail_instance.tick_speed = tick_speed
+	trail_instance.tick_age = tick_age
 	trail_instance.texture = texture
 	
 	# [BUG] https://github.com/godotengine/godot/issues/45416
@@ -47,16 +48,33 @@ func start(duration, tick_delay):
 	if duration > 0.0:
 		$TrailTimer.start(duration)
 	$TrailTickTimer.start(tick_delay)
+	tick_delay_save = tick_delay
+	last_tick = OS.get_ticks_msec()/1000.0
 	
 func stop():
 	$TrailTimer.stop()
 	_on_TrailTimer_timeout()
 
 func _on_TrailTimer_timeout():
-	$TrailTickTimer.stop()
 	if trail != null:
 		trail.stop()
-		trail = null
-
+		yield(get_tree().create_timer(trail.trail_fade_time), "timeout")
+	$TrailTickTimer.stop()
+	trail = null
+	
 func _on_TrailTickTimer_timeout():
-	trail.add_point(node_to_trail.global_position)
+	var tick = OS.get_ticks_msec()/1000.0
+	if tick_delay_save == 0.0:
+		print("error: tick_delay_save == 0 in "+self.name)
+		return
+	var nb_pts = floor((tick - last_tick)/tick_delay_save)
+	if nb_pts > 1:
+		var p0 = Vector2.ZERO
+		if trail.get_point_count() > 0:
+			p0 = trail.points[trail.get_point_count()-1] # last point
+		for i in range(nb_pts):
+			trail.add_point(1.0/nb_pts * 
+				((nb_pts-i-1)*p0 + (i+1)*node_to_trail.global_position))
+	else :
+		trail.add_point(node_to_trail.global_position)
+	last_tick = tick

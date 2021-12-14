@@ -74,6 +74,7 @@ Popol Super Slam Fusion Full Speed 2KXX
 * [x] TileMap hitboxes (bounce on corners of each tile + balls pass through 2 adjacent tiles). **size up the hitboxes smartly**
 * [x] Physic of balls when picked up (stay phisically on the ground...). **complicated** see rigidbody functions and how `integrate_force()` works.
 * [.] Problems with physics on **slopes**.
+* [ ] Problems when passing from a block just **16 pixel** over the other block (results in tiny teleportation but visible due to camera instant movement).
 
 ### Other
 * [x] Spawner rotation position is weird.
@@ -85,6 +86,9 @@ Popol Super Slam Fusion Full Speed 2KXX
 
 ### physicbodies
 Must inherit from `physicbodies.gd`.
+
+### breakables
+Must have an `apply_impulse(momentum : Vector2)` function that handles explosion.
 
 ### balls
 Must inherit from `ball.gd`.

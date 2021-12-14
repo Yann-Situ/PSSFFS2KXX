@@ -5,7 +5,7 @@ var min_spawn_distance := 5.0
 var gravity := Vector2.UP
 var trail_fade_time := 1.0
 var point_lifetime = 0.5
-var tick_speed := 0.04
+var tick_age := 0.04
 
 var tick := 0.0
 var wild_speed := 0.1
@@ -20,12 +20,11 @@ func _ready():
 
 func stop():
 	stopped = true
-	tween.interpolate_property(self, "modulate:a", 1.0, 0.0, trail_fade_time, Tween.TRANS_CIRC, Tween.EASE_OUT)
+	tween.interpolate_property(self, "modulate:a", 1.0, 0.0, trail_fade_time)
 	tween.start()
 
-
 func _process(delta):
-	if tick > tick_speed:
+	if tick > tick_age:
 		tick = 0
 		while point_age.front() > point_lifetime:
 			point_age.pop_front()

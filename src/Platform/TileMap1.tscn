@@ -1,7 +1,7 @@
 [gd_scene load_steps=5 format=2]
 
 [ext_resource path="res://src/Platform/Tileset/TileMap1.tres" type="TileSet" id=1]
-[ext_resource path="res://src/Platform/TileMap.gd" type="Script" id=2]
+[ext_resource path="res://src/Platform/World32.gd" type="Script" id=2]
 [ext_resource path="res://src/Platform/Tileset/TileMap2.tres" type="TileSet" id=3]
 [ext_resource path="res://src/Platform/Tileset/TileMap3.tres" type="TileSet" id=4]
 

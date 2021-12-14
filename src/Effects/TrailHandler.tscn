@@ -9,6 +9,7 @@ script = ExtResource( 1 )
 wait_time = 0.2
 
 [node name="TrailTimer" type="Timer" parent="."]
+one_shot = true
 
 [connection signal="timeout" from="TrailTickTimer" to="." method="_on_TrailTickTimer_timeout"]
 [connection signal="timeout" from="TrailTimer" to="." method="_on_TrailTimer_timeout"]

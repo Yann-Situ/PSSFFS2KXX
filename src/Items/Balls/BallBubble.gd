@@ -21,7 +21,7 @@ func power_jp(player,delta):
 		#$Tween.interpolate_property(self, "position", position, player.position, 0.1)
 		$Tween.follow_property(self, "position", position, player, "position", 0.1)
 		$Tween.start()
-		$TrailHandler.start(0.15,0.001)
+		$TrailHandler.start(0.1,0.0015)
 	else :
 		player.position.y -= 100
 		

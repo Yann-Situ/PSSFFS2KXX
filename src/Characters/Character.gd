@@ -1,15 +1,12 @@
-extends KinematicBody2D
-class_name Character #, "res://assets/art/icons/popol.png"
+extends PhysicBody
+class_name Character, "res://assets/art/icons/character.png"
 
 onready var S = get_node("State")
 onready var ActionHandler = get_node("Actions/Action_Handler")
 onready var Effects = get_node("Effects")
 onready var BallHandler = get_node("Ball_Handler")
 
-export (bool) var physics_enabled = true
-
 # Environment features (should be given by the map)
-export (float) var gravity = ProjectSettings.get_setting("physics/2d/default_gravity") # pix/s²
 export (float) var floor_friction = 0.2 # ratio/frame
 export (float) var air_friction = 0.0 # ratio/frame
 export (float) var attract_force = 800 # m.pix/s²
@@ -41,16 +38,16 @@ export (float) var walk_accel = 220 # pix/s²
 
 export (bool) var flip_h = false
 
-func disable_physics():
-	physics_enabled = false
-	S.velocity *= 0
-	#S.applied_force *= 0
-
-func enable_physics():
-	physics_enabled = true
+# func disable_physics():
+# 	physics_enabled = false
+# 	S.velocity *= 0
+# 	#S.applied_force *= 0
+#
+# func enable_physics():
+# 	physics_enabled = true
 
 func _ready():
-	self.z_index = Global.z_indices["player_0"]
+	self.z_index = Global.z_indices["character_0"]
 	add_to_group("holders")
 	add_to_group("characters")
 
@@ -153,21 +150,54 @@ func get_input(delta): #delta in s
 	S.release_jp = false
 
 ################################################################################
-func _physics_process(delta):
+# For physicbody
+
+func apply_impulse(impulse):
+	S.velocity += invmass * impulse
+	linear_velocity = S.velocity
+	
+func set_linear_velocity(v):
+	linear_velocity = v
+	S.velocity = v
+	
+func physics_process(delta): # called by _physics_process
 	behaviour(delta)
 	get_input(delta)
-	if S.is_onwall and S.velocity.y > 0: #fall on a wall
-		S.velocity.y += gravity/2.0 * delta
-		S.velocity.y = min(S.velocity.y,max_speed_fall_onwall)
+	linear_velocity = S.velocity
+	update_linear_velocity(delta)
+
+	if ActionHandler.is_on_slope() and linear_velocity.y > - abs(linear_velocity.x) :
+		linear_velocity.y = 0.5*sqrt(2) * \
+			move_and_slide_with_snap(linear_velocity, 33*Vector2.DOWN, \
+				Vector2.UP, true, 4, 0.785398, false).y
 	else :
-		S.velocity.y += gravity * delta
-		if S.velocity.y > max_speed_fall:
-			S.velocity.y = max_speed_fall
-	if physics_enabled:
-		if ActionHandler.is_on_slope() and S.velocity.y > - abs(S.velocity.x) :
-			S.velocity.y = 0.5*sqrt(2) * move_and_slide_with_snap(S.velocity, 33*Vector2.DOWN, Vector2.UP, true, 4, 0.785398, false).y
-		else :
-			S.velocity = move_and_slide(S.velocity, Vector2.UP, true, 4, 0.785398, false)
+		linear_velocity = move_and_slide(linear_velocity, Vector2.UP, true, 4, \
+		0.785398, false)
+
+	S.velocity = linear_velocity
+
+func update_linear_velocity(delta):
+	# apply gravity and forces
+	if S.is_onwall and linear_velocity.y > 0:
+		#fall on a wall
+		linear_velocity.y += gravity/2.0 * delta
+		linear_velocity.y = min(linear_velocity.y,max_speed_fall_onwall)
+	else :
+		linear_velocity.y += gravity * delta
+		if linear_velocity.y > max_speed_fall:
+			linear_velocity.y = max_speed_fall
+
+	linear_velocity += invmass * applied_force * delta
+
+func collision_effect(collider : Object, collider_velocity : Vector2,
+	collision_point : Vector2, collision_normal : Vector2):
+	pass
+	# this function does NOT aim to change self.linear_velocity, this can result in
+	# wrong behaviours
+	return true
+
+func collision_handle(collision, delta):
+	pass
 
 ################################################################################
 # For `holders` group

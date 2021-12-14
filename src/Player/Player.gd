@@ -51,6 +51,7 @@ func enable_physics():
 	physics_enabled = true
 
 func _ready():
+	self.z_as_relative = false
 	self.z_index = Global.z_indices["player_0"]
 	add_to_group("holders")
 	add_to_group("characters")
@@ -175,6 +176,8 @@ func get_input(delta): #delta in s
 	S.release_jp = false
 
 ################################################################################
+# For physicbody
+
 func _physics_process(delta):
 	get_input(delta)
 	if S.is_onwall and S.velocity.y > 0: #fall on a wall

@@ -122,7 +122,7 @@ func update_vars(delta):
 		$ToleranceJumpPressTimer.start(tolerance_jump_press)
 	if dunk_jp:
 		$ToleranceDunkJumpPressTimer.start(tolerance_jump_press)
-	
+
 	time += delta # still used in the current shoot vector implementation... to change
 
 	last_frame_onair = not is_onfloor

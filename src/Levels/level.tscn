@@ -1,0 +1,258 @@
+[gd_scene load_steps=16 format=2]
+
+[ext_resource path="res://src/Player/Player.tscn" type="PackedScene" id=1]
+[ext_resource path="res://src/Platform/Tileset/TileMap1.tres" type="TileSet" id=2]
+[ext_resource path="res://assets/art/background/pixelBackground7.png" type="Texture" id=6]
+[ext_resource path="res://assets/art/background/pixelBackground3.png" type="Texture" id=7]
+[ext_resource path="res://assets/art/background/pixelBackground6.png" type="Texture" id=8]
+[ext_resource path="res://src/Platform/Tileset/TileMap2.tres" type="TileSet" id=9]
+[ext_resource path="res://src/Platform/World32.gd" type="Script" id=10]
+[ext_resource path="res://src/Platform/Tileset/TileMap3.tres" type="TileSet" id=12]
+[ext_resource path="res://src/Platform/Tileset/TilesetForeground.tres" type="TileSet" id=13]
+[ext_resource path="res://src/Platform/Tileset/Back16.tres" type="TileSet" id=30]
+[ext_resource path="res://src/Platform/Tileset/World16.tres" type="TileSet" id=31]
+[ext_resource path="res://src/Platform/Tileset/Graff.tres" type="TileSet" id=32]
+
+[sub_resource type="Gradient" id=1]
+colors = PoolColorArray( 1.25, 1.03, 0.8, 1, 1, 0.436035, 0.0625, 1 )
+
+[sub_resource type="GradientTexture" id=2]
+gradient = SubResource( 1 )
+width = 516
+
+[sub_resource type="Environment" id=16]
+background_mode = 4
+auto_exposure_scale = 1.0
+auto_exposure_min_luma = 0.9
+auto_exposure_max_luma = 3.0
+dof_blur_near_distance = 0.55
+glow_enabled = true
+glow_intensity = 0.96
+glow_strength = 0.94
+glow_bloom = 0.01
+glow_blend_mode = 1
+glow_hdr_threshold = 0.95
+glow_hdr_luminance_cap = 1.0
+glow_hdr_scale = 0.98
+glow_bicubic_upscale = true
+adjustment_enabled = true
+adjustment_contrast = 1.08
+adjustment_saturation = 1.01
+
+[node name="main" type="Node2D"]
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="ParallaxBackground" type="ParallaxBackground" parent="."]
+layer = -10
+
+[node name="Parallax0" type="ParallaxLayer" parent="ParallaxBackground"]
+motion_scale = Vector2( 0, 0 )
+motion_offset = Vector2( -400, -228 )
+__meta__ = {
+"_edit_group_": true,
+"_edit_lock_": true
+}
+
+[node name="TextureRect" type="TextureRect" parent="ParallaxBackground/Parallax0"]
+margin_left = -2.0
+margin_top = 458.0
+margin_right = 454.0
+margin_bottom = 1270.0
+rect_rotation = -89.9999
+mouse_filter = 2
+texture = SubResource( 2 )
+expand = true
+stretch_mode = 2
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Parallax1" type="ParallaxLayer" parent="ParallaxBackground"]
+visible = false
+modulate = Color( 1, 0.862745, 0.776471, 1 )
+motion_scale = Vector2( 0.08, 0 )
+motion_offset = Vector2( 0, -30 )
+motion_mirroring = Vector2( 1024, 512 )
+__meta__ = {
+"_edit_group_": true,
+"_edit_lock_": true
+}
+
+[node name="TextureRect" type="TextureRect" parent="ParallaxBackground/Parallax1"]
+modulate = Color( 1, 0.784314, 0.662745, 1 )
+margin_top = -256.0
+margin_right = 1024.0
+margin_bottom = 260.0
+mouse_filter = 2
+texture = ExtResource( 7 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Parallax2" type="ParallaxLayer" parent="ParallaxBackground"]
+motion_scale = Vector2( 0.15, 0.15 )
+motion_offset = Vector2( 0, -80 )
+motion_mirroring = Vector2( 1540, 0 )
+__meta__ = {
+"_edit_group_": true,
+"_edit_lock_": true
+}
+
+[node name="TextureRect" type="TextureRect" parent="ParallaxBackground/Parallax2"]
+modulate = Color( 0.85098, 0.458824, 0.423529, 1 )
+margin_left = 5.3454
+margin_top = 5.92419
+margin_right = 1545.35
+margin_bottom = 521.924
+mouse_filter = 2
+texture = ExtResource( 8 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="ColorRect" type="ColorRect" parent="ParallaxBackground/Parallax2"]
+margin_left = 4.0
+margin_top = 259.0
+margin_right = 1551.0
+margin_bottom = 524.0
+mouse_filter = 2
+color = Color( 0.8, 0.407843, 0.364706, 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Parallax3" type="ParallaxLayer" parent="ParallaxBackground"]
+light_mask = -2147483647
+motion_scale = Vector2( 0.3, 0.3 )
+motion_mirroring = Vector2( 2300, 0 )
+__meta__ = {
+"_edit_group_": true,
+"_edit_lock_": true
+}
+
+[node name="TextureRect" type="TextureRect" parent="ParallaxBackground/Parallax3"]
+modulate = Color( 0.67451, 0.341176, 0.388235, 1 )
+margin_top = -240.0
+margin_right = 2176.0
+margin_bottom = 784.0
+mouse_filter = 2
+texture = ExtResource( 6 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="ParallaxForeground" type="ParallaxBackground" parent="."]
+layer = 10
+
+[node name="ParallaxLayer5" type="ParallaxLayer" parent="ParallaxForeground"]
+light_mask = -2147483647
+z_index = 21
+z_as_relative = false
+motion_scale = Vector2( 1.2, 1.2 )
+
+[node name="TileMap" type="TileMap" parent="ParallaxForeground/ParallaxLayer5"]
+modulate = Color( 0.290196, 0.662745, 0.690196, 1 )
+z_index = 21
+z_as_relative = false
+tile_set = ExtResource( 13 )
+cell_size = Vector2( 128, 128 )
+format = 1
+
+[node name="Map" type="Node2D" parent="."]
+z_as_relative = false
+
+[node name="CanvasModulate" type="CanvasModulate" parent="Map"]
+visible = false
+z_index = -82
+color = Color( 0.588235, 0.588235, 0.588235, 1 )
+
+[node name="Back32" type="TileMap" parent="Map"]
+light_mask = 3
+z_index = 5
+z_as_relative = false
+tile_set = ExtResource( 9 )
+cell_size = Vector2( 32, 32 )
+collision_layer = 2
+collision_mask = 7
+occluder_light_mask = 2
+format = 1
+
+[node name="Back16" type="TileMap" parent="Map"]
+light_mask = 3
+z_index = 5
+z_as_relative = false
+tile_set = ExtResource( 30 )
+cell_size = Vector2( 16, 16 )
+collision_layer = 2
+collision_mask = 7
+occluder_light_mask = 2
+format = 1
+
+[node name="Graff" type="TileMap" parent="Map"]
+light_mask = 8
+z_index = 7
+z_as_relative = false
+tile_set = ExtResource( 32 )
+cell_size = Vector2( 16, 16 )
+collision_layer = 2
+collision_mask = 7
+occluder_light_mask = 0
+format = 1
+
+[node name="World32" type="TileMap" parent="Map"]
+z_index = 15
+z_as_relative = false
+tile_set = ExtResource( 2 )
+cell_size = Vector2( 32, 32 )
+cell_clip_uv = true
+collision_layer = 2
+collision_mask = 7
+format = 1
+script = ExtResource( 10 )
+
+[node name="World16" type="TileMap" parent="Map"]
+z_index = 15
+z_as_relative = false
+tile_set = ExtResource( 31 )
+cell_size = Vector2( 16, 16 )
+cell_clip_uv = true
+collision_layer = 2
+collision_mask = 7
+format = 1
+
+[node name="Environment" type="TileMap" parent="Map"]
+light_mask = 3
+z_index = 9
+z_as_relative = false
+tile_set = ExtResource( 12 )
+cell_size = Vector2( 16, 16 )
+collision_layer = 2
+collision_mask = 7
+format = 1
+tile_data = PoolIntArray( -2359332, 35, 65536, -2359331, 35, 1, -2359330, 35, 1, -2359329, 35, 65536, -2359328, 35, 1, -2359327, 35, 1, -2359326, 35, 65537, -2359325, 35, 1, -2359324, 35, 65537, -2359323, 35, 65537, -2359322, 35, 65537, -2359321, 35, 0, -2359320, 35, 65536, -2359319, 35, 0, -2359318, 35, 1, -2359317, 35, 65536, -2359316, 35, 65537, -2359315, 35, 1, -2359314, 35, 65537, -2359313, 35, 0, -2359312, 35, 1, -2359311, 35, 0, -2359310, 35, 1, -2359309, 35, 65536, -2359308, 35, 65536, -2359307, 35, 65536, -2359306, 35, 65536, -2359305, 35, 65536, -2359304, 35, 1, -2359303, 35, 1, -2359302, 35, 65537, -2359301, 35, 65536, -2359300, 35, 1, -2359299, 35, 1, -2359298, 35, 0, -2359297, 35, 0, -2424832, 35, 65536, -2424831, 35, 65536, -2424830, 35, 65537, -2424829, 35, 65536, -2424828, 35, 0, -2424827, 35, 1, -2424826, 35, 0, -2424825, 35, 65536, -2424824, 35, 65536, -2424823, 35, 65536, -2424822, 35, 1, -2424821, 35, 1, -2424820, 35, 65537, -2424819, 35, 65536, -2424818, 35, 0, -2424817, 35, 1, -2424816, 35, 0, -2424815, 35, 65536, -2424814, 35, 1, -2424813, 35, 1, -2424812, 35, 65536, -2424811, 35, 0, -2424810, 35, 65536, -2424809, 35, 65537, -2424808, 35, 1, -2424807, 35, 0, -2424806, 35, 0, -2424805, 35, 0, -2424804, 35, 65536, -2424803, 35, 65537, -2424802, 35, 65537, -2424801, 35, 65536, -2424800, 35, 65537, -2424799, 35, 0, -2424798, 35, 0, -2424797, 35, 1, -2424796, 35, 0, -2424795, 35, 65537, -2424794, 35, 1, -2424793, 35, 1, -2424792, 35, 1, -2424791, 35, 65537, -2424790, 35, 65536, -2424789, 35, 1, -2424788, 35, 1, -2424787, 35, 65537, -2424786, 35, 0, -2424785, 35, 1, -2424784, 35, 65537, -2424783, 35, 0, -2424782, 35, 1, -2424781, 35, 65536, -2424780, 35, 1, -2424779, 35, 65537, -2424778, 35, 1, -2424777, 35, 0, -2424776, 35, 0, -2424775, 35, 65536, -2424774, 35, 65537, -2424773, 35, 1, -2424772, 35, 65537, -2424771, 35, 0, -2424770, 35, 65537, -2424769, 35, 65537, -2424768, 35, 1, -2424767, 35, 0, -2424766, 35, 0, -2424765, 35, 1, -2424764, 35, 0, -2424763, 35, 1, -2424762, 35, 1, -2424761, 35, 65536, -2424760, 35, 1, -2424759, 35, 0, -2424758, 35, 65537, -2424757, 35, 1, -2424756, 35, 65536, -2424755, 35, 1, -2424754, 35, 65537, -2424753, 35, 65537, -2424752, 35, 0, -2424751, 35, 0, -2424750, 35, 65536, -2424749, 35, 65536, -2424748, 35, 1, -2424747, 35, 1, -2424746, 35, 65537, -2424745, 35, 65536, -2424744, 35, 0, -2424743, 35, 65537, -2424742, 35, 1, -2424741, 35, 65537, -2424740, 35, 0, -2424739, 35, 0, -2424738, 35, 65537, -2424737, 35, 0, -2424736, 35, 1, -2424735, 35, 0, -2424734, 35, 0, -2424733, 35, 65537, -2424732, 35, 65536, -2424731, 35, 1, -2424730, 35, 65536, -2424729, 35, 0, -2424728, 35, 0, -2424727, 35, 65536, -2424726, 35, 65536, -2424725, 35, 1, -2424724, 35, 1, -2424723, 35, 65536, -2424722, 35, 65537, -2424721, 35, 65536, -2424720, 35, 0, -2424719, 35, 65536, -2424718, 35, 1, -2424717, 35, 1, -2424716, 35, 65537, -2424715, 35, 1, -2424714, 35, 0, -2424713, 35, 1, -2424712, 35, 65536, -2424711, 35, 65537, -2424710, 35, 65536, -2424709, 35, 0, -2424708, 35, 65537, -2424707, 35, 65537, -2424706, 35, 1, -2424705, 35, 0, -2424704, 35, 1, -2424703, 35, 65537, -2424702, 35, 1, -2424701, 35, 1, -2424700, 35, 65537, -2424699, 35, 65537, -2424698, 35, 0, -2424697, 35, 0 )
+
+[node name="Environment" type="Node2D" parent="."]
+
+[node name="Activables" type="Node2D" parent="Environment"]
+z_as_relative = false
+
+[node name="Balls" type="Node2D" parent="Environment"]
+
+[node name="Baskets" type="Node2D" parent="Environment"]
+
+[node name="Dynamics" type="Node2D" parent="Environment"]
+z_index = 2
+
+[node name="Characters" type="Node2D" parent="Environment"]
+
+[node name="Lights" type="Node2D" parent="Environment"]
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource( 16 )
+
+[node name="Player" parent="." instance=ExtResource( 1 )]
+position = Vector2( 1832, 280 )
+z_index = 10
+walk_return_thresh_instant_speed = 150.0

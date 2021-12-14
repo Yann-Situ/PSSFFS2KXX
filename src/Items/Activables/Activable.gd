@@ -2,21 +2,30 @@ extends Node2D
 class_name Activable, "res://assets/art/icons/activable.png"
 
 export (bool) var activated = false setget set_activated, is_activated
+export (bool) var locked = false
 
 func _init():
 	add_to_group("activables")
 
+func lock():
+	locked = true
+	
+func unlock():
+	locked = false
+
 func enable():
-	print("enable: " + str(self.name))
-	activated = true
-	on_enable()
+	if not locked:
+		print("enable: " + str(self.name))
+		activated = true
+		on_enable()
 func on_enable():
 	pass
 
 func disable():
-	print("disable: " + str(self.name))
-	activated = false
-	on_disable()
+	if not locked:
+		print("disable: " + str(self.name))
+		activated = false
+		on_disable()
 func on_disable():
 	pass
 
