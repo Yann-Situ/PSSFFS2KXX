@@ -1,4 +1,4 @@
-[gd_scene load_steps=61 format=2]
+[gd_scene load_steps=62 format=2]
 
 [ext_resource path="res://src/Player/Player.tscn" type="PackedScene" id=1]
 [ext_resource path="res://src/Platform/Tileset/TileMap1.tres" type="TileSet" id=2]
@@ -43,6 +43,7 @@
 [ext_resource path="res://src/Platform/Back16.gd" type="Script" id=41]
 [ext_resource path="res://src/Platform/Graff.gd" type="Script" id=42]
 [ext_resource path="res://src/Platform/FrontEnvironment.gd" type="Script" id=43]
+[ext_resource path="res://src/Items/Balls/BallShock.tscn" type="PackedScene" id=44]
 
 [sub_resource type="Gradient" id=1]
 colors = PoolColorArray( 1.25, 1.03, 0.8, 1, 1, 0.436035, 0.0625, 1 )
@@ -443,7 +444,7 @@ position = Vector2( 1312, 432 )
 position = Vector2( 830, 368 )
 
 [node name="BallBoum2" parent="Environment/Balls" instance=ExtResource( 3 )]
-position = Vector2( 272, 368 )
+position = Vector2( 176, 376 )
 
 [node name="BallRolling" parent="Environment/Balls" instance=ExtResource( 27 )]
 position = Vector2( 144, 504 )
@@ -453,6 +454,9 @@ position = Vector2( 1008, 175.385 )
 
 [node name="BallLight" parent="Environment/Balls" instance=ExtResource( 24 )]
 position = Vector2( 1040, 320 )
+
+[node name="BallShock" parent="Environment/Balls" instance=ExtResource( 44 )]
+position = Vector2( 272, 376 )
 
 [node name="Baskets" type="Node2D" parent="Environment"]
 
@@ -729,6 +733,7 @@ shadow_enabled = true
 [node name="Character" parent="." instance=ExtResource( 34 )]
 modulate = Color( 1, 0.988235, 0.666667, 1 )
 position = Vector2( 176, 320 )
+physics_enabled = false
 jump_speed = -300.0
 run_speed_max = 250.0
 walk_instant_speed = 100.0
@@ -738,6 +743,7 @@ walk_accel = 170.0
 [node name="Character2" parent="." instance=ExtResource( 34 )]
 modulate = Color( 0.529412, 0.941176, 1, 1 )
 position = Vector2( 952, -136 )
+physics_enabled = false
 jump_speed = -300.0
 run_speed_max = 250.0
 walk_instant_speed = 100.0

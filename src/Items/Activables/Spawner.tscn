@@ -43,7 +43,7 @@ region_rect = Rect2( 0, 16, 192, 32 )
 anims/spawn = SubResource( 1 )
 
 [node name="StaticBody2D" type="StaticBody2D" parent="."]
-collision_layer = 2
+collision_layer = 130
 collision_mask = 7
 
 [node name="CollisionShape" type="CollisionShape2D" parent="StaticBody2D"]

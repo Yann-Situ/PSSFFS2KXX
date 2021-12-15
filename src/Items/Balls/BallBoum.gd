@@ -30,7 +30,7 @@ func apply_boum_impulse(boum_force : float):
 		elif b.is_in_group("breakables"):
 			b.apply_impulse(boum_force*d.normalized())
 		elif b is Player:
-			b.S.velocity += boum_force*d.normalized()
+			b.apply_impulse(boum_force*d.normalized())
 
 func boum():
 	$BoumParticle.restart()

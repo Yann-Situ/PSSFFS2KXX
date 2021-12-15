@@ -1,0 +1,166 @@
+[gd_scene load_steps=12 format=2]
+
+[ext_resource path="res://src/Items/Balls/Ball.tscn" type="PackedScene" id=1]
+[ext_resource path="res://assets/art/ball/ball_shock.png" type="Texture" id=2]
+[ext_resource path="res://assets/art/effects/shockwave_0.png" type="Texture" id=4]
+[ext_resource path="res://src/Items/Balls/BallShock.gd" type="Script" id=5]
+[ext_resource path="res://assets/shader/shockwave.gdshader" type="Shader" id=6]
+
+[sub_resource type="CircleShape2D" id=1]
+resource_local_to_scene = true
+radius = 6.0
+
+[sub_resource type="CircleShape2D" id=8]
+radius = 64.0
+
+[sub_resource type="CanvasItemMaterial" id=7]
+blend_mode = 1
+
+[sub_resource type="Animation" id=5]
+resource_name = "idle"
+length = 0.6
+loop = true
+step = 0.15
+tracks/0/type = "value"
+tracks/0/path = NodePath("Sprite:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.15, 0.3, 0.45 ),
+"transitions": PoolRealArray( 1, 1, 1, 1 ),
+"update": 1,
+"values": [ 0, 1, 2, 3 ]
+}
+
+[sub_resource type="Animation" id=6]
+resource_name = "shockwave"
+length = 0.45
+step = 0.05
+tracks/0/type = "value"
+tracks/0/path = NodePath("AnimationPlayer/CanvasLayer/Shader:material:shader_param/size")
+tracks/0/interp = 2
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.05, 0.25 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 0,
+"values": [ 0.0, 0.0, 0.49 ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("AnimationPlayer/CanvasLayer/Shader:material:shader_param/thickness")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0.1, 0.3, 0.4 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 0,
+"values": [ 0.0, 0.08, 0.0 ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath("AnimationPlayer/CanvasLayer/Shader:material:shader_param/force")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0, 0.35, 0.45 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 0,
+"values": [ 0.0, 0.1, 0.0 ]
+}
+tracks/3/type = "value"
+tracks/3/path = NodePath("ShockWaveAnim:frame")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/keys = {
+"times": PoolRealArray( 0, 0.05, 0.1, 0.15, 0.2, 0.25, 0.3 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1, 1 ),
+"update": 1,
+"values": [ 0, 1, 2, 3, 4, 5, 6 ]
+}
+tracks/4/type = "value"
+tracks/4/path = NodePath("ShockWaveAnim:modulate")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/keys = {
+"times": PoolRealArray( 0, 0.25, 0.45 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 0,
+"values": [ Color( 1, 1, 1.4, 0 ), Color( 1, 1.2, 1.4, 1 ), Color( 1, 1, 1, 0 ) ]
+}
+tracks/5/type = "value"
+tracks/5/path = NodePath("Sprite:scale")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/keys = {
+"times": PoolRealArray( 0, 0.05 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Vector2( 2, 2 ), Vector2( 1, 1 ) ]
+}
+
+[sub_resource type="ShaderMaterial" id=3]
+shader = ExtResource( 6 )
+shader_param/center = Vector2( 0.5, 0.5 )
+shader_param/force = 0.0
+shader_param/size = 0.49
+shader_param/thickness = 0.0
+
+[node name="BallShock" instance=ExtResource( 1 )]
+script = ExtResource( 5 )
+
+[node name="collision" parent="." index="0"]
+shape = SubResource( 1 )
+
+[node name="Sprite" parent="." index="2"]
+texture = ExtResource( 2 )
+hframes = 4
+
+[node name="ShockZone" type="Area2D" parent="." index="5"]
+collision_layer = 0
+collision_mask = 197
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="ShockZone" index="0"]
+visible = false
+shape = SubResource( 8 )
+
+[node name="ShockWaveAnim" type="Sprite" parent="." index="6"]
+modulate = Color( 1, 1, 1, 0 )
+material = SubResource( 7 )
+texture = ExtResource( 4 )
+hframes = 7
+frame = 6
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="." index="7"]
+anims/idle = SubResource( 5 )
+anims/shockwave = SubResource( 6 )
+
+[node name="CanvasLayer" type="CanvasLayer" parent="AnimationPlayer" index="0"]
+layer = 5
+
+[node name="Shader" type="ColorRect" parent="AnimationPlayer/CanvasLayer" index="0"]
+material = SubResource( 3 )
+margin_left = -64.0
+margin_top = -64.0
+margin_right = 64.0
+margin_bottom = 64.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Timer" type="Timer" parent="." index="8"]
+one_shot = true
+
+[connection signal="animation_finished" from="AnimationPlayer" to="." method="_on_AnimationPlayer_animation_finished"]

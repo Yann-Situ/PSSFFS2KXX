@@ -63,18 +63,21 @@ Popol Super Slam Fusion Full Speed 2KXX
 
 ### Dynamic items
 * [ ] **Zipline** drop inside collision places results in stucked player
-* [ ] Get out from **zipline** just on flat floor results in sliding (like on ice).
+* [x] Get out from **zipline** just on flat floor results in sliding (like on ice).
+* [ ] Get out from **zipline** just after passing over a **Jumper** results in sliding (like on ice) because **can_go_timer** was changed.
 * [ ] Stuck colliding on a **trail** can result in building speed.
 * [ ] Weird behaviour on leaving a **zipline** to a **trail** (there is a moment when the character is on both of them)
     - Implement character holder group with `free_character` and `pickup_character` methods.
 * [ ] Characters can leave **trail** if Player press **crouch** on it.
     - Implement the `riding` and `hanging` states.
+* [ ] Entering **Pipe** at perfect frame when disabling the **Pipe** can result in a disabled ball floating in the air. -> don't stop the tween to enter the pipe when disabling the pipe.
 
 ### Misc physics
 * [x] TileMap hitboxes (bounce on corners of each tile + balls pass through 2 adjacent tiles). **size up the hitboxes smartly**
 * [x] Physic of balls when picked up (stay phisically on the ground...). **complicated** see rigidbody functions and how `integrate_force()` works.
 * [.] Problems with physics on **slopes**.
 * [ ] Problems when passing from a block just **16 pixel** over the other block (results in tiny teleportation but visible due to camera instant movement).
+* [ ] **ShockJumping** at frame perfect when crouching on **Jumper** (or when jumping or dunkjumping) results in a huge mega jump sa mère.
 
 ### Other
 * [x] Spawner rotation position is weird.

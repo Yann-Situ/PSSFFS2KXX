@@ -42,6 +42,8 @@ export (float) var walk_accel = 220 # pix/s²
 
 export (bool) var flip_h = false
 
+onready var invmass = 1.0/4.0
+
 func disable_physics():
 	physics_enabled = false
 	S.velocity *= 0
@@ -177,7 +179,9 @@ func get_input(delta): #delta in s
 
 ################################################################################
 # For physicbody
-
+func apply_impulse(impulse):
+	S.velocity += invmass * impulse
+	
 func _physics_process(delta):
 	get_input(delta)
 	if S.is_onwall and S.velocity.y > 0: #fall on a wall
