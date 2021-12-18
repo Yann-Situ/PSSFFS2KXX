@@ -31,7 +31,7 @@ offsets = PoolRealArray( 0.0375587, 0.636364, 0.995305, 1 )
 colors = PoolColorArray( 0.672221, 0.507361, 0.359743, 1, 0.508158, 0.374147, 0.275914, 1, 0.149963, 0.171976, 0.203125, 0.0328639, 0.271484, 0.350037, 0.5, 0 )
 
 [node name="Door" type="Node2D"]
-z_index = 19
+z_index = 90
 z_as_relative = false
 script = ExtResource( 1 )
 

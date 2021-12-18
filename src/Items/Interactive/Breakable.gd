@@ -1,7 +1,9 @@
-extends StaticBody2D
+extends CollisionObject2D
 # in order to call the parent apply_impulse from breakable objects
 func _ready():
 	add_to_group("breakables")
-	
-func apply_impulse(momentum : Vector2):
-	get_parent().apply_impulse(momentum)
+	get_parent().add_to_group("breakables")
+
+func apply_explosion(momentum : Vector2):
+	if get_parent().has_method("apply_explosion"):
+		get_parent().apply_explosion(momentum)

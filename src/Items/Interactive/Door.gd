@@ -17,7 +17,7 @@ var only_breakable_collision_layer = 64 # only breakable
 func set_visual_type(b):
 	visual_type = b
 	update_sprite(activated)
-	
+
 func set_flip_h(b):
 	flip_h = b
 	$Sprite.flip_h = flip_h
@@ -33,7 +33,7 @@ func update_sprite(b):
 	else:
 		$Sprite.set_frame(visual_type*2+0)
 
-func apply_impulse(momentum : Vector2):
+func apply_explosion(momentum : Vector2):
 	var m2=momentum.length_squared()
 	if m2 >= momentum_threshold2:
 		enable()

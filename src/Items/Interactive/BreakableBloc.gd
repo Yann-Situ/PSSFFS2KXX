@@ -33,8 +33,8 @@ func set_content(temp):
 func _ready():
 	self.z_index = Global.z_indices["foreground_4"]
 	$DebrisParticle.z_index = Global.z_indices["background_4"]
-	
-func apply_impulse(momentum : Vector2):
+
+func apply_explosion(momentum : Vector2):
 	if momentum.length_squared() >= momentum_threshold2:
 		explode(momentum)
 
@@ -45,10 +45,10 @@ func explode(momentum : Vector2):
 	$Occluder.visible = false
 	$Breakable.collision_layer = 0
 	$Breakable.collision_mask = 0
-	
+
 	#$Sprite.visible = false
 	$Sprite/AnimationPlayer.play("explode")
-	
+
 	if content != null and content.can_instance():
 		var inst = content.instance()
 		if inst is Node2D:

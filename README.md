@@ -84,14 +84,29 @@ Popol Super Slam Fusion Full Speed 2KXX
 * [ ] Energy loss of `constant_energy_balls`.
 * [ ] The `shoot_previewer` shows a trajectory slightly above the real one.
 * [ ] `Z_as_relative` doesn't work through script... https://github.com/godotengine/godot/issues/45416
+* [ ] **ColorRect** for shockwave effect stay in (0,0) global coordinates...
 
 ## Groups
 
 ### physicbodies
 Must inherit from `physicbodies.gd`.
 
+### activables
+Must inherit from `activable.gd`.
+
 ### breakables
 Must have an `apply_impulse(momentum : Vector2)` function that handles explosion.
+It's either an **area** or a **body** whose parent is the interesting node.
+ For a base you can use `Breakable.gd`.
+
+### electrics
+Must have an `apply_shock(momentum : Vector2)` function that handles electric shockwave.
+It's either an **area** or a **body** but its parent must be the interesting node, which is often in group **activables**
+ For a base you can use `Electric.gd`.
+
+### damageables
+Must have a `apply_damage(damage : float)`.
+It's either an **area** or a **body** but its parent must be the interesting node. For a base you can use `Damageable.gd`.
 
 ### balls
 Must inherit from `ball.gd`.
@@ -101,6 +116,3 @@ Must have a `free_ball(ball : node)` method.
 They can act and hold balls (example: player or pipeball).
 
 ### playerholders
-
-### activables
-Must inherit from `activable.gd`.

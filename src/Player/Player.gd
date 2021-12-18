@@ -55,6 +55,8 @@ func enable_physics():
 func _ready():
 	self.z_as_relative = false
 	self.z_index = Global.z_indices["player_0"]
+	$Sprite.z_as_relative = false
+	$Sprite.z_index = Global.z_indices["player_0"]
 	add_to_group("holders")
 	add_to_group("characters")
 	if !Global.playing:

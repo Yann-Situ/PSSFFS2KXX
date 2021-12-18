@@ -1,8 +1,9 @@
-[gd_scene load_steps=13 format=2]
+[gd_scene load_steps=14 format=2]
 
 [ext_resource path="res://src/Items/Dynamics/PipeBall.gd" type="Script" id=1]
 [ext_resource path="res://assets/art/environment/environment-interactive.png" type="Texture" id=2]
 [ext_resource path="res://assets/art/ball/ball_particle.png" type="Texture" id=3]
+[ext_resource path="res://src/Items/Interactive/Electric.gd" type="Script" id=4]
 
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 16, 16 )
@@ -49,7 +50,7 @@ colors = PoolColorArray( 2, 1, 1.4, 0, 1, 1, 1, 1, 1, 0.882874, 0.605469, 0.6745
 
 [node name="PipeBall" type="Path2D"]
 self_modulate = Color( 1, 1, 1, 0.701961 )
-z_index = 9
+z_index = 90
 z_as_relative = false
 curve = null
 script = ExtResource( 1 )
@@ -63,6 +64,7 @@ position = Vector2( 928, 528 )
 [node name="Entrance" type="StaticBody2D" parent="."]
 collision_layer = 130
 collision_mask = 7
+script = ExtResource( 4 )
 
 [node name="CollisionShape" type="CollisionShape2D" parent="Entrance"]
 visible = false

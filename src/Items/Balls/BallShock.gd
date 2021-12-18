@@ -19,40 +19,40 @@ func collision_effect(collider, collider_velocity, collision_point, collision_no
 
 func apply_shock_impulse(shock_force : float):
 	$Timer.start(shock_timer)
-	var bodies = $ShockZone.get_overlapping_bodies()
-	var d = Vector2(0,0)
+	var bodies = $ShockZone.get_overlapping_bodies()+$ShockZone.get_overlapping_areas()
+	
 	for b in bodies :
-		if b.get_parent().is_in_group("activables"):
-			b.get_parent().toggle_activated(true)
-		d = b.global_position - self.global_position
+		var momentum = (b.global_position - self.global_position).normalized()
+		momentum *= shock_force
+		
+		if b.is_in_group("electrics"):
+			b.apply_shock(momentum)
+			if b.get_parent().is_in_group("activables"):
+				b.get_parent().toggle_activated(true)
 		if b.is_in_group("physicbodies"):
-			b.apply_impulse(shock_force*d.normalized())
+			b.apply_impulse(momentum)
 		elif b.is_in_group("breakables"):
-			b.apply_impulse(shock_force*d.normalized())
+			b.apply_explosion(momentum)
 		if b is Player :
 			if not holder is Player:
-				b.apply_impulse(shock_force*d.normalized())
+				b.apply_impulse(momentum)
 			else :
 				if !b.S.is_jumping and b.S.is_crouching:
 					b.apply_impulse(shock_jump*Vector2.UP)
 				elif !b.S.is_onfloor and b.S.crouch_p:
 					b.apply_impulse(shock_fall*Vector2.DOWN)
-	
-	var areas = $ShockZone.get_overlapping_areas()
-	for a in areas :
-		if a.get_parent().is_in_group("activables"):
-			print("toggle")
-			a.get_parent().toggle_activated(true)
 
 func shock():
 	$AnimationPlayer.play("shockwave")
-	Global.camera.screen_shake(0.4,5)
+	$ShockWaveAnim.restart()
+	Global.camera.screen_shake(0.25,5)
 	apply_shock_impulse(shock_min)
 	print("shock !")
 
 func megashock():
 	$AnimationPlayer.play("shockwave")
-	Global.camera.screen_shake(0.4,5)
+	$ShockWaveAnim.restart()
+	Global.camera.screen_shake(0.25,5)
 	apply_shock_impulse(shock_max)
 	print("MEGAshock !")
 
