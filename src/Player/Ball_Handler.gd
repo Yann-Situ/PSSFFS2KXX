@@ -30,10 +30,10 @@ func get_throw_position():
 
 func set_has_ball_position():
 	if Player.flip_h :
-		S.active_ball.transform.origin.x = int(Player.position.x+0.5) - $Has_Ball_Position.position.x
-		S.active_ball.transform.origin.y = int(Player.position.y+0.5) + $Has_Ball_Position.position.y
+		S.active_ball.transform.origin.x = int(Player.position.x+0.5) - $HasBallPosition.position.x
+		S.active_ball.transform.origin.y = int(Player.position.y+0.5) + $HasBallPosition.position.y
 	else :
-		S.active_ball.transform.origin = Player.position + $Has_Ball_Position.position
+		S.active_ball.transform.origin = Player.position + $HasBallPosition.position
 
 #####################
 

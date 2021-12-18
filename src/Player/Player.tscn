@@ -1,4 +1,4 @@
-[gd_scene load_steps=97 format=2]
+[gd_scene load_steps=99 format=2]
 
 [ext_resource path="res://src/Player/Player.gd" type="Script" id=1]
 [ext_resource path="res://assets/art/characters/Player.png" type="Texture" id=2]
@@ -29,6 +29,8 @@
 [ext_resource path="res://src/Effects/JumpParticles0.tscn" type="PackedScene" id=27]
 [ext_resource path="res://assets/art/effects/offset_glow.png" type="Texture" id=28]
 [ext_resource path="res://src/Player/Actions/Release.gd" type="Script" id=29]
+[ext_resource path="res://src/Characters/LifeHandler.gd" type="Script" id=30]
+[ext_resource path="res://assets/art/ball/ball_particle.png" type="Texture" id=31]
 
 [sub_resource type="CircleShape2D" id=1]
 resource_local_to_scene = true
@@ -216,7 +218,7 @@ tracks/1/keys = {
 "values": [ true, false ]
 }
 tracks/2/type = "value"
-tracks/2/path = NodePath("../Ball_Handler/Has_Ball_Position:position")
+tracks/2/path = NodePath("../BallHandler/HasBallPosition:position")
 tracks/2/interp = 1
 tracks/2/loop_wrap = true
 tracks/2/imported = false
@@ -228,7 +230,7 @@ tracks/2/keys = {
 "values": [ Vector2( -14, -21 ), Vector2( -16, -20 ), Vector2( -14, -22 ), Vector2( 13, -34 ), Vector2( 13, -34 ) ]
 }
 tracks/3/type = "method"
-tracks/3/path = NodePath("../Ball_Handler")
+tracks/3/path = NodePath("../BallHandler")
 tracks/3/interp = 1
 tracks/3/loop_wrap = true
 tracks/3/imported = false
@@ -257,7 +259,7 @@ tracks/0/keys = {
 "values": [ 209 ]
 }
 tracks/1/type = "value"
-tracks/1/path = NodePath("../Ball_Handler/Has_Ball_Position:position")
+tracks/1/path = NodePath("../BallHandler/HasBallPosition:position")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/imported = false
@@ -285,7 +287,7 @@ tracks/0/keys = {
 "values": [ 112, 113, 114, 115, 116, 117, 118, 119 ]
 }
 tracks/1/type = "value"
-tracks/1/path = NodePath("../Ball_Handler/Has_Ball_Position:position")
+tracks/1/path = NodePath("../BallHandler/HasBallPosition:position")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/imported = false
@@ -314,7 +316,7 @@ tracks/0/keys = {
 "values": [ 80 ]
 }
 tracks/1/type = "value"
-tracks/1/path = NodePath("../Ball_Handler/Has_Ball_Position:position")
+tracks/1/path = NodePath("../BallHandler/HasBallPosition:position")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/imported = false
@@ -341,7 +343,7 @@ tracks/0/keys = {
 "values": [ 52, 53, 54, 55, 56, 57 ]
 }
 tracks/1/type = "value"
-tracks/1/path = NodePath("../Ball_Handler/Has_Ball_Position:position")
+tracks/1/path = NodePath("../BallHandler/HasBallPosition:position")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/imported = false
@@ -379,7 +381,7 @@ tracks/0/keys = {
 "values": [ 48, 49, 50, 51, 52 ]
 }
 tracks/1/type = "value"
-tracks/1/path = NodePath("../Ball_Handler/Has_Ball_Position:position")
+tracks/1/path = NodePath("../BallHandler/HasBallPosition:position")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/imported = false
@@ -419,7 +421,7 @@ tracks/0/keys = {
 "values": [ 148, 149 ]
 }
 tracks/1/type = "value"
-tracks/1/path = NodePath("../Ball_Handler/Has_Ball_Position:position")
+tracks/1/path = NodePath("../BallHandler/HasBallPosition:position")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/imported = false
@@ -448,7 +450,7 @@ tracks/0/keys = {
 "values": [ 149, 150, 151, 152 ]
 }
 tracks/1/type = "value"
-tracks/1/path = NodePath("../Ball_Handler/Has_Ball_Position:position")
+tracks/1/path = NodePath("../BallHandler/HasBallPosition:position")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/imported = false
@@ -477,7 +479,7 @@ tracks/0/keys = {
 "values": [ 176, 177, 178 ]
 }
 tracks/1/type = "value"
-tracks/1/path = NodePath("../Ball_Handler/Has_Ball_Position:position")
+tracks/1/path = NodePath("../BallHandler/HasBallPosition:position")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/imported = false
@@ -517,7 +519,7 @@ tracks/1/keys = {
 "values": [ true, false ]
 }
 tracks/2/type = "method"
-tracks/2/path = NodePath("../Ball_Handler")
+tracks/2/path = NodePath("../BallHandler")
 tracks/2/interp = 1
 tracks/2/loop_wrap = true
 tracks/2/imported = false
@@ -531,7 +533,7 @@ tracks/2/keys = {
 } ]
 }
 tracks/3/type = "value"
-tracks/3/path = NodePath("../Ball_Handler/Has_Ball_Position:position")
+tracks/3/path = NodePath("../BallHandler/HasBallPosition:position")
 tracks/3/interp = 1
 tracks/3/loop_wrap = true
 tracks/3/imported = false
@@ -558,7 +560,7 @@ tracks/0/keys = {
 "values": [ 208 ]
 }
 tracks/1/type = "value"
-tracks/1/path = NodePath("../Ball_Handler/Has_Ball_Position:position")
+tracks/1/path = NodePath("../BallHandler/HasBallPosition:position")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/imported = false
@@ -586,7 +588,7 @@ tracks/0/keys = {
 "values": [ 64, 65, 66 ]
 }
 tracks/1/type = "value"
-tracks/1/path = NodePath("../Ball_Handler/Has_Ball_Position:position")
+tracks/1/path = NodePath("../BallHandler/HasBallPosition:position")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/imported = false
@@ -626,7 +628,7 @@ tracks/0/keys = {
 "values": [ 199, 200, 201, 202, 199, 199, 200, 201, 202, 199, 199, 200, 201, 202, 199, 200, 192, 193, 194, 195, 196, 197, 198, 204, 192, 193, 194, 195, 196, 197, 198, 204, 192, 193, 194, 195, 196, 197, 198, 204, 199 ]
 }
 tracks/1/type = "value"
-tracks/1/path = NodePath("../Ball_Handler/Has_Ball_Position:position")
+tracks/1/path = NodePath("../BallHandler/HasBallPosition:position")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/imported = false
@@ -666,7 +668,7 @@ tracks/1/keys = {
 "values": [ true, false ]
 }
 tracks/2/type = "value"
-tracks/2/path = NodePath("../Ball_Handler/Has_Ball_Position:position")
+tracks/2/path = NodePath("../BallHandler/HasBallPosition:position")
 tracks/2/interp = 1
 tracks/2/loop_wrap = true
 tracks/2/imported = false
@@ -694,7 +696,7 @@ tracks/0/keys = {
 "values": [ 80 ]
 }
 tracks/1/type = "value"
-tracks/1/path = NodePath("../Ball_Handler/Has_Ball_Position:position")
+tracks/1/path = NodePath("../BallHandler/HasBallPosition:position")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/imported = false
@@ -734,7 +736,7 @@ tracks/0/keys = {
 "values": [ 96, 97, 98, 99, 100, 101 ]
 }
 tracks/1/type = "value"
-tracks/1/path = NodePath("../Ball_Handler/Has_Ball_Position:position")
+tracks/1/path = NodePath("../BallHandler/HasBallPosition:position")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/imported = false
@@ -790,7 +792,7 @@ tracks/0/keys = {
 "values": [ 0, 1, 2, 3, 4, 5, 6, 7 ]
 }
 tracks/1/type = "value"
-tracks/1/path = NodePath("../Ball_Handler/Has_Ball_Position:position")
+tracks/1/path = NodePath("../BallHandler/HasBallPosition:position")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/imported = false
@@ -830,7 +832,7 @@ tracks/1/keys = {
 "values": [ true, false ]
 }
 tracks/2/type = "value"
-tracks/2/path = NodePath("../Ball_Handler/Has_Ball_Position:position")
+tracks/2/path = NodePath("../BallHandler/HasBallPosition:position")
 tracks/2/interp = 1
 tracks/2/loop_wrap = true
 tracks/2/imported = false
@@ -887,81 +889,81 @@ __meta__ = {
 "_edit_group_": true
 }
 
-[node name="Special_Action_Handler" type="Node2D" parent="Actions"]
+[node name="SpecialActionHandler" type="Node2D" parent="Actions"]
 visible = false
 script = ExtResource( 9 )
 __meta__ = {
 "_edit_group_": true
 }
 
-[node name="Ray_fwd_up" type="RayCast2D" parent="Actions/Special_Action_Handler"]
+[node name="Ray_fwd_up" type="RayCast2D" parent="Actions/SpecialActionHandler"]
 position = Vector2( 0, -16 )
 cast_to = Vector2( 9, 0 )
 script = ExtResource( 10 )
 
-[node name="Ray_fwd_down" type="RayCast2D" parent="Actions/Special_Action_Handler"]
+[node name="Ray_fwd_down" type="RayCast2D" parent="Actions/SpecialActionHandler"]
 position = Vector2( 0, 16 )
 cast_to = Vector2( 9, 0 )
 script = ExtResource( 10 )
 
-[node name="Ray_fwd_up_f" type="RayCast2D" parent="Actions/Special_Action_Handler"]
+[node name="Ray_fwd_up_f" type="RayCast2D" parent="Actions/SpecialActionHandler"]
 position = Vector2( 0, -16 )
 cast_to = Vector2( -9, 0 )
 script = ExtResource( 10 )
 
-[node name="Ray_fwd_down_f" type="RayCast2D" parent="Actions/Special_Action_Handler"]
+[node name="Ray_fwd_down_f" type="RayCast2D" parent="Actions/SpecialActionHandler"]
 position = Vector2( 0, 16 )
 cast_to = Vector2( -9, 0 )
 script = ExtResource( 10 )
 
-[node name="Ray_up_fwd" type="RayCast2D" parent="Actions/Special_Action_Handler"]
+[node name="Ray_up_fwd" type="RayCast2D" parent="Actions/SpecialActionHandler"]
 position = Vector2( 8, 0 )
 cast_to = Vector2( 0, -20 )
 script = ExtResource( 10 )
 
-[node name="Ray_up_bwd" type="RayCast2D" parent="Actions/Special_Action_Handler"]
+[node name="Ray_up_bwd" type="RayCast2D" parent="Actions/SpecialActionHandler"]
 position = Vector2( -8, 0 )
 cast_to = Vector2( 0, -20 )
 script = ExtResource( 10 )
 
-[node name="Ray_down_fwd" type="RayCast2D" parent="Actions/Special_Action_Handler"]
+[node name="Ray_down_fwd" type="RayCast2D" parent="Actions/SpecialActionHandler"]
 position = Vector2( 8, 0 )
 cast_to = Vector2( 0, 33 )
 script = ExtResource( 10 )
 
-[node name="Ray_down_bwd" type="RayCast2D" parent="Actions/Special_Action_Handler"]
+[node name="Ray_down_bwd" type="RayCast2D" parent="Actions/SpecialActionHandler"]
 position = Vector2( -8, 0 )
 cast_to = Vector2( 0, 33 )
 script = ExtResource( 10 )
 
-[node name="Ray_slope_fwd" type="RayCast2D" parent="Actions/Special_Action_Handler"]
+[node name="Ray_slope_fwd" type="RayCast2D" parent="Actions/SpecialActionHandler"]
 position = Vector2( 8, 32 )
 cast_to = Vector2( 0, 17 )
 script = ExtResource( 10 )
 
-[node name="Ray_slope_bwd" type="RayCast2D" parent="Actions/Special_Action_Handler"]
+[node name="Ray_slope_bwd" type="RayCast2D" parent="Actions/SpecialActionHandler"]
 position = Vector2( -8, 32 )
 cast_to = Vector2( 0, 17 )
 script = ExtResource( 10 )
 
-[node name="dunkjump_area" type="Area2D" parent="Actions/Special_Action_Handler"]
+[node name="dunkjump_area" type="Area2D" parent="Actions/SpecialActionHandler"]
 collision_layer = 0
 collision_mask = 32
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Actions/Special_Action_Handler/dunkjump_area"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Actions/SpecialActionHandler/dunkjump_area"]
 modulate = Color( 0.945098, 1, 0, 1 )
 position = Vector2( 0, -50 )
 shape = SubResource( 1 )
 
-[node name="dunk_area" type="Area2D" parent="Actions/Special_Action_Handler"]
+[node name="dunk_area" type="Area2D" parent="Actions/SpecialActionHandler"]
 collision_layer = 0
 collision_mask = 32
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Actions/Special_Action_Handler/dunk_area"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Actions/SpecialActionHandler/dunk_area"]
 modulate = Color( 1, 0.490196, 0.870588, 1 )
 shape = SubResource( 2 )
 
-[node name="Shoot_predictor" type="Node2D" parent="Actions"]
+[node name="ShootPredictor" type="Node2D" parent="Actions"]
 position = Vector2( 1, 1 )
 script = ExtResource( 3 )
 
@@ -1007,7 +1009,7 @@ texture = ExtResource( 2 )
 offset = Vector2( 0.5, 0 )
 hframes = 16
 vframes = 20
-frame = 199
+frame = 202
 __meta__ = {
 "_edit_group_": true,
 "_edit_lock_": true
@@ -1061,13 +1063,13 @@ texture = ExtResource( 28 )
 region_enabled = true
 region_rect = Rect2( 0, 96, 32, 32 )
 
-[node name="Player_Effects" type="Node2D" parent="."]
+[node name="PlayerEffects" type="Node2D" parent="."]
 script = ExtResource( 13 )
 __meta__ = {
 "_edit_lock_": true
 }
 
-[node name="DustParticle" parent="Player_Effects" instance=ExtResource( 12 )]
+[node name="DustParticle" parent="PlayerEffects" instance=ExtResource( 12 )]
 modulate = Color( 0.85098, 0.85098, 0.85098, 1 )
 material = SubResource( 63 )
 position = Vector2( 0, 28 )
@@ -1084,36 +1086,36 @@ scale_amount = 1.0
 anim_offset = 1.0
 anim_offset_random = 1.0
 
-[node name="GhostHandler" parent="Player_Effects" instance=ExtResource( 14 )]
+[node name="GhostHandler" parent="PlayerEffects" instance=ExtResource( 14 )]
 
-[node name="TrailHandler" parent="Player_Effects" instance=ExtResource( 25 )]
+[node name="TrailHandler" parent="PlayerEffects" instance=ExtResource( 25 )]
 wildness = 50.0
 gradient_col = SubResource( 64 )
 width_curve = SubResource( 65 )
 texture = ExtResource( 26 )
 
-[node name="JumpParticles0" parent="Player_Effects" instance=ExtResource( 27 )]
+[node name="JumpParticles0" parent="PlayerEffects" instance=ExtResource( 27 )]
 material = SubResource( 66 )
 position = Vector2( -4, 20 )
 lifetime = 0.45
 local_coords = false
 
-[node name="Ball_Handler" type="Area2D" parent="."]
+[node name="BallHandler" type="Area2D" parent="."]
 collision_mask = 4
 script = ExtResource( 6 )
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Ball_Handler"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="BallHandler"]
 visible = false
 position = Vector2( 0, 5 )
 shape = SubResource( 67 )
 
-[node name="Has_Ball_Position" type="Node2D" parent="Ball_Handler"]
-position = Vector2( -6, -5 )
+[node name="HasBallPosition" type="Node2D" parent="BallHandler"]
+position = Vector2( -6, -6 )
 __meta__ = {
 "_edit_group_": true
 }
 
-[node name="Sprite" type="Sprite" parent="Ball_Handler/Has_Ball_Position"]
+[node name="Sprite" type="Sprite" parent="BallHandler/HasBallPosition"]
 visible = false
 texture = ExtResource( 4 )
 
@@ -1171,5 +1173,13 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[connection signal="body_entered" from="Ball_Handler" to="Ball_Handler" method="_on_Ball_Handler_body_entered"]
+[node name="LifeHandler" type="Node2D" parent="."]
+script = ExtResource( 30 )
+
+[node name="Sprite" type="Sprite" parent="LifeHandler"]
+visible = false
+scale = Vector2( 40, 20 )
+texture = ExtResource( 31 )
+
+[connection signal="body_entered" from="BallHandler" to="BallHandler" method="_on_Ball_Handler_body_entered"]
 [connection signal="tween_completed" from="Camera/Tween" to="Camera" method="_on_Tween_tween_completed"]

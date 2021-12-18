@@ -62,7 +62,6 @@ func update_entrance_rotation():
 func _on_Area_body_entered(ball):
 	if self.activated and ball.is_in_group("balls") and \
 		(pipe_type == PIPE_TYPE.TO_EXIT or pipe_type == PIPE_TYPE.BOTH_SIDES):
-
 		for body in inside_bodies:
 			if body == ball:
 				print("ball already in pipe")
@@ -72,11 +71,8 @@ func _on_Area_body_entered(ball):
 		new_path_follow.offset = 0
 		new_path_follow.loop = false
 		self.add_child(new_path_follow)
-		print("BALL : "+str(ball.z_index))
 		ball.pickup(self)
-		print("BALL : "+str(ball.z_index))
 		ball.z_index = z_index-1
-		print("BALL : "+str(ball.z_index))
 
 		inside_bodies.push_back(ball)
 		path_follows.push_back(new_path_follow)

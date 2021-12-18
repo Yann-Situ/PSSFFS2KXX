@@ -3,9 +3,6 @@ extends Node2D
 onready var Character = get_parent()
 onready var S = Character.get_node("State")
 
-var ghost_anim = preload("res://src/Effects/GhostAnim.tscn")
-var ghost_sprite
-
 func _ready():
 	$GhostHandler.set_ghost_sprite(Character.get_node("Sprite"))
 	$GhostHandler.set_environment_node(Character.get_parent())

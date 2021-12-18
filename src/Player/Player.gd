@@ -2,10 +2,11 @@ extends KinematicBody2D
 class_name Player, "res://assets/art/icons/popol.png"
 
 onready var S = get_node("State")
-onready var SpecialActionHandler = get_node("Actions/Special_Action_Handler")
-onready var ShootPredictor = get_node("Actions/Shoot_predictor")
-onready var PlayerEffects = get_node("Player_Effects")
-onready var BallHandler = get_node("Ball_Handler")
+onready var SpecialActionHandler = get_node("Actions/SpecialActionHandler")
+onready var ShootPredictor = get_node("Actions/ShootPredictor")
+onready var PlayerEffects = get_node("PlayerEffects")
+onready var BallHandler = get_node("BallHandler")
+onready var LifeHandler = get_node("LifeHandler")
 
 export (bool) var physics_enabled = true
 
@@ -148,10 +149,10 @@ func get_input(delta): #delta in s
 	if S.is_aiming:
 		var shoot = ShootPredictor.shoot_vector()
 		if S.power_p and S.selected_ball == S.active_ball :
-			ShootPredictor.draw_attract($Ball_Handler.get_throw_position()-self.position, shoot+0.5*S.velocity,
+			ShootPredictor.draw_attract(BallHandler.get_throw_position()-self.position, shoot+0.5*S.velocity,
 				S.active_ball.get_gravity_scale()*Vector2(0,gravity), attract_force/S.active_ball.mass)
 		else :
-			ShootPredictor.draw($Ball_Handler.get_throw_position()-self.position, shoot+0.5*S.velocity,
+			ShootPredictor.draw(BallHandler.get_throw_position()-self.position, shoot+0.5*S.velocity,
 				S.active_ball.get_gravity_scale()*Vector2(0,gravity))
 		$Camera.set_offset_from_type("aim",shoot.normalized())
 		if shoot.x > 0 :
@@ -168,6 +169,11 @@ func get_input(delta): #delta in s
 	# ANIMATION:
 	$Sprite/AnimationTree.animate_from_state(S)
 
+	if S.jump_jp:
+		LifeHandler.apply_regen(2.0, 0.0, 2.0)
+	
+	if S.dunk_jp:
+		LifeHandler.apply_damage(1.0)
 	S.jump_jp = false
 	S.jump_jr = false
 	S.aim_jp = false
