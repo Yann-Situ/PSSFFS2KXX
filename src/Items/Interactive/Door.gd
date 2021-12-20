@@ -4,8 +4,8 @@ extends Activable
 export(int, "type0", "type1") var visual_type setget set_visual_type
 export(bool) var flip_h = false setget set_flip_h
 export var mass = 5.0 # kg
-export var momentum_threshold = 0.0 # m*pix/s
-export var explode_threshold = 600.0 # m*pix/s
+export var momentum_threshold = 200.0 # m*pix/s
+export var explode_threshold = 500.0 # m*pix/s
 
 onready var momentum_threshold2 = momentum_threshold*momentum_threshold
 onready var explode_threshold2 = explode_threshold*explode_threshold

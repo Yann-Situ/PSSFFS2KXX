@@ -1,15 +1,23 @@
-[gd_scene load_steps=5 format=2]
+[gd_scene load_steps=8 format=2]
 
 [ext_resource path="res://src/Items/Balls/Ball.tscn" type="PackedScene" id=1]
 [ext_resource path="res://src/Items/Balls/BallMetal.gd" type="Script" id=2]
 [ext_resource path="res://assets/art/ball/ball_heavy.png" type="Texture" id=3]
+[ext_resource path="res://assets/art/effects/round.png" type="Texture" id=4]
 
 [sub_resource type="CircleShape2D" id=1]
 resource_local_to_scene = true
 radius = 6.0
 
+[sub_resource type="Curve" id=2]
+_data = [ Vector2( 0, 0.856818 ), 0.0, 3.55714, 0, 0, Vector2( 1, 0.209091 ), 0.0, 0.0, 0, 0 ]
+
+[sub_resource type="Gradient" id=3]
+resource_local_to_scene = true
+offsets = PoolRealArray( 0, 0.398601, 1 )
+colors = PoolColorArray( 1.5, 1.4, 1.3, 1, 0.694885, 0.731461, 0.898438, 1, 0.204468, 0.271942, 0.523438, 0 )
+
 [node name="BallMetal" instance=ExtResource( 1 )]
-z_as_relative = false
 script = ExtResource( 2 )
 dust_threshold = 200.0
 
@@ -20,5 +28,28 @@ shape = SubResource( 1 )
 amount = 20
 lifetime = 0.7
 
-[node name="Sprite" parent="." index="2"]
+[node name="SpeedParticles" type="CPUParticles2D" parent="." index="2"]
+amount = 12
+lifetime = 0.18
+randomness = 0.05
+lifetime_randomness = 0.29
+fract_delta = false
+local_coords = false
+texture = ExtResource( 4 )
+direction = Vector2( 0, 0 )
+spread = 0.0
+gravity = Vector2( 0, 0 )
+linear_accel = -20.0
+tangential_accel = -0.69
+damping = 100.0
+damping_random = 0.68
+scale_amount = 0.06
+scale_amount_random = 0.02
+scale_amount_curve = SubResource( 2 )
+color_ramp = SubResource( 3 )
+__meta__ = {
+"_editor_description_": ""
+}
+
+[node name="Sprite" parent="." index="3"]
 texture = ExtResource( 3 )

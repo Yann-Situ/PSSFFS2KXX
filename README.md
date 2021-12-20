@@ -86,6 +86,7 @@ Popol Super Slam Fusion Full Speed 2KXX
 * [ ] `Z_as_relative` doesn't work through script... https://github.com/godotengine/godot/issues/45416
 * [ ] **ColorRect** for shockwave effect stay in (0,0) global coordinates...
 * [ ] Lag if too much balls : make a spawner limit and link the dispawn of a ball to the spawner to increase the spawn count.
+* [ ] I need to adapt the boum delay: i.e apply_impulse instantly on colliding object and a bit after on far objects. nedd a method call_after_a_delay(apply_impulse)
 
 ## Groups
 

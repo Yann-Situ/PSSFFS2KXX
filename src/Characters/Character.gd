@@ -155,11 +155,11 @@ func get_input(delta): #delta in s
 func apply_impulse(impulse):
 	S.velocity += invmass * impulse
 	linear_velocity = S.velocity
-	
+
 func set_linear_velocity(v):
 	linear_velocity = v
 	S.velocity = v
-	
+
 func physics_process(delta): # called by _physics_process
 	behaviour(delta)
 	get_input(delta)
@@ -187,7 +187,8 @@ func update_linear_velocity(delta):
 		if linear_velocity.y > max_speed_fall:
 			linear_velocity.y = max_speed_fall
 
-	linear_velocity += invmass * applied_force * delta
+	for force in applied_forces.values() :
+		linear_velocity += invmass * force * delta
 
 func collision_effect(collider : Object, collider_velocity : Vector2,
 	collision_point : Vector2, collision_normal : Vector2):

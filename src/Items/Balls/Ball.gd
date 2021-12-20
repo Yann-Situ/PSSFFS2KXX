@@ -36,6 +36,7 @@ func pickup(holder_node):
 	self.disable_physics()
 	holder = holder_node
 	self.z_index = holder_node.z_index+1
+	on_pickup(holder_node)
 
 func throw(posi, velo):
 	#$TrailHandler.set_node_to_trail(self)
@@ -45,18 +46,26 @@ func throw(posi, velo):
 	linear_velocity = velo
 	if holder != null:
 		holder.free_ball(self)
+	var previous_holder = holder
 	holder = null
 	self.z_index = Global.z_indices["ball_0"]
+	on_throw(previous_holder)
 
 ################################################################################
 
+func on_pickup(holder_node : Node):
+	pass
+
+func on_throw(previous_holder : Node):
+	pass
+
 func power_p(player,delta):
 	if holder == null :
-		set_applied_force(player.attract_force*(player.position - position).normalized())
+		add_force("attract", player.attract_force*(player.position - position).normalized())
 
 func power_jp(player,delta):
 	pass
 
 func power_jr(player,delta):
 	if holder == null :
-		set_applied_force(Vector2(0.0,0.0))
+		remove_force("attract")

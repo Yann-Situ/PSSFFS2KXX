@@ -10,7 +10,7 @@ export (float) var mass = 1.0 setget set_mass
 export (float) var friction = 0.05 setget set_friction
 export (float) var bounce = 0.5 setget set_bounce
 var linear_velocity = Vector2(0.0,0.0) setget set_linear_velocity
-var applied_force = Vector2(0.0,0.0) setget set_applied_force
+var applied_forces = {} #"force_name : value in kg*pix/s^2"
 
 onready var start_position = global_position
 onready var collision_layer_save = collision_layer
@@ -34,8 +34,6 @@ func set_bounce(new_value):
 
 func set_linear_velocity(v):
 	linear_velocity = v
-func set_applied_force(force):
-	applied_force=force
 
 ################################################################################
 func _ready():
@@ -47,7 +45,7 @@ func _ready():
 func disable_physics():
 	physics_enabled = false
 	linear_velocity *= 0
-	applied_force *= 0
+	applied_forces.clear()
 	layers = 0
 	set_physics_process(false)
 
@@ -67,8 +65,11 @@ func set_start_position(posi):
 func apply_impulse(impulse):
 	linear_velocity += invmass * impulse
 
-func add_force(force):
-	applied_force += force
+func add_force(name : String, force : Vector2):
+	applied_forces[name] = force
+
+func remove_force(name : String):
+	applied_forces.erase(name)
 
 ###############PHYSICALPROCESS######################
 
@@ -76,15 +77,16 @@ func _physics_process(delta):
 	physics_process(delta)
 
 func physics_process(delta):
-	update_linear_velocity(delta)
 	var collision = move_and_collide(linear_velocity * delta, false)
 	if collision and collision_effect(collision.collider,
 		collision.collider_velocity, collision.position, collision.normal) :
 		collision_handle(collision, delta)
+	update_linear_velocity(delta)
 
 func update_linear_velocity(delta):# apply gravity and forces
 	linear_velocity.y += gravity * delta
-	linear_velocity += invmass * applied_force * delta
+	for force in applied_forces.values() :
+		linear_velocity += invmass * force * delta
 
 func collision_effect(collider : Object, collider_velocity : Vector2,
 	collision_point : Vector2, collision_normal : Vector2):
