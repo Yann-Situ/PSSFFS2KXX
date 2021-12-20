@@ -9,15 +9,11 @@ export var strength = 0.0#hp
 # the damage of an attack is : damage = trg.weakness * src.strength - trg.defense
 
 onready var life = max_life setget set_life
-#onready var flat_life = life #setget set_flat_life
-#onready var regen_life = 0.0 #setget set_regen_life
 onready var trg_life = life setget set_trg_life
 
 onready var Character = get_parent()
 onready var S = Character.get_node("State")
 var life_tween
-#func update_life():
-#	set_life(flat_life+regen_life)
 
 func set_life(v):
 	if v <= 0.0:
@@ -29,14 +25,6 @@ func set_life(v):
 
 func set_trg_life(v):
 	trg_life = clamp(v, 0.0, max_life)
-
-#func set_flat_life(v):
-#	flat_life = v
-#	update_life()
-
-#func set_regen_life(v):
-#	regen_life = v
-#	update_life()
 
 func update_life_tween(lifepoint : float, duration : float):
 	var t = 0.0#s
@@ -60,9 +48,9 @@ func _ready():
 	life_tween.name = "LifeTween"
 	add_child(life_tween)
 
-func apply_damage(damage : float):
+func apply_damage(damage : float, duration : float = 0.05):
 	var d = weakness * damage - defense
-	update_life_tween(- max(0.0, d), 0.01)
+	update_life_tween(- max(0.0, d), duration)
 	
 	# emit(tookdamage)
 	if life == 0.0:

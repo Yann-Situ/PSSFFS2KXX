@@ -1009,7 +1009,7 @@ texture = ExtResource( 2 )
 offset = Vector2( 0.5, 0 )
 hframes = 16
 vframes = 20
-frame = 202
+frame = 201
 __meta__ = {
 "_edit_group_": true,
 "_edit_lock_": true

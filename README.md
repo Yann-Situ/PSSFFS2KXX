@@ -85,6 +85,7 @@ Popol Super Slam Fusion Full Speed 2KXX
 * [ ] The `shoot_previewer` shows a trajectory slightly above the real one.
 * [ ] `Z_as_relative` doesn't work through script... https://github.com/godotengine/godot/issues/45416
 * [ ] **ColorRect** for shockwave effect stay in (0,0) global coordinates...
+* [ ] Lag if too much balls : make a spawner limit and link the dispawn of a ball to the spawner to increase the spawn count.
 
 ## Groups
 
