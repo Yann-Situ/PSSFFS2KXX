@@ -350,10 +350,10 @@ tracks/1/loop_wrap = true
 tracks/1/imported = false
 tracks/1/enabled = true
 tracks/1/keys = {
-"times": PoolRealArray( 0, 0.2, 0.22, 0.3, 0.32, 0.86, 1.38 ),
-"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1, 1 ),
+"times": PoolRealArray( 0, 0.2, 0.22, 0.3, 0.32, 0.66, 0.78, 0.8, 1.38 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1, 1, 1, 1 ),
 "update": 0,
-"values": [ Vector2( -23, -18 ), Vector2( -23, -18 ), Vector2( -19, -35 ), Vector2( -19, -35 ), Vector2( 4, -34 ), Vector2( -1, 451 ), Vector2( 0, -5 ) ]
+"values": [ Vector2( -23, -18 ), Vector2( -23, -18 ), Vector2( -19, -35 ), Vector2( -19, -35 ), Vector2( 6, -34 ), Vector2( 8, 110 ), Vector2( 8, 110 ), Vector2( 0, -5 ), Vector2( 0, -5 ) ]
 }
 tracks/2/type = "value"
 tracks/2/path = NodePath("../State:is_dunking")
@@ -885,6 +885,7 @@ radius = 14.0
 height = 28.0
 
 [node name="Player" type="KinematicBody2D"]
+light_mask = 4
 position = Vector2( 416, 144 )
 z_index = 1
 z_as_relative = false
@@ -1017,11 +1018,12 @@ position = Vector2( 0, 6 )
 shape = SubResource( 3 )
 
 [node name="Sprite" type="Sprite" parent="."]
+light_mask = 4
 texture = ExtResource( 2 )
 offset = Vector2( 0.5, 0 )
 hframes = 16
 vframes = 20
-frame = 204
+frame = 199
 __meta__ = {
 "_edit_group_": true,
 "_edit_lock_": true
@@ -1122,7 +1124,7 @@ position = Vector2( 0, 5 )
 shape = SubResource( 67 )
 
 [node name="HasBallPosition" type="Node2D" parent="BallHandler"]
-position = Vector2( 1, 0 )
+position = Vector2( -7, -6 )
 __meta__ = {
 "_edit_group_": true
 }

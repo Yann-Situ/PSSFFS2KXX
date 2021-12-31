@@ -36,8 +36,7 @@ func update_space_state():
 		r.updated = false
 
 func update_basket():
-	if S.dunkjump_basket != null:
-		S.dunkjump_basket.disable_contour()
+	var previous_basket = S.dunkjump_basket
 
 	S.dunkjump_basket = null
 	var baskets = $dunkjump_area.get_overlapping_areas()
@@ -84,8 +83,11 @@ func update_basket():
 			best_dist2 = q.length_squared()
 			best_direction = dir_sprite*dir
 
-	if S.dunkjump_basket != null:
-		S.dunkjump_basket.enable_contour()
+	if S.dunkjump_basket != previous_basket:
+		if previous_basket != null:
+			previous_basket.disable_contour()
+		if S.dunkjump_basket != null:
+			S.dunkjump_basket.enable_contour()
 
 func cast(r): #we must have updated the space_state before
 	if not r.updated:

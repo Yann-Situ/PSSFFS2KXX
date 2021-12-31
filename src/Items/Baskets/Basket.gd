@@ -1,20 +1,18 @@
 extends Node2D
 class_name Basket, "res://assets/art/icons/basket.png"
 
-export var color1 = Color(0.8,0.5,0.1,0.5)
-export var color2 = Color(0.9,0.1,0.3,1.0)
 export var speed_ball_threshold = 380 #velocity value
-export var dunk_position_offset = 10
+export var dunk_position_offset = 16 * Vector2.DOWN
+export var dunk_position_radius = 24
+
 onready var start_position = global_position
-onready var dunk_global_position = global_position + dunk_position_offset * Vector2.DOWN
-
-func _ready():
-	self.z_index = Global.z_indices["foreground_1"]
-
 # Should be in any items that can be picked/placed :
 func set_start_position(posi):
 	start_position = posi
 	global_position = posi
+
+func _ready():
+	self.z_index = Global.z_indices["foreground_1"]
 
 func _draw():
 	pass
@@ -31,26 +29,46 @@ func _on_basket_area_body_entered(body):
 			print(body.linear_velocity.y)
 			goal(body)
 
-func dunk():
+func dunk(dunker : Node2D):
 	print("DUUUNK!")
-	$CPUParticles2D.initial_velocity = 80.0
 	$CPUParticles2D.amount = 60
 	$CPUParticles2D.restart()
+	if (dunker.global_position.x - global_position.x) > 0:
+		$AnimationPlayer.play("dunk_right")
+	else :
+		$AnimationPlayer.play("dunk_left")
 	Global.camera.screen_shake(0.3,5)
 
 func goal(body):
 	print("GOOOAL!")
 	if body.linear_velocity.y > speed_ball_threshold:
-		$CPUParticles2D.initial_velocity = 60.0
 		$CPUParticles2D.amount = 40
 		Global.camera.screen_shake(0.3,5)
 	else :
-		$CPUParticles2D.initial_velocity = 30.0
 		$CPUParticles2D.amount = 20
 	$CPUParticles2D.restart()
 
 func enable_contour():
-	get_material().set_shader_param("activated", true)
-
+	var light = $LightSmall
+	var tween = $LightSmall/Tween
+	if tween.is_active():
+		tween.remove_all()
+	tween.interpolate_property(light, "energy", light.energy, 0.8, 0.15, 0, Tween.EASE_OUT)
+	tween.start()
+	
 func disable_contour():
-	get_material().set_shader_param("activated", false)
+	var light = $LightSmall
+	var tween = $LightSmall/Tween
+	if tween.is_active():
+		tween.remove_all()
+	tween.interpolate_property(light, "energy", light.energy, 0.0, 0.15, 0, Tween.EASE_OUT)
+	tween.start()
+
+func get_closest_point(global_pos : Vector2):
+	var p = global_pos - self.global_position
+	if abs(p.x) >= dunk_position_radius:
+		return self.global_position + sign(p.x) * dunk_position_radius * Vector2.RIGHT
+	return self.global_position + p.x * Vector2.RIGHT
+
+func get_dunk_position(player_global_position : Vector2):
+	return get_closest_point(player_global_position) + dunk_position_offset

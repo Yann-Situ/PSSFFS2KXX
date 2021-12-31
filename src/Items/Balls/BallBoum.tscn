@@ -50,7 +50,7 @@ script = ExtResource( 3 )
 [node name="collision" parent="." index="0"]
 shape = SubResource( 1 )
 
-[node name="Sprite" parent="." index="2"]
+[node name="Sprite" parent="." index="1"]
 texture = ExtResource( 4 )
 
 [node name="BoumZone" type="Area2D" parent="." index="5"]

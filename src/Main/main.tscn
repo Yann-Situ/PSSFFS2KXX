@@ -429,7 +429,7 @@ locked = false
 [node name="Balls" type="Node2D" parent="Environment"]
 
 [node name="Ball" parent="Environment/Balls" instance=ExtResource( 5 )]
-position = Vector2( 640, 448 )
+position = Vector2( 1528, 504 )
 
 [node name="BallBubble" parent="Environment/Balls" instance=ExtResource( 26 )]
 position = Vector2( 728, 528 )
@@ -469,7 +469,7 @@ position = Vector2( 880, 408 )
 
 [node name="Basket2" parent="Environment/Baskets" instance=ExtResource( 14 )]
 material = SubResource( 4 )
-position = Vector2( 1040, 328 )
+position = Vector2( 1040, 320 )
 
 [node name="Basket3" parent="Environment/Baskets" instance=ExtResource( 14 )]
 material = SubResource( 5 )
@@ -785,7 +785,7 @@ texture = SubResource( 17 )
 texture_scale = 2.56
 color = Color( 1, 0.901961, 0.709804, 1 )
 energy = 0.4
-range_z_max = 9
+range_z_max = 90
 shadow_enabled = true
 
 [node name="Light2D2" type="Light2D" parent="."]
@@ -795,7 +795,7 @@ texture = SubResource( 17 )
 texture_scale = 2.56
 color = Color( 1, 0.901961, 0.709804, 1 )
 energy = 0.6
-range_z_max = 9
+range_z_max = 90
 shadow_enabled = true
 
 [node name="sun" type="Light2D" parent="."]
@@ -821,7 +821,8 @@ texture = SubResource( 17 )
 texture_scale = 2.56
 color = Color( 1, 0.901961, 0.709804, 1 )
 energy = 0.81
-range_z_max = 13
+range_z_max = 130
+range_item_cull_mask = 4
 shadow_enabled = true
 __meta__ = {
 "_edit_lock_": true
@@ -858,7 +859,7 @@ walk_return_thresh_instant_speed = 120.0
 walk_accel = 170.0
 
 [node name="Player" parent="." instance=ExtResource( 1 )]
-position = Vector2( 1792, 320 )
+position = Vector2( 1496, 512 )
 z_index = 10
 walk_return_thresh_instant_speed = 150.0
 

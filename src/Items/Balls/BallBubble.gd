@@ -8,7 +8,7 @@ func _ready():
 	#$Sprite.set_material(preload("res://assets/shader/material/hologram_shadermaterial.tres"))
 	#$Sprite.set_material($Sprite.get_material().duplicate())
 
-	$TrailHandler.set_node_to_trail(self)
+	$Effects/TrailHandler.set_node_to_trail(self)
 
 func power_p(player,delta):
 	pass
@@ -20,7 +20,7 @@ func power_jp(player,delta):
 		#$Tween.interpolate_property(self, "position", position, player.position, 0.1)
 		$Tween.follow_property(self, "position", position, player, "position", 0.1)
 		$Tween.start()
-		$TrailHandler.start(0.1,0.0015)
+		$Effects/TrailHandler.start(0.1,0.0015)
 	else :
 		player.position.y -= 100
 
