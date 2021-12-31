@@ -1,6 +1,6 @@
 [gd_scene load_steps=4 format=2]
 
-[ext_resource path="res://src/Items/Dynamics/TrailLine.gd" type="Script" id=1]
+[ext_resource path="res://src/Items/Dynamics/RailLine.gd" type="Script" id=1]
 [ext_resource path="res://assets/art/environment/railline.png" type="Texture" id=3]
 
 [sub_resource type="Curve2D" id=1]
@@ -9,7 +9,7 @@ _data = {
 "points": PoolVector2Array(  )
 }
 
-[node name="TrailLine" type="Path2D"]
+[node name="RailLine" type="Path2D"]
 z_index = 16
 z_as_relative = false
 curve = SubResource( 1 )
@@ -36,4 +36,4 @@ one_shot = true
 [node name="Area" type="Area2D" parent="."]
 collision_layer = 8
 
-[connection signal="body_exited" from="Area" to="." method="_on_Area_body_exited"]
+[connection signal="body_entered" from="Area" to="." method="_on_Area_body_entered"]

@@ -38,18 +38,14 @@ export (float) var walk_accel = 220 # pix/s²
 
 export (bool) var flip_h = false
 
-# func disable_physics():
-# 	physics_enabled = false
-# 	S.velocity *= 0
-# 	#S.applied_force *= 0
-#
-# func enable_physics():
-# 	physics_enabled = true
+onready var character_holder = null
+################################################################################
 
 func _ready():
 	self.z_index = Global.z_indices["character_0"]
 	add_to_group("holders")
 	add_to_group("characters")
+	# Character extends PhysicBody so they are in group physicbodies
 
 func set_flip_h(b):
 	flip_h  = b
@@ -108,22 +104,9 @@ func get_input(delta): #delta in s
 
 	if S.can_go :
 		$Actions/Adherence.move(delta)
-#
-#	if S.selected_ball != null:
-#		if S.power_p :
-#			S.selected_ball.power_p(self,delta)
-#		if S.power_jp :
-#			S.selected_ball.power_jp(self,delta)
-#		elif S.power_jr :
-#			S.selected_ball.power_jr(self,delta)
-#
-#	if S.select_jp and Global.mouse_ball != null :
-#		$Actions/SelectBall.move(delta)
 
 	if S.release_jp :
 		$Actions/Release.move(delta)
-	# SHADER:
-	#$Sprite.material.set("shader_param/speed",S.velocity)
 
 	# HITBOX:
 	if S.is_crouching or S.is_landing or not S.can_stand:
@@ -193,12 +176,30 @@ func update_linear_velocity(delta):
 func collision_effect(collider : Object, collider_velocity : Vector2,
 	collision_point : Vector2, collision_normal : Vector2):
 	pass
-	# this function does NOT aim to change self.linear_velocity, this can result in
-	# wrong behaviours
+	# this function does NOT aim to change self.linear_velocity, because it
+	# could result in wrong behaviours
 	return true
 
 func collision_handle(collision, delta):
 	pass
+
+################################################################################
+# For `characters` group
+func get_in(new_holder : Node):
+	if not new_holder.is_in_group("holders"):
+		print("error["+name+"], holder is not in group `holders`.")
+	if character_holder != null:
+		character_holder.free_character(self)
+	self.disable_physics()
+	character_holder = new_holder
+
+func get_out(global_pos : Vector2, velo : Vector2):
+	self.enable_physics()
+	global_position = global_pos
+	S.velocity = velo
+	if character_holder != null:
+		character_holder.free_character(self)
+	character_holder = null
 
 ################################################################################
 # For `holders` group

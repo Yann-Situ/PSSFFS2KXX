@@ -58,17 +58,17 @@ Popol Super Slam Fusion Full Speed 2KXX
 * [ ] **Dunkjumping** while only moving with floor adherence a bit far from basket results in missing the basket.
 * [ ] **Air dunkjump** when dunking can result in `S.selected_basket.dunk()` called on `null` instance (basket is not selected anymore)
 * [ ] Get out from **low ceiling** (crouched) when returning can result in infinite returning **animation**.
-* [ ] (Not problematic) Pressing **jump** and **dunkjump** just before landing can result in small dunkjump/jump.
 * [ ] **release** ball when **aiming** results in error.
+* [ ] It is possible to **dunk** through walls. It can result in dunkjump particles (+ghost) emmiting (dont know why).
 
 ### Dynamic items
 * [ ] **Zipline** drop inside collision places results in stucked player
 * [x] Get out from **zipline** just on flat floor results in sliding (like on ice).
 * [ ] Get out from **zipline** just after passing over a **Jumper** results in sliding (like on ice) because **can_go_timer** was changed.
-* [ ] Stuck colliding on a **trail** can result in building speed.
-* [ ] Weird behaviour on leaving a **zipline** to a **trail** (there is a moment when the character is on both of them)
+* [ ] Stuck colliding on a **rail** can result in building speed.
+* [ ] Weird behaviour on leaving a **zipline** to a **rail** (there is a moment when the character is on both of them)
     - Implement character holder group with `free_character` and `pickup_character` methods.
-* [ ] Characters can leave **trail** if Player press **crouch** on it.
+* [ ] Characters can leave **rail** if Player press **crouch** on it.
     - Implement the `riding` and `hanging` states.
 * [ ] Entering **Pipe** at perfect frame when disabling the **Pipe** can result in a disabled ball floating in the air. -> don't stop the tween to enter the pipe when disabling the pipe.
 
@@ -87,6 +87,10 @@ Popol Super Slam Fusion Full Speed 2KXX
 * [ ] **ColorRect** for shockwave effect stay in (0,0) global coordinates...
 * [ ] Lag if too much balls : make a spawner limit and link the dispawn of a ball to the spawner to increase the spawn count.
 * [ ] I need to adapt the boum delay: i.e apply_impulse instantly on colliding object and a bit after on far objects. nedd a method call_after_a_delay(apply_impulse)
+
+### Potential Glitches
+* [ ] Pressing **jump** and **dunkjump** just before landing can result in small dunkjump/jump.
+* [ ] Jumping (from ground) just before entering a **rail** can result in a boost grind.
 
 ## Groups
 
@@ -117,4 +121,8 @@ Must inherit from `ball.gd`.
 Must have a `free_ball(ball : node)` method.
 They can act and hold balls (example: player or pipeball).
 
-### playerholders
+### characters
+Must have a `get_in(new_holder : Node)` and a `get_out(global_pos : Vector2, velo : Vector2)` function.
+
+### characterholders
+Must have a `free_character(character : node)` method.

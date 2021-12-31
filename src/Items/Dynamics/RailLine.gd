@@ -1,9 +1,10 @@
 #tool
 extends Path2D
-class_name TrailLine, "res://assets/art/icons/trailline.png"
+class_name RailLine, "res://assets/art/icons/railline.png"
 
 export (bool) var invert_line_direction = false
 export (float) var character_position_offset = -32.0
+export (float) var character_position_entrance_tolerance = -16.0
 export (float) var character_collision_offset = -52.0
 
 var _particle = preload("res://src/Effects/RideParticles.tscn")
@@ -22,43 +23,7 @@ var real_character_offset = Vector2.ZERO
 
 onready var gravity = ProjectSettings.get_setting("physics/2d/default_gravity") # pix/s²
 onready var character_offset = Vector2(0.0,character_position_offset)
-onready var collision_offset = Vector2(0.0,character_collision_offset)
-
-#
-#func set_final_point_node_path(path):
-#	final_point_node = path
-#	if is_inside_tree():
-#		_update_final_point_node()
-#
-#func _update_final_point_node():
-#	if final_point_node != null:
-#		var n = get_node(final_point_node)
-#		if n is Node2D :
-#			final_point = n.position # calls set_final_point
-#		else:
-#			print("Error: the node must be Node2D!")
-#			final_point_node = null
-#	else:
-#		final_point = Vector2.ZERO
-#
-#func set_final_point(v):
-#	print("set_final_point " + str(v))
-#	final_point = v
-#	rail_dir = (final_point-init_point).normalized()
-#	if is_inside_tree():
-#		_update_points()
-#
-#func _update_points():
-#	rail_dir = (final_point-init_point).normalized()
-#	curve.clear_points()
-#	curve.add_point(init_point)
-#	curve.add_point(final_point)
-#	$Line2D.clear_points()
-#	$Line2D.add_point(init_point)
-#	$Line2D.add_point(final_point)
-#
-#	$Area/CollisionShape2D.shape.set_a(init_point+character_offset)
-#	$Area/CollisionShape2D.shape.set_b(final_point+character_offset)
+onready var collision_offset = Vector2(0.0,0.0)
 
 func _update_points():
 	#rail_dir = (final_point-init_point).normalized()
@@ -150,9 +115,16 @@ func _process(delta):
 		yield(get_tree().create_timer(lifetime), "timeout") 
 		for p in paths_to_remove:
 			p.call_deferred("queue_free") 
+
+func _on_Area_body_entered(body):
+	if not body.is_in_group("characters") or not $Timer.is_stopped() :
+		return
+		
+	var bi = body.global_position-global_position-init_point
+	var closest_offset = curve.get_closest_offset(bi)
+	var closest_point = curve.interpolate_baked(closest_offset)
 	
-func _on_Area_body_exited(body):
-	if body.is_in_group("characters") and body.S.velocity.y > 0 and $Timer.is_stopped():
+	if (bi-closest_point).y <= character_position_entrance_tolerance :
 
 		for b in inside_bodies:
 			if b == body:
@@ -170,8 +142,7 @@ func _on_Area_body_exited(body):
 		new_path_follow.add_child(ride_particle)
 		self.add_child(new_path_follow)
 		
-		var bi = body.global_position-global_position-init_point
-		new_path_follow.offset = curve.get_closest_offset(bi) # approximate where the player is
+		new_path_follow.offset = closest_offset # approximate where the player is
 		var rail_dir = new_path_follow.transform.x
 
 		inside_bodies.push_back(body)
@@ -180,4 +151,3 @@ func _on_Area_body_exited(body):
 		linear_velocities.push_back(body.S.velocity)
 		position_offsets.push_back(body.global_position-new_path_follow.global_position)
 		body.disable_physics()
-

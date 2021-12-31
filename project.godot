@@ -45,9 +45,9 @@ _global_script_classes=[ {
 "path": "res://src/Player/Player.gd"
 }, {
 "base": "Path2D",
-"class": "TrailLine",
+"class": "RailLine",
 "language": "GDScript",
-"path": "res://src/Items/Dynamics/TrailLine.gd"
+"path": "res://src/Items/Dynamics/RailLine.gd"
 }, {
 "base": "Node2D",
 "class": "ZipLine",
@@ -62,7 +62,7 @@ _global_script_class_icons={
 "Character": "res://assets/art/icons/character.png",
 "PhysicBody": "res://assets/art/icons/physicbody.png",
 "Player": "res://assets/art/icons/popol.png",
-"TrailLine": "res://assets/art/icons/trailline.png",
+"RailLine": "res://assets/art/icons/railline.png",
 "ZipLine": "res://assets/art/icons/zipline.png"
 }
 

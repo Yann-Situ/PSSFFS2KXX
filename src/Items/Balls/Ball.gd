@@ -30,7 +30,7 @@ func collision_effect(collider, collider_velocity, collision_point, collision_no
 
 func pickup(holder_node):
 	if not holder_node.is_in_group("holders"):
-		print("error, holder_node os not in group `holders`.")
+		print("error["+name+"], holder_node is not in group `holders`.")
 	if holder != null:
 		holder.free_ball(self)
 	self.disable_physics()

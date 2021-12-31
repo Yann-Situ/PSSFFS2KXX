@@ -1,13 +1,6 @@
 extends KinematicBody2D
 class_name Player, "res://assets/art/icons/popol.png"
 
-onready var S = get_node("State")
-onready var SpecialActionHandler = get_node("Actions/SpecialActionHandler")
-onready var ShootPredictor = get_node("Actions/ShootPredictor")
-onready var PlayerEffects = get_node("PlayerEffects")
-onready var BallHandler = get_node("BallHandler")
-onready var LifeHandler = get_node("LifeHandler")
-
 export (bool) var physics_enabled = true
 
 # Environment features (should be given by the map)
@@ -43,7 +36,20 @@ export (float) var walk_accel = 220 # pix/s²
 
 export (bool) var flip_h = false
 
+################################################################################
+
+onready var S = get_node("State")
+onready var SpecialActionHandler = get_node("Actions/SpecialActionHandler")
+onready var ShootPredictor = get_node("Actions/ShootPredictor")
+onready var PlayerEffects = get_node("PlayerEffects")
+onready var BallHandler = get_node("BallHandler")
+onready var LifeHandler = get_node("LifeHandler")
+
 onready var invmass = 1.0/4.0
+
+onready var character_holder = null
+
+################################################################################
 
 func disable_physics():
 	physics_enabled = false
@@ -189,7 +195,7 @@ func get_input(delta): #delta in s
 # For physicbody
 func apply_impulse(impulse):
 	S.velocity += invmass * impulse
-	
+
 func _physics_process(delta):
 	get_input(delta)
 	if S.is_onwall and S.velocity.y > 0: #fall on a wall
@@ -204,6 +210,24 @@ func _physics_process(delta):
 			S.velocity.y = 0.5*sqrt(2) * move_and_slide_with_snap(S.velocity, 33*Vector2.DOWN, Vector2.UP, true, 4, 0.785398, false).y
 		else :
 			S.velocity = move_and_slide(S.velocity, Vector2.UP, true, 4, 0.785398, false)
+
+################################################################################
+# For `characters` group
+func get_in(new_holder : Node):
+	if not new_holder.is_in_group("holders"):
+		print("error["+name+"], holder is not in group `holders`.")
+	if character_holder != null:
+		character_holder.free_character(self)
+	self.disable_physics()
+	character_holder = new_holder
+
+func get_out(global_pos : Vector2, velo : Vector2):
+	self.enable_physics()
+	global_position = global_pos
+	S.velocity = velo
+	if character_holder != null:
+		character_holder.free_character(self)
+	character_holder = null
 
 ################################################################################
 # For `holders` group
