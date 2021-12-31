@@ -6,6 +6,7 @@ export (bool) var invert_line_direction = false
 export (float) var character_position_offset = -32.0
 export (float) var character_position_entrance_tolerance = -16.0
 export (float) var character_collision_offset = -52.0
+export (float) var cant_get_in_again_timer = 0.2#s
 
 var _particle = preload("res://src/Effects/RideParticles.tscn")
 
@@ -20,6 +21,9 @@ var linear_velocities = []
 var position_offsets = []
 
 var real_character_offset = Vector2.ZERO
+
+var paths_to_remove = []
+var released_bodies = []
 
 onready var gravity = ProjectSettings.get_setting("physics/2d/default_gravity") # pix/s²
 onready var character_offset = Vector2(0.0,character_position_offset)
@@ -53,6 +57,7 @@ func _update_points():
 
 func _ready():
 	self.z_index = Global.z_indices["foreground_1"]
+	add_to_group("characterholders")
 	if curve.get_point_count() >= 2:
 		#print(self.name + " setcurve")
 		final_point = curve.get_point_position(curve.get_point_count()-1)
@@ -63,7 +68,6 @@ func _ready():
 	
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
-	var paths_to_remove = []
 	
 	var j = 0 # int because we're deleting nodes in a list we're browsing
 	for i in range(inside_bodies.size()):
@@ -85,18 +89,17 @@ func _process(delta):
 		if path_follow.get_unit_offset() == 1.0 or \
 		   path_follow.get_unit_offset() == 0.0 or \
 		   body.S.crouch_p :
-			
-			body.enable_physics()
-			body.S.velocity = velocity
-			inside_bodies.remove(i-j)
-			paths_to_remove.push_back(path_follows[i-j])
-			path_follows.remove(i-j)
-			linear_velocities.remove(i-j)
-			position_offsets.remove(i-j)
-			$Timer.start()
-			print(body.name+" quit "+self.name)
-			#body.throw(path_follow.global_position,
-			#			path_follow.transform.x * speed_at_exit)
+#
+#			body.enable_physics()
+#			body.S.velocity = velocity
+#			inside_bodies.remove(i-j)
+#			paths_to_remove.push_back(path_follows[i-j])
+#			path_follows.remove(i-j)
+#			linear_velocities.remove(i-j)
+#			position_offsets.remove(i-j)
+#
+#			print(body.name+" quit "+self.name)
+			body.get_out(body.global_position, velocity)
 			j += 1 # because we deleted a node in the list we're browsing
 			
 			# the following code can result in wrong j and i values if there are
@@ -110,27 +113,38 @@ func _process(delta):
 	# Ugly but it works :
 	if not paths_to_remove.empty():
 		var lifetime = paths_to_remove[0].get_node("Particles").lifetime
-		for p in paths_to_remove:
-			p.get_node("Particles").emitting = false
-		yield(get_tree().create_timer(lifetime), "timeout") 
+		yield(get_tree().create_timer(min(lifetime,cant_get_in_again_timer)), "timeout") 
+		released_bodies = []
+		yield(get_tree().create_timer(abs(lifetime-cant_get_in_again_timer)), "timeout") 
 		for p in paths_to_remove:
 			p.call_deferred("queue_free") 
+	paths_to_remove = []
+	
 
 func _on_Area_body_entered(body):
-	if not body.is_in_group("characters") or not $Timer.is_stopped() :
+	if not body.is_in_group("characters") :
 		return
 		
 	var bi = body.global_position-global_position-init_point
 	var closest_offset = curve.get_closest_offset(bi)
 	var closest_point = curve.interpolate_baked(closest_offset)
+	var rail_dir = curve.interpolate_baked(closest_offset+0.001)-closest_point
+	if rail_dir.x < 0.0:
+		rail_dir = -rail_dir
 	
-	if (bi-closest_point).y <= character_position_entrance_tolerance :
+	if (bi-closest_point).y <= character_position_entrance_tolerance or \
+		rail_dir.cross(body.S.velocity) >= 0.0:
 
 		for b in inside_bodies:
 			if b == body:
 				print(body.name+" already in "+self.name)
 				return 1
-		
+				
+		for b in released_bodies:
+			if b == body:
+				print(body.name+" just get out from "+self.name)
+				return 1
+				
 		print(body.name+" on "+self.name)
 		
 		var new_path_follow : PathFollow2D = PathFollow2D.new()
@@ -143,11 +157,34 @@ func _on_Area_body_entered(body):
 		self.add_child(new_path_follow)
 		
 		new_path_follow.offset = closest_offset # approximate where the player is
-		var rail_dir = new_path_follow.transform.x
+		rail_dir = new_path_follow.transform.x
 
 		inside_bodies.push_back(body)
 		path_follows.push_back(new_path_follow)
 		body.S.velocity = body.S.velocity.dot(rail_dir) * rail_dir
 		linear_velocities.push_back(body.S.velocity)
 		position_offsets.push_back(body.global_position-new_path_follow.global_position)
-		body.disable_physics()
+		#body.disable_physics()
+		body.get_in(self)
+
+################################################################################
+# For `characterholders` group
+func free_character(character : Node):
+	# called by character when getting out
+	var i = 0
+	for body in inside_bodies:
+		if body == character:
+			print(name+" free_character("+character.name+")")
+			remove_body(i)
+		i += 1
+
+func remove_body(i : int):
+	assert(i < inside_bodies.size())
+	released_bodies.append(inside_bodies[i])
+	inside_bodies.remove(i)
+	linear_velocities.remove(i)
+	position_offsets.remove(i)
+	
+	path_follows[i].get_node("Particles").emitting = false
+	paths_to_remove.append(path_follows[i])
+	path_follows.remove(i)

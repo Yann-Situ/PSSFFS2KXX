@@ -214,8 +214,8 @@ func _physics_process(delta):
 ################################################################################
 # For `characters` group
 func get_in(new_holder : Node):
-	if not new_holder.is_in_group("holders"):
-		print("error["+name+"], holder is not in group `holders`.")
+	if not new_holder.is_in_group("characterholders"):
+		print("error["+name+"], new_holder is not in group `characterholders`.")
 	if character_holder != null:
 		character_holder.free_character(self)
 	self.disable_physics()

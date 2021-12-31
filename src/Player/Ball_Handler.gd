@@ -61,6 +61,7 @@ func throw_ball(pos, speed):
 		print("throw "+S.active_ball.name)
 		S.released_ball = S.active_ball
 		S.active_ball.throw(pos, speed)
+		# Ugly but it works :
 		yield(get_tree().create_timer(0.1), "timeout")
 		S.released_ball = null
 
