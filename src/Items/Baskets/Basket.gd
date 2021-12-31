@@ -4,7 +4,9 @@ class_name Basket, "res://assets/art/icons/basket.png"
 export var color1 = Color(0.8,0.5,0.1,0.5)
 export var color2 = Color(0.9,0.1,0.3,1.0)
 export var speed_ball_threshold = 380 #velocity value
+export var dunk_position_offset = 10
 onready var start_position = global_position
+onready var dunk_global_position = global_position + dunk_position_offset * Vector2.DOWN
 
 func _ready():
 	self.z_index = Global.z_indices["foreground_1"]

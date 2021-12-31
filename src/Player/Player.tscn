@@ -329,7 +329,8 @@ tracks/1/keys = {
 }
 
 [sub_resource type="Animation" id=47]
-length = 0.6
+length = 1.4
+step = 0.02
 tracks/0/type = "value"
 tracks/0/path = NodePath(".:frame")
 tracks/0/interp = 1
@@ -337,10 +338,10 @@ tracks/0/loop_wrap = true
 tracks/0/imported = false
 tracks/0/enabled = true
 tracks/0/keys = {
-"times": PoolRealArray( 0, 0.1, 0.2, 0.3, 0.4, 0.5 ),
-"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1 ),
+"times": PoolRealArray( 0, 0.22, 0.32, 0.4, 0.48, 0.56, 0.64, 0.78, 0.86, 0.94, 1.02, 1.1, 1.22, 1.3 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1 ),
 "update": 1,
-"values": [ 52, 53, 54, 55, 56, 57 ]
+"values": [ 32, 33, 34, 35, 36, 37, 38, 39, 40, 41, 42, 43, 44, 45 ]
 }
 tracks/1/type = "value"
 tracks/1/path = NodePath("../BallHandler/HasBallPosition:position")
@@ -349,10 +350,10 @@ tracks/1/loop_wrap = true
 tracks/1/imported = false
 tracks/1/enabled = true
 tracks/1/keys = {
-"times": PoolRealArray( 4.94346e-06, 0.1, 0.2, 0.3, 0.4, 0.5 ),
-"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1 ),
-"update": 1,
-"values": [ Vector2( -17, -31 ), Vector2( 2, -40 ), Vector2( 12, -32 ), Vector2( 11, -18 ), Vector2( 8, 5 ), Vector2( 8, 26 ) ]
+"times": PoolRealArray( 0, 0.2, 0.22, 0.3, 0.32, 0.86, 1.38 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1, 1 ),
+"update": 0,
+"values": [ Vector2( -23, -18 ), Vector2( -23, -18 ), Vector2( -19, -35 ), Vector2( -19, -35 ), Vector2( 4, -34 ), Vector2( -1, 451 ), Vector2( 0, -5 ) ]
 }
 tracks/2/type = "value"
 tracks/2/path = NodePath("../State:is_dunking")
@@ -361,10 +362,22 @@ tracks/2/loop_wrap = true
 tracks/2/imported = false
 tracks/2/enabled = true
 tracks/2/keys = {
-"times": PoolRealArray( 0, 0.6 ),
+"times": PoolRealArray( 0, 1.38 ),
 "transitions": PoolRealArray( 1, 1 ),
 "update": 1,
 "values": [ true, false ]
+}
+tracks/3/type = "value"
+tracks/3/path = NodePath("../State:velocity")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/keys = {
+"times": PoolRealArray( 0, 1.38 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Vector2( 0, 0 ), Vector2( 0, 0 ) ]
 }
 
 [sub_resource type="Animation" id=48]
@@ -637,7 +650,7 @@ tracks/1/keys = {
 "times": PoolRealArray( 0, 0.3, 1, 1.8, 2.1, 2.8, 3.6, 3.9, 4.6, 5.5, 5.6, 5.7, 5.8, 5.9, 6, 6.1, 6.2, 6.3, 6.4, 6.5, 6.6, 6.7, 6.8, 6.9, 7, 7.1, 7.2, 7.4, 7.5, 7.6, 7.7, 7.8, 7.9, 8, 8.1, 8.2, 8.3 ),
 "transitions": PoolRealArray( 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1 ),
 "update": 1,
-"values": [ Vector2( -6, -5 ), Vector2( -6, -6 ), Vector2( -6, -5 ), Vector2( -6, -5 ), Vector2( -6, -6 ), Vector2( -6, -5 ), Vector2( -6, -5 ), Vector2( -6, -6 ), Vector2( -6, -5 ), Vector2( 5, -2 ), Vector2( 10, 5.99999 ), Vector2( 8.99999, 12 ), Vector2( 8, 26 ), Vector2( 4.99999, 15 ), Vector2( 5.00001, 7.00001 ), Vector2( 5.99999, 3 ), Vector2( 1, 0 ), Vector2( 5.00001, 0 ), Vector2( 5.00001, 0 ), Vector2( 7, -3 ), Vector2( 10, 5.99999 ), Vector2( 8.99999, 12 ), Vector2( 8, 26 ), Vector2( 4.99999, 15 ), Vector2( 5.00001, 7.00001 ), Vector2( 5.99999, 3 ), Vector2( 5, 0 ), Vector2( 4.99999, 0 ), Vector2( 9, -2 ), Vector2( 10, 5.99999 ), Vector2( 8.99999, 12 ), Vector2( 8, 26 ), Vector2( 4.99999, 15 ), Vector2( 5.00001, 7.00001 ), Vector2( 5.99999, 3 ), Vector2( 5, 0 ), Vector2( -7, -5 ) ]
+"values": [ Vector2( -7, -6 ), Vector2( -6, -7 ), Vector2( -7, -6 ), Vector2( -6, -6 ), Vector2( -7, -7 ), Vector2( -7, -6 ), Vector2( -7, -6 ), Vector2( -7, -7 ), Vector2( -6, -5 ), Vector2( 5, -2 ), Vector2( 10, 5.99999 ), Vector2( 8.99999, 12 ), Vector2( 8, 26 ), Vector2( 4.99999, 15 ), Vector2( 5.00001, 7.00001 ), Vector2( 5.99999, 3 ), Vector2( 1, 0 ), Vector2( 5.00001, 0 ), Vector2( 5.00001, 0 ), Vector2( 7, -3 ), Vector2( 10, 5.99999 ), Vector2( 8.99999, 12 ), Vector2( 8, 26 ), Vector2( 4.99999, 15 ), Vector2( 5.00001, 7.00001 ), Vector2( 5.99999, 3 ), Vector2( 5, 0 ), Vector2( 4.99999, 0 ), Vector2( 9, -2 ), Vector2( 10, 5.99999 ), Vector2( 8.99999, 12 ), Vector2( 8, 26 ), Vector2( 4.99999, 15 ), Vector2( 5.00001, 7.00001 ), Vector2( 5.99999, 3 ), Vector2( 5, 0 ), Vector2( -7, -6 ) ]
 }
 
 [sub_resource type="Animation" id=56]
@@ -882,7 +895,6 @@ max_speed_fall = 700.0
 
 [node name="State" parent="." instance=ExtResource( 5 )]
 visible = false
-is_dunkjumping = true
 
 [node name="Actions" type="Node2D" parent="."]
 __meta__ = {
@@ -1110,7 +1122,7 @@ position = Vector2( 0, 5 )
 shape = SubResource( 67 )
 
 [node name="HasBallPosition" type="Node2D" parent="BallHandler"]
-position = Vector2( -6, -6 )
+position = Vector2( -7, -7 )
 __meta__ = {
 "_edit_group_": true
 }

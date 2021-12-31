@@ -12,7 +12,7 @@ export (float) var tolerance_wall_jump = 9*frame_time_ms #s
 export (float) var tolerance_land_lag = 3*frame_time_ms #s
 export (float) var walljump_move_countdown = 22*frame_time_ms #s
 export (float) var jump_countdown = 10*frame_time_ms #s
-export (float) var dunk_countdown = 30*frame_time_ms #s
+export (float) var dunk_countdown = 1.5 #s
 export (float) var shoot_countdown = 30*frame_time_ms #s
 
 # Bool for inputs ('p' is for 'pressed', 'jp' 'just_pressed', 'jr' 'just_released')
@@ -59,7 +59,7 @@ var is_idle = false
 export var move_direction = 0
 var direction_p = 0
 var aim_direction = 0
-var velocity = Vector2()
+export var velocity = Vector2()
 
 # Delays and states memory # handle by Player.gd
 #var last_onfloor = 0
@@ -155,7 +155,7 @@ func update_vars(delta):
 		$CanJumpTimer.is_stopped()
 	can_walljump = not $ToleranceWallJumpTimer.is_stopped() and \
 		$CanJumpTimer.is_stopped()
-	can_go = $CanGoTimer.is_stopped() and not is_dunkjumping
+	can_go = $CanGoTimer.is_stopped() and not is_dunkjumping and not is_dunking
 	can_crouch = is_onfloor
 	can_aim = $CanShootTimer.is_stopped() and has_ball and active_ball != null
 	can_shoot = is_aiming and has_ball and active_ball != null

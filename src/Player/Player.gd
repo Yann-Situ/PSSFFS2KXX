@@ -169,11 +169,11 @@ func get_input(delta): #delta in s
 	# ANIMATION:
 	$Sprite/AnimationTree.animate_from_state(S)
 
-	if S.jump_jp:
-		LifeHandler.apply_regen(2.0, 0.0, 2.0)
-	
-	if S.dunk_jp:
-		LifeHandler.apply_damage(1.0)
+#	if S.jump_jp:
+#		LifeHandler.apply_regen(2.0, 0.0, 2.0)
+#
+#	if S.dunk_jp:
+#		LifeHandler.apply_damage(1.0)
 	S.jump_jp = false
 	S.jump_jr = false
 	S.aim_jp = false
