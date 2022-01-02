@@ -447,7 +447,7 @@ position = Vector2( 2184, 520 )
 position = Vector2( 296, 696 )
 
 [node name="BallRolling" parent="Environment/Balls" instance=ExtResource( 27 )]
-position = Vector2( 144, 504 )
+position = Vector2( 1488, 456 )
 
 [node name="BallMetal" parent="Environment/Balls" instance=ExtResource( 28 )]
 position = Vector2( 1008, 175.385 )
@@ -859,7 +859,7 @@ walk_return_thresh_instant_speed = 120.0
 walk_accel = 170.0
 
 [node name="Player" parent="." instance=ExtResource( 1 )]
-position = Vector2( 1496, 512 )
+position = Vector2( 1456, 512 )
 z_index = 10
 walk_return_thresh_instant_speed = 150.0
 

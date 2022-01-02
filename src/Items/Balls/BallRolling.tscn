@@ -9,16 +9,16 @@ resource_local_to_scene = true
 radius = 6.0
 
 [node name="BallRolling" instance=ExtResource( 1 )]
+z_index = 110
 script = ExtResource( 2 )
 
 [node name="collision" parent="." index="0"]
 shape = SubResource( 1 )
 
-[node name="Sprite" parent="." index="2"]
+[node name="Sprite" parent="." index="1"]
 texture = ExtResource( 3 )
 
-[node name="TrailHandler" parent="." index="4"]
+[node name="TrailHandler" parent="Effects" index="3"]
+z_index = -1
 wildness = 0.0
-width = 30.0
-point_lifetime = 0.18
-tick_speed = 0.03
+width = 18.0

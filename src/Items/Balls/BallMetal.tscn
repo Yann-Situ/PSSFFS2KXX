@@ -24,11 +24,8 @@ dust_threshold = 200.0
 [node name="collision" parent="." index="0"]
 shape = SubResource( 1 )
 
-[node name="DustParticle" parent="." index="1"]
-amount = 20
-lifetime = 0.7
-
-[node name="SpeedParticles" type="CPUParticles2D" parent="." index="2"]
+[node name="SpeedParticles" type="CPUParticles2D" parent="." index="1"]
+emitting = false
 amount = 12
 lifetime = 0.18
 randomness = 0.05
@@ -43,13 +40,12 @@ linear_accel = -20.0
 tangential_accel = -0.69
 damping = 100.0
 damping_random = 0.68
-scale_amount = 0.06
-scale_amount_random = 0.02
+scale_amount = 0.1
 scale_amount_curve = SubResource( 2 )
 color_ramp = SubResource( 3 )
 __meta__ = {
 "_editor_description_": ""
 }
 
-[node name="Sprite" parent="." index="3"]
+[node name="Sprite" parent="." index="2"]
 texture = ExtResource( 3 )

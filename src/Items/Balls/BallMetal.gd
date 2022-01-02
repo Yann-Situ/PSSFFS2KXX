@@ -24,7 +24,7 @@ func update_linear_velocity(delta):# apply gravity and forces
 
 func collision_effect(collider, collider_velocity, collision_point, collision_normal):
 	if (linear_velocity-collider_velocity).length() > dust_threshold:
-		$DustParticle.restart()
+		$Effects/DustParticle.restart()
 	if (linear_velocity-collider_velocity).dot(-collision_normal) > destruction_speed_thresh:
 		if collider.is_in_group("breakables"):
 			collider.apply_explosion(

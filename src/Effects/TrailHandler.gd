@@ -26,6 +26,7 @@ func start(duration, tick_delay):
 	if trail != null:
 		trail.stop()
 	var trail_instance: Line2D = TrailScene.instance()
+	trail_instance.name = "TrailInstance"
 	trail_instance.wildness = wildness
 	trail_instance.min_spawn_distance = min_spawn_distance
 	trail_instance.gravity = gravity
@@ -39,9 +40,11 @@ func start(duration, tick_delay):
 	
 	# [BUG] https://github.com/godotengine/godot/issues/45416
 	# z_as_relative doesn't work through code... so we do not do like this :
-	#trail_instance.z_as_relative = true
-	#trail_instance.z_index = -1
-	trail_instance.z_index = node_to_trail.z_index-1
+	# trail_instance.z_as_relative = true
+	# trail_instance.z_index = -1
+	
+	#trail_instance.z_as_relative = false
+	#trail_instance.z_index = node_to_trail.z_index-1 # but bug when the ball is picked_up
 	
 	node_to_trail.add_child(trail_instance)
 	trail = trail_instance
