@@ -7,25 +7,25 @@ Popol Super Slam Fusion Full Speed 2KXX
    - [.] environment elements
    - [.] other tilesets
    - [.] other background
-   - [ ] all movement sprites
+   - [.] all movement sprites
    - [ ] UI graphism such as tag-police
 * Moveset improvment :
-   - [ ] add dunk
-   - [ ] handle crouch
-   - [ ] add landing anim
-   - [.] add turn back anim
-   - [ ] add slide
+   - [x] add dunk
+   - [x] handle crouch
+   - [x] add landing anim
+   - [x] add turn back anim
+   - [.] add slide
    - [ ] with and without balls anim
    - [x] improve wall jump (feet must be on wall ?)
    - [ ] add multiple shoot types
    - [ ] Death and life system
 * Add interactive elements (baskets, pipes, jumping platform, doors and warps, wind, enemies...)
-   - [.] baskets
-   - [.] spawners
-   - [.] activable
+   - [x] baskets
+   - [x] spawners
+   - [x] activable
    - [.] ziplines
-   - [ ] Add enemies and NPC
-   - [ ] Add destroyable blocks
+   - [.] Add enemies and NPC
+   - [x] Add destroyable blocks
    - [ ] Add one way platforms and ball-doors / player-doors
    - [.] pipes (TODO : change bounding box + handle multiple sides + be careful on exit_throw)
 * Add point system
@@ -37,11 +37,11 @@ Popol Super Slam Fusion Full Speed 2KXX
    - [ ] improve animation of balls
    - [ ] squish anim for squish balls
    - [x] add several balls (bouncy ball, fire ball, linked ball, phantom ball)
-   - [ ] handle interactions with environment elements
+   - [.] handle interactions with environment elements
    - [.] Add new powers when selection+active (such as megaBOUM, dash, RollingDestroying...)
 * Juice :
-   - [ ] Camera shake on heavy ball, dunks and other style action
-   - [.] particles on balls, dust on footsteps & slide
+   - [x] Camera shake on heavy ball, dunks and other style action
+   - [x] particles on balls, dust on footsteps & slide
    - [ ] add UBER mode with new animations
    - [ ] add sound (music + effect and stylish voice)
 * Add UIs
@@ -53,7 +53,7 @@ Popol Super Slam Fusion Full Speed 2KXX
 * [x] Weird straight **jump** on a corner. Don't know why it happens and what to do.
 * [x] Sometimes the **dunkjump** gives a velocity of `(-nan, dunkjump_speed)`. This is due to it's calculation with a square root
 * [x] **Dunking** while pushing a direction button toward another basket above results in no dunk on the current basket. -> change the criteria for the basket by taking into account a very close basket.
-* [ ] **Walljumping** at the same time that dunking results in dunking called on a **wrong basket** (if multiple baskets around)
+* [x] **Walljumping** at the same time that dunking results in dunking called on a **wrong basket** (if multiple baskets around)
 * [ ] **Aiming shooting** right after dunk results in **strange animation behaviour**.
 * [ ] **Dunkjumping** while only moving with floor adherence a bit far from basket results in missing the basket.
 * [ ] **Air dunkjump** when dunking can result in `S.selected_basket.dunk()` called on `null` instance (basket is not selected anymore)
@@ -66,7 +66,7 @@ Popol Super Slam Fusion Full Speed 2KXX
 * [x] Get out from **zipline** just on flat floor results in sliding (like on ice).
 * [ ] Get out from **zipline** just after passing over a **Jumper** results in sliding (like on ice) because **can_go_timer** was changed.
 * [ ] Stuck colliding on a **rail** can result in building speed.
-* [ ] Weird behaviour on leaving a **zipline** to a **rail** (there is a moment when the character is on both of them)
+* [.] Weird behaviour on leaving a **zipline** to a **rail** (there is a moment when the character is on both of them)
     - Implement character holder group with `free_character` and `pickup_character` methods.
 * [ ] Characters can leave **rail** if Player press **crouch** on it.
     - Implement the `riding` and `hanging` states.
@@ -87,10 +87,13 @@ Popol Super Slam Fusion Full Speed 2KXX
 * [ ] **ColorRect** for shockwave effect stay in (0,0) global coordinates...
 * [ ] Lag if too much balls : make a spawner limit and link the dispawn of a ball to the spawner to increase the spawn count.
 * [ ] I need to adapt the boum delay: i.e apply_impulse instantly on colliding object and a bit after on far objects. nedd a method call_after_a_delay(apply_impulse)
+* [ ] **Bubble/Zap ball teleportation** trailhandler can act very weirdly if used quickly repeatly.
+* [ ] Need to implement Tilemap interactive objects rotation and flips.
 
 ### Potential Glitches
 * [ ] Pressing **jump** and **dunkjump** just before landing can result in small dunkjump/jump.
 * [ ] Jumping (from ground) just before entering a **rail** can result in a boost grind.
+* [ ] If multiple explosion breaks the same bloc, it can spawn copies.
 
 ## Groups
 

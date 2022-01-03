@@ -1,4 +1,4 @@
-[gd_scene load_steps=7 format=2]
+[gd_scene load_steps=11 format=2]
 
 [ext_resource path="res://src/Items/Balls/Ball.tscn" type="PackedScene" id=1]
 [ext_resource path="res://src/Items/Balls/BallBubble.gd" type="Script" id=2]
@@ -8,7 +8,60 @@
 resource_local_to_scene = true
 radius = 6.0
 
-[sub_resource type="GDScript" id=2]
+[sub_resource type="Animation" id=2]
+resource_name = "teleport"
+length = 0.5
+step = 0.05
+tracks/0/type = "method"
+tracks/0/path = NodePath("Effects/Reconstruction")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"values": [ {
+"args": [  ],
+"method": "restart"
+} ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("Effects/Reconstruction:emitting")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ true ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath("Sprite:modulate")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0, 0.35, 0.5 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 0 ), Color( 1, 1, 1, 0 ), Color( 1, 1, 1, 1 ) ]
+}
+
+[sub_resource type="StreamTexture" id=5]
+load_path = "res://.import/round.png-173de128c3ea8d3b72416bcc5f522248.stex"
+
+[sub_resource type="Curve" id=6]
+_data = [ Vector2( 0, 0.0886364 ), 0.0, 0.215584, 0, 0, Vector2( 0.554217, 0.952273 ), 0.425641, 0.425641, 0, 0, Vector2( 1, 1 ), -0.570101, 0.0, 0, 0 ]
+
+[sub_resource type="Gradient" id=7]
+offsets = PoolRealArray( 0, 0.00699301, 0.244755, 0.468531, 0.839161, 1 )
+colors = PoolColorArray( 1, 0, 0.580392, 0, 0.131042, 0.296875, 0.281328, 0.258741, 0.295258, 0.839844, 0.750498, 0.705882, 0.142014, 0.67727, 0.886719, 1, 1, 1, 1, 1, 1, 1, 1, 0 )
+
+[sub_resource type="GDScript" id=3]
 script/source = "extends Node2D
 
 export var wildness := 15.0
@@ -91,23 +144,35 @@ func _on_TrailTickTimer_timeout():
 	last_tick = tick
 "
 
-[sub_resource type="Gradient" id=3]
+[sub_resource type="Gradient" id=4]
 colors = PoolColorArray( 0, 0.884146, 1, 0, 1.1, 1.3, 1.4, 1 )
 
 [node name="BallBubble" instance=ExtResource( 1 )]
 script = ExtResource( 2 )
+col1 = Color( 0.368627, 0.909804, 1, 1 )
+col2 = Color( 0, 0.658824, 0.917647, 1 )
+col3 = Color( 0.0823529, 0.321569, 0.427451, 1 )
 
 [node name="collision" parent="." index="0"]
+visible = false
 shape = SubResource( 1 )
 
 [node name="Sprite" parent="." index="1"]
 self_modulate = Color( 1, 1.2, 1.2, 1 )
 texture = ExtResource( 3 )
 
+[node name="Animation" parent="." index="3"]
+anims/teleport = SubResource( 2 )
+
+[node name="Reconstruction" parent="Effects" index="0"]
+texture = SubResource( 5 )
+scale_amount_curve = SubResource( 6 )
+color_ramp = SubResource( 7 )
+
 [node name="TrailHandler" parent="Effects" index="3"]
-script = SubResource( 2 )
+script = SubResource( 3 )
 wildness = 200.0
-gradient_col = SubResource( 3 )
+gradient_col = SubResource( 4 )
 width = 8.0
 width_curve = null
 trail_fade_time = 0.5

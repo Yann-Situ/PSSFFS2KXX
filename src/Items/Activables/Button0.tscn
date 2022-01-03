@@ -14,15 +14,13 @@ script = ExtResource( 2 )
 __meta__ = {
 "_edit_group_": true
 }
-locked = null
-button_type = 1
 
 [node name="Sprite" type="Sprite" parent="."]
 position = Vector2( 0, -8 )
 texture = ExtResource( 1 )
 hframes = 2
 region_enabled = true
-region_rect = Rect2( 64, 80, 64, 16 )
+region_rect = Rect2( 0, 80, 64, 16 )
 
 [node name="Area2D" type="Area2D" parent="."]
 collision_layer = 136

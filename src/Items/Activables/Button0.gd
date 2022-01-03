@@ -2,7 +2,7 @@ tool
 extends Activable
 
 enum BUTTON0_TYPE {PERMANENT, TIMER, PHYSICAL}
-export (BUTTON0_TYPE) var button_type = BUTTON0_TYPE.PERMANENT setget set_button_type
+export (BUTTON0_TYPE) var button_type setget set_button_type
 export (float) var wait_time = 1#s
 var timer = null
 
@@ -41,12 +41,14 @@ func _ready():
 		$Sprite.set_region_rect(Rect2(128,80,64,16))
 		$Area2D.connect("body_exited", self, "_on_Area2D_body_exited")
 		_on_Area2D_body_exited(null)
+	update_Sprite(activated)
 		
 func update_Sprite(b):
-	if b:
-		$Sprite.set_frame(1)
-	else:
-		$Sprite.set_frame(0)
+	if is_inside_tree():
+		if b:
+			$Sprite.set_frame(1)
+		else:
+			$Sprite.set_frame(0)
 
 
 #########################ACTIVABLE#############################################

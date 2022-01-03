@@ -21,6 +21,7 @@ func power_jp(player,delta):
 		$Tween.follow_property(self, "position", position, player, "position", 0.1)
 		$Tween.start()
 		$Effects/TrailHandler.start(0.1,0.0015)
+		$Animation.play("teleport")
 	else :
 		player.position.y -= 100
 

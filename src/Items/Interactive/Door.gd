@@ -62,7 +62,7 @@ func explode(momentum : Vector2):
 
 func on_disable():
 	update_sprite(activated)
-	if !Engine.editor_hint:
+	if !Engine.editor_hint and is_inside_tree():
 		$Occluder.visible = true
 		$Breakable.collision_layer = collision_layer_save
 		$Breakable.collision_mask = collision_mask_save

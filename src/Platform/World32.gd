@@ -5,10 +5,6 @@ var stairs_at_left = [Vector2(1,4), Vector2(0,5), Vector2(7,4), Vector2(8,5), Ve
 var stairs_at_righ = [Vector2(0,4), Vector2(1,5), Vector2(6,4), Vector2(9,5), Vector2(11,5)]
 var next_to_stairs = [Vector2(4,5), Vector2(5,5), Vector2(6,5)] # next to right, to left, to both
 var next_to_stairs_to_change = [Vector2(9,0), Vector2(5,0), Vector2(6,0)]
-# Declare member variables here. Examples:
-# var a = 2
-# var b = "text"
-
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -36,7 +32,3 @@ func set_cell(x, y, tile, flip_x=false, flip_y=false, transpose=false, autotile_
 	
 	# to update autotile
 	#update_bitmask_area(Vector2(x,y))
-
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-#func _process(delta):
-#	pass
