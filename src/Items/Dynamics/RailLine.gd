@@ -8,6 +8,11 @@ export (float) var character_position_entrance_tolerance = -16.0
 export (float) var character_collision_offset = -52.0
 export (float) var cant_get_in_again_timer = 0.2#s
 
+onready var gravity = ProjectSettings.get_setting("physics/2d/default_gravity") # pix/s²
+onready var character_offset = Vector2(0.0,character_position_offset)
+onready var collision_offset = Vector2(0.0,0.0)
+var tolerance_annoying_case = 4.0
+
 var _particle = preload("res://src/Effects/RideParticles.tscn")
 
 var init_point = Vector2.ZERO
@@ -24,10 +29,6 @@ var real_character_offset = Vector2.ZERO
 
 var paths_to_remove = []
 var released_bodies = []
-
-onready var gravity = ProjectSettings.get_setting("physics/2d/default_gravity") # pix/s²
-onready var character_offset = Vector2(0.0,character_position_offset)
-onready var collision_offset = Vector2(0.0,0.0)
 
 func _update_points():
 	#rail_dir = (final_point-init_point).normalized()
@@ -120,6 +121,8 @@ func _process(delta):
 			p.call_deferred("queue_free") 
 	paths_to_remove = []
 	
+func is_in(a, b, c, tolerance = 0.0):
+	return a >= b+tolerance and a < c-tolerance
 
 func _on_Area_body_entered(body):
 	if not body.is_in_group("characters") :
@@ -127,13 +130,16 @@ func _on_Area_body_entered(body):
 		
 	var bi = body.global_position-global_position-init_point
 	var closest_offset = curve.get_closest_offset(bi)
-	var closest_point = curve.interpolate_baked(closest_offset)
+#	if not is_in(closest_offset, 0.0, curve.get_baked_length(),5.0):
+#		print("annoying case")
+	var closest_point = curve.interpolate_baked(closest_offset-0.001)
 	var rail_dir = curve.interpolate_baked(closest_offset+0.001)-closest_point
 	if rail_dir.x < 0.0:
 		rail_dir = -rail_dir
 	
 	if (bi-closest_point).y <= character_position_entrance_tolerance or \
-		rail_dir.cross(body.S.velocity) >= 0.0:
+	   (rail_dir.cross(body.S.velocity) >= 0.0 and \
+		is_in(closest_offset, 0.0, curve.get_baked_length(),tolerance_annoying_case)) :
 
 		for b in inside_bodies:
 			if b == body:

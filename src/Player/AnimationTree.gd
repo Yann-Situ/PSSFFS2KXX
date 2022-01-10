@@ -187,8 +187,8 @@ func _ready():
 
 
 func animate_from_state(S):
-	self["parameters/conditions/not_on_wall_cond"] = !S.can_walljump#HACKED : !S.is_onwall
-	self["parameters/conditions/on_wall_cond"] = S.can_walljump# HACKED mustbe S.is_onwall, but I have to implement a wall hit box
+	self["parameters/conditions/not_on_wall_cond"] = !S.can_walljump
+	self["parameters/conditions/on_wall_cond"] = S.can_walljump
 	self["parameters/conditions/not_on_floor_cond"] = !S.is_onfloor
 	self["parameters/conditions/on_floor_cond"] = S.is_onfloor
 

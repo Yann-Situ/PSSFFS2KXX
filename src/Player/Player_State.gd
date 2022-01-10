@@ -73,16 +73,19 @@ var last_onair_velocity_y = 0
 var last_aim_jp = 0 # still used for shoot vector
 
 # Bool for actions
-export var is_jumping = false # handle also by Player.gd
-export var is_walljumping = false # handle also by Player.gd
-export var is_landing = false # handle also by animations (for stop)
-export var is_landing_roll = false # handle also by animations (for stop)
-export var is_dunkjumping = false # handle also by Player.gd
-export var is_dunking = false # handle also by Player.gd
-export var is_halfturning = false # handle also by Player.gd
-export var is_crouching = false # handle also by Player.gd
-export var is_aiming = false # handle by Player.gd
-export var is_shooting = false # handle by Player.gd (for start) and animations (for stop)
+export var is_jumping = false 
+export var is_walljumping = false 
+export var is_landing = false 
+export var is_landing_roll = false 
+export var is_dunkjumping = false 
+export var is_dunking = false 
+export var is_halfturning = false 
+export var is_crouching = false 
+export var is_aiming = false 
+export var is_shooting = false
+
+export var is_grinding = false 
+export var is_hanging = false
 
 # Bool var
 export var has_ball = false

@@ -1,4 +1,4 @@
-[gd_scene load_steps=99 format=2]
+[gd_scene load_steps=149 format=2]
 
 [ext_resource path="res://src/Player/Player.gd" type="Script" id=1]
 [ext_resource path="res://assets/art/characters/Player.png" type="Texture" id=2]
@@ -31,6 +31,7 @@
 [ext_resource path="res://src/Player/Actions/Release.gd" type="Script" id=29]
 [ext_resource path="res://src/Characters/LifeHandler.gd" type="Script" id=30]
 [ext_resource path="res://assets/art/ball/ball_particle.png" type="Texture" id=31]
+[ext_resource path="res://src/Player/AnimationHandler.gd" type="Script" id=32]
 
 [sub_resource type="CircleShape2D" id=1]
 resource_local_to_scene = true
@@ -246,6 +247,7 @@ tracks/3/keys = {
 
 [sub_resource type="Animation" id=44]
 length = 0.1
+loop = true
 tracks/0/type = "value"
 tracks/0/path = NodePath(".:frame")
 tracks/0/interp = 1
@@ -350,10 +352,10 @@ tracks/1/loop_wrap = true
 tracks/1/imported = false
 tracks/1/enabled = true
 tracks/1/keys = {
-"times": PoolRealArray( 0, 0.2, 0.22, 0.3, 0.32, 0.66, 0.78, 0.8, 1.38 ),
-"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1, 1, 1, 1 ),
+"times": PoolRealArray( 0, 0.2, 0.22, 0.3, 0.32, 0.66, 0.78, 0.8 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1, 1, 1 ),
 "update": 0,
-"values": [ Vector2( -23, -18 ), Vector2( -23, -18 ), Vector2( -19, -35 ), Vector2( -19, -35 ), Vector2( 6, -34 ), Vector2( 8, 110 ), Vector2( 8, 110 ), Vector2( 0, -5 ), Vector2( 0, -5 ) ]
+"values": [ Vector2( -23, -18 ), Vector2( -23, -18 ), Vector2( -19, -35 ), Vector2( -19, -35 ), Vector2( 6, -34 ), Vector2( 8, 110 ), Vector2( 8, 110 ), Vector2( 0, -5 ) ]
 }
 tracks/2/type = "value"
 tracks/2/path = NodePath("../State:is_dunking")
@@ -586,6 +588,125 @@ tracks/1/keys = {
 }
 
 [sub_resource type="Animation" id=54]
+resource_name = "grind+15"
+length = 0.5
+loop = true
+tracks/0/type = "value"
+tracks/0/path = NodePath(".:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ 226 ]
+}
+
+[sub_resource type="Animation" id=55]
+resource_name = "grind+30"
+length = 0.5
+loop = true
+tracks/0/type = "value"
+tracks/0/path = NodePath(".:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ 225 ]
+}
+
+[sub_resource type="Animation" id=56]
+resource_name = "grind+45"
+length = 0.5
+loop = true
+tracks/0/type = "value"
+tracks/0/path = NodePath(".:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ 224 ]
+}
+
+[sub_resource type="Animation" id=57]
+resource_name = "grind-15"
+length = 0.5
+loop = true
+tracks/0/type = "value"
+tracks/0/path = NodePath(".:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ 228 ]
+}
+
+[sub_resource type="Animation" id=58]
+resource_name = "grind-30"
+length = 0.5
+loop = true
+tracks/0/type = "value"
+tracks/0/path = NodePath(".:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ 229 ]
+}
+
+[sub_resource type="Animation" id=59]
+resource_name = "grind-45"
+length = 0.5
+loop = true
+tracks/0/type = "value"
+tracks/0/path = NodePath(".:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ 230 ]
+}
+
+[sub_resource type="Animation" id=60]
+resource_name = "grind0"
+length = 0.5
+loop = true
+tracks/0/type = "value"
+tracks/0/path = NodePath(".:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ 227 ]
+}
+
+[sub_resource type="Animation" id=61]
 length = 0.45
 step = 0.025
 tracks/0/type = "value"
@@ -625,7 +746,36 @@ tracks/2/keys = {
 "values": [ true, false ]
 }
 
-[sub_resource type="Animation" id=55]
+[sub_resource type="Animation" id=62]
+resource_name = "hang"
+length = 0.5
+step = 0.02
+tracks/0/type = "value"
+tracks/0/path = NodePath(".:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.08, 0.16, 0.24, 0.36, 0.44 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1 ),
+"update": 1,
+"values": [ 40, 41, 42, 43, 44, 45 ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("../BallHandler/HasBallPosition:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0.02 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Vector2( 0, -5 ) ]
+}
+
+[sub_resource type="Animation" id=63]
 length = 8.5
 loop = true
 tracks/0/type = "value"
@@ -653,7 +803,7 @@ tracks/1/keys = {
 "values": [ Vector2( -7, -6 ), Vector2( -6, -7 ), Vector2( -7, -6 ), Vector2( -6, -6 ), Vector2( -7, -7 ), Vector2( -7, -6 ), Vector2( -7, -6 ), Vector2( -7, -7 ), Vector2( -6, -5 ), Vector2( 5, -2 ), Vector2( 10, 5.99999 ), Vector2( 8.99999, 12 ), Vector2( 8, 26 ), Vector2( 4.99999, 15 ), Vector2( 5.00001, 7.00001 ), Vector2( 5.99999, 3 ), Vector2( 1, 0 ), Vector2( 5.00001, 0 ), Vector2( 5.00001, 0 ), Vector2( 7, -3 ), Vector2( 10, 5.99999 ), Vector2( 8.99999, 12 ), Vector2( 8, 26 ), Vector2( 4.99999, 15 ), Vector2( 5.00001, 7.00001 ), Vector2( 5.99999, 3 ), Vector2( 5, 0 ), Vector2( 4.99999, 0 ), Vector2( 9, -2 ), Vector2( 10, 5.99999 ), Vector2( 8.99999, 12 ), Vector2( 8, 26 ), Vector2( 4.99999, 15 ), Vector2( 5.00001, 7.00001 ), Vector2( 5.99999, 3 ), Vector2( 5, 0 ), Vector2( -7, -6 ) ]
 }
 
-[sub_resource type="Animation" id=56]
+[sub_resource type="Animation" id=64]
 length = 0.4
 step = 0.05
 tracks/0/type = "value"
@@ -693,8 +843,8 @@ tracks/2/keys = {
 "values": [ Vector2( 7, -0.999998 ), Vector2( -8, -11 ), Vector2( 3, -6 ), Vector2( 1, -4 ), Vector2( 0, -7 ) ]
 }
 
-[sub_resource type="Animation" id=57]
-length = 0.1
+[sub_resource type="Animation" id=65]
+length = 0.15
 step = 0.05
 tracks/0/type = "value"
 tracks/0/path = NodePath(".:frame")
@@ -727,13 +877,13 @@ tracks/2/loop_wrap = true
 tracks/2/imported = false
 tracks/2/enabled = true
 tracks/2/keys = {
-"times": PoolRealArray( 0, 0.1 ),
+"times": PoolRealArray( 0, 0.15 ),
 "transitions": PoolRealArray( 1, 1 ),
 "update": 1,
 "values": [ true, false ]
 }
 
-[sub_resource type="Animation" id=58]
+[sub_resource type="Animation" id=66]
 length = 0.42
 step = 0.07
 tracks/0/type = "value"
@@ -773,7 +923,7 @@ tracks/2/keys = {
 "values": [ true, false ]
 }
 
-[sub_resource type="Animation" id=59]
+[sub_resource type="Animation" id=67]
 length = 0.8
 loop = true
 tracks/0/type = "value"
@@ -789,7 +939,7 @@ tracks/0/keys = {
 "values": [ 16, 17, 18, 19, 20, 21, 22, 23 ]
 }
 
-[sub_resource type="Animation" id=60]
+[sub_resource type="Animation" id=68]
 length = 0.8
 loop = true
 tracks/0/type = "value"
@@ -817,7 +967,7 @@ tracks/1/keys = {
 "values": [ Vector2( 10, -5.24521e-06 ), Vector2( 11, 6 ), Vector2( 11, 10 ), Vector2( 11, 25 ), Vector2( 11, 14 ), Vector2( 11, 7 ), Vector2( 8.00001, 3 ), Vector2( 5, 3 ) ]
 }
 
-[sub_resource type="Animation" id=61]
+[sub_resource type="Animation" id=69]
 length = 0.4
 step = 0.05
 tracks/0/type = "value"
@@ -857,30 +1007,268 @@ tracks/2/keys = {
 "values": [ Vector2( 7, -0.999998 ), Vector2( 4, -0.999998 ), Vector2( -7, -11 ), Vector2( 0, -7 ), Vector2( 3, -6 ) ]
 }
 
-[sub_resource type="CanvasItemMaterial" id=62]
+[sub_resource type="CanvasItemMaterial" id=70]
 blend_mode = 1
 
-[sub_resource type="CanvasItemMaterial" id=63]
+[sub_resource type="AnimationNodeTransition" id=71]
+input_count = 5
+input_0/name = "fall"
+input_0/auto_advance = false
+input_1/name = "grind"
+input_1/auto_advance = false
+input_2/name = "hang"
+input_2/auto_advance = false
+input_3/name = "wallslide"
+input_3/auto_advance = false
+input_4/name = "dunkjump"
+input_4/auto_advance = false
+
+[sub_resource type="AnimationNodeAnimation" id=72]
+animation = "air_shoot"
+
+[sub_resource type="AnimationNodeAnimation" id=73]
+animation = "air_wall"
+
+[sub_resource type="AnimationNodeAnimation" id=74]
+animation = "crouch_idle"
+
+[sub_resource type="AnimationNodeAnimation" id=75]
+animation = "crouch"
+
+[sub_resource type="AnimationNodeBlendSpace1D" id=76]
+blend_point_0/node = SubResource( 74 )
+blend_point_0/pos = 0.0
+blend_point_1/node = SubResource( 75 )
+blend_point_1/pos = 1.0
+
+[sub_resource type="AnimationNodeAnimation" id=77]
+animation = "dunk"
+
+[sub_resource type="AnimationNodeAnimation" id=78]
+animation = "dunkjump"
+
+[sub_resource type="AnimationNodeAnimation" id=79]
+animation = "fall"
+
+[sub_resource type="AnimationNodeAnimation" id=80]
+animation = "fall_loop"
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=81]
+switch_mode = 2
+auto_advance = true
+
+[sub_resource type="AnimationNodeStateMachine" id=82]
+states/fall/node = SubResource( 79 )
+states/fall/position = Vector2( 292, 142 )
+states/fall_loop/node = SubResource( 80 )
+states/fall_loop/position = Vector2( 506, 142 )
+transitions = [ "fall", "fall_loop", SubResource( 81 ) ]
+start_node = "fall"
+end_node = "fall_loop"
+
+[sub_resource type="AnimationNodeTransition" id=83]
+input_count = 2
+input_0/name = "stand"
+input_0/auto_advance = false
+input_1/name = "crouch"
+input_1/auto_advance = false
+
+[sub_resource type="AnimationNodeAnimation" id=84]
+animation = "floor_shoot"
+
+[sub_resource type="AnimationNodeAnimation" id=85]
+animation = "grind0"
+
+[sub_resource type="AnimationNodeAnimation" id=86]
+animation = "grind-45"
+
+[sub_resource type="AnimationNodeAnimation" id=87]
+animation = "grind+45"
+
+[sub_resource type="AnimationNodeAnimation" id=88]
+animation = "grind-15"
+
+[sub_resource type="AnimationNodeAnimation" id=89]
+animation = "grind-30"
+
+[sub_resource type="AnimationNodeAnimation" id=90]
+animation = "grind+15"
+
+[sub_resource type="AnimationNodeAnimation" id=91]
+animation = "grind+30"
+
+[sub_resource type="AnimationNodeAnimation" id=92]
+animation = "fall_loop"
+
+[sub_resource type="AnimationNodeAnimation" id=93]
+animation = "fall_loop"
+
+[sub_resource type="AnimationNodeBlendSpace1D" id=94]
+blend_point_0/node = SubResource( 85 )
+blend_point_0/pos = 0.0
+blend_point_1/node = SubResource( 86 )
+blend_point_1/pos = -0.6
+blend_point_2/node = SubResource( 87 )
+blend_point_2/pos = 0.6
+blend_point_3/node = SubResource( 88 )
+blend_point_3/pos = -0.2
+blend_point_4/node = SubResource( 89 )
+blend_point_4/pos = -0.4
+blend_point_5/node = SubResource( 90 )
+blend_point_5/pos = 0.2
+blend_point_6/node = SubResource( 91 )
+blend_point_6/pos = 0.4
+blend_point_7/node = SubResource( 92 )
+blend_point_7/pos = 0.8
+blend_point_8/node = SubResource( 93 )
+blend_point_8/pos = -0.8
+snap = 0.2
+value_label = "angle"
+
+[sub_resource type="AnimationNodeAnimation" id=95]
+animation = "halfturn"
+
+[sub_resource type="AnimationNodeAnimation" id=96]
+animation = "hang"
+
+[sub_resource type="AnimationNodeAnimation" id=97]
+animation = "jump1"
+
+[sub_resource type="AnimationNodeAnimation" id=98]
+animation = "land"
+
+[sub_resource type="AnimationNodeAnimation" id=99]
+animation = "land_roll"
+
+[sub_resource type="AnimationNodeOneShot" id=100]
+fadein_time = 0.0
+fadeout_time = 0.0
+
+[sub_resource type="AnimationNodeTransition" id=101]
+input_count = 4
+input_0/name = "shoot"
+input_0/auto_advance = false
+input_1/name = "dunk"
+input_1/auto_advance = false
+input_2/name = "jump"
+input_2/auto_advance = false
+input_3/name = "walljump"
+input_3/auto_advance = false
+
+[sub_resource type="AnimationNodeOneShot" id=102]
+fadein_time = 0.0
+fadeout_time = 0.0
+autorestart_delay = 2.0
+
+[sub_resource type="AnimationNodeTransition" id=103]
+input_count = 4
+input_0/name = "shoot"
+input_0/auto_advance = false
+input_1/name = "land"
+input_1/auto_advance = false
+input_2/name = "land_roll"
+input_2/auto_advance = false
+input_3/name = "halfturn"
+input_3/auto_advance = false
+
+[sub_resource type="AnimationNodeTimeSeek" id=104]
+
+[sub_resource type="AnimationNodeAnimation" id=105]
+animation = "idle"
+
+[sub_resource type="AnimationNodeAnimation" id=106]
+animation = "walk"
+
+[sub_resource type="AnimationNodeBlendSpace1D" id=107]
+blend_point_0/node = SubResource( 105 )
+blend_point_0/pos = 0.0
+blend_point_1/node = SubResource( 106 )
+blend_point_1/pos = 1.0
+
+[sub_resource type="AnimationNodeTransition" id=108]
+input_count = 2
+input_0/name = "floor"
+input_0/auto_advance = false
+input_1/name = "air"
+input_1/auto_advance = false
+
+[sub_resource type="AnimationNodeAnimation" id=109]
+animation = "walljump1"
+
+[sub_resource type="AnimationNodeBlendTree" id=110]
+graph_offset = Vector2( -194.333, 98.7535 )
+nodes/air_pose/node = SubResource( 71 )
+nodes/air_pose/position = Vector2( 100, 560 )
+nodes/air_shoot/node = SubResource( 72 )
+nodes/air_shoot/position = Vector2( 100, 840 )
+nodes/air_wall/node = SubResource( 73 )
+nodes/air_wall/position = Vector2( -260, 780 )
+nodes/crouch/node = SubResource( 76 )
+nodes/crouch/position = Vector2( -220, 20 )
+nodes/dunk/node = SubResource( 77 )
+nodes/dunk/position = Vector2( 100, 940 )
+nodes/dunkjump/node = SubResource( 78 )
+nodes/dunkjump/position = Vector2( -260, 880 )
+nodes/fall/node = SubResource( 82 )
+nodes/fall/position = Vector2( -260, 480 )
+nodes/floor_pose/node = SubResource( 83 )
+nodes/floor_pose/position = Vector2( 300, -120 )
+nodes/floor_shoot/node = SubResource( 84 )
+nodes/floor_shoot/position = Vector2( 120, 100 )
+nodes/grind/node = SubResource( 94 )
+nodes/grind/position = Vector2( -260, 580 )
+nodes/halfturn/node = SubResource( 95 )
+nodes/halfturn/position = Vector2( 120, 400 )
+nodes/hang/node = SubResource( 96 )
+nodes/hang/position = Vector2( -260, 680 )
+nodes/jump/node = SubResource( 97 )
+nodes/jump/position = Vector2( 100, 1040 )
+nodes/land/node = SubResource( 98 )
+nodes/land/position = Vector2( 120, 200 )
+nodes/land_roll/node = SubResource( 99 )
+nodes/land_roll/position = Vector2( 120, 300 )
+nodes/one_air_action/node = SubResource( 100 )
+nodes/one_air_action/position = Vector2( 700, 580 )
+nodes/one_air_action_type/node = SubResource( 101 )
+nodes/one_air_action_type/position = Vector2( 320, 780 )
+nodes/one_floor_action/node = SubResource( 102 )
+nodes/one_floor_action/position = Vector2( 740, 20 )
+nodes/one_floor_action_type/node = SubResource( 103 )
+nodes/one_floor_action_type/position = Vector2( 320, 160 )
+nodes/output/position = Vector2( 1240, 340 )
+nodes/seek_floor/node = SubResource( 104 )
+nodes/seek_floor/position = Vector2( 80, -120 )
+nodes/stand/node = SubResource( 107 )
+nodes/stand/position = Vector2( -220, -100 )
+nodes/terrain_type/node = SubResource( 108 )
+nodes/terrain_type/position = Vector2( 1060, 340 )
+nodes/walljump/node = SubResource( 109 )
+nodes/walljump/position = Vector2( 100, 1140 )
+node_connections = [ "output", 0, "terrain_type", "air_pose", 0, "fall", "air_pose", 1, "grind", "air_pose", 2, "hang", "air_pose", 3, "air_wall", "air_pose", 4, "dunkjump", "floor_pose", 0, "seek_floor", "floor_pose", 1, "crouch", "one_air_action", 0, "air_pose", "one_air_action", 1, "one_air_action_type", "one_air_action_type", 0, "air_shoot", "one_air_action_type", 1, "dunk", "one_air_action_type", 2, "jump", "one_air_action_type", 3, "walljump", "one_floor_action", 0, "floor_pose", "one_floor_action", 1, "one_floor_action_type", "one_floor_action_type", 0, "floor_shoot", "one_floor_action_type", 1, "land", "one_floor_action_type", 2, "land_roll", "one_floor_action_type", 3, "halfturn", "seek_floor", 0, "stand", "terrain_type", 0, "one_floor_action", "terrain_type", 1, "one_air_action" ]
+
+[sub_resource type="AnimationNodeStateMachinePlayback" id=111]
+
+[sub_resource type="CanvasItemMaterial" id=112]
 particles_animation = true
 particles_anim_h_frames = 4
 particles_anim_v_frames = 1
 particles_anim_loop = false
 
-[sub_resource type="Gradient" id=64]
+[sub_resource type="Gradient" id=113]
 offsets = PoolRealArray( 0.00858369, 0.424893, 0.824034, 1 )
 colors = PoolColorArray( 0, 0, 0, 0, 0.582031, 0.316025, 0.316025, 1, 1, 0.803528, 0.660156, 1, 2, 1, 2, 1 )
 
-[sub_resource type="Curve" id=65]
+[sub_resource type="Curve" id=114]
 _data = [ Vector2( 0, 1 ), 0.0, -1.46686, 0, 0, Vector2( 1, 0.481818 ), 0.95065, 0.0, 0, 0 ]
 
-[sub_resource type="CanvasItemMaterial" id=66]
+[sub_resource type="CanvasItemMaterial" id=115]
 resource_local_to_scene = true
 particles_animation = true
 particles_anim_h_frames = 4
 particles_anim_v_frames = 1
 particles_anim_loop = true
 
-[sub_resource type="CapsuleShape2D" id=67]
+[sub_resource type="CapsuleShape2D" id=116]
 radius = 14.0
 height = 28.0
 
@@ -892,7 +1280,15 @@ z_as_relative = false
 collision_mask = 2
 script = ExtResource( 1 )
 air_friction = 0.1
+landing_velocity_thresh = 350.0
+jump_speed = -415.0
+dunk_speed = -550.0
 max_speed_fall = 700.0
+run_speed_thresh = 360.0
+run_speed_max = 380.0
+walk_instant_speed = 135.0
+walk_return_thresh_instant_speed = 250.0
+walk_accel = 210.0
 
 [node name="State" parent="." instance=ExtResource( 5 )]
 visible = false
@@ -997,6 +1393,7 @@ script = ExtResource( 19 )
 
 [node name="Dunkjump" type="Node" parent="Actions"]
 script = ExtResource( 21 )
+dunkjump_type = 1
 
 [node name="Aim" type="Node" parent="Actions"]
 script = ExtResource( 18 )
@@ -1023,7 +1420,7 @@ texture = ExtResource( 2 )
 offset = Vector2( 0.5, 0 )
 hframes = 16
 vframes = 20
-frame = 199
+frame = 204
 __meta__ = {
 "_edit_group_": true,
 "_edit_lock_": true
@@ -1057,25 +1454,50 @@ anims/fall_loop = SubResource( 50 )
 anims/floor_hit = SubResource( 51 )
 anims/floor_shoot = SubResource( 52 )
 anims/floor_wall = SubResource( 53 )
-anims/halfturn = SubResource( 54 )
-anims/idle = SubResource( 55 )
-anims/jump1 = SubResource( 56 )
-anims/land = SubResource( 57 )
-anims/land_roll = SubResource( 58 )
-anims/run = SubResource( 59 )
-anims/walk = SubResource( 60 )
-anims/walljump1 = SubResource( 61 )
+anims/grind+15 = SubResource( 54 )
+anims/grind+30 = SubResource( 55 )
+anims/grind+45 = SubResource( 56 )
+anims/grind-15 = SubResource( 57 )
+anims/grind-30 = SubResource( 58 )
+anims/grind-45 = SubResource( 59 )
+anims/grind0 = SubResource( 60 )
+anims/halfturn = SubResource( 61 )
+anims/hang = SubResource( 62 )
+anims/idle = SubResource( 63 )
+anims/jump1 = SubResource( 64 )
+anims/land = SubResource( 65 )
+anims/land_roll = SubResource( 66 )
+anims/run = SubResource( 67 )
+anims/walk = SubResource( 68 )
+anims/walljump1 = SubResource( 69 )
 
 [node name="light" type="Sprite" parent="Sprite"]
 visible = false
 modulate = Color( 1, 1, 1, 0.227451 )
-material = SubResource( 62 )
+material = SubResource( 70 )
 scale = Vector2( 4, 4 )
 z_index = 9
 z_as_relative = false
 texture = ExtResource( 28 )
 region_enabled = true
 region_rect = Rect2( 0, 96, 32, 32 )
+
+[node name="AnimationTree2" type="AnimationTree" parent="Sprite"]
+tree_root = SubResource( 110 )
+anim_player = NodePath("../Player_Animation")
+parameters/air_pose/current = 0
+parameters/crouch/blend_position = 0.0
+parameters/fall/playback = SubResource( 111 )
+parameters/floor_pose/current = 0
+parameters/grind/blend_position = 0.0240664
+parameters/one_air_action/active = false
+parameters/one_air_action_type/current = 2
+parameters/one_floor_action/active = false
+parameters/one_floor_action_type/current = 2
+parameters/seek_floor/seek_position = -1.0
+parameters/stand/blend_position = 0.0
+parameters/terrain_type/current = 0
+script = ExtResource( 32 )
 
 [node name="PlayerEffects" type="Node2D" parent="."]
 script = ExtResource( 13 )
@@ -1085,7 +1507,7 @@ __meta__ = {
 
 [node name="DustParticle" parent="PlayerEffects" instance=ExtResource( 12 )]
 modulate = Color( 0.85098, 0.85098, 0.85098, 1 )
-material = SubResource( 63 )
+material = SubResource( 112 )
 position = Vector2( 0, 28 )
 lifetime = 0.4
 explosiveness = 0.67
@@ -1104,12 +1526,12 @@ anim_offset_random = 1.0
 
 [node name="TrailHandler" parent="PlayerEffects" instance=ExtResource( 25 )]
 wildness = 50.0
-gradient_col = SubResource( 64 )
-width_curve = SubResource( 65 )
+gradient_col = SubResource( 113 )
+width_curve = SubResource( 114 )
 texture = ExtResource( 26 )
 
 [node name="JumpParticles0" parent="PlayerEffects" instance=ExtResource( 27 )]
-material = SubResource( 66 )
+material = SubResource( 115 )
 position = Vector2( -4, 20 )
 lifetime = 0.45
 local_coords = false
@@ -1121,10 +1543,10 @@ script = ExtResource( 6 )
 [node name="CollisionShape2D" type="CollisionShape2D" parent="BallHandler"]
 visible = false
 position = Vector2( 0, 5 )
-shape = SubResource( 67 )
+shape = SubResource( 116 )
 
 [node name="HasBallPosition" type="Node2D" parent="BallHandler"]
-position = Vector2( -7, -6 )
+position = Vector2( 5.00001, 0 )
 __meta__ = {
 "_edit_group_": true
 }
@@ -1178,7 +1600,6 @@ __meta__ = {
 [node name="Combos" type="Node" parent="."]
 
 [node name="UI" type="Control" parent="."]
-visible = false
 margin_left = -82.0
 margin_top = -71.0
 margin_right = -42.0
