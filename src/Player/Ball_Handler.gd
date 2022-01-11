@@ -44,7 +44,7 @@ func pickup_ball(ball):
 	ball.pickup(Player)
 
 	#TEMPORARY CONTROL NODE
-	var ui = Player.get_node("Camera/Control/RichTextLabel")
+	var ui = Player.get_node("UI/MarginContainer/HBoxContainer/ColorRect/RichTextLabel")
 	ui.clear()
 	ui.add_text("Name : "+ball.name)
 	ui.newline()

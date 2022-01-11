@@ -114,7 +114,7 @@ It's either an **area** or a **body** but its parent must be the interesting nod
  For a base you can use `Electric.gd`.
 
 ### damageables
-Must have a `apply_damage(damage : float)`.
+Must have a `apply_damage(damage : float, duration : float = 0.0)`.
 It's either an **area** or a **body** but its parent must be the interesting node. For a base you can use `Damageable.gd`.
 
 ### balls

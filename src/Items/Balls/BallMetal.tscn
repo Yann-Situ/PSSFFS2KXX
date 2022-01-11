@@ -1,4 +1,4 @@
-[gd_scene load_steps=8 format=2]
+[gd_scene load_steps=9 format=2]
 
 [ext_resource path="res://src/Items/Balls/Ball.tscn" type="PackedScene" id=1]
 [ext_resource path="res://src/Items/Balls/BallMetal.gd" type="Script" id=2]
@@ -16,6 +16,11 @@ _data = [ Vector2( 0, 0.856818 ), 0.0, 3.55714, 0, 0, Vector2( 1, 0.209091 ), 0.
 resource_local_to_scene = true
 offsets = PoolRealArray( 0, 0.398601, 1 )
 colors = PoolColorArray( 1.5, 1.4, 1.3, 1, 0.694885, 0.731461, 0.898438, 1, 0.204468, 0.271942, 0.523438, 0 )
+
+[sub_resource type="Gradient" id=4]
+resource_local_to_scene = true
+offsets = PoolRealArray( 0, 0.00699301, 0.244755, 0.468531, 0.839161, 1 )
+colors = PoolColorArray( 1, 0, 0.580392, 0, 0, 0, 0, 0.258741, 0.535156, 0.535156, 0.535156, 0.705882, 0.839844, 0.839844, 0.839844, 1, 1, 1, 1, 1, 1, 1, 1, 0 )
 
 [node name="BallMetal" instance=ExtResource( 1 )]
 script = ExtResource( 2 )
@@ -49,3 +54,6 @@ __meta__ = {
 
 [node name="Sprite" parent="." index="2"]
 texture = ExtResource( 3 )
+
+[node name="Reconstruction" parent="Effects" index="0"]
+color_ramp = SubResource( 4 )

@@ -21,7 +21,6 @@ func set_content(temp):
 				s.scale = Vector2(0.5,0.5)
 				add_child(s)
 			else :
-				print("test")
 				var s = Sprite.new()
 				s.set_texture(DefaultContentImage)
 				s.name = "ContentIcon"

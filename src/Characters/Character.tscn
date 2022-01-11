@@ -931,6 +931,7 @@ mass = 4.0
 [node name="State" parent="." instance=ExtResource( 5 )]
 visible = false
 script = ExtResource( 3 )
+dunk_countdown = 1.5
 is_landing = true
 
 [node name="Actions" type="Node2D" parent="."]

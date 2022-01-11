@@ -21,7 +21,11 @@ func _ready():
 #	draw_line(Vector2(0.0,0.0), Vector2(0.0,0.0)+50.0*normal_colision, color_colision)
 
 ###########################################################
-
+func reset_position():
+	if holder != null:
+		throw(Vector2.ZERO,Vector2.ZERO)
+	position = start_position
+	
 func collision_effect(collider, collider_velocity, collision_point, collision_normal):
 	if (linear_velocity-collider_velocity).length() > dust_threshold:
 		$Effects/DustParticle.restart()

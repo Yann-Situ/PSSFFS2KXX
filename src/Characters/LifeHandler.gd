@@ -2,6 +2,7 @@ extends Node2D
 
 signal took_damage
 signal died
+signal life_changed
 
 export var max_life = 10.0#hp
 export var defense = 0.0#hp
@@ -9,7 +10,7 @@ export var weakness = 1.0#hp/hp
 export var strength = 0.0#hp
 # the damage of an attack is : damage = trg.weakness * src.strength - trg.defense
 
-export var timer_tick = 0.1#s
+export var timer_tick = 0.05#s
 onready var life = max_life setget set_life
 
 onready var Character = get_parent()
@@ -23,7 +24,8 @@ func set_life(v):
 		emit_signal("died")
 	life = clamp(v, 0.0, max_life)
 	#print("life : "+str(life))
-	$Sprite.modulate = Color((life/max_life),(life/max_life)*0.5,(life/max_life)*0.8)
+	#$Sprite.modulate = Color((life/max_life),(life/max_life)*0.5,(life/max_life)*0.8)
+	emit_signal("life_changed", life)
 	
 func add_life(lp):
 	set_life(life+lp)
@@ -38,7 +40,7 @@ func _ready():
 	timer.connect("timeout", self, "update_life_tick")
 	self.add_child(timer)
 
-func apply_damage(damage : float, duration : float = 0.1):
+func apply_damage(damage : float, duration : float = 0.0):
 	var d = weakness * damage - defense
 	apply_life(- max(0.0, d), duration)
 	emit_signal("took_damage", damage)

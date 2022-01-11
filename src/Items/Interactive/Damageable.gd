@@ -4,6 +4,6 @@ func _ready():
 	add_to_group("damageables")
 	get_parent().add_to_group("damageables")
 
-func apply_damage(damage : float):
+func apply_damage(damage : float, duration : float = 0.0):
 	if get_parent().has_method("apply_damage"):
-		get_parent().apply_damage(damage)
+		get_parent().apply_damage(damage, duration)

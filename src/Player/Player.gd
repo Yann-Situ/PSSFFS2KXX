@@ -45,9 +45,11 @@ onready var PlayerEffects = get_node("PlayerEffects")
 onready var BallHandler = get_node("BallHandler")
 onready var LifeHandler = get_node("LifeHandler")
 
-onready var invmass = 1.0/4.0
+onready var start_position = global_position
 
-onready var character_holder = null
+var invmass = 1.0/4.0
+var character_holder = null
+
 
 ################################################################################
 
@@ -59,7 +61,19 @@ func disable_physics():
 func enable_physics():
 	physics_enabled = true
 
+func reset_position():
+	position = start_position
+	LifeHandler.set_life(LifeHandler.max_life)
+	set_flip_h(false)
+
+func set_start_position(posi):
+	start_position = posi
+	global_position = posi
+	
+################################################################################
+	
 func _ready():
+	Global.list_of_physical_nodes.append(self)
 	self.z_as_relative = false
 	self.z_index = Global.z_indices["player_0"]
 	$Sprite.z_as_relative = false

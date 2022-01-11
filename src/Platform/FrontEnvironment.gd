@@ -7,6 +7,7 @@ var button = preload("res://src/Items/Activables/Button0.tscn")
 var jumper = preload("res://src/Items/Dynamics/Jumper.tscn")
 var door = preload("res://src/Items/Interactive/Door.tscn")
 var breakableBloc = preload("res://src/Items/Interactive/BreakableBloc.tscn")
+var spikes = preload("res://src/Items/Interactive/Spikes.tscn")
 
 var o = Vector2(1,1)
 
@@ -38,6 +39,11 @@ func _ready():
 			"breakablebloc0" :
 				var instance = breakableBloc.instance()
 				instance.position = map_to_world(cell+Vector2(1,1))
+				add_child(instance)
+				set_cellv(cell, -1) # clear the cell
+			"spikes" :
+				var instance = spikes.instance()
+				instance.position = map_to_world(cell)+Vector2(8,8)
 				add_child(instance)
 				set_cellv(cell, -1) # clear the cell
 			"buttons0" :

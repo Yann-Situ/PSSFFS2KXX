@@ -35,7 +35,12 @@ var z_indices = {\
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	pass
-
+	
+func _input(event):
+	if event.is_action_pressed("ui_restart"):
+		for n in list_of_physical_nodes:
+			n.reset_position()
+		
 func toggle_playing():
 	playing = !playing
 	if playing :
@@ -47,6 +52,3 @@ func toggle_playing():
 			n.disable_physics()
 			n.reset_position()
 	print("Toggle playing : "+str(playing))
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-#func _process(delta):
-#	pass
