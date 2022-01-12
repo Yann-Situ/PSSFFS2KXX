@@ -16,11 +16,10 @@ b = Vector2( 300, 80 )
 
 [node name="ZipLine" type="Node2D"]
 position = Vector2( 72, 96 )
-z_index = 16
+z_index = 160
 z_as_relative = false
 script = ExtResource( 1 )
 final_point = Vector2( 300, 80 )
-player_position_offset = Vector2( 0, 30 )
 handle_catch_radius = 0.0
 
 [node name="Line2D" type="Line2D" parent="."]
@@ -54,7 +53,7 @@ one_shot = true
 collision_layer = 8
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="PlayerDetector"]
-visible = false
+modulate = Color( 0, 0.647059, 1, 1 )
 shape = SubResource( 2 )
 
 [connection signal="body_exited" from="PlayerDetector" to="." method="_on_PlayerDetector_body_exited"]

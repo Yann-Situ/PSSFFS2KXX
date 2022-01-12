@@ -20,11 +20,11 @@ mass = 0.9
 friction = 0.04
 bounce = 0.6
 
-[node name="collision" parent="." index="0"]
-shape = SubResource( 1 )
-
-[node name="Sprite" parent="." index="1"]
+[node name="Sprite" parent="." index="0"]
 self_modulate = Color( 1.25, 1.05, 0.2, 1 )
+
+[node name="collision" parent="." index="1"]
+shape = SubResource( 1 )
 
 [node name="Reconstruction" parent="Effects" index="0"]
 color_ramp = SubResource( 2 )

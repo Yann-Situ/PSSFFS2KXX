@@ -36,10 +36,11 @@ var z_indices = {\
 func _ready():
 	pass
 	
-func _input(event):
-	if event.is_action_pressed("ui_restart"):
-		for n in list_of_physical_nodes:
-			n.reset_position()
+func _unhandled_input(event):
+	if event is InputEventKey:
+		if event.pressed and event.scancode == KEY_R:
+			for n in list_of_physical_nodes:
+				n.reset_position()
 		
 func toggle_playing():
 	playing = !playing

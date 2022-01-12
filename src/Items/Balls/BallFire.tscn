@@ -1,0 +1,79 @@
+[gd_scene load_steps=13 format=2]
+
+[ext_resource path="res://src/Items/Balls/Ball.tscn" type="PackedScene" id=1]
+[ext_resource path="res://assets/art/ball/ball_fire.png" type="Texture" id=2]
+[ext_resource path="res://assets/shader/contour.shader" type="Shader" id=3]
+[ext_resource path="res://assets/art/effects/light4.png" type="Texture" id=4]
+[ext_resource path="res://assets/art/effects/round.png" type="Texture" id=5]
+[ext_resource path="res://src/Items/Balls/BallFire.gd" type="Script" id=6]
+
+[sub_resource type="ShaderMaterial" id=3]
+resource_local_to_scene = true
+shader = ExtResource( 3 )
+shader_param/activated = true
+shader_param/contour_color = Color( 1, 0.305882, 0.305882, 1 )
+shader_param/light_thresh = 0.0
+
+[sub_resource type="CircleShape2D" id=1]
+resource_local_to_scene = true
+radius = 6.0
+
+[sub_resource type="Gradient" id=2]
+resource_local_to_scene = true
+offsets = PoolRealArray( 0, 0.00699301, 0.232323, 0.434343, 0.839161, 1 )
+colors = PoolColorArray( 1, 0, 0.580392, 0, 0, 0, 0, 0.258741, 0.795898, 0.748553, 0.581379, 0.705882, 1, 0.727333, 0.332031, 1, 1, 0.234955, 0.171875, 1, 1, 1, 1, 0 )
+
+[sub_resource type="CanvasItemMaterial" id=4]
+
+[sub_resource type="Curve" id=5]
+_data = [ Vector2( 0, 1 ), 0.0, 1.22899, 0, 0, Vector2( 1, 0.281818 ), -0.100826, 0.0, 0, 0 ]
+
+[sub_resource type="Gradient" id=6]
+offsets = PoolRealArray( 0, 0.252525, 0.434343, 0.717172, 1 )
+colors = PoolColorArray( 1, 0.9646, 0.773438, 1, 0.9375, 0.699377, 0.194092, 1, 1, 0.382477, 0.167969, 1, 0.356863, 0.133333, 0.133333, 1, 0.183594, 0.183594, 0.183594, 0 )
+
+[node name="BallFire" instance=ExtResource( 1 )]
+script = ExtResource( 6 )
+
+[node name="Sprite" parent="." index="0"]
+material = SubResource( 3 )
+texture = ExtResource( 2 )
+
+[node name="collision" parent="." index="1"]
+visible = false
+shape = SubResource( 1 )
+
+[node name="Reconstruction" parent="Effects" index="0"]
+color_ramp = SubResource( 2 )
+
+[node name="Fire" type="CPUParticles2D" parent="Effects" index="4"]
+light_mask = 0
+material = SubResource( 4 )
+z_index = -1
+amount = 40
+lifetime = 0.25
+explosiveness = 0.2
+local_coords = false
+texture = ExtResource( 5 )
+direction = Vector2( 0, 0 )
+spread = 180.0
+gravity = Vector2( 0, -100 )
+initial_velocity = 50.0
+initial_velocity_random = 1.0
+scale_amount = 0.12
+scale_amount_curve = SubResource( 5 )
+color_ramp = SubResource( 6 )
+
+[node name="LightSmall" type="Light2D" parent="." index="5"]
+position = Vector2( -3.8147e-06, 7.62939e-06 )
+scale = Vector2( 0.25, 0.25 )
+z_as_relative = false
+texture = ExtResource( 4 )
+texture_scale = 2.56
+color = Color( 1, 0.854902, 0.419608, 1 )
+energy = 0.5
+range_z_max = 120
+range_item_cull_mask = 3
+__meta__ = {
+"_edit_lock_": true
+}

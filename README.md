@@ -23,7 +23,7 @@ Popol Super Slam Fusion Full Speed 2KXX
    - [x] baskets
    - [x] spawners
    - [x] activable
-   - [.] ziplines
+   - [.] ziplines -> to rework
    - [.] Add enemies and NPC
    - [x] Add destroyable blocks
    - [ ] Add one way platforms and ball-doors / player-doors
@@ -78,6 +78,7 @@ Popol Super Slam Fusion Full Speed 2KXX
 * [.] Problems with physics on **slopes**.
 * [ ] Problems when passing from a block just **16 pixel** over the other block (results in tiny teleportation but visible due to camera instant movement).
 * [ ] **ShockJumping** at frame perfect when crouching on **Jumper** (or when jumping or dunkjumping) results in a huge mega jump sa mère.
+* [ ] Jitter when multiple **balls** are above each other. -> reimplement the friction
 
 ### Other
 * [x] Spawner rotation position is weird.
@@ -89,6 +90,7 @@ Popol Super Slam Fusion Full Speed 2KXX
 * [ ] I need to adapt the boum delay: i.e apply_impulse instantly on colliding object and a bit after on far objects. nedd a method call_after_a_delay(apply_impulse)
 * [ ] **Bubble/Zap ball teleportation** trailhandler can act very weirdly if used quickly repeatly.
 * [ ] Need to implement Tilemap interactive objects rotation and flips.
+* [ ] On **baskets**, a ball that bounces on the ring can do multiple goals.
 
 ### Potential Glitches
 * [ ] Pressing **jump** and **dunkjump** just before landing can result in small dunkjump/jump.
@@ -104,7 +106,7 @@ Must inherit from `physicbodies.gd`.
 Must inherit from `activable.gd`.
 
 ### breakables
-Must have an `apply_impulse(momentum : Vector2)` function that handles explosion.
+Must have an `apply_explosion(momentum : Vector2)` function that handles explosion. It should returns whether the body has explode (if the collision box has been modified to null or layers to 0).
 It's either an **area** or a **body** whose parent is the interesting node.
  For a base you can use `Breakable.gd`.
 

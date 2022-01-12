@@ -6,4 +6,5 @@ func _ready():
 
 func apply_explosion(momentum : Vector2):
 	if get_parent().has_method("apply_explosion"):
-		get_parent().apply_explosion(momentum)
+		return get_parent().apply_explosion(momentum)
+	return false

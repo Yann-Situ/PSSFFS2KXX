@@ -5,8 +5,8 @@ extends Ball
 export var attract_speed = 350#pix/s
 export var attract_player_radius = 45#pix
 export var destruction_speed_thresh = 300#pix/s
-export var destruction_momentum_min = 200##kg*pix/s
-export var destruction_momentum_max = 500##kg*pix/s
+export var destruction_momentum_min = 500##kg*pix/s
+export var destruction_momentum_max = 900##kg*pix/s
 
 var friction_save
 
@@ -32,12 +32,12 @@ func collision_effect(collider, collider_velocity, collision_point, collision_no
 		$Effects/DustParticle.restart()
 	if (linear_velocity-collider_velocity).dot(-collision_normal) > destruction_speed_thresh:
 		if collider.is_in_group("breakables"):
-			collider.apply_explosion(
+			var has_explode = collider.apply_explosion(
 				-lerp(destruction_momentum_min, destruction_momentum_max,
 					smoothstep(destruction_speed_thresh, 2*destruction_speed_thresh,
 						linear_velocity.length())
 					) * collision_normal)
-			return false
+			return !has_explode
 	return true
 
 func power_p(player,delta):

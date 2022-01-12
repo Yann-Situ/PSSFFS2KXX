@@ -123,12 +123,12 @@ anim_speed = 1.0
 [node name="BallShock" instance=ExtResource( 1 )]
 script = ExtResource( 5 )
 
-[node name="collision" parent="." index="0"]
-shape = SubResource( 1 )
-
-[node name="Sprite" parent="." index="1"]
+[node name="Sprite" parent="." index="0"]
 texture = ExtResource( 2 )
 hframes = 4
+
+[node name="collision" parent="." index="1"]
+shape = SubResource( 1 )
 
 [node name="Reconstruction" parent="Effects" index="0"]
 color_ramp = SubResource( 2 )

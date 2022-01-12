@@ -39,6 +39,8 @@ func apply_explosion(momentum : Vector2):
 		enable()
 		if m2 >= explode_threshold2:
 			explode(momentum)
+		return true
+	return false
 
 func on_enable():
 	update_sprite(activated)

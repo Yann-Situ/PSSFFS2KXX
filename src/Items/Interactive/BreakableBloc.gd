@@ -36,6 +36,8 @@ func _ready():
 func apply_explosion(momentum : Vector2):
 	if momentum.length_squared() >= momentum_threshold2:
 		explode(momentum)
+		return true
+	return false
 
 func explode(momentum : Vector2):
 	$DebrisParticle.direction = momentum
