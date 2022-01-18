@@ -45,9 +45,12 @@ func update_basket():
 		var b = baskets[0].get_parent() # `get_parent` because we're
 		# detecting the basket_area node
 		var q = (b.position-Player.position)
-		var dir_sprite = 1
-		if Player.flip_h:
-			dir_sprite = -1
+		var dir_sprite = S.direction_p
+		if dir_sprite == 0:
+			if Player.flip_h:
+				dir_sprite = -1
+			else :
+				dir_sprite = 1
 		var dir : int# not 0 in order to make dir_sprite*d=1 if q.x=0
 		var Delta : float
 		var best_y = 0.0

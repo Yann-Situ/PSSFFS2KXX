@@ -14,8 +14,7 @@ func _ready():
 	$Effects/TrailHandler.set_node_to_trail(self)
 
 func collision_effect(collider, collider_velocity, collision_point, collision_normal):
-	if (linear_velocity-collider_velocity).length() > dust_threshold:
-		$Effects/DustParticle.restart()
+	destruction(0.01)
 	if collider.is_in_group("breakables"):
 		return !collider.apply_explosion(destruction_momentum  * collision_normal)
 	return true

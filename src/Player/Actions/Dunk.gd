@@ -27,9 +27,10 @@ func move(delta):
 	pos_tween.start()
 	if S.active_ball != null:
 		S.active_ball.on_dunk()
+	#yield(get_tree().create_timer(0.32), "timeout")
 	
-	yield(get_tree().create_timer(0.32), "timeout")
-	
+# should be called by the animation
+func move_dunk():
 	# at this point, S.dunk_basket can be null
 	P.get_node("Camera").screen_shake(0.3,30)
 	S.dunk_basket.dunk(P) # be careful, selected basket is sometimes null because the player got out of the zone...

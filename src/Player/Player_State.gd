@@ -132,7 +132,7 @@ func update_vars(delta):
 	Player.SpecialActionHandler.update_space_state()
 	Player.SpecialActionHandler.update_basket()
 	
-	is_onfloor = Player.SpecialActionHandler.is_on_floor()
+	is_onfloor = Player.SpecialActionHandler.is_on_floor() and not is_dunkjumping
 	is_onwall = Player.SpecialActionHandler.is_on_wall()
 	is_moving_fast = (abs(velocity.x) > Player.run_speed_thresh)
 	is_falling =  (not is_onfloor) and velocity.y > 0

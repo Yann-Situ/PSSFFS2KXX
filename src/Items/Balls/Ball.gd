@@ -54,6 +54,14 @@ func throw(posi, velo):
 	self.z_index = Global.z_indices["ball_0"]
 	on_throw(previous_holder)
 
+func destruction(delay : float = 0.0):
+	if delay > 0.0:
+		yield(get_tree().create_timer(delay), "timeout")
+	$Animation.play("destruction") # will call queue_free
+	throw(position, Vector2.ZERO)
+	self.disable_physics()
+	$Selector.toggle_selection(false)
+	
 ################################################################################
 
 func on_pickup(holder_node : Node):
@@ -66,6 +74,9 @@ func on_dunk():
 	$Animation.play("dunk")
 
 func on_goal():
+	pass
+	
+func on_destruction():
 	pass
 
 ################################################################################
