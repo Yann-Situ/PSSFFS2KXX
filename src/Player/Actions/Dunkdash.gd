@@ -9,6 +9,8 @@ func move(delta):
 	S.aim_direction = 0
 	P.ShootPredictor.clear()
 	S.is_dunkdashing = true
+	S.is_dunkjumping = false
+	S.is_dunkprejumping = false
 	P.PlayerEffects.dust_start()
 	P.PlayerEffects.jump_start()
 	P.PlayerEffects.ghost_start(0.35,0.07, ghost_modulate)

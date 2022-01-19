@@ -33,8 +33,8 @@ func set_offset_from_type(type, direction = Vector2(0,0), tween_speed = 0.2):
 		target_offset = direction
 	set_target(target_offset, tween_speed)
 
-func set_target(target_offset, tween_speed = 0.2):
-	$Tween.interpolate_property(self, "offset_no_shake", offset_no_shake, target_offset, tween_speed,
+func set_target(target_offset_, tween_speed = 0.2):
+	$Tween.interpolate_property(self, "offset_no_shake", offset_no_shake, target_offset_, tween_speed,
 		 $Tween.TRANS_LINEAR, $Tween.EASE_OUT_IN, 0)
 	$Tween.start()
 

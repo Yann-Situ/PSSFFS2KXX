@@ -1,4 +1,4 @@
-[gd_scene load_steps=185 format=2]
+[gd_scene load_steps=188 format=2]
 
 [ext_resource path="res://src/Player/Player.gd" type="Script" id=1]
 [ext_resource path="res://assets/art/characters/Player.png" type="Texture" id=2]
@@ -428,18 +428,6 @@ tracks/1/keys = {
 "update": 1,
 "values": [ Vector2( 9, 6 ), Vector2( 11, -14 ), Vector2( 6, -31 ), Vector2( -3, -35 ), Vector2( -16, -31 ) ]
 }
-tracks/2/type = "value"
-tracks/2/path = NodePath("../State:is_dunkdashing")
-tracks/2/interp = 1
-tracks/2/loop_wrap = true
-tracks/2/imported = false
-tracks/2/enabled = true
-tracks/2/keys = {
-"times": PoolRealArray( 0 ),
-"transitions": PoolRealArray( 1 ),
-"update": 1,
-"values": [ true ]
-}
 
 [sub_resource type="Animation" id=49]
 step = 0.056
@@ -558,6 +546,18 @@ tracks/3/keys = {
 "args": [  ],
 "method": "move_jump"
 } ]
+}
+tracks/4/type = "value"
+tracks/4/path = NodePath("../State:is_dunkprejumping")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/keys = {
+"times": PoolRealArray( 0.28 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ false ]
 }
 
 [sub_resource type="Animation" id=51]
@@ -1267,8 +1267,23 @@ animation = "dunk"
 [sub_resource type="AnimationNodeAnimation" id=121]
 animation = "dunkdash"
 
-[sub_resource type="AnimationNodeAnimation" id=80]
+[sub_resource type="AnimationNodeAnimation" id=184]
 animation = "dunkjump"
+
+[sub_resource type="AnimationNodeAnimation" id=185]
+animation = "dunkjump_halfturn"
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=186]
+switch_mode = 1
+advance_condition = "is_dunkjumphalfturning"
+
+[sub_resource type="AnimationNodeStateMachine" id=187]
+states/dunkjump/node = SubResource( 184 )
+states/dunkjump/position = Vector2( 674, 147 )
+states/dunkjump_halfturn/node = SubResource( 185 )
+states/dunkjump_halfturn/position = Vector2( 371, 147 )
+transitions = [ "dunkjump", "dunkjump_halfturn", SubResource( 186 ) ]
+start_node = "dunkjump"
 
 [sub_resource type="AnimationNodeAnimation" id=87]
 animation = "grind0"
@@ -1467,7 +1482,7 @@ input_3/name = "hang"
 input_3/auto_advance = false
 
 [sub_resource type="AnimationNodeBlendTree" id=114]
-graph_offset = Vector2( -49.3767, 72.6851 )
+graph_offset = Vector2( -49.3767, -58.8149 )
 nodes/action_type/node = SubResource( 103 )
 nodes/action_type/position = Vector2( 840, -60 )
 nodes/air/node = SubResource( 166 )
@@ -1478,8 +1493,8 @@ nodes/dunk/node = SubResource( 79 )
 nodes/dunk/position = Vector2( 400, -200 )
 nodes/dunkdash/node = SubResource( 121 )
 nodes/dunkdash/position = Vector2( 400, -80 )
-nodes/dunkjump/node = SubResource( 80 )
-nodes/dunkjump/position = Vector2( 400, 40 )
+nodes/dunkjump/node = SubResource( 187 )
+nodes/dunkjump/position = Vector2( 400, 80 )
 nodes/grind/node = SubResource( 96 )
 nodes/grind/position = Vector2( 100, 760 )
 nodes/ground/node = SubResource( 124 )
@@ -1685,7 +1700,7 @@ texture = ExtResource( 2 )
 offset = Vector2( 0.5, 0 )
 hframes = 16
 vframes = 20
-frame = 200
+frame = 201
 __meta__ = {
 "_edit_group_": true,
 "_edit_lock_": true
@@ -1753,13 +1768,15 @@ region_rect = Rect2( 0, 96, 32, 32 )
 tree_root = SubResource( 114 )
 anim_player = NodePath("../Player_Animation")
 active = true
-parameters/action_type/current = 2
+parameters/action_type/current = 3
 parameters/air/playback = SubResource( 125 )
 parameters/air/conditions/is_jumping = false
 parameters/air/conditions/is_not_onwall = false
 parameters/air/conditions/is_onwall = false
 parameters/air/fall/playback = SubResource( 176 )
 parameters/cancelable/current = 1
+parameters/dunkjump/playback = SubResource( 125 )
+parameters/dunkjump/conditions/is_dunkjumphalfturning = false
 parameters/grind/blend_position = 0.0240664
 parameters/ground/playback = SubResource( 125 )
 parameters/ground/conditions/is_crouching = false
@@ -1825,7 +1842,7 @@ position = Vector2( 0, 5 )
 shape = SubResource( 119 )
 
 [node name="HasBallPosition" type="Node2D" parent="BallHandler"]
-position = Vector2( -7, -6 )
+position = Vector2( -6, -7 )
 __meta__ = {
 "_edit_group_": true
 }

@@ -27,6 +27,8 @@ var IsWalking = "parameters/ground/conditions/is_walking"
 
 var IsOnFloor = "parameters/shoot/conditions/is_onfloor"
 
+var IsDunkjumpHalfturning = "parameters/dunkjump/conditions/is_dunkjumphalfturning"
+
 func animate_from_state(S):
 	
 	# in order of priority:
@@ -38,6 +40,7 @@ func animate_from_state(S):
 		self[CurrentActionType] = ActionType.DUNK
 	elif S.is_dunkjumping:
 		self[CurrentActionType] = ActionType.DUNKJUMP
+		self[IsDunkjumpHalfturning] = S.is_dunkjumphalfturning
 	elif S.is_dunkdashing:
 		self[CurrentActionType] = ActionType.DUNKDASH
 	else :

@@ -54,9 +54,9 @@ Popol Super Slam Fusion Full Speed 2KXX
 * [x] Sometimes the **dunkjump** gives a velocity of `(-nan, dunkjump_speed)`. This is due to it's calculation with a square root
 * [x] **Dunking** while pushing a direction button toward another basket above results in no dunk on the current basket. -> change the criteria for the basket by taking into account a very close basket.
 * [x] **Walljumping** at the same time that dunking results in dunking called on a **wrong basket** (if multiple baskets around)
-* [ ] **Aiming shooting** right after dunk results in **strange animation behaviour**.
+* [x] **Aiming shooting** right after dunk results in **strange animation behaviour**.
 * [ ] **Dunkjumping** while only moving with floor adherence a bit far from basket results in missing the basket.
-* [ ] **Air dunkjump** when dunking can result in `S.selected_basket.dunk()` called on `null` instance (basket is not selected anymore)
+* [ ] **dunking** can result in `S.selected_basket.dunk()` called on `null` instance (basket is not selected anymore)
 * [ ] Get out from **low ceiling** (crouched) when returning can result in infinite returning **animation**.
 * [ ] **release** ball when **aiming** results in error.
 * [ ] It is possible to **dunk** through walls. It can result in dunkjump particles (+ghost) emmiting (dont know why).

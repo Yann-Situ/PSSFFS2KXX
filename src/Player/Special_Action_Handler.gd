@@ -45,13 +45,13 @@ func update_basket():
 		var b = baskets[0].get_parent() # `get_parent` because we're
 		# detecting the basket_area node
 		var q = (b.position-Player.position)
-		var dir_sprite = S.direction_p
-		if dir_sprite == 0:
+		var direction = S.direction_p
+		if direction == 0:
 			if Player.flip_h:
-				dir_sprite = -1
+				direction = -1
 			else :
-				dir_sprite = 1
-		var dir : int# not 0 in order to make dir_sprite*d=1 if q.x=0
+				direction = 1
+		var dir : int# not 0 in order to make direction*d=1 if q.x=0
 		var Delta : float
 		var best_y = 0.0
 		var best_dist2 = $dunkjump_area/CollisionShape2D.shape.radius
@@ -67,7 +67,7 @@ func update_basket():
 			if q.y >= 0.0:
 				continue
 
-			dir = dir_sprite # not 0 in order to make dir_sprite*d=1 if q.x=0
+			dir = direction # not 0 in order to make direction*d=1 if q.x=0
 			if q.x > 0.0:
 				dir = 1
 			if q.x < 0.0:
@@ -76,15 +76,15 @@ func update_basket():
 			Delta = Delta*Delta
 			Delta += 2*Player.gravity * q.x*q.x/q.y
 
-			if Delta < 0.0 or dir_sprite*dir < best_direction:
+			if Delta < 0.0 or direction*dir < best_direction:
 				continue
-			if dir_sprite*dir == best_direction and q.y > best_y:
+			if direction*dir == best_direction and q.y > best_y:
 				continue
 
 			S.dunkjump_basket = b
 			best_y = q.y
 			best_dist2 = q.length_squared()
-			best_direction = dir_sprite*dir
+			best_direction = direction*dir
 
 	if S.dunkjump_basket != previous_basket:
 		if previous_basket != null:

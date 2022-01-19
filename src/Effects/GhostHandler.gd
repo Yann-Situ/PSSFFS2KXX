@@ -6,7 +6,7 @@ var environment_node
 
 func set_ghost_sprite(sprite_node):
 	ghost_sprite = sprite_node
-	
+
 func set_environment_node(env_node):
 	environment_node = env_node
 ################################################################################
@@ -23,13 +23,13 @@ func instance_ghost():
 	ghost.global_position = self.global_position
 	ghost.z_as_relative = false
 	ghost.z_index = ghost_sprite.z_index - 1
-	print(ghost.z_index)
-	
+	#print(ghost.z_index)
+
 func start(duration, tick_delay):
 	if duration > 0.0:
 		$Ghost_Timer.start(duration)
 	$Ghost_Tick_Timer.start(tick_delay)
-	
+
 func stop():
 	$Ghost_Timer.stop()
 	_on_Ghost_Timer_timeout()

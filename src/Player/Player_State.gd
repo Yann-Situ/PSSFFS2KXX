@@ -90,6 +90,7 @@ export var is_grinding = false
 export var is_hanging = false
 
 var is_non_cancelable = false
+var is_dunkjumphalfturning = false
 
 # Bool var
 export var has_ball = false
@@ -182,10 +183,10 @@ func update_vars(delta):
 	can_crouch = is_onfloor
 	can_aim = $CanShootTimer.is_stopped() and has_ball and active_ball != null and not is_dunking
 	can_shoot = is_aiming and has_ball and active_ball != null 
-	can_dunkjump = can_jump and Player.SpecialActionHandler.can_dunkjump()
+	can_dunkjump = can_jump and Player.SpecialActionHandler.can_dunkjump() and not is_non_cancelable
 	can_dunk = $CanDunkTimer.is_stopped() and \
 		((not is_onfloor and dunk_p)) and \
-		Player.SpecialActionHandler.can_dunk() and not is_shooting
+		Player.SpecialActionHandler.can_dunk() and not is_shooting and not is_dunkprejumping
 	can_stand = Player.SpecialActionHandler.can_stand()
 	
 	var dir_sprite = 1;
@@ -195,9 +196,10 @@ func update_vars(delta):
 	# non-cancelables :
 	#is_shooting = is_shooting 
 	is_dunking = is_dunking
-	is_dunkjumping = (is_dunkjumping and not is_onfloor and not is_onwall) or \
-	   is_dunkprejumping
 	is_dunkdashing = is_dunkdashing and not is_onfloor and dunk_p
+	is_dunkprejumping = is_dunkprejumping and !(is_dunking or is_dunkdashing)
+	is_dunkjumping = (is_dunkjumping and !(is_onfloor or (is_onwall and is_falling) or \
+		is_dunking or is_dunkdashing)) or is_dunkprejumping
 	is_non_cancelable = is_shooting or is_dunking or is_dunkjumping or is_dunkdashing
 	
 	# cancelables :
@@ -210,7 +212,7 @@ func update_vars(delta):
 		not is_non_cancelable# stop also handled by animation
 	is_landing_roll = is_landing and (abs(velocity.x) > 100.0)
 	is_halfturning = (is_halfturning or dir_sprite*direction_p == -1) and \
-		is_onfloor and !(direction_p == 0 or is_crouching or is_landing or \
+		is_onfloor and !(is_idle or direction_p == 0 or is_crouching or is_landing or \
 			is_onwall or is_non_cancelable) # handle by player actions
 	is_aiming = is_aiming and has_ball and active_ball != null and not is_non_cancelable
 	

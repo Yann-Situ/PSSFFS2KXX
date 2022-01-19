@@ -78,6 +78,11 @@ Global="*res://src/Editor/Global.gd"
 
 [debug]
 
+gdscript/warnings/unassigned_variable=false
+gdscript/warnings/unused_variable=false
+gdscript/warnings/unused_argument=false
+gdscript/warnings/unused_signal=false
+gdscript/warnings/return_value_discarded=false
 shapes/collision/shape_color=Color( 1, 1, 1, 0.419608 )
 
 [display]
