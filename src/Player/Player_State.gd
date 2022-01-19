@@ -195,11 +195,12 @@ func update_vars(delta):
 		
 	# non-cancelables :
 	#is_shooting = is_shooting 
-	is_dunking = is_dunking
+	#is_dunking = is_dunking
 	is_dunkdashing = is_dunkdashing and not is_onfloor and dunk_p
 	is_dunkprejumping = is_dunkprejumping and !(is_dunking or is_dunkdashing)
 	is_dunkjumping = (is_dunkjumping and !(is_onfloor or (is_onwall and is_falling) or \
 		is_dunking or is_dunkdashing)) or is_dunkprejumping
+	
 	is_non_cancelable = is_shooting or is_dunking or is_dunkjumping or is_dunkdashing
 	
 	# cancelables :

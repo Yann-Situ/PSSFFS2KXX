@@ -1,4 +1,4 @@
-[gd_scene load_steps=188 format=2]
+[gd_scene load_steps=189 format=2]
 
 [ext_resource path="res://src/Player/Player.gd" type="Script" id=1]
 [ext_resource path="res://assets/art/characters/Player.png" type="Texture" id=2]
@@ -369,7 +369,7 @@ tracks/2/loop_wrap = true
 tracks/2/imported = false
 tracks/2/enabled = true
 tracks/2/keys = {
-"times": PoolRealArray( 0, 1.38 ),
+"times": PoolRealArray( 0, 1.36 ),
 "transitions": PoolRealArray( 1, 1 ),
 "update": 1,
 "values": [ true, false ]
@@ -1183,6 +1183,8 @@ tracks/3/keys = {
 [sub_resource type="CanvasItemMaterial" id=72]
 blend_mode = 1
 
+[sub_resource type="AnimationNodeTimeSeek" id=188]
+
 [sub_resource type="AnimationNodeTransition" id=103]
 input_count = 4
 input_0/name = "shoot"
@@ -1482,9 +1484,11 @@ input_3/name = "hang"
 input_3/auto_advance = false
 
 [sub_resource type="AnimationNodeBlendTree" id=114]
-graph_offset = Vector2( -49.3767, -58.8149 )
+graph_offset = Vector2( 750, -58.8149 )
+nodes/Seek/node = SubResource( 188 )
+nodes/Seek/position = Vector2( 940, -20 )
 nodes/action_type/node = SubResource( 103 )
-nodes/action_type/position = Vector2( 840, -60 )
+nodes/action_type/position = Vector2( 720, -80 )
 nodes/air/node = SubResource( 166 )
 nodes/air/position = Vector2( 120, 580 )
 nodes/cancelable/node = SubResource( 110 )
@@ -1506,7 +1510,7 @@ nodes/shoot/node = SubResource( 180 )
 nodes/shoot/position = Vector2( 360, -340 )
 nodes/stance/node = SubResource( 105 )
 nodes/stance/position = Vector2( 660, 580 )
-node_connections = [ "output", 0, "cancelable", "stance", 0, "ground", "stance", 1, "air", "stance", 2, "grind", "stance", 3, "hang", "action_type", 0, "shoot", "action_type", 1, "dunk", "action_type", 2, "dunkdash", "action_type", 3, "dunkjump", "cancelable", 0, "action_type", "cancelable", 1, "stance" ]
+node_connections = [ "output", 0, "cancelable", "stance", 0, "ground", "stance", 1, "air", "stance", 2, "grind", "stance", 3, "hang", "action_type", 0, "shoot", "action_type", 1, "dunk", "action_type", 2, "dunkdash", "action_type", 3, "dunkjump", "cancelable", 0, "Seek", "cancelable", 1, "stance", "Seek", 0, "action_type" ]
 
 [sub_resource type="AnimationNodeStateMachinePlayback" id=125]
 
@@ -1564,6 +1568,7 @@ walk_accel = 210.0
 visible = false
 is_dunkjumping = true
 is_dunkdashing = true
+is_dunking = true
 
 [node name="Collision" type="CollisionShape2D" parent="."]
 visible = false
@@ -1700,7 +1705,7 @@ texture = ExtResource( 2 )
 offset = Vector2( 0.5, 0 )
 hframes = 16
 vframes = 20
-frame = 201
+frame = 199
 __meta__ = {
 "_edit_group_": true,
 "_edit_lock_": true
@@ -1768,6 +1773,7 @@ region_rect = Rect2( 0, 96, 32, 32 )
 tree_root = SubResource( 114 )
 anim_player = NodePath("../Player_Animation")
 active = true
+parameters/Seek/seek_position = 1.0
 parameters/action_type/current = 3
 parameters/air/playback = SubResource( 125 )
 parameters/air/conditions/is_jumping = false
@@ -1842,7 +1848,7 @@ position = Vector2( 0, 5 )
 shape = SubResource( 119 )
 
 [node name="HasBallPosition" type="Node2D" parent="BallHandler"]
-position = Vector2( -6, -7 )
+position = Vector2( -7, -6 )
 __meta__ = {
 "_edit_group_": true
 }
