@@ -78,6 +78,8 @@ export var is_walljumping = false
 export var is_landing = false 
 export var is_landing_roll = false 
 export var is_dunkjumping = false 
+export var is_dunkprejumping = false
+export var is_dunkdashing = false 
 export var is_dunking = false 
 export var is_halfturning = false 
 export var is_crouching = false 
@@ -87,6 +89,8 @@ export var is_shooting = false
 export var is_grinding = false 
 export var is_hanging = false
 
+var is_non_cancelable = false
+
 # Bool var
 export var has_ball = false
 var active_ball = null#pointer to a ball
@@ -95,6 +99,21 @@ var released_ball = null # useful because when the ball is released (or thrown)
 var selected_ball = null#pointer to the selected ball
 var dunkjump_basket = null#pointer to the basket to dunkjump
 var dunk_basket = null
+
+func _ready():
+	is_jumping = false 
+	is_walljumping = false 
+	is_landing = false 
+	is_landing_roll = false 
+	is_dunkjumping = false 
+	is_dunkdashing = false 
+	is_dunking = false 
+	is_halfturning = false 
+	is_crouching = false 
+	is_aiming = false 
+	is_shooting = false
+	is_grinding = false 
+	is_hanging = false
 
 func _input(event):
 	
@@ -132,7 +151,7 @@ func update_vars(delta):
 	Player.SpecialActionHandler.update_space_state()
 	Player.SpecialActionHandler.update_basket()
 	
-	is_onfloor = Player.SpecialActionHandler.is_on_floor() and not is_dunkjumping
+	is_onfloor = Player.SpecialActionHandler.is_on_floor()
 	is_onwall = Player.SpecialActionHandler.is_on_wall()
 	is_moving_fast = (abs(velocity.x) > Player.run_speed_thresh)
 	is_falling =  (not is_onfloor) and velocity.y > 0
@@ -158,26 +177,40 @@ func update_vars(delta):
 		$CanJumpTimer.is_stopped()
 	can_walljump = not $ToleranceWallJumpTimer.is_stopped() and \
 		$CanJumpTimer.is_stopped()
-	can_go = $CanGoTimer.is_stopped() and not is_dunkjumping and not is_dunking
+	can_go = $CanGoTimer.is_stopped() and not (is_dunkjumping and dunk_p) and \
+		not is_dunkdashing and not is_dunking
 	can_crouch = is_onfloor
-	can_aim = $CanShootTimer.is_stopped() and has_ball and active_ball != null
-	can_shoot = is_aiming and has_ball and active_ball != null
+	can_aim = $CanShootTimer.is_stopped() and has_ball and active_ball != null and not is_dunking
+	can_shoot = is_aiming and has_ball and active_ball != null 
 	can_dunkjump = can_jump and Player.SpecialActionHandler.can_dunkjump()
 	can_dunk = $CanDunkTimer.is_stopped() and \
-		(is_dunkjumping or (not is_onfloor and dunk_p)) and \
-		Player.SpecialActionHandler.can_dunk()
+		((not is_onfloor and dunk_p)) and \
+		Player.SpecialActionHandler.can_dunk() and not is_shooting
 	can_stand = Player.SpecialActionHandler.can_stand()
 	
 	var dir_sprite = 1;
 	if self.get_parent().flip_h :
 		dir_sprite = -1;
+		
+	# non-cancelables :
+	#is_shooting = is_shooting 
+	is_dunking = is_dunking
+	is_dunkjumping = (is_dunkjumping and not is_onfloor and not is_onwall) or \
+	   is_dunkprejumping
+	is_dunkdashing = is_dunkdashing and not is_onfloor and dunk_p
+	is_non_cancelable = is_shooting or is_dunking or is_dunkjumping or is_dunkdashing
+	
+	# cancelables :
 	is_jumping = is_jumping and not is_onfloor and is_mounting
-	is_walljumping = is_walljumping and not is_onfloor and is_mounting
-	is_dunkjumping = is_dunkjumping and not is_onfloor and dunk_p
-	is_dunking = is_dunking # handle by player actions (start) and animation (stop but not yet implemented)
-	is_halfturning = (is_halfturning or dir_sprite*direction_p == -1) and is_onfloor and direction_p != 0 and not is_shooting # handle by player actions
-	is_landing = is_onfloor and not is_onwall and (is_landing or (last_frame_onair and last_onair_velocity_y > Player.landing_velocity_thresh)) and not is_halfturning# stop also handled by animation
-	is_landing_roll = is_landing and (abs(velocity.x) > 100.0)
+	is_walljumping = is_walljumping and is_jumping
 	is_crouching = (is_onfloor and is_crouching) or not can_stand# handle by player actions (start)
-	is_aiming = is_aiming and has_ball and active_ball != null and not is_dunkjumping
-	#is_shooting handle by shoot animation+Player.gd
+	
+	is_landing = is_onfloor and not is_onwall and (is_landing or \
+		(last_frame_onair and last_onair_velocity_y > Player.landing_velocity_thresh)) and \
+		not is_non_cancelable# stop also handled by animation
+	is_landing_roll = is_landing and (abs(velocity.x) > 100.0)
+	is_halfturning = (is_halfturning or dir_sprite*direction_p == -1) and \
+		is_onfloor and !(direction_p == 0 or is_crouching or is_landing or \
+			is_onwall or is_non_cancelable) # handle by player actions
+	is_aiming = is_aiming and has_ball and active_ball != null and not is_non_cancelable
+	

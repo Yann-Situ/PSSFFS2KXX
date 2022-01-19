@@ -116,7 +116,7 @@ func get_input(delta): #delta in s
 			$Actions/Walljump.move(delta,S.last_wall_normal_direction)
 			if not S.jump_p:
 				S.velocity.y = S.velocity.y/3.5
-	if S.jump_jr and (S.is_jumping or S.is_walljumping) and not S.is_dunkjumping:
+	if S.jump_jr and S.is_jumping and not S.is_dunkjumping:
 		S.velocity.y = S.velocity.y/3.5
 
 	if S.crouch_p and S.can_crouch :
@@ -130,7 +130,10 @@ func get_input(delta): #delta in s
 
 	if not S.get_node("ToleranceDunkJumpPressTimer").is_stopped() :
 		if S.can_dunkjump :
-			$Actions/Dunkjump.move(delta)
+			if S.crouch_p:
+				$Actions/Dunkjump.move(delta)
+			else :
+				$Actions/Dunkdash.move(delta)
 
 	if S.shoot_jr and S.can_shoot :
 		$Actions/Shoot.move(delta)
@@ -187,7 +190,7 @@ func get_input(delta): #delta in s
 		$Camera.set_offset_from_type("normal")
 
 	# ANIMATION:
-	$Sprite/AnimationTree.animate_from_state(S)
+	$Sprite/AnimationTree3.animate_from_state(S)
 
 	if S.jump_jp:
 		LifeHandler.apply_life(2.0, 2.0)

@@ -402,7 +402,7 @@ light_mask = 1
 position = Vector2( 1104, 568 )
 
 [node name="Ball" parent="Environment/Balls" instance=ExtResource( 5 )]
-position = Vector2( 1224, 528 )
+position = Vector2( 1496, 472 )
 
 [node name="BallBubble" parent="Environment/Balls" instance=ExtResource( 26 )]
 light_mask = 1
@@ -645,7 +645,7 @@ walk_return_thresh_instant_speed = 120.0
 walk_accel = 170.0
 
 [node name="Player" parent="." instance=ExtResource( 1 )]
-position = Vector2( 1152, 736 )
+position = Vector2( 1496, 512 )
 z_index = 10
 walk_return_thresh_instant_speed = 150.0
 

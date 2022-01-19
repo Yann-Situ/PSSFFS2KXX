@@ -20,6 +20,7 @@ func move(delta):
 	S.velocity.y = 0
 	
 	S.get_node("CanDunkTimer").start(S.dunk_countdown)
+	S.get_node("ToleranceDunkJumpPressTimer").stop() # no dunkjump just after
 	#S.get_node("CanGoTimer").start(0.32)
 	pos_tween.interpolate_property(P, "global_position", P.global_position, \
 		S.dunk_basket.get_dunk_position(P.global_position), \

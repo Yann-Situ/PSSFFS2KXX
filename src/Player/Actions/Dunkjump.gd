@@ -2,7 +2,7 @@ extends Action
 
 enum DUNKJUMP_TYPE {HIGH_JUMP, AGRESSIVE}
 export (DUNKJUMP_TYPE) var dunkjump_type
-var b = true
+export(Color, RGBA) var ghost_modulate
 var basket = null
 
 func move(delta):
@@ -11,6 +11,7 @@ func move(delta):
 	S.aim_direction = 0
 	P.ShootPredictor.clear()
 	S.is_dunkjumping = true
+	S.is_dunkprejumping = true
 	P.PlayerEffects.dust_start()
 	S.get_node("ToleranceDunkJumpPressTimer").stop()
 	S.get_node("CanJumpTimer").start(S.jump_countdown)
@@ -20,7 +21,7 @@ func move(delta):
 # called by animation
 func move_jump():
 	P.PlayerEffects.jump_start()
-	P.PlayerEffects.ghost_start(0.35,0.07)
+	P.PlayerEffects.ghost_start(0.5,0.065, ghost_modulate)
 	if S.dunkjump_basket != null:
 		basket = S.dunkjump_basket
 	if dunkjump_type == DUNKJUMP_TYPE.HIGH_JUMP :

@@ -24,7 +24,8 @@ func dust_start():
 func dust_stop():
 	$DustParticle.stop()
 
-func ghost_start(duration, tick_delay):
+func ghost_start(duration, tick_delay, selfmodulate : Color = Color(1.2,1.8,2.2,0.39)):
+	$GhostHandler.self_modulate = selfmodulate
 	$GhostHandler.start(duration, tick_delay)
 func ghost_stop(duration, tick_delay):
 	$GhostHandler.stop()
