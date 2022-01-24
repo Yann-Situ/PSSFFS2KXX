@@ -34,10 +34,10 @@ var IsShooting = S_Action + "is_shooting"
 var IsNotDunkjumping = S_Action + "is_not_dunkjumping"
 var IsNotDunkdashing = S_Action + "is_not_dunkdashing"
 
-#var IsOnFloor = "parameters/shoot/conditions/is_onfloor"
 var IsOnFloor = "parameters/action/shoot/conditions/is_onfloor"
-#var IsDunkjumpHalfturning = "parameters/dunkjump/conditions/is_dunkjumphalfturning"
 var IsDunkjumpHalfturning = "parameters/action/dunkjump/conditions/is_dunkjumphalfturning"
+
+var GrindBlend = "parameters/grind/blend_position"
 
 func animate_from_state(S):
 
@@ -60,6 +60,10 @@ func animate_from_state(S):
 		self[CurrentStance] = Stance.HANG
 	elif S.is_grinding:
 		self[CurrentStance] = Stance.GRIND
+		var dir = S.velocity
+		if dir.x < 0:
+			dir.x = -dir.x
+		self[GrindBlend] = 0.2*round(-dir.angle() * (12.0/PI))
 	elif not S.is_onfloor:
 		self[CurrentStance] = Stance.AIR
 

@@ -69,7 +69,7 @@ _global_script_class_icons={
 [application]
 
 config/name="PSSFFS2KXX"
-run/main_scene="res://src/Player/Player.tscn"
+run/main_scene="res://src/Main/main.tscn"
 config/icon="res://assets/art/icons/popol.png"
 
 [autoload]

@@ -20,6 +20,7 @@ z_index = 160
 z_as_relative = false
 script = ExtResource( 1 )
 final_point = Vector2( 300, 80 )
+player_offset = Vector2( 0, 38 )
 handle_catch_radius = 0.0
 
 [node name="Line2D" type="Line2D" parent="."]

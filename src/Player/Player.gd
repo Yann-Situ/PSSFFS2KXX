@@ -94,9 +94,9 @@ func set_flip_h(b):
 func get_input(delta): #delta in s
 	############### Change variables of Player_state.gd
 	S.update_vars(delta)
-	if S.is_onfloor :
+	if S.is_onfloor or S.is_grinding:
 		S.get_node("ToleranceJumpFloorTimer").start(S.tolerance_jump_floor)
-	else :
+	if !S.is_onfloor:
 		S.last_onair_velocity_y = S.velocity.y
 	if S.is_onwall :
 		S.get_node("ToleranceWallJumpTimer").start(S.tolerance_wall_jump)
@@ -235,7 +235,7 @@ func _physics_process(delta):
 # For `characters` group
 func get_in(new_holder : Node):
 	if not new_holder.is_in_group("characterholders"):
-		print("error["+name+"], new_holder is not in group `characterholders`.")
+		printerr("error["+name+"], new_holder is not in group `characterholders`.")
 	if character_holder != null:
 		character_holder.free_character(self)
 	self.disable_physics()

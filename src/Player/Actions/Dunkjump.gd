@@ -7,6 +7,7 @@ var direction = 0
 
 func move(delta):
 	# Change hitbox + other animation things like sliding etc.
+	P.get_out(P.global_position, Vector2.ZERO)
 	S.is_aiming = false # cancel aiming for the moment
 	S.aim_direction = 0
 	P.ShootPredictor.clear()
@@ -17,7 +18,6 @@ func move(delta):
 	S.get_node("ToleranceDunkJumpPressTimer").stop()
 	S.get_node("CanJumpTimer").start(S.jump_countdown)
 	basket = S.dunkjump_basket
-	S.velocity = Vector2.ZERO
 	S.is_dunkjumphalfturning = false
 	if P.flip_h:
 		direction = -1

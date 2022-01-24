@@ -113,12 +113,13 @@ __meta__ = {
 }
 dunk_position_offset = Vector2( 0, 24 )
 dunk_position_radius = 14
+hang_position_offset_y = 36
 
 [node name="AnimatedSprite" type="AnimatedSprite" parent="."]
 use_parent_material = true
 position = Vector2( 0, 6 )
 frames = SubResource( 6 )
-frame = 5
+frame = 3
 playing = true
 
 [node name="basket_area" type="Area2D" parent="."]

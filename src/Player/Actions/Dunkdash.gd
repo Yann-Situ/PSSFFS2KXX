@@ -18,7 +18,7 @@ func move(delta):
 	S.get_node("CanJumpTimer").start(S.jump_countdown)
 
 	var q = (S.dunkjump_basket.position+up_distance_to_basket*Vector2.UP) - P.position
-	S.velocity = -P.dunk_speed * q.normalized()
+	P.get_out(P.global_position, -P.dunk_speed * q.normalized())
 	#print("Velocity: "+str(S.velocity))
 	P.get_node("Camera").screen_shake(0.2,10)
 

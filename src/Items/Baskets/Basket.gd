@@ -4,7 +4,11 @@ class_name Basket, "res://assets/art/icons/basket.png"
 export var speed_ball_threshold = 380 #velocity value
 export var dunk_position_offset = 16 * Vector2.DOWN
 export var dunk_position_radius = 24
+export var hang_position_offset_y = 16
 export var can_receive_dunk = true
+
+var inside_bodies = []
+var bodies_positions = []
 
 onready var start_position = global_position
 # Should be in any items that can be picked/placed :
@@ -14,14 +18,24 @@ func set_start_position(posi):
 
 func _ready():
 	self.z_index = Global.z_indices["foreground_1"]
+	add_to_group("characterholders")
 
 func _draw():
 	pass
 	#draw_line(position+$basket_area/CollisionShape2D.shape.a, position+$basket_area/CollisionShape2D.shape.b, color2)
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta):
-	update()
+#func _process(delta):
+#	update()
+func _physics_process(delta):
+	var j = 0 # int because we're deleting nodes in a list we're browsing
+	for i in range(inside_bodies.size()):
+		var body = inside_bodies[i-j]
+		if body.S.crouch_p:
+			body.get_out(body.global_position, Vector2.ZERO)
+			j += 1
+		else :
+			body.global_position = bodies_positions[i-j]
 
 func _on_basket_area_body_entered(body):
 	#print("basket :"+body.name)
@@ -40,6 +54,8 @@ func dunk(dunker : Node2D):
 	else :
 		$AnimationPlayer.play("dunk_left")
 	Global.camera.screen_shake(0.3,5)
+	
+	pickup_character(dunker)
 
 func goal(body,score):
 	print("GOOOAL!")
@@ -76,3 +92,34 @@ func get_closest_point(global_pos : Vector2):
 
 func get_dunk_position(player_global_position : Vector2):
 	return get_closest_point(player_global_position) + dunk_position_offset
+
+################################################################################
+# For `characterholders` group
+func pickup_character(character : Node):
+	character.get_in(self)
+	print(character.name+" on "+self.name)
+	inside_bodies.push_back(character)
+	bodies_positions.push_back(Vector2(character.global_position.x, \
+		self.global_position.y+hang_position_offset_y))
+	if character.has_node("Actions/Hang"):
+		character.get_node("Actions/Hang").move(0.01)
+	else :
+		printerr(character.name + " doesn't have a node called Actions/Hang")
+
+func free_character(character : Node):
+	# called by character when getting out
+	var i = 0
+	for body in inside_bodies:
+		if body == character:
+			print(name+" free_character("+character.name+")")
+			if character.has_node("Actions/Hang"):
+				character.get_node("Actions/Hang").move_stop()
+			else :
+				printerr(body.name + " doesn't have a node called Actions/Hang")
+			remove_body(i)
+		i += 1
+
+func remove_body(i : int):
+	assert(i < inside_bodies.size())
+	inside_bodies.remove(i)
+	bodies_positions.remove(i)

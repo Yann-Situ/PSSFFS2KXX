@@ -43,6 +43,8 @@ var can_shoot = false
 var can_dunkjump = false
 var can_dunk = false
 var can_stand = false
+var can_grind = false
+var can_hang = false
 
 # Bool for physical states
 var is_onfloor = false # from values of Player.gd
@@ -247,11 +249,14 @@ func update_vars(delta):
 		((not is_onfloor and dunk_p)) and \
 		Player.SpecialActionHandler.can_dunk() and not is_shooting and not is_dunkprejumping
 	can_stand = Player.SpecialActionHandler.can_stand()
+	can_grind = !is_hanging
 	
 	# cancelables :
 	is_jumping = is_jumping and not is_onfloor and is_mounting
 	is_walljumping = is_walljumping and is_jumping
 	is_crouching = (is_onfloor and is_crouching) or not can_stand# handle by player actions (start)
+	#is_grinding = is_grinding
+	#is_hanging = is_hanging
 	
 	is_landing = is_onfloor and not is_onwall and (is_landing or \
 		(last_frame_onair and last_onair_velocity_y > Player.landing_velocity_thresh)) and \

@@ -1,4 +1,4 @@
-[gd_scene load_steps=212 format=2]
+[gd_scene load_steps=214 format=2]
 
 [ext_resource path="res://src/Player/Player.gd" type="Script" id=1]
 [ext_resource path="res://assets/art/characters/Player.png" type="Texture" id=2]
@@ -31,12 +31,14 @@
 [ext_resource path="res://src/Player/Actions/Release.gd" type="Script" id=29]
 [ext_resource path="res://src/Characters/LifeHandler.gd" type="Script" id=30]
 [ext_resource path="res://src/Player/AnimationStateMachine.gd" type="Script" id=31]
+[ext_resource path="res://src/Characters/Actions/Grind.gd" type="Script" id=32]
 [ext_resource path="res://assets/art/gui/energy_bar_bg.png" type="Texture" id=33]
 [ext_resource path="res://assets/art/icons/popol.png" type="Texture" id=34]
 [ext_resource path="res://assets/art/gui/energy_bar_fill.png" type="Texture" id=35]
 [ext_resource path="res://src/Characters/GUI/LifeBar.gd" type="Script" id=36]
 [ext_resource path="res://src/Items/Interactive/Damageable.gd" type="Script" id=37]
 [ext_resource path="res://src/Player/Actions/Dunkdash.gd" type="Script" id=38]
+[ext_resource path="res://src/Characters/Actions/Hang.gd" type="Script" id=39]
 
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 8, 26 )
@@ -1570,7 +1572,7 @@ input_3/name = "hang"
 input_3/auto_advance = false
 
 [sub_resource type="AnimationNodeBlendTree" id=162]
-graph_offset = Vector2( 0, -114.5 )
+graph_offset = Vector2( 0, 802.5 )
 nodes/Seek/node = SubResource( 74 )
 nodes/Seek/position = Vector2( 280, -100 )
 nodes/action/node = SubResource( 94 )
@@ -1793,13 +1795,19 @@ script = ExtResource( 22 )
 [node name="Release" type="Node" parent="Actions"]
 script = ExtResource( 29 )
 
+[node name="Grind" type="Node" parent="Actions"]
+script = ExtResource( 32 )
+
+[node name="Hang" type="Node" parent="Actions"]
+script = ExtResource( 39 )
+
 [node name="Sprite" type="Sprite" parent="."]
 light_mask = 4
 texture = ExtResource( 2 )
 offset = Vector2( 0.5, 0 )
 hframes = 16
 vframes = 20
-frame = 201
+frame = 193
 __meta__ = {
 "_edit_group_": true,
 "_edit_lock_": true
@@ -1888,7 +1896,7 @@ parameters/air/fall/playback = SubResource( 167 )
 parameters/cancelable/current = 1
 parameters/dunkjump/playback = SubResource( 166 )
 parameters/dunkjump/conditions/is_dunkjumphalfturning = true
-parameters/grind/blend_position = 0.0240664
+parameters/grind/blend_position = -0.400866
 parameters/ground/playback = SubResource( 166 )
 parameters/ground/conditions/is_crouching = false
 parameters/ground/conditions/is_halfturning = false
@@ -1953,7 +1961,7 @@ position = Vector2( 0, 5 )
 shape = SubResource( 173 )
 
 [node name="HasBallPosition" type="Node2D" parent="BallHandler"]
-position = Vector2( -6, -7 )
+position = Vector2( 10, 5.99999 )
 __meta__ = {
 "_edit_group_": true
 }
