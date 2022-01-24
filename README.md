@@ -60,6 +60,7 @@ Popol Super Slam Fusion Full Speed 2KXX
 * [ ] Get out from **low ceiling** (crouched) when returning can result in infinite returning **animation**.
 * [ ] **release** ball when **aiming** results in error.
 * [ ] It is possible to **dunk** through walls. It can result in dunkjump particles (+ghost) emmiting (dont know why).
+* [ ] **shooting** just before **landing** results in `floor_shoot` just after `aim_shoot` animation
 
 ### Dynamic items
 * [ ] **Zipline** drop inside collision places results in stucked player
@@ -77,7 +78,7 @@ Popol Super Slam Fusion Full Speed 2KXX
 * [x] Physic of balls when picked up (stay phisically on the ground...). **complicated** see rigidbody functions and how `integrate_force()` works.
 * [.] Problems with physics on **slopes**.
 * [ ] Problems when passing from a block just **16 pixel** over the other block (results in tiny teleportation but visible due to camera instant movement).
-* [ ] **ShockJumping** at frame perfect when crouching on **Jumper** (or when jumping or dunkjumping) results in a huge mega jump sa mère.
+* [x] **ShockJumping** at frame perfect when crouching on **Jumper** (or when jumping or dunkjumping) results in a huge mega jump sa mère.
 * [ ] Jitter when multiple **balls** are above each other. -> reimplement the friction
 
 ### Other
@@ -89,7 +90,7 @@ Popol Super Slam Fusion Full Speed 2KXX
 * [ ] Lag if too much balls : make a spawner limit and link the dispawn of a ball to the spawner to increase the spawn count.
 * [ ] I need to adapt the boum delay: i.e apply_impulse instantly on colliding object and a bit after on far objects. nedd a method call_after_a_delay(apply_impulse)
 * [ ] **Bubble/Zap ball teleportation** trailhandler can act very weirdly if used quickly repeatly.
-* [ ] Need to implement Tilemap interactive objects rotation and flips.
+* [.] Need to implement Tilemap interactive objects rotation and flips.
 * [ ] On **baskets**, a ball that bounces on the ring can do multiple goals.
 
 ### Potential Glitches

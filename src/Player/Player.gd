@@ -50,6 +50,8 @@ onready var start_position = global_position
 var invmass = 1.0/4.0
 var character_holder = null
 
+func disp(s):
+	print(s)
 ################################################################################
 
 func disable_physics():

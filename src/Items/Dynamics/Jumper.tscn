@@ -44,7 +44,7 @@ script = ExtResource( 2 )
 
 [node name="Sprite" type="AnimatedSprite" parent="."]
 frames = SubResource( 6 )
-frame = 7
+frame = 1
 playing = true
 
 [node name="Area2D" type="Area2D" parent="."]
@@ -53,7 +53,7 @@ collision_mask = 5
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
 modulate = Color( 0, 0.576471, 1, 1 )
-position = Vector2( 0, -16 )
+position = Vector2( 0, -24 )
 shape = SubResource( 7 )
 
 [node name="StaticBody2D" type="StaticBody2D" parent="."]

@@ -4,6 +4,7 @@ export (float) var damage = 3.0#lp
 export (float) var boum_min = 400
 export (float) var boum_max = 700 # m*pix/s
 export (float) var distance_max = 64
+export (float) var damage_distance_max = 128
 export (float) var speed_threshold = 350#pix/s : if the difference of speed when collision is above this value, then boum !
 export (float) var boum_timer = 1.0#s : minimum time between two consecutive boums.
 export (float) var boum_delay = 0.13#s : time between boum_effect and apply_explosion
@@ -35,8 +36,8 @@ func apply_boum_impulse(boum_force : float, boum_global_position : Vector2, bodi
 			if b.is_in_group("breakables"):
 				b.apply_explosion(boum_force*d.normalized())
 			if b.is_in_group("damageables"):
-				if d.length_squared() < 62*62:
-					b.apply_damage(damage, 0.1)
+				#if d.length_squared() < damage_distance_max*damage_distance_max:
+				b.apply_damage(damage, 0.1)
 			if b is Player:
 				b.apply_impulse(boum_force*d.normalized())
 	print(self.name+" BOUM !")

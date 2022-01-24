@@ -432,6 +432,13 @@ col1 = Color( 0, 0, 0, 1 )
 col2 = Color( 0, 0, 0, 1 )
 col3 = Color( 0, 0, 0, 1 )
 
+[node name="BallBoum2" parent="Environment/Balls" instance=ExtResource( 3 )]
+light_mask = 1
+position = Vector2( -192, 504 )
+col1 = Color( 0, 0, 0, 1 )
+col2 = Color( 0, 0, 0, 1 )
+col3 = Color( 0, 0, 0, 1 )
+
 [node name="BallBoum3" parent="Environment/Balls" instance=ExtResource( 3 )]
 light_mask = 1
 position = Vector2( 296, 696 )
@@ -645,7 +652,7 @@ walk_return_thresh_instant_speed = 120.0
 walk_accel = 170.0
 
 [node name="Player" parent="." instance=ExtResource( 1 )]
-position = Vector2( 1496, 512 )
+position = Vector2( -152, 512 )
 z_index = 10
 walk_return_thresh_instant_speed = 150.0
 

@@ -1,6 +1,7 @@
 extends Action
 
 func move(delta):
+	print("bah c'est un shoot")
 	S.is_aiming = false
 	S.aim_direction = 0
 	S.is_shooting = true

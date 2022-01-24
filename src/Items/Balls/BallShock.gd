@@ -51,8 +51,12 @@ func power_p(player,delta):
 func power_jp(player,delta):
 	if $Timer.is_stopped():
 		if holder == player:
-			if !player.S.is_jumping and player.S.is_crouching:
-				player.apply_impulse(shock_jump*Vector2.UP)
+			if player.S.can_jump and player.S.is_crouching:
+				if player.has_node("Actions/Jump"):
+					player.get_node("Actions/Jump").move(0.001,-player.invmass*shock_jump)
+				else :
+					printerr("In "+name+" : player doesn't have a node Actions/Jump")
+					player.apply_impulse(shock_jump*Vector2.UP)
 				shock(shock_max, player.global_position+40*Vector2.DOWN)
 			elif !player.S.is_onfloor and player.S.crouch_p:
 				player.apply_impulse(shock_fall*Vector2.DOWN)
