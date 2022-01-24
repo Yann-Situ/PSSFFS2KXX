@@ -1,6 +1,7 @@
 extends Action
 
 export(Color, RGBA) var ghost_modulate
+export (float) var dunkjumphalfturn_threshold
 var basket = null
 var direction = 0
 
@@ -11,6 +12,7 @@ func move(delta):
 	P.ShootPredictor.clear()
 	S.is_dunkjumping = true
 	S.is_dunkprejumping = true
+	S.set_action(S.ActionType.DUNKJUMP)
 	P.PlayerEffects.dust_start()
 	S.get_node("ToleranceDunkJumpPressTimer").stop()
 	S.get_node("CanJumpTimer").start(S.jump_countdown)
@@ -39,7 +41,7 @@ func move_jump():
 	else :
 		S.velocity.x = vox1
 	S.velocity.y = P.dunk_speed
-	S.is_dunkjumphalfturning = (q.x*direction < 0)
+	S.is_dunkjumphalfturning = (q.x*direction < dunkjumphalfturn_threshold)
 	#print("Velocity: "+str(S.velocity))
 	P.get_node("Camera").screen_shake(0.2,10)
 

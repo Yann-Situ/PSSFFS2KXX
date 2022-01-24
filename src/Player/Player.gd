@@ -50,7 +50,6 @@ onready var start_position = global_position
 var invmass = 1.0/4.0
 var character_holder = null
 
-
 ################################################################################
 
 func disable_physics():
@@ -131,10 +130,8 @@ func get_input(delta): #delta in s
 	if not S.get_node("ToleranceDunkJumpPressTimer").is_stopped() :
 		if S.can_dunkjump :
 			if S.crouch_p:
-				print("DAIM_P")
 				$Actions/Dunkjump.move(delta)
 			else :
-				print("DAIM")
 				$Actions/Dunkdash.move(delta)
 
 	if S.shoot_jr and S.can_shoot :
@@ -217,6 +214,8 @@ func apply_impulse(impulse):
 
 func _physics_process(delta):
 	get_input(delta)
+#	if S.velocity == Vector2.ZERO and !S.is_onfloor:
+#		print("ZERO")
 	if S.is_onwall and S.velocity.y > 0: #fall on a wall
 		S.velocity.y += gravity/2.0 * delta
 		S.velocity.y = min(S.velocity.y,max_speed_fall_onwall)

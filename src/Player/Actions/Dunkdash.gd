@@ -5,12 +5,12 @@ export(Color, RGBA) var ghost_modulate
 
 func move(delta):
 	# Change hitbox + other animation things like sliding etc.
+#	var anim = get_parent().get_parent().get_node("Sprite/AnimationTree3")
 	S.is_aiming = false # cancel aiming for the moment
 	S.aim_direction = 0
 	P.ShootPredictor.clear()
 	S.is_dunkdashing = true
-	S.is_dunkjumping = false
-	S.is_dunkprejumping = false
+	S.set_action(S.ActionType.DUNKDASH)
 	P.PlayerEffects.dust_start()
 	P.PlayerEffects.jump_start()
 	P.PlayerEffects.ghost_start(0.35,0.07, ghost_modulate)

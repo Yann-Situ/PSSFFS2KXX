@@ -91,6 +91,8 @@ export var is_hanging = false
 
 var is_non_cancelable = false
 var is_dunkjumphalfturning = false
+enum ActionType { NONE, SHOOT, DUNK, DUNKDASH, DUNKJUMP }
+var action_type = ActionType.NONE
 
 # Bool var
 export var has_ball = false
@@ -140,6 +142,48 @@ func _input(event):
 	if dunk_jp:
 		$ToleranceDunkJumpPressTimer.start(tolerance_jump_press)
 
+func set_action(v): # for non_cancelable actions
+	action_type = v
+	match action_type:
+		ActionType.NONE:
+			is_shooting = false
+			is_dunkdashing = false
+			is_dunking = false
+			is_dunkjumping = false
+			is_dunkprejumping = false
+		ActionType.SHOOT:
+			is_dunkdashing = false
+			is_dunking = false
+			is_dunkjumping = false
+			is_dunkprejumping = false
+		ActionType.DUNK:
+			is_dunkdashing = false
+			is_shooting = false
+			is_dunkjumping = false
+			is_dunkprejumping = false
+		ActionType.DUNKDASH:
+			is_dunking = false
+			is_shooting = false
+			is_dunkjumping = false
+			is_dunkprejumping = false
+		ActionType.DUNKJUMP:
+			is_dunkdashing = false
+			is_shooting = false
+			is_dunking = false
+	is_non_cancelable = action_type != ActionType.NONE
+	
+func update_action(): # for non_cancelable actions with the following priority
+	if is_shooting:
+		set_action(ActionType.SHOOT)
+	elif is_dunking:
+		set_action(ActionType.DUNK)
+	elif is_dunkjumping:
+		set_action(ActionType.DUNKJUMP)
+	elif is_dunkdashing:
+		set_action(ActionType.DUNKDASH)
+	else :
+		set_action(ActionType.NONE)
+
 func update_vars(delta):
 	#
 	# Delays and states memory should be updated after calling update_vars()
@@ -173,7 +217,22 @@ func update_vars(delta):
 		direction_p += 1
 	if left_p :
 		direction_p -= 1
-
+	
+	var dir_sprite = 1;
+	if self.get_parent().flip_h :
+		dir_sprite = -1;
+	
+	# non-cancelables :
+	#is_shooting = is_shooting 
+	#is_dunking = is_dunking
+	is_dunkdashing = is_dunkdashing and not is_onfloor and dunk_p
+	is_dunkprejumping = is_dunkprejumping and !(is_dunking or is_dunkdashing)
+	is_dunkjumping = (is_dunkjumping  and !(is_onfloor or \
+		(is_onwall and is_falling) or is_dunking or is_dunkdashing)) or \
+		is_dunkprejumping
+	update_action()
+	
+	# possibilities can_*
 	can_jump = not $ToleranceJumpFloorTimer.is_stopped() and \
 		$CanJumpTimer.is_stopped()
 	can_walljump = not $ToleranceWallJumpTimer.is_stopped() and \
@@ -188,20 +247,6 @@ func update_vars(delta):
 		((not is_onfloor and dunk_p)) and \
 		Player.SpecialActionHandler.can_dunk() and not is_shooting and not is_dunkprejumping
 	can_stand = Player.SpecialActionHandler.can_stand()
-	
-	var dir_sprite = 1;
-	if self.get_parent().flip_h :
-		dir_sprite = -1;
-		
-	# non-cancelables :
-	#is_shooting = is_shooting 
-	#is_dunking = is_dunking
-	is_dunkdashing = is_dunkdashing and not is_onfloor and dunk_p
-	is_dunkprejumping = is_dunkprejumping and !(is_dunking or is_dunkdashing)
-	is_dunkjumping = (is_dunkjumping and !(is_onfloor or (is_onwall and is_falling) or \
-		is_dunking or is_dunkdashing)) or is_dunkprejumping
-	
-	is_non_cancelable = is_shooting or is_dunking or is_dunkjumping or is_dunkdashing
 	
 	# cancelables :
 	is_jumping = is_jumping and not is_onfloor and is_mounting

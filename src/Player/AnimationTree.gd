@@ -6,46 +6,55 @@ func _ready():
 	pass # Replace with function body.
 
 enum Cancelable { NO, YES }
-enum ActionType { SHOOT, DUNK, DUNKDASH, DUNKJUMP }
 enum Stance { GROUND, AIR, GRIND, HANG }
 
 var CurrentCancelable = "parameters/cancelable/current"
-var CurrentActionType = "parameters/action_type/current"
 var CurrentStance = "parameters/stance/current"
 
-var IsJumping = "parameters/air/conditions/is_jumping"
-var IsOnWall = "parameters/air/conditions/is_onwall"
-var IsNotOnWall = "parameters/air/conditions/is_not_onwall"
+const S_Air = "parameters/air/conditions/"
+var IsJumping = S_Air + "is_jumping"
+var IsOnWall = S_Air + "is_onwall"
+var IsNotOnWall = S_Air + "is_not_onwall"
 
-var IsCrouching = "parameters/ground/conditions/is_crouching"
-var IsHalfturning = "parameters/ground/conditions/is_halfturning"
-var IsIdle = "parameters/ground/conditions/is_idle"
-var IsLanding = "parameters/ground/conditions/is_landing"
-var IsLandrolling = "parameters/ground/conditions/is_landrolling"
-var IsStanding = "parameters/ground/conditions/is_standing"
-var IsWalking = "parameters/ground/conditions/is_walking"
+const S_Ground = "parameters/ground/conditions/"
+var IsCrouching = S_Ground +"is_crouching"
+var IsHalfturning = S_Ground + "is_halfturning"
+var IsIdle = S_Ground + "is_idle"
+var IsLanding = S_Ground + "is_landing"
+var IsLandrolling = S_Ground + "is_landrolling"
+var IsStanding = S_Ground + "is_standing"
+var IsWalking = S_Ground + "is_walking"
 
-var IsOnFloor = "parameters/shoot/conditions/is_onfloor"
+const S_Action = "parameters/action/conditions/"
+var IsDunkjumping = S_Action + "is_dunkjumping"
+var IsDunkdashing = S_Action + "is_dunkdashing"
+var IsDunking = S_Action + "is_dunking"
+var IsShooting = S_Action + "is_shooting"
 
-var IsDunkjumpHalfturning = "parameters/dunkjump/conditions/is_dunkjumphalfturning"
+var IsNotDunkjumping = S_Action + "is_not_dunkjumping"
+var IsNotDunkdashing = S_Action + "is_not_dunkdashing"
+
+#var IsOnFloor = "parameters/shoot/conditions/is_onfloor"
+var IsOnFloor = "parameters/action/shoot/conditions/is_onfloor"
+#var IsDunkjumpHalfturning = "parameters/dunkjump/conditions/is_dunkjumphalfturning"
+var IsDunkjumpHalfturning = "parameters/action/dunkjump/conditions/is_dunkjumphalfturning"
 
 func animate_from_state(S):
-	
+
 	# in order of priority:
-	self[CurrentCancelable] = Cancelable.NO
-	if S.is_shooting:
-		self[CurrentActionType] = ActionType.SHOOT
-		self[IsOnFloor] = S.is_onfloor
-	elif S.is_dunking:
-		self[CurrentActionType] = ActionType.DUNK
-	elif S.is_dunkjumping:
-		self[CurrentActionType] = ActionType.DUNKJUMP
-		self[IsDunkjumpHalfturning] = S.is_dunkjumphalfturning
-	elif S.is_dunkdashing:
-		self[CurrentActionType] = ActionType.DUNKDASH
-	else :
-		self[CurrentCancelable] = Cancelable.YES
-	
+	self[CurrentCancelable] = Cancelable.YES
+	if S.is_non_cancelable:
+		self[CurrentCancelable] = Cancelable.NO
+
+	self[IsDunkjumping] = S.is_dunkjumping
+	self[IsDunkdashing] = S.is_dunkdashing
+	self[IsDunking] = S.is_dunking
+	self[IsShooting] = S.is_shooting
+	self[IsNotDunkjumping] = !S.is_dunkjumping
+	self[IsNotDunkdashing] = !S.is_dunkdashing
+	self[IsOnFloor] = S.is_onfloor
+	self[IsDunkjumpHalfturning] = S.is_dunkjumphalfturning
+
 	# in order of priority:
 	if S.is_hanging:
 		self[CurrentStance] = Stance.HANG
@@ -53,13 +62,13 @@ func animate_from_state(S):
 		self[CurrentStance] = Stance.GRIND
 	elif not S.is_onfloor:
 		self[CurrentStance] = Stance.AIR
-		
+
 		self[IsJumping] = S.is_jumping
 		self[IsOnWall] = S.is_onwall
 		self[IsNotOnWall] = !S.is_onwall
 	else : # S.is_onfloor
 		self[CurrentStance] = Stance.GROUND
-		
+
 		self[IsCrouching] = S.is_crouching
 		self[IsHalfturning] = S.is_halfturning
 		self[IsIdle] = S.is_idle

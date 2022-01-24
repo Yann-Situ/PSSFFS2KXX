@@ -9,16 +9,14 @@ func _ready():
 	
 func move(delta):
 	# Change hitbox + other animation things like sliding etc.
-	
 	# at this point, can_dunk is true so S.dunk_basket is not null
 	S.is_aiming = false # cancel aiming for the moment
 	S.aim_direction = 0
 	P.ShootPredictor.clear()
 	S.is_dunking = true
-	S.is_dunkjumping = false
+	S.set_action(S.ActionType.DUNK)
 	S.velocity.x = 0
 	S.velocity.y = 0
-	
 	S.get_node("CanDunkTimer").start(S.dunk_countdown)
 	S.get_node("ToleranceDunkJumpPressTimer").stop() # no dunkjump just after
 	#S.get_node("CanGoTimer").start(0.32)
