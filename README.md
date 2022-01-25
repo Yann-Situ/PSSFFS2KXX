@@ -57,19 +57,20 @@ Popol Super Slam Fusion Full Speed 2KXX
 * [x] **Aiming shooting** right after dunk results in **strange animation behaviour**.
 * [ ] **Dunkjumping** while only moving with floor adherence a bit far from basket results in missing the basket.
 * [ ] **dunking** can result in `S.selected_basket.dunk()` called on `null` instance (basket is not selected anymore)
-* [ ] Get out from **low ceiling** (crouched) when returning can result in infinite returning **animation**.
+* [x] Get out from **low ceiling** (crouched) when returning can result in infinite returning **animation**.
 * [ ] **release** ball when **aiming** results in error.
 * [ ] It is possible to **dunk** through walls. It can result in dunkjump particles (+ghost) emmiting (dont know why).
 * [ ] **shooting** just before **landing** results in `floor_shoot` just after `aim_shoot` animation
+* [ ] There is some jitter animation when passing from a **dunkjump** state to a **grind** state.
 
 ### Dynamic items
 * [ ] **Zipline** drop inside collision places results in stucked player
 * [x] Get out from **zipline** just on flat floor results in sliding (like on ice).
 * [ ] Get out from **zipline** just after passing over a **Jumper** results in sliding (like on ice) because **can_go_timer** was changed.
 * [ ] Stuck colliding on a **rail** can result in building speed.
-* [.] Weird behaviour on leaving a **zipline** to a **rail** (there is a moment when the character is on both of them)
+* [x] Weird behaviour on leaving a **zipline** to a **rail** (there is a moment when the character is on both of them)
     - Implement character holder group with `free_character` and `pickup_character` methods.
-* [ ] Characters can leave **rail** if Player press **crouch** on it.
+* [x] Characters can leave **rail** if Player press **crouch** on it.
     - Implement the `riding` and `hanging` states.
 * [ ] Entering **Pipe** at perfect frame when disabling the **Pipe** can result in a disabled ball floating in the air. -> don't stop the tween to enter the pipe when disabling the pipe.
 

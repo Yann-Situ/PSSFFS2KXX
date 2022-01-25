@@ -90,7 +90,7 @@ func _physics_process(delta):
 		position_offsets[i-j]  = position_offset
 		if path_follow.get_unit_offset() == 1.0 or \
 		   path_follow.get_unit_offset() == 0.0 or \
-		   body.S.crouch_p :
+		   !body.S.is_grinding :
 #
 #			body.enable_physics()
 #			body.S.velocity = velocity
@@ -118,12 +118,12 @@ func _physics_process(delta):
 		if paths_to_free[p] < 0.0:
 			p.call_deferred("queue_free")
 			paths_to_free.erase(p)
-			
+
 	for body in released_bodies.keys():
 		released_bodies[body] -= delta
 		if released_bodies[body] < 0.0:
 			released_bodies.erase(body)
-	
+
 #	if not paths_to_free.empty():
 #		var lifetime = paths_to_free[0].get_node("Particles").lifetime
 #		print("release1 : "+str(released_bodies))
@@ -140,9 +140,24 @@ func is_in(a, b, c, tolerance = 0.0):
 	return a >= b+tolerance and a < c-tolerance
 
 func _on_Area_body_entered(body):
-	if not body.is_in_group("characters") :
-		return
+	if !body.is_in_group("characters") :
+		return 1
+	if !body.has_node("Actions/Grind"):
+		printerr(body.name + " doesn't have a node called Actions/Grind")
+		return 1
+	if !body.S.can_grind :
+		print(body.name+" cannot grind on "+self.name)
+		return 1
+	for b in inside_bodies:
+		if b == body:
+			print(body.name+" already in "+self.name)
+			return 1
 
+	for b in released_bodies.keys():
+		if b == body:
+			print(body.name+" just got out from "+self.name)
+			return 1
+			
 	var bi = body.global_position-global_position-init_point
 	var closest_offset = curve.get_closest_offset(bi)
 #	if not is_in(closest_offset, 0.0, curve.get_baked_length(),5.0):
@@ -155,17 +170,7 @@ func _on_Area_body_entered(body):
 	if (bi-closest_point).y <= character_position_entrance_tolerance or \
 	   (rail_dir.cross(body.S.velocity) >= 0.0 and \
 		is_in(closest_offset, 0.0, curve.get_baked_length(),tolerance_annoying_case)) :
-
-		for b in inside_bodies:
-			if b == body:
-				print(body.name+" already in "+self.name)
-				return 1
-
-		for b in released_bodies.keys():
-			if b == body:
-				print(body.name+" just got out from "+self.name)
-				return 1
-
+			
 		var new_path_follow : PathFollow2D = PathFollow2D.new()
 		new_path_follow.loop = false
 		var ride_particle : Particles2D = _particle.instance()
@@ -191,11 +196,8 @@ func _on_Area_body_entered(body):
 func pickup_character(character : Node):
 	character.get_in(self)
 	print(character.name+" on "+self.name)
-	if character.has_node("Actions/Grind"):
-		character.get_node("Actions/Grind").move(0.01)
-	else :
-		printerr(character.name + " doesn't have a node called Actions/Grind")
-
+	character.get_node("Actions/Grind").move(0.01)
+		
 func free_character(character : Node):
 	# called by character when getting out
 	var i = 0

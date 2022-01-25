@@ -92,8 +92,8 @@ func _process(delta):
 		linear_velocity.y += gravity * delta
 		var fi =(final_point-init_point).normalized()
 		var veldotfi = linear_velocity.dot(fi)
-
-		inside_bodies[0].S.velocity = veldotfi*fi
+		var body = inside_bodies[0]
+		body.S.velocity = veldotfi*fi
 
 		var temp_u_offset = $Path2D/PathFollow2D.get_unit_offset()
 		$Path2D/PathFollow2D.set_offset($Path2D/PathFollow2D.get_offset()+veldotfi*delta)
@@ -101,14 +101,16 @@ func _process(delta):
 		real_rope_offset = lerp(real_rope_offset, 4*temp_u_offset*(1-temp_u_offset)*rope_offset, 0.1)
 		real_player_offset = lerp(real_player_offset, player_offset, 0.1)
 
-		#inside_bodies[0].position = real_player_offset+self.global_position+relative_position_offset
-		inside_bodies[0].global_position = $Path2D/PathFollow2D.global_position+real_rope_offset+real_player_offset
+		#body.position = real_player_offset+self.global_position+relative_position_offset
+		body.global_position = $Path2D/PathFollow2D.global_position+real_rope_offset+real_player_offset
 		$Line2D.set_point_position(1,$Path2D/PathFollow2D.global_position-self.global_position+real_rope_offset)
 		$Path2D/PathFollow2D/Sprite.offset = real_rope_offset
 
-		if $Path2D/PathFollow2D.get_unit_offset() > 0.999 or $Path2D/PathFollow2D.get_unit_offset() < 0.001 or inside_bodies[0].S.crouch_p :
-			#inside_bodies[0].enable_physics()
-			var body = inside_bodies[0]
+		if $Path2D/PathFollow2D.get_unit_offset() > 0.999 or\
+			$Path2D/PathFollow2D.get_unit_offset() < 0.001 or\
+			!body.S.is_hanging :
+			#body.enable_physics()
+			
 			body.get_out(body.global_position, veldotfi*fi)
 
 			#inside_bodies.remove(0)
@@ -123,7 +125,17 @@ func _process(delta):
 
 
 func _on_PlayerDetector_body_exited(body):
-	if inside_bodies.empty() and body.is_in_group("characters") and body.S.velocity.y > 0 and $Timer.is_stopped() :
+	if !body.is_in_group("characters"):
+		return 1
+	if !body.has_node("Actions/Hang"):
+		printerr(body.name + " doesn't have a node called Actions/Hang")
+		return 1
+	if !body.S.can_hang:
+		print(body.name+" cannot hang on "+self.name)
+		return 1
+	
+	if inside_bodies.empty() and body.S.velocity.y > 0 and $Timer.is_stopped() :
+		
 		var bi =body.position-global_position-init_point
 		var fi =final_point-init_point
 		linear_velocity = body.S.velocity
@@ -139,10 +151,7 @@ func _on_PlayerDetector_body_exited(body):
 func pickup_character(character : Node):
 	character.get_in(self)
 	print(character.name+" on "+self.name)
-	if character.has_node("Actions/Hang"):
-		character.get_node("Actions/Hang").move(0.01)
-	else :
-		printerr(character.name + " doesn't have a node called Actions/Hang")
+	character.get_node("Actions/Hang").move(0.01)
 
 func free_character(character : Node):
 	# called by character when getting out

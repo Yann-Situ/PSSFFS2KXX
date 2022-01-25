@@ -1572,7 +1572,7 @@ input_3/name = "hang"
 input_3/auto_advance = false
 
 [sub_resource type="AnimationNodeBlendTree" id=162]
-graph_offset = Vector2( 0, 802.5 )
+graph_offset = Vector2( -96.9167, 37 )
 nodes/Seek/node = SubResource( 74 )
 nodes/Seek/position = Vector2( 280, -100 )
 nodes/action/node = SubResource( 94 )
@@ -1590,7 +1590,7 @@ nodes/dunkdash/position = Vector2( 0, -140 )
 nodes/dunkjump/node = SubResource( 116 )
 nodes/dunkjump/position = Vector2( 20, 0 )
 nodes/grind/node = SubResource( 126 )
-nodes/grind/position = Vector2( 100, 760 )
+nodes/grind/position = Vector2( 140, 780 )
 nodes/ground/node = SubResource( 155 )
 nodes/ground/position = Vector2( 100, 260 )
 nodes/hang/node = SubResource( 156 )
@@ -1807,7 +1807,7 @@ texture = ExtResource( 2 )
 offset = Vector2( 0.5, 0 )
 hframes = 16
 vframes = 20
-frame = 193
+frame = 201
 __meta__ = {
 "_edit_group_": true,
 "_edit_lock_": true
@@ -1961,7 +1961,7 @@ position = Vector2( 0, 5 )
 shape = SubResource( 173 )
 
 [node name="HasBallPosition" type="Node2D" parent="BallHandler"]
-position = Vector2( 10, 5.99999 )
+position = Vector2( -6, -7 )
 __meta__ = {
 "_edit_group_": true
 }

@@ -31,7 +31,7 @@ func _physics_process(delta):
 	var j = 0 # int because we're deleting nodes in a list we're browsing
 	for i in range(inside_bodies.size()):
 		var body = inside_bodies[i-j]
-		if body.S.crouch_p:
+		if !body.S.is_hanging:
 			body.get_out(body.global_position, Vector2.ZERO)
 			j += 1
 		else :
@@ -55,6 +55,12 @@ func dunk(dunker : Node2D):
 		$AnimationPlayer.play("dunk_left")
 	Global.camera.screen_shake(0.3,5)
 	
+	if !dunker.has_node("Actions/Hang"):
+		printerr(dunker.name + " doesn't have a node called Actions/Hang")
+		return 1
+	if !dunker.S.can_hang:
+		print(dunker.name+" cannot hang on "+self.name)
+		return 1
 	pickup_character(dunker)
 
 func goal(body,score):
@@ -101,11 +107,9 @@ func pickup_character(character : Node):
 	inside_bodies.push_back(character)
 	bodies_positions.push_back(Vector2(character.global_position.x, \
 		self.global_position.y+hang_position_offset_y))
-	if character.has_node("Actions/Hang"):
-		character.get_node("Actions/Hang").move(0.01)
-	else :
-		printerr(character.name + " doesn't have a node called Actions/Hang")
-
+	
+	character.get_node("Actions/Hang").move(0.01)
+	
 func free_character(character : Node):
 	# called by character when getting out
 	var i = 0

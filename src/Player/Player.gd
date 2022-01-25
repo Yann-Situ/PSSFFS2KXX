@@ -130,11 +130,10 @@ func get_input(delta): #delta in s
 		$Actions/Dunk.move(delta)
 
 	if not S.get_node("ToleranceDunkJumpPressTimer").is_stopped() :
-		if S.can_dunkjump :
-			if S.crouch_p:
-				$Actions/Dunkjump.move(delta)
-			else :
-				$Actions/Dunkdash.move(delta)
+		if S.crouch_p and S.can_dunkjump :
+			$Actions/Dunkjump.move(delta)
+		elif S.can_dunkdash :
+			$Actions/Dunkdash.move(delta)
 
 	if S.shoot_jr and S.can_shoot :
 		$Actions/Shoot.move(delta)

@@ -95,13 +95,13 @@ _data = {
 "points": PoolVector2Array( 0, 0, 0, 0, 600, -72, 0, 0, 0, 0, 432, -32, 0, 0, 0, 0, 280, -32 )
 }
 
-[sub_resource type="Curve2D" id=13]
+[sub_resource type="Curve2D" id=11]
 resource_local_to_scene = true
 _data = {
 "points": PoolVector2Array( 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 576, 0 )
 }
 
-[sub_resource type="Environment" id=11]
+[sub_resource type="Environment" id=12]
 background_mode = 4
 auto_exposure_scale = 1.0
 auto_exposure_min_luma = 0.9
@@ -120,7 +120,7 @@ adjustment_enabled = true
 adjustment_contrast = 1.08
 adjustment_saturation = 1.01
 
-[sub_resource type="AnimatedTexture" id=12]
+[sub_resource type="AnimatedTexture" id=13]
 frames = 5
 fps = 8.0
 frame_0/texture = ExtResource( 18 )
@@ -561,7 +561,7 @@ invert_line_direction = true
 
 [node name="RailLine" parent="Environment/Dynamics" instance=ExtResource( 33 )]
 position = Vector2( 192, 384 )
-curve = SubResource( 13 )
+curve = SubResource( 11 )
 
 [node name="Interactive" type="Node2D" parent="Environment"]
 
@@ -577,13 +577,13 @@ position = Vector2( 976, 400 )
 content = ExtResource( 3 )
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
-environment = SubResource( 11 )
+environment = SubResource( 12 )
 
 [node name="Light2D" type="Light2D" parent="."]
 position = Vector2( 848, 720 )
 z_index = 9
 z_as_relative = false
-texture = SubResource( 12 )
+texture = SubResource( 13 )
 texture_scale = 2.56
 color = Color( 1, 0.901961, 0.709804, 1 )
 energy = 0.4
@@ -593,7 +593,7 @@ shadow_enabled = true
 [node name="Light2D2" type="Light2D" parent="."]
 position = Vector2( -336, 192 )
 z_as_relative = false
-texture = SubResource( 12 )
+texture = SubResource( 13 )
 texture_scale = 2.56
 color = Color( 1, 0.901961, 0.709804, 1 )
 energy = 0.6
@@ -619,7 +619,7 @@ shadow_filter_smooth = 30.0
 position = Vector2( 1880, 576 )
 scale = Vector2( 1.99752, 1.99752 )
 z_as_relative = false
-texture = SubResource( 12 )
+texture = SubResource( 13 )
 texture_scale = 2.56
 color = Color( 1, 0.901961, 0.709804, 1 )
 energy = 0.81
@@ -661,7 +661,7 @@ walk_return_thresh_instant_speed = 120.0
 walk_accel = 170.0
 
 [node name="Player" parent="." instance=ExtResource( 1 )]
-position = Vector2( 528, 504 )
+position = Vector2( 248, 192 )
 z_index = 10
 walk_return_thresh_instant_speed = 150.0
 

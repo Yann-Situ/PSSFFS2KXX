@@ -41,6 +41,7 @@ var can_crouch = false
 var can_aim = false
 var can_shoot = false
 var can_dunkjump = false
+var can_dunkdash = false
 var can_dunk = false
 var can_stand = false
 var can_grind = false
@@ -229,8 +230,9 @@ func update_vars(delta):
 	#is_dunking = is_dunking
 	is_dunkdashing = is_dunkdashing and not is_onfloor and dunk_p
 	is_dunkprejumping = is_dunkprejumping and !(is_dunking or is_dunkdashing)
-	is_dunkjumping = (is_dunkjumping  and !(is_onfloor or \
-		(is_onwall and is_falling) or is_dunking or is_dunkdashing)) or \
+	is_dunkjumping = (is_dunkjumping  and \
+		!(is_onfloor or (is_onwall and is_falling) or is_dunking or \
+			is_dunkdashing or is_hanging or is_grinding)) or \
 		is_dunkprejumping
 	update_action()
 	
@@ -245,18 +247,21 @@ func update_vars(delta):
 	can_aim = $CanShootTimer.is_stopped() and has_ball and active_ball != null and not is_dunking
 	can_shoot = is_aiming and has_ball and active_ball != null 
 	can_dunkjump = can_jump and Player.SpecialActionHandler.can_dunkjump() and not is_non_cancelable
+	can_dunkdash = can_dunkjump
 	can_dunk = $CanDunkTimer.is_stopped() and \
 		((not is_onfloor and dunk_p)) and \
 		Player.SpecialActionHandler.can_dunk() and not is_shooting and not is_dunkprejumping
 	can_stand = Player.SpecialActionHandler.can_stand()
-	can_grind = !is_hanging
+	can_grind = !is_hanging and !is_dunking
+	can_hang = true
 	
 	# cancelables :
 	is_jumping = is_jumping and not is_onfloor and is_mounting
 	is_walljumping = is_walljumping and is_jumping
 	is_crouching = (is_onfloor and is_crouching) or not can_stand# handle by player actions (start)
-	#is_grinding = is_grinding
-	#is_hanging = is_hanging
+	
+	is_hanging = is_hanging and !crouch_p
+	is_grinding = is_grinding and !is_hanging and !crouch_p
 	
 	is_landing = is_onfloor and not is_onwall and (is_landing or \
 		(last_frame_onair and last_onair_velocity_y > Player.landing_velocity_thresh)) and \
