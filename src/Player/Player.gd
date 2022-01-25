@@ -105,7 +105,7 @@ func get_input(delta): #delta in s
 			S.last_wall_normal_direction = 1
 
 	############### Move from input
-	if (S.direction_p != 0) and S.can_go :
+	if physics_enabled and (S.direction_p != 0) and S.can_go :
 		$Actions/Side.move(delta,S.direction_p)
 
 	if not S.get_node("ToleranceJumpPressTimer").is_stopped() :
@@ -117,7 +117,7 @@ func get_input(delta): #delta in s
 			$Actions/Walljump.move(delta,S.last_wall_normal_direction)
 			if not S.jump_p:
 				S.velocity.y = S.velocity.y/3.5
-	if S.jump_jr and S.is_jumping and not S.is_dunkjumping:
+	if physics_enabled and S.jump_jr and S.is_jumping and not S.is_dunkjumping:
 		S.velocity.y = S.velocity.y/3.5
 
 	if S.crouch_p and S.can_crouch :
@@ -141,7 +141,7 @@ func get_input(delta): #delta in s
 	if S.aim_jp and S.can_aim :
 		$Actions/Aim.move(delta)
 
-	if S.can_go :
+	if physics_enabled and S.can_go :
 		$Actions/Adherence.move(delta)
 
 	if S.selected_ball != null:
@@ -217,14 +217,15 @@ func _physics_process(delta):
 	get_input(delta)
 #	if S.velocity == Vector2.ZERO and !S.is_onfloor:
 #		print("ZERO")
-	if S.is_onwall and S.velocity.y > 0: #fall on a wall
-		S.velocity.y += gravity/2.0 * delta
-		S.velocity.y = min(S.velocity.y,max_speed_fall_onwall)
-	else :
-		S.velocity.y += gravity * delta
-		if S.velocity.y > max_speed_fall:
-			S.velocity.y = max_speed_fall
 	if physics_enabled:
+		if S.is_onwall and S.velocity.y > 0: #fall on a wall
+			S.velocity.y += gravity/2.0 * delta
+			S.velocity.y = min(S.velocity.y,max_speed_fall_onwall)
+		else :
+			S.velocity.y += gravity * delta
+			if S.velocity.y > max_speed_fall:
+				S.velocity.y = max_speed_fall
+		
 		if SpecialActionHandler.is_on_slope() and S.velocity.y > - abs(S.velocity.x) :
 			S.velocity.y = 0.5*sqrt(2) * move_and_slide_with_snap(S.velocity, 33*Vector2.DOWN, Vector2.UP, true, 4, 0.785398, false).y
 		else :

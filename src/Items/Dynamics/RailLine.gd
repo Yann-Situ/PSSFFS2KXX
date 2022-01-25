@@ -78,6 +78,7 @@ func _physics_process(delta):
 		var position_offset = position_offsets[i-j]
 		var rail_dir = path_follow.transform.x
 		# transform.x is the direction (vec2D) of the pathfollow
+		velocity = body.S.velocity
 		velocity.y += gravity * delta
 		velocity = velocity.dot(rail_dir) * rail_dir
 		position_offset = lerp(position_offset, character_offset, 0.5)
@@ -91,16 +92,7 @@ func _physics_process(delta):
 		if path_follow.get_unit_offset() == 1.0 or \
 		   path_follow.get_unit_offset() == 0.0 or \
 		   !body.S.is_grinding :
-#
-#			body.enable_physics()
-#			body.S.velocity = velocity
-#			inside_bodies.remove(i-j)
-#			paths_to_free.push_back(path_follows[i-j])
-#			path_follows.remove(i-j)
-#			linear_velocities.remove(i-j)
-#			position_offsets.remove(i-j)
-#
-#			print(body.name+" quit "+self.name)
+			
 			body.get_out(body.global_position, velocity)
 			j += 1 # because we deleted a node in the list we're browsing
 
@@ -152,7 +144,6 @@ func _on_Area_body_entered(body):
 		if b == body:
 			print(body.name+" already in "+self.name)
 			return 1
-
 	for b in released_bodies.keys():
 		if b == body:
 			print(body.name+" just got out from "+self.name)
@@ -190,6 +181,7 @@ func _on_Area_body_entered(body):
 		position_offsets.push_back(body.global_position-new_path_follow.global_position)
 		#body.disable_physics()
 		pickup_character(body)
+		body.S.velocity = linear_velocities[-1]
 
 ################################################################################
 # For `characterholders` group
