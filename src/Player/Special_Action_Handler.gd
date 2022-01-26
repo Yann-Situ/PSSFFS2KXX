@@ -59,10 +59,10 @@ func update_basket():
 		var best_direction = -2
 		
 		for i in range(baskets.size()):
-			b = baskets[i].get_parent() # `get_parent` because we're
-		# detecting the basket_area node
+			b = baskets[i].get_parent() # `get_parent` because we're detecting the basket_area node
+			if !b.can_receive_dunkjump:
+				continue
 			q = (b.position-Player.position)
-			
 			# be carefull division by zero :
 			if q.y >= 0.0:
 				continue
@@ -72,7 +72,7 @@ func update_basket():
 				dir = 1
 			if q.x < 0.0:
 				dir = -1
-			Delta = Player.dunk_speed*q.x/q.y
+			Delta = Player.dunkjump_speed*q.x/q.y
 			Delta = Delta*Delta
 			Delta += 2*Player.gravity * q.x*q.x/q.y
 
@@ -141,19 +141,18 @@ func can_dunkjump():
 func can_dunk():
 	var baskets = $dunk_area.get_overlapping_areas()
 	if !baskets.empty():
-		var b = baskets[0].get_parent() # `get_parent` because we're
-		# detecting the basket_area node
+		var b = null
 		S.dunk_basket = b
-		var min_len_sq = \
-		(b.position - Player.position).length_squared()
-		for i in range(1,baskets.size()):
+		var r = $dunk_area/CollisionShape2D.shape.radius
+		var min_len_sq = r*r
+		for i in range(baskets.size()):
 			b = baskets[i].get_parent() # `get_parent` because we're
 		# detecting the basket_area node
 			var l2 = (b.position - Player.position).length_squared()
-			if l2 < min_len_sq :
+			if b.can_receive_dunk and l2 < min_len_sq :
 				S.dunk_basket = b
 				min_len_sq = l2
-		return true
+		return S.dunk_basket != null
 	return false
 
 #############################

@@ -35,12 +35,6 @@ var z_indices = {\
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	pass
-	
-func _unhandled_input(event):
-	if event is InputEventKey:
-		if event.pressed and event.scancode == KEY_R:
-			for n in list_of_physical_nodes:
-				n.reset_position()
 		
 func toggle_playing():
 	playing = !playing

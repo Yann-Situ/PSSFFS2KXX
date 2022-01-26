@@ -1505,11 +1505,9 @@ collision_mask = 2
 script = ExtResource( 1 )
 air_friction = 0.1
 landing_velocity_thresh = 350.0
-jump_speed = -415.0
-dunk_speed = -550.0
+jump_speed = -382.0
 max_speed_fall = 700.0
-run_speed_thresh = 360.0
-run_speed_max = 380.0
+run_speed_max = 370.0
 walk_instant_speed = 135.0
 walk_return_thresh_instant_speed = 250.0
 walk_accel = 210.0
@@ -1661,7 +1659,7 @@ texture = ExtResource( 2 )
 offset = Vector2( 0.5, 0 )
 hframes = 16
 vframes = 20
-frame = 199
+frame = 193
 __meta__ = {
 "_edit_group_": true,
 "_edit_lock_": true
@@ -1800,7 +1798,7 @@ position = Vector2( 0, 5 )
 shape = SubResource( 134 )
 
 [node name="HasBallPosition" type="Node2D" parent="BallHandler"]
-position = Vector2( -6, -6 )
+position = Vector2( 10, 5.99999 )
 __meta__ = {
 "_edit_group_": true
 }

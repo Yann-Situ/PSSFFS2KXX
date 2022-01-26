@@ -32,8 +32,8 @@ func move_jump():
 	if S.dunkjump_basket != null:
 		basket = S.dunkjump_basket
 	
-	var q = basket.position - P.position
-	var B = P.dunk_speed * q.x / q.y
+	var q = basket.get_closest_point(P.global_position) - P.global_position
+	var B = P.dunkjump_speed * q.x / q.y
 	var C = -P.gravity * 0.5 * q.x*q.x/q.y
 	var vox1 = 0.5*(B - sqrt(B*B-4*C))
 	var vox2 = 0.5*(B + sqrt(B*B-4*C))
@@ -41,7 +41,7 @@ func move_jump():
 		S.velocity.x = vox2
 	else :
 		S.velocity.x = vox1
-	S.velocity.y = P.dunk_speed
+	S.velocity.y = P.dunkjump_speed
 	S.is_dunkjumphalfturning = (q.x*direction < dunkjumphalfturn_threshold)
 	#print("Velocity: "+str(S.velocity))
 	P.get_node("Camera").screen_shake(0.2,10)

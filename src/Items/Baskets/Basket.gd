@@ -6,6 +6,9 @@ export var dunk_position_offset = 16 * Vector2.DOWN
 export var dunk_position_radius = 24
 export var hang_position_offset_y = 16
 export var can_receive_dunk = true
+export var can_receive_dunkjump = true
+export var can_receive_goal = true
+export var can_receive_hang = true
 
 var inside_bodies = []
 var bodies_positions = []
