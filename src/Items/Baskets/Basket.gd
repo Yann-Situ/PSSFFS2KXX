@@ -54,14 +54,15 @@ func dunk(dunker : Node2D):
 	else :
 		$AnimationPlayer.play("dunk_left")
 	Global.camera.screen_shake(0.3,5)
-	
-	if !dunker.has_node("Actions/Hang"):
-		printerr(dunker.name + " doesn't have a node called Actions/Hang")
+
+func get_hanged(character : Node):
+	if !character.has_node("Actions/Hang"):
+		printerr(character.name + " doesn't have a node called Actions/Hang")
 		return 1
-	if !dunker.S.can_hang:
-		print(dunker.name+" cannot hang on "+self.name)
+	if !character.S.can_hang:
+		print(character.name+" cannot hang on "+self.name)
 		return 1
-	pickup_character(dunker)
+	pickup_character(character)
 
 func goal(body,score):
 	print("GOOOAL!")

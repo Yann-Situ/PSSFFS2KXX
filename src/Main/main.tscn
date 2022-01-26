@@ -406,6 +406,7 @@ initial_velocity = Vector2( 0, -900 )
 [node name="BallFire" parent="Environment/Balls" instance=ExtResource( 11 )]
 light_mask = 1
 position = Vector2( 1104, 568 )
+physics_enabled = false
 
 [node name="Ball" parent="Environment/Balls" instance=ExtResource( 5 )]
 position = Vector2( 1496, 472 )
@@ -661,7 +662,7 @@ walk_return_thresh_instant_speed = 120.0
 walk_accel = 170.0
 
 [node name="Player" parent="." instance=ExtResource( 1 )]
-position = Vector2( 248, 192 )
+position = Vector2( 1328, 192 )
 z_index = 10
 walk_return_thresh_instant_speed = 150.0
 

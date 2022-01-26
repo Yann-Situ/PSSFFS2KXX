@@ -17,6 +17,7 @@ func move(delta):
 	P.PlayerEffects.dust_start()
 	S.get_node("ToleranceDunkJumpPressTimer").stop()
 	S.get_node("CanJumpTimer").start(S.jump_countdown)
+	S.get_node("CanDunkjumpTimer").start(S.dunkjump_countdown)
 	basket = S.dunkjump_basket
 	S.is_dunkjumphalfturning = false
 	if P.flip_h:

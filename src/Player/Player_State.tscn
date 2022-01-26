@@ -12,6 +12,10 @@ one_shot = true
 wait_time = 0.012
 one_shot = true
 
+[node name="CanDunkjumpTimer" type="Timer" parent="."]
+wait_time = 0.012
+one_shot = true
+
 [node name="CanGoTimer" type="Timer" parent="."]
 one_shot = true
 

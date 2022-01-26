@@ -12,6 +12,7 @@ export (float) var tolerance_wall_jump = 9*frame_time_ms #s
 export (float) var tolerance_land_lag = 3*frame_time_ms #s
 export (float) var walljump_move_countdown = 22*frame_time_ms #s
 export (float) var jump_countdown = 10*frame_time_ms #s
+export (float) var dunkjump_countdown = 0.4#s
 export (float) var dunk_countdown = 1.5 #s
 export (float) var shoot_countdown = 30*frame_time_ms #s
 
@@ -246,8 +247,8 @@ func update_vars(delta):
 	can_crouch = is_onfloor
 	can_aim = $CanShootTimer.is_stopped() and has_ball and active_ball != null and not is_dunking
 	can_shoot = is_aiming and has_ball and active_ball != null 
-	can_dunkjump = can_jump and Player.SpecialActionHandler.can_dunkjump() and not is_non_cancelable
-	can_dunkdash = can_dunkjump
+	can_dunkdash = can_jump and Player.SpecialActionHandler.can_dunkjump() and not is_non_cancelable
+	can_dunkjump = can_dunkdash and $CanDunkjumpTimer.is_stopped()
 	can_dunk = $CanDunkTimer.is_stopped() and \
 		((not is_onfloor and dunk_p)) and \
 		Player.SpecialActionHandler.can_dunk() and not is_shooting and not is_dunkprejumping

@@ -62,12 +62,14 @@ Popol Super Slam Fusion Full Speed 2KXX
 * [ ] It is possible to **dunk** through walls. It can result in dunkjump particles (+ghost) emmiting (dont know why).
 * [ ] **shooting** just before **landing** results in `floor_shoot` just after `aim_shoot` animation
 * [ ] There is some jitter animation when passing from a **dunkjump** state to a **grind** state.
+* [ ] There is some jitter animation when passing from a **dunk** state to a **hang** state.
 
 ### Dynamic items
-* [ ] **Zipline** drop inside collision places results in stucked player
-* [x] Get out from **zipline** just on flat floor results in sliding (like on ice).
+* [ ] **Zipline** drop inside collision places results in stucked player.
 * [ ] Get out from **zipline** just after passing over a **Jumper** results in sliding (like on ice) because **can_go_timer** was changed.
 * [ ] Stuck colliding on a **rail** can result in building speed.
+* [ ] At the connection between a **rail** and a solid block, if the character is falling such that they will wallslide on the block if there wasn't a rail, and is falling fast enough, the character will normally grind but with 0 initial speed.
+    - At the connection between a **rail** and stairs, if the character is falling such that they will go on the slope if there wasn't a rail, and is falling fast enough, the character will normally grind but with 0 speed in the direction down the stairs.
 * [x] Weird behaviour on leaving a **zipline** to a **rail** (there is a moment when the character is on both of them)
     - Implement character holder group with `free_character` and `pickup_character` methods.
 * [x] Characters can leave **rail** if Player press **crouch** on it.
@@ -93,11 +95,12 @@ Popol Super Slam Fusion Full Speed 2KXX
 * [ ] **Bubble/Zap ball teleportation** trailhandler can act very weirdly if used quickly repeatly.
 * [.] Need to implement Tilemap interactive objects rotation and flips.
 * [ ] On **baskets**, a ball that bounces on the ring can do multiple goals.
+* [ ] If multiple explosion breaks the same bloc, it can spawn copies.
 
 ### Potential Glitches
-* [ ] Pressing **jump** and **dunkjump** just before landing can result in small dunkjump/jump.
-* [ ] Jumping (from ground) just before entering a **rail** can result in a boost grind.
-* [ ] If multiple explosion breaks the same bloc, it can spawn copies.
+* [ ] Pressing **jump** and **dunkdash** just before landing can result in small dunkdash/jump.
+* [ ] **Jumping** (from ground) just before entering a **rail** can result in a boost grind.
+* [ ] **Dunkdashing** just before entering a **rail** can result in a dash boost grind.
 
 ## Groups
 

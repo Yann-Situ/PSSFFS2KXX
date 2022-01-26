@@ -190,7 +190,7 @@ func get_input(delta): #delta in s
 		$Camera.set_offset_from_type("normal")
 
 	# ANIMATION:
-	$Sprite/AnimationTree3.animate_from_state(S)
+	$Sprite/AnimationTree.animate_from_state(S)
 
 	if S.jump_jp:
 		LifeHandler.apply_life(2.0, 2.0)
