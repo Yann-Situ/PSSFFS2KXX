@@ -25,7 +25,7 @@
 [ext_resource path="res://src/Platform/Graff.gd" type="Script" id=42]
 [ext_resource path="res://src/Platform/FrontEnvironment.gd" type="Script" id=43]
 
-[sub_resource type="Animation" id=8]
+[sub_resource type="Animation" id=1]
 resource_name = "transition_in"
 tracks/0/type = "value"
 tracks/0/path = NodePath("CanvasLayer/Transition:material:shader_param/circle_size")
@@ -52,8 +52,7 @@ tracks/1/keys = {
 "values": [ true, false ]
 }
 
-[sub_resource type="Animation" id=1]
-resource_name = "transition_out"
+[sub_resource type="Animation" id=2]
 tracks/0/type = "method"
 tracks/0/path = NodePath(".")
 tracks/0/interp = 1
@@ -140,8 +139,8 @@ __meta__ = {
 script = ExtResource( 11 )
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="LevelHandler"]
-anims/transition_in = SubResource( 8 )
-anims/transition_out = SubResource( 1 )
+anims/transition_in = SubResource( 1 )
+anims/transition_out = SubResource( 2 )
 
 [node name="CanvasLayer" type="CanvasLayer" parent="LevelHandler"]
 
