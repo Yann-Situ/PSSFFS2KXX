@@ -1,6 +1,8 @@
 extends Camera2D
 export (float) var aim_offset = 100
 export (float) var crouch_offset = 100
+export (Vector2) var move_max_offset = Vector2(128, 64)
+export (Vector2) var move_speed_threshold = Vector2(600, 800)
 var target_offset = Vector2(0,0)
 var current_shake_power = 0.0
 var shake_offset = Vector2(0,0)

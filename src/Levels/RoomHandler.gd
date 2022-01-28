@@ -1,7 +1,8 @@
 extends Node2D
 
-onready var Level = get_parent()
+onready var Room = get_parent()
 onready var Transition = $CanvasLayer/Transition
+onready var P = get_parent().get_node("Player")
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -19,6 +20,7 @@ func reload_level():
 	get_tree().reload_current_scene()
 
 func transition_in():
+	Transition.material.set("shader_param/center_offset", Vector2(0.0,0.0))
 	$AnimationPlayer.play("transition_in")
 
 func transition_out():
@@ -27,4 +29,10 @@ func transition_out():
 	#var screenshot = ImageTexture.new()
 	#screenshot.create_from_image(img)
 	#Transition.texture = screenshot
+	$Tween.follow_property(Transition.material, "shader_param/center_offset", \
+		Global.camera.offset, Global.camera, "offset", 1.0)
+	$Tween.start()
 	$AnimationPlayer.play("transition_out")
+
+func exit_room(next_room : NodePath = Room.get_path()):
+	Room.exit_room(next_room)

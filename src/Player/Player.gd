@@ -184,9 +184,18 @@ func get_input(delta): #delta in s
 		else :
 			S.aim_direction = -1
 	elif S.is_crouching :
-		$Camera.set_offset_from_type("crouch")
+		var tx = $Camera.move_max_offset.x * smoothstep(0.0, \
+			$Camera.move_speed_threshold.x, abs(S.velocity.x)) \
+			* sign(S.velocity.x)
+		$Camera.set_offset_from_type("move", Vector2(tx,$Camera.crouch_offset), 0.2)
 	elif S.is_moving :
-		$Camera.set_offset_from_type("move", Vector2(0.1*S.velocity.x, 0.0), 0.4)
+		var tx = $Camera.move_max_offset.x * smoothstep(0.0, \
+			$Camera.move_speed_threshold.x, abs(S.velocity.x)) \
+			* sign(S.velocity.x)
+		var ty = $Camera.move_max_offset.y * smoothstep(0.0, \
+			$Camera.move_speed_threshold.y, abs(S.velocity.y)) \
+			* sign(S.velocity.y)
+		$Camera.set_offset_from_type("move", Vector2(tx,ty), 0.4)
 	else :
 		$Camera.set_offset_from_type("normal")
 

@@ -1,4 +1,4 @@
-[gd_scene load_steps=32 format=2]
+[gd_scene load_steps=33 format=2]
 
 [ext_resource path="res://src/Player/Player.tscn" type="PackedScene" id=1]
 [ext_resource path="res://src/Platform/Tileset/TileMap1.tres" type="TileSet" id=2]
@@ -10,10 +10,11 @@
 [ext_resource path="res://assets/art/background/pixelBackground6.png" type="Texture" id=8]
 [ext_resource path="res://src/Platform/Tileset/TileMap2.tres" type="TileSet" id=9]
 [ext_resource path="res://src/Platform/World32.gd" type="Script" id=10]
-[ext_resource path="res://src/Levels/LevelHandler.gd" type="Script" id=11]
+[ext_resource path="res://src/Levels/RoomHandler.gd" type="Script" id=11]
 [ext_resource path="res://src/Platform/Tileset/TileMap3.tres" type="TileSet" id=12]
 [ext_resource path="res://src/Platform/Tileset/TilesetForeground.tres" type="TileSet" id=13]
 [ext_resource path="res://assets/shader/transition_circle.gdshader" type="Shader" id=14]
+[ext_resource path="res://src/Levels/Room.gd" type="Script" id=15]
 [ext_resource path="res://src/Platform/Tileset/Back16.tres" type="TileSet" id=30]
 [ext_resource path="res://src/Platform/Tileset/World16.tres" type="TileSet" id=31]
 [ext_resource path="res://src/Platform/Tileset/Graff.tres" type="TileSet" id=32]
@@ -53,6 +54,7 @@ tracks/1/keys = {
 }
 
 [sub_resource type="Animation" id=2]
+length = 1.2
 tracks/0/type = "method"
 tracks/0/path = NodePath(".")
 tracks/0/interp = 1
@@ -60,24 +62,27 @@ tracks/0/loop_wrap = true
 tracks/0/imported = false
 tracks/0/enabled = true
 tracks/0/keys = {
-"times": PoolRealArray( 1 ),
-"transitions": PoolRealArray( 1 ),
+"times": PoolRealArray( 1.2, 4.3 ),
+"transitions": PoolRealArray( 1, 1 ),
 "values": [ {
+"args": [ NodePath("..") ],
+"method": "exit_room"
+}, {
 "args": [  ],
 "method": "reload_level"
 } ]
 }
 tracks/1/type = "value"
 tracks/1/path = NodePath("CanvasLayer/Transition:material:shader_param/circle_size")
-tracks/1/interp = 1
+tracks/1/interp = 2
 tracks/1/loop_wrap = true
 tracks/1/imported = false
 tracks/1/enabled = true
 tracks/1/keys = {
-"times": PoolRealArray( 0, 1 ),
-"transitions": PoolRealArray( 1.8025, 0.329877 ),
+"times": PoolRealArray( 0, 0.5, 0.8, 1 ),
+"transitions": PoolRealArray( 1.8025, 0.329877, 0.329877, 0.329877 ),
 "update": 0,
-"values": [ 1.194, 0.0 ]
+"values": [ 1.194, 0.3, 0.25, 0.0 ]
 }
 tracks/2/type = "value"
 tracks/2/path = NodePath("CanvasLayer/Transition:visible")
@@ -86,7 +91,7 @@ tracks/2/loop_wrap = true
 tracks/2/imported = false
 tracks/2/enabled = true
 tracks/2/keys = {
-"times": PoolRealArray( 0, 1 ),
+"times": PoolRealArray( 0, 1.2 ),
 "transitions": PoolRealArray( 1, 1 ),
 "update": 1,
 "values": [ true, false ]
@@ -94,9 +99,10 @@ tracks/2/keys = {
 
 [sub_resource type="ShaderMaterial" id=3]
 shader = ExtResource( 14 )
-shader_param/circle_size = 1.194
+shader_param/circle_size = 0.0
 shader_param/screen_width = 800.0
 shader_param/screen_height = 400.0
+shader_param/center_offset = null
 
 [sub_resource type="Gradient" id=4]
 colors = PoolColorArray( 1.2, 1.3, 1.1, 1, 0, 0.671387, 0.78125, 1 )
@@ -130,21 +136,22 @@ adjustment_enabled = true
 adjustment_contrast = 1.08
 adjustment_saturation = 1.01
 
-[node name="Level" type="Node2D"]
+[node name="Room" type="Node2D"]
+script = ExtResource( 15 )
 __meta__ = {
 "_edit_lock_": true
 }
 
-[node name="LevelHandler" type="Node2D" parent="."]
+[node name="TransitionHandler" type="Node2D" parent="."]
 script = ExtResource( 11 )
 
-[node name="AnimationPlayer" type="AnimationPlayer" parent="LevelHandler"]
+[node name="AnimationPlayer" type="AnimationPlayer" parent="TransitionHandler"]
 anims/transition_in = SubResource( 1 )
 anims/transition_out = SubResource( 2 )
 
-[node name="CanvasLayer" type="CanvasLayer" parent="LevelHandler"]
+[node name="CanvasLayer" type="CanvasLayer" parent="TransitionHandler"]
 
-[node name="Transition" type="ColorRect" parent="LevelHandler/CanvasLayer"]
+[node name="Transition" type="ColorRect" parent="TransitionHandler/CanvasLayer"]
 material = SubResource( 3 )
 anchor_right = 1.0
 anchor_bottom = 1.0
@@ -152,6 +159,8 @@ color = Color( 0, 0.352941, 0.388235, 1 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
+
+[node name="Tween" type="Tween" parent="TransitionHandler"]
 
 [node name="ParallaxBackground" type="ParallaxBackground" parent="."]
 layer = -10

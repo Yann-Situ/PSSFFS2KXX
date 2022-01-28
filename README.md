@@ -63,6 +63,7 @@ Popol Super Slam Fusion Full Speed 2KXX
 * [ ] **shooting** just before **landing** results in `floor_shoot` just after `aim_shoot` animation
 * [ ] There is some jitter animation when passing from a **dunkjump** state to a **grind** state.
 * [ ] There is some jitter animation when passing from a **dunk** state to a **hang** state.
+* [ ] Hard to reproduce (see video) : **dunkjump** on **jumper** can result in very far from map position teleportation.
 
 ### Dynamic items
 * [ ] **Zipline** drop inside collision places results in stucked player.
