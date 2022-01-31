@@ -43,7 +43,7 @@ func _ready():
 
 				assert(tile_set.tile_get_tile_mode(tile_id) == 2)
 				var atlas_pos : int = get_cell_autotile_coord(cell.x,cell.y).x
-				print("button : "+str(cell)+" --- "+str(atlas_pos))
+				#print("button : "+str(cell)+" --- "+str(atlas_pos))
 				instance.activated = (atlas_pos % 2 == 1)
 				instance.button_type = (atlas_pos / 2)
 			"doors0" :
@@ -52,7 +52,7 @@ func _ready():
 
 				assert(tile_set.tile_get_tile_mode(tile_id) == 2)
 				var atlas_pos : int = get_cell_autotile_coord(cell.x,cell.y).x
-				print("door : "+str(cell)+" --- "+str(atlas_pos))
+				#print("door : "+str(cell)+" --- "+str(atlas_pos))
 				instance.activated = (atlas_pos % 2 == 1)
 				instance.visual_type = (atlas_pos / 2)
 			_ :

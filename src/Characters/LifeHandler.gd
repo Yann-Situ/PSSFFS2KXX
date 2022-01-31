@@ -29,7 +29,10 @@ func set_life(v):
 	
 func add_life(lp):
 	set_life(life+lp)
-	
+
+func reset_life():
+	set_life(max_life)
+
 func _ready():
 	self.add_to_group("damageables")
 	timer = Timer.new()

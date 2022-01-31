@@ -97,6 +97,7 @@ Popol Super Slam Fusion Full Speed 2KXX
 * [.] Need to implement Tilemap interactive objects rotation and flips.
 * [ ] On **baskets**, a ball that bounces on the ring can do multiple goals.
 * [ ] If multiple explosion breaks the same bloc, it can spawn copies.
+* [ ] Jitter animation when passing from a transition_in to transition_out using rooms.
 
 ### Potential Glitches
 * [ ] Pressing **jump** and **dunkdash** just before landing can result in small dunkdash/jump.

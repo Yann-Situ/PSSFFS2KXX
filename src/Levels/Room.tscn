@@ -1,4 +1,4 @@
-[gd_scene load_steps=33 format=2]
+[gd_scene load_steps=29 format=2]
 
 [ext_resource path="res://src/Player/Player.tscn" type="PackedScene" id=1]
 [ext_resource path="res://src/Platform/Tileset/TileMap1.tres" type="TileSet" id=2]
@@ -10,10 +10,9 @@
 [ext_resource path="res://assets/art/background/pixelBackground6.png" type="Texture" id=8]
 [ext_resource path="res://src/Platform/Tileset/TileMap2.tres" type="TileSet" id=9]
 [ext_resource path="res://src/Platform/World32.gd" type="Script" id=10]
-[ext_resource path="res://src/Levels/RoomHandler.gd" type="Script" id=11]
+[ext_resource path="res://src/Levels/Portal.tscn" type="PackedScene" id=11]
 [ext_resource path="res://src/Platform/Tileset/TileMap3.tres" type="TileSet" id=12]
 [ext_resource path="res://src/Platform/Tileset/TilesetForeground.tres" type="TileSet" id=13]
-[ext_resource path="res://assets/shader/transition_circle.gdshader" type="Shader" id=14]
 [ext_resource path="res://src/Levels/Room.gd" type="Script" id=15]
 [ext_resource path="res://src/Platform/Tileset/Back16.tres" type="TileSet" id=30]
 [ext_resource path="res://src/Platform/Tileset/World16.tres" type="TileSet" id=31]
@@ -26,98 +25,20 @@
 [ext_resource path="res://src/Platform/Graff.gd" type="Script" id=42]
 [ext_resource path="res://src/Platform/FrontEnvironment.gd" type="Script" id=43]
 
-[sub_resource type="Animation" id=1]
-resource_name = "transition_in"
-tracks/0/type = "value"
-tracks/0/path = NodePath("CanvasLayer/Transition:material:shader_param/circle_size")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/keys = {
-"times": PoolRealArray( 0, 1 ),
-"transitions": PoolRealArray( 0.329877, 1.8025 ),
-"update": 0,
-"values": [ 0.0, 1.194 ]
-}
-tracks/1/type = "value"
-tracks/1/path = NodePath("CanvasLayer/Transition:visible")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/keys = {
-"times": PoolRealArray( 0, 1 ),
-"transitions": PoolRealArray( 1, 1 ),
-"update": 1,
-"values": [ true, false ]
-}
-
-[sub_resource type="Animation" id=2]
-length = 1.2
-tracks/0/type = "method"
-tracks/0/path = NodePath(".")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/keys = {
-"times": PoolRealArray( 1.2, 4.3 ),
-"transitions": PoolRealArray( 1, 1 ),
-"values": [ {
-"args": [ NodePath("..") ],
-"method": "exit_room"
-}, {
-"args": [  ],
-"method": "reload_level"
-} ]
-}
-tracks/1/type = "value"
-tracks/1/path = NodePath("CanvasLayer/Transition:material:shader_param/circle_size")
-tracks/1/interp = 2
-tracks/1/loop_wrap = true
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/keys = {
-"times": PoolRealArray( 0, 0.5, 0.8, 1 ),
-"transitions": PoolRealArray( 1.8025, 0.329877, 0.329877, 0.329877 ),
-"update": 0,
-"values": [ 1.194, 0.3, 0.25, 0.0 ]
-}
-tracks/2/type = "value"
-tracks/2/path = NodePath("CanvasLayer/Transition:visible")
-tracks/2/interp = 1
-tracks/2/loop_wrap = true
-tracks/2/imported = false
-tracks/2/enabled = true
-tracks/2/keys = {
-"times": PoolRealArray( 0, 1.2 ),
-"transitions": PoolRealArray( 1, 1 ),
-"update": 1,
-"values": [ true, false ]
-}
-
-[sub_resource type="ShaderMaterial" id=3]
-shader = ExtResource( 14 )
-shader_param/circle_size = 0.0
-shader_param/screen_width = 800.0
-shader_param/screen_height = 400.0
-shader_param/center_offset = null
-
-[sub_resource type="Gradient" id=4]
+[sub_resource type="Gradient" id=1]
 colors = PoolColorArray( 1.2, 1.3, 1.1, 1, 0, 0.671387, 0.78125, 1 )
 
-[sub_resource type="GradientTexture" id=5]
-gradient = SubResource( 4 )
+[sub_resource type="GradientTexture" id=2]
+gradient = SubResource( 1 )
 width = 516
 
-[sub_resource type="Curve2D" id=6]
+[sub_resource type="Curve2D" id=3]
 resource_local_to_scene = true
 _data = {
 "points": PoolVector2Array( 0, 0, 0, 0, 32, 0, 0, 0, 0, 0, 288, 0 )
 }
 
-[sub_resource type="Environment" id=7]
+[sub_resource type="Environment" id=4]
 background_mode = 4
 auto_exposure_scale = 1.0
 auto_exposure_min_luma = 0.9
@@ -142,25 +63,16 @@ __meta__ = {
 "_edit_lock_": true
 }
 
-[node name="TransitionHandler" type="Node2D" parent="."]
-script = ExtResource( 11 )
+[node name="Portals" type="Node2D" parent="."]
 
-[node name="AnimationPlayer" type="AnimationPlayer" parent="TransitionHandler"]
-anims/transition_in = SubResource( 1 )
-anims/transition_out = SubResource( 2 )
+[node name="PortalDefault" parent="Portals" instance=ExtResource( 11 )]
+position = Vector2( -128, -160 )
+portal_type = 0
 
-[node name="CanvasLayer" type="CanvasLayer" parent="TransitionHandler"]
-
-[node name="Transition" type="ColorRect" parent="TransitionHandler/CanvasLayer"]
-material = SubResource( 3 )
-anchor_right = 1.0
-anchor_bottom = 1.0
-color = Color( 0, 0.352941, 0.388235, 1 )
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
-[node name="Tween" type="Tween" parent="TransitionHandler"]
+[node name="PortalSecret" parent="Portals" instance=ExtResource( 11 )]
+position = Vector2( 32, -32 )
+next_room = "Room"
+next_room_portal = "PortalDefault"
 
 [node name="ParallaxBackground" type="ParallaxBackground" parent="."]
 layer = -10
@@ -180,7 +92,7 @@ margin_right = 454.0
 margin_bottom = 1270.0
 rect_rotation = -89.9999
 mouse_filter = 2
-texture = SubResource( 5 )
+texture = SubResource( 2 )
 expand = true
 stretch_mode = 2
 __meta__ = {
@@ -395,16 +307,12 @@ z_index = 2
 
 [node name="RailLine" parent="Environment/Dynamics" instance=ExtResource( 3 )]
 position = Vector2( 160, 0 )
-curve = SubResource( 6 )
+curve = SubResource( 3 )
 
 [node name="Interactive" type="Node2D" parent="Environment"]
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
-environment = SubResource( 7 )
+environment = SubResource( 4 )
 
 [node name="Player" parent="." instance=ExtResource( 1 )]
-position = Vector2( 0, -32 )
-z_index = 10
-dunkjump_speed = -450.0
-dunkdash_speed = -600.0
-walk_return_thresh_instant_speed = 150.0
+position = Vector2( -24, -32 )

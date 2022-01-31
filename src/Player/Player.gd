@@ -63,14 +63,22 @@ func disable_physics():
 func enable_physics():
 	physics_enabled = true
 
-func reset_position():
-	position = start_position
-	LifeHandler.set_life(LifeHandler.max_life)
-	set_flip_h(false)
-
 func set_start_position(posi):
 	start_position = posi
-	global_position = posi
+
+func reset_position():
+	global_position = start_position
+
+func reset_holder():
+	get_out(global_position, S.velocity)
+	BallHandler.throw_ball(global_position, Vector2.ZERO)
+
+func reset_move():
+	reset_holder()
+	S.reset_state()
+	LifeHandler.reset_life()
+	set_flip_h(false)
+	reset_position()
 	
 ################################################################################
 	

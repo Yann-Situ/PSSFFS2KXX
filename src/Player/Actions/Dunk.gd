@@ -31,7 +31,9 @@ func move(delta):
 func move_dunk():
 	# at this point, S.dunk_basket can be null
 	P.get_node("Camera").screen_shake(0.3,30)
-	S.dunk_basket.dunk(P) # be careful, selected basket is sometimes null because the player got out of the zone...
+	if S.dunk_basket != null:
+		S.dunk_basket.dunk(P) # be careful, selected basket is sometimes null because the player got out of the zone...
 
 func move_hang():
-	S.dunk_basket.get_hanged(P)
+	if S.dunk_basket != null:
+		S.dunk_basket.get_hanged(P)

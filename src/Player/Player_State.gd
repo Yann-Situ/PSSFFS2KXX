@@ -77,20 +77,20 @@ var last_onair_velocity_y = 0
 var last_aim_jp = 0 # still used for shoot vector
 
 # Bool for actions
-export var is_jumping = false 
-export var is_walljumping = false 
-export var is_landing = false 
-export var is_landing_roll = false 
-export var is_dunkjumping = false 
+export var is_jumping = false
+export var is_walljumping = false
+export var is_landing = false
+export var is_landing_roll = false
+export var is_dunkjumping = false
 export var is_dunkprejumping = false
-export var is_dunkdashing = false 
-export var is_dunking = false 
-export var is_halfturning = false 
-export var is_crouching = false 
-export var is_aiming = false 
+export var is_dunkdashing = false
+export var is_dunking = false
+export var is_halfturning = false
+export var is_crouching = false
+export var is_aiming = false
 export var is_shooting = false
 
-export var is_grinding = false 
+export var is_grinding = false
 export var is_hanging = false
 
 var is_non_cancelable = false
@@ -108,22 +108,10 @@ var dunkjump_basket = null#pointer to the basket to dunkjump
 var dunk_basket = null
 
 func _ready():
-	is_jumping = false 
-	is_walljumping = false 
-	is_landing = false 
-	is_landing_roll = false 
-	is_dunkjumping = false 
-	is_dunkdashing = false 
-	is_dunking = false 
-	is_halfturning = false 
-	is_crouching = false 
-	is_aiming = false 
-	is_shooting = false
-	is_grinding = false 
-	is_hanging = false
+	reset_state()
 
 func _input(event):
-	
+
 	right_p = Input.is_action_pressed('ui_right')
 	left_p = Input.is_action_pressed('ui_left')
 	jump_jp = Input.is_action_just_pressed('ui_up')
@@ -140,7 +128,7 @@ func _input(event):
 	power_jp =  Input.is_action_just_pressed("ui_power")
 	power_jr =  Input.is_action_just_released("ui_power")
 	release_jp =  Input.is_action_just_pressed("ui_release")
-	
+
 	if jump_jp:
 		$ToleranceJumpPressTimer.start(tolerance_jump_press)
 	if dunk_jp:
@@ -175,7 +163,7 @@ func set_action(v): # for non_cancelable actions
 			is_shooting = false
 			is_dunking = false
 	is_non_cancelable = action_type != ActionType.NONE
-	
+
 func update_action(): # for non_cancelable actions with the following priority
 	if is_shooting:
 		set_action(ActionType.SHOOT)
@@ -194,12 +182,12 @@ func update_vars(delta):
 	# in Player.gd
 	#
 	time += delta # still used in the current shoot vector implementation... to change
-	
+
 	last_frame_onair = not is_onfloor
-	
+
 	Player.SpecialActionHandler.update_space_state()
 	Player.SpecialActionHandler.update_basket()
-	
+
 	is_onfloor = Player.SpecialActionHandler.is_on_floor()
 	is_onwall = Player.SpecialActionHandler.is_on_wall()
 	is_moving_fast = (abs(velocity.x) > Player.run_speed_thresh)
@@ -221,13 +209,13 @@ func update_vars(delta):
 		direction_p += 1
 	if left_p :
 		direction_p -= 1
-	
+
 	var dir_sprite = 1;
 	if self.get_parent().flip_h :
 		dir_sprite = -1;
-	
+
 	# non-cancelables :
-	#is_shooting = is_shooting 
+	#is_shooting = is_shooting
 	#is_dunking = is_dunking
 	is_dunkdashing = is_dunkdashing and not is_onfloor and dunk_p
 	is_dunkprejumping = is_dunkprejumping and !(is_dunking or is_dunkdashing)
@@ -236,7 +224,7 @@ func update_vars(delta):
 			is_dunkdashing or is_hanging or is_grinding)) or \
 		is_dunkprejumping
 	update_action()
-	
+
 	# possibilities can_*
 	can_jump = not $ToleranceJumpFloorTimer.is_stopped() and \
 		$CanJumpTimer.is_stopped()
@@ -246,7 +234,7 @@ func update_vars(delta):
 		not is_dunkdashing and not is_dunking
 	can_crouch = is_onfloor
 	can_aim = $CanShootTimer.is_stopped() and has_ball and active_ball != null and not is_dunking
-	can_shoot = is_aiming and has_ball and active_ball != null 
+	can_shoot = is_aiming and has_ball and active_ball != null
 	can_dunkdash = can_jump and Player.SpecialActionHandler.can_dunkjump() and not is_non_cancelable
 	can_dunkjump = can_dunkdash and $CanDunkjumpTimer.is_stopped()
 	can_dunk = $CanDunkTimer.is_stopped() and \
@@ -255,15 +243,15 @@ func update_vars(delta):
 	can_stand = Player.SpecialActionHandler.can_stand()
 	can_grind = !is_hanging and !is_dunking
 	can_hang = true
-	
+
 	# cancelables :
 	is_jumping = is_jumping and not is_onfloor and is_mounting
 	is_walljumping = is_walljumping and is_jumping
 	is_crouching = (is_onfloor and is_crouching) or not can_stand# handle by player actions (start)
-	
+
 	is_hanging = is_hanging and !crouch_p
 	is_grinding = is_grinding and !is_hanging and !crouch_p
-	
+
 	is_landing = is_onfloor and not is_onwall and (is_landing or \
 		(last_frame_onair and last_onair_velocity_y > Player.landing_velocity_thresh)) and \
 		not is_non_cancelable# stop also handled by animation
@@ -272,4 +260,82 @@ func update_vars(delta):
 		is_onfloor and !(is_idle or direction_p == 0 or is_crouching or is_landing or \
 			is_onwall or is_non_cancelable) # handle by player actions
 	is_aiming = is_aiming and has_ball and active_ball != null and not is_non_cancelable
-	
+
+###############################################################################
+func disable_input():
+	set_process_input(false)
+	right_p = false
+	left_p = false
+	jump_jp = false
+	jump_p = false
+	jump_jr = false
+	crouch_p = false
+	aim_jp = false
+	shoot_jr = false
+	dunk_p = false
+	dunk_jr = false
+	dunk_jp = false
+	select_jp = false
+	power_p = false
+	power_jp = false
+	power_jr = false
+	release_jp = false
+
+func enable_input():
+	set_process_input(true)
+
+func reset_state():
+	can_jump = false
+	can_walljump = false
+	can_go = false
+	can_crouch = false
+	can_aim = false
+	can_shoot = false
+	can_dunkjump = false
+	can_dunkdash = false
+	can_dunk = false
+	can_stand = false
+	can_grind = false
+	can_hang = false
+
+	is_onfloor = false
+	is_onwall = false
+	is_moving_fast = false
+	is_falling = false
+	is_mounting = false
+	is_moving = false
+	is_idle = false
+
+	move_direction = 0
+	direction_p = 0
+	aim_direction = 0
+	velocity = Vector2.ZERO
+
+	last_frame_onair = false
+	last_wall_normal_direction = 0
+	last_onair_velocity_y = 0
+	last_aim_jp = 0
+
+	is_jumping = false
+	is_walljumping = false
+	is_landing = false
+	is_landing_roll = false
+	is_dunkjumping = false
+	is_dunkdashing = false
+	is_dunking = false
+	is_halfturning = false
+	is_crouching = false
+	is_aiming = false
+	is_shooting = false
+	is_grinding = false
+	is_hanging = false
+
+	is_non_cancelable = false
+	is_dunkjumphalfturning = false
+
+	has_ball = false
+	active_ball = null
+	released_ball = null
+	selected_ball = null
+	dunkjump_basket = null
+	dunk_basket = null
