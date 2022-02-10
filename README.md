@@ -63,7 +63,9 @@ Popol Super Slam Fusion Full Speed 2KXX
 * [ ] **shooting** just before **landing** results in `floor_shoot` just after `aim_shoot` animation
 * [ ] There is some jitter animation when passing from a **dunkjump** state to a **grind** state.
 * [ ] There is some jitter animation when passing from a **dunk** state to a **hang** state.
-* [ ] Hard to reproduce (see video) : **dunkjump** on **jumper** can result in very far from map position teleportation.
+* [ ] Hard to reproduce (see video) : **dunkjump** on **jumper** can result in very far from map position teleportation. (because to low to mathematically dunkjump => negative value ?)
+* [ ] Infinite **walking** animation on 16px block stairs.
+* [ ] High jump when jump_jp and jump_jr just before landing (because the cancelled mounting only test jump_jr).
 
 ### Dynamic items
 * [ ] **Zipline** drop inside collision places results in stucked player.
@@ -98,6 +100,7 @@ Popol Super Slam Fusion Full Speed 2KXX
 * [ ] On **baskets**, a ball that bounces on the ring can do multiple goals.
 * [ ] If multiple explosion breaks the same bloc, it can spawn copies.
 * [ ] Jitter animation when passing from a transition_in to transition_out using rooms.
+* [ ] Using the power of a selected ball that died results in error. => Implement a die signal.
 
 ### Potential Glitches
 * [ ] Pressing **jump** and **dunkdash** just before landing can result in small dunkdash/jump.

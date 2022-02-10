@@ -1,4 +1,4 @@
-[gd_scene load_steps=23 format=2]
+[gd_scene load_steps=24 format=2]
 
 [ext_resource path="res://assets/art/environment/environment-interactive.png" type="Texture" id=1]
 [ext_resource path="res://src/Items/Baskets/Basket.gd" type="Script" id=2]
@@ -8,6 +8,7 @@
 [ext_resource path="res://assets/art/effects/light5_1.png" type="Texture" id=6]
 [ext_resource path="res://assets/art/effects/light5_3.png" type="Texture" id=7]
 [ext_resource path="res://assets/art/effects/light5_2.png" type="Texture" id=8]
+[ext_resource path="res://src/Items/Interactive/Selectable.gd" type="Script" id=9]
 
 [sub_resource type="AtlasTexture" id=1]
 atlas = ExtResource( 1 )
@@ -119,12 +120,13 @@ hang_position_offset_y = 36
 use_parent_material = true
 position = Vector2( 0, 6 )
 frames = SubResource( 6 )
-frame = 3
+frame = 2
 playing = true
 
 [node name="basket_area" type="Area2D" parent="."]
 collision_layer = 40
 collision_mask = 4
+script = ExtResource( 9 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="basket_area"]
 modulate = Color( 0, 1, 0.0392157, 1 )

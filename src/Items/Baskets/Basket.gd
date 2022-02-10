@@ -76,22 +76,6 @@ func goal(body,score):
 		$CPUParticles2D.amount = 20
 	$CPUParticles2D.restart()
 
-func enable_contour():
-	var light = $LightSmall
-	var tween = $LightSmall/Tween
-	if tween.is_active():
-		tween.remove_all()
-	tween.interpolate_property(light, "energy", light.energy, 0.8, 0.15, 0, Tween.EASE_OUT)
-	tween.start()
-	
-func disable_contour():
-	var light = $LightSmall
-	var tween = $LightSmall/Tween
-	if tween.is_active():
-		tween.remove_all()
-	tween.interpolate_property(light, "energy", light.energy, 0.0, 0.15, 0, Tween.EASE_OUT)
-	tween.start()
-
 func get_closest_point(global_pos : Vector2):
 	var p = global_pos - self.global_position
 	var basket_dir = Vector2.RIGHT.rotated(global_rotation)
@@ -131,3 +115,27 @@ func remove_body(i : int):
 	assert(i < inside_bodies.size())
 	inside_bodies.remove(i)
 	bodies_positions.remove(i)
+
+################################################################################
+
+func set_selection(type : int, value : bool):
+	if $basket_area.selected:
+		enable_contour()
+	else:
+		disable_contour()
+	
+func enable_contour():
+	var light = $LightSmall
+	var tween = $LightSmall/Tween
+	if tween.is_active():
+		tween.remove_all()
+	tween.interpolate_property(light, "energy", light.energy, 0.8, 0.15, 0, Tween.EASE_OUT)
+	tween.start()
+	
+func disable_contour():
+	var light = $LightSmall
+	var tween = $LightSmall/Tween
+	if tween.is_active():
+		tween.remove_all()
+	tween.interpolate_property(light, "energy", light.energy, 0.0, 0.15, 0, Tween.EASE_OUT)
+	tween.start()

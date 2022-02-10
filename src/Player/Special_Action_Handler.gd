@@ -2,6 +2,7 @@ extends Node2D
 
 onready var Player = get_parent().get_parent()
 onready var S = Player.get_node("State")
+onready var Selector = get_parent().get_node("Selector")
 
 export var distaction = Vector2(8.1,0)
 export var color = Color(1.0,0.3,0.1)
@@ -36,13 +37,12 @@ func update_space_state():
 		r.updated = false
 
 func update_basket():
-	var previous_basket = S.dunkjump_basket
+	var selectable_node = null
 
-	S.dunkjump_basket = null
-	var baskets = $dunkjump_area.get_overlapping_areas()
-	if !baskets.empty():
-		# choose by priority baskets that are in direction_p, closest above player
-		var b = baskets[0].get_parent() # `get_parent` because we're
+	var basket_areas = $dunkjump_area.get_overlapping_areas()
+	if !basket_areas.empty():
+		# choose by priority basket_areas that are in direction_p, closest above player
+		var b = basket_areas[0].get_parent() # `get_parent` because we're
 		# detecting the basket_area node
 		var q = (b.position-Player.position)
 		var direction = S.direction_p
@@ -57,9 +57,9 @@ func update_basket():
 		var best_dist2 = $dunkjump_area/CollisionShape2D.shape.radius
 		best_dist2 *= 2 * best_dist2
 		var best_direction = -2
-		
-		for i in range(baskets.size()):
-			b = baskets[i].get_parent() # `get_parent` because we're detecting the basket_area node
+
+		for i in range(basket_areas.size()):
+			b = basket_areas[i].get_parent() # `get_parent` because we're detecting the basket_area node
 			if !b.can_receive_dunkjump:
 				continue
 			q = (b.position-Player.position)
@@ -81,16 +81,14 @@ func update_basket():
 			if direction*dir == best_direction and q.y > best_y:
 				continue
 
-			S.dunkjump_basket = b
 			best_y = q.y
 			best_dist2 = q.length_squared()
 			best_direction = direction*dir
+			
+			selectable_node = basket_areas[i]
 
-	if S.dunkjump_basket != previous_basket:
-		if previous_basket != null:
-			previous_basket.disable_contour()
-		if S.dunkjump_basket != null:
-			S.dunkjump_basket.enable_contour()
+	Selector.update_selection(2,selectable_node)
+	Selector.update_selection(1,selectable_node)
 
 func cast(r): #we must have updated the space_state before
 	if not r.updated:
@@ -139,14 +137,14 @@ func can_dunkjump():
 	return S.dunkjump_basket != null
 
 func can_dunk():
-	var baskets = $dunk_area.get_overlapping_areas()
-	if !baskets.empty():
+	var basket_areas = $dunk_area.get_overlapping_areas()
+	if !basket_areas.empty():
 		var b = null
 		S.dunk_basket = b
 		var r = $dunk_area/CollisionShape2D.shape.radius
 		var min_len_sq = r*r
-		for i in range(baskets.size()):
-			b = baskets[i].get_parent() # `get_parent` because we're
+		for i in range(basket_areas.size()):
+			b = basket_areas[i].get_parent() # `get_parent` because we're
 		# detecting the basket_area node
 			var l2 = (b.position - Player.position).length_squared()
 			if b.can_receive_dunk and l2 < min_len_sq :

@@ -1,4 +1,4 @@
-[gd_scene load_steps=174 format=2]
+[gd_scene load_steps=176 format=2]
 
 [ext_resource path="res://src/Player/Player.gd" type="Script" id=1]
 [ext_resource path="res://assets/art/characters/Player.png" type="Texture" id=2]
@@ -30,6 +30,7 @@
 [ext_resource path="res://assets/art/effects/offset_glow.png" type="Texture" id=28]
 [ext_resource path="res://src/Player/Actions/Release.gd" type="Script" id=29]
 [ext_resource path="res://src/Characters/LifeHandler.gd" type="Script" id=30]
+[ext_resource path="res://src/Items/Interactive/SelectorTarget.tscn" type="PackedScene" id=31]
 [ext_resource path="res://src/Characters/Actions/Grind.gd" type="Script" id=32]
 [ext_resource path="res://assets/art/gui/energy_bar_bg.png" type="Texture" id=33]
 [ext_resource path="res://assets/art/icons/popol.png" type="Texture" id=34]
@@ -38,6 +39,7 @@
 [ext_resource path="res://src/Items/Interactive/Damageable.gd" type="Script" id=37]
 [ext_resource path="res://src/Player/Actions/Dunkdash.gd" type="Script" id=38]
 [ext_resource path="res://src/Characters/Actions/Hang.gd" type="Script" id=39]
+[ext_resource path="res://src/Player/Selector.gd" type="Script" id=40]
 
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 8, 26 )
@@ -1604,6 +1606,22 @@ collision_mask = 32
 modulate = Color( 1, 0.490196, 0.870588, 1 )
 shape = SubResource( 3 )
 
+[node name="Selector" type="Node2D" parent="Actions"]
+script = ExtResource( 40 )
+
+[node name="ShootTarget" parent="Actions/Selector" instance=ExtResource( 31 )]
+modulate = Color( 0.45098, 0.921569, 1, 1 )
+rotation = 1.5708
+scale = Vector2( 0.5, 0.5 )
+
+[node name="DashTarget" parent="Actions/Selector" instance=ExtResource( 31 )]
+modulate = Color( 1, 0.572549, 0.121569, 1 )
+rotation = 0.785398
+scale = Vector2( 0.75, 0.75 )
+
+[node name="JumpTarget" parent="Actions/Selector" instance=ExtResource( 31 )]
+modulate = Color( 1.1, 0.3, 0.7, 1 )
+
 [node name="ShootPredictor" type="Node2D" parent="Actions"]
 position = Vector2( 1, 1 )
 script = ExtResource( 3 )
@@ -1659,7 +1677,7 @@ texture = ExtResource( 2 )
 offset = Vector2( 0.5, 0 )
 hframes = 16
 vframes = 20
-frame = 204
+frame = 194
 __meta__ = {
 "_edit_group_": true,
 "_edit_lock_": true
@@ -1798,7 +1816,7 @@ position = Vector2( 0, 5 )
 shape = SubResource( 134 )
 
 [node name="HasBallPosition" type="Node2D" parent="BallHandler"]
-position = Vector2( 5.00001, 0 )
+position = Vector2( 8.99999, 12 )
 __meta__ = {
 "_edit_group_": true
 }

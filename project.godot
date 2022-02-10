@@ -64,6 +64,16 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://src/Levels/Room.gd"
 }, {
+"base": "CollisionObject2D",
+"class": "Selectable",
+"language": "GDScript",
+"path": "res://src/Items/Interactive/Selectable.gd"
+}, {
+"base": "Sprite",
+"class": "SelectorTarget",
+"language": "GDScript",
+"path": "res://src/Items/Interactive/SelectorTarget.gd"
+}, {
 "base": "Node2D",
 "class": "ZipLine",
 "language": "GDScript",
@@ -81,6 +91,8 @@ _global_script_class_icons={
 "Portal2D": "",
 "RailLine": "res://assets/art/icons/railline.png",
 "Room": "",
+"Selectable": "res://assets/art/icons/targeted.png",
+"SelectorTarget": "res://assets/art/icons/target.png",
 "ZipLine": "res://assets/art/icons/zipline.png"
 }
 
@@ -214,7 +226,7 @@ ui_restart={
 2d_render/layer_4="graff"
 2d_physics/layer_4="environment_special"
 2d_physics/layer_5="explosion"
-2d_physics/layer_6="basket"
+2d_physics/layer_6="selectable"
 2d_physics/layer_7="breakable"
 2d_physics/layer_8="electric"
 2d_physics/layer_9="damageable"
