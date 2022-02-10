@@ -286,6 +286,20 @@ tracks/1/keys = {
 "update": 1,
 "values": [ Vector2( 9, 6 ), Vector2( 11, -14 ), Vector2( 6, -31 ), Vector2( -3, -35 ), Vector2( -16, -31 ) ]
 }
+tracks/2/type = "method"
+tracks/2/path = NodePath("../Actions/Dunkdash")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0.15 ),
+"transitions": PoolRealArray( 1 ),
+"values": [ {
+"args": [  ],
+"method": "move_end"
+} ]
+}
 
 [sub_resource type="Animation" id=10]
 step = 0.056
@@ -1677,7 +1691,7 @@ texture = ExtResource( 2 )
 offset = Vector2( 0.5, 0 )
 hframes = 16
 vframes = 20
-frame = 194
+frame = 199
 __meta__ = {
 "_edit_group_": true,
 "_edit_lock_": true
@@ -1816,7 +1830,7 @@ position = Vector2( 0, 5 )
 shape = SubResource( 134 )
 
 [node name="HasBallPosition" type="Node2D" parent="BallHandler"]
-position = Vector2( 8.99999, 12 )
+position = Vector2( -7, -6 )
 __meta__ = {
 "_edit_group_": true
 }

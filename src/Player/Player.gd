@@ -4,10 +4,10 @@ class_name Player, "res://assets/art/icons/popol.png"
 export (bool) var physics_enabled = true
 
 # Environment features (should be given by the map)
-export (float) var gravity = ProjectSettings.get_setting("physics/2d/default_gravity") # pix/s²
 export (float) var floor_friction = 0.2 # ratio/frame
 export (float) var air_friction = 0.0 # ratio/frame
 export (float) var attract_force = 800 # m.pix/s²
+export (Vector2) var gravity # pix/s²
 
 # Crouch features
 export (float) var crouch_speed_max = 300 # pix/s
@@ -48,7 +48,10 @@ onready var LifeHandler = get_node("LifeHandler")
 
 onready var start_position = global_position
 
-var invmass = 1.0/4.0
+onready var based_gravity = Vector2(0.0,ProjectSettings.get_setting("physics/2d/default_gravity")) # pix/s²
+
+onready var invmass = 1.0/4.0
+
 var character_holder = null
 
 func disp(s):
@@ -79,9 +82,9 @@ func reset_move():
 	LifeHandler.reset_life()
 	set_flip_h(false)
 	reset_position()
-	
+
 ################################################################################
-	
+
 func _ready():
 	Global.list_of_physical_nodes.append(self)
 	self.z_as_relative = false
@@ -93,6 +96,8 @@ func _ready():
 	if !Global.playing:
 		Global.toggle_playing()
 	Global.camera = $Camera
+	
+	gravity = based_gravity
 
 func set_flip_h(b):
 	flip_h  = b
@@ -166,6 +171,9 @@ func get_input(delta): #delta in s
 
 	if S.release_jp :
 		$Actions/Release.move(delta)
+
+	# GRAVITY:
+
 	# SHADER:
 	#$Sprite.material.set("shader_param/speed",S.velocity)
 
@@ -182,10 +190,10 @@ func get_input(delta): #delta in s
 		var shoot = ShootPredictor.shoot_vector()
 		if S.power_p and S.selected_ball == S.active_ball :
 			ShootPredictor.draw_attract(BallHandler.get_throw_position()-self.position, shoot+0.5*S.velocity,
-				S.active_ball.get_gravity_scale()*Vector2(0,gravity), attract_force/S.active_ball.mass)
+				S.active_ball.get_gravity_scale()*gravity, attract_force/S.active_ball.mass)
 		else :
 			ShootPredictor.draw(BallHandler.get_throw_position()-self.position, shoot+0.5*S.velocity,
-				S.active_ball.get_gravity_scale()*Vector2(0,gravity))
+				S.active_ball.get_gravity_scale()*gravity)
 		$Camera.set_offset_from_type("aim",shoot.normalized())
 		if shoot.x > 0 :
 			S.aim_direction = 1
@@ -210,11 +218,6 @@ func get_input(delta): #delta in s
 	# ANIMATION:
 	$Sprite/AnimationTree.animate_from_state(S)
 
-	if S.jump_jp:
-		LifeHandler.apply_life(2.0, 2.0)
-
-	if S.dunk_jp:
-		LifeHandler.apply_damage(1.0)
 	S.jump_jp = false
 	S.jump_jr = false
 	S.aim_jp = false
@@ -231,19 +234,21 @@ func get_input(delta): #delta in s
 func apply_impulse(impulse):
 	S.velocity += invmass * impulse
 
+func apply_gravity(delta):
+	if S.is_onwall and S.velocity.y > 0: #fall on a wall
+		S.velocity += gravity/2.0 * delta
+		S.velocity.y = min(S.velocity.y,max_speed_fall_onwall)
+	else :
+		S.velocity += gravity * delta
+		if S.velocity.y > max_speed_fall:
+			S.velocity.y = max_speed_fall
+
 func _physics_process(delta):
 	get_input(delta)
 #	if S.velocity == Vector2.ZERO and !S.is_onfloor:
 #		print("ZERO")
 	if physics_enabled:
-		if S.is_onwall and S.velocity.y > 0: #fall on a wall
-			S.velocity.y += gravity/2.0 * delta
-			S.velocity.y = min(S.velocity.y,max_speed_fall_onwall)
-		else :
-			S.velocity.y += gravity * delta
-			if S.velocity.y > max_speed_fall:
-				S.velocity.y = max_speed_fall
-		
+		apply_gravity(delta)
 		if SpecialActionHandler.is_on_slope() and S.velocity.y > - abs(S.velocity.x) :
 			S.velocity.y = 0.5*sqrt(2) * move_and_slide_with_snap(S.velocity, 33*Vector2.DOWN, Vector2.UP, true, 4, 0.785398, false).y
 		else :

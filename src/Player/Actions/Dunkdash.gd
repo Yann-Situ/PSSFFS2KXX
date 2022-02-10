@@ -1,10 +1,11 @@
 extends Action
 
-export var up_distance_to_basket = 32#px
+export var up_distance_to_basket = 0#px
 export var max_dunkdash_distance = 180#px
 export(Color, RGBA) var ghost_modulate
 
 func move(delta):
+	print("begindash")
 	# Change hitbox + other animation things like sliding etc.
 #	var anim = get_parent().get_parent().get_node("Sprite/AnimationTree3")
 	S.is_aiming = false # cancel aiming for the moment
@@ -12,6 +13,8 @@ func move(delta):
 	P.ShootPredictor.clear()
 	S.is_dunkdashing = true
 	S.set_action(S.ActionType.DUNKDASH)
+	P.gravity = Vector2.ZERO
+	
 	P.PlayerEffects.dust_start()
 	P.PlayerEffects.jump_start()
 	P.PlayerEffects.ghost_start(0.35,0.07, ghost_modulate)
@@ -25,3 +28,6 @@ func move(delta):
 	#print("Velocity: "+str(S.velocity))
 	P.get_node("Camera").screen_shake(0.2,10)
 
+func move_end():
+	print("enddash")
+	P.gravity = P.based_gravity

@@ -34,7 +34,7 @@ func move_jump():
 	
 	var q = basket.get_closest_point(P.global_position) - P.global_position
 	var B = P.dunkjump_speed * q.x / q.y
-	var C = -P.gravity * 0.5 * q.x*q.x/q.y
+	var C = -P.gravity.y * 0.5 * q.x*q.x/q.y
 	var vox1 = 0.5*(B - sqrt(B*B-4*C))
 	var vox2 = 0.5*(B + sqrt(B*B-4*C))
 	if (abs(vox2) < abs(vox1)):
@@ -46,3 +46,5 @@ func move_jump():
 	#print("Velocity: "+str(S.velocity))
 	P.get_node("Camera").screen_shake(0.2,10)
 
+func move_end():
+	pass

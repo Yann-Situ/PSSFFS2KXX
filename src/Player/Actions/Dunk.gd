@@ -37,3 +37,6 @@ func move_dunk():
 func move_hang():
 	if S.dunk_basket != null:
 		S.dunk_basket.get_hanged(P)
+
+func move_end():
+	pass

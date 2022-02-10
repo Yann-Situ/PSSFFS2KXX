@@ -1,6 +1,7 @@
 extends Node
 
 onready var Player = get_parent()
+onready var Actions = Player.get_node("Actions")
 
 var frame_time_ms = 1.0/60.0 #s
 var time = 0.0#s
@@ -137,33 +138,26 @@ func _input(event):
 		$ToleranceDunkJumpPressTimer.start(tolerance_jump_press)
 
 func set_action(v): # for non_cancelable actions
+	is_shooting = is_shooting and v == ActionType.SHOOT
+	is_dunkdashing = is_dunkdashing and v == ActionType.DUNKDASH
+	is_dunking = is_dunking and v == ActionType.DUNK
+	is_dunkjumping = is_dunkjumping and v == ActionType.DUNKJUMP
+	is_dunkprejumping = is_dunkprejumping and v == ActionType.DUNKJUMP
+	
+	if action_type != v:
+		match action_type:
+			ActionType.SHOOT:
+				Actions.get_node("Shoot").move_end()
+			ActionType.DUNKDASH:
+				Actions.get_node("Dunkdash").move_end()
+			ActionType.DUNK:
+				Actions.get_node("Dunk").move_end()
+			ActionType.DUNKJUMP:
+				Actions.get_node("Dunkjump").move_end()
+			_:
+				pass
+	
 	action_type = v
-	match action_type:
-		ActionType.NONE:
-			is_shooting = false
-			is_dunkdashing = false
-			is_dunking = false
-			is_dunkjumping = false
-			is_dunkprejumping = false
-		ActionType.SHOOT:
-			is_dunkdashing = false
-			is_dunking = false
-			is_dunkjumping = false
-			is_dunkprejumping = false
-		ActionType.DUNK:
-			is_dunkdashing = false
-			is_shooting = false
-			is_dunkjumping = false
-			is_dunkprejumping = false
-		ActionType.DUNKDASH:
-			is_dunking = false
-			is_shooting = false
-			is_dunkjumping = false
-			is_dunkprejumping = false
-		ActionType.DUNKJUMP:
-			is_dunkdashing = false
-			is_shooting = false
-			is_dunking = false
 	is_non_cancelable = action_type != ActionType.NONE
 
 func update_action(): # for non_cancelable actions with the following priority

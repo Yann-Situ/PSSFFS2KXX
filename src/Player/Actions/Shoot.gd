@@ -10,3 +10,6 @@ func move(delta):
 	#Engine.time_scale = 1.0
 	P.ShootPredictor.clear()
 	#throw_ball()+free_ball in Ball_handler	called by animation
+
+func move_end():
+	pass
