@@ -1,14 +1,14 @@
 extends Node2D
 class_name Portal2D
 
-enum PortalType {ENTRANCE, EXIT, BOTH}
+enum PortalType {ENTRANCE, EXIT, BOTH, EXIT_LEVEL}
 export (PortalType) var portal_type = PortalType.BOTH setget set_portal_type
 
 enum TriggerType {ON_BODY_ENTER, ON_KEY_E}
 export (TriggerType) var trigger_type = TriggerType.ON_BODY_ENTER setget set_trigger_type
 
-export (String) var next_room
-export (String) var next_room_portal
+export (String) var next_room setget set_next_room, get_next_room
+export (String) var next_room_portal setget set_next_room_portal, get_next_room_portal
 
 onready var room = get_parent().get_parent()
 onready var P = room.get_node("Player")
@@ -18,15 +18,30 @@ func set_portal_type(new_type):
 	portal_type = new_type
 	if portal_type == PortalType.ENTRANCE or portal_type == PortalType.BOTH:
 		pass
-	if portal_type == PortalType.EXIT or portal_type == PortalType.BOTH:
+	if portal_type == PortalType.EXIT or \
+	   portal_type == PortalType.BOTH or \
+   	   portal_type == PortalType.EXIT_LEVEL :
 		if trigger_type == TriggerType.ON_BODY_ENTER:
 			$Area2D.connect("body_entered", self, "_on_Area2D_body_entered")
 		elif trigger_type == TriggerType.ON_KEY_E :
 			pass # TO IMPLEMENT [TODO]
-			
+
 func set_trigger_type(new_type):
 	trigger_type = new_type
 	set_portal_type(portal_type)
+
+func set_next_room(_next_room : String):
+	next_room = _next_room
+
+func set_next_room_portal(_next_room_portal : String):
+	next_room_portal = _next_room_portal
+
+func get_next_room():
+	return next_room
+
+func get_next_room_portal():
+	return next_room_portal
+
 ################################################################################
 func disp(s:String):
 	print(s)
@@ -39,7 +54,7 @@ func _ready():
 func reload_portal():
 	transition_out()
 	yield(get_node("AnimationPlayer"), "animation_finished")
-	enter()
+	enter_portal()
 
 func transition_in():
 	#Transition.material.set("shader_param/center_offset", Vector2(0.0,0.0))
@@ -56,13 +71,16 @@ func transition_out():
 	#$Tween.start()
 	$AnimationPlayer.play("transition_out")
 
-func exit():
+func exit_portal():
 	transition_out()
 	P.S.disable_input()
 	yield(get_node("AnimationPlayer"), "animation_finished")
-	room.exit_room(next_room, next_room_portal)
-	
-func enter():
+	if portal_type != PortalType.EXIT_LEVEL:
+		room.exit_room(next_room, next_room_portal)
+	else :
+		room.exit_level(self.name)
+
+func enter_portal():
 	P.set_start_position(self.global_position)
 	P.reset_move()
 	P.S.enable_input()
@@ -72,4 +90,4 @@ func enter():
 
 func _on_Area2D_body_entered(body):
 	if body == P:
-		exit()
+		exit_portal()
