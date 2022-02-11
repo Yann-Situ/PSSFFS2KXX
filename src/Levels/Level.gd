@@ -12,11 +12,11 @@ func _ready():
 	pass # Replace with function body.
 
 func preload_rooms():
-	browse(first_room)
+	browse_rooms(first_room)
 
 func browse_rooms(room_name : String):
 	if !rooms.has(room_name):
-		var packed_room = preload(room_name)
+		var packed_room = load(room_name)
 		if packed_room == null:
 			printerr("can't preload "+room_name+" because it doesn't exist.")
 			return
@@ -38,7 +38,7 @@ func exit_level(exit_room : String, exit_room_portal : String):
 	print_debug("exit_level called on "+name+" on room "+exit_room+" at portal "+exit_room_portal)
 
 func change_room(next_room : String, next_room_portal : String):
-	if self.has_child(actual_room_instance):
+	if self.is_a_parent_of(actual_room_instance):
 		self.remove_child(actual_room_instance)
 	if rooms.has(next_room):
 		actual_room_instance = rooms[next_room]

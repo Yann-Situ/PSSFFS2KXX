@@ -13,7 +13,7 @@ func get_portal(portal_name : String):
 	if portals.has(portal_name):
 		return portals[portal_name]
 	else :
-		printerr(next_portal+" not found in room "+self.name)
+		printerr(portal_name+" not found in room "+self.name)
 		return null
 
 ################################################################################
