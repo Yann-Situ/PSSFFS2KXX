@@ -4,17 +4,17 @@ Popol Super Slam Fusion Full Speed 2KXX
 
 ## Work to do
 * Graphism :
-   - [.] environment elements
-   - [.] other tilesets
-   - [.] other background
-   - [.] all movement sprites
+   - :pushpin: environment elements
+   - :pushpin: other tilesets
+   - :pushpin: other background
+   - :pushpin: all movement sprites
    - [ ] UI graphism such as tag-police
 * Moveset improvment :
    - [x] add dunk
    - [x] handle crouch
    - [x] add landing anim
    - [x] add turn back anim
-   - [.] add slide
+   - :pushpin: add slide
    - [ ] with and without balls anim
    - [x] improve wall jump (feet must be on wall ?)
    - [ ] add multiple shoot types
@@ -23,11 +23,11 @@ Popol Super Slam Fusion Full Speed 2KXX
    - [x] baskets
    - [x] spawners
    - [x] activable
-   - [.] ziplines -> to rework
-   - [.] Add enemies and NPC
+   - :pushpin: ziplines -> to rework
+   - :pushpin: Add enemies and NPC
    - [x] Add destroyable blocks
    - [ ] Add one way platforms and ball-doors / player-doors
-   - [.] pipes (TODO : change bounding box + handle multiple sides + be careful on exit_throw)
+   - :pushpin: pipes (TODO : change bounding box + handle multiple sides + be careful on exit_throw)
 * Add point system
    - [ ] UI for combos
    - [ ] Combo and point system
@@ -37,8 +37,8 @@ Popol Super Slam Fusion Full Speed 2KXX
    - [ ] improve animation of balls
    - [ ] squish anim for squish balls
    - [x] add several balls (bouncy ball, fire ball, linked ball, phantom ball)
-   - [.] handle interactions with environment elements
-   - [.] Add new powers when selection+active (such as megaBOUM, dash, RollingDestroying...)
+   - :pushpin: handle interactions with environment elements
+   - :pushpin: Add new powers when selection+active (such as megaBOUM, dash, RollingDestroying...)
 * Juice :
    - [x] Camera shake on heavy ball, dunks and other style action
    - [x] particles on balls, dust on footsteps & slide
@@ -79,10 +79,11 @@ Popol Super Slam Fusion Full Speed 2KXX
     - Implement the `riding` and `hanging` states.
 * [ ] Entering **Pipe** at perfect frame when disabling the **Pipe** can result in a disabled ball floating in the air. -> don't stop the tween to enter the pipe when disabling the pipe.
 
+
 ### Misc physics
 * [x] TileMap hitboxes (bounce on corners of each tile + balls pass through 2 adjacent tiles). **size up the hitboxes smartly**
 * [x] Physic of balls when picked up (stay phisically on the ground...). **complicated** see rigidbody functions and how `integrate_force()` works.
-* [.] Problems with physics on **slopes**.
+* :pushpin: Problems with physics on **slopes**.
 * [ ] Problems when passing from a block just **16 pixel** over the other block (results in tiny teleportation but visible due to camera instant movement).
 * [x] **ShockJumping** at frame perfect when crouching on **Jumper** (or when jumping or dunkjumping) results in a huge mega jump sa mère.
 * [ ] Jitter when multiple **balls** are above each other. -> reimplement the friction
@@ -96,7 +97,7 @@ Popol Super Slam Fusion Full Speed 2KXX
 * [ ] Lag if too much balls : make a spawner limit and link the dispawn of a ball to the spawner to increase the spawn count.
 * [ ] I need to adapt the boum delay: i.e apply_impulse instantly on colliding object and a bit after on far objects. nedd a method call_after_a_delay(apply_impulse)
 * [ ] **Bubble/Zap ball teleportation** trailhandler can act very weirdly if used quickly repeatly.
-* [.] Need to implement Tilemap interactive objects rotation and flips.
+* :pushpin: Need to implement Tilemap interactive objects rotation and flips.
 * [ ] On **baskets**, a ball that bounces on the ring can do multiple goals.
 * [ ] If multiple explosion breaks the same bloc, it can spawn copies.
 * [ ] Jitter animation when passing from a transition_in to transition_out using rooms.
