@@ -1,6 +1,7 @@
 extends Node2D
 class_name Level
 
+export (String) var dir_path = "res://src/Levels/LevelExample/"
 #export(Array, PackedScene) var rooms
 export (String) var first_room
 export (String) var first_room_portal
@@ -9,22 +10,31 @@ var rooms = {}
 var actual_room_instance = null #
 
 func _ready():
-	pass # Replace with function body.
+	load_level()
+	enter_level()
 
-func preload_rooms():
+func load_level():
 	browse_rooms(first_room)
 
 func browse_rooms(room_name : String):
 	if !rooms.has(room_name):
-		var packed_room = load(room_name)
+		var packed_room = load(dir_path+room_name+".tscn")
 		if packed_room == null:
-			printerr("can't preload "+room_name+" because it doesn't exist.")
+			printerr("can't preload "+room_name+" in "+dir_path+" because it doesn't exist.")
 			return
 
 		var room: Room = packed_room.instance()
 		rooms[room_name] = room
-
+		print_debug("add room : "+room_name)
+		room.connect("exit_room", self, "change_room")
+		room.connect("exit_level", self, "exit_level")
+		
+		# TODO ugly but we need to call _ready on room in order to get the portals...
+		self.add_child(room)
 		var portal_nodes = room.get_portals().values()
+		print(" - portals : "+str(portal_nodes))
+		self.remove_child(room)
+		
 		for portal in portal_nodes:
 			browse_rooms(portal.get_next_room())
 

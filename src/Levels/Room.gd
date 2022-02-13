@@ -18,10 +18,12 @@ func get_portal(portal_name : String):
 
 ################################################################################
 
+	
 func _ready():
 	var portal_list = get_node("Portals").get_children()
 	for portal in portal_list:
 		portals[portal.name] = portal
+
 
 #	P = preload("res://src/Player/Player.tscn").instance()
 #	P.name = "Player"

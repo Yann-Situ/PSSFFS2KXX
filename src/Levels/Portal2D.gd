@@ -1,6 +1,8 @@
 extends Node2D
 class_name Portal2D
 
+export (bool) var activated = true
+
 enum PortalType {ENTRANCE, EXIT, BOTH, EXIT_LEVEL}
 export (PortalType) var portal_type = PortalType.BOTH setget set_portal_type
 
@@ -14,10 +16,9 @@ onready var room = get_parent().get_parent()
 onready var P = room.get_node("Player")
 
 func set_portal_type(new_type):
-	print("set_portal_type")
 	portal_type = new_type
 	if portal_type == PortalType.ENTRANCE or portal_type == PortalType.BOTH:
-		pass
+		pass # TO IMPLEMENT [TODO]
 	if portal_type == PortalType.EXIT or \
 	   portal_type == PortalType.BOTH or \
    	   portal_type == PortalType.EXIT_LEVEL :
@@ -89,5 +90,7 @@ func enter_portal():
 ################################################################################
 
 func _on_Area2D_body_entered(body):
-	if body == P:
+	if activated and body == P:
+		print("enter portal "+name)
 		exit_portal()
+		

@@ -77,6 +77,7 @@ shader_param/center_offset = null
 extents = Vector2( 10, 32 )
 
 [node name="Portal" type="Node2D"]
+z_index = 300
 script = ExtResource( 1 )
 __meta__ = {
 "_edit_group_": true
