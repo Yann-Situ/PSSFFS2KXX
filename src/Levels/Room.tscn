@@ -1,16 +1,12 @@
-[gd_scene load_steps=29 format=2]
+[gd_scene load_steps=24 format=2]
 
 [ext_resource path="res://src/Player/Player.tscn" type="PackedScene" id=1]
 [ext_resource path="res://src/Platform/Tileset/TileMap1.tres" type="TileSet" id=2]
-[ext_resource path="res://src/Items/Dynamics/RailLine.tscn" type="PackedScene" id=3]
-[ext_resource path="res://src/Items/Baskets/Basket.tscn" type="PackedScene" id=4]
-[ext_resource path="res://src/Items/Balls/Ball.tscn" type="PackedScene" id=5]
 [ext_resource path="res://assets/art/background/pixelBackground7.png" type="Texture" id=6]
 [ext_resource path="res://assets/art/background/pixelBackground3.png" type="Texture" id=7]
 [ext_resource path="res://assets/art/background/pixelBackground6.png" type="Texture" id=8]
 [ext_resource path="res://src/Platform/Tileset/TileMap2.tres" type="TileSet" id=9]
 [ext_resource path="res://src/Platform/World32.gd" type="Script" id=10]
-[ext_resource path="res://src/Levels/Portal.tscn" type="PackedScene" id=11]
 [ext_resource path="res://src/Platform/Tileset/TileMap3.tres" type="TileSet" id=12]
 [ext_resource path="res://src/Platform/Tileset/TilesetForeground.tres" type="TileSet" id=13]
 [ext_resource path="res://src/Levels/Room.gd" type="Script" id=15]
@@ -32,13 +28,7 @@ colors = PoolColorArray( 1.2, 1.3, 1.1, 1, 0, 0.671387, 0.78125, 1 )
 gradient = SubResource( 1 )
 width = 516
 
-[sub_resource type="Curve2D" id=3]
-resource_local_to_scene = true
-_data = {
-"points": PoolVector2Array( 0, 0, 0, 0, 32, 0, 0, 0, 0, 0, 288, 0 )
-}
-
-[sub_resource type="Environment" id=4]
+[sub_resource type="Environment" id=3]
 background_mode = 4
 auto_exposure_scale = 1.0
 auto_exposure_min_luma = 0.9
@@ -64,15 +54,6 @@ __meta__ = {
 }
 
 [node name="Portals" type="Node2D" parent="."]
-
-[node name="PortalDefault" parent="Portals" instance=ExtResource( 11 )]
-position = Vector2( -128, -160 )
-portal_type = 0
-
-[node name="PortalSecret" parent="Portals" instance=ExtResource( 11 )]
-position = Vector2( 32, -32 )
-next_room = "Room"
-next_room_portal = "PortalDefault"
 
 [node name="ParallaxBackground" type="ParallaxBackground" parent="."]
 layer = -10
@@ -208,7 +189,7 @@ collision_layer = 2
 collision_mask = 7
 occluder_light_mask = 2
 format = 1
-tile_data = PoolIntArray( -196614, 536870921, 8, -196613, 536870921, 9, -196612, 536870921, 11, -131078, 536870921, 131080, -131077, 536870920, 3, -131076, 536870921, 65547, -196594, 9, 8, -196593, 9, 9, -196592, 9, 9, -196591, 9, 9, -196590, 9, 11, -65542, 536870921, 131080, -65541, 536870920, 131075, -65540, 536870921, 65547, -131058, 9, 131080, -131057, 9, 65545, -131056, 9, 65545, -131055, 9, 65545, -131054, 9, 65547, -6, 536870921, 131080, -5, 536870921, 65545, -4, 536870921, 65547, -65522, 9, 196616, -65521, 9, 196618, -65520, 9, 196618, -65519, 9, 196618, -65518, 9, 196619, 65530, 536870923, 0, 65531, 536870923, 0, 65532, 536870923, 0, 65533, 536870923, 0, 65534, 536870923, 0, 65535, 536870923, 0, 0, 536870923, 0, 1, 536870923, 0, 2, 536870923, 0, 3, 536870923, 0, 131067, 536870921, 131080, 131068, 536870921, 65545, 131069, 536870921, 65545, 131070, 536870921, 65545, 131071, 536870921, 65545, 65536, 536870921, 65545, 65537, 536870921, 65545, 65538, 536870921, 65545, 65539, 536870921, 65547, 196604, 536870921, 65545, 196605, 536870921, 65545, 196606, 536870921, 65545, 196607, 536870921, 65545, 131072, 536870921, 65545, 131073, 536870921, 65545, 131074, 536870921, 65545, 262140, 536870921, 65545, 262141, 536870921, 65545, 262142, 536870921, 65545, 262143, 536870921, 65545, 196608, 536870921, 65545, 196609, 536870921, 65545, 196610, 536870921, 65545, 327676, 536870921, 65545, 327677, 536870921, 65545, 327678, 536870921, 65545, 327679, 536870921, 65545, 262144, 536870921, 65545, 262145, 536870921, 65545, 262146, 536870921, 65545, 393212, 536870923, 0, 393213, 536870923, 0, 393214, 536870923, 0, 393215, 536870923, 0, 327680, 536870923, 0, 327681, 536870923, 0, 327682, 536870923, 0, 458748, 536870921, 65545, 458749, 536870921, 65545, 458750, 536870921, 65545, 458751, 536870921, 65545, 393216, 536870921, 65545, 393217, 536870921, 65545, 393218, 536870921, 65545, 524284, 536870921, 65545, 524285, 536870921, 65545, 524286, 536870921, 65545, 524287, 536870921, 65545, 458752, 536870921, 65545, 458753, 536870921, 65545, 458754, 536870921, 65545, 589820, 536870921, 65545, 589821, 536870921, 65545, 589822, 536870921, 65545, 589823, 536870921, 65545, 524288, 536870921, 65545, 524289, 536870921, 65545, 524290, 536870921, 65545 )
+tile_data = PoolIntArray( -196614, 9, 8, -196613, 9, 9, -196612, 9, 9, -196611, 9, 9, -196610, 9, 9, -196609, 9, 9, -262144, 9, 9, -262143, 9, 9, -262142, 9, 9, -262141, 9, 9, -262140, 9, 9, -262139, 9, 11, -131078, 9, 131080, -131077, 9, 65545, -131076, 9, 65545, -131075, 9, 65545, -131074, 9, 65545, -131073, 9, 65545, -196608, 9, 65545, -196607, 9, 65545, -196606, 9, 65545, -196605, 9, 65545, -196604, 9, 65545, -196603, 9, 65547, -65542, 9, 131080, -65541, 9, 65545, -65540, 9, 65545, -65539, 9, 65545, -65538, 9, 65545, -65537, 9, 65545, -131072, 9, 65545, -131071, 9, 65545, -131070, 9, 65545, -131069, 9, 65545, -131068, 9, 65545, -131067, 9, 65547, -6, 9, 196616, -5, 9, 196618, -4, 9, 196618, -3, 9, 196618, -2, 9, 196618, -1, 9, 196618, -65536, 9, 196618, -65535, 9, 196618, -65534, 9, 196618, -65533, 9, 196618, -65532, 9, 196618, -65531, 9, 196619 )
 script = ExtResource( 40 )
 
 [node name="Back16" type="TileMap" parent="Map"]
@@ -221,7 +202,6 @@ collision_layer = 2
 collision_mask = 7
 occluder_light_mask = 2
 format = 1
-tile_data = PoolIntArray( -393227, 12, 0, -393223, 536870924, 0, -393222, 8, 0, -327686, 8, 0, -262150, 8, 65537, -196614, 8, 65536, -131078, 8, 65537, -65542, 8, 65536, -6, 8, 1, 262153, 8, 65536, 327689, 8, 1, 393225, 8, 1, 393244, 8, 65536, 458761, 8, 65537, 458780, 8, 0 )
 script = ExtResource( 41 )
 
 [node name="Graff" type="TileMap" parent="Map"]
@@ -234,7 +214,6 @@ collision_layer = 2
 collision_mask = 7
 occluder_light_mask = 0
 format = 1
-tile_data = PoolIntArray( 458744, 536870944, 0, 524288, 536870935, 1, 589828, 536870935, 2 )
 script = ExtResource( 42 )
 
 [node name="World32" type="TileMap" parent="Map"]
@@ -246,7 +225,7 @@ cell_clip_uv = true
 collision_layer = 2
 collision_mask = 7
 format = 1
-tile_data = PoolIntArray( 65530, 0, 1, 65531, 0, 5, 65532, 0, 9, 65533, 0, 9, 65534, 0, 9, 65535, 0, 9, 0, 0, 9, 1, 0, 9, 2, 0, 9, 3, 0, 9, 4, 0, 6, 5, 0, 3, 14, 0, 8, 15, 0, 9, 16, 0, 9, 17, 0, 9, 18, 0, 11, 131067, 0, 196616, 131068, 0, 131077, 131069, 0, 65545, 131070, 0, 65545, 131071, 0, 65545, 65536, 0, 65545, 65537, 0, 65545, 65538, 0, 65545, 65539, 0, 131078, 65540, 0, 196619, 65550, 0, 131080, 65551, 0, 65545, 65552, 0, 65545, 65553, 0, 65545, 65554, 0, 65547, 196604, 0, 196616, 196605, 0, 196618, 196606, 0, 196618, 196607, 0, 196618, 131072, 0, 196618, 131073, 0, 196618, 131074, 0, 196618, 131075, 0, 196619, 131086, 0, 196616, 131087, 0, 196618, 131088, 0, 196618, 131089, 0, 196618, 131090, 0, 196619 )
+tile_data = PoolIntArray( 65530, 0, 1, 65531, 0, 5, 65532, 0, 9, 65533, 0, 9, 65534, 0, 9, 65535, 0, 9, 0, 0, 9, 1, 0, 9, 2, 0, 9, 3, 0, 9, 4, 0, 6, 5, 0, 3, 131067, 0, 196616, 131068, 0, 131077, 131069, 0, 65545, 131070, 0, 65545, 131071, 0, 65545, 65536, 0, 65545, 65537, 0, 65545, 65538, 0, 65545, 65539, 0, 131078, 65540, 0, 196619, 196604, 0, 196616, 196605, 0, 196618, 196606, 0, 196618, 196607, 0, 196618, 131072, 0, 196618, 131073, 0, 196618, 131074, 0, 196618, 131075, 0, 196619 )
 script = ExtResource( 10 )
 
 [node name="World16" type="TileMap" parent="Map"]
@@ -258,7 +237,6 @@ cell_clip_uv = true
 collision_layer = 2
 collision_mask = 7
 format = 1
-tile_data = PoolIntArray( -458764, 11, 0, -458763, 35, 1, -458762, 35, 65537, -458761, 35, 0, -458760, 35, 0, -458759, 35, 65537, -458758, 10, 0, -393228, 6, 0, -458719, 11, 0, -458718, 11, 0, -458717, 11, 0, -458716, 11, 0, -458715, 11, 0, -327692, 6, 65537, -262156, 6, 65536, -196620, 6, 65537, -131084, 6, 1, -65548, 6, 0, -65547, 10, 0, -65546, 10, 0, -65545, 10, 0, -65544, 10, 0, -12, 6, 1, -10, 11, 0, -9, 11, 0, 524297, 10, 0, 524298, 35, 0, 524299, 35, 65537, 524300, 35, 0, 524301, 35, 0, 524302, 35, 0, 524303, 35, 65537, 524304, 35, 1, 524305, 35, 1, 524306, 35, 1, 524307, 35, 65536, 524308, 35, 0, 524309, 35, 65536, 524310, 35, 65536, 524311, 35, 0, 524312, 35, 0, 524313, 35, 1, 524314, 35, 65537, 524315, 35, 0, 524316, 10, 0 )
 script = ExtResource( 38 )
 
 [node name="BackEnvironment" type="TileMap" parent="Map"]
@@ -270,7 +248,6 @@ cell_size = Vector2( 16, 16 )
 collision_layer = 2
 collision_mask = 7
 format = 1
-tile_data = PoolIntArray( -786444, 14, 1, -720909, 14, 131072, -720908, 14, 65537, -720907, 14, 131074, -655372, 14, 131073, -589836, 14, 131073, -524300, 14, 131073, -458758, 18, 0, -393180, 14, 131073, -327644, 14, 131073, -131069, 37, 0, -131066, 16, 2, -7, 34, 0, -6, 34, 3 )
 script = ExtResource( 39 )
 
 [node name="FrontEnvironment" type="TileMap" parent="Map"]
@@ -282,12 +259,7 @@ cell_size = Vector2( 16, 16 )
 collision_layer = 2
 collision_mask = 7
 format = 1
-tile_data = PoolIntArray( -786424, 536870964, 0, -786422, 536870964, 0, -655350, 536870964, 0, -393221, 536870960, 0, -262108, 53, 0, 458762, 54, 0, 458763, 54, 0, 458764, 54, 0, 458765, 54, 0, 458766, 54, 0, 458767, 54, 0, 458768, 54, 0, 458769, 54, 0, 458770, 54, 0, 458771, 54, 0, 458772, 54, 0, 458773, 54, 0, 458774, 54, 0, 458775, 54, 0, 458776, 54, 0, 458777, 54, 0, 458778, 54, 0, 458779, 54, 0, 655352, 536870966, 0, 655353, 536870966, 0, 655354, 536870966, 0, 655355, 536870966, 0, 655356, 536870966, 0, 655357, 536870966, 0, 655358, 536870966, 0, 655359, 536870966, 0, 589824, 536870966, 0, 589825, 536870966, 0, 589826, 536870966, 0, 589827, 536870966, 0, 589828, 536870966, 0, 589829, 536870966, 0 )
 script = ExtResource( 43 )
-
-[node name="Basket" parent="Map/FrontEnvironment" instance=ExtResource( 4 )]
-position = Vector2( 304, -32 )
-can_receive_dunk = false
 
 [node name="Environment" type="Node2D" parent="."]
 
@@ -297,22 +269,15 @@ z_as_relative = false
 
 [node name="Balls" type="Node2D" parent="Environment"]
 
-[node name="Ball" parent="Environment/Balls" instance=ExtResource( 5 )]
-position = Vector2( -144, -40 )
-
 [node name="Baskets" type="Node2D" parent="Environment"]
 
 [node name="Dynamics" type="Node2D" parent="Environment"]
 z_index = 2
 
-[node name="RailLine" parent="Environment/Dynamics" instance=ExtResource( 3 )]
-position = Vector2( 160, 0 )
-curve = SubResource( 3 )
-
 [node name="Interactive" type="Node2D" parent="Environment"]
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
-environment = SubResource( 4 )
+environment = SubResource( 3 )
 
 [node name="Player" parent="." instance=ExtResource( 1 )]
-position = Vector2( -24, -32 )
+position = Vector2( 0, -32 )

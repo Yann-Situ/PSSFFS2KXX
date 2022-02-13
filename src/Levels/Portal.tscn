@@ -61,7 +61,7 @@ tracks/1/keys = {
 
 [sub_resource type="ShaderMaterial" id=3]
 shader = ExtResource( 2 )
-shader_param/circle_size = 1.194
+shader_param/circle_size = 0.0
 shader_param/screen_width = 800.0
 shader_param/screen_height = 400.0
 shader_param/center_offset = null
@@ -84,6 +84,7 @@ __meta__ = {
 }
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+method_call_mode = 1
 anims/transition_in = SubResource( 1 )
 anims/transition_out = SubResource( 2 )
 
@@ -94,7 +95,7 @@ visible = false
 material = SubResource( 3 )
 anchor_right = 1.0
 anchor_bottom = 1.0
-color = Color( 0, 0.352941, 0.388235, 1 )
+color = Color( 0, 0, 0, 1 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
@@ -104,12 +105,13 @@ visible = false
 material = SubResource( 4 )
 anchor_right = 1.0
 anchor_bottom = 1.0
-color = Color( 0, 0.352941, 0.388235, 1 )
+color = Color( 0, 0, 0, 1 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
 [node name="Area2D" type="Area2D" parent="."]
+input_pickable = false
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
 modulate = Color( 1, 0.984314, 0, 1 )

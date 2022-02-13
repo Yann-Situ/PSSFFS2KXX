@@ -1,22 +1,21 @@
 [gd_scene load_steps=3 format=2]
 
 [ext_resource path="res://src/Levels/Room.tscn" type="PackedScene" id=1]
-
-[sub_resource type="Curve2D" id=1]
-resource_local_to_scene = true
-_data = {
-"points": PoolVector2Array( 0, 0, 0, 0, 32, 0, 0, 0, 0, 0, 288, 0 )
-}
+[ext_resource path="res://src/Levels/Portal.tscn" type="PackedScene" id=2]
 
 [node name="RoomExample2" instance=ExtResource( 1 )]
 
-[node name="PortalDefault" parent="Portals" index="0"]
-position = Vector2( 120, -32 )
-
-[node name="PortalSecret" parent="Portals" index="1"]
-position = Vector2( 160, -32 )
+[node name="Portal1" parent="Portals" index="0" instance=ExtResource( 2 )]
+position = Vector2( -96, -32 )
 portal_type = 1
-next_room = "RoomExample1"
+next_room = "res://src/Levels/LevelExample/RoomExample1.tscn"
+next_room_portal = "Portal1"
+
+[node name="Portal2" parent="Portals" index="1" instance=ExtResource( 2 )]
+position = Vector2( 136, -32 )
+next_room = "res://src/Levels/LevelExample/RoomExample1.tscn"
+next_room_portal = "Portal1"
+transition_color = Color( 0.239216, 0, 0.258824, 1 )
 
 [node name="ParallaxLayer" parent="ParallaxBackground" index="0"]
 visible = false
@@ -33,9 +32,6 @@ tile_data = PoolIntArray( -458759, 9, 8, -458758, 9, 9, -458757, 9, 9, -458756, 
 [node name="Back16" parent="Map" index="2"]
 tile_data = PoolIntArray( -851980, 536870920, 0, -851974, 536870920, 0, -917499, 536870920, 0, -917493, 536870920, 0, -786444, 536870920, 0, -786438, 536870920, 0, -851963, 536870920, 0, -851957, 536870920, 0, -720908, 536870920, 0, -720902, 536870920, 65536, -786427, 536870920, 0, -786421, 536870920, 0, -655372, 536870920, 1, -655366, 536870920, 0, -720891, 536870920, 0, -720885, 536870920, 0, -589836, 536870920, 0, -589830, 536870920, 0, -655355, 536870920, 0, -655349, 536870920, 0, -524300, 536870920, 0, -524294, 536870920, 1, -589819, 536870920, 0, -589813, 536870920, 0, -458758, 536870920, 1, -458757, 536870921, 0, -458756, 536870921, 65537, -458755, 536870921, 0, -458754, 536870921, 0, -458753, 536870921, 0, -524288, 536870921, 0, -524287, 536870921, 65537, -524286, 536870921, 65537, -524283, 536870920, 0, -524277, 536870920, 0, -393222, 536870920, 0, -458747, 536870920, 0, -458741, 536870920, 0, -327686, 536870920, 65537, -393211, 536870920, 0, -393205, 536870920, 0, -262150, 536870920, 0, -327675, 536870920, 0, -327669, 536870920, 0, -196614, 536870920, 65537, -262139, 536870920, 0, -262133, 536870920, 0, -131078, 536870920, 0, -196603, 536870920, 0, -196597, 536870920, 0, -65542, 536870920, 0, -131067, 536870920, 0, -131061, 536870920, 0, -6, 536870920, 0, -65531, 536870920, 0, -65525, 536870920, 0 )
 
-[node name="Graff" parent="Map" index="3"]
-tile_data = PoolIntArray(  )
-
 [node name="World32" parent="Map" index="4"]
 tile_data = PoolIntArray( -458759, 0, 65537, -458758, 0, 2, -458757, 0, 2, -458756, 0, 2, -458755, 0, 2, -458754, 0, 2, -458753, 0, 2, -524288, 0, 2, -524287, 0, 2, -524286, 0, 2, -524285, 0, 2, -524284, 0, 2, -524283, 0, 2, -524282, 0, 65539, -393223, 0, 131072, -458746, 0, 131072, -327687, 0, 131072, -393210, 0, 131072, -262151, 0, 131072, -327674, 0, 131072, -196615, 0, 131072, -262138, 0, 131072, -131079, 0, 131072, -196602, 0, 131072, -65543, 0, 131072, -131066, 0, 131072, -7, 0, 131072, -65530, 0, 131072, 65529, 0, 196609, 65530, 0, 2, 65531, 0, 2, 65532, 0, 2, 65533, 0, 2, 65534, 0, 2, 65535, 0, 2, 0, 0, 2, 1, 0, 2, 2, 0, 2, 3, 0, 2, 4, 0, 2, 5, 0, 2, 6, 0, 196611 )
 
@@ -47,12 +43,3 @@ tile_data = PoolIntArray( -720909, 14, 131072, -65542, 536870927, 0, -131069, 37
 
 [node name="FrontEnvironment" parent="Map" index="7"]
 tile_data = PoolIntArray( -786424, 536870964, 0, -786422, 536870964, 0, -655350, 536870964, 0 )
-
-[node name="Basket" parent="Map/FrontEnvironment" index="0"]
-position = Vector2( -176, -192 )
-
-[node name="RailLine" parent="Environment/Dynamics" index="0"]
-curve = SubResource( 1 )
-
-[node name="Player" parent="." index="6"]
-z_index = 100

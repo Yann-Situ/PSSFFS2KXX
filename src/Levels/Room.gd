@@ -16,6 +16,13 @@ func get_portal(portal_name : String):
 		printerr(portal_name+" not found in room "+self.name)
 		return null
 
+func lock_portals(): # necessary because of issue : https://github.com/godotengine/godot/issues/14578
+	for portal in portals.values():
+		portal.is_locked = true
+		
+func unlock_portals(): # necessary because of issue : https://github.com/godotengine/godot/issues/14578
+	for portal in portals.values():
+		portal.is_locked = false
 ################################################################################
 
 	
@@ -23,20 +30,13 @@ func _ready():
 	var portal_list = get_node("Portals").get_children()
 	for portal in portal_list:
 		portals[portal.name] = portal
-
+		portal.connect("enter_portal_finished", self, "unlock_portals")
+		portal.connect("exit_portal_finished", self, "lock_portals")
+	lock_portals()
 
 #	P = preload("res://src/Player/Player.tscn").instance()
 #	P.name = "Player"
 #	self.add_child(P)
-#	if portals.has("PortalDefault"):
-#		portals["PortalDefault"].enter()
-#	else:
-#		printerr(self.name+" doesn't have a PortalDefault portal for spawning Player")
-#		if portal_list.count() < 1:
-#			printerr(self.name+" doesn't have any Portal")
-#			return
-#		portal_list[0].enter()
-
 
 func _unhandled_input(event):
 	if event is InputEventKey:
@@ -46,7 +46,6 @@ func _unhandled_input(event):
 ################################################################################
 
 func exit_room(next_room : String, next_room_portal : String):
-	print_debug("exit "+self.name+" to enter "+next_room+" at the portal "+next_room_portal)
 	if next_room == self.name:
 		enter_room(next_room_portal)
 	else:

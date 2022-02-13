@@ -3,5 +3,5 @@
 [ext_resource path="res://src/Levels/Level.tscn" type="PackedScene" id=1]
 
 [node name="LevelExample" instance=ExtResource( 1 )]
-first_room = "RoomExample1"
-first_room_portal = "PortalDefault"
+first_room = "res://src/Levels/LevelExample/RoomExample1.tscn"
+first_room_portal = "Portal1"

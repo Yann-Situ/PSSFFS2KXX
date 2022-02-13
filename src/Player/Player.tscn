@@ -1515,7 +1515,7 @@ height = 42.0
 [node name="Player" type="KinematicBody2D"]
 light_mask = 4
 position = Vector2( 416, 144 )
-z_index = 1
+z_index = 100
 z_as_relative = false
 collision_mask = 2
 script = ExtResource( 1 )
@@ -1691,7 +1691,7 @@ texture = ExtResource( 2 )
 offset = Vector2( 0.5, 0 )
 hframes = 16
 vframes = 20
-frame = 194
+frame = 196
 __meta__ = {
 "_edit_group_": true,
 "_edit_lock_": true
@@ -1830,7 +1830,7 @@ position = Vector2( 0, 5 )
 shape = SubResource( 134 )
 
 [node name="HasBallPosition" type="Node2D" parent="BallHandler"]
-position = Vector2( 8.99999, 12 )
+position = Vector2( 4.99999, 15 )
 __meta__ = {
 "_edit_group_": true
 }

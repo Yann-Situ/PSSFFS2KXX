@@ -101,8 +101,8 @@ Popol Super Slam Fusion Full Speed 2KXX
 * [ ] On **baskets**, a ball that bounces on the ring can do multiple goals.
 * [ ] If multiple explosion breaks the same bloc, it can spawn copies.
 * [ ] Using the power of a selected ball that died results in error. => Implement a die signal.
-* [ ] **portals** : multiple portal_transition due to a late reset position, when changing rooms...
-* [ ] Jitter animation when passing from a transition_in to transition_out using **rooms**.
+* [ ] **portals** : multiple portal_transition due to a late reset position, when changing rooms... see https://godotengine.org/qa/9761/area2d-triggered-more-time-when-player-node-previous-scene and https://github.com/godotengine/godot/issues/14578
+* [x] Jitter animation when passing from a transition_in to transition_out using **rooms**.
 
 ### Potential Glitches
 * [ ] Pressing **jump** and **dunkdash** just before landing can result in small dunkdash/jump.

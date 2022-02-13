@@ -47,24 +47,23 @@ onready var BallHandler = get_node("BallHandler")
 onready var LifeHandler = get_node("LifeHandler")
 
 onready var start_position = global_position
-
 onready var based_gravity = Vector2(0.0,ProjectSettings.get_setting("physics/2d/default_gravity")) # pix/s²
-
 onready var invmass = 1.0/4.0
+onready var collision_layer_save = 1
 
 var character_holder = null
 
-func disp(s):
-	print(s)
 ################################################################################
 
 func disable_physics():
 	physics_enabled = false
+	collision_layer = 0
 	S.velocity *= 0
 	#S.applied_force *= 0
 
 func enable_physics():
 	physics_enabled = true
+	collision_layer = collision_layer_save
 
 func set_start_position(posi):
 	start_position = posi
@@ -79,7 +78,7 @@ func reset_holder():
 func reset_move():
 	reset_holder()
 	S.reset_state()
-	LifeHandler.reset_life()
+	#LifeHandler.reset_life()
 	set_flip_h(false)
 	reset_position()
 

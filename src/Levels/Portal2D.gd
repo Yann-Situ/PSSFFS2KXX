@@ -1,6 +1,9 @@
 extends Node2D
 class_name Portal2D
 
+signal enter_portal_finished
+signal exit_portal_finished
+
 export (bool) var activated = true
 
 enum PortalType {ENTRANCE, EXIT, BOTH, EXIT_LEVEL}
@@ -9,11 +12,15 @@ export (PortalType) var portal_type = PortalType.BOTH setget set_portal_type
 enum TriggerType {ON_BODY_ENTER, ON_KEY_E}
 export (TriggerType) var trigger_type = TriggerType.ON_BODY_ENTER setget set_trigger_type
 
-export (String) var next_room setget set_next_room, get_next_room
+export (String,FILE, "*.tscn") var next_room setget set_next_room, get_next_room
 export (String) var next_room_portal setget set_next_room_portal, get_next_room_portal
+
+export (Color) var transition_color = Color.black setget set_transition_color
+export (float, EXP, 0.1, 10.0) var transition_speed = 1.0 setget set_transition_speed
 
 onready var room = get_parent().get_parent()
 onready var P = room.get_node("Player")
+onready var is_locked = false 
 
 func set_portal_type(new_type):
 	portal_type = new_type
@@ -43,6 +50,15 @@ func get_next_room():
 func get_next_room_portal():
 	return next_room_portal
 
+func set_transition_color(c : Color):
+	transition_color = c
+	$CanvasLayer/Transition_in.color = c
+	$CanvasLayer/Transition_out.color = c
+
+func set_transition_speed(f : float):
+	transition_speed = f
+	$AnimationPlayer.playback_speed = f
+
 ################################################################################
 func disp(s:String):
 	print(s)
@@ -60,6 +76,7 @@ func reload_portal():
 func transition_in():
 	#Transition.material.set("shader_param/center_offset", Vector2(0.0,0.0))
 	$AnimationPlayer.play("transition_in")
+	$AnimationPlayer.advance(0.0) # to avoid jitter issues
 
 func transition_out():
 	#var img = get_viewport().get_texture().get_data()
@@ -71,11 +88,14 @@ func transition_out():
 	#	Global.camera.offset, Global.camera, "offset", 1.0)
 	#$Tween.start()
 	$AnimationPlayer.play("transition_out")
+	$AnimationPlayer.advance(0.0) # to avoid jitter issues
 
 func exit_portal():
 	transition_out()
 	P.S.disable_input()
 	yield(get_node("AnimationPlayer"), "animation_finished")
+	emit_signal("exit_portal_finished")
+	
 	if portal_type != PortalType.EXIT_LEVEL:
 		room.exit_room(next_room, next_room_portal)
 	else :
@@ -86,11 +106,14 @@ func enter_portal():
 	P.reset_move()
 	P.S.enable_input()
 	transition_in()
+	yield(get_node("AnimationPlayer"), "animation_finished")
+	emit_signal("enter_portal_finished")
 
 ################################################################################
 
 func _on_Area2D_body_entered(body):
-	if activated and body == P:
-		print("enter portal "+name)
+	# print_debug("enter portal "+name) # this function is called too many time due \
+	# to the following issue : https://github.com/godotengine/godot/issues/14578
+	if activated and !is_locked and body == P:
 		exit_portal()
 		

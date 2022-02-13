@@ -17,21 +17,24 @@ func update_selection(selection : Selectable):
 			select()
 		
 func select():
-	$Tween.stop_all()
-	$Tween.follow_property(self, "global_position",global_position,\
+	$TweenPosition.stop_all()
+	$TweenPosition.follow_property(self, "global_position",global_position,\
 		selection_node, "global_position", tween_speed, \
 		Tween.TRANS_CUBIC, Tween.EASE_OUT)
-	$Tween.interpolate_property(self, "self_modulate", self.self_modulate, \
-		Color.white, tween_speed, \
+	$TweenPosition.start()
+	
+	$TweenSelfModulate.stop_all()
+	$TweenSelfModulate.interpolate_property(self, "self_modulate", \
+		self.self_modulate, Color.white, tween_speed, \
 		Tween.TRANS_LINEAR, Tween.EASE_IN)
-	$Tween.start()
+	$TweenSelfModulate.start()
 	
 func deselect():
-	$Tween.stop_all()
-	$Tween.interpolate_property(self, "self_modulate", self.self_modulate, \
-		Color.transparent, tween_speed, \
+	$TweenSelfModulate.stop_all()
+	$TweenSelfModulate.interpolate_property(self, "self_modulate", \
+		self.self_modulate, Color.transparent, tween_speed, \
 		Tween.TRANS_LINEAR, Tween.EASE_OUT_IN)
-	$Tween.start()
+	$TweenSelfModulate.start()
 	
 #func _draw():
 #	if selection_node != null :
