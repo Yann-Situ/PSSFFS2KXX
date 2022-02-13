@@ -44,6 +44,7 @@ onready var SpecialActionHandler = get_node("Actions/SpecialActionHandler")
 onready var ShootPredictor = get_node("Actions/ShootPredictor")
 onready var PlayerEffects = get_node("PlayerEffects")
 onready var BallHandler = get_node("BallHandler")
+onready var Camera = get_node("Camera")
 onready var LifeHandler = get_node("LifeHandler")
 
 onready var start_position = global_position

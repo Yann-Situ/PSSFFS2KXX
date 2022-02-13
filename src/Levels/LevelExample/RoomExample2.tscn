@@ -4,6 +4,10 @@
 [ext_resource path="res://src/Levels/Portal.tscn" type="PackedScene" id=2]
 
 [node name="RoomExample2" instance=ExtResource( 1 )]
+limit_left = -400
+limit_top = -300
+limit_right = 400
+limit_bottom = 300
 
 [node name="Portal1" parent="Portals" index="0" instance=ExtResource( 2 )]
 position = Vector2( -96, -32 )

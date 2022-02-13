@@ -4,8 +4,19 @@ class_name Room
 signal exit_room
 signal exit_level
 
+export (int) var limit_left = -10000000
+export (int) var limit_top = -10000000
+export (int) var limit_right = 10000000
+export (int) var limit_bottom = 10000000
+
 onready var P = $Player
 var portals = {} setget , get_portals
+
+func update_camera_limit():
+	P.Camera.limit_left = limit_left
+	P.Camera.limit_top = limit_top
+	P.Camera.limit_right = limit_right
+	P.Camera.limit_bottom = limit_bottom
 
 func get_portals():
 	return portals
@@ -19,13 +30,13 @@ func get_portal(portal_name : String):
 func lock_portals(): # necessary because of issue : https://github.com/godotengine/godot/issues/14578
 	for portal in portals.values():
 		portal.is_locked = true
-		
+
 func unlock_portals(): # necessary because of issue : https://github.com/godotengine/godot/issues/14578
 	for portal in portals.values():
 		portal.is_locked = false
 ################################################################################
 
-	
+
 func _ready():
 	var portal_list = get_node("Portals").get_children()
 	for portal in portal_list:
@@ -33,6 +44,7 @@ func _ready():
 		portal.connect("enter_portal_finished", self, "unlock_portals")
 		portal.connect("exit_portal_finished", self, "lock_portals")
 	lock_portals()
+	update_camera_limit()
 
 #	P = preload("res://src/Player/Player.tscn").instance()
 #	P.name = "Player"

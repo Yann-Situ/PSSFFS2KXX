@@ -17,7 +17,7 @@ var shoot_vector_save = Vector2()
 
 var white = Color(1,1,1,1)
 var red = Color(1,0,0,1)
-var yellorange = Color(1.0,0.8,0.1,1)
+var yellorange = Color.deeppink
 
 export (bool) var flip_h = false
 # Called when the node enters the scene tree for the first time.
