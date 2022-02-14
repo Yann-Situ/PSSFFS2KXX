@@ -46,7 +46,7 @@ extents = Vector2( 8, 26 )
 
 [sub_resource type="CircleShape2D" id=2]
 resource_local_to_scene = true
-radius = 180.0
+radius = 224.0
 
 [sub_resource type="CircleShape2D" id=3]
 resource_local_to_scene = true
@@ -261,7 +261,8 @@ tracks/4/keys = {
 
 [sub_resource type="Animation" id=9]
 resource_name = "dunkdash"
-step = 0.05
+length = 0.5
+step = 0.01
 tracks/0/type = "value"
 tracks/0/path = NodePath(".:frame")
 tracks/0/interp = 1
@@ -269,7 +270,7 @@ tracks/0/loop_wrap = true
 tracks/0/imported = false
 tracks/0/enabled = true
 tracks/0/keys = {
-"times": PoolRealArray( 0, 0.1, 0.2, 0.3, 0.4 ),
+"times": PoolRealArray( 0, 0.08, 0.16, 0.24, 0.32 ),
 "transitions": PoolRealArray( 1, 1, 1, 1, 1 ),
 "update": 1,
 "values": [ 48, 49, 50, 51, 52 ]
@@ -281,7 +282,7 @@ tracks/1/loop_wrap = true
 tracks/1/imported = false
 tracks/1/enabled = true
 tracks/1/keys = {
-"times": PoolRealArray( 0, 0.1, 0.2, 0.3, 0.4 ),
+"times": PoolRealArray( 0, 0.08, 0.16, 0.24, 0.32 ),
 "transitions": PoolRealArray( 1, 1, 1, 1, 1 ),
 "update": 1,
 "values": [ Vector2( 9, 6 ), Vector2( 11, -14 ), Vector2( 6, -31 ), Vector2( -3, -35 ), Vector2( -16, -31 ) ]
@@ -1542,16 +1543,9 @@ __meta__ = {
 }
 
 [node name="Actions" type="Node2D" parent="."]
-__meta__ = {
-"_edit_group_": true
-}
 
 [node name="SpecialActionHandler" type="Node2D" parent="Actions"]
-visible = false
 script = ExtResource( 9 )
-__meta__ = {
-"_edit_group_": true
-}
 
 [node name="Ray_fwd_up" type="RayCast2D" parent="Actions/SpecialActionHandler"]
 position = Vector2( 0, -16 )
@@ -1609,7 +1603,6 @@ collision_mask = 32
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Actions/SpecialActionHandler/dunkjump_area"]
 modulate = Color( 0.945098, 1, 0, 1 )
-position = Vector2( 0, -50 )
 shape = SubResource( 2 )
 
 [node name="dunk_area" type="Area2D" parent="Actions/SpecialActionHandler"]
@@ -1691,7 +1684,7 @@ texture = ExtResource( 2 )
 offset = Vector2( 0.5, 0 )
 hframes = 16
 vframes = 20
-frame = 193
+frame = 199
 __meta__ = {
 "_edit_group_": true,
 "_edit_lock_": true
@@ -1830,7 +1823,7 @@ position = Vector2( 0, 5 )
 shape = SubResource( 134 )
 
 [node name="HasBallPosition" type="Node2D" parent="BallHandler"]
-position = Vector2( 10, 5.99999 )
+position = Vector2( -7, -6 )
 __meta__ = {
 "_edit_group_": true
 }

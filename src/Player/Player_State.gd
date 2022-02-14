@@ -7,9 +7,9 @@ var frame_time_ms = 1.0/60.0 #s
 var time = 0.0#s
 
 # Countdowns and delays between actions
-export (float) var tolerance_jump_floor = 9*frame_time_ms #s
-export (float) var tolerance_jump_press = 9*frame_time_ms #s
-export (float) var tolerance_wall_jump = 9*frame_time_ms #s
+export (float) var tolerance_jump_floor = 7*frame_time_ms #s
+export (float) var tolerance_jump_press = 7*frame_time_ms #s
+export (float) var tolerance_wall_jump = 7*frame_time_ms #s
 export (float) var tolerance_land_lag = 3*frame_time_ms #s
 export (float) var walljump_move_countdown = 22*frame_time_ms #s
 export (float) var jump_countdown = 10*frame_time_ms #s
@@ -180,10 +180,8 @@ func update_vars(delta):
 	time += delta # still used in the current shoot vector implementation... to change
 
 	last_frame_onair = not is_onfloor
-
+	
 	Player.SpecialActionHandler.update_space_state()
-	Player.SpecialActionHandler.update_basket()
-
 	is_onfloor = Player.SpecialActionHandler.is_on_floor()
 	is_onwall = Player.SpecialActionHandler.is_on_wall()
 	is_moving_fast = (abs(velocity.x) > Player.run_speed_thresh)
@@ -229,17 +227,19 @@ func update_vars(delta):
 	can_go = $CanGoTimer.is_stopped() and not (is_dunkjumping and dunk_p) and \
 		not is_dunkdashing and not is_dunking
 	can_crouch = is_onfloor
-	can_aim = $CanShootTimer.is_stopped() and has_ball and active_ball != null and not is_dunking
-	can_shoot = is_aiming and has_ball and active_ball != null
-	can_dunkdash = can_jump and Player.SpecialActionHandler.can_dunkjump() and not is_non_cancelable
-	can_dunkjump = can_dunkdash and $CanDunkjumpTimer.is_stopped()
-	can_dunk = $CanDunkTimer.is_stopped() and \
-		((not is_onfloor and dunk_p)) and \
-		Player.SpecialActionHandler.can_dunk() and not is_shooting and not is_dunkprejumping
 	can_stand = Player.SpecialActionHandler.can_stand()
 	can_grind = !is_hanging and !is_dunking
 	can_hang = true
 
+	Player.SpecialActionHandler.update_basket_selectors()
+	can_aim = $CanShootTimer.is_stopped() and has_ball and active_ball != null and not is_dunking
+	can_shoot = is_aiming and has_ball and active_ball != null
+	can_dunkdash = Player.SpecialActionHandler.can_dunkdash()
+	can_dunkjump = Player.SpecialActionHandler.can_dunkjump()
+	can_dunk = $CanDunkTimer.is_stopped() and \
+		((not is_onfloor and dunk_p)) and \
+		Player.SpecialActionHandler.can_dunk() and not is_shooting and not is_dunkprejumping
+	
 	# cancelables :
 	is_jumping = is_jumping and not is_onfloor and is_mounting
 	is_walljumping = is_walljumping and is_jumping

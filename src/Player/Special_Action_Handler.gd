@@ -13,6 +13,9 @@ var rays_not_flip = []
 var rays_res = []
 var space_state
 
+onready var dunkjump_criteria_bests = []
+onready var dunkdash_criteria_bests = []
+
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	rays_not_flip = [$Ray_fwd_down, $Ray_fwd_up, $Ray_up_fwd, $Ray_up_bwd, \
@@ -33,59 +36,91 @@ func cast(r): #we must have updated the space_state before
 			[P], P.collision_mask, true, false)
 		r.updated = true
 
-func update_basket():
-	var selectable_node = null
+################################################################################
+
+func dunkjump_criteria_init():
+	dunkjump_criteria_bests.clear()
+	dunkjump_criteria_bests.push_back(0.0) # best_y
+	dunkjump_criteria_bests.push_back(-2) # best_direction
+func dunkjump_criteria(q : Vector2, target_direction : int):
+	# q is basket_pos - player_pos
+	# target_direction is the favorite direction
+	if q.y >= 0.0:
+		return false
+	var dir = target_direction # not 0 in order to make direction*d=1 if q.x=0
+	if q.x > 0.0:
+		dir = 1
+	if q.x < 0.0:
+		dir = -1
+	var Delta = P.dunkjump_speed*q.x/q.y
+	Delta = Delta*Delta
+	Delta += 2*P.gravity.y * q.x*q.x/q.y
+
+	if Delta <= 0.0 or target_direction*dir < dunkjump_criteria_bests[1]:
+		return false
+	if target_direction*dir == dunkjump_criteria_bests[1] and q.y > dunkjump_criteria_bests[0]:
+		return false
+
+	dunkjump_criteria_bests[0] = q.y
+	dunkjump_criteria_bests[1] = target_direction*dir
+	return true
+
+func dunkdash_criteria_init():
+	dunkdash_criteria_bests.clear()
+	dunkdash_criteria_bests.push_back(P.max_dunkdash_distance2) # best_dist2
+	dunkdash_criteria_bests.push_back(-2) # best_direction
+func dunkdash_criteria(q : Vector2, target_direction : int):
+	var dir = target_direction # not 0 in order to make direction*d=1 if q.x=0
+	if q.x > 0.0:
+		dir = 1
+	if q.x < 0.0:
+		dir = -1
+	if target_direction*dir < dunkdash_criteria_bests[1]:
+		return false
+	var lq2 = q.length_squared()
+	if lq2 > P.max_dunkdash_distance2:
+		return false
+	if target_direction*dir == dunkdash_criteria_bests[1] and lq2 > dunkdash_criteria_bests[0]:
+		return false
+
+	dunkdash_criteria_bests[0] = lq2
+	dunkdash_criteria_bests[1] = target_direction*dir
+	return true
+
+func update_basket_selectors():
+	var selectable_jump = null
+	var selectable_dash = null
 
 	var selectables = $dunkjump_area.get_overlapping_areas()
 	if !selectables.empty():
 		# choose by priority selectables that are in direction_p, closest above player
-		var b = selectables[0].get_parent() # `get_parent` because we're
-		# detecting the basket_area node
-		var q = (b.position-P.position)
-		var direction = S.direction_p
-		if direction == 0:
+		var could_dunkjump = S.can_jump and not S.is_non_cancelable and \
+			S.get_node("CanDunkjumpTimer").is_stopped()
+		var could_dunkdash = not S.is_non_cancelable
+		dunkjump_criteria_init()
+		dunkdash_criteria_init()
+
+		var target_direction = S.direction_p
+		if target_direction == 0:
 			if P.flip_h:
-				direction = -1
+				target_direction = -1
 			else :
-				direction = 1
-		var dir : int# not 0 in order to make direction*d=1 if q.x=0
-		var Delta : float
-		var best_y = 0.0
-		var best_dist2 = $dunkjump_area/CollisionShape2D.shape.radius
-		best_dist2 *= 2 * best_dist2
-		var best_direction = -2
+				target_direction = 1
 
 		for i in range(selectables.size()):
-			b = selectables[i]
-			if !b.is_jump_selectable:
-				continue
-			q = (b.global_position-P.global_position)
-			# be carefull division by zero :
-			if q.y >= 0.0:
-				continue
+			var b = selectables[i]
+			var q = (b.global_position-P.global_position)
 
-			dir = direction # not 0 in order to make direction*d=1 if q.x=0
-			if q.x > 0.0:
-				dir = 1
-			if q.x < 0.0:
-				dir = -1
-			Delta = P.dunkjump_speed*q.x/q.y
-			Delta = Delta*Delta
-			Delta += 2*P.gravity.y * q.x*q.x/q.y
+			if b.is_jump_selectable and could_dunkjump and \
+				dunkjump_criteria(q, target_direction):
+				selectable_jump = b
 
-			if Delta < 0.0 or direction*dir < best_direction:
-				continue
-			if direction*dir == best_direction and q.y > best_y:
-				continue
+			if b.is_dash_selectable and could_dunkdash and \
+				dunkdash_criteria(q, target_direction):
+				selectable_dash = b
 
-			best_y = q.y
-			best_dist2 = q.length_squared()
-			best_direction = direction*dir
-
-			selectable_node = b
-
-	Selector.update_selection(2,selectable_node)
-	Selector.update_selection(1,selectable_node)
+	Selector.update_selection(Selectable.SelectionType.JUMP,selectable_jump)
+	Selector.update_selection(Selectable.SelectionType.DASH,selectable_dash)
 
 #############################
 func is_on_wall():
@@ -125,6 +160,9 @@ func can_stand():
 func can_dunkjump():
 	# update_basket()
 	return S.dunkjump_basket != null
+
+func can_dunkdash():
+	return S.dunkdash_basket != null
 
 func can_dunk():
 	var selectables = $dunk_area.get_overlapping_areas()

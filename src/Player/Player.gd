@@ -24,6 +24,7 @@ export (float) var sideaerial_accel = 220 # pix/s²
 export (float) var jump_speed = -425 # pix/s
 export (float) var dunkjump_speed = -500 # pix/s
 export (float) var dunkdash_speed = -500 # pix/s
+export (float) var max_dunkdash_distance2 = 180*180 # pix^2
 export (float) var max_speed_fall = 800 # pix/s
 export (float) var max_speed_fall_onwall = 200 # pix/s
 export (Vector2) var vec_walljump = Vector2(0.65, -1)

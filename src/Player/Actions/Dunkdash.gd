@@ -1,7 +1,7 @@
 extends Action
 
 export var up_distance_to_basket = 0#px
-export var max_dunkdash_distance = 180#px
+export var can_go_delay = 0.2#s
 export(Color, RGBA) var ghost_modulate
 
 func move(delta):
@@ -14,14 +14,15 @@ func move(delta):
 	S.is_dunkdashing = true
 	S.set_action(S.ActionType.DUNKDASH)
 	P.gravity = Vector2.ZERO
-	
+
 	P.PlayerEffects.dust_start()
 	P.PlayerEffects.jump_start()
 	P.PlayerEffects.ghost_start(0.35,0.07, ghost_modulate)
 	S.get_node("ToleranceDunkJumpPressTimer").stop()
 	S.get_node("CanJumpTimer").start(S.jump_countdown)
+	S.get_node("CanGoTimer").start(can_go_delay)
 
-	var q = (S.dunkjump_basket.position+up_distance_to_basket*Vector2.UP) - P.position
+	var q = (S.dunkdash_basket.position+up_distance_to_basket*Vector2.UP) - P.position
 	q *= -P.dunkdash_speed/q.length()
 	q.y = max(q.y, P.jump_speed)
 	P.get_out(P.global_position, q)
