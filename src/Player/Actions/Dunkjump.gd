@@ -25,10 +25,10 @@ func move(delta):
 	else:
 		direction = 1
 	
+	P.PlayerEffects.ghost_start(0.8,0.08, ghost_modulate)
 # called by animation
 func move_jump():
 	P.PlayerEffects.jump_start()
-	P.PlayerEffects.ghost_start(0.5,0.065, ghost_modulate)
 	if S.dunkjump_basket != null:
 		basket = S.dunkjump_basket
 	

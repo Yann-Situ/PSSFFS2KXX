@@ -36,6 +36,9 @@ export (float) var walk_instant_speed = 150 # pix/s
 export (float) var walk_return_thresh_instant_speed = 300 # pix/s
 export (float) var walk_accel = 220 # pix/s²
 
+# Other features
+export (float) var throw_impulse = 600 # kg.pix/s
+
 export (bool) var flip_h = false
 
 ################################################################################
@@ -43,6 +46,7 @@ export (bool) var flip_h = false
 onready var S = get_node("State")
 onready var SpecialActionHandler = get_node("Actions/SpecialActionHandler")
 onready var ShootPredictor = get_node("Actions/ShootPredictor")
+onready var Shooter = get_node("Shooter")
 onready var PlayerEffects = get_node("PlayerEffects")
 onready var BallHandler = get_node("BallHandler")
 onready var Camera = get_node("Camera")
@@ -199,7 +203,7 @@ func get_input(delta): #delta in s
 		if shoot.x > 0 :
 			S.aim_direction = 1
 		else :
-			S.aim_direction = -1
+			S.aim_direction = -1	
 	elif S.is_crouching :
 		var tx = $Camera.move_max_offset.x * smoothstep(0.0, \
 			$Camera.move_speed_threshold.x, abs(S.velocity.x)) \
@@ -218,6 +222,11 @@ func get_input(delta): #delta in s
 
 	# ANIMATION:
 	$Sprite/AnimationTree.animate_from_state(S)
+
+	if S.is_aiming:
+		Shooter.update_screen_viewer_position()
+	else :
+		Shooter.disable_screen_viewer()
 
 	S.jump_jp = false
 	S.jump_jr = false
