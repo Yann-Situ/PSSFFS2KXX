@@ -1,5 +1,6 @@
 extends Camera2D
 export (float) var aim_offset = 100
+export (float) var aim_max_dist = 300
 export (float) var crouch_offset = 100
 export (Vector2) var move_max_offset = Vector2(128, 64)
 export (Vector2) var move_speed_threshold = Vector2(600, 800)
@@ -26,7 +27,8 @@ func _on_Tween_tween_completed(object, key):
 
 func set_offset_from_type(type, direction = Vector2(0,0), tween_speed = 0.2):
 	if type == "aim":
-		target_offset = direction*aim_offset
+		var l = direction.length()
+		target_offset = smoothstep(0.0,aim_max_dist,l) * aim_offset/l*direction 
 	elif type == "crouch":
 		target_offset = Vector2(0,1)*crouch_offset
 	elif type == "normal":

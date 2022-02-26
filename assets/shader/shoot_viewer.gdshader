@@ -20,7 +20,7 @@ void fragment(){
 	vec2 p = UV/SCREEN_PIXEL_SIZE - throw_pos;
 	
 	vec4 screen_col = texture(SCREEN_TEXTURE,SCREEN_UV);
-	float force = smoothstep(0.0, tolerance, - 2.0*p.y + p.x*p.x/parameter - parameter);
+	float force = smoothstep(-tolerance, tolerance, - 2.0*p.y + p.x*p.x/parameter - parameter);
 	//COLOR = vec4(vec3(abs(p.x)),1.0);
 	COLOR = grey(screen_col, force);
 }

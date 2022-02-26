@@ -59,6 +59,8 @@ onready var collision_layer_save = 1
 
 var character_holder = null
 
+var shoot = Vector2.ZERO
+
 ################################################################################
 
 func disable_physics():
@@ -100,8 +102,8 @@ func _ready():
 	add_to_group("characters")
 	if !Global.playing:
 		Global.toggle_playing()
-	Global.camera = $Camera
-	
+	Global.camera = Camera
+
 	gravity = based_gravity
 
 func set_flip_h(b):
@@ -192,33 +194,44 @@ func get_input(delta): #delta in s
 
 	# CAMERA:
 	if S.is_aiming:
-		var shoot = ShootPredictor.shoot_vector()
-		if S.power_p and S.selected_ball == S.active_ball :
-			ShootPredictor.draw_attract(BallHandler.get_throw_position()-self.position, shoot+0.5*S.velocity,
-				S.active_ball.get_gravity_scale()*gravity, attract_force/S.active_ball.mass)
+		#var shoot = Vector2.ZERO
+		var target = (Camera.get_global_mouse_position() - global_position)
+		Shooter.update_target(target)
+		if Shooter.can_shoot_to_target():
+			Shooter.update_effective_can_shoot(0.0,0)
+			shoot = Shooter.effective_v
 		else :
-			ShootPredictor.draw(BallHandler.get_throw_position()-self.position, shoot+0.5*S.velocity,
-				S.active_ball.get_gravity_scale()*gravity)
-		$Camera.set_offset_from_type("aim",shoot.normalized())
+			Shooter.update_effective_cant_shoot(0.0,0)
+			shoot = Shooter.effective_v
+#			shoot = ShootPredictor.shoot_vector()
+#			if S.power_p and S.selected_ball == S.active_ball :
+#				ShootPredictor.draw_attract(BallHandler.get_throw_position()-self.position, shoot+0.5*S.velocity,
+#					S.active_ball.get_gravity_scale()*gravity, attract_force/S.active_ball.mass)
+#			else :
+#				ShootPredictor.draw(BallHandler.get_throw_position()-self.position, shoot+0.5*S.velocity,
+#					S.active_ball.get_gravity_scale()*gravity)
+		ShootPredictor.draw(Vector2.ZERO, shoot,
+			S.active_ball.gravity*Vector2.DOWN)
+		Camera.set_offset_from_type("aim",target)
 		if shoot.x > 0 :
 			S.aim_direction = 1
 		else :
-			S.aim_direction = -1	
+			S.aim_direction = -1
 	elif S.is_crouching :
-		var tx = $Camera.move_max_offset.x * smoothstep(0.0, \
-			$Camera.move_speed_threshold.x, abs(S.velocity.x)) \
+		var tx = Camera.move_max_offset.x * smoothstep(0.0, \
+			Camera.move_speed_threshold.x, abs(S.velocity.x)) \
 			* sign(S.velocity.x)
-		$Camera.set_offset_from_type("move", Vector2(tx,$Camera.crouch_offset), 0.2)
+		Camera.set_offset_from_type("move", Vector2(tx,Camera.crouch_offset), 0.2)
 	elif S.is_moving :
-		var tx = $Camera.move_max_offset.x * smoothstep(0.0, \
-			$Camera.move_speed_threshold.x, abs(S.velocity.x)) \
+		var tx = Camera.move_max_offset.x * smoothstep(0.0, \
+			Camera.move_speed_threshold.x, abs(S.velocity.x)) \
 			* sign(S.velocity.x)
-		var ty = $Camera.move_max_offset.y * smoothstep(0.0, \
-			$Camera.move_speed_threshold.y, abs(S.velocity.y)) \
+		var ty = Camera.move_max_offset.y * smoothstep(0.0, \
+			Camera.move_speed_threshold.y, abs(S.velocity.y)) \
 			* sign(S.velocity.y)
-		$Camera.set_offset_from_type("move", Vector2(tx,ty), 0.4)
+		Camera.set_offset_from_type("move", Vector2(tx,ty), 0.4)
 	else :
-		$Camera.set_offset_from_type("normal")
+		Camera.set_offset_from_type("normal")
 
 	# ANIMATION:
 	$Sprite/AnimationTree.animate_from_state(S)

@@ -24,7 +24,7 @@ export (bool) var flip_h = false
 func _ready():
 	pass
 
-func shoot_vector(): # return shoot vector if player not moving
+func shoot_vector(): # return shoot vector if player not moving	
 	var t = S.time-S.last_aim_jp
 	t = min(shoot_max_aim_time, t)/shoot_max_aim_time
 	t = shoot_min_speed+t*(shoot_max_speed-shoot_min_speed)
@@ -42,8 +42,8 @@ func draw(pos, vel, grav):
 	points.clear()
 	for i in range(nb_points):
 		points.append(pos)
-		vel += 1.002*grav * delta
-		pos += 0.998*vel * delta
+		vel += 1.001*grav * delta
+		pos += 0.999*vel * delta
 	update()
 
 func draw_attract(pos, vel, grav, power):

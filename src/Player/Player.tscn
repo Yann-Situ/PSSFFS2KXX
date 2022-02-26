@@ -58,7 +58,7 @@ radius = 30.0
 shader = ExtResource( 42 )
 shader_param/parameter = 300.0
 shader_param/throw_pos = Vector2( 400, 224 )
-shader_param/tolerance = 10.0
+shader_param/tolerance = 15.0
 
 [sub_resource type="Animation" id=5]
 length = 0.35
@@ -1843,7 +1843,7 @@ position = Vector2( 0, 5 )
 shape = SubResource( 135 )
 
 [node name="HasBallPosition" type="Node2D" parent="BallHandler"]
-position = Vector2( -6, -5 )
+position = Vector2( -7, -6 )
 __meta__ = {
 "_edit_group_": true
 }
