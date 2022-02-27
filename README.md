@@ -32,7 +32,7 @@ Popol Super Slam Fusion Full Speed 2KXX
    - [ ] UI for combos
    - [ ] Combo and point system
 * Improve shooter
-   - [ ] Auto aim on baskets
+   - :pushpin: Auto aim on baskets
 * Balls :
    - [ ] improve animation of balls
    - [ ] squish anim for squish balls
@@ -93,7 +93,7 @@ Popol Super Slam Fusion Full Speed 2KXX
 * [ ] Energy loss of `constant_energy_balls`.
 * [ ] The `shoot_previewer` shows a trajectory slightly above the real one.
 * [ ] `Z_as_relative` doesn't work through script... https://github.com/godotengine/godot/issues/45416
-* [ ] **ColorRect** for shockwave effect stay in (0,0) global coordinates...
+* [x] **ColorRect** for shockwave effect stay in (0,0) global coordinates...
 * [ ] Lag if too much balls : make a spawner limit and link the dispawn of a ball to the spawner to increase the spawn count.
 * [ ] I need to adapt the boum delay: i.e apply_impulse instantly on colliding object and a bit after on far objects. nedd a method call_after_a_delay(apply_impulse)
 * [ ] **Bubble/Zap ball teleportation** trailhandler can act very weirdly if used quickly repeatly.
@@ -101,7 +101,7 @@ Popol Super Slam Fusion Full Speed 2KXX
 * [ ] On **baskets**, a ball that bounces on the ring can do multiple goals.
 * [ ] If multiple explosion breaks the same bloc, it can spawn copies.
 * [ ] Using the power of a selected ball that died results in error. => Implement a die signal.
-* [ ] **portals** : multiple portal_transition due to a late reset position, when changing rooms... see https://godotengine.org/qa/9761/area2d-triggered-more-time-when-player-node-previous-scene and https://github.com/godotengine/godot/issues/14578
+* [x] **portals** : multiple portal_transition due to a late reset position, when changing rooms... see https://godotengine.org/qa/9761/area2d-triggered-more-time-when-player-node-previous-scene and https://github.com/godotengine/godot/issues/14578
 * [x] Jitter animation when passing from a transition_in to transition_out using **rooms**.
 
 ### Potential Glitches

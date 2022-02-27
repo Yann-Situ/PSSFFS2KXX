@@ -8,11 +8,16 @@ uniform float thickness;
 void fragment(){
 	//float ratio = TEXTURE_PIXEL_SIZE.x / TEXTURE_PIXEL_SIZE.y;
 	//vec2 scaledUV = (UV - vec2(0.5,0.0)) / vec2(ratio, 1) + vec2(0.5,0.0);
-	vec2 scaledUV = UV;
-	float mask = (1.0 - smoothstep(size-0.1,size, length(scaledUV - center))) * 
-	smoothstep(size-thickness-0.1,size-thickness, length(scaledUV - center));
-	vec2 disp = normalize(scaledUV - center) * force * mask;
-	COLOR = texture(SCREEN_TEXTURE,SCREEN_UV - disp);
+	if(force == 0.0){
+		COLOR = vec4(0.0);
+	}
+	else {
+		vec2 scaledUV = UV;
+		float mask = (1.0 - smoothstep(size-0.1,size, length(scaledUV - center))) * 
+		smoothstep(size-thickness-0.1,size-thickness, length(scaledUV - center));
+		vec2 disp = normalize(scaledUV - center) * force * mask;
+		COLOR = textureLod(SCREEN_TEXTURE,SCREEN_UV - disp,0.0);
+	}
 	//COLOR.rgb = vec3(mask);
 	
 }

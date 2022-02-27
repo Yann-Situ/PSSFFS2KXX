@@ -12,6 +12,7 @@ export var can_receive_hang = true
 
 var inside_bodies = []
 var bodies_positions = []
+var distortion_scene = preload("res://src/Effects/Distortion.tscn") 
 
 onready var start_position = global_position
 # Should be in any items that can be picked/placed :
@@ -52,6 +53,12 @@ func dunk(dunker : Node2D):
 	print("DUUUNK!")
 	$CPUParticles2D.amount = 60
 	$CPUParticles2D.restart()
+	var distortion = distortion_scene.instance()
+	self.add_child(distortion)
+	distortion.animation_delay = 0.75#s
+	distortion.z_index = Global.z_indices["foreground_2"]
+	distortion.start("fast_subtle")
+	
 	if (dunker.global_position.x - global_position.x) > 0:
 		$AnimationPlayer.play("dunk_right")
 	else :

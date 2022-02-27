@@ -120,6 +120,7 @@ hang_position_offset_y = 36
 use_parent_material = true
 position = Vector2( 0, 6 )
 frames = SubResource( 6 )
+frame = 6
 playing = true
 
 [node name="basket_area" type="Area2D" parent="."]

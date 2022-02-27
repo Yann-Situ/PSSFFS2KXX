@@ -7,6 +7,8 @@ export (float) var shock_fall = 5000 # m*pix/s
 export (float) var distance_max = 64
 export (float) var shock_timer = 0.25#s
 
+var distortion_scene = preload("res://src/Effects/Distortion.tscn") 
+
 func _ready():
 	self.mass = 1.15
 	self.set_friction(0.12)
@@ -40,6 +42,7 @@ func shock(shock_force : float, shock_global_position : Vector2):
 	$ShockWaveAnim.global_position = shock_global_position
 	$ShockWaveAnim.restart()
 	$AnimationPlayer.play("shockwave")
+	shockwave_distortion(shock_global_position)
 	Global.camera.screen_shake(0.25,5)
 	var bodies = $ShockZone.get_overlapping_bodies()+$ShockZone.get_overlapping_areas()
 	apply_shock_impulse(shock_force, shock_global_position, bodies)
@@ -72,3 +75,11 @@ func power_jr(player,delta):
 func _on_AnimationPlayer_animation_finished(anim_name):
 	if anim_name == "shockwave":
 		$AnimationPlayer.play("idle")
+
+func shockwave_distortion(glob_pos : Vector2):
+	var distortion = distortion_scene.instance()
+	get_parent().add_child(distortion)
+	distortion.animation_delay = 0.5#s
+	distortion.z_index = 250
+	distortion.global_position = glob_pos
+	distortion.start("fast")
