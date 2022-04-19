@@ -175,7 +175,7 @@ func can_dunk():
 			b = selectables[i].get_parent() # `get_parent` because we're
 		# detecting the basket_area node
 			var l2 = (b.position - P.position).length_squared()
-			if b.can_receive_dunk and l2 < min_len_sq :
+			if b is Basket and b.can_receive_dunk and l2 < min_len_sq :
 				S.dunk_basket = b
 				min_len_sq = l2
 		return S.dunk_basket != null

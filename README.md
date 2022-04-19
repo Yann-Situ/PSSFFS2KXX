@@ -66,6 +66,8 @@ Popol Super Slam Fusion Full Speed 2KXX
 * [ ] Hard to reproduce (see video) : **dunkjump** on **jumper** can result in very far from map position teleportation. (because to low to mathematically dunkjump => negative value ?)
 * [ ] Infinite **walking** animation on 16px block stairs.
 * [ ] High jump when jump_jp and jump_jr just before landing (because the cancelled mounting only test jump_jr).
+* [ ] **one-way platform** make player crouch due to raycast mecanik.
+* [ ] **one-way platform** make player unable to do small jumps.
 
 ### Dynamic items
 * [ ] **Zipline** drop inside collision places results in stucked player.

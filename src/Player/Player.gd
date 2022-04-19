@@ -60,6 +60,7 @@ onready var collision_layer_save = 1
 var character_holder = null
 
 var shoot = Vector2.ZERO
+var snap_vector = Vector2.ZERO
 
 ################################################################################
 
@@ -275,7 +276,7 @@ func _physics_process(delta):
 		if SpecialActionHandler.is_on_slope() and S.velocity.y > - abs(S.velocity.x) :
 			S.velocity.y = 0.5*sqrt(2) * move_and_slide_with_snap(S.velocity, 33*Vector2.DOWN, Vector2.UP, true, 4, 0.785398, false).y
 		else :
-			S.velocity = move_and_slide(S.velocity, Vector2.UP, true, 4, 0.785398, false)
+			S.velocity = move_and_slide_with_snap(S.velocity, snap_vector, Vector2.UP, true, 4, 0.785398, false)
 
 ################################################################################
 # For `characters` group

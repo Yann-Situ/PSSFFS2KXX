@@ -14,6 +14,9 @@ onready var P = get_parent()
 onready var S = P.get_node("State")
 onready var shader = $ShootScreen/ShootScreenShader.material
 
+################################################################################
+
+
 func update_viewer_parameter():
 	if S.active_ball == null:
 		viewer_parameter = INF

@@ -39,11 +39,11 @@ func shock(shock_force : float, shock_global_position : Vector2):
 		print(self.name + " is not yet ready for a new shock")
 		return false
 	$Timer.start(shock_timer)
+	Global.camera.screen_shake(0.25,5)
 	$ShockWaveAnim.global_position = shock_global_position
 	$ShockWaveAnim.restart()
 	$AnimationPlayer.play("shockwave")
 	shockwave_distortion(shock_global_position)
-	Global.camera.screen_shake(0.25,5)
 	var bodies = $ShockZone.get_overlapping_bodies()+$ShockZone.get_overlapping_areas()
 	apply_shock_impulse(shock_force, shock_global_position, bodies)
 	print("shock !")
@@ -78,8 +78,8 @@ func _on_AnimationPlayer_animation_finished(anim_name):
 
 func shockwave_distortion(glob_pos : Vector2):
 	var distortion = distortion_scene.instance()
-	get_parent().add_child(distortion)
 	distortion.animation_delay = 0.5#s
 	distortion.z_index = 250
 	distortion.global_position = glob_pos
+	get_parent().add_child(distortion)
 	distortion.start("fast")

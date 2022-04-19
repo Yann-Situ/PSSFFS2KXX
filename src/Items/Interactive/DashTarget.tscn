@@ -1,0 +1,25 @@
+[gd_scene load_steps=4 format=2]
+
+[ext_resource path="res://src/Items/Interactive/Selectable.gd" type="Script" id=1]
+[ext_resource path="res://assets/art/environment/environment-interactive.png" type="Texture" id=2]
+
+[sub_resource type="CircleShape2D" id=1]
+radius = 0.01
+
+[node name="DashTarget" type="Node2D"]
+modulate = Color( 1, 1.2, 1.2, 1 )
+
+[node name="Sprite" type="Sprite" parent="."]
+texture = ExtResource( 2 )
+region_enabled = true
+region_rect = Rect2( 4, 132, 24, 24 )
+
+[node name="Area2D" type="Area2D" parent="."]
+collision_layer = 40
+collision_mask = 0
+script = ExtResource( 1 )
+is_shoot_selectable = false
+is_jump_selectable = false
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+shape = SubResource( 1 )

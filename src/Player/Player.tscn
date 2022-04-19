@@ -1475,7 +1475,7 @@ nodes/shoot/node = SubResource( 122 )
 nodes/shoot/position = Vector2( 80, -420 )
 nodes/stance/node = SubResource( 123 )
 nodes/stance/position = Vector2( 660, 580 )
-node_connections = [ "output", 0, "cancelable", "action_type", 0, "shoot", "action_type", 1, "dunk", "action_type", 2, "Seek", "action_type", 3, "dunkjump", "Seek", 0, "dunkdash", "cancelable", 0, "action", "cancelable", 1, "stance", "stance", 0, "ground", "stance", 1, "air", "stance", 2, "grind", "stance", 3, "hang" ]
+node_connections = [ "output", 0, "cancelable", "action_type", 0, "shoot", "action_type", 1, "dunk", "action_type", 2, "Seek", "action_type", 3, "dunkjump", "cancelable", 0, "action", "cancelable", 1, "stance", "Seek", 0, "dunkdash", "stance", 0, "ground", "stance", 1, "air", "stance", 2, "grind", "stance", 3, "hang" ]
 
 [sub_resource type="AnimationNodeStateMachinePlayback" id=125]
 
@@ -1539,12 +1539,8 @@ is_dunkjumping = true
 is_dunkdashing = true
 
 [node name="Collision" type="CollisionShape2D" parent="."]
-visible = false
 position = Vector2( 0, 6 )
 shape = SubResource( 1 )
-__meta__ = {
-"_edit_lock_": true
-}
 
 [node name="Actions" type="Node2D" parent="."]
 
@@ -1555,51 +1551,61 @@ script = ExtResource( 9 )
 [node name="Ray_fwd_up" type="RayCast2D" parent="Actions/SpecialActionHandler"]
 position = Vector2( 0, -16 )
 cast_to = Vector2( 9, 0 )
+collision_mask = 2
 script = ExtResource( 10 )
 
 [node name="Ray_fwd_down" type="RayCast2D" parent="Actions/SpecialActionHandler"]
 position = Vector2( 0, 32 )
 cast_to = Vector2( 9, 0 )
+collision_mask = 2
 script = ExtResource( 10 )
 
 [node name="Ray_fwd_up_f" type="RayCast2D" parent="Actions/SpecialActionHandler"]
 position = Vector2( 0, -16 )
 cast_to = Vector2( -9, 0 )
+collision_mask = 2
 script = ExtResource( 10 )
 
 [node name="Ray_fwd_down_f" type="RayCast2D" parent="Actions/SpecialActionHandler"]
 position = Vector2( 0, 32 )
 cast_to = Vector2( -9, 0 )
+collision_mask = 2
 script = ExtResource( 10 )
 
 [node name="Ray_up_fwd" type="RayCast2D" parent="Actions/SpecialActionHandler"]
 position = Vector2( 8, 0 )
 cast_to = Vector2( 0, -20 )
+collision_mask = 2
 script = ExtResource( 10 )
 
 [node name="Ray_up_bwd" type="RayCast2D" parent="Actions/SpecialActionHandler"]
 position = Vector2( -8, 0 )
 cast_to = Vector2( 0, -20 )
+collision_mask = 2
 script = ExtResource( 10 )
 
 [node name="Ray_down_fwd" type="RayCast2D" parent="Actions/SpecialActionHandler"]
 position = Vector2( 8, 0 )
 cast_to = Vector2( 0, 33 )
+collision_mask = 2
 script = ExtResource( 10 )
 
 [node name="Ray_down_bwd" type="RayCast2D" parent="Actions/SpecialActionHandler"]
 position = Vector2( -8, 0 )
 cast_to = Vector2( 0, 33 )
+collision_mask = 2
 script = ExtResource( 10 )
 
 [node name="Ray_slope_fwd" type="RayCast2D" parent="Actions/SpecialActionHandler"]
 position = Vector2( 8, 32 )
 cast_to = Vector2( 0, 17 )
+collision_mask = 2
 script = ExtResource( 10 )
 
 [node name="Ray_slope_bwd" type="RayCast2D" parent="Actions/SpecialActionHandler"]
 position = Vector2( -8, 32 )
 cast_to = Vector2( 0, 17 )
+collision_mask = 2
 script = ExtResource( 10 )
 
 [node name="dunkjump_area" type="Area2D" parent="Actions/SpecialActionHandler"]
@@ -1619,6 +1625,7 @@ modulate = Color( 1, 0.490196, 0.870588, 1 )
 shape = SubResource( 3 )
 
 [node name="Selector" type="Node2D" parent="Actions"]
+visible = false
 script = ExtResource( 40 )
 
 [node name="ShootTarget" parent="Actions/Selector" instance=ExtResource( 31 )]
@@ -1689,6 +1696,7 @@ script = ExtResource( 41 )
 [node name="ShootScreen" type="CanvasLayer" parent="Shooter"]
 
 [node name="ShootScreenShader" type="ColorRect" parent="Shooter/ShootScreen"]
+visible = false
 material = SubResource( 4 )
 anchor_right = 1.0
 anchor_bottom = 1.0
