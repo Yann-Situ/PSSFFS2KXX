@@ -1,4 +1,4 @@
-[gd_scene load_steps=12 format=2]
+[gd_scene load_steps=13 format=2]
 
 [ext_resource path="res://src/Effects/Distortion.gd" type="Script" id=1]
 [ext_resource path="res://assets/art/environment/TileMap.png" type="Texture" id=2]
@@ -8,9 +8,9 @@
 resource_local_to_scene = true
 shader = ExtResource( 3 )
 shader_param/center = Vector2( 0.5, 0.5 )
-shader_param/force = 0.000929688
-shader_param/size = 0.0215015
-shader_param/thickness = 0.00527778
+shader_param/force = 0.0
+shader_param/size = 0.1
+shader_param/thickness = 0.0
 
 [sub_resource type="Gradient" id=2]
 
@@ -56,6 +56,46 @@ tracks/2/keys = {
 "transitions": PoolRealArray( 1, 1, 1 ),
 "update": 0,
 "values": [ 0.0, 0.07, 0.0 ]
+}
+
+[sub_resource type="Animation" id=9]
+resource_name = "fast_soft"
+step = 0.05
+tracks/0/type = "value"
+tracks/0/path = NodePath("Shader:material:shader_param/size")
+tracks/0/interp = 2
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.2, 1 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 0,
+"values": [ 0.0, 0.48, 0.1 ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("Shader:material:shader_param/thickness")
+tracks/1/interp = 2
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 0.55, 1 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 0,
+"values": [ 0.0, 0.08, 0.0 ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath("Shader:material:shader_param/force")
+tracks/2/interp = 2
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0, 0.1, 1 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 0,
+"values": [ 0.0, 0.01, 0.0 ]
 }
 
 [sub_resource type="Animation" id=5]
@@ -238,6 +278,7 @@ __meta__ = {
 
 [node name="Animation" type="AnimationPlayer" parent="."]
 anims/fast = SubResource( 4 )
+anims/fast_soft = SubResource( 9 )
 anims/fast_subtle = SubResource( 5 )
 anims/massive = SubResource( 6 )
 anims/soft = SubResource( 7 )

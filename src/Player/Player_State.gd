@@ -149,6 +149,7 @@ func set_action(v): # for non_cancelable actions
 			ActionType.SHOOT:
 				Actions.get_node("Shoot").move_end()
 			ActionType.DUNKDASH:
+				print("set_action : "+str(v))
 				Actions.get_node("Dunkdash").move_end()
 			ActionType.DUNK:
 				Actions.get_node("Dunk").move_end()
@@ -211,7 +212,7 @@ func update_vars(delta):
 	# non-cancelables :
 	#is_shooting = is_shooting
 	#is_dunking = is_dunking
-	is_dunkdashing = is_dunkdashing and not is_onfloor and dunk_p
+	is_dunkdashing = is_dunkdashing# and not is_onfloor and dunk_p
 	is_dunkprejumping = is_dunkprejumping and !(is_dunking or is_dunkdashing)
 	is_dunkjumping = (is_dunkjumping  and \
 		!(is_onfloor or (is_onwall and is_falling) or is_dunking or \

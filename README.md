@@ -110,6 +110,7 @@ Popol Super Slam Fusion Full Speed 2KXX
 * [ ] Pressing **jump** and **dunkdash** just before landing can result in small dunkdash/jump.
 * [ ] **Jumping** (from ground) just before entering a **rail** can result in a boost grind.
 * [ ] **Dunkdashing** just before entering a **rail** can result in a dash boost grind.
+* [ ] **Dunkjump** through a **one way platform** resets the dash.
 
 ## Groups
 

@@ -120,13 +120,14 @@ hang_position_offset_y = 36
 use_parent_material = true
 position = Vector2( 0, 6 )
 frames = SubResource( 6 )
-frame = 5
+frame = 4
 playing = true
 
 [node name="basket_area" type="Area2D" parent="."]
 collision_layer = 40
 collision_mask = 4
 script = ExtResource( 9 )
+is_dash_selectable = false
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="basket_area"]
 modulate = Color( 0, 1, 0.0392157, 1 )
