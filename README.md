@@ -48,6 +48,9 @@ Popol Super Slam Fusion Full Speed 2KXX
    - [ ] Complete editor by adding tilemapping in it
 * Add levels
 
+### Code structure to implement
+* `Selector` is currently a child of `Player/Actions` and is reparent by code to be a child of `Room`. Maybe it should be a child of the room or the level, and accessed in `SpecialActionHandler` via a NodePath or through signals.
+
 ## Issues
 ### Physical movement
 * [x] Weird straight **jump** on a corner. Don't know why it happens and what to do.
@@ -63,9 +66,9 @@ Popol Super Slam Fusion Full Speed 2KXX
 * [ ] **shooting** just before **landing** results in `floor_shoot` just after `aim_shoot` animation
 * [ ] There is some jitter animation when passing from a **dunkjump** state to a **grind** state.
 * [ ] There is some jitter animation when passing from a **dunk** state to a **hang** state.
-* [ ] Hard to reproduce (see video) : **dunkjump** on **jumper** can result in very far from map position teleportation. (because to low to mathematically dunkjump => negative value ?)
+* [ ] Hard to reproduce (see video) : **dunkjump** on **jumper** can result in `Nan` camera position teleportation. (because to low to mathematically dunkjump => negative value ? division by 0.0 ?)
 * [ ] Infinite **walking** animation on 16px block stairs.
-* [ ] High jump when jump_jp and jump_jr just before landing (because the cancelled mounting only test jump_jr).
+* [ ] High jump when `jump_jp` and `jump_jr` just before landing (because the cancelled mounting only test `jump_jr`). (also on walljumps)
 * [ ] **one-way platform** make player crouch due to raycast mecanik.
 * [ ] **one-way platform** make player unable to do small jumps.
 
@@ -96,6 +99,7 @@ Popol Super Slam Fusion Full Speed 2KXX
 * [ ] The `shoot_previewer` shows a trajectory slightly above the real one.
 * [ ] `Z_as_relative` doesn't work through script... https://github.com/godotengine/godot/issues/45416
 * [x] **ColorRect** for shockwave effect stay in (0,0) global coordinates...
+* [ ] **ColorRect** for shockwave effect combine with `canvas_modulate` results in weird color rectangle.
 * [ ] Lag if too much balls : make a spawner limit and link the dispawn of a ball to the spawner to increase the spawn count.
 * [ ] I need to adapt the boum delay: i.e apply_impulse instantly on colliding object and a bit after on far objects. nedd a method call_after_a_delay(apply_impulse)
 * [ ] **Bubble/Zap ball teleportation** trailhandler can act very weirdly if used quickly repeatly.
@@ -105,12 +109,14 @@ Popol Super Slam Fusion Full Speed 2KXX
 * [ ] Using the power of a selected ball that died results in error. => Implement a die signal.
 * [x] **portals** : multiple portal_transition due to a late reset position, when changing rooms... see https://godotengine.org/qa/9761/area2d-triggered-more-time-when-player-node-previous-scene and https://github.com/godotengine/godot/issues/14578
 * [x] Jitter animation when passing from a transition_in to transition_out using **rooms**.
+* [ ] Changing **room** holding a **ball** results in leaving the ball in the previous room.
 
 ### Potential Glitches
 * [ ] Pressing **jump** and **dunkdash** just before landing can result in small dunkdash/jump.
 * [ ] **Jumping** (from ground) just before entering a **rail** can result in a boost grind.
 * [ ] **Dunkdashing** just before entering a **rail** can result in a dash boost grind.
 * [ ] **Dunkjump** through a **one way platform** resets the dash.
+* [ ] Up-**Dunkdash** just after a **Jump** or a **ShockJump** results in high **Dunkdash**.
 
 ## Groups
 

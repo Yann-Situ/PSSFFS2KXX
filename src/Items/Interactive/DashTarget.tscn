@@ -8,8 +8,10 @@ radius = 0.01
 
 [node name="DashTarget" type="Node2D"]
 modulate = Color( 1, 1.2, 1.2, 1 )
+light_mask = 16
 
 [node name="Sprite" type="Sprite" parent="."]
+light_mask = 16
 texture = ExtResource( 2 )
 region_enabled = true
 region_rect = Rect2( 4, 132, 24, 24 )

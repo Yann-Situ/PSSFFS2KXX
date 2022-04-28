@@ -5,9 +5,9 @@
 [ext_resource path="res://src/Items/Balls/BallBoum.tscn" type="PackedScene" id=3]
 [ext_resource path="res://src/Items/Dynamics/PipeBall.tscn" type="PackedScene" id=4]
 [ext_resource path="res://src/Items/Balls/Ball.tscn" type="PackedScene" id=5]
-[ext_resource path="res://assets/art/background/pixelBackground7.png" type="Texture" id=6]
+[ext_resource path="res://assets/art/background/ShopBackground2.png" type="Texture" id=6]
 [ext_resource path="res://assets/art/background/pixelBackground3.png" type="Texture" id=7]
-[ext_resource path="res://assets/art/background/pixelBackground6.png" type="Texture" id=8]
+[ext_resource path="res://assets/art/background/ShopBackground4.png" type="Texture" id=8]
 [ext_resource path="res://src/Platform/Tileset/TileMap2.tres" type="TileSet" id=9]
 [ext_resource path="res://src/Platform/World32.gd" type="Script" id=10]
 [ext_resource path="res://src/Items/Balls/BallFire.tscn" type="PackedScene" id=11]
@@ -190,7 +190,7 @@ __meta__ = {
 modulate = Color( 0.678431, 0.368627, 0.505882, 1 )
 motion_scale = Vector2( 0.15, 0.15 )
 motion_offset = Vector2( 0, -80 )
-motion_mirroring = Vector2( 1540, 0 )
+motion_mirroring = Vector2( 2048, 0 )
 __meta__ = {
 "_edit_group_": true,
 "_edit_lock_": true
@@ -198,9 +198,9 @@ __meta__ = {
 
 [node name="TextureRect" type="TextureRect" parent="ParallaxBackground/ParallaxLayer3"]
 margin_left = 5.3454
-margin_top = 5.92419
-margin_right = 1545.35
-margin_bottom = 521.924
+margin_top = -100.076
+margin_right = 2053.35
+margin_bottom = 415.924
 mouse_filter = 2
 texture = ExtResource( 8 )
 __meta__ = {
@@ -208,9 +208,8 @@ __meta__ = {
 }
 
 [node name="ColorRect" type="ColorRect" parent="ParallaxBackground/ParallaxLayer3"]
-margin_left = 4.0
 margin_top = 259.0
-margin_right = 1551.0
+margin_right = 2048.0
 margin_bottom = 524.0
 mouse_filter = 2
 color = Color( 0.964706, 0.964706, 0.964706, 1 )
@@ -229,9 +228,9 @@ __meta__ = {
 }
 
 [node name="TextureRect" type="TextureRect" parent="ParallaxBackground/ParallaxLayer4"]
-margin_top = -240.0
+margin_top = -476.0
 margin_right = 2176.0
-margin_bottom = 784.0
+margin_bottom = 548.0
 mouse_filter = 2
 texture = ExtResource( 6 )
 __meta__ = {
@@ -476,6 +475,13 @@ col1 = Color( 0, 0, 0, 1 )
 col2 = Color( 0, 0, 0, 1 )
 col3 = Color( 0, 0, 0, 1 )
 
+[node name="BallMetal3" parent="Environment/Balls" instance=ExtResource( 28 )]
+light_mask = 1
+position = Vector2( -576, -616 )
+col1 = Color( 0, 0, 0, 1 )
+col2 = Color( 0, 0, 0, 1 )
+col3 = Color( 0, 0, 0, 1 )
+
 [node name="BallLight" parent="Environment/Balls" instance=ExtResource( 24 )]
 light_mask = 1
 position = Vector2( 856, 208 )
@@ -485,7 +491,7 @@ col3 = Color( 0, 0, 0, 1 )
 
 [node name="BallShock" parent="Environment/Balls" instance=ExtResource( 44 )]
 light_mask = 1
-position = Vector2( 1312, 328 )
+position = Vector2( 352, 336 )
 col1 = Color( 0, 0, 0, 1 )
 col2 = Color( 0, 0, 0, 1 )
 col3 = Color( 0, 0, 0, 1 )

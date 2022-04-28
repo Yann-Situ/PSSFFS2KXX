@@ -7,7 +7,10 @@ export (String, FILE, "*.tscn") var first_room
 export (String) var first_room_portal
 
 var rooms = {}
-var actual_room_instance = null #
+var current_room_instance = null #
+var player_scene = preload("res://src/Player/Player.tscn")
+var meta_player = null
+var player_save = null
 
 func _ready():
 	load_level()
@@ -25,17 +28,22 @@ func browse_rooms(room_name : String):
 
 		var room: Room = packed_room.instance()
 		rooms[room_name] = room
-		print_debug("add room : "+room_name)
+		print_debug("created room : "+room_name)
+		room.meta_player = $Player.get_path()
 		room.connect("exit_room", self, "change_room")
 		room.connect("exit_level", self, "exit_level")
-		
+
 		# TODO ugly but we need to call _ready on room in order to get the portals...
+		# Maybe find a system with resources ? Or store a meta room as resource, with its information
+		# or maybe create an _init function that create the portal_list ?
 		self.add_child(room)
 		var portal_nodes = room.get_portals().values()
 		self.remove_child(room)
-		
+
 		for portal in portal_nodes:
 			browse_rooms(portal.get_next_room())
+
+################################################################################
 
 func enter_level():
 	change_room(first_room, first_room_portal)
@@ -48,12 +56,21 @@ func exit_level(exit_room : String, exit_room_portal : String):
 
 func change_room(next_room : String, next_room_portal : String):
 	print_debug("entering "+next_room+" at the portal "+next_room_portal)
-	
-	if self.is_a_parent_of(actual_room_instance):
-		self.remove_child(actual_room_instance)
+	# TODO: pause or unpause the room when changing ?
+	if self.is_a_parent_of(current_room_instance):
+#		if current_room_instance.is_a_parent_of(meta_player):
+#			current_room_instance.remove_child(meta_player)
+#			current_room_instance.add_child(player_save)
+		self.remove_child(current_room_instance)
 	if rooms.has(next_room):
-		actual_room_instance = rooms[next_room]
-		actual_room_instance.enter_room(next_room_portal)
-		self.add_child(actual_room_instance)
+		current_room_instance = rooms[next_room]
+		
+		# need to deal with the _ready problems... Maybe look for _init and _enter_tree
+#		player_save = current_room_instance.get_node("Player")
+#		current_room_instance.remove_child(player_save)
+#		current_room_instance.add_child(meta_player)
+		
+		current_room_instance.enter_room(next_room_portal) #move it to the appropriate position
+		self.add_child(current_room_instance)
 	else :
 		printerr(name+" doesn't have a preloaded room named "+next_room)

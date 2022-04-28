@@ -231,6 +231,7 @@ ui_restart={
 2d_physics/layer_3="balls"
 2d_render/layer_4="graff"
 2d_physics/layer_4="environment_special"
+2d_render/layer_5="special"
 2d_physics/layer_5="explosion"
 2d_physics/layer_6="selectable"
 2d_physics/layer_7="breakable"

@@ -75,6 +75,6 @@ func update_effective_can_shoot(tau : float = 0.0, s = 0):
 	# due to float arithmetic, we need to force the following value to be positive :
 	var temp = max(0.0, 1 - Q.x*Q.x + 2*Q.y)
 	
-	print("%d %d", [g, temp, rad2deg(atan2(1 + s*sqrt(temp), Q.x))])
+	#print("%d %d", [g, temp, rad2deg(atan2(1 + s*sqrt(temp), Q.x))])
 	effective_v = polar2cartesian(v_length, -atan2(1 + s*sqrt(temp), Q.x))
 		

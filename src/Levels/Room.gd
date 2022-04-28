@@ -9,8 +9,10 @@ export (int) var limit_top = -10000000
 export (int) var limit_right = 10000000
 export (int) var limit_bottom = 10000000
 
-onready var P = $Player
+var P = null
 var portals = {} setget , get_portals
+
+export (NodePath) var meta_player
 
 func update_camera_limit():
 	P.Camera.limit_left = limit_left
@@ -27,6 +29,9 @@ func get_portal(portal_name : String):
 		printerr(portal_name+" not found in room "+self.name)
 		return null
 
+func get_player():
+	return get_node(meta_player)
+
 func lock_portals(): # necessary because of issue : https://github.com/godotengine/godot/issues/14578
 	for portal in portals.values():
 		portal.is_locked = true
@@ -36,19 +41,43 @@ func unlock_portals(): # necessary because of issue : https://github.com/godoten
 		portal.is_locked = false
 ################################################################################
 
-
+func _enter_tree():
+	# check if it has a Player node as a child. If not, create a Player node 
+	# and assign it to meta_player
+	print(name + " enter_tree")
+	#print("METAPLAYER : " + str(meta_player))
+	if get_node(meta_player) == null: # when room is run alone from the editor for tests
+		#print("No meta player : create one and assign meta_player")
+		var player_scene = load("res://src/Player/Player.tscn")
+		var player = player_scene.instance()
+		self.add_child(player) #move it to the appropriate position
+		meta_player = player.get_path()
+		#print("---> new METAPLAYER : " + str(meta_player))
+		if self.has_node("PlayerPosition"):
+			player.global_position = get_node_or_null("PlayerPosition").global_position
+	P = get_player()
+	
 func _ready():
+	print(name + " ready")
 	var portal_list = get_node("Portals").get_children()
 	for portal in portal_list:
-		portals[portal.name] = portal
-		portal.connect("enter_portal_finished", self, "unlock_portals")
-		portal.connect("exit_portal_finished", self, "lock_portals")
+		add_portal(portal)
+		# note that if room isn't a child of level (like when it is opened from
+		# the editor as child of root), enter_room is never called so 
+		# enter_portal_finished is never emited and all the portals are locked.
+	
+	if self.has_node("PlayerPosition"):
+		get_node_or_null("PlayerPosition").visible = false
 	lock_portals()
-	update_camera_limit()
+	
+	if get_parent() == get_tree().root:
+		update_camera_limit()
 
-#	P = preload("res://src/Player/Player.tscn").instance()
-#	P.name = "Player"
-#	self.add_child(P)
+func add_portal(portal : Portal2D):
+	portals[portal.name] = portal
+	portal.connect("enter_portal_finished", self, "unlock_portals")
+	portal.connect("exit_portal_finished", self, "lock_portals")
+		
 
 func _unhandled_input(event):
 	if event is InputEventKey:
@@ -69,6 +98,7 @@ func exit_level(exit_portal : String):
 	emit_signal("exit_level", self.name, exit_portal)
 
 func enter_room(entrance_portal : String):
+	update_camera_limit()
 	if portals.has(entrance_portal):
 		portals[entrance_portal].enter_portal()
 	else :

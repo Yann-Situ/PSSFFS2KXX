@@ -1,0 +1,200 @@
+[gd_scene load_steps=15 format=2]
+
+[ext_resource path="res://src/Levels/Room.tscn" type="PackedScene" id=1]
+[ext_resource path="res://src/Levels/Portal.tscn" type="PackedScene" id=2]
+[ext_resource path="res://src/Items/Balls/Ball.tscn" type="PackedScene" id=3]
+[ext_resource path="res://src/Items/Balls/BallShock.tscn" type="PackedScene" id=4]
+[ext_resource path="res://src/Items/Interactive/DashTarget.tscn" type="PackedScene" id=5]
+[ext_resource path="res://assets/art/background/ShopBackground2.png" type="Texture" id=6]
+[ext_resource path="res://assets/art/effects/light2.png" type="Texture" id=7]
+[ext_resource path="res://assets/shader/god_rays.gdshader" type="Shader" id=12]
+
+[sub_resource type="Gradient" id=1]
+resource_local_to_scene = true
+offsets = PoolRealArray( 0, 0.518182, 1 )
+colors = PoolColorArray( 0.0410156, 0.205185, 0.4375, 1, 0.0439453, 0.0733185, 0.3125, 1, 0.0491943, 0, 0.203125, 1 )
+
+[sub_resource type="GradientTexture" id=2]
+resource_local_to_scene = true
+gradient = SubResource( 1 )
+width = 516
+
+[sub_resource type="Environment" id=3]
+resource_local_to_scene = true
+background_mode = 4
+auto_exposure_scale = 1.0
+auto_exposure_min_luma = 0.9
+auto_exposure_max_luma = 3.0
+dof_blur_near_distance = 0.55
+glow_enabled = true
+glow_intensity = 0.95
+glow_strength = 1.12
+glow_bloom = 0.03
+glow_blend_mode = 1
+glow_hdr_threshold = 0.95
+glow_hdr_luminance_cap = 1.1
+glow_hdr_scale = 0.98
+glow_bicubic_upscale = true
+adjustment_enabled = true
+adjustment_contrast = 1.05
+
+[sub_resource type="ShaderMaterial" id=5]
+shader = ExtResource( 12 )
+shader_param/angle = 0.533
+shader_param/position = 0.293
+shader_param/spread = 0.5
+shader_param/cutoff = 0.1
+shader_param/falloff = 0.2
+shader_param/edge_fade = 0.15
+shader_param/speed = 1.0
+shader_param/ray1_density = 8.0
+shader_param/ray2_density = 30.0
+shader_param/ray2_intensity = 0.3
+shader_param/color = Color( 1.3, 1.2, 1, 0.8 )
+shader_param/hdr = true
+shader_param/seed = 5.0
+
+[sub_resource type="Gradient" id=6]
+
+[sub_resource type="GradientTexture" id=7]
+gradient = SubResource( 6 )
+
+[node name="RoomExample1" instance=ExtResource( 1 )]
+
+[node name="Portal1" parent="Portals" index="0" instance=ExtResource( 2 )]
+position = Vector2( -32, -32 )
+portal_type = 0
+transition_speed = 1.5
+
+[node name="Portal2" parent="Portals" index="1" instance=ExtResource( 2 )]
+position = Vector2( 160, -32 )
+next_room = "res://src/Levels/LevelTest/RoomTest2.tscn"
+next_room_portal = "Portal2"
+transition_color = Color( 0.317647, 0, 0.352941, 1 )
+transition_speed = 1.5
+
+[node name="TextureRect" parent="ParallaxBackground/ParallaxLayer" index="0"]
+texture = SubResource( 2 )
+
+[node name="ParallaxLayer2" parent="ParallaxBackground" index="1"]
+visible = true
+
+[node name="TextureRect" parent="ParallaxBackground/ParallaxLayer2" index="0"]
+modulate = Color( 0.133333, 0.0862745, 0.341176, 1 )
+
+[node name="ParallaxLayer3" parent="ParallaxBackground" index="2"]
+modulate = Color( 0.0823529, 0.0235294, 0.262745, 1 )
+
+[node name="ParallaxLayer4" parent="ParallaxBackground" index="3"]
+modulate = Color( 0.0705882, 0.0117647, 0.180392, 1 )
+motion_mirroring = Vector2( 2048, 0 )
+
+[node name="TextureRect" parent="ParallaxBackground/ParallaxLayer4" index="0"]
+margin_top = -500.0
+margin_bottom = 524.0
+texture = ExtResource( 6 )
+
+[node name="CanvasModulate" parent="Map" index="0"]
+visible = true
+color = Color( 0.411765, 0.4, 0.870588, 1 )
+
+[node name="Back32" parent="Map" index="1"]
+tile_data = PoolIntArray( -196615, 10, 262145, -196614, 9, 9, -196613, 9, 9, -196612, 9, 9, -196611, 9, 9, -196610, 9, 9, -196609, 9, 9, -262144, 9, 9, -262143, 9, 9, -262142, 9, 9, -262141, 9, 9, -262140, 9, 9, -262139, 9, 9, -262138, 9, 9, -262137, 10, 262144, -131079, 9, 131080, -131078, 9, 65545, -131077, 9, 65545, -131076, 9, 65545, -131075, 9, 65545, -131074, 9, 65545, -131073, 9, 65545, -196608, 9, 65545, -196607, 9, 65545, -196606, 9, 65545, -196605, 9, 65545, -196604, 9, 65545, -196603, 9, 65545, -196602, 9, 65545, -196601, 9, 65542, -196600, 11, 0, -196599, 11, 0, -196598, 10, 262144, -65543, 9, 131080, -65542, 9, 65545, -65541, 9, 65545, -65540, 9, 65545, -65539, 9, 65545, -65538, 9, 65545, -65537, 9, 65545, -131072, 9, 65545, -131071, 9, 65545, -131070, 9, 65545, -131069, 9, 65545, -131068, 9, 65545, -131067, 9, 65545, -131066, 9, 65545, -131065, 9, 65545, -131064, 12, 1, -131063, 11, 0, -131062, 12, 0, -131061, 10, 262144, -7, 9, 196616, -6, 9, 196618, -5, 9, 196618, -4, 9, 196618, -3, 9, 196618, -2, 9, 196618, -1, 9, 196618, -65536, 9, 196618, -65535, 9, 196618, -65534, 9, 196618, -65533, 9, 196618, -65532, 9, 196618, -65531, 9, 196618, -65530, 9, 196618, -65529, 12, 1, -65528, 11, 0, -65527, 11, 0, -65526, 536870924, 1, -65525, 536870924, 1, -65524, 536870922, 262145 )
+
+[node name="Back16" parent="Map" index="2"]
+tile_data = PoolIntArray( -196612, 536870920, 65537, -196609, 536870920, 65536, -262136, 536870920, 1, -262133, 536870920, 65537, -131076, 536870920, 65536, -131073, 536870920, 1, -196600, 536870920, 1, -196597, 536870920, 1, -65540, 536870920, 0, -65537, 536870920, 65536, -131064, 536870920, 65536, -131061, 536870920, 65537, -4, 536870920, 1, -1, 536870920, 1, -65528, 536870920, 1, -65525, 536870920, 65537 )
+
+[node name="Graff" parent="Map" index="3"]
+tile_data = PoolIntArray( -458764, 28, 0, -327664, 536870937, 0, -131078, 536870935, 0, -65543, 536870935, 0, -65540, 536870935, 2, -5, 536870935, 65538 )
+
+[node name="World16" parent="Map" index="5"]
+tile_data = PoolIntArray( -1245211, 10, 0, -1245210, 10, 0, -1245209, 10, 0, -1245208, 10, 0, -1245207, 10, 0, -1245206, 10, 0, -1245205, 10, 0, -1245204, 10, 0, -1245203, 10, 0, -1245202, 10, 0, -1245201, 10, 0, -1245200, 10, 0, -1245199, 10, 0, -1245198, 10, 0, -1245197, 10, 0, -1245196, 10, 0, -1245195, 10, 0, -1245194, 10, 0, -1245193, 10, 0, -1245192, 10, 0, -1245191, 10, 0, -1245190, 10, 0, -1245189, 10, 0, -1245188, 10, 0, -1245187, 10, 0, -1245186, 10, 0, -1245185, 10, 0, -1310720, 10, 0, -1310719, 10, 0, -1310718, 10, 0, -1310717, 10, 0, -1310716, 10, 0, -1310715, 10, 0, -1310714, 10, 0, -1310713, 10, 0, -1310712, 10, 0, -1310711, 10, 0, -1310710, 10, 0, -1310709, 10, 0, -1310708, 10, 0, -1310707, 10, 0, -1310706, 10, 0, -1310705, 10, 0, -1310704, 10, 0, -1310703, 10, 0, -1310702, 10, 0, -1310701, 10, 0, -1310700, 10, 0, -1310699, 10, 0, -1310698, 10, 0, -1310697, 10, 0, -1310696, 10, 0, -1310695, 10, 0, -1310694, 10, 0, -1310693, 10, 0, -1310692, 10, 0, -1310691, 10, 0, -1310690, 10, 0, -1310689, 10, 0, -1310688, 10, 0, -1310687, 10, 0, -1310686, 10, 0, -1310685, 10, 0, -1179675, 10, 0, -1245149, 10, 0, -1114139, 10, 0, -1179613, 10, 0, -1048603, 10, 0, -1114077, 10, 0, -983067, 10, 0, -1048541, 10, 0, -917531, 10, 0, -983005, 10, 0, -851995, 10, 0, -917469, 10, 0, -786459, 10, 0, -851933, 10, 0, -720923, 10, 0, -786397, 10, 0, -655387, 10, 0, -720861, 10, 0, -589851, 10, 0, -655325, 10, 0, -524315, 10, 0, -589789, 10, 0, -458779, 10, 0, -524253, 10, 0, -393243, 10, 0, -458717, 10, 0, -327707, 10, 0, -393181, 10, 0, -262171, 10, 0, -262156, 36, 0, -262154, 36, 0, -262152, 36, 0, -262148, 536870923, 0, -262147, 536870947, 0, -262146, 536870947, 0, -262145, 536870923, 0, -327672, 536870923, 0, -327671, 536870947, 0, -327670, 536870947, 0, -327669, 536870923, 0, -327645, 10, 0, -196635, 10, 0, -262109, 10, 0, -131099, 10, 0, -131084, 36, 0, -131082, 36, 0, -196573, 10, 0, -65563, 10, 0, -131037, 10, 0, -27, 10, 0, -65501, 10, 0, 65509, 10, 0, 65510, 10, 0, 65511, 10, 0, 65512, 10, 0, 65513, 10, 0, 65514, 10, 0, 65515, 10, 0, 65516, 10, 0, 65517, 10, 0, 65518, 10, 0, 65519, 10, 0, 65520, 10, 0, 65521, 10, 0, 65522, 10, 0, 65523, 10, 0, 12, 10, 0, 13, 10, 0, 14, 10, 0, 15, 10, 0, 16, 10, 0, 17, 10, 0, 18, 10, 0, 19, 10, 0, 20, 10, 0, 21, 10, 0, 22, 10, 0, 23, 10, 0, 24, 10, 0, 25, 10, 0, 26, 10, 0, 27, 10, 0, 28, 10, 0, 29, 10, 0, 30, 10, 0, 31, 10, 0, 32, 10, 0, 33, 10, 0, 34, 10, 0, 35, 10, 0 )
+
+[node name="BackEnvironment" parent="Map" index="6"]
+tile_data = PoolIntArray( -1245171, 536870957, 0, -1245168, 536870956, 0, -1245160, 536870954, 0, -1048550, 536870930, 0, -983014, 536870926, 1, -917478, 14, 131073, -851942, 14, 131073, -786406, 14, 131073, -720870, 14, 131073, -655334, 14, 131073, -589798, 14, 131073, -524262, 14, 131073, -458726, 14, 131073, -393190, 14, 131073, -327654, 14, 131073, -196611, 536870958, 3, -262135, 536870958, 2, -262118, 14, 131073, -196582, 14, 131073, -65553, 536870949, 0, -131070, 1610612774, 4, -131068, 1610612774, 1, -131066, 1610612774, 0, -131046, 14, 131073, -65524, 536870948, 0, -65520, 536870946, 2, -65519, 536870946, 3, -65518, 536870946, 0, -65517, 536870946, 0, -65510, 14, 131073 )
+
+[node name="FrontEnvironment" parent="Map" index="7"]
+tile_data = PoolIntArray( -917479, 536870960, 0, -327706, 536870964, 0, -393183, 536870960, 0, -196634, 536870964, 0, -196632, 536870964, 0, -131090, 536870960, 0, -65562, 536870964, 0, -65560, 536870964, 0, -65558, 536870964, 0, -65554, 536870960, 0, -65529, 54, 0 )
+
+[node name="Ball" parent="Environment/Balls" index="0" instance=ExtResource( 3 )]
+position = Vector2( 216, -8 )
+
+[node name="BallShock" parent="Environment/Balls" index="1" instance=ExtResource( 4 )]
+position = Vector2( -88, -8 )
+
+[node name="DashTarget" parent="Environment/Interactive" index="0" instance=ExtResource( 5 )]
+position = Vector2( 544, -96 )
+
+[node name="DashTarget2" parent="Environment/Interactive" index="1" instance=ExtResource( 5 )]
+position = Vector2( -80, -336 )
+
+[node name="DashTarget3" parent="Environment/Interactive" index="2" instance=ExtResource( 5 )]
+position = Vector2( 272, -112 )
+
+[node name="WorldEnvironment" parent="." index="5"]
+environment = SubResource( 3 )
+
+[node name="GodRay" type="Sprite" parent="." index="6"]
+visible = false
+modulate = Color( 1.5, 1.3, 0.6, 1 )
+material = SubResource( 5 )
+position = Vector2( 280, 64 )
+scale = Vector2( 0.28125, 376 )
+z_index = 130
+z_as_relative = false
+texture = SubResource( 7 )
+
+[node name="Light2D5" type="Light2D" parent="." index="7"]
+position = Vector2( 160, -32 )
+scale = Vector2( 1.68235, 1.68235 )
+z_as_relative = false
+texture = ExtResource( 7 )
+texture_scale = 2.56
+energy = 1.05
+mode = 2
+range_z_max = 130
+range_item_cull_mask = 7
+
+[node name="Light2D9" type="Light2D" parent="." index="8"]
+position = Vector2( -32, -32 )
+scale = Vector2( 1.68235, 1.68235 )
+z_as_relative = false
+texture = ExtResource( 7 )
+texture_scale = 2.56
+energy = 1.05
+mode = 2
+range_z_max = 130
+range_item_cull_mask = 7
+
+[node name="Light2D6" type="Light2D" parent="." index="9"]
+position = Vector2( 272, -112 )
+scale = Vector2( 0.412822, 0.412822 )
+z_as_relative = false
+texture = ExtResource( 7 )
+texture_scale = 2.56
+color = Color( 0.827451, 0.866667, 1, 1 )
+mode = 2
+range_z_max = 350
+range_item_cull_mask = 17
+
+[node name="Light2D8" type="Light2D" parent="." index="10"]
+position = Vector2( 544, -96 )
+scale = Vector2( 0.412822, 0.412822 )
+z_as_relative = false
+texture = ExtResource( 7 )
+texture_scale = 2.56
+color = Color( 0.827451, 0.866667, 1, 1 )
+mode = 2
+range_z_max = 350
+range_item_cull_mask = 17
+
+[node name="Light2D7" type="Light2D" parent="." index="11"]
+position = Vector2( -80, -336 )
+scale = Vector2( 0.412822, 0.412822 )
+z_as_relative = false
+texture = ExtResource( 7 )
+texture_scale = 2.56
+color = Color( 0.827451, 0.866667, 1, 1 )
+mode = 2
+range_z_max = 350
+range_item_cull_mask = 17

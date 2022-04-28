@@ -242,7 +242,7 @@ func update_vars(delta):
 		Player.SpecialActionHandler.can_dunk() and not is_shooting and not is_dunkprejumping
 	
 	# cancelables :
-	is_jumping = is_jumping and not is_onfloor and is_mounting
+	is_jumping = is_jumping and not is_onfloor and is_mounting and not is_dunkdashing
 	is_walljumping = is_walljumping and is_jumping
 	is_crouching = (is_onfloor and is_crouching) or not can_stand# handle by player actions (start)
 

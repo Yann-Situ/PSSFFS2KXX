@@ -46,13 +46,16 @@ func move_end():
 	P.gravity = P.based_gravity
 	
 	if not S.is_grinding:
-		var vel_dir = S.velocity.normalized() # vel_dir is not always equals to dash_dir (e.g if there is an obstacle on the dash path)
-		var temp = velocity_save.dot(vel_dir)
-		if 0.25*S.velocity.length_squared() > temp*temp :
+		var temp_vel_l = S.velocity.length()
+		var vel_dir = Vector2.ZERO
+		if temp_vel_l != 0.0: #avoid zero division
+			vel_dir = S.velocity/temp_vel_l # vel_dir is not always equals to dash_dir (e.g if there is an obstacle on the dash path)
+		var temp_dot = velocity_save.dot(vel_dir)
+		if 0.5*temp_vel_l > temp_dot :
 			S.velocity *= 0.5
 		else :
-			S.velocity = temp * vel_dir
+			S.velocity = temp_dot * vel_dir
 		
 		if S.direction_p * S.move_direction < 0:
-			S.velocity.x = 0.0
+			S.velocity.x *= 0.5 # again
 	#P.get_node("Sprite").modulate = Color.white

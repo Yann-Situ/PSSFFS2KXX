@@ -80,7 +80,10 @@ extents = Vector2( 10, 32 )
 z_index = 300
 script = ExtResource( 1 )
 __meta__ = {
-"_edit_group_": true
+"_edit_group_": true,
+"_editor_description_": "*Purpose: used for teleportation of Player between rooms.
+*Requirement: It strongly depends on a Room node. A Portal node must be put under a Portals node under Room node (Room/Portals/Portal).
+"
 }
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]

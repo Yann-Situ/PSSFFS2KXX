@@ -1474,7 +1474,7 @@ nodes/shoot/node = SubResource( 122 )
 nodes/shoot/position = Vector2( 80, -420 )
 nodes/stance/node = SubResource( 123 )
 nodes/stance/position = Vector2( 660, 580 )
-node_connections = [ "output", 0, "cancelable", "action_type", 0, "shoot", "action_type", 1, "dunk", "action_type", 2, "Seek", "action_type", 3, "dunkjump", "stance", 0, "ground", "stance", 1, "air", "stance", 2, "grind", "stance", 3, "hang", "cancelable", 0, "action", "cancelable", 1, "stance", "Seek", 0, "dunkdash" ]
+node_connections = [ "output", 0, "cancelable", "action_type", 0, "shoot", "action_type", 1, "dunk", "action_type", 2, "Seek", "action_type", 3, "dunkjump", "Seek", 0, "dunkdash", "cancelable", 0, "action", "cancelable", 1, "stance", "stance", 0, "ground", "stance", 1, "air", "stance", 2, "grind", "stance", 3, "hang" ]
 
 [sub_resource type="AnimationNodeStateMachinePlayback" id=125]
 
@@ -1744,7 +1744,7 @@ texture = ExtResource( 2 )
 offset = Vector2( 0.5, 0 )
 hframes = 16
 vframes = 20
-frame = 193
+frame = 196
 __meta__ = {
 "_edit_group_": true,
 "_edit_lock_": true
@@ -1876,6 +1876,7 @@ local_coords = false
 
 [node name="CloudParticles" parent="PlayerEffects" instance=ExtResource( 43 )]
 material = SubResource( 135 )
+position = Vector2( 0, 8 )
 amount = 7
 lifetime = 0.65
 explosiveness = 0.9
@@ -1893,7 +1894,7 @@ position = Vector2( 0, 5 )
 shape = SubResource( 140 )
 
 [node name="HasBallPosition" type="Node2D" parent="BallHandler"]
-position = Vector2( 10, 5.99999 )
+position = Vector2( 4.99999, 15 )
 __meta__ = {
 "_edit_group_": true
 }

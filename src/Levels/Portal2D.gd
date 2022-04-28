@@ -18,9 +18,9 @@ export (String) var next_room_portal setget set_next_room_portal, get_next_room_
 export (Color) var transition_color = Color.black setget set_transition_color
 export (float, EXP, 0.1, 10.0) var transition_speed = 1.0 setget set_transition_speed
 
-onready var room = get_parent().get_parent()
-onready var P = room.get_node("Player")
+var room = null
 onready var is_locked = false 
+var P = null
 
 func set_portal_type(new_type):
 	portal_type = new_type
@@ -62,6 +62,15 @@ func set_transition_speed(f : float):
 ################################################################################
 func disp(s:String):
 	print(s)
+
+#func _init():
+#	print(name + " init")
+#	room = self.get_parent().get_parent()
+#	room.add_portal(self)
+	
+func _enter_tree():
+	room = get_parent().get_parent()
+	P = room.get_player()
 
 func _ready():
 	set_trigger_type(trigger_type)
