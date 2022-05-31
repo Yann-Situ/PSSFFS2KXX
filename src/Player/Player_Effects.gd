@@ -5,6 +5,7 @@ onready var S = Player.get_node("State")
 
 var ghost_anim = preload("res://src/Effects/GhostAnim.tscn")
 var distortion_scene = preload("res://src/Effects/Distortion.tscn") 
+var jump_particles1 = preload("res://src/Effects/JumpParticles1.tscn")
 
 var ghost_sprite
 
@@ -17,20 +18,26 @@ func process_effects():
 	pass
 
 func jump_start():
-	$JumpParticles0.restart()
-func jump_stop():
-	$JumpParticles0.stop()
+	var jump = jump_particles1.instance()
+	get_parent().add_child(jump)
+	jump.global_position = Player.global_position + Player.foot_vector + Vector2(0,-16)
+	jump.start()
 
 func dust_start():
 	$DustParticle.restart()
 func dust_stop():
-	$DustParticle.stop()
+	$DustParticle.emitting = false
 	
 func cloud_start():
 	$CloudParticles.restart()
 func cloud_stop():
-	$CloudParticles.stop()
+	$CloudParticles.emitting = false
 
+func grind_start():
+	$GrindParticles.restart()
+func grind_stop():
+	$GrindParticles.emitting = false
+	
 func ghost_start(duration, tick_delay, selfmodulate : Color = Color(1.2,1.8,2.2,0.39)):
 	$GhostHandler.self_modulate = selfmodulate
 	$GhostHandler.start(duration, tick_delay)

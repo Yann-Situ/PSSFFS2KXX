@@ -1,12 +1,11 @@
 [gd_scene load_steps=7 format=2]
 
-[ext_resource path="res://assets/art/effects/jumpcloud.png" type="Texture" id=1]
-[ext_resource path="res://src/Effects/OneShotParticle.gd" type="Script" id=2]
+[ext_resource path="res://assets/art/effects/jumpcloud1.png" type="Texture" id=1]
 
 [sub_resource type="CanvasItemMaterial" id=1]
 resource_local_to_scene = true
 particles_animation = true
-particles_anim_h_frames = 4
+particles_anim_h_frames = 6
 particles_anim_v_frames = 1
 particles_anim_loop = true
 
@@ -29,9 +28,27 @@ radial_accel = -10.17
 color_ramp = SubResource( 3 )
 anim_speed = 1.0
 
-[node name="JumpParticles0" type="Particles2D"]
+[sub_resource type="GDScript" id=5]
+script/source = "extends Particles2D
+
+signal emission_finished
+
+func start():
+	if not emitting:
+		emitting = true
+		get_tree().create_timer(lifetime * (2 - explosiveness), false)\\
+			.connect(\"timeout\", self, \"_queue_free\")
+			
+func _queue_free():
+	emit_signal(\"emission_finished\")
+	queue_free()
+"
+
+[node name="JumpParticles1" type="Particles2D"]
 material = SubResource( 1 )
+position = Vector2( 0, -16 )
 z_index = 110
+z_as_relative = false
 emitting = false
 amount = 1
 lifetime = 0.35
@@ -40,4 +57,4 @@ visibility_rect = Rect2( -50, -50, 100, 100 )
 local_coords = false
 process_material = SubResource( 4 )
 texture = ExtResource( 1 )
-script = ExtResource( 2 )
+script = SubResource( 5 )

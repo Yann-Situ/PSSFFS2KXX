@@ -26,7 +26,7 @@
 [ext_resource path="res://src/Player/Actions/Crouch.gd" type="Script" id=24]
 [ext_resource path="res://src/Effects/TrailHandler.tscn" type="PackedScene" id=25]
 [ext_resource path="res://assets/art/effects/trail.png" type="Texture" id=26]
-[ext_resource path="res://src/Effects/JumpParticles0.tscn" type="PackedScene" id=27]
+[ext_resource path="res://src/Effects/GrindParticles.tscn" type="PackedScene" id=27]
 [ext_resource path="res://assets/art/effects/offset_glow.png" type="Texture" id=28]
 [ext_resource path="res://src/Player/Actions/Release.gd" type="Script" id=29]
 [ext_resource path="res://src/Characters/LifeHandler.gd" type="Script" id=30]
@@ -701,7 +701,7 @@ tracks/0/keys = {
 }
 
 [sub_resource type="Animation" id=24]
-length = 0.5
+length = 0.1
 loop = true
 tracks/0/type = "value"
 tracks/0/path = NodePath(".:frame")
@@ -1501,13 +1501,6 @@ colors = PoolColorArray( 0, 0, 0, 0, 0.582031, 0.316025, 0.316025, 1, 1, 0.80352
 [sub_resource type="Curve" id=133]
 _data = [ Vector2( 0, 1 ), 0.0, -1.46686, 0, 0, Vector2( 1, 0.481818 ), 0.95065, 0.0, 0, 0 ]
 
-[sub_resource type="CanvasItemMaterial" id=134]
-resource_local_to_scene = true
-particles_animation = true
-particles_anim_h_frames = 4
-particles_anim_v_frames = 1
-particles_anim_loop = true
-
 [sub_resource type="CanvasItemMaterial" id=135]
 particles_animation = true
 particles_anim_h_frames = 10
@@ -1543,6 +1536,13 @@ anim_speed = 1.0
 [sub_resource type="StreamTexture" id=139]
 load_path = "res://.import/dust_0.png-aa7e79fd880c78618fa1d60a7c8d332a.stex"
 
+[sub_resource type="CanvasItemMaterial" id=142]
+resource_local_to_scene = true
+particles_animation = true
+particles_anim_h_frames = 6
+particles_anim_v_frames = 1
+particles_anim_loop = true
+
 [sub_resource type="CapsuleShape2D" id=140]
 radius = 14.0
 height = 28.0
@@ -1553,7 +1553,6 @@ height = 42.0
 
 [node name="Player" type="KinematicBody2D"]
 light_mask = 4
-position = Vector2( 416, 144 )
 z_index = 100
 z_as_relative = false
 collision_mask = 2
@@ -1744,7 +1743,7 @@ texture = ExtResource( 2 )
 offset = Vector2( 0.5, 0 )
 hframes = 16
 vframes = 20
-frame = 196
+frame = 204
 __meta__ = {
 "_edit_group_": true,
 "_edit_lock_": true
@@ -1868,12 +1867,6 @@ gradient_col = SubResource( 132 )
 width_curve = SubResource( 133 )
 texture = ExtResource( 26 )
 
-[node name="JumpParticles0" parent="PlayerEffects" instance=ExtResource( 27 )]
-material = SubResource( 134 )
-position = Vector2( -4, 20 )
-lifetime = 0.45
-local_coords = false
-
 [node name="CloudParticles" parent="PlayerEffects" instance=ExtResource( 43 )]
 material = SubResource( 135 )
 position = Vector2( 0, 8 )
@@ -1883,6 +1876,10 @@ explosiveness = 0.9
 local_coords = false
 process_material = SubResource( 138 )
 texture = SubResource( 139 )
+
+[node name="GrindParticles" parent="PlayerEffects" instance=ExtResource( 27 )]
+material = SubResource( 142 )
+position = Vector2( 0, 16 )
 
 [node name="BallHandler" type="Area2D" parent="."]
 collision_mask = 4
@@ -1894,7 +1891,7 @@ position = Vector2( 0, 5 )
 shape = SubResource( 140 )
 
 [node name="HasBallPosition" type="Node2D" parent="BallHandler"]
-position = Vector2( 4.99999, 15 )
+position = Vector2( 5, 0 )
 __meta__ = {
 "_edit_group_": true
 }

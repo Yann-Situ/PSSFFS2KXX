@@ -53,6 +53,7 @@ onready var Camera = get_node("Camera")
 onready var LifeHandler = get_node("LifeHandler")
 
 onready var start_position = global_position
+onready var foot_vector = Vector2(0,32)
 onready var based_gravity = Vector2(0.0,ProjectSettings.get_setting("physics/2d/default_gravity")) # pix/s²
 onready var invmass = 1.0/4.0
 onready var collision_layer_save = 1
