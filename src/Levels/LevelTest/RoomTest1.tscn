@@ -38,7 +38,7 @@ glow_bicubic_upscale = true
 adjustment_enabled = true
 adjustment_contrast = 1.05
 
-[sub_resource type="ShaderMaterial" id=5]
+[sub_resource type="ShaderMaterial" id=4]
 shader = ExtResource( 12 )
 shader_param/angle = 0.533
 shader_param/position = 0.293
@@ -54,10 +54,10 @@ shader_param/color = Color( 1.3, 1.2, 1, 0.8 )
 shader_param/hdr = true
 shader_param/seed = 5.0
 
-[sub_resource type="Gradient" id=6]
+[sub_resource type="Gradient" id=5]
 
-[sub_resource type="GradientTexture" id=7]
-gradient = SubResource( 6 )
+[sub_resource type="GradientTexture" id=6]
+gradient = SubResource( 5 )
 
 [node name="RoomExample1" instance=ExtResource( 1 )]
 
@@ -96,7 +96,10 @@ texture = ExtResource( 6 )
 
 [node name="CanvasModulate" parent="Map" index="0"]
 visible = true
-color = Color( 0.411765, 0.4, 0.870588, 1 )
+light_mask = 0
+z_index = 500
+z_as_relative = false
+color = Color( 0.176471, 0.133333, 0.403922, 1 )
 
 [node name="Back32" parent="Map" index="1"]
 tile_data = PoolIntArray( -196615, 10, 262145, -196614, 9, 9, -196613, 9, 9, -196612, 9, 9, -196611, 9, 9, -196610, 9, 9, -196609, 9, 9, -262144, 9, 9, -262143, 9, 9, -262142, 9, 9, -262141, 9, 9, -262140, 9, 9, -262139, 9, 9, -262138, 9, 9, -262137, 10, 262144, -131079, 9, 131080, -131078, 9, 65545, -131077, 9, 65545, -131076, 9, 65545, -131075, 9, 65545, -131074, 9, 65545, -131073, 9, 65545, -196608, 9, 65545, -196607, 9, 65545, -196606, 9, 65545, -196605, 9, 65545, -196604, 9, 65545, -196603, 9, 65545, -196602, 9, 65545, -196601, 9, 65542, -196600, 11, 0, -196599, 11, 0, -196598, 10, 262144, -65543, 9, 131080, -65542, 9, 65545, -65541, 9, 65545, -65540, 9, 65545, -65539, 9, 65545, -65538, 9, 65545, -65537, 9, 65545, -131072, 9, 65545, -131071, 9, 65545, -131070, 9, 65545, -131069, 9, 65545, -131068, 9, 65545, -131067, 9, 65545, -131066, 9, 65545, -131065, 9, 65545, -131064, 12, 1, -131063, 11, 0, -131062, 12, 0, -131061, 10, 262144, -7, 9, 196616, -6, 9, 196618, -5, 9, 196618, -4, 9, 196618, -3, 9, 196618, -2, 9, 196618, -1, 9, 196618, -65536, 9, 196618, -65535, 9, 196618, -65534, 9, 196618, -65533, 9, 196618, -65532, 9, 196618, -65531, 9, 196618, -65530, 9, 196618, -65529, 12, 1, -65528, 11, 0, -65527, 11, 0, -65526, 536870924, 1, -65525, 536870924, 1, -65524, 536870922, 262145 )
@@ -137,12 +140,12 @@ environment = SubResource( 3 )
 [node name="GodRay" type="Sprite" parent="." index="6"]
 visible = false
 modulate = Color( 1.5, 1.3, 0.6, 1 )
-material = SubResource( 5 )
+material = SubResource( 4 )
 position = Vector2( 280, 64 )
 scale = Vector2( 0.28125, 376 )
 z_index = 130
 z_as_relative = false
-texture = SubResource( 7 )
+texture = SubResource( 6 )
 
 [node name="Light2D5" type="Light2D" parent="." index="7"]
 position = Vector2( 160, -32 )
@@ -153,7 +156,7 @@ texture_scale = 2.56
 energy = 1.05
 mode = 2
 range_z_max = 130
-range_item_cull_mask = 7
+range_item_cull_mask = 15
 
 [node name="Light2D9" type="Light2D" parent="." index="8"]
 position = Vector2( -32, -32 )
@@ -164,7 +167,7 @@ texture_scale = 2.56
 energy = 1.05
 mode = 2
 range_z_max = 130
-range_item_cull_mask = 7
+range_item_cull_mask = 15
 
 [node name="Light2D6" type="Light2D" parent="." index="9"]
 position = Vector2( 272, -112 )

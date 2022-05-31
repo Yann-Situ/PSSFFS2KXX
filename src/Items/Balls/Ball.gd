@@ -1,11 +1,15 @@
 extends PhysicBody
 class_name Ball, "res://assets/art/ball/ball_test.png"
 
+var impact_particles1 = preload("res://src/Effects/ImpactParticle1.tscn")
+var impact_particles0 = preload("res://src/Effects/ImpactParticle0.tscn")
+
 var selected = false # if selected by mouse
 var holder = null # if hold by player
 onready var selector = $Selector
 
-export (float) var dust_threshold = 400
+export (float) var dust_threshold = 300
+export (float) var impact_threshold = 500
 
 export(Color, RGBA) var col1
 export(Color, RGBA) var col2
@@ -27,8 +31,14 @@ func reset_position():
 	position = start_position
 	
 func collision_effect(collider, collider_velocity, collision_point, collision_normal):
-	if (linear_velocity-collider_velocity).length() > dust_threshold:
+	var speed = (linear_velocity-collider_velocity).length()
+	if speed > dust_threshold:
 		$Effects/DustParticle.restart()
+		if speed > impact_threshold:
+			var impact = impact_particles1.instance()
+			get_parent().add_child(impact)
+			impact.global_position = collision_point
+			impact.start()
 	return true
 
 func pickup(holder_node):

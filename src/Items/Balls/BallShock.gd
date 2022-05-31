@@ -17,6 +17,14 @@ func _ready():
 	$AnimationPlayer.play("idle")
 
 func collision_effect(collider, collider_velocity, collision_point, collision_normal):
+	var speed = (linear_velocity-collider_velocity).length()
+	if speed > dust_threshold:
+		$Effects/DustParticle.restart()
+		if speed > impact_threshold:
+			var impact = impact_particles0.instance()
+			get_parent().add_child(impact)
+			impact.global_position = collision_point
+			impact.start()
 	return true
 
 func apply_shock_impulse(shock_force : float, shock_global_position : Vector2, bodies):
@@ -30,6 +38,7 @@ func apply_shock_impulse(shock_force : float, shock_global_position : Vector2, b
 				if b.get_parent().is_in_group("activables"):
 					b.get_parent().toggle_activated(true)
 			if b.is_in_group("physicbodies"):
+				b.set_linear_velocity(Vector2.ZERO)
 				b.apply_impulse(momentum)
 			elif b.is_in_group("breakables"):
 				b.apply_explosion(momentum)

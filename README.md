@@ -2,6 +2,20 @@
 Popol Super Slam Fusion Full Speed 2KXX
 -----
 
+## Big Goals
+* graphism
+* animations
+* visual effects
+* music
+* sound design
+* AI for NPC
+* level design
+* level system
+* saving system
+* GUI for menus
+* GUI for in-game
+* story
+
 ## Work to do
 * Graphism :
    - :pushpin: environment elements
@@ -92,24 +106,28 @@ Popol Super Slam Fusion Full Speed 2KXX
 * [ ] Problems when passing from a block just **16 pixel** over the other block (results in tiny teleportation but visible due to camera instant movement).
 * [x] **ShockJumping** at frame perfect when crouching on **Jumper** (or when jumping or dunkjumping) results in a huge mega jump sa mère.
 * [ ] Jitter when multiple **balls** are above each other. -> reimplement the friction
+* [ ] **Ball** located just on a spawner position results in very high velocity when spawning a ball on it.
 
 ### Other
 * [x] Spawner rotation position is weird.
 * [ ] Energy loss of `constant_energy_balls`.
-* [ ] The `shoot_previewer` shows a trajectory slightly above the real one.
-* [ ] `Z_as_relative` doesn't work through script... https://github.com/godotengine/godot/issues/45416
-* [x] **ColorRect** for shockwave effect stay in (0,0) global coordinates...
-* [ ] **ColorRect** for shockwave effect combine with `canvas_modulate` results in weird color rectangle.
 * [ ] Lag if too much balls : make a spawner limit and link the dispawn of a ball to the spawner to increase the spawn count.
 * [ ] I need to adapt the boum delay: i.e apply_impulse instantly on colliding object and a bit after on far objects. nedd a method call_after_a_delay(apply_impulse)
-* [ ] **Bubble/Zap ball teleportation** trailhandler can act very weirdly if used quickly repeatly.
 * :pushpin: Need to implement Tilemap interactive objects rotation and flips.
 * [ ] On **baskets**, a ball that bounces on the ring can do multiple goals.
 * [ ] If multiple explosion breaks the same bloc, it can spawn copies.
 * [ ] Using the power of a selected ball that died results in error. => Implement a die signal.
 * [x] **portals** : multiple portal_transition due to a late reset position, when changing rooms... see https://godotengine.org/qa/9761/area2d-triggered-more-time-when-player-node-previous-scene and https://github.com/godotengine/godot/issues/14578
-* [x] Jitter animation when passing from a transition_in to transition_out using **rooms**.
 * [ ] Changing **room** holding a **ball** results in leaving the ball in the previous room.
+
+### Visual issues
+* [x] Jitter animation when passing from a transition_in to transition_out using **rooms**.
+* [ ] The `shoot_previewer` shows a trajectory slightly above the real one.
+* [ ] `Z_as_relative` doesn't work through script... https://github.com/godotengine/godot/issues/45416
+* [x] **ColorRect** for shockwave effect stay in (0,0) global coordinates...
+* [ ] **ColorRect** for shockwave effect combine with `canvas_modulate` results in weird color rectangle.
+* [ ] **Bubble/Zap ball teleportation** trailhandler can act very weirdly if used quickly repeatly.
+* [ ] **Effects** that are displayed outside the window are displayed after when they reenter the window.
 
 ### Potential Glitches
 * [ ] Pressing **jump** and **dunkdash** just before landing can result in small dunkdash/jump.

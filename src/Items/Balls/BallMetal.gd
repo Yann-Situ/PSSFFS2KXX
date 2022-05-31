@@ -28,8 +28,14 @@ func update_linear_velocity(delta):# apply gravity and forces
 		$SpeedParticles.emitting = false
 
 func collision_effect(collider, collider_velocity, collision_point, collision_normal):
-	if (linear_velocity-collider_velocity).length() > dust_threshold:
+	var speed = (linear_velocity-collider_velocity).length()
+	if speed > dust_threshold:
 		$Effects/DustParticle.restart()
+		if speed > impact_threshold:
+			var impact = impact_particles0.instance()
+			get_parent().add_child(impact)
+			impact.global_position = collision_point
+			impact.start()
 	if (linear_velocity-collider_velocity).dot(-collision_normal) > destruction_speed_thresh:
 		if collider.is_in_group("breakables"):
 			var has_explode = collider.apply_explosion(

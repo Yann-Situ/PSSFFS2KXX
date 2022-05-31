@@ -1,6 +1,6 @@
 [gd_scene load_steps=7 format=2]
 
-[ext_resource path="res://assets/art/effects/impact_0.png" type="Texture" id=1]
+[ext_resource path="res://assets/art/effects/impact_1.png" type="Texture" id=1]
 [ext_resource path="res://src/Effects/OneShotParticle.gd" type="Script" id=2]
 
 [sub_resource type="CanvasItemMaterial" id=1]
@@ -30,13 +30,13 @@ angle_random = 1.0
 color_ramp = SubResource( 3 )
 anim_speed = 1.0
 
-[node name="ImpactParticle0" type="Particles2D"]
+[node name="ImpactParticle1" type="Particles2D"]
 material = SubResource( 1 )
 z_index = 110
 z_as_relative = false
 emitting = false
 amount = 1
-lifetime = 0.5
+lifetime = 0.35
 one_shot = true
 local_coords = false
 process_material = SubResource( 4 )
