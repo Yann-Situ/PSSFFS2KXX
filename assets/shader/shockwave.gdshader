@@ -1,5 +1,5 @@
 shader_type canvas_item;
-render_mode blend_mix;
+render_mode unshaded;
 
 uniform vec2 center;
 uniform float force;
@@ -9,6 +9,7 @@ uniform float thickness;
 void fragment(){
 	//float ratio = TEXTURE_PIXEL_SIZE.x / TEXTURE_PIXEL_SIZE.y;
 	//vec2 scaledUV = (UV - vec2(0.5,0.0)) / vec2(ratio, 1) + vec2(0.5,0.0);
+
 	if(force == 0.0){
 		COLOR = vec4(1.0,1.0,1.0,0.0);
 	}
@@ -24,5 +25,4 @@ void fragment(){
 		//COLOR.a = textureLod(SCREEN_TEXTURE,SCREEN_UV - disp,0.0).a;
 	}
 	//COLOR.rgb = vec3(mask);
-	
 }

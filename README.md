@@ -125,7 +125,7 @@ Popol Super Slam Fusion Full Speed 2KXX
 * [ ] The `shoot_previewer` shows a trajectory slightly above the real one.
 * [ ] `Z_as_relative` doesn't work through script... https://github.com/godotengine/godot/issues/45416
 * [x] **ColorRect** for shockwave effect stay in (0,0) global coordinates...
-* [ ] **ColorRect** for shockwave effect combine with `canvas_modulate` results in weird color rectangle.
+* [x] **ColorRect** for shockwave effect combine with `canvas_modulate` results in weird color rectangle.
 * [ ] **Bubble/Zap ball teleportation** trailhandler can act very weirdly if used quickly repeatly.
 * [ ] **Effects** that are displayed outside the window are displayed after when they reenter the window.
 

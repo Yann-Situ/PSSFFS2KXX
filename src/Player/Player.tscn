@@ -1,4 +1,4 @@
-[gd_scene load_steps=185 format=2]
+[gd_scene load_steps=173 format=2]
 
 [ext_resource path="res://src/Player/Player.gd" type="Script" id=1]
 [ext_resource path="res://assets/art/characters/Player.png" type="Texture" id=2]
@@ -201,7 +201,8 @@ tracks/1/keys = {
 }
 
 [sub_resource type="Animation" id=9]
-length = 1.4
+length = 0.7
+step = 0.05
 tracks/0/type = "value"
 tracks/0/path = NodePath(".:frame")
 tracks/0/interp = 1
@@ -209,10 +210,10 @@ tracks/0/loop_wrap = true
 tracks/0/imported = false
 tracks/0/enabled = true
 tracks/0/keys = {
-"times": PoolRealArray( 0, 0.22, 0.32, 0.4, 0.48, 0.56, 0.64, 0.78, 0.86, 0.94, 1.02, 1.1, 1.22, 1.3 ),
-"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1 ),
+"times": PoolRealArray( 0, 0.22, 0.32, 0.4, 0.48, 0.56, 0.64 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1, 1 ),
 "update": 1,
-"values": [ 32, 33, 34, 35, 36, 37, 38, 39, 40, 41, 42, 43, 44, 45 ]
+"values": [ 32, 33, 34, 35, 36, 37, 38 ]
 }
 tracks/1/type = "value"
 tracks/1/path = NodePath("../BallHandler/HasBallPosition:position")
@@ -221,10 +222,10 @@ tracks/1/loop_wrap = true
 tracks/1/imported = false
 tracks/1/enabled = true
 tracks/1/keys = {
-"times": PoolRealArray( 0, 0.2, 0.22, 0.3, 0.32, 0.66, 0.78, 0.8 ),
-"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1, 1, 1 ),
+"times": PoolRealArray( 0, 0.2, 0.22, 0.3, 0.32, 0.66 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1 ),
 "update": 0,
-"values": [ Vector2( -23, -18 ), Vector2( -23, -18 ), Vector2( -19, -35 ), Vector2( -19, -35 ), Vector2( 6, -34 ), Vector2( 8, 110 ), Vector2( 8, 110 ), Vector2( 0, -5 ) ]
+"values": [ Vector2( -23, -18 ), Vector2( -23, -18 ), Vector2( -19, -35 ), Vector2( -19, -35 ), Vector2( 6, -34 ), Vector2( 8, 110 ) ]
 }
 tracks/2/type = "value"
 tracks/2/path = NodePath("../State:is_dunking")
@@ -233,7 +234,7 @@ tracks/2/loop_wrap = true
 tracks/2/imported = false
 tracks/2/enabled = true
 tracks/2/keys = {
-"times": PoolRealArray( 1.4 ),
+"times": PoolRealArray( 0.7 ),
 "transitions": PoolRealArray( 1 ),
 "update": 1,
 "values": [ false ]
@@ -245,7 +246,7 @@ tracks/3/loop_wrap = true
 tracks/3/imported = false
 tracks/3/enabled = true
 tracks/3/keys = {
-"times": PoolRealArray( 0, 1.34 ),
+"times": PoolRealArray( 0, 0.7 ),
 "transitions": PoolRealArray( 1, 1 ),
 "update": 0,
 "values": [ Vector2( 0, 0 ), Vector2( 0, 0 ) ]
@@ -257,7 +258,7 @@ tracks/4/loop_wrap = true
 tracks/4/imported = false
 tracks/4/enabled = true
 tracks/4/keys = {
-"times": PoolRealArray( 0.32, 1.4 ),
+"times": PoolRealArray( 0.32, 0.7 ),
 "transitions": PoolRealArray( 1, 1 ),
 "values": [ {
 "args": [  ],
@@ -771,7 +772,7 @@ tracks/3/keys = {
 }
 
 [sub_resource type="Animation" id=26]
-length = 0.5
+length = 0.8
 step = 0.02
 tracks/0/type = "value"
 tracks/0/path = NodePath(".:frame")
@@ -780,10 +781,10 @@ tracks/0/loop_wrap = true
 tracks/0/imported = false
 tracks/0/enabled = true
 tracks/0/keys = {
-"times": PoolRealArray( 0, 0.08, 0.16, 0.24, 0.36, 0.44 ),
-"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1 ),
+"times": PoolRealArray( 0, 0.16, 0.24, 0.32, 0.4, 0.48, 0.6, 0.68 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1, 1, 1 ),
 "update": 1,
-"values": [ 40, 41, 42, 43, 44, 45 ]
+"values": [ 38, 39, 40, 41, 42, 43, 44, 45 ]
 }
 tracks/1/type = "value"
 tracks/1/path = NodePath("../BallHandler/HasBallPosition:position")
@@ -792,7 +793,7 @@ tracks/1/loop_wrap = true
 tracks/1/imported = false
 tracks/1/enabled = true
 tracks/1/keys = {
-"times": PoolRealArray( 0.02 ),
+"times": PoolRealArray( 0 ),
 "transitions": PoolRealArray( 1 ),
 "update": 0,
 "values": [ Vector2( 0, -5 ) ]
@@ -1087,8 +1088,6 @@ tracks/3/keys = {
 [sub_resource type="CanvasItemMaterial" id=35]
 blend_mode = 1
 
-[sub_resource type="AnimationNodeTimeSeek" id=36]
-
 [sub_resource type="AnimationNodeAnimation" id=37]
 animation = "dunk"
 
@@ -1173,18 +1172,7 @@ states/shoot/node = SubResource( 47 )
 states/shoot/position = Vector2( 639, 551 )
 transitions = [ "hub", "dunkjump", SubResource( 48 ), "hub", "dunkdash", SubResource( 49 ), "hub", "dunk", SubResource( 50 ), "hub", "shoot", SubResource( 51 ), "shoot", "hub", SubResource( 52 ), "dunk", "hub", SubResource( 53 ), "dunkdash", "hub", SubResource( 54 ), "dunkjump", "hub", SubResource( 55 ) ]
 start_node = "hub"
-graph_offset = Vector2( 0, 287.309 )
-
-[sub_resource type="AnimationNodeTransition" id=57]
-input_count = 4
-input_0/name = "shoot"
-input_0/auto_advance = false
-input_1/name = "dunk"
-input_1/auto_advance = false
-input_2/name = "dunkdash"
-input_2/auto_advance = false
-input_3/name = "dunkjump"
-input_3/auto_advance = false
+graph_offset = Vector2( 0, -71.7847 )
 
 [sub_resource type="AnimationNodeAnimation" id=58]
 animation = "air_wall"
@@ -1252,30 +1240,6 @@ input_0/name = "no"
 input_0/auto_advance = false
 input_1/name = "yes"
 input_1/auto_advance = false
-
-[sub_resource type="AnimationNodeAnimation" id=73]
-animation = "dunk"
-
-[sub_resource type="AnimationNodeAnimation" id=74]
-animation = "dunkdash"
-
-[sub_resource type="AnimationNodeAnimation" id=75]
-animation = "dunkjump"
-
-[sub_resource type="AnimationNodeAnimation" id=76]
-animation = "dunkjump_halfturn"
-
-[sub_resource type="AnimationNodeStateMachineTransition" id=77]
-switch_mode = 1
-advance_condition = "is_dunkjumphalfturning"
-
-[sub_resource type="AnimationNodeStateMachine" id=78]
-states/dunkjump/node = SubResource( 75 )
-states/dunkjump/position = Vector2( 674, 147 )
-states/dunkjump_halfturn/node = SubResource( 76 )
-states/dunkjump_halfturn/position = Vector2( 371, 147 )
-transitions = [ "dunkjump", "dunkjump_halfturn", SubResource( 77 ) ]
-start_node = "dunkjump"
 
 [sub_resource type="AnimationNodeAnimation" id=79]
 animation = "grind0"
@@ -1445,23 +1409,6 @@ graph_offset = Vector2( 0, 17.3702 )
 [sub_resource type="AnimationNodeAnimation" id=118]
 animation = "hang"
 
-[sub_resource type="AnimationNodeAnimation" id=119]
-animation = "air_shoot"
-
-[sub_resource type="AnimationNodeAnimation" id=120]
-animation = "floor_shoot"
-
-[sub_resource type="AnimationNodeStateMachineTransition" id=121]
-advance_condition = "is_onfloor"
-
-[sub_resource type="AnimationNodeStateMachine" id=122]
-states/air_shoot/node = SubResource( 119 )
-states/air_shoot/position = Vector2( 506, 279 )
-states/floor_shoot/node = SubResource( 120 )
-states/floor_shoot/position = Vector2( 506, 144 )
-transitions = [ "air_shoot", "floor_shoot", SubResource( 121 ) ]
-start_node = "air_shoot"
-
 [sub_resource type="AnimationNodeTransition" id=123]
 input_count = 4
 input_0/name = "ground"
@@ -1474,23 +1421,13 @@ input_3/name = "hang"
 input_3/auto_advance = false
 
 [sub_resource type="AnimationNodeBlendTree" id=124]
-graph_offset = Vector2( -96.9167, 37 )
-nodes/Seek/node = SubResource( 36 )
-nodes/Seek/position = Vector2( 280, -100 )
+graph_offset = Vector2( -92.1785, -15.1666 )
 nodes/action/node = SubResource( 56 )
 nodes/action/position = Vector2( 680, -100 )
-nodes/action_type/node = SubResource( 57 )
-nodes/action_type/position = Vector2( 440, -160 )
 nodes/air/node = SubResource( 71 )
 nodes/air/position = Vector2( 120, 580 )
 nodes/cancelable/node = SubResource( 72 )
 nodes/cancelable/position = Vector2( 1080, 280 )
-nodes/dunk/node = SubResource( 73 )
-nodes/dunk/position = Vector2( 120, -280 )
-nodes/dunkdash/node = SubResource( 74 )
-nodes/dunkdash/position = Vector2( 0, -140 )
-nodes/dunkjump/node = SubResource( 78 )
-nodes/dunkjump/position = Vector2( 20, 0 )
 nodes/grind/node = SubResource( 88 )
 nodes/grind/position = Vector2( 140, 780 )
 nodes/ground/node = SubResource( 117 )
@@ -1498,11 +1435,9 @@ nodes/ground/position = Vector2( 100, 260 )
 nodes/hang/node = SubResource( 118 )
 nodes/hang/position = Vector2( 160, 900 )
 nodes/output/position = Vector2( 1240, 340 )
-nodes/shoot/node = SubResource( 122 )
-nodes/shoot/position = Vector2( 80, -420 )
 nodes/stance/node = SubResource( 123 )
 nodes/stance/position = Vector2( 660, 580 )
-node_connections = [ "output", 0, "cancelable", "action_type", 0, "shoot", "action_type", 1, "dunk", "action_type", 2, "Seek", "action_type", 3, "dunkjump", "Seek", 0, "dunkdash", "cancelable", 0, "action", "cancelable", 1, "stance", "stance", 0, "ground", "stance", 1, "air", "stance", 2, "grind", "stance", 3, "hang" ]
+node_connections = [ "output", 0, "cancelable", "cancelable", 0, "action", "cancelable", 1, "stance", "stance", 0, "ground", "stance", 1, "air", "stance", 2, "grind", "stance", 3, "hang" ]
 
 [sub_resource type="AnimationNodeStateMachinePlayback" id=125]
 
@@ -1725,12 +1660,12 @@ script = ExtResource( 19 )
 
 [node name="Dunkjump" type="Node" parent="Actions"]
 script = ExtResource( 21 )
-ghost_modulate = Color( 1, 0.180392, 0.411765, 0.623529 )
+ghost_modulate = Color( 1, 0.317647, 0.509804, 0.545098 )
 dunkjumphalfturn_threshold = -48.0
 
 [node name="Dunkdash" type="Node" parent="Actions"]
 script = ExtResource( 38 )
-ghost_modulate = Color( 1, 0.760784, 0.309804, 0.647059 )
+ghost_modulate = Color( 1, 0.803922, 0.435294, 0.52549 )
 
 [node name="Aim" type="Node" parent="Actions"]
 script = ExtResource( 18 )
@@ -1775,7 +1710,7 @@ texture = ExtResource( 2 )
 offset = Vector2( 0.5, 0 )
 hframes = 16
 vframes = 20
-frame = 199
+frame = 197
 __meta__ = {
 "_edit_group_": true,
 "_edit_lock_": true
@@ -1828,7 +1763,6 @@ region_rect = Rect2( 0, 96, 32, 32 )
 tree_root = SubResource( 124 )
 anim_player = NodePath("../Player_Animation")
 active = true
-parameters/Seek/seek_position = -1.0
 parameters/action/playback = SubResource( 125 )
 parameters/action/conditions/is_dunkdashing = true
 parameters/action/conditions/is_dunking = false
@@ -1840,15 +1774,12 @@ parameters/action/dunkjump/playback = SubResource( 126 )
 parameters/action/dunkjump/conditions/is_dunkjumphalfturning = false
 parameters/action/shoot/playback = SubResource( 127 )
 parameters/action/shoot/conditions/is_onfloor = false
-parameters/action_type/current = 1
 parameters/air/playback = SubResource( 128 )
 parameters/air/conditions/is_jumping = false
 parameters/air/conditions/is_not_onwall = false
 parameters/air/conditions/is_onwall = false
 parameters/air/fall/playback = SubResource( 129 )
 parameters/cancelable/current = 1
-parameters/dunkjump/playback = SubResource( 128 )
-parameters/dunkjump/conditions/is_dunkjumphalfturning = true
 parameters/grind/blend_position = -0.400866
 parameters/ground/playback = SubResource( 128 )
 parameters/ground/conditions/is_crouching = false
@@ -1859,8 +1790,6 @@ parameters/ground/conditions/is_landrolling = false
 parameters/ground/conditions/is_standing = false
 parameters/ground/conditions/is_walking = false
 parameters/ground/stand_idle/playback = SubResource( 130 )
-parameters/shoot/playback = SubResource( 128 )
-parameters/shoot/conditions/is_onfloor = false
 parameters/stance/current = 0
 script = ExtResource( 8 )
 __meta__ = {
@@ -1924,7 +1853,7 @@ position = Vector2( 0, 5 )
 shape = SubResource( 140 )
 
 [node name="HasBallPosition" type="Node2D" parent="BallHandler"]
-position = Vector2( -7, -6 )
+position = Vector2( 5.00001, 7.00001 )
 __meta__ = {
 "_edit_group_": true
 }
