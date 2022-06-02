@@ -29,10 +29,11 @@ func update_linear_velocity(delta):# apply gravity and forces
 
 func collision_effect(collider, collider_velocity, collision_point, collision_normal):
 	var speed = (linear_velocity-collider_velocity).length()
-	if speed > dust_threshold:
+	if $ImpactTimer.is_stopped() and speed >= dust_threshold:
+		$ImpactTimer.start()
 		$Effects/DustParticle.restart()
-		if speed > impact_threshold:
-			var impact = impact_particles0.instance()
+		if speed >= impact_threshold:
+			var impact = impact_particles[impact_effect].instance()
 			get_parent().add_child(impact)
 			impact.global_position = collision_point
 			impact.start()

@@ -2,7 +2,7 @@ extends Ball
 
 export (float) var shock_min = 401
 export (float) var shock_max = 401 # m*pix/s
-export (float) var shock_jump = 2300 # m*pix/s
+export (float) var shock_jump = 1850 # m*pix/s
 export (float) var shock_fall = 5000 # m*pix/s
 export (float) var distance_max = 64
 export (float) var shock_timer = 0.25#s
@@ -15,17 +15,6 @@ func _ready():
 	self.set_bounce(0.35)
 	$ShockZone/CollisionShape2D.shape.radius = distance_max
 	$AnimationPlayer.play("idle")
-
-func collision_effect(collider, collider_velocity, collision_point, collision_normal):
-	var speed = (linear_velocity-collider_velocity).length()
-	if speed > dust_threshold:
-		$Effects/DustParticle.restart()
-		if speed > impact_threshold:
-			var impact = impact_particles0.instance()
-			get_parent().add_child(impact)
-			impact.global_position = collision_point
-			impact.start()
-	return true
 
 func apply_shock_impulse(shock_force : float, shock_global_position : Vector2, bodies):
 	for b in bodies :

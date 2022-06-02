@@ -20,7 +20,7 @@ func process_effects():
 func jump_start():
 	var jump = jump_particles1.instance()
 	get_parent().add_child(jump)
-	jump.global_position = Player.global_position + Player.foot_vector + Vector2(0,-16)
+	jump.global_position = Player.global_position + Player.foot_vector + Vector2(0,-9)
 	jump.start()
 
 func dust_start():

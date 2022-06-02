@@ -1,7 +1,8 @@
-[gd_scene load_steps=4 format=2]
+[gd_scene load_steps=5 format=2]
 
 [ext_resource path="res://src/Items/Interactive/Selectable.gd" type="Script" id=1]
 [ext_resource path="res://assets/art/environment/environment-interactive.png" type="Texture" id=2]
+[ext_resource path="res://assets/art/effects/light2.png" type="Texture" id=3]
 
 [sub_resource type="CircleShape2D" id=1]
 radius = 0.01
@@ -25,3 +26,13 @@ is_jump_selectable = false
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
 shape = SubResource( 1 )
+
+[node name="Light" type="Light2D" parent="."]
+position = Vector2( 0.00012207, -7.62939e-06 )
+scale = Vector2( 0.412822, 0.412822 )
+z_as_relative = false
+texture = ExtResource( 3 )
+texture_scale = 2.56
+mode = 2
+range_z_max = 350
+range_item_cull_mask = 17

@@ -755,6 +755,20 @@ tracks/2/keys = {
 "update": 1,
 "values": [ true, false ]
 }
+tracks/3/type = "method"
+tracks/3/path = NodePath("../PlayerEffects")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"values": [ {
+"args": [  ],
+"method": "cloud_start"
+} ]
+}
 
 [sub_resource type="Animation" id=26]
 length = 0.5
@@ -958,6 +972,20 @@ tracks/2/keys = {
 "transitions": PoolRealArray( 1, 1 ),
 "update": 1,
 "values": [ true, false ]
+}
+tracks/3/type = "method"
+tracks/3/path = NodePath("../PlayerEffects")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"values": [ {
+"args": [  ],
+"method": "cloud_start"
+} ]
 }
 
 [sub_resource type="Animation" id=32]
@@ -1501,23 +1529,23 @@ colors = PoolColorArray( 0, 0, 0, 0, 0.582031, 0.316025, 0.316025, 1, 1, 0.80352
 [sub_resource type="Curve" id=133]
 _data = [ Vector2( 0, 1 ), 0.0, -1.46686, 0, 0, Vector2( 1, 0.481818 ), 0.95065, 0.0, 0, 0 ]
 
-[sub_resource type="CanvasItemMaterial" id=135]
+[sub_resource type="CanvasItemMaterial" id=134]
 particles_animation = true
 particles_anim_h_frames = 10
 particles_anim_v_frames = 1
 particles_anim_loop = true
 
-[sub_resource type="Gradient" id=136]
-offsets = PoolRealArray( 0, 0.589147, 1 )
-colors = PoolColorArray( 1, 0.782959, 0.503906, 1, 1, 0.901961, 0.776471, 1, 1, 1, 1, 0 )
+[sub_resource type="Gradient" id=135]
+offsets = PoolRealArray( 0, 0.55, 1 )
+colors = PoolColorArray( 1, 1, 1, 0.913725, 0.90625, 0.90625, 0.90625, 0.745098, 1, 1, 1, 0 )
 
-[sub_resource type="GradientTexture" id=137]
-gradient = SubResource( 136 )
+[sub_resource type="GradientTexture" id=136]
+gradient = SubResource( 135 )
 width = 20
 
-[sub_resource type="ParticlesMaterial" id=138]
+[sub_resource type="ParticlesMaterial" id=137]
 emission_shape = 2
-emission_box_extents = Vector3( 10, 20, 1 )
+emission_box_extents = Vector3( 14, 12, 1 )
 flag_disable_z = true
 direction = Vector3( 0, 1, 0 )
 spread = 180.0
@@ -1529,14 +1557,15 @@ linear_accel_random = 0.13
 radial_accel = -10.17
 angle = 1.0
 angle_random = 1.0
+scale = 0.6
 scale_random = 1.0
-color_ramp = SubResource( 137 )
+color_ramp = SubResource( 136 )
 anim_speed = 1.0
 
-[sub_resource type="StreamTexture" id=139]
+[sub_resource type="StreamTexture" id=138]
 load_path = "res://.import/dust_0.png-aa7e79fd880c78618fa1d60a7c8d332a.stex"
 
-[sub_resource type="CanvasItemMaterial" id=142]
+[sub_resource type="CanvasItemMaterial" id=139]
 resource_local_to_scene = true
 particles_animation = true
 particles_anim_h_frames = 6
@@ -1553,6 +1582,7 @@ height = 42.0
 
 [node name="Player" type="KinematicBody2D"]
 light_mask = 4
+position = Vector2( -15, 0 )
 z_index = 100
 z_as_relative = false
 collision_mask = 2
@@ -1568,6 +1598,8 @@ walk_accel = 210.0
 
 [node name="State" parent="." instance=ExtResource( 5 )]
 visible = false
+is_landing = true
+is_halfturning = true
 
 [node name="Collision" type="CollisionShape2D" parent="."]
 position = Vector2( 0, 6 )
@@ -1743,7 +1775,7 @@ texture = ExtResource( 2 )
 offset = Vector2( 0.5, 0 )
 hframes = 16
 vframes = 20
-frame = 204
+frame = 199
 __meta__ = {
 "_edit_group_": true,
 "_edit_lock_": true
@@ -1868,17 +1900,18 @@ width_curve = SubResource( 133 )
 texture = ExtResource( 26 )
 
 [node name="CloudParticles" parent="PlayerEffects" instance=ExtResource( 43 )]
-material = SubResource( 135 )
-position = Vector2( 0, 8 )
-amount = 7
+material = SubResource( 134 )
+position = Vector2( 0, 32 )
+z_index = -1
+amount = 4
 lifetime = 0.65
 explosiveness = 0.9
 local_coords = false
-process_material = SubResource( 138 )
-texture = SubResource( 139 )
+process_material = SubResource( 137 )
+texture = SubResource( 138 )
 
 [node name="GrindParticles" parent="PlayerEffects" instance=ExtResource( 27 )]
-material = SubResource( 142 )
+material = SubResource( 139 )
 position = Vector2( 0, 16 )
 
 [node name="BallHandler" type="Area2D" parent="."]
@@ -1891,7 +1924,7 @@ position = Vector2( 0, 5 )
 shape = SubResource( 140 )
 
 [node name="HasBallPosition" type="Node2D" parent="BallHandler"]
-position = Vector2( 5, 0 )
+position = Vector2( -7, -6 )
 __meta__ = {
 "_edit_group_": true
 }

@@ -118,6 +118,8 @@ anim_speed = 1.0
 
 [node name="BallShock" instance=ExtResource( 1 )]
 script = ExtResource( 5 )
+impact_effect = 1
+impact_threshold = 400.0
 
 [node name="Sprite" parent="." index="0"]
 texture = ExtResource( 2 )
@@ -125,6 +127,11 @@ hframes = 4
 
 [node name="collision" parent="." index="1"]
 shape = SubResource( 1 )
+
+[node name="Effects" parent="." index="4"]
+col1 = Color( 1, 0.976471, 0.796078, 1 )
+col2 = Color( 0.392157, 0.929412, 1, 1 )
+col3 = Color( 0.121569, 0.14902, 0.25098, 1 )
 
 [node name="Reconstruction" parent="Effects" index="0"]
 color_ramp = SubResource( 2 )

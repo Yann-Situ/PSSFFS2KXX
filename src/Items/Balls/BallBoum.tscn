@@ -64,6 +64,11 @@ texture = ExtResource( 4 )
 [node name="collision" parent="." index="1"]
 shape = SubResource( 1 )
 
+[node name="Effects" parent="." index="4"]
+col1 = Color( 1.2, 0.65, 0.25, 1 )
+col2 = Color( 0.309804, 0.298039, 0.298039, 1 )
+col3 = Color( 0.203922, 0.203922, 0.203922, 1 )
+
 [node name="Reconstruction" parent="Effects" index="0"]
 color_ramp = SubResource( 2 )
 
