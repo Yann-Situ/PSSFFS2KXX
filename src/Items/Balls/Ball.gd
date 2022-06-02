@@ -4,9 +4,11 @@ class_name Ball, "res://assets/art/ball/ball_test.png"
 var impact_particles = [preload("res://src/Effects/ImpactParticle1.tscn"),
 	preload("res://src/Effects/ImpactParticle0.tscn")]
 
+signal is_destroyed
+
 var selected = false # if selected by mouse
 var holder = null # if hold by player
-onready var selector = $Selector
+onready var Highlighter = $Highlighter
 
 enum IMPACT_EFFECT {SPIKY, METALLIC}
 export (IMPACT_EFFECT) var impact_effect = IMPACT_EFFECT.SPIKY
@@ -17,6 +19,7 @@ func _ready():
 	self.z_as_relative = false
 	self.z_index = Global.z_indices["ball_0"]
 	add_to_group("balls")
+	add_to_group("damageables")
 
 #func _draw():
 #	# draw collision normal
@@ -26,7 +29,7 @@ func _ready():
 func reset_position():
 	if holder != null:
 		throw(Vector2.ZERO,Vector2.ZERO)
-	position = start_position
+	global_position = start_position
 	
 func collision_effect(collider, collider_velocity, collision_point, collision_normal):
 	var speed = (linear_velocity-collider_velocity).length()
@@ -39,13 +42,24 @@ func collision_effect(collider, collider_velocity, collision_point, collision_no
 			impact.start()
 	return true
 
+###########################################################
+
+func change_holder(new_holder : Node):
+	if holder != null:
+		holder.free_ball(self)
+	holder = new_holder
+	# WARNING : the game seems to crash when calling change_holder(null) with holder = null on the following line
+	get_parent().remove_child(self)
+	if new_holder == null:
+		Global.get_current_room().add_child(self)
+	else :
+		new_holder.add_child(self) 
+
 func pickup(holder_node):
 	if not holder_node.is_in_group("holders"):
 		print("error["+name+"], holder_node is not in group `holders`.")
-	if holder != null:
-		holder.free_ball(self)
+	change_holder(holder_node)
 	self.disable_physics()
-	holder = holder_node
 	self.z_index = holder_node.z_index+1
 	on_pickup(holder_node)
 
@@ -53,22 +67,28 @@ func throw(posi, velo):
 	#$TrailHandler.set_node_to_trail(self)
 	#$TrailHandler.start(2.0,0.1)
 	self.enable_physics()
-	position = posi
-	linear_velocity = velo
-	if holder != null:
-		holder.free_ball(self)
 	var previous_holder = holder
-	holder = null
+	change_holder(null)
+	global_position = posi
+	linear_velocity = velo
 	self.z_index = Global.z_indices["ball_0"]
 	on_throw(previous_holder)
 
 func destruction(delay : float = 0.0):
 	if delay > 0.0:
 		yield(get_tree().create_timer(delay), "timeout")
-	$Animation.play("destruction") # will call queue_free
-	throw(position, Vector2.ZERO)
+	if holder != null:
+		change_holder(null)
+	$Animation.play("destruction") # will call _queue_free
+	#TODO need to handle the selector of the player
 	self.disable_physics()
-	$Selector.toggle_selection(false)
+	$Highlighter.toggle_selection(false)
+	
+func _queue_free():
+	print("DESTROYED")
+	emit_signal("is_destroyed")
+	print("DEAD")
+	queue_free()
 	
 ################################################################################
 
@@ -86,6 +106,9 @@ func on_goal():
 	
 func on_destruction():
 	pass
+
+func apply_damage(damage : float, duration : float = 0.0):
+	destruction(0.0)
 
 ################################################################################
 

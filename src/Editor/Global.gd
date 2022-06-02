@@ -6,6 +6,15 @@ var list_of_physical_nodes = []
 var mouse_ball = null #pointer to the last selectable item that called mouse_entered
 var camera = null
 
+var current_room = null setget set_current_room, get_current_room
+
+func set_current_room(room : Room):
+	current_room = room
+func get_current_room():
+	if current_room == null:
+		printerr("current_room is null")
+	return current_room
+
 var z_indices = {\
 	"parallax_0" : 00, \
 	"parallax_1" : 10, \

@@ -79,5 +79,5 @@ func shockwave_distortion(glob_pos : Vector2):
 	distortion.animation_delay = 0.5#s
 	distortion.z_index = 250
 	distortion.global_position = glob_pos
-	get_parent().add_child(distortion)
+	Global.get_current_room().add_child(distortion)
 	distortion.start("fast")

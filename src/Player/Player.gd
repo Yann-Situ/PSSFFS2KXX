@@ -83,7 +83,7 @@ func reset_position():
 
 func reset_holder():
 	get_out(global_position, S.velocity)
-	BallHandler.throw_ball(global_position, Vector2.ZERO)
+	#BallHandler.throw_ball(global_position, Vector2.ZERO)
 
 func reset_move():
 	reset_holder()

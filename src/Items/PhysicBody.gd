@@ -56,9 +56,9 @@ func enable_physics():
 	set_physics_process(true)
 
 func reset_position():
-	position = start_position
+	global_position = start_position
 
-func set_start_position(posi):
+func set_start_position(posi : Vector2):
 	start_position = posi
 	global_position = posi
 
@@ -102,7 +102,7 @@ func collision_handle(collision, delta):
 	if collision.collider.is_in_group("physicbodies") :
 		var m2 = collision.collider.mass
 		var summass = m2 + mass
-		var dist_vect = position-collision.collider.get_position()
+		var dist_vect = global_position-collision.collider.get_global_position()
 		var speeddist = (linear_velocity - collision.collider_velocity).dot(dist_vect)
 		linear_velocity -= 2*m2/summass*(speeddist/dist_vect.length_squared())*dist_vect
 		collision.collider.set_linear_velocity(collision.collider_velocity + 2*mass/summass*(speeddist/dist_vect.length_squared())*dist_vect)

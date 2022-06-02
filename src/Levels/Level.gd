@@ -7,11 +7,15 @@ export (String, FILE, "*.tscn") var first_room
 export (String) var first_room_portal
 
 var rooms = {}
-var current_room_instance = null #
+var current_room_instance = null setget set_current_room_instance#
 var player_scene = preload("res://src/Player/Player.tscn")
 var meta_player = null
 var player_save = null
 
+func set_current_room_instance(room : Room):
+	Global.set_current_room(room)
+	current_room_instance = room
+	
 func _ready():
 	load_level()
 	enter_level()
@@ -29,7 +33,7 @@ func browse_rooms(room_name : String):
 		var room: Room = packed_room.instance()
 		rooms[room_name] = room
 		print_debug("created room : "+room_name)
-		room.meta_player = $Player.get_path()
+		room.meta_player = $Player.get_path() # instantiate meta_player for each room
 		room.connect("exit_room", self, "change_room")
 		room.connect("exit_level", self, "exit_level")
 
@@ -58,12 +62,9 @@ func change_room(next_room : String, next_room_portal : String):
 	print_debug("entering "+next_room+" at the portal "+next_room_portal)
 	# TODO: pause or unpause the room when changing ?
 	if self.is_a_parent_of(current_room_instance):
-#		if current_room_instance.is_a_parent_of(meta_player):
-#			current_room_instance.remove_child(meta_player)
-#			current_room_instance.add_child(player_save)
 		self.remove_child(current_room_instance)
 	if rooms.has(next_room):
-		current_room_instance = rooms[next_room]
+		set_current_room_instance(rooms[next_room])
 		
 		# need to deal with the _ready problems... Maybe look for _init and _enter_tree
 #		player_save = current_room_instance.get_node("Player")

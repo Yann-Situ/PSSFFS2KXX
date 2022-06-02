@@ -72,9 +72,13 @@ Popol Super Slam Fusion Full Speed 2KXX
 * [x] **Dunking** while pushing a direction button toward another basket above results in no dunk on the current basket. -> change the criteria for the basket by taking into account a very close basket.
 * [x] **Walljumping** at the same time that dunking results in dunking called on a **wrong basket** (if multiple baskets around)
 * [x] **Aiming shooting** right after dunk results in **strange animation behaviour**.
+* [x] Get out from **low ceiling** (crouched) when returning can result in infinite returning **animation**.
+* [x] Weird behaviour on leaving a **zipline** to a **rail** (there is a moment when the character is on both of them)
+    - Implement character holder group with `free_character` and `pickup_character` methods.
+* [x] Characters can leave **rail** if Player press **crouch** on it.
+    - Implement the `riding` and `hanging` states.
 * [ ] **Dunkjumping** while only moving with floor adherence a bit far from basket results in missing the basket.
 * [ ] **dunking** can result in `S.selected_basket.dunk()` called on `null` instance (basket is not selected anymore)
-* [x] Get out from **low ceiling** (crouched) when returning can result in infinite returning **animation**.
 * [ ] **release** ball when **aiming** results in error.
 * [ ] It is possible to **dunk** through walls. It can result in dunkjump particles (+ghost) emmiting (dont know why).
 * [ ] **shooting** just before **landing** results in `floor_shoot` just after `aim_shoot` animation
@@ -92,24 +96,22 @@ Popol Super Slam Fusion Full Speed 2KXX
 * [ ] Stuck colliding on a **rail** can result in building speed.
 * [ ] At the connection between a **rail** and a solid block, if the character is falling such that they will wallslide on the block if there wasn't a rail, and is falling fast enough, the character will normally grind but with 0 initial speed.
     - At the connection between a **rail** and stairs, if the character is falling such that they will go on the slope if there wasn't a rail, and is falling fast enough, the character will normally grind but with 0 speed in the direction down the stairs.
-* [x] Weird behaviour on leaving a **zipline** to a **rail** (there is a moment when the character is on both of them)
-    - Implement character holder group with `free_character` and `pickup_character` methods.
-* [x] Characters can leave **rail** if Player press **crouch** on it.
-    - Implement the `riding` and `hanging` states.
 * [ ] Entering **Pipe** at perfect frame when disabling the **Pipe** can result in a disabled ball floating in the air. -> don't stop the tween to enter the pipe when disabling the pipe.
 
 
 ### Misc physics
 * [x] TileMap hitboxes (bounce on corners of each tile + balls pass through 2 adjacent tiles). **size up the hitboxes smartly**
 * [x] Physic of balls when picked up (stay phisically on the ground...). **complicated** see rigidbody functions and how `integrate_force()` works.
+* [x] **ShockJumping** at frame perfect when crouching on **Jumper** (or when jumping or dunkjumping) results in a huge mega jump sa mère.
 * :pushpin: Problems with physics on **slopes**.
 * [ ] Problems when passing from a block just **16 pixel** over the other block (results in tiny teleportation but visible due to camera instant movement).
-* [x] **ShockJumping** at frame perfect when crouching on **Jumper** (or when jumping or dunkjumping) results in a huge mega jump sa mère.
 * [ ] Jitter when multiple **balls** are above each other. -> reimplement the friction
 * [ ] **Ball** located just on a spawner position results in very high velocity when spawning a ball on it.
 
 ### Other
 * [x] Spawner rotation position is weird.
+* [x] **portals** : multiple portal_transition due to a late reset position, when changing rooms... see https://godotengine.org/qa/9761/area2d-triggered-more-time-when-player-node-previous-scene and https://github.com/godotengine/godot/issues/14578
+* [x] Changing **room** holding a **ball** results in leaving the ball in the previous room.
 * [ ] Energy loss of `constant_energy_balls`.
 * [ ] Lag if too much balls : make a spawner limit and link the dispawn of a ball to the spawner to increase the spawn count.
 * [ ] I need to adapt the boum delay: i.e apply_impulse instantly on colliding object and a bit after on far objects. nedd a method call_after_a_delay(apply_impulse)
@@ -117,15 +119,14 @@ Popol Super Slam Fusion Full Speed 2KXX
 * [ ] On **baskets**, a ball that bounces on the ring can do multiple goals.
 * [ ] If multiple explosion breaks the same bloc, it can spawn copies.
 * [ ] Using the power of a selected ball that died results in error. => Implement a die signal.
-* [x] **portals** : multiple portal_transition due to a late reset position, when changing rooms... see https://godotengine.org/qa/9761/area2d-triggered-more-time-when-player-node-previous-scene and https://github.com/godotengine/godot/issues/14578
-* [ ] Changing **room** holding a **ball** results in leaving the ball in the previous room.
+* [ ] The game seems to crash when calling **change_holder(null)** with holder = null (in the reparent part) in `Ball.gd`
 
 ### Visual issues
 * [x] Jitter animation when passing from a transition_in to transition_out using **rooms**.
-* [ ] The `shoot_previewer` shows a trajectory slightly above the real one.
-* [ ] `Z_as_relative` doesn't work through script... https://github.com/godotengine/godot/issues/45416
 * [x] **ColorRect** for shockwave effect stay in (0,0) global coordinates...
 * [x] **ColorRect** for shockwave effect combine with `canvas_modulate` results in weird color rectangle.
+* [ ] The `shoot_previewer` shows a trajectory slightly above the real one.
+* [ ] `Z_as_relative` doesn't work through script... https://github.com/godotengine/godot/issues/45416
 * [ ] **Bubble/Zap ball teleportation** trailhandler can act very weirdly if used quickly repeatly.
 * [ ] **Effects** that are displayed outside the window are displayed after when they reenter the window.
 

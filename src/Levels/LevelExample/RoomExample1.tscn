@@ -75,10 +75,12 @@ tile_data = PoolIntArray( -1245171, 536870957, 0, -1245168, 536870956, 0, -12451
 tile_data = PoolIntArray( -917479, 536870960, 0, -327706, 536870964, 0, -393183, 536870960, 0, -196634, 536870964, 0, -196632, 536870964, 0, -131090, 536870960, 0, -65562, 536870964, 0, -65560, 536870964, 0, -65558, 536870964, 0, -65554, 536870960, 0, -65529, 54, 0 )
 
 [node name="Ball" parent="Environment/Balls" index="0" instance=ExtResource( 3 )]
-position = Vector2( 216, -8 )
+position = Vector2( 80, -16 )
 
 [node name="BallShock" parent="Environment/Balls" index="1" instance=ExtResource( 4 )]
-position = Vector2( -32, -88 )
+position = Vector2( -232, -104 )
+z_index = 11
+collision_layer = 4
 
 [node name="DashTarget" parent="Environment/Interactive" index="0" instance=ExtResource( 5 )]
 position = Vector2( 544, -96 )

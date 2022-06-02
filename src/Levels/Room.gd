@@ -48,6 +48,7 @@ func _enter_tree():
 	#print("METAPLAYER : " + str(meta_player))
 	if get_node(meta_player) == null: # when room is run alone from the editor for tests
 		#print("No meta player : create one and assign meta_player")
+		Global.set_current_room(self)
 		var player_scene = load("res://src/Player/Player.tscn")
 		var player = player_scene.instance()
 		self.add_child(player) #move it to the appropriate position

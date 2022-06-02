@@ -37,16 +37,21 @@ func get_throw_position():
 	# return the global position of the beginning of the throw, depending on the
 	# position of the player and the flip value :
 	if Character.flip_h :
-		return Character.position + Vector2(-4.0,-6.0)
+		return Character.global_position + Vector2(-4.0,-6.0)
 	else :
-		return Character.position + Vector2(4.0,-6.0)
+		return Character.global_position + Vector2(4.0,-6.0)
 
 func set_has_ball_position():
+#	if Character.flip_h :
+#		S.held_ball.global_position.x = int(Character.global_position.x+0.5) - $Has_Ball_Position.position.x
+#		S.held_ball.global_position.y = int(Character.global_position.y+0.5) + $Has_Ball_Position.position.y
+#	else :
+#		S.held_ball.global_position = Character.global_position + $Has_Ball_Position.global_position
 	if Character.flip_h :
-		S.held_ball.transform.origin.x = int(Character.position.x+0.5) - $Has_Ball_Position.position.x
-		S.held_ball.transform.origin.y = int(Character.position.y+0.5) + $Has_Ball_Position.position.y
+		S.held_ball.position.x = - $Has_Ball_Position.position.x
+		S.held_ball.position.y = + $Has_Ball_Position.position.y
 	else :
-		S.held_ball.transform.origin = Character.position + $Has_Ball_Position.position
+		S.held_ball.position = + $Has_Ball_Position.position
 
 #####################
 
@@ -56,11 +61,11 @@ func pickup_ball(ball):
 	S.held_ball = ball
 	ball.pickup(Character)
 
-func throw_ball(pos, momentum):
+func throw_ball(global_pos, momentum):
 	if S.has_ball and S.held_ball != null :
 		print(Character.name+" throw "+S.held_ball.name)
 		S.released_ball = S.held_ball
-		S.held_ball.throw(pos, 1.0/S.held_ball.mass * momentum)
+		S.held_ball.throw(global_pos, 1.0/S.held_ball.mass * momentum)
 		yield(get_tree().create_timer(0.1), "timeout")
 		S.released_ball = null
 

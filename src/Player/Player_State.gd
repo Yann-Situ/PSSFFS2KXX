@@ -330,8 +330,8 @@ func reset_state():
 	is_non_cancelable = false
 	is_dunkjumphalfturning = false
 
-	has_ball = false
-	active_ball = null
+	#has_ball = false
+	#active_ball = null
 	released_ball = null
 	selected_ball = null
 	dunkjump_basket = null

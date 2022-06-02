@@ -24,16 +24,16 @@ func get_throw_position():
 	# return the global position of the beginning of the throw, depending on the
 	# position of the player and the flip value :
 	if Player.flip_h :
-		return Player.position + Vector2(-4.0,-6.0)
+		return Player.global_position + Vector2(-4.0,-6.0)
 	else :
-		return Player.position + Vector2(4.0,-6.0)
+		return Player.global_position + Vector2(4.0,-6.0)
 
 func set_has_ball_position():
 	if Player.flip_h :
-		S.active_ball.transform.origin.x = int(Player.position.x+0.5) - $HasBallPosition.position.x
-		S.active_ball.transform.origin.y = int(Player.position.y+0.5) + $HasBallPosition.position.y
+		S.active_ball.transform.origin.x = - $HasBallPosition.position.x
+		S.active_ball.transform.origin.y = + $HasBallPosition.position.y
 	else :
-		S.active_ball.transform.origin = Player.position + $HasBallPosition.position
+		S.active_ball.transform.origin = + $HasBallPosition.position
 
 #####################
 
@@ -56,11 +56,11 @@ func pickup_ball(ball):
 	ui.newline()
 	ui.add_text("Ball posit : "+str(ball.position - Player.position))
 
-func throw_ball(pos, speed):
+func throw_ball(global_pos, speed):
 	if S.has_ball and S.active_ball != null :
 		print("throw "+S.active_ball.name)
 		S.released_ball = S.active_ball
-		S.active_ball.throw(pos, speed)
+		S.active_ball.throw(global_pos, speed)
 		# Ugly but it works :
 		yield(get_tree().create_timer(0.1), "timeout")
 		S.released_ball = null
