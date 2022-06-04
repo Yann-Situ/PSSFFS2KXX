@@ -10,6 +10,9 @@ export var can_receive_dunkjump = true
 export var can_receive_goal = true
 export var can_receive_hang = true
 
+export var dunk_cooldown = 0.75#s
+export var dunk_free_character_cooldown = 0.4#s
+
 var inside_bodies = []
 var bodies_positions = []
 var distortion_scene = preload("res://src/Effects/Distortion.tscn") 
@@ -64,6 +67,12 @@ func dunk(dunker : Node2D):
 	else :
 		$AnimationPlayer.play("dunk_left")
 	Global.camera.screen_shake(0.3,5)
+	
+	if can_receive_dunk or !$DunkCooldown.is_stopped():
+		$DunkCooldown.stop()
+		can_receive_dunk = false
+		$DunkCooldown.start(dunk_cooldown)
+	
 
 func get_hanged(character : Node):
 	if !character.has_node("Actions/Hang"):
@@ -117,6 +126,13 @@ func free_character(character : Node):
 				printerr(body.name + " doesn't have a node called Actions/Hang")
 			remove_body(i)
 		i += 1
+	if can_receive_dunk or !$DunkCooldown.is_stopped():
+		$DunkCooldown.stop()
+		can_receive_dunk = false
+		$DunkCooldown.start(dunk_free_character_cooldown)
+
+func _on_DunkCooldown_timeout():
+	can_receive_dunk = true
 
 func remove_body(i : int):
 	assert(i < inside_bodies.size())

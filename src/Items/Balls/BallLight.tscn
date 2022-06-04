@@ -1,9 +1,8 @@
 [gd_scene load_steps=8 format=2]
 
 [ext_resource path="res://src/Items/Balls/Ball.tscn" type="PackedScene" id=1]
-[ext_resource path="res://assets/art/effects/light5.tres" type="Texture" id=2]
+[ext_resource path="res://assets/art/effects/light2.png" type="Texture" id=3]
 [ext_resource path="res://src/Items/Balls/BallLight.gd" type="Script" id=7]
-[ext_resource path="res://assets/art/effects/light4.png" type="Texture" id=8]
 
 [sub_resource type="CircleShape2D" id=1]
 resource_local_to_scene = true
@@ -19,6 +18,35 @@ resource_local_to_scene = true
 offsets = PoolRealArray( 0, 0.020202, 0.131313, 0.50505, 0.808081, 1 )
 colors = PoolColorArray( 1, 0, 0.580392, 0, 1, 1, 1, 0, 1, 1, 1, 1, 0.839844, 0.839844, 0.839844, 1, 0.533333, 0.533333, 0.533333, 0.705882, 0, 0, 0, 0.258824 )
 
+[sub_resource type="Animation" id=4]
+resource_name = "flash_light"
+length = 0.85
+step = 0.05
+tracks/0/type = "value"
+tracks/0/path = NodePath("LightAdd:enabled")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0.2, 0.85 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 1,
+"values": [ true, true ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("LightAdd:energy")
+tracks/1/interp = 2
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0.2, 0.55, 0.85 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 0,
+"values": [ 0.1, 0.5, 0.1 ]
+}
+
 [node name="BallLight" instance=ExtResource( 1 )]
 script = ExtResource( 7 )
 mass = 0.9
@@ -26,7 +54,7 @@ friction = 0.04
 bounce = 0.6
 
 [node name="Sprite" parent="." index="0"]
-self_modulate = Color( 1.25, 1.05, 0.2, 1 )
+self_modulate = Color( 1.5, 1.3, 0.2, 1 )
 
 [node name="collision" parent="." index="1"]
 shape = SubResource( 1 )
@@ -42,64 +70,62 @@ color_ramp = SubResource( 2 )
 [node name="Destruction" parent="Effects" index="1"]
 color_ramp = SubResource( 3 )
 
-[node name="LightPlayer" type="Light2D" parent="." index="5"]
-visible = false
-position = Vector2( -1.14441e-05, 1.14441e-05 )
-scale = Vector2( 1.64187, 1.64187 )
+[node name="LightSmall" type="Light2D" parent="." index="5"]
+position = Vector2( -3.8147e-06, 7.62939e-06 )
+scale = Vector2( 1.11855, 1.11855 )
 z_as_relative = false
-enabled = false
-texture = ExtResource( 2 )
+texture = ExtResource( 3 )
 texture_scale = 2.56
-color = Color( 1, 0.827451, 0.968627, 1 )
-energy = 0.7
-range_z_min = 100
-range_z_max = 120
-range_item_cull_mask = 3
+color = Color( 1, 0.909804, 0.639216, 1 )
+mode = 2
+range_z_max = 130
+range_item_cull_mask = 31
 __meta__ = {
 "_edit_lock_": true
 }
 
-[node name="LightSmall" type="Light2D" parent="." index="6"]
+[node name="LightAdd" type="Light2D" parent="." index="6"]
 position = Vector2( -3.8147e-06, 7.62939e-06 )
 scale = Vector2( 1.11855, 1.11855 )
 z_as_relative = false
-texture = ExtResource( 2 )
+texture = ExtResource( 3 )
 texture_scale = 2.56
-color = Color( 1, 0.854902, 0.419608, 1 )
-energy = 0.6
-range_z_max = 120
-range_item_cull_mask = 3
+energy = 0.1
+range_z_min = 0
+range_z_max = 130
+range_item_cull_mask = 23
 __meta__ = {
 "_edit_lock_": true
 }
 
 [node name="LightFront" type="Light2D" parent="." index="7"]
-visible = false
 position = Vector2( 7.62939e-06, 0 )
-scale = Vector2( 2.28671, 2.28671 )
+scale = Vector2( 1.6, 1.6 )
 z_as_relative = false
 enabled = false
-texture = ExtResource( 2 )
+texture = ExtResource( 3 )
 texture_scale = 2.56
-color = Color( 1, 0.909804, 0.827451, 1 )
-energy = 0.7
-range_z_min = 160
-range_z_max = 160
-range_item_cull_mask = 3
+color = Color( 1, 0.803922, 0.431373, 1 )
+energy = 1.1
+mode = 2
+range_z_min = 91
+range_z_max = 200
+range_item_cull_mask = 31
 __meta__ = {
 "_edit_lock_": true
 }
 
 [node name="LightBack" type="Light2D" parent="." index="8"]
-visible = false
 scale = Vector2( 2.5, 2.5 )
 z_as_relative = false
 enabled = false
-texture = ExtResource( 8 )
+texture = ExtResource( 3 )
 texture_scale = 2.56
 color = Color( 1, 0.901961, 0.709804, 1 )
-energy = 0.9
+energy = 1.25
+mode = 2
 range_z_max = 90
+range_item_cull_mask = 31
 shadow_enabled = true
 shadow_gradient_length = 3.0
 shadow_filter = 1
@@ -107,3 +133,6 @@ shadow_filter_smooth = 30.0
 __meta__ = {
 "_edit_lock_": true
 }
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="." index="9"]
+anims/flash_light = SubResource( 4 )

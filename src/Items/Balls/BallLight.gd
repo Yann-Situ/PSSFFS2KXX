@@ -14,13 +14,16 @@ func set_enabled(b):
 		$LightSmall.enabled = false
 		$LightBack.enabled = true
 		$LightFront.enabled = true
-		$LightPlayer.enabled = true
 	else :
 		$LightSmall.enabled = true
 		$LightBack.enabled = false
 		$LightFront.enabled = false
-		$LightPlayer.enabled = false
 
+func on_dunk(basket : Node = null):
+	$Animation.stop()
+	$Animation.play("dunk")
+	$AnimationPlayer.play("flash_light")
+	
 func power_p(player,delta):
 	pass
 	
