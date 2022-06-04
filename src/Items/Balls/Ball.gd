@@ -98,7 +98,8 @@ func on_pickup(holder_node : Node):
 func on_throw(previous_holder : Node):
 	pass
 
-func on_dunk():
+func on_dunk(basket : Node = null):
+	$Animation.stop()
 	$Animation.play("dunk")
 
 func on_goal():

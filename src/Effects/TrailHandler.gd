@@ -26,7 +26,6 @@ func start(duration, tick_delay):
 	if trail != null:
 		trail.stop()
 	var trail_instance: Line2D = TrailScene.instance()
-	trail_instance.name = "TrailInstance"
 	trail_instance.wildness = wildness
 	trail_instance.min_spawn_distance = min_spawn_distance
 	trail_instance.gravity = gravity

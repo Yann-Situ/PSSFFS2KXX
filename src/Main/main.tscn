@@ -458,7 +458,7 @@ position = Vector2( -576, -616 )
 
 [node name="BallLight" parent="Environment/Balls" instance=ExtResource( 24 )]
 light_mask = 1
-position = Vector2( 856, 208 )
+position = Vector2( 600, 536 )
 
 [node name="BallShock" parent="Environment/Balls" instance=ExtResource( 44 )]
 light_mask = 1

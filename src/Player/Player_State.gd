@@ -14,7 +14,7 @@ export (float) var tolerance_land_lag = 3*frame_time_ms #s
 export (float) var walljump_move_countdown = 22*frame_time_ms #s
 export (float) var jump_countdown = 10*frame_time_ms #s
 export (float) var dunkjump_countdown = 0.4#s
-export (float) var dunk_countdown = 1.5 #s
+export (float) var dunk_countdown = 0.71 #s
 export (float) var shoot_countdown = 30*frame_time_ms #s
 
 # Bool for inputs ('p' is for 'pressed', 'jp' 'just_pressed', 'jr' 'just_released')
