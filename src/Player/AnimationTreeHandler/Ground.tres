@@ -1,0 +1,117 @@
+[gd_resource type="AnimationNodeStateMachine" load_steps=29 format=2]
+
+[sub_resource type="AnimationNodeAnimation" id=1]
+animation = "crouch"
+
+[sub_resource type="AnimationNodeAnimation" id=2]
+animation = "crouch_idle"
+
+[sub_resource type="AnimationNodeAnimation" id=3]
+animation = "halfturn"
+
+[sub_resource type="AnimationNodeAnimation" id=4]
+animation = "land"
+
+[sub_resource type="AnimationNodeAnimation" id=5]
+animation = "land_roll"
+
+[sub_resource type="AnimationNodeAnimation" id=6]
+animation = "idle"
+
+[sub_resource type="AnimationNodeAnimation" id=7]
+animation = "idle_dribble"
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=8]
+switch_mode = 2
+auto_advance = true
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=9]
+switch_mode = 2
+auto_advance = true
+
+[sub_resource type="AnimationNodeStateMachine" id=10]
+states/idle/node = SubResource( 6 )
+states/idle/position = Vector2( 482, 169 )
+states/idle_dribble/node = SubResource( 7 )
+states/idle_dribble/position = Vector2( 681, 169 )
+transitions = [ "idle", "idle_dribble", SubResource( 8 ), "idle_dribble", "idle", SubResource( 9 ) ]
+start_node = "idle"
+
+[sub_resource type="AnimationNodeAnimation" id=11]
+animation = "walk"
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=12]
+advance_condition = "is_crouching"
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=13]
+advance_condition = "is_standing"
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=14]
+advance_condition = "is_idle"
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=15]
+advance_condition = "is_walking"
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=16]
+switch_mode = 2
+auto_advance = true
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=17]
+switch_mode = 2
+auto_advance = true
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=18]
+switch_mode = 2
+auto_advance = true
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=19]
+advance_condition = "is_standing"
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=20]
+advance_condition = "is_crouching"
+priority = 3
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=21]
+advance_condition = "is_landing"
+priority = 2
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=22]
+advance_condition = "is_landrolling"
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=23]
+advance_condition = "is_walking"
+priority = 3
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=24]
+advance_condition = "is_idle"
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=25]
+advance_condition = "is_halfturning"
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=26]
+advance_condition = "is_crouching"
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=27]
+advance_condition = "is_halfturning"
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=28]
+advance_condition = "is_idle"
+
+[resource]
+states/crouch/node = SubResource( 1 )
+states/crouch/position = Vector2( 251, 522 )
+states/crouch_idle/node = SubResource( 2 )
+states/crouch_idle/position = Vector2( 275, 84 )
+states/halfturn/node = SubResource( 3 )
+states/halfturn/position = Vector2( 748, 343 )
+states/land/node = SubResource( 4 )
+states/land/position = Vector2( 584, 212 )
+states/land_roll/node = SubResource( 5 )
+states/land_roll/position = Vector2( 518, 327 )
+states/stand_idle/node = SubResource( 10 )
+states/stand_idle/position = Vector2( 920, 70 )
+states/walk/node = SubResource( 11 )
+states/walk/position = Vector2( 914, 527 )
+transitions = [ "walk", "crouch", SubResource( 12 ), "crouch", "walk", SubResource( 13 ), "crouch", "crouch_idle", SubResource( 14 ), "crouch_idle", "crouch", SubResource( 15 ), "land", "crouch_idle", SubResource( 16 ), "land_roll", "crouch", SubResource( 17 ), "halfturn", "walk", SubResource( 18 ), "crouch_idle", "stand_idle", SubResource( 19 ), "stand_idle", "crouch_idle", SubResource( 20 ), "stand_idle", "land", SubResource( 21 ), "stand_idle", "land_roll", SubResource( 22 ), "stand_idle", "walk", SubResource( 23 ), "walk", "stand_idle", SubResource( 24 ), "stand_idle", "halfturn", SubResource( 25 ), "halfturn", "land_roll", SubResource( 26 ), "walk", "halfturn", SubResource( 27 ), "halfturn", "stand_idle", SubResource( 28 ) ]
+start_node = "stand_idle"
+graph_offset = Vector2( 0, 17.3702 )

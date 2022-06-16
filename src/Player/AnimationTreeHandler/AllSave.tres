@@ -1,0 +1,22 @@
+[gd_resource type="AnimationNodeBlendTree" load_steps=6 format=2]
+
+[ext_resource path="res://src/Player/AnimationTreeHandler/Air.tres" type="AnimationNodeStateMachine" id=1]
+[ext_resource path="res://src/Player/AnimationTreeHandler/Ground.tres" type="AnimationNodeStateMachine" id=2]
+[ext_resource path="res://src/Player/AnimationTreeHandler/Hang.tres" type="AnimationNodeAnimation" id=3]
+[ext_resource path="res://src/Player/AnimationTreeHandler/Grind.tres" type="AnimationNodeBlendSpace1D" id=4]
+[ext_resource path="res://src/Player/AnimationTreeHandler/Stance.tres" type="AnimationNodeBlendTree" id=5]
+
+[resource]
+graph_offset = Vector2( 684, 262 )
+nodes/air/node = ExtResource( 1 )
+nodes/air/position = Vector2( 120, 580 )
+nodes/grind/node = ExtResource( 4 )
+nodes/grind/position = Vector2( 140, 780 )
+nodes/ground/node = ExtResource( 2 )
+nodes/ground/position = Vector2( 100, 260 )
+nodes/hang/node = ExtResource( 3 )
+nodes/hang/position = Vector2( 160, 900 )
+nodes/output/position = Vector2( 1240, 340 )
+nodes/stance/node = ExtResource( 5 )
+nodes/stance/position = Vector2( 660, 580 )
+node_connections = [ "output", 0, "stance" ]

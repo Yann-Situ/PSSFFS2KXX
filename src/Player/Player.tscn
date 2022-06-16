@@ -1,4 +1,4 @@
-[gd_scene load_steps=173 format=2]
+[gd_scene load_steps=104 format=2]
 
 [ext_resource path="res://src/Player/Player.gd" type="Script" id=1]
 [ext_resource path="res://assets/art/characters/Player.png" type="Texture" id=2]
@@ -43,6 +43,8 @@
 [ext_resource path="res://src/Player/Shooter.gd" type="Script" id=41]
 [ext_resource path="res://assets/shader/shoot_viewer.gdshader" type="Shader" id=42]
 [ext_resource path="res://src/Effects/DustParticle1.tscn" type="PackedScene" id=43]
+[ext_resource path="res://src/Player/AnimationTreeHandler/Action.tres" type="AnimationNodeStateMachine" id=45]
+[ext_resource path="res://src/Player/AnimationTreeHandler/Stance.tres" type="AnimationNodeBlendTree" id=46]
 
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 8, 26 )
@@ -222,7 +224,7 @@ tracks/1/loop_wrap = true
 tracks/1/imported = false
 tracks/1/enabled = true
 tracks/1/keys = {
-"times": PoolRealArray( 0, 0.2, 0.22, 0.3, 0.32, 0.66 ),
+"times": PoolRealArray( 0, 0.2, 0.22, 0.3, 0.32, 0.65 ),
 "transitions": PoolRealArray( 1, 1, 1, 1, 1, 1 ),
 "update": 0,
 "values": [ Vector2( -23, -18 ), Vector2( -23, -18 ), Vector2( -19, -35 ), Vector2( -19, -35 ), Vector2( 6, -34 ), Vector2( 8, 110 ) ]
@@ -234,7 +236,7 @@ tracks/2/loop_wrap = true
 tracks/2/imported = false
 tracks/2/enabled = true
 tracks/2/keys = {
-"times": PoolRealArray( 0.7 ),
+"times": PoolRealArray( 0.65 ),
 "transitions": PoolRealArray( 1 ),
 "update": 1,
 "values": [ false ]
@@ -258,7 +260,7 @@ tracks/4/loop_wrap = true
 tracks/4/imported = false
 tracks/4/enabled = true
 tracks/4/keys = {
-"times": PoolRealArray( 0.32, 0.7 ),
+"times": PoolRealArray( 0.32, 0.65 ),
 "transitions": PoolRealArray( 1, 1 ),
 "values": [ {
 "args": [  ],
@@ -773,7 +775,7 @@ tracks/3/keys = {
 
 [sub_resource type="Animation" id=26]
 length = 0.8
-step = 0.02
+step = 0.001
 tracks/0/type = "value"
 tracks/0/path = NodePath(".:frame")
 tracks/0/interp = 1
@@ -797,6 +799,20 @@ tracks/1/keys = {
 "transitions": PoolRealArray( 1 ),
 "update": 0,
 "values": [ Vector2( 0, -5 ) ]
+}
+tracks/2/type = "method"
+tracks/2/path = NodePath("../Actions/Dunk")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0.02 ),
+"transitions": PoolRealArray( 1 ),
+"values": [ {
+"args": [  ],
+"method": "test_print"
+} ]
 }
 
 [sub_resource type="Animation" id=27]
@@ -1088,397 +1104,71 @@ tracks/3/keys = {
 [sub_resource type="CanvasItemMaterial" id=35]
 blend_mode = 1
 
-[sub_resource type="AnimationNodeAnimation" id=36]
-animation = "dunk"
-
-[sub_resource type="AnimationNodeAnimation" id=37]
-animation = "dunkdash"
-
-[sub_resource type="AnimationNodeAnimation" id=38]
-animation = "dunkjump"
-
-[sub_resource type="AnimationNodeAnimation" id=39]
-animation = "dunkjump_halfturn"
-
-[sub_resource type="AnimationNodeStateMachineTransition" id=40]
-switch_mode = 1
-advance_condition = "is_dunkjumphalfturning"
-
-[sub_resource type="AnimationNodeStateMachine" id=41]
-states/dunkjump/node = SubResource( 38 )
-states/dunkjump/position = Vector2( 273, 328 )
-states/dunkjump_halfturn/node = SubResource( 39 )
-states/dunkjump_halfturn/position = Vector2( 273, 159 )
-transitions = [ "dunkjump", "dunkjump_halfturn", SubResource( 40 ) ]
-start_node = "dunkjump"
-
-[sub_resource type="AnimationNodeAnimation" id=42]
-animation = "grind0"
-
-[sub_resource type="AnimationNodeAnimation" id=43]
-animation = "air_shoot"
-
-[sub_resource type="AnimationNodeAnimation" id=44]
-animation = "floor_shoot"
-
-[sub_resource type="AnimationNodeStateMachineTransition" id=45]
-switch_mode = 1
-advance_condition = "is_onfloor"
-
-[sub_resource type="AnimationNodeStateMachine" id=46]
-states/air_shoot/node = SubResource( 43 )
-states/air_shoot/position = Vector2( 336, 359 )
-states/floor_shoot/node = SubResource( 44 )
-states/floor_shoot/position = Vector2( 336, 223 )
-transitions = [ "air_shoot", "floor_shoot", SubResource( 45 ) ]
-start_node = "air_shoot"
-
-[sub_resource type="AnimationNodeStateMachineTransition" id=47]
-advance_condition = "is_dunkjumping"
-
-[sub_resource type="AnimationNodeStateMachineTransition" id=48]
-advance_condition = "is_dunkdashing"
-
-[sub_resource type="AnimationNodeStateMachineTransition" id=49]
-advance_condition = "is_dunking"
-
-[sub_resource type="AnimationNodeStateMachineTransition" id=50]
-advance_condition = "is_shooting"
-
-[sub_resource type="AnimationNodeStateMachineTransition" id=51]
-switch_mode = 2
-auto_advance = true
-
-[sub_resource type="AnimationNodeStateMachineTransition" id=52]
-switch_mode = 2
-auto_advance = true
-
-[sub_resource type="AnimationNodeStateMachineTransition" id=53]
-advance_condition = "is_not_dunkdashing"
-
-[sub_resource type="AnimationNodeStateMachineTransition" id=54]
-advance_condition = "is_not_dunkjumping"
-
-[sub_resource type="AnimationNodeStateMachine" id=55]
-states/dunk/node = SubResource( 36 )
-states/dunk/position = Vector2( 267, 514 )
-states/dunkdash/node = SubResource( 37 )
-states/dunkdash/position = Vector2( 202, 243 )
-states/dunkjump/node = SubResource( 41 )
-states/dunkjump/position = Vector2( 445, 61 )
-states/hub/node = SubResource( 42 )
-states/hub/position = Vector2( 639, 312 )
-states/shoot/node = SubResource( 46 )
-states/shoot/position = Vector2( 639, 551 )
-transitions = [ "hub", "dunkjump", SubResource( 47 ), "hub", "dunkdash", SubResource( 48 ), "hub", "dunk", SubResource( 49 ), "hub", "shoot", SubResource( 50 ), "shoot", "hub", SubResource( 51 ), "dunk", "hub", SubResource( 52 ), "dunkdash", "hub", SubResource( 53 ), "dunkjump", "hub", SubResource( 54 ) ]
-start_node = "hub"
-graph_offset = Vector2( 0, -71.7847 )
-
-[sub_resource type="AnimationNodeAnimation" id=56]
-animation = "air_wall"
-
-[sub_resource type="AnimationNodeAnimation" id=57]
-animation = "fall"
-
-[sub_resource type="AnimationNodeAnimation" id=58]
-animation = "fall_loop"
-
-[sub_resource type="AnimationNodeStateMachineTransition" id=59]
-switch_mode = 2
-auto_advance = true
-
-[sub_resource type="AnimationNodeStateMachine" id=60]
-states/fall/node = SubResource( 57 )
-states/fall/position = Vector2( 605, 145 )
-states/fall_loop/node = SubResource( 58 )
-states/fall_loop/position = Vector2( 596, 242 )
-transitions = [ "fall", "fall_loop", SubResource( 59 ) ]
-start_node = "fall"
-
-[sub_resource type="AnimationNodeAnimation" id=61]
-animation = "jump1"
-
-[sub_resource type="AnimationNodeAnimation" id=62]
-animation = "walljump1"
-
-[sub_resource type="AnimationNodeStateMachineTransition" id=63]
-advance_condition = "is_onwall"
-
-[sub_resource type="AnimationNodeStateMachineTransition" id=64]
-advance_condition = "is_jumping"
-
 [sub_resource type="AnimationNodeStateMachineTransition" id=65]
-switch_mode = 2
-auto_advance = true
+advance_condition = "is_not_cancelable"
 
 [sub_resource type="AnimationNodeStateMachineTransition" id=66]
-advance_condition = "is_jumping"
+advance_condition = "is_cancelable"
 
-[sub_resource type="AnimationNodeStateMachineTransition" id=67]
-switch_mode = 2
-auto_advance = true
+[sub_resource type="AnimationNodeStateMachine" id=36]
+states/action/node = ExtResource( 45 )
+states/action/position = Vector2( 325, 124 )
+states/stance/node = ExtResource( 46 )
+states/stance/position = Vector2( 325, 251 )
+transitions = [ "stance", "action", SubResource( 65 ), "action", "stance", SubResource( 66 ) ]
+start_node = "stance"
 
-[sub_resource type="AnimationNodeStateMachineTransition" id=68]
-advance_condition = "is_not_onwall"
-
-[sub_resource type="AnimationNodeStateMachine" id=69]
-states/air_wall/node = SubResource( 56 )
-states/air_wall/position = Vector2( 786, 431 )
-states/fall/node = SubResource( 60 )
-states/fall/position = Vector2( 786, 261 )
-states/jump1/node = SubResource( 61 )
-states/jump1/position = Vector2( 499, 261 )
-states/walljump1/node = SubResource( 62 )
-states/walljump1/position = Vector2( 499, 431 )
-transitions = [ "fall", "air_wall", SubResource( 63 ), "fall", "jump1", SubResource( 64 ), "jump1", "fall", SubResource( 65 ), "air_wall", "walljump1", SubResource( 66 ), "walljump1", "fall", SubResource( 67 ), "air_wall", "fall", SubResource( 68 ) ]
-start_node = "fall"
-graph_offset = Vector2( 0, 116.72 )
-
-[sub_resource type="AnimationNodeTransition" id=70]
-input_count = 2
-input_0/name = "no"
-input_0/auto_advance = false
-input_1/name = "yes"
-input_1/auto_advance = false
-
-[sub_resource type="AnimationNodeAnimation" id=71]
-animation = "grind0"
-
-[sub_resource type="AnimationNodeAnimation" id=72]
-animation = "grind-45"
-
-[sub_resource type="AnimationNodeAnimation" id=73]
-animation = "grind+45"
-
-[sub_resource type="AnimationNodeAnimation" id=74]
-animation = "grind-15"
-
-[sub_resource type="AnimationNodeAnimation" id=75]
-animation = "grind-30"
-
-[sub_resource type="AnimationNodeAnimation" id=76]
-animation = "grind+15"
-
-[sub_resource type="AnimationNodeAnimation" id=77]
-animation = "grind+30"
-
-[sub_resource type="AnimationNodeAnimation" id=78]
-animation = "fall_loop"
-
-[sub_resource type="AnimationNodeAnimation" id=79]
-animation = "fall_loop"
-
-[sub_resource type="AnimationNodeBlendSpace1D" id=80]
-blend_point_0/node = SubResource( 71 )
-blend_point_0/pos = 0.0
-blend_point_1/node = SubResource( 72 )
-blend_point_1/pos = -0.6
-blend_point_2/node = SubResource( 73 )
-blend_point_2/pos = 0.6
-blend_point_3/node = SubResource( 74 )
-blend_point_3/pos = -0.2
-blend_point_4/node = SubResource( 75 )
-blend_point_4/pos = -0.4
-blend_point_5/node = SubResource( 76 )
-blend_point_5/pos = 0.2
-blend_point_6/node = SubResource( 77 )
-blend_point_6/pos = 0.4
-blend_point_7/node = SubResource( 78 )
-blend_point_7/pos = 0.8
-blend_point_8/node = SubResource( 79 )
-blend_point_8/pos = -0.8
-snap = 0.2
-value_label = "angle"
-
-[sub_resource type="AnimationNodeAnimation" id=81]
-animation = "crouch"
-
-[sub_resource type="AnimationNodeAnimation" id=82]
-animation = "crouch_idle"
-
-[sub_resource type="AnimationNodeAnimation" id=83]
-animation = "halfturn"
-
-[sub_resource type="AnimationNodeAnimation" id=84]
-animation = "land"
-
-[sub_resource type="AnimationNodeAnimation" id=85]
-animation = "land_roll"
-
-[sub_resource type="AnimationNodeAnimation" id=86]
-animation = "idle"
-
-[sub_resource type="AnimationNodeAnimation" id=87]
-animation = "idle_dribble"
-
-[sub_resource type="AnimationNodeStateMachineTransition" id=88]
-switch_mode = 2
-auto_advance = true
-
-[sub_resource type="AnimationNodeStateMachineTransition" id=89]
-switch_mode = 2
-auto_advance = true
-
-[sub_resource type="AnimationNodeStateMachine" id=90]
-states/idle/node = SubResource( 86 )
-states/idle/position = Vector2( 482, 169 )
-states/idle_dribble/node = SubResource( 87 )
-states/idle_dribble/position = Vector2( 681, 169 )
-transitions = [ "idle", "idle_dribble", SubResource( 88 ), "idle_dribble", "idle", SubResource( 89 ) ]
-start_node = "idle"
-
-[sub_resource type="AnimationNodeAnimation" id=91]
-animation = "walk"
-
-[sub_resource type="AnimationNodeStateMachineTransition" id=92]
-advance_condition = "is_crouching"
-
-[sub_resource type="AnimationNodeStateMachineTransition" id=93]
-advance_condition = "is_standing"
-
-[sub_resource type="AnimationNodeStateMachineTransition" id=94]
-advance_condition = "is_idle"
-
-[sub_resource type="AnimationNodeStateMachineTransition" id=95]
-advance_condition = "is_walking"
-
-[sub_resource type="AnimationNodeStateMachineTransition" id=96]
-switch_mode = 2
-auto_advance = true
-
-[sub_resource type="AnimationNodeStateMachineTransition" id=97]
-switch_mode = 2
-auto_advance = true
-
-[sub_resource type="AnimationNodeStateMachineTransition" id=98]
-switch_mode = 2
-auto_advance = true
-
-[sub_resource type="AnimationNodeStateMachineTransition" id=99]
-advance_condition = "is_standing"
-
-[sub_resource type="AnimationNodeStateMachineTransition" id=100]
-advance_condition = "is_crouching"
-priority = 3
-
-[sub_resource type="AnimationNodeStateMachineTransition" id=101]
-advance_condition = "is_landing"
-priority = 2
-
-[sub_resource type="AnimationNodeStateMachineTransition" id=102]
-advance_condition = "is_landrolling"
-
-[sub_resource type="AnimationNodeStateMachineTransition" id=103]
-advance_condition = "is_walking"
-priority = 3
-
-[sub_resource type="AnimationNodeStateMachineTransition" id=104]
-advance_condition = "is_idle"
-
-[sub_resource type="AnimationNodeStateMachineTransition" id=105]
-advance_condition = "is_halfturning"
-
-[sub_resource type="AnimationNodeStateMachineTransition" id=106]
-advance_condition = "is_crouching"
-
-[sub_resource type="AnimationNodeStateMachineTransition" id=107]
-advance_condition = "is_halfturning"
-
-[sub_resource type="AnimationNodeStateMachineTransition" id=108]
-advance_condition = "is_idle"
-
-[sub_resource type="AnimationNodeStateMachine" id=109]
-states/crouch/node = SubResource( 81 )
-states/crouch/position = Vector2( 251, 522 )
-states/crouch_idle/node = SubResource( 82 )
-states/crouch_idle/position = Vector2( 275, 84 )
-states/halfturn/node = SubResource( 83 )
-states/halfturn/position = Vector2( 748, 343 )
-states/land/node = SubResource( 84 )
-states/land/position = Vector2( 584, 212 )
-states/land_roll/node = SubResource( 85 )
-states/land_roll/position = Vector2( 518, 327 )
-states/stand_idle/node = SubResource( 90 )
-states/stand_idle/position = Vector2( 920, 70 )
-states/walk/node = SubResource( 91 )
-states/walk/position = Vector2( 914, 527 )
-transitions = [ "walk", "crouch", SubResource( 92 ), "crouch", "walk", SubResource( 93 ), "crouch", "crouch_idle", SubResource( 94 ), "crouch_idle", "crouch", SubResource( 95 ), "land", "crouch_idle", SubResource( 96 ), "land_roll", "crouch", SubResource( 97 ), "halfturn", "walk", SubResource( 98 ), "crouch_idle", "stand_idle", SubResource( 99 ), "stand_idle", "crouch_idle", SubResource( 100 ), "stand_idle", "land", SubResource( 101 ), "stand_idle", "land_roll", SubResource( 102 ), "stand_idle", "walk", SubResource( 103 ), "walk", "stand_idle", SubResource( 104 ), "stand_idle", "halfturn", SubResource( 105 ), "halfturn", "land_roll", SubResource( 106 ), "walk", "halfturn", SubResource( 107 ), "halfturn", "stand_idle", SubResource( 108 ) ]
-start_node = "stand_idle"
-graph_offset = Vector2( 0, 17.3702 )
-
-[sub_resource type="AnimationNodeAnimation" id=110]
-animation = "hang"
-
-[sub_resource type="AnimationNodeTransition" id=111]
-input_count = 4
-input_0/name = "ground"
-input_0/auto_advance = false
-input_1/name = "air"
-input_1/auto_advance = false
-input_2/name = "grind"
-input_2/auto_advance = false
-input_3/name = "hang"
-input_3/auto_advance = false
-
-[sub_resource type="AnimationNodeBlendTree" id=112]
-graph_offset = Vector2( -92.1785, -15.1666 )
-nodes/action/node = SubResource( 55 )
-nodes/action/position = Vector2( 680, -100 )
-nodes/air/node = SubResource( 69 )
-nodes/air/position = Vector2( 120, 580 )
-nodes/cancelable/node = SubResource( 70 )
-nodes/cancelable/position = Vector2( 1080, 280 )
-nodes/grind/node = SubResource( 80 )
-nodes/grind/position = Vector2( 140, 780 )
-nodes/ground/node = SubResource( 109 )
-nodes/ground/position = Vector2( 100, 260 )
-nodes/hang/node = SubResource( 110 )
-nodes/hang/position = Vector2( 160, 900 )
+[sub_resource type="AnimationNodeBlendTree" id=37]
+graph_offset = Vector2( 684, 177 )
+nodes/cancelable/node = SubResource( 36 )
+nodes/cancelable/position = Vector2( 980, 320 )
 nodes/output/position = Vector2( 1240, 340 )
-nodes/stance/node = SubResource( 111 )
-nodes/stance/position = Vector2( 660, 580 )
-node_connections = [ "output", 0, "cancelable", "cancelable", 0, "action", "cancelable", 1, "stance", "stance", 0, "ground", "stance", 1, "air", "stance", 2, "grind", "stance", 3, "hang" ]
+node_connections = [ "output", 0, "cancelable" ]
 
-[sub_resource type="AnimationNodeStateMachinePlayback" id=113]
+[sub_resource type="AnimationNodeStateMachinePlayback" id=38]
 
-[sub_resource type="AnimationNodeStateMachinePlayback" id=114]
+[sub_resource type="AnimationNodeStateMachinePlayback" id=67]
 
-[sub_resource type="AnimationNodeStateMachinePlayback" id=115]
+[sub_resource type="AnimationNodeStateMachinePlayback" id=68]
 
-[sub_resource type="AnimationNodeStateMachinePlayback" id=116]
+[sub_resource type="AnimationNodeStateMachinePlayback" id=69]
 
-[sub_resource type="AnimationNodeStateMachinePlayback" id=117]
+[sub_resource type="AnimationNodeStateMachinePlayback" id=70]
 
-[sub_resource type="AnimationNodeStateMachinePlayback" id=118]
+[sub_resource type="AnimationNodeStateMachinePlayback" id=71]
 
-[sub_resource type="CanvasItemMaterial" id=119]
+[sub_resource type="AnimationNodeStateMachinePlayback" id=72]
+
+[sub_resource type="AnimationNodeStateMachinePlayback" id=73]
+
+[sub_resource type="CanvasItemMaterial" id=54]
 particles_animation = true
 particles_anim_h_frames = 4
 particles_anim_v_frames = 1
 particles_anim_loop = false
 
-[sub_resource type="Gradient" id=120]
+[sub_resource type="Gradient" id=55]
 offsets = PoolRealArray( 0.00858369, 0.424893, 0.824034, 1 )
 colors = PoolColorArray( 0, 0, 0, 0, 0.582031, 0.316025, 0.316025, 1, 1, 0.803528, 0.660156, 1, 2, 1, 2, 1 )
 
-[sub_resource type="Curve" id=121]
+[sub_resource type="Curve" id=56]
 _data = [ Vector2( 0, 1 ), 0.0, -1.46686, 0, 0, Vector2( 1, 0.481818 ), 0.95065, 0.0, 0, 0 ]
 
-[sub_resource type="CanvasItemMaterial" id=122]
+[sub_resource type="CanvasItemMaterial" id=57]
 particles_animation = true
 particles_anim_h_frames = 10
 particles_anim_v_frames = 1
 particles_anim_loop = true
 
-[sub_resource type="Gradient" id=123]
+[sub_resource type="Gradient" id=58]
 offsets = PoolRealArray( 0, 0.55, 1 )
 colors = PoolColorArray( 1, 1, 1, 0.913725, 0.90625, 0.90625, 0.90625, 0.745098, 1, 1, 1, 0 )
 
-[sub_resource type="GradientTexture" id=124]
-gradient = SubResource( 123 )
+[sub_resource type="GradientTexture" id=59]
+gradient = SubResource( 58 )
 width = 20
 
-[sub_resource type="ParticlesMaterial" id=125]
+[sub_resource type="ParticlesMaterial" id=60]
 emission_shape = 2
 emission_box_extents = Vector3( 14, 12, 1 )
 flag_disable_z = true
@@ -1494,24 +1184,24 @@ angle = 1.0
 angle_random = 1.0
 scale = 0.6
 scale_random = 1.0
-color_ramp = SubResource( 124 )
+color_ramp = SubResource( 59 )
 anim_speed = 1.0
 
-[sub_resource type="StreamTexture" id=126]
+[sub_resource type="StreamTexture" id=61]
 load_path = "res://.import/dust_0.png-aa7e79fd880c78618fa1d60a7c8d332a.stex"
 
-[sub_resource type="CanvasItemMaterial" id=127]
+[sub_resource type="CanvasItemMaterial" id=62]
 resource_local_to_scene = true
 particles_animation = true
 particles_anim_h_frames = 6
 particles_anim_v_frames = 1
 particles_anim_loop = true
 
-[sub_resource type="CapsuleShape2D" id=128]
+[sub_resource type="CapsuleShape2D" id=63]
 radius = 14.0
 height = 28.0
 
-[sub_resource type="CapsuleShape2D" id=129]
+[sub_resource type="CapsuleShape2D" id=64]
 radius = 5.0
 height = 42.0
 
@@ -1711,7 +1401,7 @@ texture = ExtResource( 2 )
 offset = Vector2( 0.5, 0 )
 hframes = 16
 vframes = 20
-frame = 196
+frame = 199
 __meta__ = {
 "_edit_group_": true,
 "_edit_lock_": true
@@ -1761,37 +1451,39 @@ region_enabled = true
 region_rect = Rect2( 0, 96, 32, 32 )
 
 [node name="AnimationTree" type="AnimationTree" parent="Sprite"]
-tree_root = SubResource( 112 )
+tree_root = SubResource( 37 )
 anim_player = NodePath("../Player_Animation")
 active = true
-parameters/action/playback = SubResource( 113 )
-parameters/action/conditions/is_dunkdashing = true
-parameters/action/conditions/is_dunking = false
-parameters/action/conditions/is_dunkjumping = false
-parameters/action/conditions/is_not_dunkdashing = false
-parameters/action/conditions/is_not_dunkjumping = false
-parameters/action/conditions/is_shooting = false
-parameters/action/dunkjump/playback = SubResource( 114 )
-parameters/action/dunkjump/conditions/is_dunkjumphalfturning = false
-parameters/action/shoot/playback = SubResource( 115 )
-parameters/action/shoot/conditions/is_onfloor = false
-parameters/air/playback = SubResource( 116 )
-parameters/air/conditions/is_jumping = false
-parameters/air/conditions/is_not_onwall = false
-parameters/air/conditions/is_onwall = false
-parameters/air/fall/playback = SubResource( 117 )
-parameters/cancelable/current = 1
-parameters/grind/blend_position = -0.400866
-parameters/ground/playback = SubResource( 116 )
-parameters/ground/conditions/is_crouching = false
-parameters/ground/conditions/is_halfturning = false
-parameters/ground/conditions/is_idle = false
-parameters/ground/conditions/is_landing = false
-parameters/ground/conditions/is_landrolling = false
-parameters/ground/conditions/is_standing = false
-parameters/ground/conditions/is_walking = false
-parameters/ground/stand_idle/playback = SubResource( 118 )
-parameters/stance/current = 0
+parameters/cancelable/playback = SubResource( 38 )
+parameters/cancelable/conditions/is_cancelable = false
+parameters/cancelable/conditions/is_not_cancelable = false
+parameters/cancelable/action/playback = SubResource( 67 )
+parameters/cancelable/action/conditions/is_dunkdashing = false
+parameters/cancelable/action/conditions/is_dunking = false
+parameters/cancelable/action/conditions/is_dunkjumping = false
+parameters/cancelable/action/conditions/is_not_dunkdashing = false
+parameters/cancelable/action/conditions/is_not_dunkjumping = false
+parameters/cancelable/action/conditions/is_shooting = false
+parameters/cancelable/action/dunkjump/playback = SubResource( 68 )
+parameters/cancelable/action/dunkjump/conditions/is_dunkjumphalfturning = false
+parameters/cancelable/action/shoot/playback = SubResource( 69 )
+parameters/cancelable/action/shoot/conditions/is_onfloor = false
+parameters/cancelable/stance/air/playback = SubResource( 70 )
+parameters/cancelable/stance/air/conditions/is_jumping = false
+parameters/cancelable/stance/air/conditions/is_not_onwall = false
+parameters/cancelable/stance/air/conditions/is_onwall = false
+parameters/cancelable/stance/air/fall/playback = SubResource( 71 )
+parameters/cancelable/stance/grind/blend_position = 0
+parameters/cancelable/stance/ground/playback = SubResource( 72 )
+parameters/cancelable/stance/ground/conditions/is_crouching = false
+parameters/cancelable/stance/ground/conditions/is_halfturning = false
+parameters/cancelable/stance/ground/conditions/is_idle = false
+parameters/cancelable/stance/ground/conditions/is_landing = false
+parameters/cancelable/stance/ground/conditions/is_landrolling = false
+parameters/cancelable/stance/ground/conditions/is_standing = false
+parameters/cancelable/stance/ground/conditions/is_walking = false
+parameters/cancelable/stance/ground/stand_idle/playback = SubResource( 73 )
+parameters/cancelable/stance/stancetransition/current = 0
 script = ExtResource( 8 )
 __meta__ = {
 "_editor_description_": ""
@@ -1805,7 +1497,7 @@ __meta__ = {
 
 [node name="DustParticle" parent="PlayerEffects" instance=ExtResource( 12 )]
 modulate = Color( 0.85098, 0.85098, 0.85098, 1 )
-material = SubResource( 119 )
+material = SubResource( 54 )
 position = Vector2( 0, 28 )
 amount = 9
 lifetime = 0.4
@@ -1825,23 +1517,23 @@ anim_offset_random = 1.0
 
 [node name="TrailHandler" parent="PlayerEffects" instance=ExtResource( 25 )]
 wildness = 50.0
-gradient_col = SubResource( 120 )
-width_curve = SubResource( 121 )
+gradient_col = SubResource( 55 )
+width_curve = SubResource( 56 )
 texture = ExtResource( 26 )
 
 [node name="CloudParticles" parent="PlayerEffects" instance=ExtResource( 43 )]
-material = SubResource( 122 )
+material = SubResource( 57 )
 position = Vector2( 0, 32 )
 z_index = -1
 amount = 4
 lifetime = 0.65
 explosiveness = 0.9
 local_coords = false
-process_material = SubResource( 125 )
-texture = SubResource( 126 )
+process_material = SubResource( 60 )
+texture = SubResource( 61 )
 
 [node name="GrindParticles" parent="PlayerEffects" instance=ExtResource( 27 )]
-material = SubResource( 127 )
+material = SubResource( 62 )
 position = Vector2( 0, 16 )
 
 [node name="BallHandler" type="Area2D" parent="."]
@@ -1851,10 +1543,10 @@ script = ExtResource( 6 )
 [node name="CollisionShape2D" type="CollisionShape2D" parent="BallHandler"]
 visible = false
 position = Vector2( 0, 5 )
-shape = SubResource( 128 )
+shape = SubResource( 63 )
 
 [node name="HasBallPosition" type="Node2D" parent="BallHandler"]
-position = Vector2( 4.99999, 15 )
+position = Vector2( -7, -6 )
 __meta__ = {
 "_edit_group_": true
 }
@@ -1983,7 +1675,7 @@ script = ExtResource( 37 )
 [node name="CollisionShape2D" type="CollisionShape2D" parent="LifeHandler/HitBox"]
 modulate = Color( 1, 0, 0, 1 )
 position = Vector2( 0, 6 )
-shape = SubResource( 129 )
+shape = SubResource( 64 )
 
 [connection signal="body_entered" from="BallHandler" to="BallHandler" method="_on_Ball_Handler_body_entered"]
 [connection signal="tween_completed" from="Camera/Tween" to="Camera" method="_on_Tween_tween_completed"]

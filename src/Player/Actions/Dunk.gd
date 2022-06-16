@@ -36,8 +36,15 @@ func move_dunk():
 	P.get_node("Camera").screen_shake(0.3,30)
 	assert(dunking_basket != null)
 	dunking_basket.dunk(P) # be careful, selected basket is sometimes null because the player got out of the zone...
+	
+	
+func test_print():
+	print("Time : "+str(OS.get_ticks_msec()))
+	
 
 func move_hang():
+	print("Hang")
+	test_print()
 	assert(dunking_basket != null)
 	dunking_basket.get_hanged(P)
 
