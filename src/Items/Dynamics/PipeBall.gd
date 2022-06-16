@@ -71,13 +71,17 @@ func _on_Area_body_entered(ball):
 		new_path_follow.offset = 0
 		new_path_follow.loop = false
 		self.add_child(new_path_follow)
+		# WARNING : due to the issue in Ball.gd func change_holder, this part can freeze.
+		# inside_bodies.push_back need to be called before ball.pickup because 
+		# ball.pickup reparent the ball which cause _on_Area_body_entered to be
+		# called again on the same ball.
+		inside_bodies.push_back(ball)
 		ball.pickup(self)
 		ball.z_index = z_index-1
-
-		inside_bodies.push_back(ball)
 		path_follows.push_back(new_path_follow)
 
 		print(ball.name+" enter the pipe: "+str(inside_bodies.size())+" bodies")
+	
 
 ################################################################################
 # For `holders` group

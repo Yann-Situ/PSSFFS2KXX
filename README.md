@@ -81,9 +81,6 @@ Popol Super Slam Fusion Full Speed 2KXX
 * [x] **dunking** can result in `S.selected_basket.dunk()` called on `null` instance (basket is not selected anymore)
 * [ ] **release** ball when **aiming** results in error.
 * [ ] It is possible to **dunk** through walls. It can result in dunkjump particles (+ghost) emmiting (dont know why).
-* [ ] **shooting** just before **landing** results in `floor_shoot` just after `aim_shoot` animation
-* [ ] There is some jitter animation when passing from a **dunkjump** state to a **grind** state.
-* [ ] There is some jitter animation when passing from a **dunk** state to a **hang** state.
 * [ ] Hard to reproduce (see video) : **dunkjump** on **jumper** can result in `Nan` camera position teleportation. (because to low to mathematically dunkjump => negative value ? division by 0.0 ?)
 * [ ] Infinite **walking** animation on 16px block stairs.
 * [ ] High jump when `jump_jp` and `jump_jr` just before landing (because the cancelled mounting only test `jump_jr`). (also on walljumps)
@@ -129,6 +126,9 @@ Popol Super Slam Fusion Full Speed 2KXX
 * [ ] `Z_as_relative` doesn't work through script... https://github.com/godotengine/godot/issues/45416
 * [ ] **Bubble/Zap ball teleportation** trailhandler can act very weirdly if used quickly repeatly.
 * [ ] **Effects** that are displayed outside the window are displayed after when they reenter the window.
+* [ ] **shooting** just before **landing** results in `floor_shoot` just after `aim_shoot` animation
+* [ ] There is some jitter animation when passing from a **dunkjump** state to a **grind** state.
+* [ ] There is some jitter animation when passing from a **dunk** state to a **hang** state.
 
 ### Potential Glitches
 * [ ] Pressing **jump** and **dunkdash** just before landing can result in small dunkdash/jump.
@@ -136,6 +136,9 @@ Popol Super Slam Fusion Full Speed 2KXX
 * [ ] **Dunkdashing** just before entering a **rail** can result in a dash boost grind.
 * [ ] **Dunkjump** through a **one way platform** resets the dash.
 * [ ] Up-**Dunkdash** just after a **Jump** or a **ShockJump** results in high **Dunkdash**.
+
+### Godot Issues
+* in `Ball.gd` function `change_holder` : issue related to https://github.com/godotengine/godot/issues/14578 and https://github.com/godotengine/godot/issues/34207
 
 ## Groups
 

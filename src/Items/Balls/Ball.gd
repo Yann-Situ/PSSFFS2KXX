@@ -48,8 +48,12 @@ func change_holder(new_holder : Node):
 	if holder != null:
 		holder.free_ball(self)
 	holder = new_holder
-	# WARNING : the game seems to crash when calling change_holder(null) with holder = null on the following line
+	# WARNING : the game seems to crash when calling change_holder(null) with# holder = null on the following line
 	get_parent().remove_child(self)
+	# Warning : the following part reparent the node and will trigger again 
+	# every area/body_entered signal. This can lead to weird things when
+	# multiple nodes are retriggering their functions.
+	# see https://github.com/godotengine/godot/issues/14578
 	if new_holder == null:
 		Global.get_current_room().add_child(self)
 	else :
