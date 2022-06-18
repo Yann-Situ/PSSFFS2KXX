@@ -193,9 +193,9 @@ func get_in(new_holder : Node):
 	self.disable_physics()
 	character_holder = new_holder
 
-func get_out(global_pos : Vector2, velo : Vector2):
+func get_out(out_global_position : Vector2, velo : Vector2):
 	self.enable_physics()
-	global_position = global_pos
+	global_position = out_global_position
 	S.velocity = velo
 	if character_holder != null:
 		character_holder.free_character(self)

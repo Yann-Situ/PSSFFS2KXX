@@ -15,13 +15,13 @@ export var dunk_free_character_cooldown = 0.4#s
 
 var inside_bodies = []
 var bodies_positions = []
-var distortion_scene = preload("res://src/Effects/Distortion.tscn") 
+var distortion_scene = preload("res://src/Effects/Distortion.tscn")
 
 onready var start_position = global_position
 # Should be in any items that can be picked/placed :
-func set_start_position(posi):
-	start_position = posi
-	global_position = posi
+func set_start_position(position):
+	start_position = position
+	global_position = position
 
 func _ready():
 	self.z_index = Global.z_indices["foreground_1"]
@@ -61,18 +61,18 @@ func dunk(dunker : Node2D):
 	distortion.animation_delay = 0.75#s
 	distortion.z_index = Global.z_indices["foreground_2"]
 	distortion.start("fast_subtle")
-	
+
 	if (dunker.global_position.x - global_position.x) > 0:
 		$AnimationPlayer.play("dunk_right")
 	else :
 		$AnimationPlayer.play("dunk_left")
 	Global.camera.screen_shake(0.3,5)
-	
+
 	if can_receive_dunk or !$DunkCooldown.is_stopped():
 		$DunkCooldown.stop()
 		can_receive_dunk = false
 		$DunkCooldown.start(dunk_cooldown)
-	
+
 
 func get_hanged(character : Node):
 	if !character.has_node("Actions/Hang"):
@@ -92,8 +92,8 @@ func goal(body,score):
 		$CPUParticles2D.amount = 20
 	$CPUParticles2D.restart()
 
-func get_closest_point(global_pos : Vector2):
-	var p = global_pos - self.global_position
+func get_closest_point(point_global_position : Vector2):
+	var p = point_global_position - self.global_position
 	var basket_dir = Vector2.RIGHT.rotated(global_rotation)
 	var d = p.dot(basket_dir)
 	if abs(d) >= dunk_position_radius:
@@ -111,9 +111,9 @@ func pickup_character(character : Node):
 	inside_bodies.push_back(character)
 	bodies_positions.push_back(Vector2(character.global_position.x, \
 		self.global_position.y+hang_position_offset_y))
-	
+
 	character.get_node("Actions/Hang").move(0.01)
-	
+
 func free_character(character : Node):
 	# called by character when getting out
 	var i = 0
@@ -146,7 +146,7 @@ func set_selection(type : int, value : bool):
 		enable_contour()
 	else:
 		disable_contour()
-	
+
 func enable_contour():
 	var light = $LightSmall
 	var tween = $LightSmall/Tween
@@ -154,7 +154,7 @@ func enable_contour():
 		tween.remove_all()
 	tween.interpolate_property(light, "energy", light.energy, 0.8, 0.15, 0, Tween.EASE_OUT)
 	tween.start()
-	
+
 func disable_contour():
 	var light = $LightSmall
 	var tween = $LightSmall/Tween

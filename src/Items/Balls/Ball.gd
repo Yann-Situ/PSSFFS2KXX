@@ -30,7 +30,7 @@ func reset_position():
 	if holder != null:
 		throw(Vector2.ZERO,Vector2.ZERO)
 	global_position = start_position
-	
+
 func collision_effect(collider, collider_velocity, collision_point, collision_normal):
 	var speed = (linear_velocity-collider_velocity).length()
 	if speed >= dust_threshold:
@@ -50,14 +50,14 @@ func change_holder(new_holder : Node):
 	holder = new_holder
 	# WARNING : the game seems to crash when calling change_holder(null) with# holder = null on the following line
 	get_parent().remove_child(self)
-	# Warning : the following part reparent the node and will trigger again 
+	# Warning : the following part reparent the node and will trigger again
 	# every area/body_entered signal. This can lead to weird things when
 	# multiple nodes are retriggering their functions.
 	# see https://github.com/godotengine/godot/issues/14578
 	if new_holder == null:
 		Global.get_current_room().add_child(self)
 	else :
-		new_holder.add_child(self) 
+		new_holder.add_child(self)
 
 func pickup(holder_node):
 	if not holder_node.is_in_group("holders"):
@@ -67,13 +67,13 @@ func pickup(holder_node):
 	self.z_index = holder_node.z_index+1
 	on_pickup(holder_node)
 
-func throw(posi, velo):
+func throw(position, velo):
 	#$TrailHandler.set_node_to_trail(self)
 	#$TrailHandler.start(2.0,0.1)
 	self.enable_physics()
 	var previous_holder = holder
 	change_holder(null)
-	global_position = posi
+	global_position = position
 	linear_velocity = velo
 	self.z_index = Global.z_indices["ball_0"]
 	on_throw(previous_holder)
@@ -87,13 +87,13 @@ func destruction(delay : float = 0.0):
 	#TODO need to handle the selector of the player
 	self.disable_physics()
 	$Highlighter.toggle_selection(false)
-	
+
 func _queue_free():
 	print("DESTROYED")
 	emit_signal("is_destroyed")
 	print("DEAD")
 	queue_free()
-	
+
 ################################################################################
 
 func on_pickup(holder_node : Node):
@@ -108,7 +108,7 @@ func on_dunk(basket : Node = null):
 
 func on_goal():
 	pass
-	
+
 func on_destruction():
 	pass
 
@@ -127,4 +127,3 @@ func power_jp(player,delta):
 func power_jr(player,delta):
 	if holder == null :
 		remove_force("attract")
-

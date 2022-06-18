@@ -90,12 +90,12 @@ func _ready():
 func _process(delta):
 	if not inside_bodies.empty():
 		linear_velocity.y += gravity * delta
-		var fi =(final_point-init_point).normalized()
-		var veldotfi = linear_velocity.dot(fi)
+		const fi =(final_point-init_point).normalized()
+		const veldotfi = linear_velocity.dot(fi)
 		var body = inside_bodies[0]
 		body.S.velocity = veldotfi*fi
 
-		var temp_u_offset = $Path2D/PathFollow2D.get_unit_offset()
+		const temp_u_offset = $Path2D/PathFollow2D.get_unit_offset()
 		$Path2D/PathFollow2D.set_offset($Path2D/PathFollow2D.get_offset()+veldotfi*delta)
 		#relative_position_offset = temp_u_offset*(final_point-init_point)+init_point
 		real_rope_offset = lerp(real_rope_offset, 4*temp_u_offset*(1-temp_u_offset)*rope_offset, 0.1)
@@ -110,7 +110,7 @@ func _process(delta):
 			$Path2D/PathFollow2D.get_unit_offset() < 0.001 or\
 			!body.S.is_hanging :
 			#body.enable_physics()
-			
+
 			body.get_out(body.global_position, veldotfi*fi)
 
 			#inside_bodies.remove(0)
@@ -133,11 +133,11 @@ func _on_PlayerDetector_body_exited(body):
 	if !body.S.can_hang:
 		print(body.name+" cannot hang on "+self.name)
 		return 1
-	
+
 	if inside_bodies.empty() and body.S.velocity.y > 0 and $Timer.is_stopped() :
-		
-		var bi =body.position-global_position-init_point
-		var fi =final_point-init_point
+
+		const bi =body.position-global_position-init_point
+		const fi =final_point-init_point
 		linear_velocity = body.S.velocity
 		inside_bodies.append(body)
 		$Path2D/PathFollow2D.set_offset(bi.dot(fi.normalized()))

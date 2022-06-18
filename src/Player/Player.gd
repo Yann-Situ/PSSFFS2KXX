@@ -75,8 +75,8 @@ func enable_physics():
 	physics_enabled = true
 	collision_layer = collision_layer_save
 
-func set_start_position(posi):
-	start_position = posi
+func set_start_position(position):
+	start_position = position
 
 func reset_position():
 	global_position = start_position
@@ -289,9 +289,9 @@ func get_in(new_holder : Node):
 	self.disable_physics()
 	character_holder = new_holder
 
-func get_out(global_pos : Vector2, velo : Vector2):
+func get_out(out_global_position : Vector2, velo : Vector2):
 	self.enable_physics()
-	global_position = global_pos
+	global_position = out_global_position
 	S.velocity = velo
 	if character_holder != null:
 		character_holder.free_character(self)

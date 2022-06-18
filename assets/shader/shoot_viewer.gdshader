@@ -1,7 +1,7 @@
 shader_type canvas_item;
 
 uniform float parameter; // v^2/g
-uniform vec2 throw_pos;
+uniform vec2 throw_position;
 uniform float tolerance;
 
 float lightness(vec4 x)
@@ -17,7 +17,7 @@ vec4 grey(vec4 col, float force){
 }
 
 void fragment(){
-	vec2 p = UV/SCREEN_PIXEL_SIZE - throw_pos;
+	vec2 p = UV/SCREEN_PIXEL_SIZE - throw_position;
 
 	vec4 screen_col = texture(SCREEN_TEXTURE,SCREEN_UV);
 	float force = smoothstep(-tolerance, tolerance, - 2.0*p.y + p.x*p.x/parameter - parameter);

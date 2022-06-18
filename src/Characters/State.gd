@@ -2,7 +2,7 @@ extends Node
 
 onready var Character = get_parent()
 
-var frame_time_ms = 1.0/60.0 #s
+const frame_time_ms = 1.0/60.0 #s
 var time = 0.0#s
 
 # Countdowns and delays between actions

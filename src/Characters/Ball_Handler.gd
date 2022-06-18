@@ -61,11 +61,11 @@ func pickup_ball(ball):
 	S.held_ball = ball
 	ball.pickup(Character)
 
-func throw_ball(global_pos, momentum):
+func throw_ball(throw_global_position, momentum):
 	if S.has_ball and S.held_ball != null :
 		print(Character.name+" throw "+S.held_ball.name)
 		S.released_ball = S.held_ball
-		S.held_ball.throw(global_pos, 1.0/S.held_ball.mass * momentum)
+		S.held_ball.throw(throw_global_position, 1.0/S.held_ball.mass * momentum)
 		yield(get_tree().create_timer(0.1), "timeout")
 		S.released_ball = null
 

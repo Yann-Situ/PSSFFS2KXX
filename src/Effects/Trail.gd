@@ -37,11 +37,11 @@ func _process(delta):
 		tick += delta
 
 
-func add_point(point_pos:Vector2, at_pos := -1):
-	if get_point_count() > 0 and point_pos.distance_to( points[get_point_count()-1] ) < min_spawn_distance:
+func add_point(point_position:Vector2, at_position := -1):
+	if get_point_count() > 0 and point_position.distance_to( points[get_point_count()-1] ) < min_spawn_distance:
 		return
 	point_age.append(0.0)
-	.add_point(point_pos, at_pos)
+	.add_point(point_position, at_position)
 
 
 func _on_Decay_tween_all_completed():

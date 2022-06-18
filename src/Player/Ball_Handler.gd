@@ -56,11 +56,11 @@ func pickup_ball(ball):
 	ui.newline()
 	ui.add_text("Ball posit : "+str(ball.position - Player.position))
 
-func throw_ball(global_pos, speed):
+func throw_ball(throw_global_position, speed):
 	if S.has_ball and S.active_ball != null :
 		print("throw "+S.active_ball.name)
 		S.released_ball = S.active_ball
-		S.active_ball.throw(global_pos, speed)
+		S.active_ball.throw(throw_global_position, speed)
 		# Ugly but it works :
 		yield(get_tree().create_timer(0.1), "timeout")
 		S.released_ball = null

@@ -9,11 +9,11 @@ func move(delta):
 	P.Effects.ghost_start(0.35,0.07)
 	P.Effects.jump_start()
 	#print(S.dunkjump_basket)
-	var q = S.dunkjump_basket.position - P.position
-	var B = P.dunk_speed * q.x / q.y
-	var C = -P.gravity * 0.5 * q.x*q.x/q.y
-	var vox1 = 0.5*(B - sqrt(B*B-4*C))
-	var vox2 = 0.5*(B + sqrt(B*B-4*C))
+	const q = S.dunkjump_basket.position - P.position
+	const B = P.dunk_speed * q.x / q.y
+	const C = -P.gravity * 0.5 * q.x*q.x/q.y
+	const vox1 = 0.5*(B - sqrt(B*B-4*C))
+	const vox2 = 0.5*(B + sqrt(B*B-4*C))
 	if (abs(vox2) < abs(vox1)):
 		S.velocity.x = vox2
 	else :

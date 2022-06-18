@@ -7,7 +7,7 @@ export (float) var shock_fall = 5000 # m*pix/s
 export (float) var distance_max = 64
 export (float) var shock_timer = 0.25#s
 
-var distortion_scene = preload("res://src/Effects/Distortion.tscn") 
+var distortion_scene = preload("res://src/Effects/Distortion.tscn")
 
 func _ready():
 	self.mass = 1.15
@@ -21,7 +21,7 @@ func apply_shock_impulse(shock_force : float, shock_global_position : Vector2, b
 		if b != self:
 			var momentum = (b.global_position - shock_global_position).normalized()
 			momentum *= shock_force
-			
+
 			if b.is_in_group("electrics"):
 				b.apply_shock(momentum)
 				if b.get_parent().is_in_group("activables"):
@@ -48,7 +48,7 @@ func shock(shock_force : float, shock_global_position : Vector2):
 
 func power_p(player,delta):
 	pass
-	
+
 func power_jp(player,delta):
 	if $Timer.is_stopped():
 		if holder == player:
@@ -66,7 +66,7 @@ func power_jp(player,delta):
 				shock(shock_max, player.global_position)
 		else :
 			shock(shock_min, self.global_position)
-	
+
 func power_jr(player,delta):
 	pass
 
@@ -74,10 +74,10 @@ func _on_AnimationPlayer_animation_finished(anim_name):
 	if anim_name == "shockwave":
 		$AnimationPlayer.play("idle")
 
-func shockwave_distortion(glob_pos : Vector2):
+func shockwave_distortion(distortion_glob_position : Vector2):
 	var distortion = distortion_scene.instance()
 	distortion.animation_delay = 0.5#s
 	distortion.z_index = 250
-	distortion.global_position = glob_pos
+	distortion.global_position = distortion_glob_position
 	Global.get_current_room().add_child(distortion)
 	distortion.start("fast")

@@ -11,7 +11,7 @@ export (float) var cant_get_in_again_timer = 0.2#s
 onready var gravity = ProjectSettings.get_setting("physics/2d/default_gravity") # pix/s²
 onready var character_offset = Vector2(0.0,character_position_offset)
 onready var collision_offset = Vector2(0.0,0.0)
-var tolerance_annoying_case = 4.0
+const tolerance_annoying_case = 4.0
 
 var _particle = preload("res://src/Effects/RideParticles.tscn")
 
@@ -92,7 +92,7 @@ func _physics_process(delta):
 		if path_follow.get_unit_offset() == 1.0 or \
 		   path_follow.get_unit_offset() == 0.0 or \
 		   !body.S.is_grinding :
-			
+
 			body.get_out(body.global_position, velocity)
 			j += 1 # because we deleted a node in the list we're browsing
 
@@ -148,7 +148,7 @@ func _on_Area_body_entered(body):
 		if b == body:
 			print(body.name+" just got out from "+self.name)
 			return 1
-			
+
 	var bi = body.global_position-global_position-init_point
 	var closest_offset = curve.get_closest_offset(bi)
 #	if not is_in(closest_offset, 0.0, curve.get_baked_length(),5.0):
@@ -161,7 +161,7 @@ func _on_Area_body_entered(body):
 	if (bi-closest_point).y <= character_position_entrance_tolerance or \
 	   (rail_dir.cross(body.S.velocity) >= 0.0 and \
 		is_in(closest_offset, 0.0, curve.get_baked_length(),tolerance_annoying_case)) :
-			
+
 		var new_path_follow : PathFollow2D = PathFollow2D.new()
 		new_path_follow.loop = false
 		var ride_particle : Particles2D = _particle.instance()
@@ -189,7 +189,7 @@ func pickup_character(character : Node):
 	character.get_in(self)
 	print(character.name+" on "+self.name)
 	character.get_node("Actions/Grind").move(0.01)
-		
+
 func free_character(character : Node):
 	# called by character when getting out
 	var i = 0

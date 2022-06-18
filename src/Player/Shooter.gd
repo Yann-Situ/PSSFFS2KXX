@@ -4,7 +4,7 @@ var viewer_parameter = INF
 var vmax = INF
 var vmax_2 = INF # (pix/s)^2
 
-var target_pos = Vector2.ZERO
+var target_position = Vector2.ZERO
 var target_vmin_2 = 0.0 # (pix/s)^2
 
 var effective_v = Vector2.ZERO# pix/s
@@ -38,13 +38,13 @@ func disable_screen_viewer():
 	$ShootScreen/ShootScreenShader.visible = false
 
 func update_screen_viewer_position():
-	var player_screen_pos = P.get_global_transform_with_canvas().origin
-	shader.set_shader_param("throw_pos", player_screen_pos)
+	var player_screen_position = P.get_global_transform_with_canvas().origin
+	shader.set_shader_param("throw_position", player_screen_position)
 
 ################################################################################
 
 func update_target(target : Vector2):
-	target_pos = target
+	target_position = target
 	if S.active_ball != null:
 		var ball = S.active_ball
 		target_vmin_2 = ball.gravity*(target.length() - target.y)
@@ -56,25 +56,24 @@ func can_shoot_to_target() -> bool:
 	return target_vmin_2 <= vmax_2
 
 func update_effective_cant_shoot(tau : float = 0.0, s = 0):
-	var theta = lerp_angle(-PI/2, target_pos.angle(), 0.5)
+	var theta = lerp_angle(-PI/2, target_position.angle(), 0.5)
 	effective_v_2 = vmax_2
 	effective_v = polar2cartesian(vmax, theta)
-	
+
 func update_effective_can_shoot(tau : float = 0.0, s = 0):
 	tau = clamp(tau, 0.0, 1.0)
 	s = sign(s)
 	var g = S.active_ball.gravity
 	var v_length = lerp(sqrt(target_vmin_2), vmax, tau)
 	effective_v_2 = v_length*v_length
-	
+
 	var D = INF # g/v^2
 	if effective_v_2 != 0.0 :
 		D = g/effective_v_2
-	var Q = D*target_pos
-	
+	var Q = D*target_position
+
 	# due to float arithmetic, we need to force the following value to be positive :
 	var temp = max(0.0, 1 - Q.x*Q.x + 2*Q.y)
-	
+
 	#print("%d %d", [g, temp, rad2deg(atan2(1 + s*sqrt(temp), Q.x))])
 	effective_v = polar2cartesian(v_length, -atan2(1 + s*sqrt(temp), Q.x))
-		

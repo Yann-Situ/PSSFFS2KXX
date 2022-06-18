@@ -43,7 +43,7 @@ func dunkjump_criteria_init():
 	dunkjump_criteria_bests.push_back(0.0) # best_y
 	dunkjump_criteria_bests.push_back(-2) # best_direction
 func dunkjump_criteria(q : Vector2, target_direction : int):
-	# q is basket_pos - player_pos
+	# q is basket_position - player_position
 	# target_direction is the favorite direction
 	if q.y >= 0.0:
 		return false
