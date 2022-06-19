@@ -96,14 +96,14 @@ func collision_effect(collider : Object, collider_velocity : Vector2,
 	return true
 
 func collision_handle(collision, delta):
-	const n = collision.normal
-	const t = n.tangent()
+	var n = collision.normal
+	var t = n.tangent()
 	#normal_colision = n
 	if collision.collider.is_in_group("physicbodies") :
-		const m2 = collision.collider.mass
-		const summass = m2 + mass
-		const dist_vect = global_position-collision.collider.get_global_position()
-		const speeddist = (linear_velocity - collision.collider_velocity).dot(dist_vect)
+		var m2 = collision.collider.mass
+		var summass = m2 + mass
+		var dist_vect = global_position-collision.collider.get_global_position()
+		var speeddist = (linear_velocity - collision.collider_velocity).dot(dist_vect)
 		linear_velocity -= 2*m2/summass*(speeddist/dist_vect.length_squared())*dist_vect
 		collision.collider.set_linear_velocity(collision.collider_velocity + 2*mass/summass*(speeddist/dist_vect.length_squared())*dist_vect)
 		#collision.collider.apply_impulse(2*m2*mass/summass*(speeddist/dist_vect.length_squared())*dist_vect)#doesn't work don't know Y
@@ -117,21 +117,21 @@ func collision_handle(collision, delta):
 		move_and_collide(collision.remainder.bounce(collision.normal),false)#may cause pb on corners ?
 
 	else:
-		const bounce_linear_velocity = bounce*linear_velocity.bounce(n)
-		const vel_n = n.dot(bounce_linear_velocity)
+		var bounce_linear_velocity = bounce*linear_velocity.bounce(n)
+		var vel_n = n.dot(bounce_linear_velocity)
 		if vel_n < 2.5*gravity*delta:
 			#TODO seuil à déterminer
 			#sliding
 			#color_colision = color1
-			const vel_t = lerp(t.dot(linear_velocity), 0, friction)
+			var vel_t = lerp(t.dot(linear_velocity), 0, friction)
 			linear_velocity = vel_t*t
-			const motion = collision.remainder.dot(t)*t
+			var motion = collision.remainder.dot(t)*t
 			move_and_collide(motion,false)
 			#linear_velocity = move_and_slide(linear_velocity,n,false,4,0.79,false)
 		else :
 			#bouncing
 			#color_colision = color2
-			const vel_t = lerp(t.dot(bounce_linear_velocity), 0, friction)
+			var vel_t = lerp(t.dot(bounce_linear_velocity), 0, friction)
 			linear_velocity = vel_n*n + vel_t*t
-			const motion = collision.remainder.bounce(n)
+			var motion = collision.remainder.bounce(n)
 			move_and_collide(motion,false)#may cause pb on corners ?

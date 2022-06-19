@@ -42,7 +42,7 @@ func _ready():
 				instance.position = map_to_world(cell+Vector2(1,1))
 
 				assert(tile_set.tile_get_tile_mode(tile_id) == 2)
-				const atlas_index : int = get_cell_autotile_coord(cell.x,cell.y).x
+				var atlas_index : int = get_cell_autotile_coord(cell.x,cell.y).x
 				#print("button : "+str(cell)+" --- "+str(atlas_index))
 				instance.activated = (atlas_index % 2 == 1)
 				instance.button_type = (atlas_index / 2)
@@ -51,14 +51,14 @@ func _ready():
 				instance.position = map_to_world(cell+Vector2(1,2))
 
 				assert(tile_set.tile_get_tile_mode(tile_id) == 2)
-				const atlas_index : int = get_cell_autotile_coord(cell.x,cell.y).x
+				var atlas_index : int = get_cell_autotile_coord(cell.x,cell.y).x
 				#print("door : "+str(cell)+" --- "+str(atlas_index))
 				instance.activated = (atlas_index % 2 == 1)
 				instance.visual_type = (atlas_index / 2)
 			_ :
 				pass
 		if instance != null:
-			const pose = get_angle(cell.x, cell.y)
+			var pose = get_angle(cell.x, cell.y)
 			if "flip_h" in instance:
 				instance.flip_h = pose[1]
 			if "global_rotation" in instance:

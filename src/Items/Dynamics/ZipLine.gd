@@ -90,12 +90,12 @@ func _ready():
 func _process(delta):
 	if not inside_bodies.empty():
 		linear_velocity.y += gravity * delta
-		const fi =(final_point-init_point).normalized()
-		const veldotfi = linear_velocity.dot(fi)
+		var fi =(final_point-init_point).normalized()
+		var veldotfi = linear_velocity.dot(fi)
 		var body = inside_bodies[0]
 		body.S.velocity = veldotfi*fi
 
-		const temp_u_offset = $Path2D/PathFollow2D.get_unit_offset()
+		var temp_u_offset = $Path2D/PathFollow2D.get_unit_offset()
 		$Path2D/PathFollow2D.set_offset($Path2D/PathFollow2D.get_offset()+veldotfi*delta)
 		#relative_position_offset = temp_u_offset*(final_point-init_point)+init_point
 		real_rope_offset = lerp(real_rope_offset, 4*temp_u_offset*(1-temp_u_offset)*rope_offset, 0.1)
@@ -136,8 +136,8 @@ func _on_PlayerDetector_body_exited(body):
 
 	if inside_bodies.empty() and body.S.velocity.y > 0 and $Timer.is_stopped() :
 
-		const bi =body.position-global_position-init_point
-		const fi =final_point-init_point
+		var bi =body.position-global_position-init_point
+		var fi =final_point-init_point
 		linear_velocity = body.S.velocity
 		inside_bodies.append(body)
 		$Path2D/PathFollow2D.set_offset(bi.dot(fi.normalized()))
