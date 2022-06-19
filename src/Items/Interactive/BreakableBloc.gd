@@ -1,3 +1,4 @@
+# A physical breakable bloc that can contain objectsin it.
 tool
 extends Node2D
 
@@ -14,9 +15,9 @@ func set_content(temp):
 	content = temp
 	if Engine.editor_hint:
 		if content != null and content.can_instance():
-			var inst = content.instance()
-			if inst.has_node("Sprite"):
-				var s = inst.get_node("Sprite").duplicate()
+			var instance = content.instance()
+			if instance.has_node("Sprite"):
+				var s = instance.get_node("Sprite").duplicate()
 				s.name = "ContentIcon"
 				s.scale = Vector2(0.5,0.5)
 				add_child(s)
@@ -25,7 +26,7 @@ func set_content(temp):
 				s.set_texture(DefaultContentImage)
 				s.name = "ContentIcon"
 				add_child(s)
-			inst.queue_free()
+			instance.queue_free()
 		elif self.has_node("ContentIcon"):
 			get_node("ContentIcon").queue_free()
 
@@ -51,9 +52,9 @@ func explode(momentum : Vector2):
 	$Sprite/AnimationPlayer.play("explode")
 
 	if content != null and content.can_instance():
-		var inst = content.instance()
-		if inst is Node2D:
-			inst.global_position = self.global_position
-		get_parent().add_child(inst) # TODO put level in global and add it to level
+		var instance = content.instance()
+		if instance is Node2D:
+			instance.global_position = self.global_position
+		get_parent().add_child(instance) # TODO put level in global and add it to level
 	yield(get_tree().create_timer($DebrisParticle.lifetime*1.5), "timeout")
 	queue_free()

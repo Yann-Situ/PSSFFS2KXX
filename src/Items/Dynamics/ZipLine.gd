@@ -1,3 +1,5 @@
+# Interactive Zipline node (with currently some implementation problem).
+# Two types of zipline are implemented : Rope catch and Handle catch.
 tool
 extends Node2D
 class_name ZipLine, "res://assets/art/icons/zipline.png"

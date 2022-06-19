@@ -1,3 +1,4 @@
+# A generic PhysicBody class that can handle collisions and impulse.
 extends KinematicBody2D
 class_name PhysicBody, "res://assets/art/icons/physicbody.png"
 

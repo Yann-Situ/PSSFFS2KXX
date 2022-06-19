@@ -1,3 +1,5 @@
+# A node that instantiate instances of interactive objects that are in the
+# front environment layer.
 extends TileMap
 
 # preloads :
