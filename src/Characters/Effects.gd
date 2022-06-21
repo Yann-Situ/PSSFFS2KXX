@@ -26,7 +26,7 @@ func ghost_start(duration, tick_delay):
 func ghost_stop(duration, tick_delay):
 	$GhostHandler.stop()
 
-func trail_start(duration, tick_delay):
-	$TrailHandler.start(duration, tick_delay)
-func trail_stop():
-	$TrailHandler.stop()
+#func trail_start(duration, tick_delay):
+#	$TrailHandler.start(duration, tick_delay)
+#func trail_stop():
+#	$TrailHandler.stop()

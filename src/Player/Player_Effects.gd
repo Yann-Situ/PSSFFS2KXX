@@ -4,7 +4,7 @@ onready var Player = get_parent()
 onready var S = Player.get_node("State")
 
 var ghost_anim = preload("res://src/Effects/GhostAnim.tscn")
-var distortion_scene = preload("res://src/Effects/Distortion.tscn") 
+var distortion_scene = preload("res://src/Effects/Distortion.tscn")
 var jump_particles1 = preload("res://src/Effects/JumpParticles1.tscn")
 
 var ghost_sprite
@@ -12,7 +12,7 @@ var ghost_sprite
 func _ready():
 	$GhostHandler.set_ghost_sprite(Player.get_node("Sprite"))
 	$GhostHandler.set_environment_node(Player.get_parent())
-	$TrailHandler.set_node_to_trail(Player)
+	#$TrailHandler.set_node_to_trail(Player)
 
 func process_effects():
 	pass
@@ -27,7 +27,7 @@ func dust_start():
 	$DustParticle.restart()
 func dust_stop():
 	$DustParticle.emitting = false
-	
+
 func cloud_start():
 	$CloudParticles.restart()
 func cloud_stop():
@@ -37,7 +37,7 @@ func grind_start():
 	$GrindParticles.restart()
 func grind_stop():
 	$GrindParticles.emitting = false
-	
+
 func ghost_start(duration, tick_delay, selfmodulate : Color = Color(1.2,1.8,2.2,0.39)):
 	$GhostHandler.self_modulate = selfmodulate
 	$GhostHandler.start(duration, tick_delay)
@@ -48,7 +48,7 @@ func trail_start(duration, tick_delay):
 	$TrailHandler.start(duration, tick_delay)
 func trail_stop():
 	$TrailHandler.stop()
-	
+
 func distortion_start(animation_name : String = "subtle", duration : float = 0.75):
 	var distortion = distortion_scene.instance()
 	Player.get_parent().add_child(distortion)

@@ -1,5 +1,8 @@
 extends Ball
 # Constant energy ball, with infinite bouncing and no gravity
+
+var trail_scene = preload("res://src/Effects/Trail.tscn")
+
 func _ready():
 	self.mass = 1.5
 	set_gravity_scale(0.0)
@@ -7,8 +10,6 @@ func _ready():
 	self.set_bounce(1.0)
 	#$Sprite.set_material(preload("res://assets/shader/material/hologram_shadermaterial.tres"))
 	#$Sprite.set_material($Sprite.get_material().duplicate())
-
-	$Effects/TrailHandler.set_node_to_trail(self)
 
 func power_p(player,delta):
 	pass
@@ -20,7 +21,11 @@ func power_jp(player,delta):
 		#$Tween.interpolate_property(self, "position", position, player.position, 0.1)
 		$Tween.follow_property(self, "position", position, player, "position", 0.1)
 		$Tween.start()
-		$Effects/TrailHandler.start(0.1,0.0015)
+		var trail_instance = trail_scene.instance()
+		trail_instance.lifetime = 5.0
+		trail_instance.node_to_trail = self
+		$Sprite.add_child(trail_instance)
+		#$Effects/TrailHandler.start(0.1,0.0015)
 		$Animation.play("teleport")
 	else :
 		player.position.y -= 100

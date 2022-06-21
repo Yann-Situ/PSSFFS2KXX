@@ -11,7 +11,6 @@ func _ready():
 	self.set_friction(0.05)
 	friction_save = friction
 	self.set_bounce(0.5)
-	$Effects/TrailHandler.set_node_to_trail(self)
 
 func collision_effect(collider, collider_velocity, collision_point, collision_normal):
 	destruction(0.01)

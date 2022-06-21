@@ -1,22 +1,37 @@
 extends Line2D
 
-var wildness := 15.0
-var min_spawn_distance := 5.0
-var gravity := Vector2.UP
-var trail_fade_time := 1.0
-var point_lifetime = 0.5
-var tick_age := 0.04
+export (float) var min_point_spawn_distance := 5.0#pix
+export (float) var wildness_amplitude := 200.0#pix/s
+export (float) var wildness_tick := 0.02#s
 
-var tick := 0.0
-var wild_speed := 0.1
+export (float) var trail_fade_time := 1.0#s
+export (float) var point_lifetime := 0.7#s
+export (float) var lifetime_tick := 0.04#s
+
+export (float) var addpoint_tick := 0.04#s
+export (float) var lifetime := 0.0#s (if <= 0.0s, then the trail stays until stop is called)
+
+var node_to_trail = null setget set_node_to_trail
+
+var wildness_tick_current := 0.0
+var lifetime_tick_current := 0.0
+var addpoint_tick_current := 0.0
 var point_age := [0.0]
-var stopped := false
+onready var wildness_amplitude_per_tick = wildness_amplitude*wildness_tick#pix
 
+var stopped := false
 onready var tween := $Decay
+
+func set_node_to_trail(node : Node2D):
+	node_to_trail = node
+	clear_points()
+	add_point(node_to_trail.global_position)
+	self.z_index = node_to_trail.z_index - 1
 
 func _ready():
 	set_as_toplevel(true)
-	clear_points()
+	if lifetime > 0.0:
+		$Timer.start(lifetime)
 
 func stop():
 	stopped = true
@@ -24,25 +39,50 @@ func stop():
 	tween.start()
 
 func _process(delta):
-	if tick > tick_age:
-		tick = 0
+	if lifetime_tick_current > lifetime_tick:
+		for p in range(get_point_count()):
+			point_age[p] += lifetime_tick_current
+		lifetime_tick_current = 0.0
 		while point_age.front() > point_lifetime:
 			point_age.pop_front()
 			remove_point(0)
-		for p in range(get_point_count()):
-			point_age[p] += delta
-			var rand_vector := Vector2( rand_range(-wild_speed, wild_speed), rand_range(-wild_speed, wild_speed) )
-			points[p] += gravity + ( rand_vector * wildness * point_age[p] )
 	else:
-		tick += delta
+		lifetime_tick_current += delta
+		
+	if wildness_tick_current > wildness_tick:
+		var n = floor(wildness_tick_current/wildness_tick)
+		wildness_tick_current = fmod(wildness_tick_current, wildness_tick)
+		for i in range(n):
+			for p in range(get_point_count()):
+				var rand_vector := Vector2(rand_range(-1.0, 1.0), rand_range(-1.0, 1.0))
+				points[p] += (rand_vector * wildness_amplitude_per_tick)
+	else:
+		wildness_tick_current += delta
+	
+	if node_to_trail != null:
+		if addpoint_tick_current > addpoint_tick:
+			var n = floor(addpoint_tick_current/wildness_tick)
+			addpoint_tick_current = fmod(addpoint_tick_current, addpoint_tick)
+			if n > 1:
+				var p0 = node_to_trail.global_position
+				if get_point_count() > 0:
+					p0 = points[get_point_count()-1] # last point
+				for i in range(n):
+					add_point(1.0/n * ((n-i-1)*p0 + (i+1)*node_to_trail.global_position))
+			else :
+				add_point(node_to_trail.global_position)
+		else:
+			addpoint_tick_current += delta
 
 
 func add_point(point_position:Vector2, at_position := -1):
-	if get_point_count() > 0 and point_position.distance_to( points[get_point_count()-1] ) < min_spawn_distance:
+	if get_point_count() > 0 and point_position.distance_to( points[get_point_count()-1] ) < min_point_spawn_distance:
 		return
 	point_age.append(0.0)
 	.add_point(point_position, at_position)
 
-
 func _on_Decay_tween_all_completed():
 	queue_free()
+
+func _on_Timer_timeout():
+	stop()

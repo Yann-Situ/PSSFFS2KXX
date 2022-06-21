@@ -15,7 +15,6 @@ func _ready():
 	self.set_friction(0.007)
 	friction_save = friction
 	self.set_bounce(0.0)
-	$Effects/TrailHandler.set_node_to_trail(self)
 
 
 func update_linear_velocity(delta):# apply gravity and forces

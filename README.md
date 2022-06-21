@@ -117,6 +117,7 @@ Popol Super Slam Fusion Full Speed 2KXX
 * [ ] If multiple explosion breaks the same bloc, it can spawn copies.
 * [ ] Using the power of a selected ball that died results in error. => Implement a die signal.
 * [ ] The game seems to crash when calling **change_holder(null)** with holder = null (in the reparent part) in `Ball.gd`
+* [ ] Multiple call in Area2D when reparenting node https://github.com/godotengine/godot/issues/14578. This results in crashing when ball enters pipe and player just release it near the pipe.
 
 ### Visual issues
 * [x] Jitter animation when passing from a transition_in to transition_out using **rooms**.
@@ -129,6 +130,7 @@ Popol Super Slam Fusion Full Speed 2KXX
 * [ ] **shooting** just before **landing** results in `floor_shoot` just after `aim_shoot` animation
 * [ ] There is some jitter animation when passing from a **dunkjump** state to a **grind** state.
 * [ ] There is some jitter animation when passing from a **dunk** state to a **hang** state.
+* [ ] To many trails results in crash.
 
 ### Potential Glitches
 * [ ] Pressing **jump** and **dunkdash** just before landing can result in small dunkdash/jump.
