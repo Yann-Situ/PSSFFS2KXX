@@ -7,7 +7,7 @@ var impact_particles = [preload("res://src/Effects/ImpactParticle1.tscn"),
 signal is_destroyed
 
 var selected = false # if selected by mouse
-var holder = null # if hold by player
+onready var holder = Global.get_current_room()
 onready var Highlighter = $Highlighter
 
 enum IMPACT_EFFECT {SPIKY, METALLIC}
@@ -27,7 +27,7 @@ func _ready():
 
 ###########################################################
 func reset_position():
-	if holder != null:
+	if holder != Global.get_current_room():
 		throw(Vector2.ZERO,Vector2.ZERO)
 	global_position = start_position
 
@@ -45,8 +45,13 @@ func collision_effect(collider, collider_velocity, collision_point, collision_no
 ###########################################################
 
 func change_holder(new_holder : Node):
-	if holder != null:
+	assert(new_holder != null)
+	if new_holder == holder:
+		print_debug(self.name+" reparent from "+holder.name+" to "+new_holder.name+" is ignored")
+		return
+	if holder != Global.get_current_room():
 		holder.free_ball(self)
+	print_debug(self.name+" reparent from "+holder.name+" to "+new_holder.name)
 	holder = new_holder
 	# WARNING : the game seems to crash when calling change_holder(null) with# holder = null on the following line
 	get_parent().remove_child(self)
@@ -54,14 +59,12 @@ func change_holder(new_holder : Node):
 	# every area/body_entered signal. This can lead to weird things when
 	# multiple nodes are retriggering their functions.
 	# see https://github.com/godotengine/godot/issues/14578
-	if new_holder == null:
-		Global.get_current_room().add_child(self)
-	else :
-		new_holder.add_child(self)
+	new_holder.add_child(self)
 
 func pickup(holder_node):
 	if not holder_node.is_in_group("holders"):
 		print("error["+name+"], holder_node is not in group `holders`.")
+	assert(holder_node != null)
 	change_holder(holder_node)
 	self.disable_physics()
 	self.z_index = holder_node.z_index+1
@@ -72,7 +75,7 @@ func throw(position, velo):
 	#$TrailHandler.start(2.0,0.1)
 	self.enable_physics()
 	var previous_holder = holder
-	change_holder(null)
+	change_holder(Global.get_current_room())
 	global_position = position
 	linear_velocity = velo
 	self.z_index = Global.z_indices["ball_0"]
@@ -81,8 +84,8 @@ func throw(position, velo):
 func destruction(delay : float = 0.0):
 	if delay > 0.0:
 		yield(get_tree().create_timer(delay), "timeout")
-	if holder != null:
-		change_holder(null)
+	if holder != Global.get_current_room():
+		change_holder(Global.get_current_room())
 	$Animation.play("destruction") # will call _queue_free
 	#TODO need to handle the selector of the player
 	self.disable_physics()
@@ -118,12 +121,12 @@ func apply_damage(damage : float, duration : float = 0.0):
 ################################################################################
 
 func power_p(player,delta):
-	if holder == null :
+	if holder == Global.get_current_room() :
 		add_force("attract", player.attract_force*(player.position - position).normalized())
 
 func power_jp(player,delta):
 	pass
 
 func power_jr(player,delta):
-	if holder == null :
+	if holder == Global.get_current_room() :
 		remove_force("attract")

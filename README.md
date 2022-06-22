@@ -123,6 +123,7 @@ Popol Super Slam Fusion Full Speed 2KXX
 * [x] Jitter animation when passing from a transition_in to transition_out using **rooms**.
 * [x] **ColorRect** for shockwave effect stay in (0,0) global coordinates...
 * [x] **ColorRect** for shockwave effect combine with `canvas_modulate` results in weird color rectangle.
+* [x] To many trails results in crash.
 * [ ] The `shoot_previewer` shows a trajectory slightly above the real one.
 * [ ] `Z_as_relative` doesn't work through script... https://github.com/godotengine/godot/issues/45416
 * [ ] **Bubble/Zap ball teleportation** trailhandler can act very weirdly if used quickly repeatly.
@@ -130,7 +131,7 @@ Popol Super Slam Fusion Full Speed 2KXX
 * [ ] **shooting** just before **landing** results in `floor_shoot` just after `aim_shoot` animation
 * [ ] There is some jitter animation when passing from a **dunkjump** state to a **grind** state.
 * [ ] There is some jitter animation when passing from a **dunk** state to a **hang** state.
-* [ ] To many trails results in crash.
+* [ ] **Trails** timer are reset when **Ball** get reparented...
 
 ### Potential Glitches
 * [ ] Pressing **jump** and **dunkdash** just before landing can result in small dunkdash/jump.

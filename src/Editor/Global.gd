@@ -1,12 +1,22 @@
 tool
 extends Node
 
+export (int) var max_trail_points = 5000
+
 var playing = true
 var list_of_physical_nodes = []
 var mouse_ball = null #pointer to the last selectable item that called mouse_entered
 var camera = null
 
 var current_room = null setget set_current_room, get_current_room
+var _nb_trail_points = 0
+
+func can_add_trail_point() -> bool:
+	return _nb_trail_points < max_trail_points
+func add_trail_point() -> void:
+	_nb_trail_points += 1
+func remove_trail_point() -> void:
+		_nb_trail_points -= 1
 
 func set_current_room(room : Room):
 	current_room = room
@@ -44,7 +54,7 @@ var z_indices = {\
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	pass
-		
+
 func toggle_playing():
 	playing = !playing
 	if playing :
