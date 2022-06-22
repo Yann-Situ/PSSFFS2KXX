@@ -40,6 +40,7 @@ func browse_rooms(room_name : String):
 		# TODO ugly but we need to call _ready on room in order to get the portals...
 		# Maybe find a system with resources ? Or store a meta room as resource, with its information
 		# or maybe create an _init function that create the portal_list ?
+		set_current_room_instance(room)
 		self.add_child(room)
 		var portal_nodes = room.get_portals().values()
 		self.remove_child(room)

@@ -20,6 +20,7 @@ func _ready():
 	self.z_index = Global.z_indices["ball_0"]
 	add_to_group("balls")
 	add_to_group("damageables")
+	assert(holder != null)
 
 #func _draw():
 #	# draw collision normal
