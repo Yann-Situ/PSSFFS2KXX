@@ -10,6 +10,7 @@ export (float, 0.001, 1.0) var point_lifetime_tick := 0.04#s
 
 export (float, 0.001, 1.0) var addpoint_tick := 0.04#s
 export (float) var lifetime := 0.0#s (if <= 0.0s, then the trail stays until stop is called)
+export (bool) var autostart = true setget set_autostart
 
 var node_to_trail = null setget set_node_to_trail
 
@@ -20,6 +21,11 @@ var point_age := [0.0]
 onready var wildness_amplitude_per_tick = wildness_amplitude*wildness_tick#pix
 
 var stopped := false
+
+func set_autostart(b : bool) -> void:
+	autostart = b
+	$Timer.set_autostart(autostart)
+	set_process(autostart)
 
 func set_node_to_trail(node : Node2D):
 	node_to_trail = node
@@ -33,12 +39,16 @@ func _ready():
 func start():
 	if lifetime > 0.0:
 		$Timer.start(lifetime)
-		print(lifetime)
+	set_process(true)
 
 func stop():
 	stopped = true
 	$Decay.interpolate_property(self, "modulate:a", 1.0, 0.0, trail_fade_time)
 	$Decay.start()
+	print(name + "WHAAAT")
+	#get_tree().create_timer(trail_fade_time)
+	#call_deferred("queue_free")
+	#print(name + "QUEUE")
 
 func _process(delta):
 	if point_lifetime_tick_current > point_lifetime_tick:
@@ -88,10 +98,10 @@ func _add_point(point_position:Vector2, at_position := -1) -> bool:
 	Global.add_trail_point()
 	return true
 
+# Warning : if the trail node has been reparented during the decay tween, this
+# function might never be called...
 func _on_Decay_tween_all_completed():
-	print("QUEUE")
 	queue_free()
 
 func _on_Timer_timeout():
-	print("WHAAAT")
 	stop()

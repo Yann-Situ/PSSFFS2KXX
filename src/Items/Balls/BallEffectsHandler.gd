@@ -6,6 +6,7 @@ export(Color, RGBA) var col3 setget set_col3
 var gradient_destruction := Gradient.new()
 var gradient_construction := Gradient.new()
 var gradient_dunk := Gradient.new()
+var gradient_main := Gradient.new()
 
 func set_col1(c : Color):
 	col1 = c
@@ -32,7 +33,11 @@ func update_colors():
 	0.8: Color(col3.r,col3.g,col3.b,0.35*col3.a),
 	1.0: Color(0.0,0.0,0.0,0.0)
 	}
-	
+	var gradient_data_main := {
+	0.0: col1,
+	0.5: col2,
+	1.0: col3
+	}
 	var destruction_offsets = gradient_data_destruction.keys()
 	gradient_destruction.offsets = destruction_offsets
 	gradient_destruction.colors = gradient_data_destruction.values()
@@ -43,6 +48,9 @@ func update_colors():
 	
 	gradient_dunk.offsets = gradient_data_dunk.keys()
 	gradient_dunk.colors = gradient_data_dunk.values()
+	
+	gradient_main.offsets = gradient_data_main.keys()
+	gradient_main.colors = gradient_data_main.values()
 	
 func _ready():
 	$Reconstruction.color_ramp = gradient_construction

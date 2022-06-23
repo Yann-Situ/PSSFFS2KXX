@@ -38,8 +38,12 @@ func grind_start():
 func grind_stop():
 	$GrindParticles.emitting = false
 
-func ghost_start(duration, tick_delay, selfmodulate : Color = Color(1.2,1.8,2.2,0.39)):
-	$GhostHandler.self_modulate = selfmodulate
+func ghost_start(duration, tick_delay, selfmodulate : Color = Color(1.2,1.8,2.2,0.39), gradient : Gradient = null):
+	$GhostHandler.use_gradient = gradient != null
+	if gradient == null:
+		$GhostHandler.self_modulate = selfmodulate
+	else :
+		$GhostHandler.gradient = gradient
 	$GhostHandler.start(duration, tick_delay)
 func ghost_stop(duration, tick_delay):
 	$GhostHandler.stop()

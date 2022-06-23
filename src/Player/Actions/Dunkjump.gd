@@ -25,7 +25,14 @@ func move(delta):
 	else:
 		direction = 1
 	
-	P.PlayerEffects.ghost_start(0.8,0.08, ghost_modulate)
+	if S.has_ball:
+		var grad : Gradient = S.active_ball.get_main_gradient()
+		grad.set_offset(0, 0.0)
+		grad.set_offset(1, 0.2)
+		grad.set_offset(2, 0.4)
+		P.PlayerEffects.ghost_start(0.8,0.08, Color.white, grad)
+	else:
+		P.PlayerEffects.ghost_start(0.8,0.08, ghost_modulate)
 # called by animation
 func move_jump():
 	P.PlayerEffects.jump_start()

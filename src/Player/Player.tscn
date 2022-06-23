@@ -60,7 +60,7 @@ radius = 30.0
 [sub_resource type="ShaderMaterial" id=4]
 shader = ExtResource( 42 )
 shader_param/parameter = 300.0
-shader_param/throw_pos = Vector2( 400, 224 )
+shader_param/throw_position = null
 shader_param/tolerance = 15.0
 
 [sub_resource type="Animation" id=5]
@@ -1104,71 +1104,71 @@ tracks/3/keys = {
 [sub_resource type="CanvasItemMaterial" id=35]
 blend_mode = 1
 
-[sub_resource type="AnimationNodeStateMachineTransition" id=65]
+[sub_resource type="AnimationNodeStateMachineTransition" id=36]
 advance_condition = "is_not_cancelable"
 
-[sub_resource type="AnimationNodeStateMachineTransition" id=66]
+[sub_resource type="AnimationNodeStateMachineTransition" id=37]
 advance_condition = "is_cancelable"
 
-[sub_resource type="AnimationNodeStateMachine" id=36]
+[sub_resource type="AnimationNodeStateMachine" id=38]
 states/action/node = ExtResource( 45 )
 states/action/position = Vector2( 325, 124 )
 states/stance/node = ExtResource( 46 )
 states/stance/position = Vector2( 325, 251 )
-transitions = [ "stance", "action", SubResource( 65 ), "action", "stance", SubResource( 66 ) ]
+transitions = [ "stance", "action", SubResource( 36 ), "action", "stance", SubResource( 37 ) ]
 start_node = "stance"
 
-[sub_resource type="AnimationNodeBlendTree" id=37]
+[sub_resource type="AnimationNodeBlendTree" id=39]
 graph_offset = Vector2( 684, 177 )
-nodes/cancelable/node = SubResource( 36 )
+nodes/cancelable/node = SubResource( 38 )
 nodes/cancelable/position = Vector2( 980, 320 )
 nodes/output/position = Vector2( 1240, 340 )
 node_connections = [ "output", 0, "cancelable" ]
 
-[sub_resource type="AnimationNodeStateMachinePlayback" id=38]
+[sub_resource type="AnimationNodeStateMachinePlayback" id=40]
 
-[sub_resource type="AnimationNodeStateMachinePlayback" id=67]
+[sub_resource type="AnimationNodeStateMachinePlayback" id=41]
 
-[sub_resource type="AnimationNodeStateMachinePlayback" id=68]
+[sub_resource type="AnimationNodeStateMachinePlayback" id=42]
 
-[sub_resource type="AnimationNodeStateMachinePlayback" id=69]
+[sub_resource type="AnimationNodeStateMachinePlayback" id=43]
 
-[sub_resource type="AnimationNodeStateMachinePlayback" id=70]
+[sub_resource type="AnimationNodeStateMachinePlayback" id=44]
 
-[sub_resource type="AnimationNodeStateMachinePlayback" id=71]
+[sub_resource type="AnimationNodeStateMachinePlayback" id=45]
 
-[sub_resource type="AnimationNodeStateMachinePlayback" id=72]
+[sub_resource type="AnimationNodeStateMachinePlayback" id=46]
 
-[sub_resource type="AnimationNodeStateMachinePlayback" id=73]
+[sub_resource type="AnimationNodeStateMachinePlayback" id=47]
 
-[sub_resource type="CanvasItemMaterial" id=54]
+[sub_resource type="CanvasItemMaterial" id=48]
 particles_animation = true
 particles_anim_h_frames = 4
 particles_anim_v_frames = 1
 particles_anim_loop = false
 
-[sub_resource type="Gradient" id=55]
+[sub_resource type="Gradient" id=49]
 offsets = PoolRealArray( 0.00858369, 0.424893, 0.824034, 1 )
 colors = PoolColorArray( 0, 0, 0, 0, 0.582031, 0.316025, 0.316025, 1, 1, 0.803528, 0.660156, 1, 2, 1, 2, 1 )
 
-[sub_resource type="Curve" id=56]
+[sub_resource type="Curve" id=50]
 _data = [ Vector2( 0, 1 ), 0.0, -1.46686, 0, 0, Vector2( 1, 0.481818 ), 0.95065, 0.0, 0, 0 ]
 
-[sub_resource type="CanvasItemMaterial" id=57]
+[sub_resource type="CanvasItemMaterial" id=51]
 particles_animation = true
 particles_anim_h_frames = 10
 particles_anim_v_frames = 1
 particles_anim_loop = true
 
-[sub_resource type="Gradient" id=58]
+[sub_resource type="Gradient" id=52]
 offsets = PoolRealArray( 0, 0.55, 1 )
 colors = PoolColorArray( 1, 1, 1, 0.913725, 0.90625, 0.90625, 0.90625, 0.745098, 1, 1, 1, 0 )
 
-[sub_resource type="GradientTexture" id=59]
-gradient = SubResource( 58 )
+[sub_resource type="GradientTexture" id=53]
+gradient = SubResource( 52 )
 width = 20
 
-[sub_resource type="ParticlesMaterial" id=60]
+[sub_resource type="ParticlesMaterial" id=54]
 emission_shape = 2
 emission_box_extents = Vector3( 14, 12, 1 )
 flag_disable_z = true
@@ -1184,24 +1184,24 @@ angle = 1.0
 angle_random = 1.0
 scale = 0.6
 scale_random = 1.0
-color_ramp = SubResource( 59 )
+color_ramp = SubResource( 53 )
 anim_speed = 1.0
 
-[sub_resource type="StreamTexture" id=61]
+[sub_resource type="StreamTexture" id=55]
 load_path = "res://.import/dust_0.png-aa7e79fd880c78618fa1d60a7c8d332a.stex"
 
-[sub_resource type="CanvasItemMaterial" id=62]
+[sub_resource type="CanvasItemMaterial" id=56]
 resource_local_to_scene = true
 particles_animation = true
 particles_anim_h_frames = 6
 particles_anim_v_frames = 1
 particles_anim_loop = true
 
-[sub_resource type="CapsuleShape2D" id=63]
+[sub_resource type="CapsuleShape2D" id=57]
 radius = 14.0
 height = 28.0
 
-[sub_resource type="CapsuleShape2D" id=64]
+[sub_resource type="CapsuleShape2D" id=58]
 radius = 5.0
 height = 42.0
 
@@ -1401,7 +1401,7 @@ texture = ExtResource( 2 )
 offset = Vector2( 0.5, 0 )
 hframes = 16
 vframes = 20
-frame = 199
+frame = 201
 __meta__ = {
 "_edit_group_": true,
 "_edit_lock_": true
@@ -1451,30 +1451,30 @@ region_enabled = true
 region_rect = Rect2( 0, 96, 32, 32 )
 
 [node name="AnimationTree" type="AnimationTree" parent="Sprite"]
-tree_root = SubResource( 37 )
+tree_root = SubResource( 39 )
 anim_player = NodePath("../Player_Animation")
 active = true
-parameters/cancelable/playback = SubResource( 38 )
+parameters/cancelable/playback = SubResource( 40 )
 parameters/cancelable/conditions/is_cancelable = false
 parameters/cancelable/conditions/is_not_cancelable = false
-parameters/cancelable/action/playback = SubResource( 67 )
+parameters/cancelable/action/playback = SubResource( 41 )
 parameters/cancelable/action/conditions/is_dunkdashing = false
 parameters/cancelable/action/conditions/is_dunking = false
 parameters/cancelable/action/conditions/is_dunkjumping = false
 parameters/cancelable/action/conditions/is_not_dunkdashing = false
 parameters/cancelable/action/conditions/is_not_dunkjumping = false
 parameters/cancelable/action/conditions/is_shooting = false
-parameters/cancelable/action/dunkjump/playback = SubResource( 68 )
+parameters/cancelable/action/dunkjump/playback = SubResource( 42 )
 parameters/cancelable/action/dunkjump/conditions/is_dunkjumphalfturning = false
-parameters/cancelable/action/shoot/playback = SubResource( 69 )
+parameters/cancelable/action/shoot/playback = SubResource( 43 )
 parameters/cancelable/action/shoot/conditions/is_onfloor = false
-parameters/cancelable/stance/air/playback = SubResource( 70 )
+parameters/cancelable/stance/air/playback = SubResource( 44 )
 parameters/cancelable/stance/air/conditions/is_jumping = false
 parameters/cancelable/stance/air/conditions/is_not_onwall = false
 parameters/cancelable/stance/air/conditions/is_onwall = false
-parameters/cancelable/stance/air/fall/playback = SubResource( 71 )
+parameters/cancelable/stance/air/fall/playback = SubResource( 45 )
 parameters/cancelable/stance/grind/blend_position = 0
-parameters/cancelable/stance/ground/playback = SubResource( 72 )
+parameters/cancelable/stance/ground/playback = SubResource( 46 )
 parameters/cancelable/stance/ground/conditions/is_crouching = false
 parameters/cancelable/stance/ground/conditions/is_halfturning = false
 parameters/cancelable/stance/ground/conditions/is_idle = false
@@ -1482,7 +1482,7 @@ parameters/cancelable/stance/ground/conditions/is_landing = false
 parameters/cancelable/stance/ground/conditions/is_landrolling = false
 parameters/cancelable/stance/ground/conditions/is_standing = false
 parameters/cancelable/stance/ground/conditions/is_walking = false
-parameters/cancelable/stance/ground/stand_idle/playback = SubResource( 73 )
+parameters/cancelable/stance/ground/stand_idle/playback = SubResource( 47 )
 parameters/cancelable/stance/stancetransition/current = 0
 script = ExtResource( 8 )
 __meta__ = {
@@ -1497,7 +1497,7 @@ __meta__ = {
 
 [node name="DustParticle" parent="PlayerEffects" instance=ExtResource( 12 )]
 modulate = Color( 0.85098, 0.85098, 0.85098, 1 )
-material = SubResource( 54 )
+material = SubResource( 48 )
 position = Vector2( 0, 28 )
 amount = 9
 lifetime = 0.4
@@ -1517,23 +1517,23 @@ anim_offset_random = 1.0
 
 [node name="TrailHandler" parent="PlayerEffects" instance=ExtResource( 25 )]
 wildness = 50.0
-gradient_col = SubResource( 55 )
-width_curve = SubResource( 56 )
+gradient_col = SubResource( 49 )
+width_curve = SubResource( 50 )
 texture = ExtResource( 26 )
 
 [node name="CloudParticles" parent="PlayerEffects" instance=ExtResource( 43 )]
-material = SubResource( 57 )
+material = SubResource( 51 )
 position = Vector2( 0, 32 )
 z_index = -1
 amount = 4
 lifetime = 0.65
 explosiveness = 0.9
 local_coords = false
-process_material = SubResource( 60 )
-texture = SubResource( 61 )
+process_material = SubResource( 54 )
+texture = SubResource( 55 )
 
 [node name="GrindParticles" parent="PlayerEffects" instance=ExtResource( 27 )]
-material = SubResource( 62 )
+material = SubResource( 56 )
 position = Vector2( 0, 16 )
 
 [node name="BallHandler" type="Area2D" parent="."]
@@ -1543,7 +1543,7 @@ script = ExtResource( 6 )
 [node name="CollisionShape2D" type="CollisionShape2D" parent="BallHandler"]
 visible = false
 position = Vector2( 0, 5 )
-shape = SubResource( 63 )
+shape = SubResource( 57 )
 
 [node name="HasBallPosition" type="Node2D" parent="BallHandler"]
 position = Vector2( -7, -6 )
@@ -1675,7 +1675,7 @@ script = ExtResource( 37 )
 [node name="CollisionShape2D" type="CollisionShape2D" parent="LifeHandler/HitBox"]
 modulate = Color( 1, 0, 0, 1 )
 position = Vector2( 0, 6 )
-shape = SubResource( 64 )
+shape = SubResource( 58 )
 
 [connection signal="body_entered" from="BallHandler" to="BallHandler" method="_on_Ball_Handler_body_entered"]
 [connection signal="tween_completed" from="Camera/Tween" to="Camera" method="_on_Tween_tween_completed"]

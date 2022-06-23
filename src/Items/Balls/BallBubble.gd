@@ -22,17 +22,17 @@ func power_jp(player,delta):
 		$Tween.follow_property(self, "position", position, player, "position", 0.1)
 		$Tween.start()
 		var trail_instance = trail_scene.instance()
-		trail_instance.lifetime = 0.2
+		trail_instance.lifetime = 0.1
 		trail_instance.wildness_amplitude = 200.0
 		trail_instance.wildness_tick = 0.02
-		trail_instance.trail_fade_time = 0.5
-		trail_instance.point_lifetime = 0.4
+		trail_instance.trail_fade_time = 0.4
+		trail_instance.point_lifetime = 0.3
 		trail_instance.addpoint_tick = 0.005
 		trail_instance.width = 8.0
-		trail_instance.gradient = $Effects/Reconstruction.color_ramp
+		trail_instance.gradient = get_main_gradient()
+		trail_instance.autostart = true
 		trail_instance.node_to_trail = self
 		$Sprite.add_child(trail_instance)
-		trail_instance.start()
 		#$Effects/TrailHandler.start(0.1,0.0015)
 		$Animation.play("teleport")
 	else :
