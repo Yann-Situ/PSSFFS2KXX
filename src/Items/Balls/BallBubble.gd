@@ -23,17 +23,19 @@ func power_jp(player,delta):
 		$Tween.start()
 		var trail_instance = trail_scene.instance()
 		trail_instance.lifetime = 0.1
-		trail_instance.wildness_amplitude = 200.0
+		trail_instance.wildness_amplitude = 250.0
 		trail_instance.wildness_tick = 0.02
-		trail_instance.trail_fade_time = 0.4
-		trail_instance.point_lifetime = 0.3
+		trail_instance.trail_fade_time = 0.1
+		trail_instance.point_lifetime = 0.25
 		trail_instance.addpoint_tick = 0.005
 		trail_instance.width = 8.0
 		trail_instance.gradient = get_main_gradient()
 		trail_instance.autostart = true
 		trail_instance.node_to_trail = self
-		$Sprite.add_child(trail_instance)
-		#$Effects/TrailHandler.start(0.1,0.0015)
+		Global.get_current_room().add_child(trail_instance)
+		# Warning: We're not calling $Sprite.add_child(trail_instance) because
+		# the ball can be reparented during the tween of the trail, which
+		# results in canceling the tween. (see https://www.reddit.com/r/godot/comments/vjkaun/reparenting_node_without_removing_it_from_tree/)
 		$Animation.play("teleport")
 	else :
 		player.position.y -= 100

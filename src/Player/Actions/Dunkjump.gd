@@ -24,21 +24,23 @@ func move(delta):
 		direction = -1
 	else:
 		direction = 1
-	
+
 	if S.has_ball:
-		var grad : Gradient = S.active_ball.get_main_gradient()
-		grad.set_offset(0, 0.0)
-		grad.set_offset(1, 0.2)
-		grad.set_offset(2, 0.4)
-		P.PlayerEffects.ghost_start(0.8,0.08, Color.white, grad)
+		var grad : Gradient = S.active_ball.get_main_gradient().duplicate()
+		for i in range(grad.get_point_count()):
+			grad.set_offset(i, 0.5*grad.get_offset(i))
+			var col = grad.get_color(i)
+			col.a *= 0.7
+			grad.set_color(i, col)
+		P.PlayerEffects.ghost_start(1.0,0.1, Color.white, grad)
 	else:
-		P.PlayerEffects.ghost_start(0.8,0.08, ghost_modulate)
+		P.PlayerEffects.ghost_start(1.0,0.1, ghost_modulate)
 # called by animation
 func move_jump():
 	P.PlayerEffects.jump_start()
 	if S.dunkjump_basket != null:
 		basket = S.dunkjump_basket
-	
+
 	var q = basket.get_closest_point(P.global_position) - P.global_position
 	var B = P.dunkjump_speed * q.x / q.y
 	var C = -P.gravity.y * 0.5 * q.x*q.x/q.y

@@ -4,7 +4,7 @@ export (float) var min_point_spawn_distance := 5.0#pix
 export (float) var wildness_amplitude := 200.0#pix/s
 export (float, 0.001, 1.0) var wildness_tick := 0.02#s
 
-export (float) var trail_fade_time := 1.0#s
+export (float) var trail_fade_time := 5.0#s
 export (float) var point_lifetime := 0.7#s
 export (float, 0.001, 1.0) var point_lifetime_tick := 0.04#s
 
@@ -35,7 +35,7 @@ func set_node_to_trail(node : Node2D):
 
 func _ready():
 	set_as_toplevel(true)
-	
+
 func start():
 	if lifetime > 0.0:
 		$Timer.start(lifetime)
@@ -45,10 +45,8 @@ func stop():
 	stopped = true
 	$Decay.interpolate_property(self, "modulate:a", 1.0, 0.0, trail_fade_time)
 	$Decay.start()
-	print(name + "WHAAAT")
 	#get_tree().create_timer(trail_fade_time)
 	#call_deferred("queue_free")
-	#print(name + "QUEUE")
 
 func _process(delta):
 	if point_lifetime_tick_current > point_lifetime_tick:
@@ -99,7 +97,7 @@ func _add_point(point_position:Vector2, at_position := -1) -> bool:
 	return true
 
 # Warning : if the trail node has been reparented during the decay tween, this
-# function might never be called...
+# function might never be called because Tween._exit_tree calls stop_all().
 func _on_Decay_tween_all_completed():
 	queue_free()
 

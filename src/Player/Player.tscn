@@ -798,7 +798,7 @@ tracks/1/keys = {
 "times": PoolRealArray( 0 ),
 "transitions": PoolRealArray( 1 ),
 "update": 0,
-"values": [ Vector2( 0, -5 ) ]
+"values": [ Vector2( -8, 20 ) ]
 }
 tracks/2/type = "method"
 tracks/2/path = NodePath("../Actions/Dunk")
@@ -1225,7 +1225,6 @@ walk_accel = 210.0
 visible = false
 is_landing = true
 is_halfturning = true
-is_shooting = true
 
 [node name="Collision" type="CollisionShape2D" parent="."]
 position = Vector2( 0, 6 )
@@ -1401,7 +1400,7 @@ texture = ExtResource( 2 )
 offset = Vector2( 0.5, 0 )
 hframes = 16
 vframes = 20
-frame = 201
+frame = 199
 __meta__ = {
 "_edit_group_": true,
 "_edit_lock_": true

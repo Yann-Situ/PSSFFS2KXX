@@ -124,6 +124,7 @@ Popol Super Slam Fusion Full Speed 2KXX
 * [x] **ColorRect** for shockwave effect stay in (0,0) global coordinates...
 * [x] **ColorRect** for shockwave effect combine with `canvas_modulate` results in weird color rectangle.
 * [x] To many trails results in crash.
+* [x] **Trails** _on_Decay_tween_all_completed never called when **Ball** get reparented during the decay. [workaround by adding child to current_room instead of ball. see https://www.reddit.com/r/godot/comments/vjkaun/reparenting_node_without_removing_it_from_tree/]
 * [ ] The `shoot_previewer` shows a trajectory slightly above the real one.
 * [ ] `Z_as_relative` doesn't work through script... https://github.com/godotengine/godot/issues/45416
 * [ ] **Bubble/Zap ball teleportation** trailhandler can act very weirdly if used quickly repeatly.
@@ -131,7 +132,7 @@ Popol Super Slam Fusion Full Speed 2KXX
 * [ ] **shooting** just before **landing** results in `floor_shoot` just after `aim_shoot` animation
 * [ ] There is some jitter animation when passing from a **dunkjump** state to a **grind** state.
 * [ ] There is some jitter animation when passing from a **dunk** state to a **hang** state.
-* [ ] **Trails** _on_Decay_tween_all_completed never called when **Ball** get reparented during the decay.
+* [ ] **Trail** lifetime and point_lifetime not set correctly when trail for **bubble_ball**.
 
 ### Potential Glitches
 * [ ] Pressing **jump** and **dunkdash** just before landing can result in small dunkdash/jump.
@@ -139,6 +140,7 @@ Popol Super Slam Fusion Full Speed 2KXX
 * [ ] **Dunkdashing** just before entering a **rail** can result in a dash boost grind.
 * [ ] **Dunkjump** through a **one way platform** resets the dash.
 * [ ] Up-**Dunkdash** just after a **Jump** or a **ShockJump** results in high **Dunkdash**.
+* [ ] **Dunkjump** with pressing jump_button while pre-dunkjumping can result in high or low dunkjump.
 
 ### Godot Issues
 * in `Ball.gd` function `change_holder` : issue related to https://github.com/godotengine/godot/issues/14578 and https://github.com/godotengine/godot/issues/34207

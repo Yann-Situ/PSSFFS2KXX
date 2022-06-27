@@ -9,6 +9,7 @@ _data = [ Vector2( 0, 0 ), 0.0, 0.0, 0, 0, Vector2( 0.536885, 0.672727 ), 1.3144
 [sub_resource type="Gradient" id=2]
 
 [node name="Trail" type="Line2D"]
+z_index = 130
 z_as_relative = false
 width = 20.0
 width_curve = SubResource( 1 )

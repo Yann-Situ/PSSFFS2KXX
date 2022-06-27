@@ -22,6 +22,11 @@ func _ready():
 	add_to_group("damageables")
 	assert(holder != null)
 
+# func _enter_tree():
+# 	print(name+" _enter_tree")
+# func _exit_tree():
+# 	print(name+" _exit_tree")
+
 func get_main_color() -> Color:
 	return $Effects.col2
 
