@@ -16,7 +16,7 @@ radius = 16.0
 
 [sub_resource type="Animation" id=3]
 resource_name = "destruction"
-length = 0.5
+length = 0.9
 tracks/0/type = "method"
 tracks/0/path = NodePath("Effects/Destruction")
 tracks/0/interp = 1
@@ -62,7 +62,7 @@ tracks/3/loop_wrap = true
 tracks/3/imported = false
 tracks/3/enabled = true
 tracks/3/keys = {
-"times": PoolRealArray( 0.5 ),
+"times": PoolRealArray( 0.9 ),
 "transitions": PoolRealArray( 1 ),
 "values": [ {
 "args": [  ],
@@ -153,7 +153,7 @@ colors = PoolColorArray( 1, 0, 0.580392, 0, 0, 0, 0, 0.258741, 0.535156, 0.53515
 load_path = "res://.import/round.png-173de128c3ea8d3b72416bcc5f522248.stex"
 
 [sub_resource type="Curve" id=9]
-_data = [ Vector2( 0, 1 ), 0.0, 0.215584, 0, 0, Vector2( 0.581967, 1 ), -1.3517, -1.3517, 0, 0, Vector2( 1, 0.238636 ), -0.570101, 0.0, 0, 0 ]
+_data = [ Vector2( 0, 1 ), 0.0, 0.215584, 0, 0, Vector2( 0.786325, 1 ), -1.57233, -1.57233, 0, 0, Vector2( 1, 0.4 ), -2.73506, 0.0, 0, 0 ]
 
 [sub_resource type="Gradient" id=10]
 resource_local_to_scene = true
@@ -242,8 +242,9 @@ __meta__ = {
 [node name="Destruction" type="CPUParticles2D" parent="Effects"]
 emitting = false
 amount = 24
+lifetime = 1.2
 one_shot = true
-speed_scale = 1.5
+speed_scale = 1.4
 explosiveness = 0.8
 lifetime_randomness = 0.29
 fract_delta = false
@@ -256,7 +257,7 @@ spread = 180.0
 gravity = Vector2( 0, 0 )
 orbit_velocity = -0.5
 radial_accel = 250.0
-damping = 100.0
+damping = 53.06
 scale_amount = 0.06
 scale_amount_curve = SubResource( 9 )
 color_ramp = SubResource( 10 )

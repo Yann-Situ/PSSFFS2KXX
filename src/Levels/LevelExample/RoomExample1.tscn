@@ -53,6 +53,9 @@ adjustment_contrast = 1.08
 adjustment_saturation = 1.01
 
 [node name="RoomExample1" instance=ExtResource( 1 )]
+limit_left = -432
+limit_top = -640
+limit_right = 1024
 
 [node name="Portal1" parent="Portals" index="0" instance=ExtResource( 2 )]
 position = Vector2( -32, -32 )
@@ -79,12 +82,13 @@ modulate = Color( 0.529412, 0.505882, 0.443137, 1 )
 [node name="Fog" type="ColorRect" parent="ParallaxForeground/ParallaxLayer5" index="1"]
 material = SubResource( 5 )
 margin_left = -984.0
-margin_top = -760.0
+margin_top = -851.0
 margin_right = 1192.0
-margin_bottom = 480.0
+margin_bottom = 389.0
 rect_pivot_offset = Vector2( 696, 272 )
 mouse_filter = 2
 __meta__ = {
+"_edit_lock_": true,
 "_edit_use_anchors_": false
 }
 

@@ -37,9 +37,9 @@ func _process(delta):
 		if path_follow.get_unit_offset() == 1.0:
 			body.throw(path_follow.global_position,
 						path_follow.transform.x * speed_at_exit)
-			# note that throw also call self.free_ball and remove it from the 
+			# note that throw also call self.free_ball and remove it from the
 			# inside_bodies list
-						
+
 			# transform.x is the direction (vec2D) of the pathfollow
 			j += 1 # because we deleted a node in the list we're browsing
 
@@ -62,26 +62,28 @@ func update_entrance_rotation():
 func _on_Area_body_entered(ball):
 	if self.activated and ball.is_in_group("balls") and \
 		(pipe_type == PIPE_TYPE.TO_EXIT or pipe_type == PIPE_TYPE.BOTH_SIDES):
+		if ball.is_reparenting():
+			print(" - pipe "+ball.name+" is ignored because reparenting")
+			return # Workaround because of https://www.reddit.com/r/godot/comments/vjkaun/reparenting_node_without_removing_it_from_tree/
+
 		for body in inside_bodies:
 			if body == ball:
-				print("ball already in pipe")
-				return 1
+				print(ball.name+" already in pipe")
+				return
 
 		var new_path_follow : PathFollow2D = PathFollow2D.new()
 		new_path_follow.offset = 0
 		new_path_follow.loop = false
 		self.add_child(new_path_follow)
-		# WARNING : due to the issue in Ball.gd func change_holder, this part can freeze.
-		# inside_bodies.push_back need to be called before ball.pickup because 
-		# ball.pickup reparent the ball which cause _on_Area_body_entered to be
-		# called again on the same ball.
+		# WARNING : due to the issue in Ball.gd func change_holder, this part can freeze/crash.
+		# https://www.reddit.com/r/godot/comments/vjkaun/reparenting_node_without_removing_it_from_tree/
 		inside_bodies.push_back(ball)
 		ball.pickup(self)
 		ball.z_index = z_index-1
 		path_follows.push_back(new_path_follow)
 
 		print(ball.name+" enter the pipe: "+str(inside_bodies.size())+" bodies")
-	
+
 
 ################################################################################
 # For `holders` group
@@ -100,7 +102,7 @@ func remove_ball(i : int):
 	inside_bodies.remove(i)
 	path_follows[i].queue_free()
 	path_follows.remove(i)
-	
+
 ################################################################################
 
 func on_enable():
@@ -114,4 +116,3 @@ func on_enable():
 func on_disable():
 	if is_inside_tree():
 		update_entrance_sprite()
-

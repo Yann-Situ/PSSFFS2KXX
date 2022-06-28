@@ -20,7 +20,7 @@ radius = 6.0
 
 [sub_resource type="Animation" id=3]
 resource_name = "destruction"
-length = 0.5
+length = 0.9
 tracks/0/type = "method"
 tracks/0/path = NodePath("Effects/Destruction")
 tracks/0/interp = 1
@@ -66,7 +66,7 @@ tracks/3/loop_wrap = true
 tracks/3/imported = false
 tracks/3/enabled = true
 tracks/3/keys = {
-"times": PoolRealArray( 0.5 ),
+"times": PoolRealArray( 0.9 ),
 "transitions": PoolRealArray( 1 ),
 "values": [ {
 "args": [  ],

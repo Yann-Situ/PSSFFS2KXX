@@ -462,7 +462,7 @@ position = Vector2( 600, 536 )
 
 [node name="BallShock" parent="Environment/Balls" instance=ExtResource( 44 )]
 light_mask = 1
-position = Vector2( 352, 336 )
+position = Vector2( 928, 360 )
 
 [node name="Baskets" type="Node2D" parent="Environment"]
 
@@ -650,7 +650,7 @@ walk_return_thresh_instant_speed = 120.0
 walk_accel = 170.0
 
 [node name="PlayerPosition" parent="." instance=ExtResource( 45 )]
-position = Vector2( 560, 512 )
+position = Vector2( 840, 352 )
 
 [connection signal="activated_change_signal" from="Environment/Activables/Button0" to="Environment/Activables/Spawner" method="set_activated"]
 [connection signal="activated_change_signal" from="Environment/Activables/Button1" to="Environment/Activables/Spawner2" method="set_activated"]

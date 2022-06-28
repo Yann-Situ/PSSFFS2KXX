@@ -20,18 +20,18 @@ func set_col3(c : Color):
 
 func update_colors():	
 	var gradient_data_destruction := {
-	0.0: Color(1.0,1.0,1.0,0.0),
-	0.25: col1,
+	0.0: Color(col3.r,col3.g,col3.b,0.0),
+	0.25: col3,
 	0.5: col2,
-	0.75: Color(col3.r,col3.g,col3.b,0.7*col3.a),
-	1.0: Color(0.2,0.2,0.2,0.0)
+	0.75: Color(col1.r,col1.g,col1.b,0.8*col1.a),
+	1.0: Color(col1.r,col1.g,col1.b,0.0)
 	}
 	var gradient_data_dunk := {
-	0.0: Color(1.0,1.0,1.0,0.0),
+	0.0: Color(col1.r,col1.g,col1.b,0.0),
 	0.2: col1,
 	0.5: Color(col2.r,col2.g,col2.b,0.68*col2.a),
 	0.8: Color(col3.r,col3.g,col3.b,0.35*col3.a),
-	1.0: Color(0.0,0.0,0.0,0.0)
+	1.0: Color(col3.r,col3.g,col3.b,0.0)
 	}
 	var gradient_data_main := {
 	0.0: col1,
@@ -42,7 +42,7 @@ func update_colors():
 	gradient_destruction.offsets = destruction_offsets
 	gradient_destruction.colors = gradient_data_destruction.values()
 	
-	destruction_offsets.invert()
+	#destruction_offsets.invert()
 	gradient_construction.offsets = destruction_offsets
 	gradient_construction.colors = gradient_data_destruction.values()
 	

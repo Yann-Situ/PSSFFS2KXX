@@ -24,9 +24,12 @@ func _ready():
 func _on_Ball_Handler_body_entered(body):
 	#print(body.name+" entering "+Character.name+" ballhandler area")
 	if Character.physics_enabled and body.is_in_group("balls"):
+		if body.is_reparenting():
+			print(" - ballhandler "+body.name+" is ignored because reparenting")
+			return # Workaround because of https://www.reddit.com/r/godot/comments/vjkaun/reparenting_node_without_removing_it_from_tree/
 		if body == S.released_ball:
 			S.released_ball = null
-			print("but "+body.name+" is ignored")
+			print(" - but "+body.name+" is ignored")
 			return
 		if S.has_ball or S.is_shooting :
 			pass

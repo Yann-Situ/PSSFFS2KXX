@@ -1,19 +1,20 @@
 extends PhysicBody
 class_name Ball, "res://assets/art/ball/ball_test.png"
 
-var impact_particles = [preload("res://src/Effects/ImpactParticle1.tscn"),
-	preload("res://src/Effects/ImpactParticle0.tscn")]
-
 signal is_destroyed
-
-var selected = false # if selected by mouse
-onready var holder = Global.get_current_room()
-onready var Highlighter = $Highlighter
 
 enum IMPACT_EFFECT {SPIKY, METALLIC}
 export (IMPACT_EFFECT) var impact_effect = IMPACT_EFFECT.SPIKY
 export (float) var dust_threshold = 300
 export (float) var impact_threshold = 500
+
+var selected = false # if selected by mouse
+var impact_particles = [preload("res://src/Effects/ImpactParticle1.tscn"),
+	preload("res://src/Effects/ImpactParticle0.tscn")]
+var _is_reparenting = false setget ,is_reparenting
+
+onready var holder = Global.get_current_room()
+onready var Highlighter = $Highlighter
 
 func _ready():
 	self.z_as_relative = false
@@ -26,6 +27,10 @@ func _ready():
 # 	print(name+" _enter_tree")
 # func _exit_tree():
 # 	print(name+" _exit_tree")
+
+# Warning: workaround because of https://www.reddit.com/r/godot/comments/vjkaun/reparenting_node_without_removing_it_from_tree/
+func is_reparenting():
+	return _is_reparenting
 
 func get_main_color() -> Color:
 	return $Effects.col2
@@ -65,12 +70,14 @@ func change_holder(new_holder : Node):
 	print_debug(self.name+" reparent from "+holder.name+" to "+new_holder.name)
 	holder = new_holder
 	# WARNING : the game seems to crash when calling change_holder(null) with# holder = null on the following line
+	_is_reparenting = true
 	get_parent().remove_child(self)
 	# Warning : the following part reparent the node and will trigger again
 	# every area/body_entered signal. This can lead to weird things when
 	# multiple nodes are retriggering their functions.
 	# see https://github.com/godotengine/godot/issues/14578
 	new_holder.add_child(self)
+	_is_reparenting = false
 
 func pickup(holder_node):
 	if not holder_node.is_in_group("holders"):
@@ -97,15 +104,14 @@ func destruction(delay : float = 0.0):
 		yield(get_tree().create_timer(delay), "timeout")
 	if holder != Global.get_current_room():
 		change_holder(Global.get_current_room())
-	$Animation.play("destruction") # will call _queue_free
 	#TODO need to handle the selector of the player
 	self.disable_physics()
 	$Highlighter.toggle_selection(false)
-
+	$Animation.play("destruction") # will call _queue_free
+	
 func _queue_free():
-	print("DESTROYED")
+	print(self.name+" is DESTROYED")
 	emit_signal("is_destroyed")
-	print("DEAD")
 	queue_free()
 
 ################################################################################

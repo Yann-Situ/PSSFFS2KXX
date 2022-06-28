@@ -77,8 +77,8 @@ Popol Super Slam Fusion Full Speed 2KXX
     - Implement character holder group with `free_character` and `pickup_character` methods.
 * [x] Characters can leave **rail** if Player press **crouch** on it.
     - Implement the `riding` and `hanging` states.
-* [ ] **Dunkjumping** while only moving with floor adherence a bit far from basket results in missing the basket.
 * [x] **dunking** can result in `S.selected_basket.dunk()` called on `null` instance (basket is not selected anymore)
+* [ ] **Dunkjumping** while only moving with floor adherence a bit far from basket results in missing the basket.
 * [ ] **release** ball when **aiming** results in error.
 * [ ] It is possible to **dunk** through walls. It can result in dunkjump particles (+ghost) emmiting (dont know why).
 * [ ] Hard to reproduce (see video) : **dunkjump** on **jumper** can result in `Nan` camera position teleportation. (because to low to mathematically dunkjump => negative value ? division by 0.0 ?)
@@ -90,9 +90,7 @@ Popol Super Slam Fusion Full Speed 2KXX
 ### Dynamic items
 * [ ] **Zipline** drop inside collision places results in stucked player.
 * [ ] Get out from **zipline** just after passing over a **Jumper** results in sliding (like on ice) because **can_go_timer** was changed.
-* [ ] Stuck colliding on a **rail** can result in building speed.
-* [ ] At the connection between a **rail** and a solid block, if the character is falling such that they will wallslide on the block if there wasn't a rail, and is falling fast enough, the character will normally grind but with 0 initial speed.
-    - At the connection between a **rail** and stairs, if the character is falling such that they will go on the slope if there wasn't a rail, and is falling fast enough, the character will normally grind but with 0 speed in the direction down the stairs.
+* [ ] (?) Stuck colliding on a **rail** can result in building speed.
 * [ ] Entering **Pipe** at perfect frame when disabling the **Pipe** can result in a disabled ball floating in the air. -> don't stop the tween to enter the pipe when disabling the pipe.
 
 
@@ -107,8 +105,10 @@ Popol Super Slam Fusion Full Speed 2KXX
 
 ### Other
 * [x] Spawner rotation position is weird.
-* [x] **portals** : multiple portal_transition due to a late reset position, when changing rooms... see https://godotengine.org/qa/9761/area2d-triggered-more-time-when-player-node-previous-scene and https://github.com/godotengine/godot/issues/14578
+* [x] **portals** : multiple portal_transition due to a late reset position, when changing rooms... see this [issue](https://godotengine.org/qa/9761/area2d-triggered-more-time-when-player-node-previous-scene) and this [issue](https://github.com/godotengine/godot/issues/14578).
 * [x] Changing **room** holding a **ball** results in leaving the ball in the previous room.
+* [x] The game seems to crash when calling **change_holder(null)** with holder = null (in the reparent part) in `Ball.gd`. (see this [issue](https://github.com/godotengine/godot/issues/14578)). See [my workaround](https://www.reddit.com/r/godot/comments/vjkaun/reparenting_node_without_removing_it_from_tree/).
+* [x] Multiple call in Area2D when reparenting node (see this [issue](https://github.com/godotengine/godot/issues/14578)). This results in crashing when ball enters pipe and player just release it near the pipe. See [my workaround](https://www.reddit.com/r/godot/comments/vjkaun/reparenting_node_without_removing_it_from_tree/).
 * [ ] Energy loss of `constant_energy_balls`.
 * [ ] Lag if too much balls : make a spawner limit and link the dispawn of a ball to the spawner to increase the spawn count.
 * [ ] I need to adapt the boum delay: i.e apply_impulse instantly on colliding object and a bit after on far objects. nedd a method call_after_a_delay(apply_impulse)
@@ -116,19 +116,17 @@ Popol Super Slam Fusion Full Speed 2KXX
 * [ ] On **baskets**, a ball that bounces on the ring can do multiple goals.
 * [ ] If multiple explosion breaks the same bloc, it can spawn copies.
 * [ ] Using the power of a selected ball that died results in error. => Implement a die signal.
-* [ ] The game seems to crash when calling **change_holder(null)** with holder = null (in the reparent part) in `Ball.gd`
-* [ ] Multiple call in Area2D when reparenting node https://github.com/godotengine/godot/issues/14578. This results in crashing when ball enters pipe and player just release it near the pipe.
 
 ### Visual issues
 * [x] Jitter animation when passing from a transition_in to transition_out using **rooms**.
 * [x] **ColorRect** for shockwave effect stay in (0,0) global coordinates...
 * [x] **ColorRect** for shockwave effect combine with `canvas_modulate` results in weird color rectangle.
 * [x] To many trails results in crash.
-* [x] **Trails** _on_Decay_tween_all_completed never called when **Ball** get reparented during the decay. [workaround by adding child to current_room instead of ball. see https://www.reddit.com/r/godot/comments/vjkaun/reparenting_node_without_removing_it_from_tree/]
+* [x] **Trails** _on_Decay_tween_all_completed never called when **Ball** get reparented during the decay. Workaround by adding child to current_room instead of ball.
+* [x] **Bubble/Zap ball teleportation** trailhandler can act very weirdly if used quickly repeatly.
 * [ ] The `shoot_previewer` shows a trajectory slightly above the real one.
-* [ ] `Z_as_relative` doesn't work through script... https://github.com/godotengine/godot/issues/45416
-* [ ] **Bubble/Zap ball teleportation** trailhandler can act very weirdly if used quickly repeatly.
-* [ ] **Effects** that are displayed outside the window are displayed after when they reenter the window.
+* [ ] `Z_as_relative` doesn't work through script... see this [issue](https://github.com/godotengine/godot/issues/45416).
+* [ ] **Effects** **Particles** that are displayed outside the window are displayed after when they reenter the window.
 * [ ] **shooting** just before **landing** results in `floor_shoot` just after `aim_shoot` animation
 * [ ] There is some jitter animation when passing from a **dunkjump** state to a **grind** state.
 * [ ] There is some jitter animation when passing from a **dunk** state to a **hang** state.
@@ -141,9 +139,11 @@ Popol Super Slam Fusion Full Speed 2KXX
 * [ ] **Dunkjump** through a **one way platform** resets the dash.
 * [ ] Up-**Dunkdash** just after a **Jump** or a **ShockJump** results in high **Dunkdash**.
 * [ ] **Dunkjump** with pressing jump_button while pre-dunkjumping can result in high or low dunkjump.
+* [ ] At the connection between a **rail** and a solid block, if the character is falling such that they will wallslide on the block if there wasn't a rail, and is falling fast enough, the character will normally grind but with 0 initial speed.
+    - At the connection between a **rail** and stairs, if the character is falling such that they will go on the slope if there wasn't a rail, and is falling fast enough, the character will normally grind but with 0 speed in the direction down the stairs.
 
 ### Godot Issues
-* in `Ball.gd` function `change_holder` : issue related to https://github.com/godotengine/godot/issues/14578 and https://github.com/godotengine/godot/issues/34207
+* in `Ball.gd` function `change_holder` : issue related to https://github.com/godotengine/godot/issues/14578 and https://github.com/godotengine/godot/issues/34207. See [my workaround](https://www.reddit.com/r/godot/comments/vjkaun/reparenting_node_without_removing_it_from_tree/).
 
 ## Groups
 

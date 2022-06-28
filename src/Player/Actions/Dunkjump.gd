@@ -32,9 +32,9 @@ func move(delta):
 			var col = grad.get_color(i)
 			col.a *= 0.7
 			grad.set_color(i, col)
-		P.PlayerEffects.ghost_start(1.0,0.1, Color.white, grad)
+		P.PlayerEffects.ghost_start(0.8,0.1, Color.white, grad)
 	else:
-		P.PlayerEffects.ghost_start(1.0,0.1, ghost_modulate)
+		P.PlayerEffects.ghost_start(0.8,0.1, ghost_modulate)
 # called by animation
 func move_jump():
 	P.PlayerEffects.jump_start()
