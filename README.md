@@ -144,38 +144,3 @@ Popol Super Slam Fusion Full Speed 2KXX
 
 ### Godot Issues
 * in `Ball.gd` function `change_holder` : issue related to https://github.com/godotengine/godot/issues/14578 and https://github.com/godotengine/godot/issues/34207. See [my workaround](https://www.reddit.com/r/godot/comments/vjkaun/reparenting_node_without_removing_it_from_tree/).
-
-## Groups
-
-### physicbodies
-Must inherit from `physicbodies.gd`.
-
-### activables
-Must inherit from `activable.gd`.
-
-### breakables
-Must have an `apply_explosion(momentum : Vector2)` function that handles explosion. It should returns whether the body has explode (if the collision box has been modified to null or layers to 0).
-It's either an **area** or a **body** whose parent is the interesting node.
- For a base you can use `Breakable.gd`.
-
-### electrics
-Must have an `apply_shock(momentum : Vector2)` function that handles electric shockwave.
-It's either an **area** or a **body** but its parent must be the interesting node, which is often in group **activables**
- For a base you can use `Electric.gd`.
-
-### damageables
-Must have a `apply_damage(damage : float, duration : float = 0.0)`.
-It's either an **area** or a **body** but its parent must be the interesting node. For a base you can use `Damageable.gd`.
-
-### balls
-Must inherit from `ball.gd`.
-
-### holders
-Must have a `free_ball(ball : node)` method.
-They can act and hold balls (example: player or pipeball).
-
-### characters
-Must have a `get_in(new_holder : Node)` and a `get_out(global_pos : Vector2, velo : Vector2)` function.
-
-### characterholders
-Must have a `free_character(character : node)` method.
