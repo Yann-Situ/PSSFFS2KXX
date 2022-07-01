@@ -42,10 +42,16 @@ func set_has_ball_position():
 
 func pickup_ball(ball):
 	print(Player.name+" pickup "+ball.name)
+	print(str(Player.collision_layer)+" "+str(Player.collision_layer_save))
 	S.has_ball = true
 	S.active_ball = ball
-	Player.set_collision_layer_bit(10, true) #ball_wall collision layer
-	Player.set_collision_mask_bit(10, true) #ball_wall collision layer
+	if Player.physics_enabled:
+		print("Phys")
+		Player.set_collision_layer_bit(10, true) #ball_wall collision layer
+		Player.set_collision_mask_bit(10, true) #ball_wall collision layer
+	Player.collision_layer_save |= 1<<10
+	Player.collision_mask_save |= 1<<10
+	print(str(Player.collision_layer)+" "+str(Player.collision_layer_save))
 	ball.pickup(Player)
 
 	#TEMPORARY CONTROL NODE
@@ -61,6 +67,28 @@ func pickup_ball(ball):
 	ui.newline()
 	ui.add_text("Ball posit : "+str(ball.position - Player.position))
 
+
+func free_ball(ball): # set out  active_ball and has_ball
+	# called by ball when thrown or deleted
+	print(Player.name+" free_ball")
+	print(str(Player.collision_layer)+" "+str(Player.collision_layer_save))
+	if S.has_ball and S.active_ball == ball:
+		S.active_ball = null
+		S.has_ball = false
+		if Player.physics_enabled:
+			Player.set_collision_layer_bit(10, false)
+			Player.set_collision_mask_bit(10, false) #ball_wall collision layer
+		Player.collision_layer_save &= ~(1<<10)
+		Player.collision_mask_save &= ~(1<<10)
+		
+		print(str(Player.collision_layer)+" "+str(Player.collision_layer_save))
+		print(Player.name+" free_ball")
+	elif S.has_ball :
+		print("error, "+Player.name+" free_ball on other ball")
+	else :
+		print("error, "+Player.name+" free_ball but doesn't have ball")
+
+
 func throw_ball(throw_global_position, speed):
 	if S.has_ball and S.active_ball != null :
 		print("throw "+S.active_ball.name)
@@ -72,21 +100,6 @@ func throw_ball(throw_global_position, speed):
 
 func shoot_ball(): # called by animation
 	throw_ball(get_throw_position(), Player.ShootPredictor.shoot_vector_save + 0.5*S.velocity)
-
-
-func free_ball(ball): # set out  active_ball and has_ball
-	# called by ball when thrown or deleted
-	if S.has_ball and S.active_ball == ball:
-		S.active_ball = null
-		S.has_ball = false
-		Player.set_collision_layer_bit(10, false)
-		Player.set_collision_mask_bit(10, false) #ball_wall collision layer
-		print(Player.name+" free_ball")
-	elif S.has_ball :
-		print("error, "+Player.name+" free_ball on other ball")
-	else :
-		print("error, "+Player.name+" free_ball but doesn't have ball")
-
 
 func _physics_process(delta):
 	if S.has_ball and S.active_ball != null :

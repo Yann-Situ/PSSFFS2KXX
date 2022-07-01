@@ -131,6 +131,7 @@ Popol Super Slam Fusion Full Speed 2KXX
 * [ ] There is some jitter animation when passing from a **dunkjump** state to a **grind** state.
 * [ ] There is some jitter animation when passing from a **dunk** state to a **hang** state.
 * [ ] **Trail** lifetime and point_lifetime not set correctly when trail for **bubble_ball**.
+* [ ] **Player** catching ball while inside **BallWall** results in stuck player.
 
 ### Potential Glitches
 * [ ] Pressing **jump** and **dunkdash** just before landing can result in small dunkdash/jump.

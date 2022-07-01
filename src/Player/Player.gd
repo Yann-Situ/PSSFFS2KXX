@@ -57,6 +57,7 @@ onready var foot_vector = Vector2(0,32)
 onready var based_gravity = Vector2(0.0,ProjectSettings.get_setting("physics/2d/default_gravity")) # pix/s²
 onready var invmass = 1.0/4.0
 onready var collision_layer_save = 1
+onready var collision_mask_save = 514
 
 var character_holder = null
 
@@ -69,12 +70,15 @@ func disable_physics():
 	physics_enabled = false
 	collision_layer_save = collision_layer
 	collision_layer = 0
+	collision_mask_save = collision_mask
+	collision_mask = 0
 	S.velocity *= 0
 	#S.applied_force *= 0
 
 func enable_physics():
 	physics_enabled = true
 	collision_layer = collision_layer_save
+	collision_mask = collision_mask_save
 
 func set_start_position(position):
 	start_position = position
