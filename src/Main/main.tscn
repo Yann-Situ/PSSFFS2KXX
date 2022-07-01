@@ -411,6 +411,7 @@ initial_velocity = Vector2( 0, -900 )
 [node name="BallFire" parent="Environment/Balls" instance=ExtResource( 11 )]
 light_mask = 1
 position = Vector2( 1104, 568 )
+collision_mask = 6
 physics_enabled = false
 
 [node name="Ball" parent="Environment/Balls" instance=ExtResource( 5 )]
@@ -419,50 +420,62 @@ position = Vector2( 1856, 336 )
 [node name="BallBubble" parent="Environment/Balls" instance=ExtResource( 26 )]
 light_mask = 1
 position = Vector2( 728, 528 )
+collision_mask = 6
 
 [node name="BallBubble2" parent="Environment/Balls" instance=ExtResource( 26 )]
 light_mask = 1
 position = Vector2( 688, 48 )
+collision_mask = 6
 
 [node name="BallBouncy" parent="Environment/Balls" instance=ExtResource( 25 )]
 light_mask = 1
 position = Vector2( 1312, 432 )
+collision_mask = 6
 
 [node name="BallBoum" parent="Environment/Balls" instance=ExtResource( 3 )]
 light_mask = 1
 position = Vector2( 2184, 520 )
+collision_mask = 6
 
 [node name="BallBoum2" parent="Environment/Balls" instance=ExtResource( 3 )]
 light_mask = 1
 position = Vector2( -192, 504 )
+collision_mask = 6
 
 [node name="BallBoum3" parent="Environment/Balls" instance=ExtResource( 3 )]
 light_mask = 1
 position = Vector2( 296, 696 )
+collision_mask = 6
 
 [node name="BallRolling" parent="Environment/Balls" instance=ExtResource( 27 )]
 light_mask = 1
 position = Vector2( 1168, 520 )
+collision_mask = 6
 
 [node name="BallMetal" parent="Environment/Balls" instance=ExtResource( 28 )]
 light_mask = 1
 position = Vector2( 1536, 520 )
+collision_mask = 6
 
 [node name="BallMetal2" parent="Environment/Balls" instance=ExtResource( 28 )]
 light_mask = 1
 position = Vector2( 2456, 536 )
+collision_mask = 6
 
 [node name="BallMetal3" parent="Environment/Balls" instance=ExtResource( 28 )]
 light_mask = 1
 position = Vector2( -576, -616 )
+collision_mask = 6
 
 [node name="BallLight" parent="Environment/Balls" instance=ExtResource( 24 )]
 light_mask = 1
 position = Vector2( 600, 536 )
+collision_mask = 6
 
 [node name="BallShock" parent="Environment/Balls" instance=ExtResource( 44 )]
 light_mask = 1
 position = Vector2( 928, 360 )
+collision_mask = 6
 
 [node name="Baskets" type="Node2D" parent="Environment"]
 

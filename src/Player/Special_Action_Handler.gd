@@ -183,15 +183,15 @@ func can_dunk():
 
 #############################
 
-#func _draw():
-#	for r in rays:
-#		if r.result:#r.is_colliding():
-#			draw_circle(r.result.position-P.position, 2, color)
-#			draw_line(r.position, r.position+r.cast_to, color)
-
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-#func _process(delta):
-#	update()
+# func _draw():
+# 	for r in rays:
+# 		if r.result:#r.is_colliding():
+# 			draw_circle(r.result.position-P.position, 2, color)
+# 			draw_line(r.position, r.position+r.cast_to, color)
+#
+# # Called every frame. 'delta' is the elapsed time since the previous frame.
+# func _process(delta):
+# 	update()
 
 #############################
 func set_flip_h(b):

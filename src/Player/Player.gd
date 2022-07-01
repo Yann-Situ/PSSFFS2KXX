@@ -67,6 +67,7 @@ var snap_vector = Vector2.ZERO
 
 func disable_physics():
 	physics_enabled = false
+	collision_layer_save = collision_layer
 	collision_layer = 0
 	S.velocity *= 0
 	#S.applied_force *= 0

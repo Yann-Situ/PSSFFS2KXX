@@ -237,6 +237,8 @@ ui_restart={
 2d_physics/layer_7="breakable"
 2d_physics/layer_8="electric"
 2d_physics/layer_9="damageable"
+2d_physics/layer_10="player_wall"
+2d_physics/layer_11="ball_wall"
 
 [physics]
 

@@ -55,7 +55,7 @@ radius = 224.0
 
 [sub_resource type="CircleShape2D" id=3]
 resource_local_to_scene = true
-radius = 30.0
+radius = 34.0
 
 [sub_resource type="ShaderMaterial" id=4]
 shader = ExtResource( 42 )
@@ -1210,7 +1210,7 @@ light_mask = 4
 position = Vector2( -15, 0 )
 z_index = 100
 z_as_relative = false
-collision_mask = 2
+collision_mask = 514
 script = ExtResource( 1 )
 air_friction = 0.1
 landing_velocity_thresh = 350.0
@@ -1227,76 +1227,77 @@ is_landing = true
 is_halfturning = true
 
 [node name="Collision" type="CollisionShape2D" parent="."]
+visible = false
 position = Vector2( 0, 6 )
 shape = SubResource( 1 )
 
 [node name="Actions" type="Node2D" parent="."]
 
 [node name="SpecialActionHandler" type="Node2D" parent="Actions"]
-visible = false
 script = ExtResource( 9 )
 
 [node name="Ray_fwd_up" type="RayCast2D" parent="Actions/SpecialActionHandler"]
 position = Vector2( 0, -16 )
 cast_to = Vector2( 9, 0 )
-collision_mask = 2
+collision_mask = 514
 script = ExtResource( 10 )
 
 [node name="Ray_fwd_down" type="RayCast2D" parent="Actions/SpecialActionHandler"]
 position = Vector2( 0, 32 )
 cast_to = Vector2( 9, 0 )
-collision_mask = 2
+collision_mask = 514
 script = ExtResource( 10 )
 
 [node name="Ray_fwd_up_f" type="RayCast2D" parent="Actions/SpecialActionHandler"]
 position = Vector2( 0, -16 )
 cast_to = Vector2( -9, 0 )
-collision_mask = 2
+collision_mask = 514
 script = ExtResource( 10 )
 
 [node name="Ray_fwd_down_f" type="RayCast2D" parent="Actions/SpecialActionHandler"]
 position = Vector2( 0, 32 )
 cast_to = Vector2( -9, 0 )
-collision_mask = 2
+collision_mask = 514
 script = ExtResource( 10 )
 
 [node name="Ray_up_fwd" type="RayCast2D" parent="Actions/SpecialActionHandler"]
 position = Vector2( 8, 0 )
 cast_to = Vector2( 0, -20 )
-collision_mask = 2
+collision_mask = 514
 script = ExtResource( 10 )
 
 [node name="Ray_up_bwd" type="RayCast2D" parent="Actions/SpecialActionHandler"]
 position = Vector2( -8, 0 )
 cast_to = Vector2( 0, -20 )
-collision_mask = 2
+collision_mask = 514
 script = ExtResource( 10 )
 
 [node name="Ray_down_fwd" type="RayCast2D" parent="Actions/SpecialActionHandler"]
-position = Vector2( 8, 0 )
-cast_to = Vector2( 0, 33 )
-collision_mask = 2
+position = Vector2( 8, 28 )
+cast_to = Vector2( 0, 5 )
+collision_mask = 514
 script = ExtResource( 10 )
 
 [node name="Ray_down_bwd" type="RayCast2D" parent="Actions/SpecialActionHandler"]
-position = Vector2( -8, 0 )
-cast_to = Vector2( 0, 33 )
-collision_mask = 2
+position = Vector2( -8, 28 )
+cast_to = Vector2( 0, 5 )
+collision_mask = 514
 script = ExtResource( 10 )
 
 [node name="Ray_slope_fwd" type="RayCast2D" parent="Actions/SpecialActionHandler"]
 position = Vector2( 8, 32 )
 cast_to = Vector2( 0, 17 )
-collision_mask = 2
+collision_mask = 514
 script = ExtResource( 10 )
 
 [node name="Ray_slope_bwd" type="RayCast2D" parent="Actions/SpecialActionHandler"]
 position = Vector2( -8, 32 )
 cast_to = Vector2( 0, 17 )
-collision_mask = 2
+collision_mask = 514
 script = ExtResource( 10 )
 
 [node name="dunkjump_area" type="Area2D" parent="Actions/SpecialActionHandler"]
+visible = false
 collision_layer = 0
 collision_mask = 32
 
@@ -1305,6 +1306,7 @@ modulate = Color( 0.945098, 1, 0, 1 )
 shape = SubResource( 2 )
 
 [node name="dunk_area" type="Area2D" parent="Actions/SpecialActionHandler"]
+visible = false
 collision_layer = 0
 collision_mask = 32
 
@@ -1400,7 +1402,7 @@ texture = ExtResource( 2 )
 offset = Vector2( 0.5, 0 )
 hframes = 16
 vframes = 20
-frame = 199
+frame = 197
 __meta__ = {
 "_edit_group_": true,
 "_edit_lock_": true
@@ -1545,7 +1547,7 @@ position = Vector2( 0, 5 )
 shape = SubResource( 57 )
 
 [node name="HasBallPosition" type="Node2D" parent="BallHandler"]
-position = Vector2( -7, -6 )
+position = Vector2( 5.00001, 7.00001 )
 __meta__ = {
 "_edit_group_": true
 }

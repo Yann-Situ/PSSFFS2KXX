@@ -10,6 +10,8 @@ var jumper = preload("res://src/Items/Dynamics/Jumper.tscn")
 var door = preload("res://src/Items/Interactive/Door.tscn")
 var breakableBloc = preload("res://src/Items/Interactive/BreakableBloc.tscn")
 var spikes = preload("res://src/Items/Interactive/Spikes.tscn")
+var playerWall = preload("res://src/Platform/PlayerWall.tscn")
+var ballWall = preload("res://src/Platform/BallWall.tscn")
 
 var o = Vector2(1,1)
 
@@ -38,6 +40,12 @@ func _ready():
 				instance.position = map_to_world(cell+Vector2(1,1))
 			"spikes" :
 				instance = spikes.instance()
+				instance.position = map_to_world(cell)+Vector2(8,8)
+			"player_wall" :
+				instance = playerWall.instance()
+				instance.position = map_to_world(cell)+Vector2(8,8)
+			"ball_wall" :
+				instance = ballWall.instance()
 				instance.position = map_to_world(cell)+Vector2(8,8)
 			"buttons0" :
 				instance = button.instance()

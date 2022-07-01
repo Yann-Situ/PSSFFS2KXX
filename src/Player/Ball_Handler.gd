@@ -44,6 +44,8 @@ func pickup_ball(ball):
 	print(Player.name+" pickup "+ball.name)
 	S.has_ball = true
 	S.active_ball = ball
+	Player.set_collision_layer_bit(10, true) #ball_wall collision layer
+	Player.set_collision_mask_bit(10, true) #ball_wall collision layer
 	ball.pickup(Player)
 
 	#TEMPORARY CONTROL NODE
@@ -64,7 +66,7 @@ func throw_ball(throw_global_position, speed):
 		print("throw "+S.active_ball.name)
 		S.released_ball = S.active_ball
 		S.active_ball.throw(throw_global_position, speed)
-		# Ugly but it works :
+		# WARNING: Ugly but it works :
 		yield(get_tree().create_timer(0.1), "timeout")
 		S.released_ball = null
 
@@ -77,6 +79,8 @@ func free_ball(ball): # set out  active_ball and has_ball
 	if S.has_ball and S.active_ball == ball:
 		S.active_ball = null
 		S.has_ball = false
+		Player.set_collision_layer_bit(10, false)
+		Player.set_collision_mask_bit(10, false) #ball_wall collision layer
 		print(Player.name+" free_ball")
 	elif S.has_ball :
 		print("error, "+Player.name+" free_ball on other ball")
