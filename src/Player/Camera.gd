@@ -4,6 +4,7 @@ export (float) var aim_max_dist = 300
 export (float) var crouch_offset = 100
 export (Vector2) var move_max_offset = Vector2(128, 64)
 export (Vector2) var move_speed_threshold = Vector2(600, 800)
+export (Vector2) var initial_position = Vector2(0,-35)# relative position to the player
 var target_offset = Vector2(0,0)
 var current_shake_power = 0.0
 var shake_offset = Vector2(0,0)
@@ -16,7 +17,7 @@ func screen_shake(duration, power):
 	if power > current_shake_power:
 		current_shake_power = power
 		$Tween.interpolate_method(self, "set_random_shake_offset",
-			Vector2(power, power), Vector2(0,0), duration, 
+			Vector2(power, power), Vector2(0,0), duration,
 			$Tween.TRANS_SINE, $Tween.EASE_OUT, 0)
 		$Tween.start()
 
@@ -28,7 +29,7 @@ func _on_Tween_tween_completed(object, key):
 func set_offset_from_type(type, direction = Vector2(0,0), tween_speed = 0.2):
 	if type == "aim":
 		var l = direction.length()
-		target_offset = smoothstep(0.0,aim_max_dist,l) * aim_offset/l*direction 
+		target_offset = smoothstep(0.0,aim_max_dist,l) * aim_offset/l*direction
 	elif type == "crouch":
 		target_offset = Vector2(0,1)*crouch_offset
 	elif type == "normal":
@@ -52,4 +53,5 @@ func add_offset(vec = Vector2(0,0)):
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
-	offset = offset_no_shake + shake_offset
+	offset = shake_offset
+	position = initial_position + offset_no_shake

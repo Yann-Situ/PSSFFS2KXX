@@ -40,18 +40,29 @@ func set_has_ball_position():
 
 #####################
 
+# Ball Holder call order:
+# Pickup:
+#- holder.pickup_ball(ball)
+#	- ball.pickup(holder)
+#		- old_holder.free_ball(ball) # if the old_holder was not the current room
+#		- reparenting system
+#		- ball.disable_physics()
+#		- ball.on_pickup(holder) # additional effect
+# Throw:
+#- old_holder.throw_ball(...) # or any function that calls ball.throw(...)
+#	- ball.throw(position, velocity)
+#		- ball.enable_physics()
+#		- old_holder.free_ball(ball)
+#		- reparenting system
+#		- ball.on_throw(old_holder) # additional effect
+
 func pickup_ball(ball):
 	print(Player.name+" pickup "+ball.name)
-	print(str(Player.collision_layer)+" "+str(Player.collision_layer_save))
 	S.has_ball = true
 	S.active_ball = ball
 	if Player.physics_enabled:
-		print("Phys")
-		Player.set_collision_layer_bit(10, true) #ball_wall collision layer
 		Player.set_collision_mask_bit(10, true) #ball_wall collision layer
-	Player.collision_layer_save |= 1<<10
-	Player.collision_mask_save |= 1<<10
-	print(str(Player.collision_layer)+" "+str(Player.collision_layer_save))
+	Player.collision_mask_save |= 1<<10 # same as set_collision_mask_bit(10,true)
 	ball.pickup(Player)
 
 	#TEMPORARY CONTROL NODE
@@ -76,10 +87,8 @@ func free_ball(ball): # set out  active_ball and has_ball
 		S.active_ball = null
 		S.has_ball = false
 		if Player.physics_enabled:
-			Player.set_collision_layer_bit(10, false)
 			Player.set_collision_mask_bit(10, false) #ball_wall collision layer
-		Player.collision_layer_save &= ~(1<<10)
-		Player.collision_mask_save &= ~(1<<10)
+		Player.collision_mask_save &= ~(1<<10) # same as set_collision_mask_bit(10, false)
 		
 		print(str(Player.collision_layer)+" "+str(Player.collision_layer_save))
 		print(Player.name+" free_ball")
@@ -93,7 +102,7 @@ func throw_ball(throw_global_position, speed):
 	if S.has_ball and S.active_ball != null :
 		print("throw "+S.active_ball.name)
 		S.released_ball = S.active_ball
-		S.active_ball.throw(throw_global_position, speed)
+		S.active_ball.throw(throw_global_position, speed) # will call free_ball
 		# WARNING: Ugly but it works :
 		yield(get_tree().create_timer(0.1), "timeout")
 		S.released_ball = null

@@ -1547,7 +1547,7 @@ position = Vector2( 0, 5 )
 shape = SubResource( 57 )
 
 [node name="HasBallPosition" type="Node2D" parent="BallHandler"]
-position = Vector2( -6, -5 )
+position = Vector2( -7, -6 )
 __meta__ = {
 "_edit_group_": true
 }

@@ -86,12 +86,13 @@ Popol Super Slam Fusion Full Speed 2KXX
 * [ ] High jump when `jump_jp` and `jump_jr` just before landing (because the cancelled mounting only test `jump_jr`). (also on walljumps)
 * [ ] **one-way platform** make player crouch due to raycast mecanik.
 * [ ] **one-way platform** make player unable to do small jumps.
+* [ ] Pressing **dunkdash** at a precise moment during **dunk** animation results in **dunkdashing** on place.
 
 ### Dynamic items
 * [ ] **Zipline** drop inside collision places results in stucked player.
 * [ ] Get out from **zipline** just after passing over a **Jumper** results in sliding (like on ice) because **can_go_timer** was changed.
-* [ ] (?) Stuck colliding on a **rail** can result in building speed.
-* [ ] Entering **Pipe** at perfect frame when disabling the **Pipe** can result in a disabled ball floating in the air. -> don't stop the tween to enter the pipe when disabling the pipe.
+* [ ] (?) Stuck colliding on a **rail** can result in building speed. [need tests]
+* [ ] Entering **Pipe** at perfect frame when disabling the **Pipe** can result in a disabled ball floating in the air. -> don't stop the tween to enter the pipe when disabling the pipe. [Hard to reproduce, it happened once]
 
 
 ### Misc physics
@@ -125,13 +126,12 @@ Popol Super Slam Fusion Full Speed 2KXX
 * [x] **Trails** _on_Decay_tween_all_completed never called when **Ball** get reparented during the decay. Workaround by adding child to current_room instead of ball.
 * [x] **Bubble/Zap ball teleportation** trailhandler can act very weirdly if used quickly repeatly.
 * [ ] The `shoot_previewer` shows a trajectory slightly above the real one.
-* [ ] `Z_as_relative` doesn't work through script... see this [issue](https://github.com/godotengine/godot/issues/45416).
 * [ ] **Effects** **Particles** that are displayed outside the window are displayed after when they reenter the window.
 * [ ] **shooting** just before **landing** results in `floor_shoot` just after `aim_shoot` animation
 * [ ] There is some jitter animation when passing from a **dunkjump** state to a **grind** state.
 * [ ] There is some jitter animation when passing from a **dunk** state to a **hang** state.
 * [ ] **Trail** lifetime and point_lifetime not set correctly when trail for **bubble_ball**.
-* [ ] **Player** catching ball while inside **BallWall** results in stuck player.
+* [ ] **Player** catching ball while inside **BallWall** results in stuck player. [Maybe disable the player catch area while inside ballwall?]
 
 ### Potential Glitches
 * [ ] Pressing **jump** and **dunkdash** just before landing can result in small dunkdash/jump.
@@ -145,3 +145,4 @@ Popol Super Slam Fusion Full Speed 2KXX
 
 ### Godot Issues
 * in `Ball.gd` function `change_holder` : issue related to https://github.com/godotengine/godot/issues/14578 and https://github.com/godotengine/godot/issues/34207. See [my workaround](https://www.reddit.com/r/godot/comments/vjkaun/reparenting_node_without_removing_it_from_tree/).
+* `Z_as_relative` doesn't work through script... see this [issue](https://github.com/godotengine/godot/issues/45416).

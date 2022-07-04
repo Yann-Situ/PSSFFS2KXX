@@ -9,6 +9,7 @@ export (float) var dust_threshold = 300
 export (float) var impact_threshold = 500
 
 var selected = false # if selected by mouse
+var selectors = {}
 var impact_particles = [preload("res://src/Effects/ImpactParticle1.tscn"),
 	preload("res://src/Effects/ImpactParticle0.tscn")]
 var _is_reparenting = false setget ,is_reparenting
@@ -59,6 +60,22 @@ func collision_effect(collider, collider_velocity, collision_point, collision_no
 	return true
 
 ###########################################################
+
+# Ball Holder call order:
+# Pickup:
+#- holder.pickup_ball(ball)
+#	- ball.pickup(holder)
+#		- old_holder.free_ball(ball) # if the old_holder was not the current room
+#		- reparenting system
+#		- ball.disable_physics()
+#		- ball.on_pickup(holder) # additional effect
+# Throw:
+#- old_holder.throw_ball(...) # or any function that calls ball.throw(...)
+#	- ball.throw(position, velocity)
+#		- ball.enable_physics()
+#		- old_holder.free_ball(ball)
+#		- reparenting system
+#		- ball.on_throw(old_holder) # additional effect
 
 func change_holder(new_holder : Node):
 	assert(new_holder != null)
@@ -114,6 +131,22 @@ func _queue_free():
 	emit_signal("is_destroyed")
 	queue_free()
 
+################################################################################
+
+func select(selector : Node):
+	if selectors.has(selector):
+		printerr(selector.name+" already in 'selectors'")
+		return
+	selectors[selector] = true # or whatever
+	if selector.has_method("select_ball"):
+		selector.select_ball(self)
+
+func deselect(selector : Node):
+	if !selectors.erase(selector):
+		printerr(selector.name+" is not in 'selectors'")
+		return
+	if selector.has_method("deselect_ball"):
+		selector.deselect_ball(self)
 ################################################################################
 
 func on_pickup(holder_node : Node):
