@@ -66,29 +66,8 @@ var snap_vector = Vector2.ZERO
 
 ################################################################################
 
-func disable_physics():
-	physics_enabled = false
-	collision_layer_save = collision_layer
-	collision_layer = 0
-	collision_mask_save = collision_mask
-	collision_mask = 0
-	S.velocity *= 0
-	#S.applied_force *= 0
-
-func enable_physics():
-	physics_enabled = true
-	collision_layer = collision_layer_save
-	collision_mask = collision_mask_save
-
-func set_start_position(position):
-	start_position = position
-
-func reset_position():
-	global_position = start_position
-
 func reset_holder():
 	get_out(global_position, S.velocity)
-	#BallHandler.throw_ball(global_position, Vector2.ZERO)
 
 func reset_move():
 	reset_holder()
@@ -284,6 +263,26 @@ func _physics_process(delta):
 		else :
 			S.velocity = move_and_slide_with_snap(S.velocity, snap_vector, Vector2.UP, true, 4, 0.785398, false)
 
+func disable_physics():
+	physics_enabled = false
+	collision_layer_save = collision_layer
+	collision_layer = 0
+	collision_mask_save = collision_mask
+	collision_mask = 0
+	S.velocity *= 0
+	#S.applied_force *= 0
+
+func enable_physics():
+	physics_enabled = true
+	collision_layer = collision_layer_save
+	collision_mask = collision_mask_save
+
+func set_start_position(position):
+	start_position = position
+
+func reset_position():
+	global_position = start_position
+
 ################################################################################
 # For `characters` group
 func get_in(new_holder : Node):
@@ -304,6 +303,13 @@ func get_out(out_global_position : Vector2, velo : Vector2):
 
 ################################################################################
 # For `holders` group
-func free_ball(ball):
+func free_ball(ball : Ball):
 	# set out  active_ball and has_ball
 	BallHandler.free_ball(ball)
+
+################################################################################
+# For ball selection
+func select_ball(ball : Ball):
+	BallHandler.select_ball(ball)
+func deselect_ball(ball : Ball):
+	BallHandler.deselect_ball(ball)

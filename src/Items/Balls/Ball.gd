@@ -123,7 +123,8 @@ func destruction(delay : float = 0.0):
 		change_holder(Global.get_current_room())
 	#TODO need to handle the selector of the player
 	self.disable_physics()
-	$Highlighter.toggle_selection(false)
+	for selector in selectors.keys():
+		deselect(selector) # will also call selectors.erase(selector)
 	$Animation.play("destruction") # will call _queue_free
 	
 func _queue_free():
@@ -132,12 +133,12 @@ func _queue_free():
 	queue_free()
 
 ################################################################################
-
 func select(selector : Node):
 	if selectors.has(selector):
 		printerr(selector.name+" already in 'selectors'")
 		return
 	selectors[selector] = true # or whatever
+	$Highlighter.toggle_selection(true)
 	if selector.has_method("select_ball"):
 		selector.select_ball(self)
 
@@ -145,8 +146,11 @@ func deselect(selector : Node):
 	if !selectors.erase(selector):
 		printerr(selector.name+" is not in 'selectors'")
 		return
+	if selectors.keys().empty():
+		Highlighter.toggle_selection(false)
 	if selector.has_method("deselect_ball"):
 		selector.deselect_ball(self)
+
 ################################################################################
 
 func on_pickup(holder_node : Node):

@@ -1,8 +1,8 @@
 extends Area2D
 # Ball pickup
 
-onready var Player = get_parent()
-onready var S = Player.get_node("State")
+onready var P = get_parent()
+onready var S = P.get_node("State")
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -26,13 +26,13 @@ func _on_Ball_Handler_body_entered(body):
 func get_throw_position():
 	# return the global position of the beginning of the throw, depending on the
 	# position of the player and the flip value :
-	if Player.flip_h :
-		return Player.global_position + Vector2(-4.0,-6.0)
+	if P.flip_h :
+		return P.global_position + Vector2(-4.0,-6.0)
 	else :
-		return Player.global_position + Vector2(4.0,-6.0)
+		return P.global_position + Vector2(4.0,-6.0)
 
 func set_has_ball_position():
-	if Player.flip_h :
+	if P.flip_h :
 		S.active_ball.transform.origin.x = - $HasBallPosition.position.x
 		S.active_ball.transform.origin.y = + $HasBallPosition.position.y
 	else :
@@ -56,46 +56,33 @@ func set_has_ball_position():
 #		- reparenting system
 #		- ball.on_throw(old_holder) # additional effect
 
-func pickup_ball(ball):
-	print(Player.name+" pickup "+ball.name)
+func pickup_ball(ball : Ball):
+	print(P.name+" pickup "+ball.name)
 	S.has_ball = true
 	S.active_ball = ball
-	if Player.physics_enabled:
-		Player.set_collision_mask_bit(10, true) #ball_wall collision layer
-	Player.collision_mask_save |= 1<<10 # same as set_collision_mask_bit(10,true)
-	ball.pickup(Player)
+	if P.physics_enabled:
+		P.set_collision_mask_bit(10, true) #ball_wall collision layer
+	P.collision_mask_save |= 1<<10 # same as set_collision_mask_bit(10,true)
+	ball.pickup(P)
+	ball.select(P)
 
-	#TEMPORARY CONTROL NODE
-	var ui = Player.get_node("UI/MarginContainer/HBoxContainer/ColorRect/RichTextLabel")
-	ui.clear()
-	ui.add_text("Name : "+ball.name)
-	ui.newline()
-	ui.add_text("Ball mass  : "+str(ball.mass))
-	ui.newline()
-	ui.add_text("Ball frict : "+str(ball.friction))
-	ui.newline()
-	ui.add_text("Ball bounc : "+str(ball.bounce))
-	ui.newline()
-	ui.add_text("Ball posit : "+str(ball.position - Player.position))
-
-
-func free_ball(ball): # set out  active_ball and has_ball
+func free_ball(ball : Ball): # set out  active_ball and has_ball
 	# called by ball when thrown or deleted
-	print(Player.name+" free_ball")
-	print(str(Player.collision_layer)+" "+str(Player.collision_layer_save))
+	print(P.name+" free_ball")
+	print(str(P.collision_layer)+" "+str(P.collision_layer_save))
 	if S.has_ball and S.active_ball == ball:
 		S.active_ball = null
 		S.has_ball = false
-		if Player.physics_enabled:
-			Player.set_collision_mask_bit(10, false) #ball_wall collision layer
-		Player.collision_mask_save &= ~(1<<10) # same as set_collision_mask_bit(10, false)
+		if P.physics_enabled:
+			P.set_collision_mask_bit(10, false) #ball_wall collision layer
+		P.collision_mask_save &= ~(1<<10) # same as set_collision_mask_bit(10, false)
 		
-		print(str(Player.collision_layer)+" "+str(Player.collision_layer_save))
-		print(Player.name+" free_ball")
+		print(str(P.collision_layer)+" "+str(P.collision_layer_save))
+		print(P.name+" free_ball")
 	elif S.has_ball :
-		print("error, "+Player.name+" free_ball on other ball")
+		print("error, "+P.name+" free_ball on other ball")
 	else :
-		print("error, "+Player.name+" free_ball but doesn't have ball")
+		print("error, "+P.name+" free_ball but doesn't have ball")
 
 
 func throw_ball(throw_global_position, speed):
@@ -108,7 +95,33 @@ func throw_ball(throw_global_position, speed):
 		S.released_ball = null
 
 func shoot_ball(): # called by animation
-	throw_ball(get_throw_position(), Player.ShootPredictor.shoot_vector_save + 0.5*S.velocity)
+	throw_ball(get_throw_position(), P.ShootPredictor.shoot_vector_save + 0.5*S.velocity)
+
+func select_ball(ball : Ball): # called by ball.select(P)
+	if S.selected_ball != null and S.selected_ball != ball:
+			S.selected_ball.deselect(P)
+	S.selected_ball = ball
+	#TEMPORARY CONTROL NODE
+	var ui = P.get_node("UI/MarginContainer/HBoxContainer/ColorRect/RichTextLabel")
+	ui.clear()
+	ui.add_text("Name : "+ball.name)
+	ui.newline()
+	ui.add_text("Ball mass  : "+str(ball.mass))
+	ui.newline()
+	ui.add_text("Ball frict : "+str(ball.friction))
+	ui.newline()
+	ui.add_text("Ball bounc : "+str(ball.bounce))
+	ui.newline()
+	ui.add_text("Ball posit : "+str(ball.position - P.position))
+	
+func deselect_ball(ball : Ball): # called by ball.deselect(P)
+	assert(S.selected_ball != null)
+	if S.power_p:
+		S.selected_ball.power_jr(self,0.0)
+	S.selected_ball = null
+	#TEMPORARY CONTROL NODE
+	var ui = P.get_node("UI/MarginContainer/HBoxContainer/ColorRect/RichTextLabel")
+	ui.clear()
 
 func _physics_process(delta):
 	if S.has_ball and S.active_ball != null :
