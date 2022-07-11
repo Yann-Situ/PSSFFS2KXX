@@ -7,3 +7,14 @@ func _ready():
 
 #func on_pickup(holder_node : Node):
 #	get_node("TrailInstance").z_index = z_index - 1
+#
+func power_p(player,delta):
+	pass
+
+func power_jp(player,delta):
+	if holder == player:
+		player.gravity = Vector2.ZERO
+
+func power_jr(player,delta):
+	if holder == player:
+		player.gravity = player.based_gravity

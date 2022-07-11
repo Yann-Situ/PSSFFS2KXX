@@ -19,7 +19,6 @@ offsets = PoolRealArray( 0, 0.020202, 0.131313, 0.50505, 0.808081, 1 )
 colors = PoolColorArray( 1, 0, 0.580392, 0, 1, 1, 1, 0, 1, 1, 1, 1, 0.839844, 0.839844, 0.839844, 1, 0.535156, 0.535156, 0.535156, 0.705882, 0, 0, 0, 0.258741 )
 
 [node name="BallRolling" instance=ExtResource( 1 )]
-z_index = 110
 script = ExtResource( 2 )
 impact_effect = 1
 impact_threshold = 400.0
@@ -39,8 +38,3 @@ color_ramp = SubResource( 2 )
 
 [node name="Destruction" parent="Effects" index="1"]
 color_ramp = SubResource( 3 )
-
-[node name="TrailHandler" parent="Effects" index="4"]
-z_index = -1
-wildness = 0.0
-width = 18.0

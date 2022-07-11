@@ -8,7 +8,7 @@ export (IMPACT_EFFECT) var impact_effect = IMPACT_EFFECT.SPIKY
 export (float) var dust_threshold = 300
 export (float) var impact_threshold = 500
 
-var selected = false # if selected by mouse
+#var selected = false # if selected by mouse
 var selectors = {}
 var impact_particles = [preload("res://src/Effects/ImpactParticle1.tscn"),
 	preload("res://src/Effects/ImpactParticle0.tscn")]
@@ -150,6 +150,9 @@ func deselect(selector : Node):
 		Highlighter.toggle_selection(false)
 	if selector.has_method("deselect_ball"):
 		selector.deselect_ball(self)
+		
+func is_selected() -> bool:
+	return !selectors.keys().empty()
 
 ################################################################################
 

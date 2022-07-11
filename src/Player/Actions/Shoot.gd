@@ -9,7 +9,7 @@ func move(delta):
 	P.ShootPredictor.shoot_vector_save = P.shoot#P.ShootPredictor.shoot_vector()
 	#Engine.time_scale = 1.0
 	P.ShootPredictor.clear()
-	#throw_ball()+free_ball in Ball_handler	called by animation
-
+	#shoot_ball+ throw_ball()+free_ball in Ball_handler are called by animation
+	
 func move_end():
 	pass

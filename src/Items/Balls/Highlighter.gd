@@ -17,21 +17,20 @@ func set_selection_color(col):
 	sprite_selection.modulate = col
 
 func toggle_selection(b):
-	ball.selected = b
-	if ball.selected :
+	if b :
 		set_selection_color(selection_color)
 		sprite_selection.visible = true
 	else :
 		sprite_selection.visible = false
 
 func _on_Selector_mouse_entered():
-	if !ball.selected:
+	if !ball.is_selected():
 		set_selection_color(selection_color_mid)
 		sprite_selection.visible = true
 	Global.mouse_ball = ball
 
 func _on_Selector_mouse_exited():
-	if !ball.selected:
+	if !ball.is_selected():
 		sprite_selection.visible = false
 	if Global.mouse_ball == ball:
 		Global.mouse_ball = null

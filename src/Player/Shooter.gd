@@ -61,6 +61,7 @@ func update_effective_cant_shoot(tau : float = 0.0, s = 0):
 	effective_v = polar2cartesian(vmax, theta)
 
 func update_effective_can_shoot(tau : float = 0.0, s = 0):
+	# v is shortcut for velocity
 	tau = clamp(tau, 0.0, 1.0)
 	s = sign(s)
 	var g = S.active_ball.gravity

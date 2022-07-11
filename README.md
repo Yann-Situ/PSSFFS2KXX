@@ -40,7 +40,7 @@ Popol Super Slam Fusion Full Speed 2KXX
    - :pushpin: ziplines -> to rework
    - :pushpin: Add enemies and NPC
    - [x] Add destroyable blocks
-   - [ ] Add one way platforms and ball-doors / player-doors
+   - :pushpin: Add one way platforms and ball-doors / player-doors
    - :pushpin: pipes (TODO : change bounding box + handle multiple sides + be careful on exit_throw)
 * Add point system
    - [ ] UI for combos
@@ -113,7 +113,7 @@ Popol Super Slam Fusion Full Speed 2KXX
 * [x] Using the power of a selected ball that died results in error. => I reworked the selection system.
 * [ ] Energy loss of `constant_energy_balls`.
 * [ ] Lag if too much balls : make a spawner limit and link the dispawn of a ball to the spawner to increase the spawn count.
-* [ ] I need to adapt the boum delay: i.e apply_impulse instantly on colliding object and a bit after on far objects. nedd a method call_after_a_delay(apply_impulse)
+* [ ] I need to adapt the boum delay: i.e apply_impulse instantly on colliding object and a bit after on far objects. need a method call_after_a_delay(apply_impulse)
 * :pushpin: Need to implement Tilemap interactive objects rotation and flips.
 * [ ] On **baskets**, a ball that bounces on the ring can do multiple goals.
 * [ ] If multiple explosion breaks the same bloc, it can spawn copies.
