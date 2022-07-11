@@ -111,12 +111,12 @@ Popol Super Slam Fusion Full Speed 2KXX
 * [x] The game seems to crash when calling **change_holder(null)** with holder = null (in the reparent part) in `Ball.gd`. (see this [issue](https://github.com/godotengine/godot/issues/14578)). See [my workaround](https://www.reddit.com/r/godot/comments/vjkaun/reparenting_node_without_removing_it_from_tree/).
 * [x] Multiple call in Area2D when reparenting node (see this [issue](https://github.com/godotengine/godot/issues/14578)). This results in crashing when ball enters pipe and player just release it near the pipe. See [my workaround](https://www.reddit.com/r/godot/comments/vjkaun/reparenting_node_without_removing_it_from_tree/).
 * [x] Using the power of a selected ball that died results in error. => I reworked the selection system.
+* [x] If multiple explosion breaks the same bloc, it can spawn copies.
 * [ ] Energy loss of `constant_energy_balls`.
 * [ ] Lag if too much balls : make a spawner limit and link the dispawn of a ball to the spawner to increase the spawn count.
 * [ ] I need to adapt the boum delay: i.e apply_impulse instantly on colliding object and a bit after on far objects. need a method call_after_a_delay(apply_impulse)
 * :pushpin: Need to implement Tilemap interactive objects rotation and flips.
 * [ ] On **baskets**, a ball that bounces on the ring can do multiple goals.
-* [ ] If multiple explosion breaks the same bloc, it can spawn copies.
 
 ### Visual issues
 * [x] Jitter animation when passing from a transition_in to transition_out using **rooms**.

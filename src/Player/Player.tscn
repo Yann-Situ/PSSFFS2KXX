@@ -622,6 +622,18 @@ tracks/0/keys = {
 "update": 1,
 "values": [ 226 ]
 }
+tracks/1/type = "value"
+tracks/1/path = NodePath("../BallHandler/HasBallPosition:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Vector2( -14, 7 ) ]
+}
 
 [sub_resource type="Animation" id=19]
 length = 0.5
@@ -637,6 +649,18 @@ tracks/0/keys = {
 "transitions": PoolRealArray( 1 ),
 "update": 1,
 "values": [ 225 ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("../BallHandler/HasBallPosition:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Vector2( -13, 6 ) ]
 }
 
 [sub_resource type="Animation" id=20]
@@ -654,6 +678,18 @@ tracks/0/keys = {
 "update": 1,
 "values": [ 224 ]
 }
+tracks/1/type = "value"
+tracks/1/path = NodePath("../BallHandler/HasBallPosition:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Vector2( -14, 2 ) ]
+}
 
 [sub_resource type="Animation" id=21]
 length = 0.5
@@ -669,6 +705,18 @@ tracks/0/keys = {
 "transitions": PoolRealArray( 1 ),
 "update": 1,
 "values": [ 228 ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("../BallHandler/HasBallPosition:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Vector2( -10, 7 ) ]
 }
 
 [sub_resource type="Animation" id=22]
@@ -686,6 +734,18 @@ tracks/0/keys = {
 "update": 1,
 "values": [ 229 ]
 }
+tracks/1/type = "value"
+tracks/1/path = NodePath("../BallHandler/HasBallPosition:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Vector2( -10, 7 ) ]
+}
 
 [sub_resource type="Animation" id=23]
 length = 0.5
@@ -702,6 +762,18 @@ tracks/0/keys = {
 "update": 1,
 "values": [ 230 ]
 }
+tracks/1/type = "value"
+tracks/1/path = NodePath("../BallHandler/HasBallPosition:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Vector2( -9, -1 ) ]
+}
 
 [sub_resource type="Animation" id=24]
 length = 0.1
@@ -717,6 +789,18 @@ tracks/0/keys = {
 "transitions": PoolRealArray( 1 ),
 "update": 1,
 "values": [ 227 ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("../BallHandler/HasBallPosition:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Vector2( -13, 8 ) ]
 }
 
 [sub_resource type="Animation" id=25]
@@ -1234,6 +1318,7 @@ shape = SubResource( 1 )
 [node name="Actions" type="Node2D" parent="."]
 
 [node name="SpecialActionHandler" type="Node2D" parent="Actions"]
+visible = false
 script = ExtResource( 9 )
 
 [node name="Ray_fwd_up" type="RayCast2D" parent="Actions/SpecialActionHandler"]
@@ -1402,7 +1487,7 @@ texture = ExtResource( 2 )
 offset = Vector2( 0.5, 0 )
 hframes = 16
 vframes = 20
-frame = 199
+frame = 193
 __meta__ = {
 "_edit_group_": true,
 "_edit_lock_": true
@@ -1547,7 +1632,7 @@ position = Vector2( 0, 5 )
 shape = SubResource( 57 )
 
 [node name="HasBallPosition" type="Node2D" parent="BallHandler"]
-position = Vector2( -7, -6 )
+position = Vector2( 10, 5.99999 )
 __meta__ = {
 "_edit_group_": true
 }

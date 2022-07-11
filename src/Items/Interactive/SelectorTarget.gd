@@ -43,10 +43,9 @@ func deselect():
 #		draw_circle(Vector2.ZERO, 16, Color(1.0,0.8,0.6,1.0))
 #
 func _process(delta):
-	assert(selection_node != null)
+	assert(selection_node != null) # WARNING it seems to work but beware!
 	global_position = selection_node.global_position
 
 func _on_TweenPosition_tween_completed(object, key):
-	print("endtween")
 	if selection_node != null:
 		set_process(true)

@@ -54,11 +54,11 @@ func explode(momentum : Vector2):
 
 		#$Sprite.visible = false
 		$Sprite/AnimationPlayer.play("explode")
-
 		if content is PackedScene and content.can_instance():
 			var instance = content.instance()
 			if instance is Node2D:
 				instance.global_position = self.global_position
 			Global.get_current_room().add_child(instance)
+			print("SPAWN")
 		yield(get_tree().create_timer($DebrisParticle.lifetime*1.5), "timeout")
 		queue_free()

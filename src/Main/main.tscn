@@ -104,7 +104,7 @@ _data = {
 
 [sub_resource type="Curve2D" id=14]
 _data = {
-"points": PoolVector2Array( 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, -40, 0, 0, 0, 0, 0, -40, 96, 0, 0, 0, 0, 24, 96, 0, 0, 0, 0, 24, 256, 0, 0, 0, 0, 64, 256 )
+"points": PoolVector2Array( 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, -40, 0, 0, 0, 0, 0, -40, 96, 0, 0, 0, 0, 24, 96, 0, 0, 0, 0, 24, 192, 0, 0, 0, 0, 24, 256, 0, 0, 0, 0, 64, 256 )
 }
 
 [sub_resource type="Curve2D" id=15]
@@ -493,7 +493,12 @@ collision_mask = 6
 
 [node name="BallBoum3" parent="Environment/Balls" instance=ExtResource( 3 )]
 light_mask = 1
-position = Vector2( 296, 696 )
+position = Vector2( 320, 696 )
+collision_mask = 6
+
+[node name="BallBoum4" parent="Environment/Balls" instance=ExtResource( 3 )]
+light_mask = 1
+position = Vector2( 960, 368 )
 collision_mask = 6
 
 [node name="BallRolling" parent="Environment/Balls" instance=ExtResource( 27 )]
@@ -518,12 +523,12 @@ collision_mask = 6
 
 [node name="BallLight" parent="Environment/Balls" instance=ExtResource( 24 )]
 light_mask = 1
-position = Vector2( 600, 536 )
+position = Vector2( 624, 528 )
 collision_mask = 6
 
 [node name="BallShock" parent="Environment/Balls" instance=ExtResource( 44 )]
 light_mask = 1
-position = Vector2( 928, 360 )
+position = Vector2( 936, 376 )
 collision_mask = 6
 
 [node name="BallDash" parent="Environment/Balls" instance=ExtResource( 47 )]
