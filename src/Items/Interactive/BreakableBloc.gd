@@ -11,10 +11,12 @@ const DefaultContentImage = preload("res://assets/art/icons/contenticon.png")
 onready var momentum_threshold2 = momentum_threshold*momentum_threshold
 onready var inv_mass = 1.0/mass
 
-func set_content(temp):
-	content = temp
+var _is_exploding = false # to prevent multiple explosion of the same bloc
+
+func set_content(new_content : PackedScene):
+	content = new_content
 	if Engine.editor_hint:
-		if content != null and content.can_instance():
+		if content is PackedScene and content.can_instance():
 			var instance = content.instance()
 			if instance.has_node("Sprite"):
 				var s = instance.get_node("Sprite").duplicate()
@@ -41,20 +43,22 @@ func apply_explosion(momentum : Vector2):
 	return false
 
 func explode(momentum : Vector2):
-	$DebrisParticle.direction = momentum
-	$DebrisParticle.initial_velocity = inv_mass * momentum.length()
-	$DebrisParticle.restart()
-	$Occluder.visible = false
-	$Breakable.collision_layer = 0
-	$Breakable.collision_mask = 0
+	if !_is_exploding: # to prevent multiple explosion of the same bloc
+		_is_exploding = true
+		$DebrisParticle.direction = momentum
+		$DebrisParticle.initial_velocity = inv_mass * momentum.length()
+		$DebrisParticle.restart()
+		$Occluder.visible = false
+		$Breakable.collision_layer = 0
+		$Breakable.collision_mask = 0
 
-	#$Sprite.visible = false
-	$Sprite/AnimationPlayer.play("explode")
+		#$Sprite.visible = false
+		$Sprite/AnimationPlayer.play("explode")
 
-	if content != null and content.can_instance():
-		var instance = content.instance()
-		if instance is Node2D:
-			instance.global_position = self.global_position
-		get_parent().add_child(instance) # TODO put level in global and add it to level
-	yield(get_tree().create_timer($DebrisParticle.lifetime*1.5), "timeout")
-	queue_free()
+		if content is PackedScene and content.can_instance():
+			var instance = content.instance()
+			if instance is Node2D:
+				instance.global_position = self.global_position
+			Global.get_current_room().add_child(instance)
+		yield(get_tree().create_timer($DebrisParticle.lifetime*1.5), "timeout")
+		queue_free()

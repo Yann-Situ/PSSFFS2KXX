@@ -2,14 +2,27 @@ extends CollisionObject2D
 class_name Selectable, "res://assets/art/icons/targeted.png"
 # Selectable.gd
 
-export var is_shoot_selectable = true
-export var is_dash_selectable = true
-export var is_jump_selectable = true
+export var is_shoot_selectable = true setget set_is_shoot_selectable
+export var is_dash_selectable = true setget set_is_dash_selectable
+export var is_jump_selectable = true setget set_is_jump_selectable
 
 var shoot_selected = false # should not be modified by other function than set_selection
 var dash_selected = false # should not be modified by other function than set_selection
 var jump_selected = false # should not be modified by other function than set_selection
 var selected = false # should not be modified by other function than set_selection
+
+func set_is_shoot_selectable(value : bool):
+	is_shoot_selectable = value
+	if !value:
+		set_selection(SelectionType.SHOOT,value)
+func set_is_dash_selectable(value : bool):
+	is_dash_selectable = value
+	if !value:
+		set_selection(SelectionType.DASH,value)
+func set_is_jump_selectable(value : bool):
+	is_jump_selectable = value
+	if !value:
+		set_selection(SelectionType.JUMP,value)
 
 enum SelectionType { SHOOT, DASH, JUMP }
 
@@ -35,7 +48,7 @@ func set_selection(type : int, value : bool):
 		_ :
 			printerr("set_select(value, type) with a non existent type.")
 	selected = shoot_selected or dash_selected or jump_selected
-	
+
 	if changed :
 		if get_parent().has_method("set_selection"):
 			get_parent().set_selection(type, value)

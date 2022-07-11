@@ -13,3 +13,6 @@ script = ExtResource( 2 )
 [node name="TweenPosition" type="Tween" parent="."]
 
 [node name="TweenSelfModulate" type="Tween" parent="."]
+
+[connection signal="tween_all_completed" from="TweenPosition" to="." method="_on_TweenPosition_tween_all_completed"]
+[connection signal="tween_completed" from="TweenPosition" to="." method="_on_TweenPosition_tween_completed"]

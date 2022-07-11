@@ -44,6 +44,11 @@ material = SubResource( 3 )
 [node name="collision" parent="." index="1"]
 shape = SubResource( 4 )
 
+[node name="Effects" parent="." index="4"]
+col1 = Color( 0.309804, 0.886275, 1, 1 )
+col2 = Color( 0.858824, 0.0823529, 0.968627, 1 )
+col3 = Color( 0.364706, 0.184314, 0.482353, 1 )
+
 [node name="Reconstruction" parent="Effects" index="0"]
 color_ramp = SubResource( 5 )
 

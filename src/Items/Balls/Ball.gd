@@ -119,6 +119,7 @@ func throw(position, velo):
 func destruction(delay : float = 0.0):
 	if delay > 0.0:
 		yield(get_tree().create_timer(delay), "timeout")
+	on_destruction()
 	if holder != Global.get_current_room():
 		change_holder(Global.get_current_room())
 	#TODO need to handle the selector of the player
@@ -169,7 +170,7 @@ func on_dunk(basket : Node = null):
 func on_goal():
 	pass
 
-func on_destruction():
+func on_destruction(): # call before changing holder, disable_physics and deleting selectors
 	pass
 
 func apply_damage(damage : float, duration : float = 0.0):
