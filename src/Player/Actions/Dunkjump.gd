@@ -26,13 +26,7 @@ func move(delta):
 		direction = 1
 
 	if S.has_ball:
-		var grad : Gradient = S.active_ball.get_main_gradient().duplicate()
-		for i in range(grad.get_point_count()):
-			grad.set_offset(i, 0.5*grad.get_offset(i))
-			var col = grad.get_color(i)
-			col.a *= 0.7
-			grad.set_color(i, col)
-		P.PlayerEffects.ghost_start(0.8,0.1, Color.white, grad)
+		P.PlayerEffects.ghost_start(0.8,0.1, Color.white, S.active_ball.get_dash_gradient())
 	else:
 		P.PlayerEffects.ghost_start(0.8,0.1, ghost_modulate)
 # called by animation

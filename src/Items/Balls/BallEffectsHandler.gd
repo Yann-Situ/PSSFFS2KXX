@@ -7,6 +7,7 @@ var gradient_destruction := Gradient.new()
 var gradient_construction := Gradient.new()
 var gradient_dunk := Gradient.new()
 var gradient_main := Gradient.new()
+var gradient_dash := Gradient.new()
 
 func set_col1(c : Color):
 	col1 = c
@@ -38,6 +39,7 @@ func update_colors():
 	0.5: col2,
 	1.0: col3
 	}
+	
 	var destruction_offsets = gradient_data_destruction.keys()
 	gradient_destruction.offsets = destruction_offsets
 	gradient_destruction.colors = gradient_data_destruction.values()
@@ -51,6 +53,13 @@ func update_colors():
 	
 	gradient_main.offsets = gradient_data_main.keys()
 	gradient_main.colors = gradient_data_main.values()
+	
+	gradient_dash = gradient_main.duplicate()
+	for i in range(gradient_dash.get_point_count()):
+		gradient_dash.set_offset(i, 0.5*gradient_dash.get_offset(i))
+		var col = gradient_dash.get_color(i)
+		col.a *= 0.7
+		gradient_dash.set_color(i, col)
 	
 func _ready():
 	$Reconstruction.color_ramp = gradient_construction

@@ -21,7 +21,10 @@ func move(delta):
 
 	P.PlayerEffects.cloud_start()
 	P.PlayerEffects.jump_start()
-	P.PlayerEffects.ghost_start(0.21,0.05, ghost_modulate)
+	if S.has_ball:
+		P.PlayerEffects.ghost_start(0.21,0.05, Color.white, S.active_ball.get_dash_gradient())
+	else:
+		P.PlayerEffects.ghost_start(0.21,0.05, ghost_modulate)
 	P.PlayerEffects.distortion_start("fast_soft", 0.75)
 	P.get_node("Camera").screen_shake(0.2,10)
 
@@ -36,17 +39,14 @@ func move(delta):
 #	q.y = max(q.y, P.jump_speed)
 #	P.get_out(P.global_position, q)
 
-
 #	var corrected_angle = (S.dunkdash_basket.position - P.position).angle()
 #	corrected_angle = correction_angle(corrected_angle)
 #	dash_dir = Vector2.RIGHT.rotated(corrected_angle)
-	dash_dir = (S.dunkdash_basket.position - P.position).normalized()
-	var q = max(P.dunkdash_speed, velocity_save.dot(dash_dir)) * dash_dir
+	var dash_velocity = effective_dash_velocity(S.dunkdash_basket)
 	if not S.is_grinding:
-		P.get_out(P.global_position, q)
+		P.get_out(P.global_position, dash_velocity)
 	else :
-		S.velocity = q
-	#print("Velocity: "+str(S.velocity))
+		S.velocity = dash_velocity
 
 func move_end():
 	print("enddash")
@@ -67,9 +67,22 @@ func move_end():
 			S.velocity.x *= 0.5 # again
 	#P.get_node("Sprite").modulate = Color.white
 
-func correction_angle(x:float):
+func correction_angle(x:float): # for a discrete dash angle
 	var l = 2*PI/nb_quadrant
 	var xp = x/l
 	var n = int(round(xp)) % nb_quadrant # the number of the quadrant x is into
 	var d = 2*(xp-n) # should be between -1 and 1
 	return l*(pow(d,5)+n)
+
+func effective_dash_velocity(target : Node2D):
+	var q = (target.global_position - P.global_position)
+	var ql = q.length()
+	var target_dir = 1.0/ql * q
+	var dash_speed = max(P.dunkdash_speed, velocity_save.dot(target_dir))
+	var target_velocity = target.get("linear_velocity")
+	
+	if target_velocity == null:
+		return dash_speed * target_dir
+	
+	var dash_position = target.global_position + ql/dash_speed * target_velocity
+	return dash_speed * (dash_position - P.global_position).normalized()

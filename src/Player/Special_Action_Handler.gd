@@ -42,7 +42,9 @@ func dunkjump_criteria_init():
 	dunkjump_criteria_bests.clear()
 	dunkjump_criteria_bests.push_back(0.0) # best_y
 	dunkjump_criteria_bests.push_back(-2) # best_direction
-func dunkjump_criteria(q : Vector2, target_direction : int):
+	
+# criteria to select the dunkjump target
+func dunkjump_criteria(q : Vector2, target_direction : int) -> bool:
 	# q is basket_position - player_position
 	# target_direction is the favorite direction
 	if q.y >= 0.0:
@@ -69,7 +71,9 @@ func dunkdash_criteria_init():
 	dunkdash_criteria_bests.clear()
 	dunkdash_criteria_bests.push_back(P.max_dunkdash_distance2) # best_dist2
 	dunkdash_criteria_bests.push_back(-2) # best_direction
-func dunkdash_criteria(q : Vector2, target_direction : int):
+	
+# criteria to select the dunkdash target
+func dunkdash_criteria(q : Vector2, target_direction : int) -> bool:
 	var dir = target_direction # not 0 in order to make direction*d=1 if q.x=0
 	if q.x > 0.0:
 		dir = 1
@@ -108,16 +112,16 @@ func update_basket_selectors():
 				target_direction = 1
 
 		for i in range(selectables.size()):
-			var b = selectables[i]
-			var q = (b.global_position-P.global_position)
+			var body = selectables[i]
+			var q = (body.global_position-P.global_position)
 
-			if b.is_jump_selectable and could_dunkjump and \
+			if body.is_jump_selectable and could_dunkjump and \
 				dunkjump_criteria(q, target_direction):
-				selectable_jump = b
+				selectable_jump = body
 
-			if b.is_dash_selectable and could_dunkdash and \
+			if body.is_dash_selectable and could_dunkdash and \
 				dunkdash_criteria(q, target_direction):
-				selectable_dash = b
+				selectable_dash = body
 
 	Selector.update_selection(Selectable.SelectionType.JUMP,selectable_jump)
 	Selector.update_selection(Selectable.SelectionType.DASH,selectable_dash)

@@ -32,7 +32,10 @@ func get_main_color() -> Color:
 	return $Effects.col2
 
 func get_main_gradient() -> Gradient:
-	return $Effects.gradient_main
+	return $Effects.gradient_main.duplicate()
+	
+func get_dash_gradient() -> Gradient:
+	return $Effects.gradient_dash.duplicate()
 #func _draw():
 #	# draw collision normal
 #	draw_line(Vector2(0.0,0.0), Vector2(0.0,0.0)+50.0*normal_colision, color_colision)

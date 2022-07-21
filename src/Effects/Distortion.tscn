@@ -9,7 +9,7 @@ resource_local_to_scene = true
 shader = ExtResource( 3 )
 shader_param/center = Vector2( 0.5, 0.5 )
 shader_param/force = 0.0
-shader_param/size = 0.5
+shader_param/size = 0.1
 shader_param/thickness = 0.0
 
 [sub_resource type="Gradient" id=2]
@@ -28,7 +28,7 @@ tracks/0/loop_wrap = true
 tracks/0/imported = false
 tracks/0/enabled = true
 tracks/0/keys = {
-"times": PoolRealArray( 0, 0.3, 0.7 ),
+"times": PoolRealArray( 0, 0.25, 0.7 ),
 "transitions": PoolRealArray( 1, 1, 1 ),
 "update": 0,
 "values": [ 0.0, 0.4, 0.5 ]
@@ -83,7 +83,7 @@ tracks/1/keys = {
 "times": PoolRealArray( 0, 0.55, 1 ),
 "transitions": PoolRealArray( 1, 1, 1 ),
 "update": 0,
-"values": [ 0.0, 0.08, 0.0 ]
+"values": [ 0.0, 0.085, 0.0 ]
 }
 tracks/2/type = "value"
 tracks/2/path = NodePath("Shader:material:shader_param/force")
@@ -95,7 +95,7 @@ tracks/2/keys = {
 "times": PoolRealArray( 0, 0.1, 1 ),
 "transitions": PoolRealArray( 1, 1, 1 ),
 "update": 0,
-"values": [ 0.0, 0.01, 0.0 ]
+"values": [ 0.0, 0.013, 0.0 ]
 }
 
 [sub_resource type="Animation" id=6]
