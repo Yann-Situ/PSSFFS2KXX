@@ -116,18 +116,6 @@ func _physics_process(delta):
 		if released_bodies[body] < 0.0:
 			released_bodies.erase(body)
 
-#	if not paths_to_free.empty():
-#		var lifetime = paths_to_free[0].get_node("Particles").lifetime
-#		print("release1 : "+str(released_bodies))
-#		yield(get_tree().create_timer(min(lifetime,cant_get_in_again_timer)), "timeout")
-#		print("release2 : "+str(released_bodies))
-#		released_bodies = []
-#		yield(get_tree().create_timer(abs(lifetime-cant_get_in_again_timer)), "timeout")
-#		print("release3 : "+str(released_bodies))
-#		for p in paths_to_free:
-#			p.call_deferred("queue_free")
-#		paths_to_free = []
-
 func is_in(a, b, c, tolerance = 0.0):
 	return a >= b+tolerance and a < c-tolerance
 
@@ -138,15 +126,15 @@ func _on_Area_body_entered(body):
 		printerr(body.name + " doesn't have a node called Actions/Grind")
 		return 1
 	if !body.S.can_grind :
-		print(body.name+" cannot grind on "+self.name)
+		print_debug(body.name+" cannot grind on "+self.name)
 		return 1
 	for b in inside_bodies:
 		if b == body:
-			print(body.name+" already in "+self.name)
+			print_debug(body.name+" already in "+self.name)
 			return 1
 	for b in released_bodies.keys():
 		if b == body:
-			print(body.name+" just got out from "+self.name)
+			print_debug(body.name+" just got out from "+self.name)
 			return 1
 
 	var bi = body.global_position-global_position-init_point
@@ -199,7 +187,7 @@ func free_character(character : Node):
 			if character.has_node("Actions/Grind"):
 				character.get_node("Actions/Grind").move_stop()
 			else :
-				printerr(body.name + " doesn't have a node called Actions/Grind")
+				push_warning(body.name + " doesn't have a node called Actions/Grind")
 			remove_body(i)
 		i += 1
 

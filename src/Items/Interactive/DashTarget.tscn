@@ -1,10 +1,14 @@
-[gd_scene load_steps=5 format=2]
+[gd_scene load_steps=7 format=2]
 
 [ext_resource path="res://src/Items/Interactive/Selectable.gd" type="Script" id=1]
 [ext_resource path="res://assets/art/environment/environment-interactive.png" type="Texture" id=2]
 [ext_resource path="res://assets/art/effects/light2.png" type="Texture" id=3]
+[ext_resource path="res://assets/shader/dashtarget.gdshader" type="Shader" id=4]
 
-[sub_resource type="CircleShape2D" id=1]
+[sub_resource type="ShaderMaterial" id=1]
+shader = ExtResource( 4 )
+
+[sub_resource type="CircleShape2D" id=2]
 radius = 0.01
 
 [node name="DashTarget" type="Node2D"]
@@ -13,6 +17,7 @@ light_mask = 16
 
 [node name="Sprite" type="Sprite" parent="."]
 light_mask = 16
+material = SubResource( 1 )
 texture = ExtResource( 2 )
 region_enabled = true
 region_rect = Rect2( 4, 132, 24, 24 )
@@ -25,7 +30,7 @@ is_shoot_selectable = false
 is_jump_selectable = false
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
-shape = SubResource( 1 )
+shape = SubResource( 2 )
 
 [node name="Light" type="Light2D" parent="."]
 position = Vector2( 0.00012207, -7.62939e-06 )

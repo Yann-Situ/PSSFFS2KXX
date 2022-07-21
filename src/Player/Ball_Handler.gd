@@ -4,7 +4,9 @@ extends Area2D
 onready var P = get_parent()
 onready var S = P.get_node("State")
 
-# Called when the node enters the scene tree for the first time.
+const collision_mask_balls = 4
+const released_ball_delay = 0.3
+
 func _ready():
 	pass
 
@@ -12,11 +14,11 @@ func _on_Ball_Handler_body_entered(body):
 	#print(body.name+" entering "+Player.name+" ballhandler area")
 	if body.is_in_group("balls"):
 		if body.is_reparenting():
-			print(" - ballhandler "+body.name+" is ignored because reparenting")
+			print_debug(" - ballhandler "+body.name+" is ignored because reparenting")
 			return # Workaround because of https://www.reddit.com/r/godot/comments/vjkaun/reparenting_node_without_removing_it_from_tree/
 		if body == S.released_ball:
-			S.released_ball = null
-			print(" - but "+body.name+" is ignored because it was just released")
+			#S.released_ball = null
+			print_debug(" - but "+body.name+" is ignored because it was just released")
 			return
 		if S.has_ball or S.is_shooting :
 			return
@@ -76,13 +78,13 @@ func free_ball(ball : Ball): # set out  active_ball and has_ball
 		if P.physics_enabled:
 			P.set_collision_mask_bit(10, false) #ball_wall collision layer
 		P.collision_mask_save &= ~(1<<10) # same as set_collision_mask_bit(10, false)
-		
+
 		print(str(P.collision_layer)+" "+str(P.collision_layer_save))
 		print(P.name+" free_ball")
 	elif S.has_ball :
-		print("error, "+P.name+" free_ball on other ball")
+		printerr(P.name+" free_ball on other ball")
 	else :
-		print("error, "+P.name+" free_ball but doesn't have ball")
+		printerr(P.name+" free_ball but doesn't have ball")
 
 
 func throw_ball(throw_global_position, speed):
@@ -91,7 +93,7 @@ func throw_ball(throw_global_position, speed):
 		S.released_ball = S.active_ball
 		S.active_ball.throw(throw_global_position, speed) # will call free_ball
 		# WARNING: Ugly but it works :
-		yield(get_tree().create_timer(0.1), "timeout")
+		yield(get_tree().create_timer(released_ball_delay), "timeout")
 		S.released_ball = null
 
 func shoot_ball(): # called by animation
@@ -113,7 +115,7 @@ func select_ball(ball : Ball): # called by ball.select(P)
 	ui.add_text("Ball bounc : "+str(ball.bounce))
 	ui.newline()
 	ui.add_text("Ball posit : "+str(ball.position - P.position))
-	
+
 func deselect_ball(ball : Ball): # called by ball.deselect(P)
 	assert(S.selected_ball != null)
 	if S.power_p:
@@ -126,3 +128,10 @@ func deselect_ball(ball : Ball): # called by ball.deselect(P)
 func _physics_process(delta):
 	if S.has_ball and S.active_ball != null :
 		set_has_ball_position()
+
+func _on_BallWallDetector_body_entered(body):
+	collision_mask = 0
+
+func _on_BallWallDetector_body_exited(body):
+	if $BallWallDetector.get_overlapping_bodies().empty():
+		collision_mask = collision_mask_balls

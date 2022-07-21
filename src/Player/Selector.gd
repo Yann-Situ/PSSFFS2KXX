@@ -24,15 +24,15 @@ func update_selection(type : int, selection_node : Selectable):
 		if selection_node != null:
 			selection_node.set_selection(type, true)
 
-		var new_basket = null
+		var new_target = null
 		if selection_node != null :
-			new_basket = selection_node.get_parent() # Warning: a call to get_parent(), maybe rework Selectables to add a get_interesting_parent()
+			new_target = selection_node.get_parent() # Warning: a call to get_parent(), maybe rework Selectables to add a get_interesting_parent()
 		match type :
 			Selectable.SelectionType.SHOOT :
-				S.shoot_basket = new_basket
+				S.shoot_basket = new_target
 			Selectable.SelectionType.DASH :
-				S.dunkdash_basket = new_basket
+				S.dunkdash_basket = new_target
 			Selectable.SelectionType.JUMP :
-					S.dunkjump_basket = new_basket
+					S.dunkjump_basket = new_target
 
 	selector_targets[type].update_selection(selection_node)

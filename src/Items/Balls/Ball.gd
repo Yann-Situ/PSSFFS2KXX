@@ -24,11 +24,6 @@ func _ready():
 	add_to_group("damageables")
 	assert(holder != null)
 
-# func _enter_tree():
-# 	print(name+" _enter_tree")
-# func _exit_tree():
-# 	print(name+" _exit_tree")
-
 # Warning: workaround because of https://www.reddit.com/r/godot/comments/vjkaun/reparenting_node_without_removing_it_from_tree/
 func is_reparenting():
 	return _is_reparenting
@@ -98,7 +93,7 @@ func change_holder(new_holder : Node):
 
 func pickup(holder_node):
 	if not holder_node.is_in_group("holders"):
-		print("error["+name+"], holder_node is not in group `holders`.")
+		printerr("["+name+"], holder_node is not in group `holders`.")
 	assert(holder_node != null)
 	change_holder(holder_node)
 	self.disable_physics()
@@ -122,12 +117,11 @@ func destruction(delay : float = 0.0):
 	on_destruction()
 	if holder != Global.get_current_room():
 		change_holder(Global.get_current_room())
-	#TODO need to handle the selector of the player
 	self.disable_physics()
 	for selector in selectors.keys():
 		deselect(selector) # will also call selectors.erase(selector)
 	$Animation.play("destruction") # will call _queue_free
-	
+
 func _queue_free():
 	print(self.name+" is DESTROYED")
 	emit_signal("is_destroyed")
@@ -145,13 +139,13 @@ func select(selector : Node):
 
 func deselect(selector : Node):
 	if !selectors.erase(selector):
-		printerr(selector.name+" is not in 'selectors'")
+		push_warning(selector.name+" is not in 'selectors'")
 		return
 	if selectors.keys().empty():
 		Highlighter.toggle_selection(false)
 	if selector.has_method("deselect_ball"):
 		selector.deselect_ball(self)
-		
+
 func is_selected() -> bool:
 	return !selectors.keys().empty()
 

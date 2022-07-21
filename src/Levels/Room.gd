@@ -12,7 +12,7 @@ export (int) var limit_bottom = 10000000
 var P = null
 var portals = {} setget , get_portals
 
-export (NodePath) var meta_player
+export (NodePath) var meta_player # sould be set by the level
 
 func update_camera_limit():
 	P.Camera.limit_left = limit_left

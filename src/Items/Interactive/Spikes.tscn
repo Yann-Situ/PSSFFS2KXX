@@ -10,6 +10,7 @@ extents = Vector2( 8, 1 )
 extents = Vector2( 7, 4 )
 
 [node name="Spikes" type="Node2D"]
+z_as_relative = false
 script = ExtResource( 2 )
 
 [node name="Sprite" type="Sprite" parent="."]

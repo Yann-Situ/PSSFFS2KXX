@@ -1487,7 +1487,7 @@ texture = ExtResource( 2 )
 offset = Vector2( 0.5, 0 )
 hframes = 16
 vframes = 20
-frame = 193
+frame = 199
 __meta__ = {
 "_edit_group_": true,
 "_edit_lock_": true
@@ -1623,16 +1623,16 @@ material = SubResource( 56 )
 position = Vector2( 0, 16 )
 
 [node name="BallHandler" type="Area2D" parent="."]
+collision_layer = 0
 collision_mask = 4
 script = ExtResource( 6 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="BallHandler"]
-visible = false
 position = Vector2( 0, 5 )
 shape = SubResource( 57 )
 
 [node name="HasBallPosition" type="Node2D" parent="BallHandler"]
-position = Vector2( 10, 5.99999 )
+position = Vector2( -7, -6 )
 __meta__ = {
 "_edit_group_": true
 }
@@ -1640,6 +1640,15 @@ __meta__ = {
 [node name="Sprite" type="Sprite" parent="BallHandler/HasBallPosition"]
 visible = false
 texture = ExtResource( 4 )
+
+[node name="BallWallDetector" type="Area2D" parent="BallHandler"]
+collision_layer = 0
+collision_mask = 1024
+
+[node name="Collision" type="CollisionShape2D" parent="BallHandler/BallWallDetector"]
+visible = false
+position = Vector2( 0, 6 )
+shape = SubResource( 1 )
 
 [node name="Camera" type="Camera2D" parent="."]
 position = Vector2( 0, -35 )
@@ -1764,5 +1773,7 @@ position = Vector2( 0, 6 )
 shape = SubResource( 58 )
 
 [connection signal="body_entered" from="BallHandler" to="BallHandler" method="_on_Ball_Handler_body_entered"]
+[connection signal="body_entered" from="BallHandler/BallWallDetector" to="BallHandler" method="_on_BallWallDetector_body_entered"]
+[connection signal="body_exited" from="BallHandler/BallWallDetector" to="BallHandler" method="_on_BallWallDetector_body_exited"]
 [connection signal="tween_completed" from="Camera/Tween" to="Camera" method="_on_Tween_tween_completed"]
 [connection signal="life_changed" from="LifeHandler" to="UI/MarginContainer/HBoxContainer/VBoxContainer/Bar" method="on_life_changed"]

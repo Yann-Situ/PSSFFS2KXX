@@ -333,7 +333,7 @@ func reset_state():
 	#has_ball = false
 	#active_ball = null
 	released_ball = null
-	selected_ball = null
+	#selected_ball = null
 	dunkjump_basket = null
 	dunkdash_basket = null
 	shoot_basket = null

@@ -18,6 +18,7 @@ func update_selection(selection : Selectable):
 			select()
 
 func select():
+	set_process(false)
 	$TweenPosition.stop_all()
 	$TweenPosition.follow_property(self, "global_position",global_position,\
 		selection_node, "global_position", tween_speed, \

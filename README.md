@@ -112,8 +112,8 @@ Popol Super Slam Fusion Full Speed 2KXX
 * [x] Multiple call in Area2D when reparenting node (see this [issue](https://github.com/godotengine/godot/issues/14578)). This results in crashing when ball enters pipe and player just release it near the pipe. See [my workaround](https://www.reddit.com/r/godot/comments/vjkaun/reparenting_node_without_removing_it_from_tree/).
 * [x] Using the power of a selected ball that died results in error. => I reworked the selection system.
 * [x] If multiple explosion breaks the same bloc, it can spawn copies.
+* [x] Lag if too much balls : make a spawner limit and link the dispawn of a ball to the spawner to increase the spawn count.
 * [ ] Energy loss of `constant_energy_balls`.
-* [ ] Lag if too much balls : make a spawner limit and link the dispawn of a ball to the spawner to increase the spawn count.
 * [ ] I need to adapt the boum delay: i.e apply_impulse instantly on colliding object and a bit after on far objects. need a method call_after_a_delay(apply_impulse)
 * :pushpin: Need to implement Tilemap interactive objects rotation and flips.
 * [ ] On **baskets**, a ball that bounces on the ring can do multiple goals.
@@ -125,13 +125,13 @@ Popol Super Slam Fusion Full Speed 2KXX
 * [x] To many trails results in crash.
 * [x] **Trails** _on_Decay_tween_all_completed never called when **Ball** get reparented during the decay. Workaround by adding child to current_room instead of ball.
 * [x] **Bubble/Zap ball teleportation** trailhandler can act very weirdly if used quickly repeatly.
+* [x] **Player** catching ball while inside **BallWall** results in stuck player. [Maybe disable the player catch area while inside ballwall?]
 * [ ] The `shoot_previewer` shows a trajectory slightly above the real one.
 * [ ] **Effects** **Particles** that are displayed outside the window are displayed after when they reenter the window.
 * [ ] **shooting** just before **landing** results in `floor_shoot` just after `aim_shoot` animation
 * [ ] There is some jitter animation when passing from a **dunkjump** state to a **grind** state.
 * [ ] There is some jitter animation when passing from a **dunk** state to a **hang** state.
 * [ ] **Trail** lifetime and point_lifetime not set correctly when trail for **bubble_ball**.
-* [ ] **Player** catching ball while inside **BallWall** results in stuck player. [Maybe disable the player catch area while inside ballwall?]
 
 ### Potential Glitches
 * [ ] Pressing **jump** and **dunkdash** just before landing can result in small dunkdash/jump.
@@ -142,6 +142,7 @@ Popol Super Slam Fusion Full Speed 2KXX
 * [ ] **Dunkjump** with pressing jump_button while pre-dunkjumping can result in high or low dunkjump.
 * [ ] At the connection between a **rail** and a solid block, if the character is falling such that they will wallslide on the block if there wasn't a rail, and is falling fast enough, the character will normally grind but with 0 initial speed.
     - At the connection between a **rail** and stairs, if the character is falling such that they will go on the slope if there wasn't a rail, and is falling fast enough, the character will normally grind but with 0 speed in the direction down the stairs.
+* [ ] Player changing **Room** while in a **BallWall** results in player not able to pickup ball. (If glitch, we need to make sure portals are away from ballwall).
 
 ### Godot Issues
 * in `Ball.gd` function `change_holder` : issue related to https://github.com/godotengine/godot/issues/14578 and https://github.com/godotengine/godot/issues/34207. See [my workaround](https://www.reddit.com/r/godot/comments/vjkaun/reparenting_node_without_removing_it_from_tree/).

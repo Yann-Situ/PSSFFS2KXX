@@ -35,11 +35,12 @@ func move(delta):
 #	q *= -P.dunkdash_speed/q.length()
 #	q.y = max(q.y, P.jump_speed)
 #	P.get_out(P.global_position, q)
-	var corrected_angle = (S.dunkdash_basket.position - P.position).angle()
-	print(corrected_angle*180/PI)
-	corrected_angle = correction_angle(corrected_angle)
-	print(corrected_angle*180/PI)
-	dash_dir = Vector2.RIGHT.rotated(corrected_angle)
+
+
+#	var corrected_angle = (S.dunkdash_basket.position - P.position).angle()
+#	corrected_angle = correction_angle(corrected_angle)
+#	dash_dir = Vector2.RIGHT.rotated(corrected_angle)
+	dash_dir = (S.dunkdash_basket.position - P.position).normalized()
 	var q = max(P.dunkdash_speed, velocity_save.dot(dash_dir)) * dash_dir
 	if not S.is_grinding:
 		P.get_out(P.global_position, q)

@@ -101,7 +101,7 @@ func set_flip_h(b):
 func get_input(delta): #delta in s
 	############### Change variables of Player_state.gd
 	S.update_vars(delta)
-	if S.is_onfloor or S.is_grinding:
+	if S.is_onfloor or S.is_grinding or S.is_hanging:
 		S.get_node("ToleranceJumpFloorTimer").start(S.tolerance_jump_floor)
 	if !S.is_onfloor:
 		S.last_onair_velocity_y = S.velocity.y
