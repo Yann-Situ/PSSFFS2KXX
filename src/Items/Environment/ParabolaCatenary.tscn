@@ -4,16 +4,23 @@
 [ext_resource path="res://assets/art/environment/zipline.png" type="Texture" id=2]
 
 [sub_resource type="Curve2D" id=1]
+resource_local_to_scene = true
 _data = {
-"points": PoolVector2Array( 0, 0, 0, 0, 0, 0 )
+"points": PoolVector2Array( 0, 0, 0, 0, 88, 16, 0, 0, 0, 0, -120, 16 )
 }
 
 [node name="ParabolaCatenary" type="Path2D"]
+self_modulate = Color( 1, 1, 1, 0.701961 )
+position = Vector2( 120, -16 )
 curve = SubResource( 1 )
 script = ExtResource( 1 )
-p0_slope = 4.0
+p0_slope = 3.0
+line_width = 3.393
+line_modulate = Color( 0.627451, 0.627451, 0.627451, 1 )
+line_texture = ExtResource( 2 )
 
 [node name="Line2D" type="Line2D" parent="."]
+points = PoolVector2Array( -120, 16 )
 width = 4.0
 default_color = Color( 1, 1, 1, 1 )
 texture = ExtResource( 2 )
