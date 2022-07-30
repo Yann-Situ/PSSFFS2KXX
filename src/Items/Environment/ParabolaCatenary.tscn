@@ -6,16 +6,21 @@
 [sub_resource type="Curve2D" id=1]
 resource_local_to_scene = true
 _data = {
-"points": PoolVector2Array( 0, 0, 0, 0, 88, 16, 0, 0, 0, 0, -120, 16 )
+"points": PoolVector2Array( 0, 0, 0, 0, 264, 120, 0, 0, 0, 0, -120, 16 )
 }
 
 [node name="ParabolaCatenary" type="Path2D"]
 self_modulate = Color( 1, 1, 1, 0.701961 )
-position = Vector2( 120, -16 )
+position = Vector2( 296, 8 )
+z_index = 80
+z_as_relative = false
 curve = SubResource( 1 )
 script = ExtResource( 1 )
+__meta__ = {
+"_edit_group_": true
+}
 p0_slope = 3.0
-line_width = 3.393
+line_width = 4.0
 line_modulate = Color( 0.627451, 0.627451, 0.627451, 1 )
 line_texture = ExtResource( 2 )
 
