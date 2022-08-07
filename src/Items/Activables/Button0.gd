@@ -1,12 +1,13 @@
 tool
 extends Activable
 
+signal activated_change_signal(b)
+
 enum BUTTON0_TYPE {PERMANENT, TIMER, PHYSICAL}
+
 export (BUTTON0_TYPE) var button_type setget set_button_type
 export (float) var wait_time = 1#s
 var timer = null
-
-signal activated_change_signal(b)
 
 func set_button_type(t):
 	button_type = t
