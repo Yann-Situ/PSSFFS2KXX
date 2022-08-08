@@ -33,9 +33,14 @@ func move(delta):
 # should be called by the animation
 func move_dunk():
 	# at this point, S.dunk_basket can be null
-	P.get_node("Camera").screen_shake(0.3,30)
 	assert(dunking_basket != null)
-	dunking_basket.dunk(P) # be careful, selected basket is sometimes null because the player got out of the zone...
+	# be careful, selected basket is sometimes null because the player got out of the zone...
+	if S.active_ball != null:
+		dunking_basket.dunk(P, S.active_ball) 
+		Global.camera.screen_shake(0.3,25)
+	else :
+		dunking_basket.dunk(P) 
+		Global.camera.screen_shake(0.3,10)
 	
 	
 func test_print():

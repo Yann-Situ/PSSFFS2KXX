@@ -26,7 +26,7 @@ func move(delta):
 	else:
 		P.PlayerEffects.ghost_start(0.21,0.05, ghost_modulate)
 	P.PlayerEffects.distortion_start("fast_soft", 0.75)
-	P.get_node("Camera").screen_shake(0.2,10)
+	Global.camera.screen_shake(0.2,10)
 
 	S.get_node("ToleranceDunkJumpPressTimer").stop()
 	S.get_node("CanJumpTimer").start(S.jump_countdown)
@@ -80,9 +80,9 @@ func effective_dash_velocity(target : Node2D):
 	var target_dir = 1.0/ql * q
 	var dash_speed = max(P.dunkdash_speed, velocity_save.dot(target_dir))
 	var target_velocity = target.get("linear_velocity")
-	
+
 	if target_velocity == null:
 		return dash_speed * target_dir
-	
+
 	var dash_position = target.global_position + ql/dash_speed * target_velocity
 	return dash_speed * (dash_position - P.global_position).normalized()

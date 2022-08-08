@@ -30,7 +30,7 @@ func shoot_vector(): # return shoot vector if player not moving
 	t = shoot_min_speed+t*(shoot_max_speed-shoot_min_speed)
 	if S.active_ball != null: # to be sure
 		t = t/S.active_ball.mass
-	return t * (Player.get_node("Camera").get_global_mouse_position() -
+	return t * (Global.camera.get_global_mouse_position() -
 					Player.position).normalized()
 
 func _draw():

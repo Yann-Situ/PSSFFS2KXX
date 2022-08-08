@@ -47,7 +47,7 @@ func move_jump():
 	S.velocity.y = P.dunkjump_speed
 	S.is_dunkjumphalfturning = (q.x*direction < dunkjumphalfturn_threshold)
 	#print("Velocity: "+str(S.velocity))
-	P.get_node("Camera").screen_shake(0.2,10)
+	Global.camera.screen_shake(0.2,10)
 
 func move_end():
 	pass
