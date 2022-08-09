@@ -77,7 +77,9 @@ func correction_angle(x:float): # for a discrete dash angle
 func effective_dash_velocity(target : Node2D):
 	var q = (target.global_position - P.global_position)
 	var ql = q.length()
-	var target_dir = 1.0/ql * q
+	var target_dir = Vector2.UP # limit case when the player is exactly on the target
+	if ql != 0.0:
+		target_dir = 1.0/ql * q
 	var dash_speed = max(P.dunkdash_speed, velocity_save.dot(target_dir))
 	var target_velocity = target.get("linear_velocity")
 	
