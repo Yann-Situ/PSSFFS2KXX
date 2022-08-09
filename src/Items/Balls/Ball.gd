@@ -2,13 +2,14 @@ extends PhysicBody
 class_name Ball, "res://assets/art/ball/ball_test.png"
 
 signal is_destroyed
+signal is_picked_up
+signal is_thrown
 
 enum IMPACT_EFFECT {SPIKY, METALLIC}
+
 export (IMPACT_EFFECT) var impact_effect = IMPACT_EFFECT.SPIKY
 export (float) var dust_threshold = 300
 export (float) var impact_threshold = 500
-
-#var selected = false # if selected by mouse
 var selectors = {}
 var impact_particles = [preload("res://src/Effects/ImpactParticle1.tscn"),
 	preload("res://src/Effects/ImpactParticle0.tscn")]
@@ -102,6 +103,7 @@ func pickup(holder_node):
 	self.disable_physics()
 	self.z_index = holder_node.z_index+1
 	on_pickup(holder_node)
+	emit_signal("is_picked_up")
 
 func throw(position, velo):
 	#$TrailHandler.set_node_to_trail(self)
@@ -113,6 +115,7 @@ func throw(position, velo):
 	linear_velocity = velo
 	self.z_index = Global.z_indices["ball_0"]
 	on_throw(previous_holder)
+	emit_signal("is_thrown")
 
 func destruction(delay : float = 0.0):
 	if delay > 0.0:

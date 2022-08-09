@@ -1,6 +1,9 @@
 extends Node2D
 class_name Basket, "res://assets/art/icons/basket.png"
 
+signal is_dunked
+signal is_goaled
+
 export var speed_ball_threshold = 380 #velocity value
 export var dunk_position_offset = 16 * Vector2.DOWN
 export var dunk_position_radius = 24
@@ -18,6 +21,7 @@ var bodies_positions = []
 var distortion_scene = preload("res://src/Effects/Distortion.tscn")
 
 onready var start_position = global_position
+
 # Should be in any items that can be picked/placed :
 func set_start_position(position):
 	start_position = position
@@ -56,7 +60,10 @@ func _on_basket_area_body_entered(body):
 			goal(body,score)
 
 func dunk(dunker : Node2D, ball : Ball = null):
-	print("DUUUNK!")
+	if not can_receive_dunk:
+		push_warning("can_receive_dunk is false but basket.dunk() was called.")
+		return
+	print_debug("DUUUNK!")
 	if ball != null:
 		$Effects/LineParticle.amount = 48
 		$Effects/LineParticle.process_material.color_ramp.gradient = ball.get_main_gradient()
@@ -72,10 +79,10 @@ func dunk(dunker : Node2D, ball : Ball = null):
 	else :
 		$AnimationPlayer.play("dunk_left")
 
-	if can_receive_dunk or !$DunkCooldown.is_stopped():
-		$DunkCooldown.stop()
-		can_receive_dunk = false
-		$DunkCooldown.start(dunk_cooldown)
+	$DunkCooldown.stop()
+	can_receive_dunk = false
+	$DunkCooldown.start(dunk_cooldown)
+	emit_signal("is_dunked")
 
 
 func get_hanged(character : Node):
@@ -96,6 +103,7 @@ func goal(ball : Ball, score):
 		$Effects/LineParticle.amount = 16
 	$Effects/LineParticle.process_material.color_ramp.gradient = ball.get_main_gradient()
 	$Effects/LineParticle.restart()
+	emit_signal("is_goaled")
 
 func get_closest_point(point_global_position : Vector2):
 	var p = point_global_position - self.global_position

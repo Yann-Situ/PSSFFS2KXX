@@ -1,6 +1,10 @@
 extends Node2D
 class_name Activable, "res://assets/art/icons/activable.png"
 
+signal is_enabled
+signal is_disabled
+signal is_toggled(b)
+
 export (bool) var activated = false setget set_activated, is_activated
 export (bool) var locked = false
 
@@ -16,16 +20,24 @@ func unlock():
 func enable():
 	if not locked:
 		print("enable: " + str(self.name))
+		var temp = activated
 		activated = true
 		on_enable()
+		emit_signal("is_enabled")
+		if !temp:
+			emit_signal("is_toggled", activated)
 func on_enable():
 	pass
 
 func disable():
 	if not locked:
 		print("disable: " + str(self.name))
+		var temp = activated
 		activated = false
 		on_disable()
+		emit_signal("is_disabled")
+		if temp:
+			emit_signal("is_toggled", activated)
 func on_disable():
 	pass
 
