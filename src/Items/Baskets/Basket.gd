@@ -59,24 +59,25 @@ func _on_basket_area_body_entered(body):
 		if score > 0.0:
 			goal(body,score)
 
-func dunk(dunker : Node2D):
+func dunk(dunker : Node2D, ball : Ball = null):
 	if not can_receive_dunk:
 		push_warning("can_receive_dunk is false but basket.dunk() was called.")
 		return
 	print_debug("DUUUNK!")
-	$CPUParticles2D.amount = 60
-	$CPUParticles2D.restart()
-	var distortion = distortion_scene.instance()
-	self.add_child(distortion)
-	distortion.animation_delay = 0.75#s
-	distortion.z_index = Global.z_indices["foreground_2"]
-	distortion.start("fast_subtle")
+	if ball != null:
+		$Effects/LineParticle.amount = 48
+		$Effects/LineParticle.process_material.color_ramp.gradient = ball.get_main_gradient()
+		$Effects/LineParticle.restart()
+		var distortion = distortion_scene.instance()
+		self.add_child(distortion)
+		distortion.animation_delay = 0.75#s
+		distortion.z_index = Global.z_indices["foreground_2"]
+		distortion.start("fast_subtle")
 
 	if (dunker.global_position.x - global_position.x) > 0:
 		$AnimationPlayer.play("dunk_right")
 	else :
 		$AnimationPlayer.play("dunk_left")
-	Global.camera.screen_shake(0.3,5)
 
 	$DunkCooldown.stop()
 	can_receive_dunk = false
@@ -93,14 +94,15 @@ func get_hanged(character : Node):
 		return 1
 	pickup_character(character)
 
-func goal(body,score):
+func goal(ball : Ball, score):
 	print("GOOOAL!")
 	if score > speed_ball_threshold:
-		$CPUParticles2D.amount = 40
+		$Effects/LineParticle.amount = 32
 		Global.camera.screen_shake(0.3,5)
 	else :
-		$CPUParticles2D.amount = 20
-	$CPUParticles2D.restart()
+		$Effects/LineParticle.amount = 16
+	$Effects/LineParticle.process_material.color_ramp.gradient = ball.get_main_gradient()
+	$Effects/LineParticle.restart()
 	emit_signal("is_goaled")
 
 func get_closest_point(point_global_position : Vector2):

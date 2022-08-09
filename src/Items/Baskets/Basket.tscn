@@ -1,4 +1,4 @@
-[gd_scene load_steps=24 format=2]
+[gd_scene load_steps=31 format=2]
 
 [ext_resource path="res://assets/art/environment/environment-interactive.png" type="Texture" id=1]
 [ext_resource path="res://src/Items/Baskets/Basket.gd" type="Script" id=2]
@@ -9,6 +9,7 @@
 [ext_resource path="res://assets/art/effects/light5_3.png" type="Texture" id=7]
 [ext_resource path="res://assets/art/effects/light5_2.png" type="Texture" id=8]
 [ext_resource path="res://src/Items/Interactive/Selectable.gd" type="Script" id=9]
+[ext_resource path="res://src/Effects/LineParticle.tscn" type="PackedScene" id=10]
 
 [sub_resource type="AtlasTexture" id=1]
 atlas = ExtResource( 1 )
@@ -105,6 +106,41 @@ b = Vector2( -1, -1 )
 a = Vector2( 0, -2 )
 b = Vector2( 1, -1 )
 
+[sub_resource type="CanvasItemMaterial" id=15]
+particles_animation = true
+particles_anim_h_frames = 32
+particles_anim_v_frames = 1
+particles_anim_loop = true
+
+[sub_resource type="Curve" id=16]
+max_value = 2.0
+_data = [ Vector2( 0, 1.02727 ), 0.0, 2.46857, 0, 0, Vector2( 1, 0 ), 0.0, 0.0, 0, 0 ]
+
+[sub_resource type="CurveTexture" id=17]
+width = 100
+curve = SubResource( 16 )
+
+[sub_resource type="GradientTexture" id=18]
+
+[sub_resource type="ParticlesMaterial" id=19]
+lifetime_randomness = 0.33
+emission_shape = 2
+emission_box_extents = Vector3( 13, 1, 1 )
+flag_disable_z = true
+direction = Vector3( 0, -1, 0 )
+spread = 0.0
+gravity = Vector3( 0, -100, 0 )
+initial_velocity = 40.0
+orbit_velocity = 0.0
+orbit_velocity_random = 0.0
+damping = 43.64
+color_ramp = SubResource( 18 )
+anim_speed = 1.0
+anim_speed_curve = SubResource( 17 )
+
+[sub_resource type="StreamTexture" id=20]
+load_path = "res://.import/line_particule.png-a121e21732928f808962c84ee5009984.stex"
+
 [node name="Basket" type="Node2D"]
 z_index = 16
 z_as_relative = false
@@ -196,6 +232,18 @@ one_way_collision = true
 
 [node name="DunkCooldown" type="Timer" parent="."]
 one_shot = true
+
+[node name="Effects" type="Node2D" parent="."]
+
+[node name="LineParticle" parent="Effects" instance=ExtResource( 10 )]
+material = SubResource( 15 )
+z_index = -1
+emitting = false
+amount = 32
+one_shot = true
+explosiveness = 0.34
+process_material = SubResource( 19 )
+texture = SubResource( 20 )
 
 [connection signal="body_entered" from="basket_area" to="." method="_on_basket_area_body_entered"]
 [connection signal="timeout" from="DunkCooldown" to="." method="_on_DunkCooldown_timeout"]
