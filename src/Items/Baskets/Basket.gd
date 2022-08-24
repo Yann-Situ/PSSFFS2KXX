@@ -65,14 +65,9 @@ func dunk(dunker : Node2D, ball : Ball = null):
 		return
 	print_debug("DUUUNK!")
 	if ball != null:
-		$Effects/LineParticle.amount = 48
-		$Effects/LineParticle.process_material.color_ramp.gradient = ball.get_main_gradient()
-		$Effects/LineParticle.restart()
-		var distortion = distortion_scene.instance()
-		self.add_child(distortion)
-		distortion.animation_delay = 0.75#s
-		distortion.z_index = Global.z_indices["foreground_2"]
-		distortion.start("fast_subtle")
+		goal_effects(ball, 3)
+	else :
+		Global.camera.screen_shake(0.3,8)
 
 	if (dunker.global_position.x - global_position.x) > 0:
 		$AnimationPlayer.play("dunk_right")
@@ -97,13 +92,24 @@ func get_hanged(character : Node):
 func goal(ball : Ball, score):
 	print("GOOOAL!")
 	if score > speed_ball_threshold:
-		$Effects/LineParticle.amount = 32
-		Global.camera.screen_shake(0.3,5)
+		goal_effects(ball, 2)
 	else :
-		$Effects/LineParticle.amount = 16
+		goal_effects(ball, 1)
+	emit_signal("is_goaled")
+
+func goal_effects(ball : Ball, force : int = 0):
+	$Effects/LineParticle.amount = force * 16
+	$Effects/LineParticle.process_material.initial_velocity = -40 + force * 80
 	$Effects/LineParticle.process_material.color_ramp.gradient = ball.get_main_gradient()
 	$Effects/LineParticle.restart()
-	emit_signal("is_goaled")
+	if force > 1:
+		Global.camera.screen_shake(0.3,5.0+(force-2)*20.0)
+	if force > 2:
+		var distortion = distortion_scene.instance()
+		self.add_child(distortion)
+		distortion.animation_delay = 0.75#s
+		distortion.z_index = Global.z_indices["foreground_2"]
+		distortion.start("fast_subtle")
 
 func get_closest_point(point_global_position : Vector2):
 	var p = point_global_position - self.global_position

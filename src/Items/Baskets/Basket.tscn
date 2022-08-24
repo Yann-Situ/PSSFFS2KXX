@@ -241,7 +241,7 @@ z_index = -1
 emitting = false
 amount = 32
 one_shot = true
-explosiveness = 0.28
+explosiveness = 0.41
 process_material = SubResource( 19 )
 texture = SubResource( 20 )
 

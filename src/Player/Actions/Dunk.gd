@@ -37,11 +37,8 @@ func move_dunk():
 	# be careful, selected basket is sometimes null because the player got out of the zone...
 	if S.active_ball != null:
 		dunking_basket.dunk(P, S.active_ball) 
-		Global.camera.screen_shake(0.3,25)
 	else :
-		dunking_basket.dunk(P) 
-		Global.camera.screen_shake(0.3,10)
-	
+		dunking_basket.dunk(P) 	
 	
 func test_print():
 	print("Time : "+str(OS.get_ticks_msec()))

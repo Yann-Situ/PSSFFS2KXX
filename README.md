@@ -2,7 +2,7 @@
 Popol Super Slam Fusion Full Speed 2KXX
 -----
 
-## Big Goals
+## Specific big parts
 * graphism
 * animations
 * visual effects
@@ -23,44 +23,60 @@ Popol Super Slam Fusion Full Speed 2KXX
    - :pushpin: other background
    - :pushpin: all movement sprites
    - [ ] UI graphism such as tag-police
+   - [ ] other characters/npc
+   - [ ] adinkra symbols
 * Moveset improvment :
    - [x] add dunk
    - [x] handle crouch
    - [x] add landing anim
    - [x] add turn back anim
+   - [x] improve wall jump (feet must be on wall ?)
    - :pushpin: add slide
    - [ ] with and without balls anim
-   - [x] improve wall jump (feet must be on wall ?)
    - [ ] add multiple shoot types
    - [ ] Death and life system
-* Add interactive elements (baskets, pipes, jumping platform, doors and warps, wind, enemies...)
+* Interactive elements (baskets, pipes, jumping platform, doors and warps, wind, enemies...)
    - [x] baskets
    - [x] spawners
    - [x] activable
+   - [x] Add destroyable blocks
    - :pushpin: ziplines -> to rework
    - :pushpin: Add enemies and NPC
-   - [x] Add destroyable blocks
    - :pushpin: Add one way platforms and ball-doors / player-doors
    - :pushpin: pipes (TODO : change bounding box + handle multiple sides + be careful on exit_throw)
-* Add point system
+   - [ ] moving platform (tilemap + pathfollow2D?)
+   - [ ] collectibles (spray?)
+* NPCs
+   - interactive npc
+   - pedestrian generator
+   - bosses
+   - ennemies
+* Style system (optional)
    - [ ] UI for combos
    - [ ] Combo and point system
+   - [ ] Reward ('succès') for special style achievements
 * Improve shooter
    - :pushpin: Auto aim on baskets
+   - [ ] finalize shoot system (test with time stop/slow)
 * Balls :
-   - [ ] improve animation of balls
-   - [ ] squish anim for squish balls
    - [x] add several balls (bouncy ball, fire ball, linked ball, phantom ball)
    - :pushpin: handle interactions with environment elements
    - :pushpin: Add new powers when selection+active (such as megaBOUM, dash, RollingDestroying...)
+   - [ ] improve animation of balls
+   - [ ] squish anim for squish balls
 * Juice :
    - [x] Camera shake on heavy ball, dunks and other style action
    - [x] particles on balls, dust on footsteps & slide
    - [ ] add UBER mode with new animations
-   - [ ] add sound (music + effect and stylish voice)
+* Sound design
+   - [ ] add sounds
+   - [ ] add musics
+   - [ ] handle music variations
 * Add UIs
-   - [ ] Complete editor by adding tilemapping in it
-* Add levels
+   - [ ] Add HUD
+   - [ ] Add menus
+   - [ ] Add WorldMap and level selection
+   - [ ] Add dialogue system
 
 ### Code structure to implement
 * `Selector` is currently a child of `Player/Actions` and is reparent by code to be a child of `Room`. Maybe it should be a child of the room or the level, and accessed in `SpecialActionHandler` via a NodePath or through signals.
