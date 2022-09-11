@@ -36,14 +36,25 @@ func move_jump():
 		basket = S.dunkjump_basket
 
 	var q = basket.get_closest_point(P.global_position) - P.global_position
-	var B = P.dunkjump_speed * q.x / q.y
-	var C = -P.gravity.y * 0.5 * q.x*q.x/q.y
-	var vox1 = 0.5*(B - sqrt(B*B-4*C))
-	var vox2 = 0.5*(B + sqrt(B*B-4*C))
-	if (abs(vox2) < abs(vox1)):
-		S.velocity.x = vox2
-	else :
-		S.velocity.x = vox1
+
+	if q.y == 0.0:
+		S.velocity.x = -0.5*q.x*P.gravity.y/P.dunkjump_speed
+	else : # standard case
+		var B = P.dunkjump_speed * q.x / q.y
+		var C = -P.gravity.y * 0.5 * q.x*q.x/q.y
+		var sq_discriminant = B*B-4*C
+
+		if sq_discriminant < 0.0: # should not happen
+			#TODO implement this case ?
+			S.velocity.x = -0.5*q.x*P.gravity.y/P.dunkjump_speed
+		else:
+			sq_discriminant = sqrt(sq_discriminant)
+			var velocity_x1 = 0.5*(B - sq_discriminant)
+			var velocity_x2 = 0.5*(B + sq_discriminant)
+			if (abs(velocity_x2) < abs(velocity_x1)):
+				S.velocity.x = velocity_x2
+			else :
+				S.velocity.x = velocity_x1
 	S.velocity.y = P.dunkjump_speed
 	S.is_dunkjumphalfturning = (q.x*direction < dunkjumphalfturn_threshold)
 	#print("Velocity: "+str(S.velocity))

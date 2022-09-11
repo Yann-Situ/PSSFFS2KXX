@@ -94,10 +94,10 @@ Popol Super Slam Fusion Full Speed 2KXX
 * [x] Characters can leave **rail** if Player press **crouch** on it.
     - Implement the `riding` and `hanging` states.
 * [x] **dunking** can result in `S.selected_basket.dunk()` called on `null` instance (basket is not selected anymore)
+* [x] Hard to reproduce (see video) : **dunkjump** on **jumper** can result in `Nan` camera position teleportation. (because to low to mathematically dunkjump => negative value ? division by 0.0 ?)
 * [ ] **Dunkjumping** while only moving with floor adherence a bit far from basket results in missing the basket.
 * [ ] **release** ball when **aiming** results in error.
 * [ ] It is possible to **dunk** through walls. It can result in dunkjump particles (+ghost) emmiting (dont know why).
-* [ ] Hard to reproduce (see video) : **dunkjump** on **jumper** can result in `Nan` camera position teleportation. (because to low to mathematically dunkjump => negative value ? division by 0.0 ?)
 * [ ] Infinite **walking** animation on 16px block stairs.
 * [ ] High jump when `jump_jp` and `jump_jr` just before landing (because the cancelled mounting only test `jump_jr`). (also on walljumps)
 * [ ] **one-way platform** make player crouch due to raycast mecanik.
