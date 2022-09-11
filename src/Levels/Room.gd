@@ -1,5 +1,5 @@
 extends Node2D
-class_name Room
+class_name Room2D
 
 signal exit_room
 signal exit_level

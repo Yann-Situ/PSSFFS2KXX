@@ -12,10 +12,10 @@ var player_scene = preload("res://src/Player/Player.tscn")
 var meta_player = null
 var player_save = null
 
-func set_current_room_instance(room : Room):
+func set_current_room_instance(room : Room2D):
 	Global.set_current_room(room)
 	current_room_instance = room
-	
+
 func _ready():
 	load_level()
 	enter_level()
@@ -30,7 +30,7 @@ func browse_rooms(room_name : String):
 			printerr("can't preload "+room_name+" because it doesn't exist.")
 			return
 
-		var room: Room = packed_room.instance()
+		var room: Room2D = packed_room.instance()
 		rooms[room_name] = room
 		print_debug("created room : "+room_name)
 		room.meta_player = $Player.get_path() # instantiate meta_player for each room
@@ -66,12 +66,12 @@ func change_room(next_room : String, next_room_portal : String):
 		self.remove_child(current_room_instance)
 	if rooms.has(next_room):
 		set_current_room_instance(rooms[next_room])
-		
+
 		# need to deal with the _ready problems... Maybe look for _init and _enter_tree
 #		player_save = current_room_instance.get_node("Player")
 #		current_room_instance.remove_child(player_save)
 #		current_room_instance.add_child(meta_player)
-		
+
 		current_room_instance.enter_room(next_room_portal) #move it to the appropriate position
 		self.add_child(current_room_instance)
 	else :
