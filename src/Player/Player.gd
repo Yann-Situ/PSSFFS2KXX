@@ -62,7 +62,6 @@ onready var collision_mask_save = 514
 var character_holder = null
 
 var shoot = Vector2.ZERO
-var snap_vector = Vector2.ZERO
 
 ################################################################################
 
@@ -259,10 +258,10 @@ func _physics_process(delta):
 	if physics_enabled:
 		apply_gravity(delta)
 		if SpecialActionHandler.is_on_slope() and S.velocity.y > - abs(S.velocity.x) :
-			S.velocity.y = 0.5*sqrt(2) * move_and_slide_with_snap(S.velocity, 33*Vector2.DOWN, Vector2.UP, true, 4, 0.785398, false).y
+			S.velocity.y = 0.5*sqrt(2) * move_and_slide_with_snap(S.velocity, S.snap_vector_floor, Vector2.UP, true, 4, 0.785398, false).y
 		else :
-			S.velocity = move_and_slide_with_snap(S.velocity, snap_vector, Vector2.UP, true, 4, 0.785398, false)
-
+			S.velocity = move_and_slide_with_snap(S.velocity, S.snap_vector, Vector2.UP, false, 4, 0.785398, false)
+	$Label.text = str(S.snap_vector)
 func disable_physics():
 	physics_enabled = false
 	collision_layer_save = collision_layer

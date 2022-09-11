@@ -5,7 +5,7 @@ func move(delta, jump_speed = 0.0):
 		S.velocity.y = P.jump_speed
 	else :
 		S.velocity.y = jump_speed
-		
+	S.snap_vector = Vector2.ZERO
 	P.get_out(P.global_position, S.velocity)
 	S.is_jumping = true
 	S.get_node("ToleranceJumpPressTimer").stop()

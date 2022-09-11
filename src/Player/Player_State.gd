@@ -65,6 +65,8 @@ export var move_direction = 0
 var direction_p = 0
 var aim_direction = 0
 export var velocity = Vector2()
+var snap_vector_floor = Vector2.DOWN*32
+var snap_vector = Vector2()
 
 # Delays and states memory # handle by Player.gd
 #var last_onfloor = 0
@@ -208,7 +210,11 @@ func update_vars(delta):
 	var dir_sprite = 1;
 	if self.get_parent().flip_h :
 		dir_sprite = -1;
-
+	
+	if is_onfloor:
+		snap_vector = snap_vector_floor
+	else :
+		snap_vector = Vector2.ZERO
 	# non-cancelables :
 	#is_shooting = is_shooting
 	#is_dunking = is_dunking

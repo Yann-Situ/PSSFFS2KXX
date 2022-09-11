@@ -47,6 +47,7 @@ func move(delta):
 		P.get_out(P.global_position, dash_velocity)
 	else :
 		S.velocity = dash_velocity
+	S.snap_vector = Vector2.ZERO
 
 func move_end():
 	print("enddash")

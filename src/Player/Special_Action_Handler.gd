@@ -134,9 +134,10 @@ func is_on_wall():
 
 func is_on_floor():
 	# update_space_state()
-	cast(rays[4])#down fwd
-	cast(rays[5])#down bwd
-	return (rays[4].result or rays[5].result)
+	#cast(rays[4])#down fwd
+	#cast(rays[5])#down bwd
+	#return (rays[4].result or rays[5].result)
+	return P.is_on_floor() # better than the raycast because of moving platform and snapping internal implementation
 
 func is_on_slope():
 	# update_space_state()

@@ -1309,6 +1309,7 @@ walk_accel = 210.0
 visible = false
 is_landing = true
 is_halfturning = true
+is_shooting = true
 
 [node name="Collision" type="CollisionShape2D" parent="."]
 visible = false
@@ -1487,13 +1488,14 @@ texture = ExtResource( 2 )
 offset = Vector2( 0.5, 0 )
 hframes = 16
 vframes = 20
-frame = 202
+frame = 199
 __meta__ = {
 "_edit_group_": true,
 "_edit_lock_": true
 }
 
 [node name="Player_Animation" type="AnimationPlayer" parent="Sprite"]
+method_call_mode = 1
 anims/air_shoot = SubResource( 5 )
 anims/air_wall = SubResource( 6 )
 anims/crouch = SubResource( 7 )
@@ -1632,7 +1634,7 @@ position = Vector2( 0, 5 )
 shape = SubResource( 57 )
 
 [node name="HasBallPosition" type="Node2D" parent="BallHandler"]
-position = Vector2( -7, -7 )
+position = Vector2( -7, -6 )
 __meta__ = {
 "_edit_group_": true
 }
@@ -1771,6 +1773,13 @@ script = ExtResource( 37 )
 modulate = Color( 1, 0, 0, 1 )
 position = Vector2( 0, 6 )
 shape = SubResource( 58 )
+
+[node name="Label" type="Label" parent="."]
+margin_right = 40.0
+margin_bottom = 14.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
 
 [connection signal="body_entered" from="BallHandler" to="BallHandler" method="_on_Ball_Handler_body_entered"]
 [connection signal="body_entered" from="BallHandler/BallWallDetector" to="BallHandler" method="_on_BallWallDetector_body_entered"]

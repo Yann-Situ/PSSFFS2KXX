@@ -10,10 +10,12 @@ export (float) var gravity_scale = 1.0 setget set_gravity_scale, get_gravity_sca
 export (float) var mass = 1.0 setget set_mass
 export (float) var friction = 0.05 setget set_friction
 export (float) var bounce = 0.5 setget set_bounce
+export (bool) var is_on_path = false setget set_is_on_path
 var linear_velocity = Vector2(0.0,0.0) setget set_linear_velocity
 var applied_forces = {} #"force_name : value in kg*pix/s^2"
 
 onready var start_position = global_position
+onready var last_position = start_position
 onready var collision_layer_save = collision_layer
 onready var collision_mask_save = collision_mask
 onready var invmass = 1/mass
@@ -33,6 +35,9 @@ func set_friction(new_value):
 func set_bounce(new_value):
 	bounce = new_value
 
+func set_is_on_path(new_value : bool):
+	is_on_path = new_value
+	
 func set_linear_velocity(v):
 	linear_velocity = v
 
@@ -74,9 +79,13 @@ func remove_force(name : String):
 
 ###############PHYSICALPROCESS######################
 
-func _physics_process(delta):
-	physics_process(delta)
-
+func _physics_process(delta): # don't remember why it is useful to have this duplicate
+	if !is_on_path:
+		physics_process(delta)
+	else:
+		set_linear_velocity(1.0/delta * (global_position-last_position))
+	last_position = global_position
+	
 func physics_process(delta):
 	var collision = move_and_collide(linear_velocity * delta, false)
 	if collision and collision_effect(collision.collider,
@@ -105,8 +114,9 @@ func collision_handle(collision, delta):
 		var summass = m2 + mass
 		var dist_vect = global_position-collision.collider.get_global_position()
 		var speeddist = (linear_velocity - collision.collider_velocity).dot(dist_vect)
-		linear_velocity -= 2*m2/summass*(speeddist/dist_vect.length_squared())*dist_vect
-		collision.collider.set_linear_velocity(collision.collider_velocity + 2*mass/summass*(speeddist/dist_vect.length_squared())*dist_vect)
+		var speeddistvec = (speeddist/dist_vect.length_squared())*dist_vect
+		linear_velocity -= 2*m2/summass*speeddistvec
+		collision.collider.set_linear_velocity(collision.collider_velocity + 2*mass/summass*speeddistvec)
 		#collision.collider.apply_impulse(2*m2*mass/summass*(speeddist/dist_vect.length_squared())*dist_vect)#doesn't work don't know Y
 
 		# see https://docs.godotengine.org/fr/stable/classes/class_kinematiccollision2d.html#class-kinematiccollision2d-property-collider
@@ -124,7 +134,8 @@ func collision_handle(collision, delta):
 			#TODO seuil à déterminer
 			#sliding
 			#color_colision = color1
-			var vel_t = lerp(t.dot(linear_velocity), 0, friction)
+			#var vel_t = lerp(t.dot(linear_velocity), 0, friction)
+			var vel_t = apply_friction(t.dot(linear_velocity), friction*500, delta)
 			linear_velocity = vel_t*t
 			var motion = collision.remainder.dot(t)*t
 			move_and_collide(motion,false)
@@ -132,7 +143,12 @@ func collision_handle(collision, delta):
 		else :
 			#bouncing
 			#color_colision = color2
-			var vel_t = lerp(t.dot(bounce_linear_velocity), 0, friction)
+			#var vel_t = lerp(t.dot(bounce_linear_velocity), 0, friction)
+			var vel_t = apply_friction(t.dot(bounce_linear_velocity), friction*500, delta)
 			linear_velocity = vel_n*n + vel_t*t
 			var motion = collision.remainder.bounce(n)
 			move_and_collide(motion,false)#may cause pb on corners ?
+
+func apply_friction(relative_velocity : float, friction_decel : float, delta : float):
+	var d = max(abs(relative_velocity) - friction_decel*delta, 0.0)
+	return sign(relative_velocity) * d

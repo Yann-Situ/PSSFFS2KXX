@@ -174,9 +174,9 @@ colors = PoolColorArray( 1, 0.954956, 0.859375, 0, 0.820312, 0.799805, 0.78186, 
 light_mask = 4
 z_index = 110
 z_as_relative = false
-input_pickable = true
 collision_layer = 260
 collision_mask = 1030
+input_pickable = true
 script = ExtResource( 2 )
 __meta__ = {
 "_edit_group_": true
