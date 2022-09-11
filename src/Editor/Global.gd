@@ -18,7 +18,7 @@ func add_trail_point() -> void:
 func remove_trail_point() -> void:
 		_nb_trail_points -= 1
 
-func set_current_room(room : Room):
+func set_current_room(room : Room2D):
 	current_room = room
 func get_current_room():
 	if current_room == null:
