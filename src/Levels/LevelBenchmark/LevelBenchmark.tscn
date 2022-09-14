@@ -1,0 +1,7 @@
+[gd_scene load_steps=2 format=2]
+
+[ext_resource path="res://src/Levels/Level.tscn" type="PackedScene" id=1]
+
+[node name="LevelBenchmark" instance=ExtResource( 1 )]
+first_room = "res://src/Levels/LevelBenchmark/RoomBenchmark1.tscn"
+first_room_portal = "Portal1"

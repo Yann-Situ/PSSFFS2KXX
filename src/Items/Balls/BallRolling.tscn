@@ -20,6 +20,9 @@ colors = PoolColorArray( 1, 0, 0.580392, 0, 1, 1, 1, 0, 1, 1, 1, 1, 0.839844, 0.
 
 [node name="BallRolling" instance=ExtResource( 1 )]
 script = ExtResource( 2 )
+mass = 2.0
+friction = 0.0
+bounce = 0.001
 impact_effect = 1
 impact_threshold = 400.0
 

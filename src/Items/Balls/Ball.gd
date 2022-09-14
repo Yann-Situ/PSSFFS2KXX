@@ -48,7 +48,7 @@ func reset_position():
 	global_position = start_position
 
 func collision_effect(collider, collider_velocity, collision_point, collision_normal):
-	var speed = (linear_velocity-collider_velocity).length()
+	var speed = abs((linear_velocity-collider_velocity).dot(collision_normal))
 	if speed >= dust_threshold:
 		$Effects/DustParticle.restart()
 		if speed >= impact_threshold:
@@ -56,6 +56,8 @@ func collision_effect(collider, collider_velocity, collision_point, collision_no
 			get_parent().add_child(impact)
 			impact.global_position = collision_point
 			impact.start()
+			if collider.has_method("set_linear_velocity"):
+				print(str(speed)+"  "+str(linear_velocity)+"  "+str(collider.linear_velocity))
 	return true
 
 ###########################################################

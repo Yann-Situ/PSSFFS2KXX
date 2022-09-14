@@ -20,6 +20,7 @@ onready var collision_layer_save = collision_layer
 onready var collision_mask_save = collision_mask
 onready var invmass = 1/mass
 onready var gravity = gravity_scale*ProjectSettings.get_setting("physics/2d/default_gravity") # pix/s²
+onready var sqrt_c_gravity = sqrt(4*gravity)
 
 func set_gravity_scale(v):
 	gravity_scale = v
@@ -37,7 +38,7 @@ func set_bounce(new_value):
 
 func set_is_on_path(new_value : bool):
 	is_on_path = new_value
-	
+
 func set_linear_velocity(v):
 	linear_velocity = v
 
@@ -69,7 +70,8 @@ func set_start_position(position : Vector2):
 	global_position = position
 
 func apply_impulse(impulse):
-	linear_velocity += invmass * impulse
+	if !is_on_path:
+		linear_velocity += invmass * impulse
 
 func add_force(name : String, force : Vector2):
 	applied_forces[name] = force
@@ -83,10 +85,11 @@ func _physics_process(delta): # don't remember why it is useful to have this dup
 	if !is_on_path:
 		physics_process(delta)
 	else:
-		set_linear_velocity(1.0/delta * (global_position-last_position))
+		set_linear_velocity(0.5*linear_velocity +0.5/delta * (global_position-last_position))
 	last_position = global_position
-	
+
 func physics_process(delta):
+	color_collision(0)
 	var collision = move_and_collide(linear_velocity * delta, false)
 	if collision and collision_effect(collision.collider,
 		collision.collider_velocity, collision.position, collision.normal) :
@@ -105,50 +108,77 @@ func collision_effect(collider : Object, collider_velocity : Vector2,
 	# wrong behaviours
 	return true
 
-func collision_handle(collision, delta):
+func collision_handle(collision : KinematicCollision2D, delta : float):
 	var n = collision.normal
 	var t = n.tangent()
 	#normal_colision = n
-	if collision.collider.is_in_group("physicbodies") :
+	if collision.collider.is_in_group("physicbodies") and !collision.collider.is_on_path :
+		color_collision(1)
 		var m2 = collision.collider.mass
 		var summass = m2 + mass
-		var dist_vect = global_position-collision.collider.get_global_position()
-		var speeddist = (linear_velocity - collision.collider_velocity).dot(dist_vect)
-		var speeddistvec = (speeddist/dist_vect.length_squared())*dist_vect
+
+		# var dist_vect = global_position-collision.collider.get_global_position()
+		# var speeddist = (linear_velocity - collision.collider_velocity).dot(dist_vect)
+		# var speeddistvec = (speeddist/dist_vect.length_squared())*dist_vect
+		var speeddist = (linear_velocity - collision.collider_velocity).dot(n)
+		var speeddistvec = speeddist*n
+
 		linear_velocity -= 2*m2/summass*speeddistvec
-		collision.collider.set_linear_velocity(collision.collider_velocity + 2*mass/summass*speeddistvec)
-		#collision.collider.apply_impulse(2*m2*mass/summass*(speeddist/dist_vect.length_squared())*dist_vect)#doesn't work don't know Y
+		#collision.collider.set_linear_velocity(collision.collider_velocity + 2*mass/summass*speeddistvec)
+		collision.collider.apply_impulse(2*mass/summass*speeddistvec)
 
 		# see https://docs.godotengine.org/fr/stable/classes/class_kinematiccollision2d.html#class-kinematiccollision2d-property-collider
 		# and call `collision_effect` on the collider with the right `collision`
 		# object. This requires to change collider, angle, normal etc.
-		collision.collider.collision_effect(self,linear_velocity, \
+		collision.collider.collision_effect(self, linear_velocity, \
 			collision.position, collision.normal)
 
 		move_and_collide(collision.remainder.bounce(collision.normal),false)#may cause pb on corners ?
 
 	else:
-		var bounce_linear_velocity = bounce*linear_velocity.bounce(n)
-		var vel_n = n.dot(bounce_linear_velocity)
-		if vel_n < 2.5*gravity*delta:
-			#TODO seuil à déterminer
-			#sliding
-			#color_colision = color1
-			#var vel_t = lerp(t.dot(linear_velocity), 0, friction)
-			var vel_t = apply_friction(t.dot(linear_velocity), friction*500, delta)
-			linear_velocity = vel_t*t
+		var bounce_linear_velocity = linear_velocity.bounce(n)
+		var vel_n = bounce*bounce_linear_velocity.dot(n)
+		
+		# Critieria for friction instead of bounce: if the height of the bounce is under c pixels 
+		# then friction. #TODO seuil à déterminer
+		# Height of bounce is 0.5*v/g where v is the vertical speed
+		#0.5*v^2/g < c pix => v < sqrt(2*c*pix*g)
+		if vel_n < sqrt_c_gravity:
+			color_collision(2)
+			# Friction Part
+			# only apply friction on the tangential part of the bounce
+#			
+#			if "linear_velocity" in collision.collider:
+#				var vel_t = apply_friction((linear_velocity-collision.collider.linear_velocity).dot(t), friction*500, delta)
+#				linear_velocity = vel_t*t + collision.collider.linear_velocity
+#			else :
+			var vel_t = apply_friction((linear_velocity-collision.collider_velocity).dot(t), friction*400, delta)
+			linear_velocity = vel_t*t + collision.collider_velocity
 			var motion = collision.remainder.dot(t)*t
 			move_and_collide(motion,false)
 			#linear_velocity = move_and_slide(linear_velocity,n,false,4,0.79,false)
 		else :
-			#bouncing
-			#color_colision = color2
-			#var vel_t = lerp(t.dot(bounce_linear_velocity), 0, friction)
-			var vel_t = apply_friction(t.dot(bounce_linear_velocity), friction*500, delta)
+			color_collision(3)
+			# Bouncing Part
+			# apply friction on the tangential part of the bounce and bounce on the normal part
+			var vel_t = apply_friction(bounce_linear_velocity.dot(t), friction*500, delta)
 			linear_velocity = vel_n*n + vel_t*t
 			var motion = collision.remainder.bounce(n)
-			move_and_collide(motion,false)#may cause pb on corners ?
+			move_and_collide(motion,false)
+			# TODO
+			# Warning : may cause pb on corners ?
+			# Error : infinite bounce in some cases due to approximation
 
 func apply_friction(relative_velocity : float, friction_decel : float, delta : float):
 	var d = max(abs(relative_velocity) - friction_decel*delta, 0.0)
 	return sign(relative_velocity) * d
+
+func color_collision(i : int):
+	if i == 0:
+		self.modulate = Color.white
+	if i == 1:
+		self.modulate = Color.red
+	if i == 2:
+		self.modulate = Color.green
+	if i == 3:
+		self.modulate = Color.blue
