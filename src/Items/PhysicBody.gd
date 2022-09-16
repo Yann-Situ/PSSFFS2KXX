@@ -29,7 +29,10 @@ func get_gravity_scale():
 	return gravity_scale
 func set_mass(m):
 	mass = m
-	invmass = 1/mass
+	if is_inf(mass):
+		invmass = 0.0
+	else:
+		invmass = 1/mass
 
 func set_friction(new_value):
 	friction = new_value
@@ -113,7 +116,7 @@ func collision_handle(collision : KinematicCollision2D, delta : float):
 	var n = collision.normal
 	var t = n.tangent()
 	#normal_colision = n
-	if collision.collider.is_in_group("physicbodies") and !collision.collider.is_on_path :
+	if collision.collider.is_in_group("physicbodies") :#and !collision.collider.is_on_path :
 		color_collision(1)
 		# see https://docs.godotengine.org/fr/stable/classes/class_kinematiccollision2d.html#class-kinematiccollision2d-property-collider
 		# and call `collision_effect` on the collider with the right `collision`
@@ -121,21 +124,36 @@ func collision_handle(collision : KinematicCollision2D, delta : float):
 		collision.collider.collision_effect(self, linear_velocity, \
 			collision.position, collision.normal)
 
+		# t_m := mass/(mass+m2) and t_m2 := m2/(mass+m2), with common definition
+		# if some mass is infinite
 		var m2 = collision.collider.mass
-		var inv_sum_mass = 1/(m2 + mass)
+		var t_m1 = 0.0
+		var t_m2 = 0.0
+		if is_inf(mass):
+			if is_inf(m2):
+				t_m1 = 0.5
+				t_m2 = 0.5
+			else:
+				t_m1 = 1.0
+				t_m2 = 0.0
+		elif is_inf(m2):
+			t_m1 = 0.0
+			t_m2 = 1.0
+		else:
+			var inv_sum_mass = 1/(m2 + mass)
+			t_m1 = mass*inv_sum_mass
+			t_m2 = m2*inv_sum_mass
+
 		# computation of coeff of restitution (bounce coeff during an inelastic
 		# choc). It is a handmade computation, but it works if mass is near
 		# infinite
-		var restitution_coeff = bounce * m2 + collision.collider.bounce * mass
-		restitution_coeff *= inv_sum_mass
+		var restitution_coeff = bounce * t_m2 + collision.collider.bounce * t_m1
 		var temp_coeff = 1.0+restitution_coeff
 		var vel_dif = (linear_velocity - collision.collider_velocity).dot(n)*n
 
 		#linear_velocity -= 2*m2*inv_sum_mass*vel_dif
-		linear_velocity -= temp_coeff*m2*inv_sum_mass*vel_dif
-
-		#collision.collider.set_linear_velocity(collision.collider_velocity + 2*mass/summass*vel_dif)
-		collision.collider.apply_impulse(temp_coeff*mass*inv_sum_mass*vel_dif)
+		linear_velocity -= temp_coeff*t_m2*vel_dif
+		collision.collider.set_linear_velocity(collision.collider_velocity + temp_coeff*t_m1*vel_dif)
 
 		var motion = collision.remainder.bounce(n)
 		move_and_collide(motion,false)#may cause pb on corners ?
@@ -157,7 +175,7 @@ func collision_handle(collision : KinematicCollision2D, delta : float):
 #				var vel_t = apply_friction((linear_velocity-collision.collider.linear_velocity).dot(t), friction*500, delta)
 #				linear_velocity = vel_t*t + collision.collider.linear_velocity
 #			else :
-			var vel_t = apply_friction((linear_velocity-collision.collider_velocity).dot(t), friction*500, delta)
+			var vel_t = apply_friction((linear_velocity-collision.collider_velocity).dot(t), friction*800, delta)
 			linear_velocity = vel_t*t + collision.collider_velocity
 			var motion = collision.remainder.dot(t)*t
 			move_and_collide(motion,false)
@@ -166,7 +184,7 @@ func collision_handle(collision : KinematicCollision2D, delta : float):
 			color_collision(3)
 			# Bouncing Part
 			# apply friction on the tangential part of the bounce and bounce on the normal part
-			var vel_t = apply_friction(bounce_linear_velocity.dot(t), friction*500, delta)
+			var vel_t = apply_friction(bounce_linear_velocity.dot(t), friction*800, delta)
 			linear_velocity = vel_n*n + vel_t*t
 			var motion = collision.remainder.bounce(n)
 			move_and_collide(motion,false)

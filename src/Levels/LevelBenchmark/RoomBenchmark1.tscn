@@ -168,52 +168,52 @@ bounce = 0.0
 [node name="Jumper" parent="Environment/Dynamics" index="0" instance=ExtResource( 4 )]
 position = Vector2( -112, 48 )
 rotation = 1.5708
-jump_velocity = 100
+jump_velocity = 200
 
 [node name="Jumper2" parent="Environment/Dynamics" index="1" instance=ExtResource( 4 )]
 position = Vector2( -112, 112 )
 rotation = 1.5708
-jump_velocity = 100
+jump_velocity = 200
 
 [node name="Jumper3" parent="Environment/Dynamics" index="2" instance=ExtResource( 4 )]
 position = Vector2( -112, 176 )
 rotation = 1.5708
-jump_velocity = 100
+jump_velocity = 200
 
 [node name="Jumper4" parent="Environment/Dynamics" index="3" instance=ExtResource( 4 )]
 position = Vector2( -112, 240 )
 rotation = 1.5708
-jump_velocity = 100
+jump_velocity = 200
 
 [node name="Jumper5" parent="Environment/Dynamics" index="4" instance=ExtResource( 4 )]
 position = Vector2( -112, 304 )
 rotation = 1.5708
-jump_velocity = 100
+jump_velocity = 200
 
 [node name="Jumper6" parent="Environment/Dynamics" index="5" instance=ExtResource( 4 )]
 position = Vector2( 304, 48 )
 rotation = 1.5708
-jump_velocity = 100
+jump_velocity = 200
 
 [node name="Jumper7" parent="Environment/Dynamics" index="6" instance=ExtResource( 4 )]
 position = Vector2( 304, 112 )
 rotation = 1.5708
-jump_velocity = 100
+jump_velocity = 200
 
 [node name="Jumper8" parent="Environment/Dynamics" index="7" instance=ExtResource( 4 )]
 position = Vector2( 304, 176 )
 rotation = 1.5708
-jump_velocity = 100
+jump_velocity = 200
 
 [node name="Jumper9" parent="Environment/Dynamics" index="8" instance=ExtResource( 4 )]
 position = Vector2( 304, 240 )
 rotation = 1.5708
-jump_velocity = 100
+jump_velocity = 200
 
 [node name="Jumper10" parent="Environment/Dynamics" index="9" instance=ExtResource( 4 )]
 position = Vector2( 304, 304 )
 rotation = 1.5708
-jump_velocity = 100
+jump_velocity = 200
 
 [node name="DashTarget" parent="Environment/Interactive" index="0" instance=ExtResource( 5 )]
 position = Vector2( -176, 48 )
