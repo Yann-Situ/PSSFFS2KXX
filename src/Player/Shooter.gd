@@ -1,5 +1,7 @@
 extends Node2D
 
+export (float, 0.0, 500) var aim_tau_radius = 100
+
 var viewer_parameter = INF
 var vmax = INF
 var vmax_2 = INF # (pix/s)^2
@@ -18,6 +20,7 @@ onready var shader = $ShootScreen/ShootScreenShader.material
 
 
 func update_viewer_parameter():
+	# modify vmax and the viewer/shader parameter
 	if S.active_ball == null:
 		viewer_parameter = INF
 		vmax = INF
@@ -78,3 +81,11 @@ func update_effective_can_shoot(tau : float = 0.0, s = 0):
 
 	#print("%d %d", [g, temp, rad2deg(atan2(1 + s*sqrt(temp), Q.x))])
 	effective_v = polar2cartesian(v_length, -atan2(1 + s*sqrt(temp), Q.x))
+
+func tau_from_vector(vector : Vector2):
+	# tau from the vector (mouse_position-ball)
+	return abs(2*(smoothstep(-aim_tau_radius, aim_tau_radius, vector.y)-0.5))
+
+func s_from_vector(vector : Vector2):
+	# s from the vector (mouse_position-ball)
+	return sign(vector.y)
