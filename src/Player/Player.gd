@@ -128,10 +128,13 @@ func get_input(delta): #delta in s
 		S.velocity.y = S.velocity.y/3.5
 
 	if S.crouch_p and S.can_crouch :
-		$Actions/Crouch.move(delta)
-	else :
-		if S.can_stand:
-			S.is_crouching = false
+		if not S.is_crouching:
+			if not S.is_sliding and S.is_moving_fast:
+				$Actions/Slide.move(delta)
+			else :
+				$Actions/Crouch.move(delta)
+	elif S.can_stand:
+		S.is_crouching = false
 
 	if S.can_dunk :
 		$Actions/Dunk.move(delta)

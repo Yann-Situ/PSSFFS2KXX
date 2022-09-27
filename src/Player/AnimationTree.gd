@@ -25,6 +25,8 @@ var IsLanding = S_Ground + "is_landing"
 var IsLandrolling = S_Ground + "is_landrolling"
 var IsStanding = S_Ground + "is_standing"
 var IsWalking = S_Ground + "is_walking"
+var IsSliding = S_Ground + "is_sliding"
+var IsNotSliding = S_Ground + "is_not_sliding"
 
 const S_Action = "parameters/cancelable/action/conditions/"
 var IsDunkjumping = S_Action + "is_dunkjumping"
@@ -80,6 +82,8 @@ func animate_from_state(S):
 		self[IsLandrolling] = S.is_landing_roll
 		self[IsStanding] = !S.is_crouching
 		self[IsWalking] = !S.is_idle
+		self[IsSliding] = S.is_sliding
+		self[IsNotSliding] = !S.is_sliding
 
 	set_flip(S.move_direction == -1, S.move_direction == 1)
 

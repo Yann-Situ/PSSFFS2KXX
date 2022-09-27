@@ -90,6 +90,7 @@ export var is_halfturning = false
 export var is_crouching = false
 export var is_aiming = false
 export var is_shooting = false
+export var is_sliding = false
 
 export var is_grinding = false
 export var is_hanging = false
@@ -258,6 +259,8 @@ func update_vars(delta):
 		is_onfloor and !(is_idle or direction_p == 0 or is_crouching or is_landing or \
 			is_onwall or is_non_cancelable) # handle by player actions
 	is_aiming = is_aiming and has_ball and active_ball != null and not is_non_cancelable
+	
+	is_sliding = is_sliding and is_crouching and crouch_p
 
 ###############################################################################
 func disable_input():
@@ -325,6 +328,7 @@ func reset_state():
 	is_crouching = false
 	is_aiming = false
 	is_shooting = false
+	is_sliding = false
 	is_grinding = false
 	is_hanging = false
 

@@ -782,7 +782,7 @@ walk_return_thresh_instant_speed = 120.0
 walk_accel = 170.0
 
 [node name="PlayerPosition" parent="." instance=ExtResource( 45 )]
-position = Vector2( 536, -128 )
+position = Vector2( 2176, -608 )
 
 [connection signal="activated_change_signal" from="Environment/Activables/Button0" to="Environment/Activables/Spawner" method="set_activated"]
 [connection signal="activated_change_signal" from="Environment/Activables/Button1" to="Environment/Activables/Spawner2" method="set_activated"]
