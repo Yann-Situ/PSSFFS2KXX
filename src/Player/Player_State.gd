@@ -14,7 +14,7 @@ export (float) var tolerance_land_lag = 3*frame_time_ms #s
 export (float) var walljump_move_countdown = 22*frame_time_ms #s
 export (float) var jump_countdown = 10*frame_time_ms #s
 export (float) var dunkjump_countdown = 0.4#s
-export (float) var dunk_countdown = 0.71 #s
+export (float) var dunk_countdown = 0.9 #s
 export (float) var shoot_countdown = 30*frame_time_ms #s
 
 # Bool for inputs ('p' is for 'pressed', 'jp' 'just_pressed', 'jr' 'just_released')
@@ -221,8 +221,8 @@ func update_vars(delta):
 	update_action()
 
 	# possibilities can_*
-	can_jump = not $ToleranceJumpFloorTimer.is_stopped() and \
-		$CanJumpTimer.is_stopped()
+	can_jump = (not $ToleranceJumpFloorTimer.is_stopped() or is_grinding or \
+		is_hanging) and $CanJumpTimer.is_stopped()
 	can_walljump = not $ToleranceWallJumpTimer.is_stopped() and \
 		$CanJumpTimer.is_stopped()
 	can_go = $CanGoTimer.is_stopped() and not (is_dunkjumping and dunk_p) and \
@@ -237,9 +237,10 @@ func update_vars(delta):
 	can_shoot = is_aiming and has_ball and active_ball != null
 	can_dunkdash = Player.SpecialActionHandler.can_dunkdash()
 	can_dunkjump = Player.SpecialActionHandler.can_dunkjump()
-	can_dunk = $CanDunkTimer.is_stopped() and \
-		((not is_onfloor and dunk_p)) and \
-		Player.SpecialActionHandler.can_dunk() and not is_shooting and not is_dunkprejumping
+	can_dunk = $CanDunkTimer.is_stopped() and ((not is_onfloor and dunk_p)) and \
+		not is_shooting and \
+		not is_dunkprejumping and Player.SpecialActionHandler.can_dunk() 
+		# TODO: enable dunking while hanging except when hanging on the dunk_basket
 	
 	# cancelables :
 	is_jumping = is_jumping and not is_onfloor and is_mounting and not is_dunkdashing

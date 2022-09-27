@@ -98,8 +98,8 @@ func update_basket_selectors():
 	var selectables = $dunkjump_area.get_overlapping_areas()
 	if !selectables.empty():
 		# choose by priority selectables that are in direction_p, closest above player
-		var could_dunkjump = S.can_jump and not S.is_non_cancelable and \
-			S.get_node("CanDunkjumpTimer").is_stopped()
+		var could_dunkjump = not S.get_node("ToleranceJumpFloorTimer").is_stopped() and \
+			not S.is_non_cancelable and S.get_node("CanDunkjumpTimer").is_stopped()
 		var could_dunkdash = not S.is_non_cancelable
 		dunkjump_criteria_init()
 		dunkdash_criteria_init()
@@ -163,10 +163,10 @@ func can_stand():
 
 func can_dunkjump():
 	# update_basket()
-	return S.dunkjump_basket != null
+	return S.dunkjump_basket != null # S.dunkjump_basket is set by the Selector
 
 func can_dunkdash():
-	return S.dunkdash_basket != null
+	return S.dunkdash_basket != null  # S.dunkdash_basket is set by the Selector
 
 func can_dunk():
 	var selectables = $dunk_area.get_overlapping_areas()

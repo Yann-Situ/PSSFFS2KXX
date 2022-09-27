@@ -167,6 +167,7 @@ adjustment_contrast = 1.08
 adjustment_saturation = 1.01
 
 [sub_resource type="AnimatedTexture" id=23]
+flags = 4
 frames = 5
 fps = 8.0
 frame_0/texture = ExtResource( 18 )
@@ -411,10 +412,12 @@ z_as_relative = false
 
 [node name="Button0" parent="Environment/Activables" instance=ExtResource( 20 )]
 position = Vector2( 600, -94 )
+wait_time = 1
 
 [node name="Button1" parent="Environment/Activables" instance=ExtResource( 20 )]
 position = Vector2( 456, -94 )
 button_type = 1
+wait_time = 1
 
 [node name="Spawner" parent="Environment/Activables" instance=ExtResource( 19 )]
 position = Vector2( 752, 82 )
@@ -430,26 +433,32 @@ ball = ExtResource( 3 )
 [node name="Button2" parent="Environment/Activables" instance=ExtResource( 20 )]
 position = Vector2( 640, -94 )
 button_type = 2
+wait_time = 1
 
 [node name="Button3" parent="Environment/Activables" instance=ExtResource( 20 )]
 position = Vector2( 368, 546 )
 button_type = 2
+wait_time = 1
 
 [node name="Button4" parent="Environment/Activables" instance=ExtResource( 20 )]
 position = Vector2( 1168, 226 )
 button_type = 1
+wait_time = 1
 
 [node name="Button5" parent="Environment/Activables" instance=ExtResource( 20 )]
 position = Vector2( 1216, 226 )
 button_type = 1
+wait_time = 1
 
 [node name="Button6" parent="Environment/Activables" instance=ExtResource( 20 )]
 position = Vector2( 1200, 98 )
 button_type = 1
+wait_time = 1
 
 [node name="Button7" parent="Environment/Activables" instance=ExtResource( 20 )]
 position = Vector2( 1168, 354 )
 button_type = 1
+wait_time = 1
 
 [node name="Spawner3" parent="Environment/Activables" instance=ExtResource( 19 )]
 position = Vector2( 1104, 786 )
@@ -463,6 +472,8 @@ light_mask = 1
 position = Vector2( 1104, 568 )
 collision_mask = 6
 physics_enabled = false
+attract_force = 500
+destruction_momentum = 20
 
 [node name="Ball" parent="Environment/Balls" instance=ExtResource( 5 )]
 position = Vector2( 1856, 336 )
@@ -486,21 +497,49 @@ collision_mask = 6
 light_mask = 1
 position = Vector2( 2184, 520 )
 collision_mask = 6
+damage = 3.0
+boum_min = 400.0
+boum_max = 700.0
+distance_max = 64.0
+speed_threshold = 350.0
+boum_timer = 1.0
+boum_delay = 0.13
 
 [node name="BallBoum2" parent="Environment/Balls" instance=ExtResource( 3 )]
 light_mask = 1
 position = Vector2( -192, 504 )
 collision_mask = 6
+damage = 3.0
+boum_min = 400.0
+boum_max = 700.0
+distance_max = 64.0
+speed_threshold = 350.0
+boum_timer = 1.0
+boum_delay = 0.13
 
 [node name="BallBoum3" parent="Environment/Balls" instance=ExtResource( 3 )]
 light_mask = 1
 position = Vector2( 320, 696 )
 collision_mask = 6
+damage = 3.0
+boum_min = 400.0
+boum_max = 700.0
+distance_max = 64.0
+speed_threshold = 350.0
+boum_timer = 1.0
+boum_delay = 0.13
 
 [node name="BallBoum4" parent="Environment/Balls" instance=ExtResource( 3 )]
 light_mask = 1
 position = Vector2( 960, 368 )
 collision_mask = 6
+damage = 3.0
+boum_min = 400.0
+boum_max = 700.0
+distance_max = 64.0
+speed_threshold = 350.0
+boum_timer = 1.0
+boum_delay = 0.13
 
 [node name="BallRolling" parent="Environment/Balls" instance=ExtResource( 27 )]
 light_mask = 1
@@ -511,26 +550,48 @@ collision_mask = 6
 light_mask = 1
 position = Vector2( 1536, 520 )
 collision_mask = 6
+attract_speed = 350
+attract_player_radius = 45
+destruction_speed_thresh = 300
+destruction_momentum_min = 500
+destruction_momentum_max = 900
 
 [node name="BallMetal2" parent="Environment/Balls" instance=ExtResource( 28 )]
 light_mask = 1
 position = Vector2( 2456, 536 )
 collision_mask = 6
+attract_speed = 350
+attract_player_radius = 45
+destruction_speed_thresh = 300
+destruction_momentum_min = 500
+destruction_momentum_max = 900
 
 [node name="BallMetal3" parent="Environment/Balls" instance=ExtResource( 28 )]
 light_mask = 1
 position = Vector2( -576, -616 )
 collision_mask = 6
+attract_speed = 350
+attract_player_radius = 45
+destruction_speed_thresh = 300
+destruction_momentum_min = 500
+destruction_momentum_max = 900
 
 [node name="BallLight" parent="Environment/Balls" instance=ExtResource( 24 )]
 light_mask = 1
 position = Vector2( 624, 528 )
 collision_mask = 6
+enabled = false
 
 [node name="BallShock" parent="Environment/Balls" instance=ExtResource( 44 )]
 light_mask = 1
 position = Vector2( 936, 376 )
 collision_mask = 6
+shock_min = 401.0
+shock_max = 401.0
+shock_jump = 1850.0
+shock_fall = 5000.0
+distance_max = 64.0
+shock_timer = 0.25
 
 [node name="BallDash" parent="Environment/Balls" instance=ExtResource( 47 )]
 position = Vector2( 832, 248 )

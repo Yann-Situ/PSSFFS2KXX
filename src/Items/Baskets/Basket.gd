@@ -130,8 +130,11 @@ func pickup_character(character : Node):
 	inside_bodies.push_back(character)
 	bodies_positions.push_back(Vector2(character.global_position.x, \
 		self.global_position.y+hang_position_offset_y))
-
+	
 	character.get_node("Actions/Hang").move(0.01)
+	
+	$DunkCooldown.stop()
+	can_receive_dunk = false
 
 func free_character(character : Node):
 	# called by character when getting out
@@ -145,10 +148,9 @@ func free_character(character : Node):
 				printerr(body.name + " doesn't have a node called Actions/Hang")
 			remove_body(i)
 		i += 1
-	if can_receive_dunk or !$DunkCooldown.is_stopped():
-		$DunkCooldown.stop()
-		can_receive_dunk = false
-		$DunkCooldown.start(dunk_free_character_cooldown)
+	$DunkCooldown.stop()
+	can_receive_dunk = false
+	$DunkCooldown.start(dunk_free_character_cooldown)
 
 func _on_DunkCooldown_timeout():
 	can_receive_dunk = true

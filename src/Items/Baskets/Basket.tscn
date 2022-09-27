@@ -12,36 +12,41 @@
 [ext_resource path="res://src/Effects/LineParticle.tscn" type="PackedScene" id=10]
 
 [sub_resource type="AtlasTexture" id=1]
+flags = 4
 atlas = ExtResource( 1 )
 region = Rect2( 0, 0, 32, 16 )
 
 [sub_resource type="AtlasTexture" id=2]
+flags = 4
 atlas = ExtResource( 1 )
 region = Rect2( 32, 0, 32, 16 )
 
 [sub_resource type="AtlasTexture" id=3]
+flags = 4
 atlas = ExtResource( 1 )
 region = Rect2( 64, 0, 32, 16 )
 
 [sub_resource type="AtlasTexture" id=4]
+flags = 4
 atlas = ExtResource( 1 )
 region = Rect2( 96, 0, 32, 16 )
 
 [sub_resource type="AtlasTexture" id=5]
+flags = 4
 atlas = ExtResource( 1 )
 region = Rect2( 128, 0, 32, 16 )
 
 [sub_resource type="SpriteFrames" id=6]
 animations = [ {
-"frames": [ SubResource( 1 ), SubResource( 2 ), SubResource( 3 ), SubResource( 4 ), SubResource( 1 ), SubResource( 5 ), SubResource( 1 ) ],
-"loop": true,
-"name": "default",
-"speed": 4.0
-}, {
 "frames": [  ],
 "loop": true,
 "name": "New Anim",
 "speed": 5.0
+}, {
+"frames": [ SubResource( 1 ), SubResource( 2 ), SubResource( 3 ), SubResource( 4 ), SubResource( 1 ), SubResource( 5 ), SubResource( 1 ) ],
+"loop": true,
+"name": "default",
+"speed": 4.0
 } ]
 
 [sub_resource type="SegmentShape2D" id=7]
@@ -86,6 +91,7 @@ tracks/0/keys = {
 }
 
 [sub_resource type="AnimatedTexture" id=12]
+flags = 4
 frames = 5
 fps = 8.0
 frame_0/texture = ExtResource( 6 )
@@ -139,6 +145,7 @@ anim_speed = 1.0
 anim_speed_curve = SubResource( 17 )
 
 [sub_resource type="StreamTexture" id=20]
+flags = 4
 load_path = "res://.import/line_particule.png-a121e21732928f808962c84ee5009984.stex"
 
 [node name="Basket" type="Node2D"]
@@ -156,7 +163,7 @@ hang_position_offset_y = 36
 use_parent_material = true
 position = Vector2( 0, 6 )
 frames = SubResource( 6 )
-frame = 6
+frame = 5
 playing = true
 
 [node name="basket_area" type="Area2D" parent="."]

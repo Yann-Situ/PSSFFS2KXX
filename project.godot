@@ -123,11 +123,12 @@ shapes/collision/shape_color=Color( 1, 1, 1, 0.419608 )
 
 [display]
 
-window/size/width=800
-window/size/height=450
-window/size/test_width=1600
-window/size/test_height=900
+window/size/width=900
+window/size/height=500
+window/size/test_width=1440
+window/size/test_height=800
 window/dpi/allow_hidpi=true
+mouse_cursor/custom_image="res://assets/art/icons/target.png"
 window/stretch/mode="viewport"
 window/stretch/aspect="keep"
 
@@ -138,24 +139,11 @@ enabled=PoolStringArray(  )
 [importer_defaults]
 
 texture={
-"compress/bptc_ldr": 0,
-"compress/hdr_mode": 0,
-"compress/lossy_quality": 0.7,
-"compress/mode": 0,
-"compress/normal_map": 0,
 "detect_3d": false,
-"flags/anisotropic": false,
-"flags/filter": false,
-"flags/mipmaps": false,
-"flags/repeat": 0,
-"flags/srgb": 2,
-"process/HDR_as_SRGB": false,
-"process/fix_alpha_border": true,
-"process/invert_color": false,
-"process/premult_alpha": false,
-"size_limit": 0,
-"stream": false,
-"svg/scale": 1.0
+"flags/filter": false
+}
+scene={
+"nodes/root_type": "Node2D"
 }
 
 [input]
