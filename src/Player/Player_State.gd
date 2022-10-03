@@ -189,8 +189,8 @@ func update_vars(delta):
 	is_moving_fast = (abs(velocity.x) > Player.run_speed_thresh)
 	is_falling =  (not is_onfloor) and velocity.y > 0
 	is_mounting = (not is_onfloor) and velocity.y < 0
-	is_moving = (abs(velocity.x) > 5.0) or (abs(velocity.y) > 5.0)
-	is_idle = (abs(velocity.x) <= 5.0)
+	is_moving = (abs(velocity.x) > 10.0) or (abs(velocity.y) > 10.0)
+	is_idle = (abs(velocity.x) <= 10.0)
 
 	if (velocity.x == 0):
 		move_direction = 0
@@ -260,7 +260,7 @@ func update_vars(delta):
 			is_onwall or is_non_cancelable) # handle by player actions
 	is_aiming = is_aiming and has_ball and active_ball != null and not is_non_cancelable
 	
-	is_sliding = is_sliding and is_crouching and crouch_p
+	is_sliding = is_sliding and is_crouching and crouch_p and not is_idle
 
 ###############################################################################
 func disable_input():

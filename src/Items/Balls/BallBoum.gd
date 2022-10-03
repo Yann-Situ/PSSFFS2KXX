@@ -69,3 +69,5 @@ func power_jp(player,delta):
 func power_jr(player,delta):
 	pass
 
+func on_destruction(): # call before changing holder, disable_physics and deleting selectors
+	boum(boum_min, self.global_position)

@@ -56,7 +56,7 @@ radius = 224.0
 
 [sub_resource type="CircleShape2D" id=3]
 resource_local_to_scene = true
-radius = 48.0
+radius = 64.0
 
 [sub_resource type="ShaderMaterial" id=4]
 shader = ExtResource( 42 )
@@ -1479,7 +1479,6 @@ shape = SubResource( 1 )
 [node name="Actions" type="Node2D" parent="."]
 
 [node name="SpecialActionHandler" type="Node2D" parent="Actions"]
-visible = false
 script = ExtResource( 9 )
 
 [node name="Ray_fwd_up" type="RayCast2D" parent="Actions/SpecialActionHandler"]

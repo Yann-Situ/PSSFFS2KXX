@@ -56,7 +56,14 @@ anim_speed = 1.0
 
 [node name="BallBoum" instance=ExtResource( 1 )]
 script = ExtResource( 3 )
+damage = 3.0
+boum_min = 400.0
+boum_max = 700.0
+distance_max = 64.0
 damage_distance_max = 63.0
+speed_threshold = 350.0
+boum_timer = 1.0
+boum_delay = 0.13
 
 [node name="Sprite" parent="." index="0"]
 texture = ExtResource( 4 )

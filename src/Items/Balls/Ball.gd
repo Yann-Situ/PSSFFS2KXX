@@ -10,6 +10,7 @@ enum IMPACT_EFFECT {SPIKY, METALLIC}
 export (IMPACT_EFFECT) var impact_effect = IMPACT_EFFECT.SPIKY
 export (float) var dust_threshold = 300
 export (float) var impact_threshold = 500
+export (float) var damage_destruction_threshold = 2
 var selectors = {}
 var impact_particles = [preload("res://src/Effects/ImpactParticle1.tscn"),
 	preload("res://src/Effects/ImpactParticle0.tscn")]
@@ -174,7 +175,8 @@ func on_destruction(): # call before changing holder, disable_physics and deleti
 	pass
 
 func apply_damage(damage : float, duration : float = 0.0):
-	destruction(0.0)
+	if damage >= damage_destruction_threshold:
+		destruction(0.0)
 
 ################################################################################
 
