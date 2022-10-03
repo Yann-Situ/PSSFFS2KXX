@@ -25,6 +25,7 @@ hue_variation = -1.0
 hue_variation_random = 0.05
 
 [sub_resource type="StreamTexture" id=4]
+flags = 4
 load_path = "res://.import/pixel.png-8e4e6cd3613230bba87e395c4cf3f3d7.stex"
 
 [node name="RideParticles" type="Particles2D"]
