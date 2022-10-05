@@ -1,0 +1,111 @@
+[gd_scene load_steps=15 format=2]
+
+[ext_resource path="res://assets/art/characters/Pedestrian_2.png" type="Texture" id=1]
+[ext_resource path="res://assets/shader/pedestrian.gdshader" type="Shader" id=2]
+
+[sub_resource type="Gradient" id=6]
+offsets = PoolRealArray( 0.376471, 0.870588 )
+colors = PoolColorArray( 0.522461, 0, 0.266333, 1, 0.926758, 0.511105, 0.267891, 1 )
+
+[sub_resource type="GradientTexture" id=7]
+gradient = SubResource( 6 )
+width = 100
+
+[sub_resource type="Gradient" id=10]
+offsets = PoolRealArray( 0.176471, 1 )
+colors = PoolColorArray( 0.575195, 0.372342, 0.0921211, 1, 0.817383, 0.759917, 0.507671, 1 )
+
+[sub_resource type="GradientTexture" id=11]
+gradient = SubResource( 10 )
+width = 100
+
+[sub_resource type="Gradient" id=12]
+offsets = PoolRealArray( 0.376471, 1 )
+colors = PoolColorArray( 0.363281, 0.0823059, 0.24694, 1, 1, 0.690308, 0.328125, 1 )
+
+[sub_resource type="GradientTexture" id=13]
+gradient = SubResource( 12 )
+width = 100
+
+[sub_resource type="Gradient" id=8]
+offsets = PoolRealArray( 0.364706, 0.905882, 0.964706 )
+colors = PoolColorArray( 0.180664, 0.0522232, 0.0860894, 1, 0.433594, 0.281357, 0.133804, 1, 0.78125, 0.78125, 0.78125, 1 )
+
+[sub_resource type="GradientTexture" id=9]
+gradient = SubResource( 8 )
+width = 100
+
+[sub_resource type="ShaderMaterial" id=2]
+shader = ExtResource( 2 )
+shader_param/grad_skin = SubResource( 9 )
+shader_param/grad_1 = SubResource( 7 )
+shader_param/grad_2 = SubResource( 11 )
+shader_param/grad_3 = SubResource( 13 )
+
+[sub_resource type="Animation" id=3]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/path = NodePath("Sprite:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ 0 ]
+}
+
+[sub_resource type="Animation" id=4]
+resource_name = "idle"
+length = 1.2
+loop = true
+step = 0.075
+tracks/0/type = "value"
+tracks/0/path = NodePath("Sprite:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.075, 0.15, 0.225, 0.3, 0.375, 0.45, 0.525, 0.6, 0.675, 0.75, 0.825, 0.9, 0.975, 1.05, 1.125 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1 ),
+"update": 1,
+"values": [ 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15 ]
+}
+
+[sub_resource type="Animation" id=5]
+resource_name = "walk"
+length = 1.04
+loop = true
+step = 0.065
+tracks/0/type = "value"
+tracks/0/path = NodePath("Sprite:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.065, 0.13, 0.195, 0.26, 0.325, 0.39, 0.455, 0.52, 0.585, 0.65, 0.715, 0.78, 0.845, 0.91, 0.975 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1 ),
+"update": 1,
+"values": [ 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31 ]
+}
+
+[node name="Pedestrian" type="Node2D"]
+z_index = 100
+z_as_relative = false
+
+[node name="Sprite" type="Sprite" parent="."]
+material = SubResource( 2 )
+texture = ExtResource( 1 )
+hframes = 16
+vframes = 3
+region_rect = Rect2( 0, 0, 64, 96 )
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+autoplay = "idle"
+anims/RESET = SubResource( 3 )
+anims/idle = SubResource( 4 )
+anims/walk = SubResource( 5 )
