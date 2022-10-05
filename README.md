@@ -146,7 +146,7 @@ Popol Super Slam Fusion Full Speed 2KXX
 * [x] **Trails** _on_Decay_tween_all_completed never called when **Ball** get reparented during the decay. Workaround by adding child to current_room instead of ball.
 * [x] **Bubble/Zap ball teleportation** trailhandler can act very weirdly if used quickly repeatly.
 * [x] **Player** catching ball while inside **BallWall** results in stuck player. [Maybe disable the player catch area while inside ballwall?]
-* [ ] The `shoot_previewer` shows a trajectory slightly above the real one.
+* [x] The `shoot_previewer` shows a trajectory slightly above the real one.
 * [ ] **Effects** **Particles** that are displayed outside the window are displayed after when they reenter the window.
 * [ ] **shooting** just before **landing** results in `floor_shoot` just after `aim_shoot` animation
 * [ ] There is some jitter animation when passing from a **dunkjump** state to a **grind** state.

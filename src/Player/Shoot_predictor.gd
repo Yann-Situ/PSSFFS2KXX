@@ -42,8 +42,8 @@ func draw(position, vel, grav):
 	points.clear()
 	for i in range(nb_points):
 		points.append(position)
-		vel += 1.001*grav * delta
-		position += 0.999*vel * delta
+		vel += 1.0*grav * delta
+		position += 1.0*vel * delta + 0.5 * grav*delta*delta # Thanks Taylor
 	update()
 
 func draw_attract(position, vel, grav, power):
