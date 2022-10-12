@@ -497,49 +497,21 @@ collision_mask = 6
 light_mask = 1
 position = Vector2( 2184, 520 )
 collision_mask = 6
-damage = 3.0
-boum_min = 400.0
-boum_max = 700.0
-distance_max = 64.0
-speed_threshold = 350.0
-boum_timer = 1.0
-boum_delay = 0.13
 
 [node name="BallBoum2" parent="Environment/Balls" instance=ExtResource( 3 )]
 light_mask = 1
 position = Vector2( -192, 504 )
 collision_mask = 6
-damage = 3.0
-boum_min = 400.0
-boum_max = 700.0
-distance_max = 64.0
-speed_threshold = 350.0
-boum_timer = 1.0
-boum_delay = 0.13
 
 [node name="BallBoum3" parent="Environment/Balls" instance=ExtResource( 3 )]
 light_mask = 1
 position = Vector2( 320, 696 )
 collision_mask = 6
-damage = 3.0
-boum_min = 400.0
-boum_max = 700.0
-distance_max = 64.0
-speed_threshold = 350.0
-boum_timer = 1.0
-boum_delay = 0.13
 
 [node name="BallBoum4" parent="Environment/Balls" instance=ExtResource( 3 )]
 light_mask = 1
 position = Vector2( 960, 368 )
 collision_mask = 6
-damage = 3.0
-boum_min = 400.0
-boum_max = 700.0
-distance_max = 64.0
-speed_threshold = 350.0
-boum_timer = 1.0
-boum_delay = 0.13
 
 [node name="BallRolling" parent="Environment/Balls" instance=ExtResource( 27 )]
 light_mask = 1

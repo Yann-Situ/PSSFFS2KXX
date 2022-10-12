@@ -9,24 +9,22 @@ particles_anim_h_frames = 6
 particles_anim_v_frames = 1
 particles_anim_loop = true
 
-[sub_resource type="Curve" id=2]
-max_value = 2.0
-_data = [ Vector2( 0, 0.986364 ), 0.0, -1.02546, 0, 0, Vector2( 0.537037, 0.172727 ), -0.906294, -0.906294, 0, 0, Vector2( 1, 0 ), 0.0, 0.0, 0, 0 ]
+[sub_resource type="Curve" id=7]
+_data = [ Vector2( 0, 0.993182 ), 0.0, 0.0, 0, 0, Vector2( 0.611111, 0.295455 ), -1.47273, -1.47273, 0, 0, Vector2( 1, 0 ), 0.0, 0.0, 0, 0 ]
 
-[sub_resource type="CurveTexture" id=3]
-width = 100
-curve = SubResource( 2 )
+[sub_resource type="CurveTexture" id=8]
+width = 128
+curve = SubResource( 7 )
 
 [sub_resource type="Gradient" id=4]
 offsets = PoolRealArray( 0, 0.554404, 1 )
-colors = PoolColorArray( 1.30196, 1.2, 1.2, 0.968627, 0.976471, 0.72549, 0.4, 0.85098, 0.449219, 0.0947571, 0.0947571, 0.584314 )
+colors = PoolColorArray( 1.30196, 1.2, 1.2, 0.968627, 0.976471, 0.72549, 0.4, 0.85098, 0.45098, 0.0941176, 0.0941176, 0.34902 )
 
 [sub_resource type="GradientTexture" id=5]
 gradient = SubResource( 4 )
 width = 100
 
 [sub_resource type="ParticlesMaterial" id=6]
-lifetime_randomness = 0.2
 flag_disable_z = true
 direction = Vector3( 0, 0, 0 )
 spread = 0.0
@@ -35,8 +33,10 @@ orbit_velocity = 0.0
 orbit_velocity_random = 0.0
 radial_accel = -10.17
 color_ramp = SubResource( 5 )
+hue_variation = 0.01
+hue_variation_random = 1.0
 anim_speed = 1.0
-anim_speed_curve = SubResource( 3 )
+anim_speed_curve = SubResource( 8 )
 
 [node name="GrindParticles" type="Particles2D"]
 material = SubResource( 1 )

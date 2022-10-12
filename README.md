@@ -78,8 +78,12 @@ Popol Super Slam Fusion Full Speed 2KXX
    - [ ] Add WorldMap and level selection
    - [ ] Add dialogue system
 
-### Code structure to implement
+### Code structure to implement / TODO
 * `Selector` is currently a child of `Player/Actions` and is reparent by code to be a child of `Room`. Maybe it should be a child of the room or the level, and accessed in `SpecialActionHandler` via a NodePath or through signals.
+* Implement Explosion nodes.
+* Rework Aiming system (better physics + time stop + 2 steps shoot).
+* Rework Dunkdash target graphism.
+* Implement Pedestrian generator (pnj shader, gradient sampler, ...).
 
 ## Issues
 ### Physical movement
