@@ -10,7 +10,7 @@ _data = [ Vector2( 0, 1 ), 4.35537, -0.0568181, 0, 0, Vector2( 0.0823529, 1 ), 0
 _data = [ Vector2( 0.3, 0 ), 0.0, 0.0, 0, 0, Vector2( 0.664706, 1 ), 0.0, 0.0, 0, 0, Vector2( 0.855882, 0 ), 0.0, 0.0, 0, 0 ]
 
 [sub_resource type="Curve" id=18]
-_data = [ Vector2( 0.176471, 0 ), 0.0, 0.0, 0, 0, Vector2( 0.373529, 0.936364 ), 0.0, 0.0, 0, 0, Vector2( 0.541176, 0.3 ), 0.0, 0.0, 0, 0, Vector2( 0.802941, 0.945454 ), 0.0, 0.0, 0, 0, Vector2( 0.912281, 0 ), 0.0, 0.0, 0, 0 ]
+_data = [ Vector2( 0, 0 ), 0.0, 0.0, 0, 0, Vector2( 0.108824, 1 ), 0.0, 0.0, 0, 0, Vector2( 0.297059, 0 ), 0.0, 0.0, 0, 0, Vector2( 0.767647, 0.590909 ), 0.0, 0.0, 0, 0, Vector2( 0.95, 0 ), 0.0, 0.0, 0, 0 ]
 
 [sub_resource type="Resource" id=19]
 script = ExtResource( 3 )
@@ -22,10 +22,10 @@ value_distribution = SubResource( 18 )
 _data = [ Vector2( 0.378446, 0.961364 ), 0.0, 0.0, 0, 0 ]
 
 [sub_resource type="Curve" id=21]
-_data = [ Vector2( 0.620588, 0 ), 0.0, 0.0, 0, 0, Vector2( 0.905882, 1 ), 0.0, 0.0, 0, 0, Vector2( 1, 0.406818 ), 0.0, 0.0, 0, 0 ]
+_data = [ Vector2( 0.467647, 0 ), 0.0, 0.0, 0, 0, Vector2( 0.864706, 1 ), 0.0, 0.0, 0, 0, Vector2( 1, 0.454545 ), 0.0, 0.0, 0, 0 ]
 
 [sub_resource type="Curve" id=22]
-_data = [ Vector2( 0.608823, 0 ), 0.0, 0.0, 0, 0, Vector2( 0.902941, 1 ), 0.0, 0.0, 0, 0 ]
+_data = [ Vector2( 0.508824, 0 ), 0.0, 0.0, 0, 0, Vector2( 0.902941, 1 ), 0.0, 0.0, 0, 0, Vector2( 1, 0 ), 0.0, 0.0, 0, 0 ]
 
 [sub_resource type="Resource" id=23]
 script = ExtResource( 3 )
@@ -49,13 +49,13 @@ saturation_distribution = SubResource( 29 )
 value_distribution = SubResource( 30 )
 
 [sub_resource type="Curve" id=32]
-_data = [ Vector2( 0.0294118, 0.881818 ), 0.0, 0.0, 0, 0, Vector2( 0.264706, 0 ), 0.0, 0.0, 0, 0, Vector2( 0.558824, 0 ), 0.0, 0.0, 0, 0, Vector2( 0.785294, 0.472727 ), 1.2201, 0.0, 0, 0, Vector2( 1, 0.663636 ), 0.0, 0.0, 0, 0 ]
+_data = [ Vector2( 0.0676471, 1 ), 0.0, 0.0, 0, 0, Vector2( 0.185294, 0 ), 0.0, 0.0, 0, 0, Vector2( 0.820588, 0 ), 0.0, 0.0, 0, 0, Vector2( 1, 1 ), 0.0, 0.0, 0, 0 ]
 
 [sub_resource type="Curve" id=33]
-_data = [ Vector2( 0, 0 ), 0.0, 0.0, 0, 0, Vector2( 0.161765, 1 ), 0.0, 0.0, 0, 0, Vector2( 0.758823, 0 ), 0.0, 0.0, 0, 0 ]
+_data = [ Vector2( 0, 1 ), 0.0, 0.0, 0, 0, Vector2( 0.470588, 0 ), 0.0, 0.0, 0, 0 ]
 
 [sub_resource type="Curve" id=34]
-_data = [ Vector2( 0.255882, 0 ), 0.0, 0.0, 0, 0, Vector2( 0.644118, 1 ), 0.0, 0.0, 0, 0 ]
+_data = [ Vector2( 0, 0 ), 0.0, 0.0, 0, 0, Vector2( 0.505882, 1 ), 0.0, 0.0, 0, 0, Vector2( 1, 0 ), 0.0, 0.0, 0, 0 ]
 
 [sub_resource type="Resource" id=35]
 script = ExtResource( 3 )

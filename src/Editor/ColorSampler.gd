@@ -70,7 +70,6 @@ func update_samplers():
 	value_sampler = compute_sampler(value_distribution)
 
 func sample(alpha : float = 1.0) -> Color:
-	randomize()
 	var h = hue_sampler.interpolate_baked(randf())
 	var s = saturation_sampler.interpolate_baked(randf())
 	var v = value_sampler.interpolate_baked(randf())

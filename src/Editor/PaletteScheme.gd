@@ -3,12 +3,25 @@ class_name PaletteScheme
 
 export (Array, Gradient) var gradients = []
 
+func display():
+	var s = ""
+	for gradient in gradients:
+		s+= ("[")
+		for i in [0.5]:
+			s+=(str(gradient.interpolate(i)))
+		s+=("]\n")
+	print(s)
+
+func clear_gradients():
+	gradients.clear()
+
 func add_gradient_from_color(color : Color,\
 		black : Color=ColorN("black"), white : Color=ColorN("white")):
 	var g = Gradient.new()
 	g.set_color(0,black)
 	g.set_color(1,white)
 	g.add_point(0.5, color)
+	#g.set_local_to_scene(true) ?
 	gradients.push_back(g)
 
 func add_gradient_from_colors(colors : PoolColorArray):

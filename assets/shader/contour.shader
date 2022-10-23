@@ -1,7 +1,7 @@
 shader_type canvas_item;
 render_mode blend_mix;
 
-uniform bool activated : true;
+uniform bool activated = true;
 uniform vec4 contour_color : hint_color = vec4(1.2,1.0,0.9,0.65);
 uniform float light_thresh : hint_range(0., 1.,0.05) = 0.4;
 float lightness(vec4 x)
