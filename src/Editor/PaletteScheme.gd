@@ -1,19 +1,27 @@
 extends Resource
 class_name PaletteScheme
 
-export (Array, Gradient) var gradients = []
+var gradients = [] # (Array, Gradient)
 
-func display():
-	var s = ""
-	for gradient in gradients:
-		s+= ("[")
-		for i in [0.5]:
-			s+=(str(gradient.interpolate(i)))
-		s+=("]\n")
-	print(s)
+func get_gradient(i : int) -> Gradient:
+	if i < gradients.size() and i >= 0:
+		return gradients[i]
+	push_warning("out of bounds, return default gradient")
+	return Gradient.new()
 
 func clear_gradients():
 	gradients.clear()
+
+func add_gradient(gradient : Gradient, index : int = -1):
+	if index == -1:
+		gradients.push_back(gradient)
+	else :
+		gradients.insert(index, gradient)
+
+func remove_gradient(index : int):
+	gradients.remove(index)
+
+################################################################################
 
 func add_gradient_from_color(color : Color,\
 		black : Color=ColorN("black"), white : Color=ColorN("white")):
@@ -21,7 +29,6 @@ func add_gradient_from_color(color : Color,\
 	g.set_color(0,black)
 	g.set_color(1,white)
 	g.add_point(0.5, color)
-	#g.set_local_to_scene(true) ?
 	gradients.push_back(g)
 
 func add_gradient_from_colors(colors : PoolColorArray):
@@ -36,3 +43,12 @@ func add_gradient_from_colors(colors : PoolColorArray):
 		g.set_offset(i,offset)
 		offset += step
 	gradients.push_back(g)
+
+func display():
+	var s = ""
+	for gradient in gradients:
+		s+= ("[")
+		for i in [0.5]:
+			s+=(str(gradient.interpolate(i)))
+		s+=("]\n")
+	print(s)

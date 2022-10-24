@@ -1,61 +1,62 @@
-[gd_resource type="Resource" load_steps=19 format=2]
+[gd_resource type="Resource" load_steps=20 format=2]
 
 [ext_resource path="res://src/Editor/PaletteSchemeSampler.gd" type="Script" id=1]
+[ext_resource path="res://src/Editor/ColorSampler.gd" type="Script" id=2]
 [ext_resource path="res://src/Editor/ColorSampler.gd" type="Script" id=3]
 
 [sub_resource type="Curve" id=16]
 _data = [ Vector2( 0, 1 ), 4.35537, -0.0568181, 0, 0, Vector2( 0.0823529, 1 ), 0.0, 0.0, 0, 0, Vector2( 0.141176, 0 ), 0.0, 0.0, 0, 0, Vector2( 0.958824, 0 ), 0.0, 0.0, 0, 0, Vector2( 1, 1 ), 0.0, 0.0, 0, 0 ]
 
 [sub_resource type="Curve" id=17]
-_data = [ Vector2( 0.3, 0 ), 0.0, 0.0, 0, 0, Vector2( 0.664706, 1 ), 0.0, 0.0, 0, 0, Vector2( 0.855882, 0 ), 0.0, 0.0, 0, 0 ]
+_data = [ Vector2( 0.450172, 0 ), 0.0, 0.0, 0, 0, Vector2( 0.769759, 1 ), 0.0, 0.0, 0, 0, Vector2( 0.945017, 0 ), 0.0, 0.0, 0, 0 ]
 
 [sub_resource type="Curve" id=18]
-_data = [ Vector2( 0, 0 ), 0.0, 0.0, 0, 0, Vector2( 0.108824, 1 ), 0.0, 0.0, 0, 0, Vector2( 0.297059, 0 ), 0.0, 0.0, 0, 0, Vector2( 0.767647, 0.590909 ), 0.0, 0.0, 0, 0, Vector2( 0.95, 0 ), 0.0, 0.0, 0, 0 ]
+_data = [ Vector2( 0, 0 ), 0.0, 0.0, 0, 0, Vector2( 0.0687285, 1 ), 0.0, 0.0, 0, 0, Vector2( 0.189003, 0.809091 ), -3.65695, -3.65695, 0, 0, Vector2( 0.508591, 0.618182 ), 0.0, 0.0, 0, 0, Vector2( 0.890034, 0 ), 0.0, 0.0, 0, 0 ]
 
 [sub_resource type="Resource" id=19]
-script = ExtResource( 3 )
+script = ExtResource( 2 )
 hue_distribution = SubResource( 16 )
 saturation_distribution = SubResource( 17 )
 value_distribution = SubResource( 18 )
 
 [sub_resource type="Curve" id=20]
-_data = [ Vector2( 0.378446, 0.961364 ), 0.0, 0.0, 0, 0 ]
+_data = [ Vector2( 0, 1 ), 0.0, 0.0, 0, 0, Vector2( 0.429553, 0.290909 ), 0.0, 0.0, 0, 0, Vector2( 1, 1 ), 0.0, 0.0, 0, 0 ]
 
 [sub_resource type="Curve" id=21]
 _data = [ Vector2( 0.467647, 0 ), 0.0, 0.0, 0, 0, Vector2( 0.864706, 1 ), 0.0, 0.0, 0, 0, Vector2( 1, 0.454545 ), 0.0, 0.0, 0, 0 ]
 
 [sub_resource type="Curve" id=22]
-_data = [ Vector2( 0.508824, 0 ), 0.0, 0.0, 0, 0, Vector2( 0.902941, 1 ), 0.0, 0.0, 0, 0, Vector2( 1, 0 ), 0.0, 0.0, 0, 0 ]
+_data = [ Vector2( 0.0790378, 0 ), 0.0, 0.0, 0, 0, Vector2( 0.841924, 1 ), 0.0, 0.0, 0, 0, Vector2( 1, 0 ), 0.0, 0.0, 0, 0 ]
 
 [sub_resource type="Resource" id=23]
-script = ExtResource( 3 )
+script = ExtResource( 2 )
 hue_distribution = SubResource( 20 )
 saturation_distribution = SubResource( 21 )
 value_distribution = SubResource( 22 )
 
 [sub_resource type="Curve" id=28]
-_data = [ Vector2( 0.503759, 0 ), 0.0, 0.0, 0, 0, Vector2( 0.73183, 0.788636 ), 0.0, 0.0, 0, 0, Vector2( 1, 0 ), 0.0, 0.0, 0, 0 ]
+_data = [ Vector2( 0, 1 ), 0.0, 0.0, 0, 0, Vector2( 0.202749, 0 ), 0.0, 0.0, 0, 0, Vector2( 0.90378, 0 ), 0.0, 0.0, 0, 0, Vector2( 1, 0.772727 ), 0.0, 0.0, 0, 0 ]
 
 [sub_resource type="Curve" id=29]
-_data = [ Vector2( 0.085213, 0 ), 0.0, 0.0, 0, 0, Vector2( 0.265664, 1 ), 0.0, 0.0, 0, 0 ]
+_data = [ Vector2( 0, 1 ), 0.0, 0.0, 0, 0, Vector2( 0.52921, 0 ), 0.0, 0.0, 0, 0 ]
 
 [sub_resource type="Curve" id=30]
-_data = [ Vector2( 0.150376, 0 ), 0.0, 0.0, 0, 0, Vector2( 0.308271, 1 ), 0.0, 0.0, 0, 0 ]
+_data = [ Vector2( 0.0206186, 0 ), 0.0, 0.0, 0, 0, Vector2( 0.219931, 1 ), 0.0, 0.0, 0, 0, Vector2( 0.371134, 0.647727 ), 0.0, 0.0, 0, 0, Vector2( 0.628866, 1 ), 0.0, -7.68441, 0, 0, Vector2( 0.883162, 0 ), 0.0, 0.0, 0, 0 ]
 
 [sub_resource type="Resource" id=31]
-script = ExtResource( 3 )
+script = ExtResource( 2 )
 hue_distribution = SubResource( 28 )
 saturation_distribution = SubResource( 29 )
 value_distribution = SubResource( 30 )
 
 [sub_resource type="Curve" id=32]
-_data = [ Vector2( 0.0676471, 1 ), 0.0, 0.0, 0, 0, Vector2( 0.185294, 0 ), 0.0, 0.0, 0, 0, Vector2( 0.820588, 0 ), 0.0, 0.0, 0, 0, Vector2( 1, 1 ), 0.0, 0.0, 0, 0 ]
+_data = [ Vector2( 0, 0 ), 0.0, 0.0, 0, 1, Vector2( 0.61512, 0 ), 0.0, 0.0, 0, 0, Vector2( 0.80756, 1 ), 0.0, 0.0, 0, 0, Vector2( 1, 0 ), -5.19643, 0.0, 1, 0 ]
 
 [sub_resource type="Curve" id=33]
-_data = [ Vector2( 0, 1 ), 0.0, 0.0, 0, 0, Vector2( 0.470588, 0 ), 0.0, 0.0, 0, 0 ]
+_data = [ Vector2( 0, 1 ), 0.0, -0.100886, 0, 0, Vector2( 0.762887, 0 ), 0.00703578, 0.0, 0, 0 ]
 
 [sub_resource type="Curve" id=34]
-_data = [ Vector2( 0, 0 ), 0.0, 0.0, 0, 0, Vector2( 0.505882, 1 ), 0.0, 0.0, 0, 0, Vector2( 1, 0 ), 0.0, 0.0, 0, 0 ]
+_data = [ Vector2( 0, 0 ), 0.0, 0.0, 0, 0, Vector2( 0.199313, 1 ), 0.0, 0.0, 0, 0, Vector2( 0.498282, 0.379545 ), 0.0, 0.0, 0, 0, Vector2( 0.793814, 1 ), 0.0, 0.0, 0, 0, Vector2( 1, 0 ), 0.0, 0.0, 0, 0 ]
 
 [sub_resource type="Resource" id=35]
 script = ExtResource( 3 )

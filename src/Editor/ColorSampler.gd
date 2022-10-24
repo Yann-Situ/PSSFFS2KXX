@@ -73,5 +73,5 @@ func sample(alpha : float = 1.0) -> Color:
 	var h = hue_sampler.interpolate_baked(randf())
 	var s = saturation_sampler.interpolate_baked(randf())
 	var v = value_sampler.interpolate_baked(randf())
-	print("sample "+str(Color().from_hsv(h,s,v,alpha)))
+	#print("sample "+str(Color().from_hsv(h,s,v,alpha)))
 	return Color().from_hsv(h,s,v,alpha)
