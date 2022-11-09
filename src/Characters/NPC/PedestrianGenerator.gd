@@ -21,5 +21,5 @@ func generate_pedestrian(global_pos : Vector2 = self.global_position) -> Node:
 func _input(event):
 	if event is InputEventKey and event.pressed:
 		if event.scancode == KEY_T:
-			var p = global_position+Vector2(128*(2*randf()-1.0), 128*(2*randf()-1.0))
+			var p = global_position+Vector2(128*(2*randf()-1.0), 0.0)
 			generate_pedestrian(p)
