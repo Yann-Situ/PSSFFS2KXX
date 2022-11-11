@@ -22,8 +22,8 @@ Popol Super Slam Fusion Full Speed 2KXX
    - :pushpin: other tilesets
    - :pushpin: other background
    - :pushpin: all movement sprites
-   - [ ] UI graphism such as tag-police
-   - [ ] other characters/npc
+   - [ ] GUI graphism such as tag-police
+   - :pushpin: other characters/npc
    - [ ] adinkra symbols
 * Moveset improvment :
    - [x] add dunk
@@ -31,7 +31,7 @@ Popol Super Slam Fusion Full Speed 2KXX
    - [x] add landing anim
    - [x] add turn back anim
    - [x] improve wall jump (feet must be on wall ?)
-   - :pushpin: add slide
+   - [x] add slide
    - [ ] with and without balls anim
    - [ ] add multiple shoot types
    - [ ] Death and life system
@@ -44,13 +44,13 @@ Popol Super Slam Fusion Full Speed 2KXX
    - :pushpin: Add enemies and NPC
    - :pushpin: Add one way platforms and ball-doors / player-doors
    - :pushpin: pipes (TODO : change bounding box + handle multiple sides + be careful on exit_throw)
-   - [ ] moving platform (tilemap + pathfollow2D?)
+   - :pushpin: moving platform (tilemap + pathfollow2D?)
    - [ ] collectibles (spray?)
 * NPCs
-   - interactive npc
-   - pedestrian generator
-   - bosses
-   - ennemies
+   - [x] pedestrian generator
+   - [ ] interactive npc
+   - [ ] bosses
+   - [ ] ennemies
 * Style system (optional)
    - [ ] UI for combos
    - [ ] Combo and point system
@@ -80,10 +80,11 @@ Popol Super Slam Fusion Full Speed 2KXX
 
 ### Code structure to implement / TODO
 * `Selector` is currently a child of `Player/Actions` and is reparent by code to be a child of `Room`. Maybe it should be a child of the room or the level, and accessed in `SpecialActionHandler` via a NodePath or through signals.
-* Implement Explosion nodes.
+* [x] Implement Explosion nodes.
 * Rework Aiming system (better physics + time stop + 2 steps shoot).
 * Rework Dunkdash target graphism.
-* Implement Pedestrian generator (pnj shader, gradient sampler, ...).
+* [x] Implement Pedestrian generator (pnj shader, gradient sampler, ...).
+* GUI Graphism
 
 ## Issues
 ### Physical movement
@@ -107,6 +108,7 @@ Popol Super Slam Fusion Full Speed 2KXX
 * [ ] **one-way platform** make player crouch due to raycast mecanik.
 * [ ] **one-way platform** make player unable to do small jumps.
 * [ ] Pressing **dunkdash** at a precise moment during **dunk** animation results in **dunkdashing** on place.
+* [ ] Pressing **jump** at a precise moment during **dunk** animation results in ungrabing the basket without any jump.
 
 ### Dynamic items
 * [ ] **Zipline** drop inside collision places results in stucked player.
@@ -134,7 +136,7 @@ Popol Super Slam Fusion Full Speed 2KXX
 * [x] If multiple explosion breaks the same bloc, it can spawn copies.
 * [x] Lag if too much balls : make a spawner limit and link the dispawn of a ball to the spawner to increase the spawn count.
 * [ ] Energy loss of `constant_energy_balls`.
-* [ ] I need to adapt the boum delay: i.e apply_impulse instantly on colliding object and a bit after on far objects. need a method call_after_a_delay(apply_impulse)
+* [x] I need to adapt the boum delay: i.e apply_impulse instantly on colliding object and a bit after on far objects. need a method call_after_a_delay(apply_impulse) -> see Explosion node implementation
 * :pushpin: Need to implement Tilemap interactive objects rotation and flips.
 * [ ] On **baskets**, a ball that bounces on the ring can do multiple goals.
 
