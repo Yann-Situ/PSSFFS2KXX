@@ -1,0 +1,72 @@
+[gd_resource type="Resource" load_steps=19 format=2]
+
+[ext_resource path="res://src/Editor/PaletteSchemeSampler.gd" type="Script" id=1]
+[ext_resource path="res://src/Editor/ColorSampler.gd" type="Script" id=3]
+
+[sub_resource type="Curve" id=16]
+_data = [ Vector2( 0, 0.327273 ), 4.35537, -0.0568181, 0, 0, Vector2( 0.036855, 1 ), 0.0, 0.0, 0, 0, Vector2( 0.0712531, 1 ), 0.0, 0.0, 0, 0, Vector2( 0.130221, 0 ), 0.0, 0.0, 0, 0, Vector2( 0.958824, 0 ), 0.0, 0.0, 0, 0, Vector2( 1, 0.381818 ), 0.0, 0.0, 0, 0 ]
+
+[sub_resource type="Curve" id=36]
+_data = [ Vector2( 0, 0 ), 0.0, 0.0, 0, 0, Vector2( 0.162162, 1 ), 0.0, 0.0, 0, 0, Vector2( 0.299754, 1 ), 0.0, 0.0, 0, 0, Vector2( 0.390374, 0 ), 0.0, 0.0, 0, 0 ]
+
+[sub_resource type="Curve" id=17]
+_data = [ Vector2( 0.681818, 0 ), 0.0, 1.71463, 0, 0, Vector2( 0.828877, 1 ), 0.0, 0.0, 0, 0, Vector2( 0.8877, 0 ), 0.0, 0.0, 0, 0 ]
+
+[sub_resource type="Resource" id=19]
+script = ExtResource( 3 )
+hue_distribution = SubResource( 16 )
+saturation_distribution = SubResource( 17 )
+lightness_distribution = SubResource( 36 )
+
+[sub_resource type="Curve" id=20]
+bake_resolution = 200
+_data = [ Vector2( 0.013369, 0 ), 0.0, 0.0, 0, 0, Vector2( 0.0427807, 1 ), 0.0, 0.0, 0, 0, Vector2( 0.0695187, 0 ), 0.0, 0.0, 0, 0, Vector2( 0.109626, 0 ), 0.0, 0.0, 0, 0, Vector2( 0.122995, 0.718182 ), 0.0, 0.0, 0, 0, Vector2( 0.144385, 0 ), 0.0, 0.0, 0, 0, Vector2( 0.941176, 0 ), 0.0, 0.0, 0, 0, Vector2( 0.967914, 1 ), 0.0, 0.0, 0, 0, Vector2( 1, 0 ), 0.0, 0.0, 0, 0 ]
+
+[sub_resource type="Curve" id=37]
+_data = [ Vector2( 0.350267, 0 ), 0.0, 0.0, 0, 0, Vector2( 0.505348, 1 ), 0.0, 0.0, 0, 0, Vector2( 0.786096, 0 ), -6.93749, 0.0, 0, 0 ]
+
+[sub_resource type="Curve" id=21]
+_data = [ Vector2( 0.435829, 0 ), 0.0, 0.0, 0, 0, Vector2( 0.864706, 1 ), 0.0, 0.0, 0, 0, Vector2( 1, 0.5 ), 0.0, 0.0, 0, 0 ]
+
+[sub_resource type="Resource" id=23]
+script = ExtResource( 3 )
+hue_distribution = SubResource( 20 )
+saturation_distribution = SubResource( 21 )
+lightness_distribution = SubResource( 37 )
+
+[sub_resource type="Curve" id=28]
+_data = [ Vector2( 0, 1 ), 0.0, 0.0, 0, 0, Vector2( 0.202749, 0 ), 0.0, 0.0, 0, 0, Vector2( 0.90378, 0 ), 0.0, 0.0, 0, 0, Vector2( 1, 0.772727 ), 0.0, 0.0, 0, 0 ]
+
+[sub_resource type="Curve" id=38]
+_data = [ Vector2( 0.0628415, 0 ), 0.0, 0.0, 0, 0, Vector2( 0.221311, 0.645455 ), 0.0, 0.0, 0, 0, Vector2( 0.385246, 0 ), 0.0, 0.0, 0, 0, Vector2( 0.467213, 0 ), 0.0, 0.0, 0, 0, Vector2( 0.622951, 0.690909 ), 0.0, 0.0, 0, 0, Vector2( 0.775956, 0 ), 0.0, 0.0, 0, 0 ]
+
+[sub_resource type="Curve" id=29]
+_data = [ Vector2( 0, 1 ), 0.0, 0.0, 0, 0, Vector2( 0.647619, 0 ), 0.0, 0.0, 0, 0 ]
+
+[sub_resource type="Resource" id=31]
+script = ExtResource( 3 )
+hue_distribution = SubResource( 28 )
+saturation_distribution = SubResource( 29 )
+lightness_distribution = SubResource( 38 )
+
+[sub_resource type="Curve" id=32]
+_data = [ Vector2( 0, 1 ), 0.0, -12.0645, 0, 1, Vector2( 0.0828877, 0 ), 0.0, 0.0, 0, 0, Vector2( 0.92246, 0 ), 0.0, 0.0, 0, 0, Vector2( 1, 1 ), 12.8965, 0.0, 1, 0 ]
+
+[sub_resource type="Curve" id=39]
+_data = [ Vector2( 0, 0.472727 ), 0.0, 0.0, 0, 0, Vector2( 0.368984, 1 ), 0.0, 0.0, 0, 0, Vector2( 0.558824, 0 ), 0.0, 0.0, 0, 0 ]
+
+[sub_resource type="Curve" id=33]
+_data = [ Vector2( 0, 0 ), 0.0, -0.100886, 0, 0, Vector2( 0.8877, 1 ), 0.00703578, 0.0, 0, 0, Vector2( 1, 0 ), 0.0, 0.0, 0, 0 ]
+
+[sub_resource type="Resource" id=35]
+script = ExtResource( 3 )
+hue_distribution = SubResource( 32 )
+saturation_distribution = SubResource( 33 )
+lightness_distribution = SubResource( 39 )
+
+[resource]
+resource_local_to_scene = true
+script = ExtResource( 1 )
+color_samplers = [ SubResource( 19 ), SubResource( 23 ), SubResource( 31 ), SubResource( 35 ) ]
+black = Color( 0.215686, 0.0509804, 0.168627, 1 )
+white = Color( 0.976471, 0.952941, 0.713726, 1 )
