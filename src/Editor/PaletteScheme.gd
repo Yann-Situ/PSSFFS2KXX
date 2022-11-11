@@ -26,8 +26,33 @@ func remove_gradient(index : int):
 func add_gradient_from_color(color : Color,\
 		black : Color=ColorN("black"), white : Color=ColorN("white")):
 	var g = Gradient.new()
-	g.set_color(0,black)
-	g.set_color(1,white)
+	var l = color.get_luminance()
+	var lw = white.get_luminance()
+	var lb = black.get_luminance()
+	if lw < lb: # swap variables
+		var lb_s = lb
+		var black_s = black
+		lb = lw
+		black = white # hashtag everybody equal hashtag mum and dad
+		lw = lb_s
+		white = black_s
+
+	if lw < l and l > 0:
+		var t = lw/l
+		color =  Color(t*color.r, t*color.g, t*color.b)
+		l = lw
+	elif lb > l and l > 0:
+		var t = lb/l
+		color =  Color(t*color.r, t*color.g, t*color.b)
+		l = lb
+	l = inverse_lerp(lb,lw,l)
+
+	if l > 0.5:
+		g.set_color(0, black.linear_interpolate(white, l-0.5))
+		g.set_color(1.5-l,white)
+	else:
+		g.set_color(0.5-l,black)
+		g.set_color(1, black.linear_interpolate(white, 0.5+l))
 	g.add_point(0.5, color)
 	gradients.push_back(g)
 

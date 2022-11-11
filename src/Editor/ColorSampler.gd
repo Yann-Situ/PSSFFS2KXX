@@ -3,11 +3,11 @@ class_name ColorSampler
 
 export (Curve) var hue_distribution setget set_hue_distribution
 export (Curve) var saturation_distribution setget set_saturation_distribution
-export (Curve) var value_distribution setget set_value_distribution
+export (Curve) var lightness_distribution setget set_lightness_distribution
 
 var hue_sampler = Curve.new()
 var saturation_sampler = Curve.new()
-var value_sampler = Curve.new()
+var lightness_sampler = Curve.new()
 
 func set_hue_distribution(c : Curve):
 	hue_distribution = c
@@ -23,12 +23,12 @@ func set_saturation_distribution(c : Curve):
 	# for i in range(6):
 	# 	print(str(saturation_sampler.interpolate_baked(i/5.0)))
 	emit_changed()
-func set_value_distribution(c : Curve):
-	value_distribution = c
-	value_sampler = compute_sampler(value_distribution)
+func set_lightness_distribution(c : Curve):
+	lightness_distribution = c
+	lightness_sampler = compute_sampler(lightness_distribution)
 	# print("Color sampler changed")
 	# for i in range(6):
-	# 	print(str(value_sampler.interpolate_baked(i/5.0)))
+	# 	print(str(lightness_sampler.interpolate_baked(i/5.0)))
 	emit_changed()
 
 func compute_sampler(distribution : Curve) -> Curve:
@@ -67,12 +67,19 @@ func compute_sampler(distribution : Curve) -> Curve:
 func update_samplers():
 	hue_sampler = compute_sampler(hue_distribution)
 	saturation_sampler = compute_sampler(saturation_distribution)
-	value_sampler = compute_sampler(value_distribution)
+	lightness_sampler = compute_sampler(lightness_distribution)
 
 # sample a color following the sampler. if sh (resp. ss, sv) is not in [0,1], use randf instead
 func sample(rng : RandomNumberGenerator, alpha : float = 1.0) -> Color:
 	var h = hue_sampler.interpolate_baked(rng.randf())
 	var s = saturation_sampler.interpolate_baked(rng.randf())
-	var v = value_sampler.interpolate_baked(rng.randf())
+	var l = lightness_sampler.interpolate_baked(rng.randf())
+
+	var t = min(l,1-l)
+	var v = l + s*t
+	if v == 0:
+		s = 0
+	else :
+		s = 2*(1-l/v)
 	#print("sample "+str(Color().from_hsv(h,s,v,alpha)))
 	return Color().from_hsv(h,s,v,alpha)

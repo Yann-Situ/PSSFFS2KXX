@@ -39,13 +39,16 @@ func generate_pedestrian(global_pos : Vector2 = self.global_position, direction 
 	pedestrian.ai.set_initial_direction(direction)
 	return pedestrian
 
+func generate_random_pedestrian() -> Node:
+	var x_value = 0.0
+	if x_radius >= INF:
+		x_value = rng.randfn(0.0, 256)
+	else:
+		x_value = x_radius*(2*rng.randf()-1.0)
+	var p = global_position+Vector2(x_value, 0.0)
+	return generate_pedestrian(p, -1 if rng.randf() < 0.5 else 1)
+
 func _input(event):
 	if event is InputEventKey and event.pressed:
 		if event.scancode == KEY_T:
-			var x_value = 0.0
-			if x_radius >= INF:
-				x_value = rng.randfn(0.0, 256)
-			else:
-				x_value = x_radius*(2*rng.randf()-1.0)
-			var p = global_position+Vector2(x_value, 0.0)
-			generate_pedestrian(p, -1 if rng.randf() < 0.5 else 1)
+			generate_random_pedestrian()
