@@ -4,8 +4,17 @@ signal move_offset(offset)
 
 export (bool) var free_pedestrian = true # if true, connect move_offset to walk_offset
 
+export (float) var walk_speed_min = 50.0
+export (float) var walk_speed_max = 80.0
+export (float) var x_min = -INF
+export (float) var x_max = INF
+var walk_speed
+
+onready var ai = get_node("AI")
+
 func _ready():
-	$AI.connect("direction_changed", self, "update_animation")
+	ai.connect("direction_changed", self, "update_animation")
+	walk_speed = ai.rng.randf_range(walk_speed_min, walk_speed_max)
 	if free_pedestrian:
 		connect("move_offset", self, "walk_offset")
 
@@ -14,7 +23,6 @@ func apply_palette_scheme(palette : PaletteScheme):
 		push_warning("not enough gradients ("+str(palette.gradients.size())+"<4)")
 		return
 	var m : ShaderMaterial = $Sprite.material
-
 	var gt_skin = GradientTexture.new()
 	gt_skin.set_gradient(palette.get_gradient(0))
 	m.set_shader_param("grad_skin", gt_skin)
@@ -30,21 +38,29 @@ func apply_palette_scheme(palette : PaletteScheme):
 
 func walk_offset(offset : Vector2):
 	global_position.x += offset.x
+	if global_position.x > x_max:
+		global_position.x = x_max
+		ai.change_direction(-1)
+	if global_position.x < x_min:
+		global_position.x = x_min
+		ai.change_direction(1)
 
 func update_animation(direction : int):
 	if direction > 0:
 		$AnimationPlayer.play("walk")
+		walk_speed = ai.rng.randf_range(walk_speed_min, walk_speed_max)
 		$Sprite.flip_h = false
 	elif direction < 0:
 		$AnimationPlayer.play("walk")
+		walk_speed = ai.rng.randf_range(walk_speed_min, walk_speed_max)
 		$Sprite.flip_h = true
 	else:
 		$AnimationPlayer.play("idle")
-	
+
 func _process(delta):
 	var direction_vector = Vector2.ZERO
-	if $AI.direction > 0:
+	if ai.direction > 0:
 		direction_vector = Vector2.RIGHT
-	elif $AI.direction < 0:
+	elif ai.direction < 0:
 		direction_vector = Vector2.LEFT
-	emit_signal("move_offset", $AI.walk_speed*direction_vector*delta)
+	emit_signal("move_offset", walk_speed*direction_vector*delta)

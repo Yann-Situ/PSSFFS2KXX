@@ -61,13 +61,10 @@ tracks/0/keys = {
 }
 
 [node name="Pedestrian" type="Node2D"]
-z_index = 100
-z_as_relative = false
 script = ExtResource( 3 )
 
 [node name="Sprite" type="Sprite" parent="."]
 material = SubResource( 38 )
-position = Vector2( 0, -2 )
 texture = ExtResource( 1 )
 hframes = 16
 vframes = 3

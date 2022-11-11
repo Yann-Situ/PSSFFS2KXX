@@ -69,9 +69,10 @@ func update_samplers():
 	saturation_sampler = compute_sampler(saturation_distribution)
 	value_sampler = compute_sampler(value_distribution)
 
-func sample(alpha : float = 1.0) -> Color:
-	var h = hue_sampler.interpolate_baked(randf())
-	var s = saturation_sampler.interpolate_baked(randf())
-	var v = value_sampler.interpolate_baked(randf())
+# sample a color following the sampler. if sh (resp. ss, sv) is not in [0,1], use randf instead
+func sample(rng : RandomNumberGenerator, alpha : float = 1.0) -> Color:
+	var h = hue_sampler.interpolate_baked(rng.randf())
+	var s = saturation_sampler.interpolate_baked(rng.randf())
+	var v = value_sampler.interpolate_baked(rng.randf())
 	#print("sample "+str(Color().from_hsv(h,s,v,alpha)))
 	return Color().from_hsv(h,s,v,alpha)
