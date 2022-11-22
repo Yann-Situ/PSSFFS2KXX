@@ -24,15 +24,19 @@ func apply_palette_scheme(palette : PaletteScheme):
 		return
 	var m : ShaderMaterial = $Sprite.material
 	var gt_skin = GradientTexture.new()
+	gt_skin.width = 64
 	gt_skin.set_gradient(palette.get_gradient(0))
 	m.set_shader_param("grad_skin", gt_skin)
 	var gt_1 = GradientTexture.new()
+	gt_1.width = 64
 	gt_1.set_gradient(palette.get_gradient(1))
 	m.set_shader_param("grad_1", gt_1)
 	var gt_2 = GradientTexture.new()
+	gt_2.width = 64
 	gt_2.set_gradient(palette.get_gradient(2))
 	m.set_shader_param("grad_2", gt_2)
 	var gt_3 = GradientTexture.new()
+	gt_3.width = 64
 	gt_3.set_gradient(palette.get_gradient(3))
 	m.set_shader_param("grad_3", gt_3)
 
