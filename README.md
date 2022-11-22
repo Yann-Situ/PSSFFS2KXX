@@ -45,7 +45,7 @@ Popol Super Slam Fusion Full Speed 2KXX
    - :pushpin: Add one way platforms and ball-doors / player-doors
    - :pushpin: pipes (TODO : change bounding box + handle multiple sides + be careful on exit_throw)
    - :pushpin: moving platform (tilemap + pathfollow2D?)
-   - [ ] collectibles (spray?)
+   - :pushpin: collectibles (spray?)
 * NPCs
    - [x] pedestrian generator
    - [ ] interactive npc
