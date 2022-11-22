@@ -135,6 +135,7 @@ config/icon="res://assets/art/icons/popol.png"
 [autoload]
 
 Global="*res://src/Editor/Global.gd"
+GlobalEffect="*res://src/Editor/GlobalEffect.gd"
 
 [debug]
 

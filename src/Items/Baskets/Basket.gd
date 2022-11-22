@@ -105,11 +105,7 @@ func goal_effects(ball : Ball, force : int = 0):
 	if force > 1:
 		Global.camera.screen_shake(0.3,5.0+(force-2)*20.0)
 	if force > 2:
-		var distortion = distortion_scene.instance()
-		self.add_child(distortion)
-		distortion.animation_delay = 0.75#s
-		distortion.z_index = Global.z_indices["foreground_2"]
-		distortion.start("fast_subtle")
+		GlobalEffect.make_distortion(self.global_position, 0.75, "fast_subtle")
 
 func get_closest_point(point_global_position : Vector2):
 	var p = point_global_position - self.global_position
