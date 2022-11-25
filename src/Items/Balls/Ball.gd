@@ -8,9 +8,9 @@ signal is_thrown
 enum IMPACT_EFFECT {SPIKY, METALLIC}
 
 export (IMPACT_EFFECT) var impact_effect = IMPACT_EFFECT.SPIKY
-export (float) var dust_threshold = 300
-export (float) var impact_threshold = 500
-export (float) var damage_destruction_threshold = 2
+export (float) var dust_threshold = 300.0
+export (float) var impact_threshold = 500.0
+export (float) var damage_destruction_threshold = 2.0
 var selectors = {}
 var impact_particles = [preload("res://src/Effects/ImpactParticle1.tscn"),
 	preload("res://src/Effects/ImpactParticle0.tscn")]
@@ -35,7 +35,7 @@ func get_main_color() -> Color:
 
 func get_main_gradient() -> Gradient:
 	return $Effects.gradient_main.duplicate()
-	
+
 func get_dash_gradient() -> Gradient:
 	return $Effects.gradient_dash.duplicate()
 #func _draw():
@@ -53,10 +53,11 @@ func collision_effect(collider, collider_velocity, collision_point, collision_no
 	if speed >= dust_threshold:
 		$Effects/DustParticle.restart()
 		if speed >= impact_threshold:
-			var impact = impact_particles[impact_effect].instance()
-			get_parent().add_child(impact)
-			impact.global_position = collision_point
-			impact.start()
+			GlobalEffect.make_impact(collision_point, impact_effect)
+#			var impact = impact_particles[impact_effect].instance()
+#			get_parent().add_child(impact)
+#			impact.global_position = collision_point
+#			impact.start()
 	return true
 
 ###########################################################
