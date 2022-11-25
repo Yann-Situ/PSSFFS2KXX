@@ -1,4 +1,4 @@
-[gd_scene load_steps=16 format=2]
+[gd_scene load_steps=17 format=2]
 
 [ext_resource path="res://assets/art/effects/light2.png" type="Texture" id=1]
 [ext_resource path="res://src/Items/Balls/Ball.tscn" type="PackedScene" id=2]
@@ -10,6 +10,7 @@
 [ext_resource path="res://src/Levels/Room.tscn" type="PackedScene" id=8]
 [ext_resource path="res://src/Items/Dynamics/ZipLine.tscn" type="PackedScene" id=9]
 [ext_resource path="res://assets/shader/cloudsky.gdshader" type="Shader" id=10]
+[ext_resource path="res://src/Items/Interactive/GraffSpray.tscn" type="PackedScene" id=11]
 
 [sub_resource type="ShaderMaterial" id=6]
 shader = ExtResource( 10 )
@@ -131,6 +132,12 @@ position = Vector2( 216, -8 )
 
 [node name="BallShock" parent="Environment/Balls" index="1" instance=ExtResource( 7 )]
 position = Vector2( 2560, -344 )
+shock_min = 401.0
+shock_max = 401.0
+shock_jump = 1850.0
+shock_fall = 5000.0
+distance_max = 64.0
+shock_timer = 0.25
 
 [node name="ZipLine" parent="Environment/Dynamics" index="0" instance=ExtResource( 9 )]
 position = Vector2( 896, -320 )
@@ -169,3 +176,7 @@ range_item_cull_mask = 17
 
 [node name="PlayerPosition" parent="." index="7"]
 position = Vector2( -32, -32 )
+
+[node name="GraffSpray" parent="." index="9" instance=ExtResource( 11 )]
+position = Vector2( -48, 403 )
+color = Color( 0.113725, 0.113725, 0.113725, 1 )

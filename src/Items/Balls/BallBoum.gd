@@ -1,6 +1,6 @@
 extends Ball
 
-export (float) var damage = 1.0#lp
+export (float) var damage = 3.0#lp
 export (float) var boum_min = 400.0
 export (float) var boum_max = 700.0 # m*pix/s
 export (float) var distance_max = 64.0

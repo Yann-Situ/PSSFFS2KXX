@@ -1,4 +1,4 @@
-[gd_scene load_steps=22 format=2]
+[gd_scene load_steps=23 format=2]
 
 [ext_resource path="res://src/Levels/Room.tscn" type="PackedScene" id=1]
 [ext_resource path="res://src/Levels/Portal.tscn" type="PackedScene" id=2]
@@ -12,6 +12,7 @@
 [ext_resource path="res://src/Items/Interactive/GraffSpray.tscn" type="PackedScene" id=10]
 [ext_resource path="res://src/Characters/NPC/PedestrianGenerator.tscn" type="PackedScene" id=11]
 [ext_resource path="res://src/Characters/NPC/PaletteSampler1.tres" type="Resource" id=12]
+[ext_resource path="res://src/Items/Balls/BallBoum.tscn" type="PackedScene" id=13]
 
 [sub_resource type="Gradient" id=1]
 resource_local_to_scene = true
@@ -179,7 +180,8 @@ __meta__ = {
 }
 
 [node name="CanvasModulate" parent="Map" index="0"]
-color = Color( 0.988235, 0.984314, 0.901961, 1 )
+visible = true
+color = Color( 0.921569, 0.917647, 0.831373, 1 )
 
 [node name="Back32" parent="Map" index="1"]
 modulate = Color( 0.811765, 0.780392, 0.705882, 1 )
@@ -218,6 +220,7 @@ position = Vector2( -232, -104 )
 z_index = 11
 collision_layer = 4
 collision_mask = 6
+damage_destruction_threshold = 3.0
 shock_min = 401.0
 shock_max = 401.0
 shock_jump = 1850.0
@@ -269,6 +272,33 @@ x_radius = 400.0
 palette_scheme_sampler = ExtResource( 12 )
 
 [node name="GraffSpray" parent="." index="11" instance=ExtResource( 10 )]
-position = Vector2( 64, -352 )
+position = Vector2( 288, -24 )
+color = Color( 0.054902, 0.568627, 0.941176, 1 )
+
+[node name="GraffSpray2" parent="." index="12" instance=ExtResource( 10 )]
+position = Vector2( 248, -24 )
+color = Color( 1, 0, 0.890196, 1 )
+
+[node name="GraffSpray4" parent="." index="13" instance=ExtResource( 10 )]
+position = Vector2( 416, -284 )
+color = Color( 0.890196, 0.717647, 0.0470588, 1 )
+
+[node name="GraffSpray5" parent="." index="14" instance=ExtResource( 10 )]
+position = Vector2( -361, -376 )
+color = Color( 0.682353, 0.682353, 0.682353, 1 )
+
+[node name="GraffSpray6" parent="." index="15" instance=ExtResource( 10 )]
+position = Vector2( -399, -29 )
+color = Color( 0.239216, 0.172549, 0.172549, 1 )
+
+[node name="GraffSpray3" parent="." index="16" instance=ExtResource( 10 )]
+position = Vector2( 328, -24 )
+color = Color( 0.0862745, 0.603922, 0.411765, 1 )
+
+[node name="BallBoum" parent="." index="17" instance=ExtResource( 13 )]
+position = Vector2( -192, -64 )
+
+[node name="BallBoum2" parent="." index="18" instance=ExtResource( 13 )]
+position = Vector2( -192, -96 )
 
 [connection signal="is_destroyed" from="Environment/Balls/Ball" to="RoomAnimations" method="play" binds= [ "calm" ]]
