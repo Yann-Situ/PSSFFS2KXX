@@ -22,6 +22,7 @@ func update_color():
 	g.add_point(0.5, Color.white)
 	g.add_point(0.8, color)
 	$CloudParticles.color_ramp = g
+	$Sprite/LightSmall.color = color.lightened(0.9)
 
 func _ready():
 	update_color()
@@ -33,4 +34,7 @@ func _on_Area2D_body_entered(body):
 func collect():
 	print(name+" collected!")
 	emit_signal("spray_collected", self)
-	GlobalEffect.make_distortion(self.global_position, 0.75, "fast_subtle")
+	GlobalEffect.make_distortion(self.global_position, 0.5, "subtle")
+	$AnimationPlayer.play("collect")
+	yield($AnimationPlayer, "animation_finished")
+	queue_free()
