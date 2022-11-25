@@ -49,9 +49,9 @@ func add_gradient_from_color(color : Color,\
 
 	if l > 0.5:
 		g.set_color(0, black.linear_interpolate(white, l-0.5))
-		g.set_color(1.5-l,white)
+		g.add_point(1.5-l,white)
 	else:
-		g.set_color(0.5-l,black)
+		g.add_point(0.5-l,black)
 		g.set_color(1, black.linear_interpolate(white, 0.5+l))
 	g.add_point(0.5, color)
 	gradients.push_back(g)
