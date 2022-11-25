@@ -8,6 +8,11 @@ export (float) var walk_speed_min = 50.0
 export (float) var walk_speed_max = 80.0
 export (float) var x_min = -INF
 export (float) var x_max = INF
+export (float) var ai_timer_min = 1.0 #s
+export (float) var ai_timer_max = 4.0 #s
+export (float) var proba_idle = 0.2 #
+export (float) var proba_stay_idle = 0.4 #
+export (float) var proba_change_direction = 0.4 #
 var walk_speed
 
 onready var ai = get_node("AI")
