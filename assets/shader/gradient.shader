@@ -1,5 +1,5 @@
 shader_type canvas_item;
-render_mode unshaded;
+//render_mode unshaded;
 
 uniform sampler2D gradient: hint_black;
 uniform float mix_amount = 1.0;

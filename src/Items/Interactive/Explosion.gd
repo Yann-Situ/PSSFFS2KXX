@@ -47,7 +47,7 @@ func _ready():
 	collision_mask = 1+4+64+128+256
 	if simple_explosion:
 		connect("body_explode", self, "explode_body")
-	print("BOUM_ready "+str(duration))
+	print("BOUM _ready "+str(duration))
 	explode()
 
 func explode():
@@ -55,7 +55,7 @@ func explode():
 	if duration <= 0.0:
 		explosion_steps = 1
 	var time_step = duration*1.0/explosion_steps
-	print(time_step)
+	#print(time_step)
 
 	# process part:
 	for i in range(explosion_steps):
@@ -66,7 +66,7 @@ func explode():
 		yield(get_tree().create_timer(time_step), "timeout")
 		# process bodies
 		var bodies = get_overlapping_bodies()+get_overlapping_areas()
-		print(bodies)
+		#print(bodies)
 		for body in bodies:
 			if !body in exploded_bodies and !body in body_exceptions:
 				var d = (body.global_position-global_position)

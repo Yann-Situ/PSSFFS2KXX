@@ -94,8 +94,11 @@ func change_holder(new_holder : Node):
 	# every area/body_entered signal. This can lead to weird things when
 	# multiple nodes are retriggering their functions.
 	# see https://github.com/godotengine/godot/issues/14578
-	new_holder.add_child(self)
-	_is_reparenting = false
+
+	#new_holder.add_child(self)
+	new_holder.call_deferred("add_child", self)
+	self.set_deferred("_is_reparenting", false)
+	#_is_reparenting = false
 
 func pickup(holder_node):
 	if not holder_node.is_in_group("holders"):

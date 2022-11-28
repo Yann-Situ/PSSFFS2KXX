@@ -1,5 +1,6 @@
 shader_type canvas_item;
 render_mode blend_mix;
+//render_mode unshaded;
 
 uniform bool activated = true;
 uniform vec4 contour_color : hint_color = vec4(1.2,1.0,0.9,0.65);

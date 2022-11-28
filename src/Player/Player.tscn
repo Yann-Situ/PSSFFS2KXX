@@ -1,4 +1,4 @@
-[gd_scene load_steps=113 format=2]
+[gd_scene load_steps=115 format=2]
 
 [ext_resource path="res://src/Player/Player.gd" type="Script" id=1]
 [ext_resource path="res://assets/art/characters/Player.png" type="Texture" id=2]
@@ -27,7 +27,7 @@
 [ext_resource path="res://src/Effects/TrailHandler.tscn" type="PackedScene" id=25]
 [ext_resource path="res://assets/art/effects/trail.png" type="Texture" id=26]
 [ext_resource path="res://src/Effects/GrindParticles.tscn" type="PackedScene" id=27]
-[ext_resource path="res://assets/art/effects/offset_glow.png" type="Texture" id=28]
+[ext_resource path="res://assets/shader/contour.shader" type="Shader" id=28]
 [ext_resource path="res://src/Player/Actions/Release.gd" type="Script" id=29]
 [ext_resource path="res://src/Characters/LifeHandler.gd" type="Script" id=30]
 [ext_resource path="res://src/Items/Interactive/SelectorTarget.tscn" type="PackedScene" id=31]
@@ -46,6 +46,7 @@
 [ext_resource path="res://src/Player/Actions/Slide.gd" type="Script" id=44]
 [ext_resource path="res://src/Player/AnimationTreeHandler/Action.tres" type="AnimationNodeStateMachine" id=45]
 [ext_resource path="res://src/Player/AnimationTreeHandler/Stance.tres" type="AnimationNodeBlendTree" id=46]
+[ext_resource path="res://assets/art/effects/light2.png" type="Texture" id=47]
 
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 8, 26 )
@@ -63,6 +64,12 @@ shader = ExtResource( 42 )
 shader_param/parameter = 300.0
 shader_param/throw_position = null
 shader_param/tolerance = 15.0
+
+[sub_resource type="ShaderMaterial" id=67]
+shader = ExtResource( 28 )
+shader_param/activated = true
+shader_param/contour_color = Color( 1, 1, 1, 0.65098 )
+shader_param/light_thresh = 0.0
 
 [sub_resource type="Animation" id=59]
 length = 0.001
@@ -1646,6 +1653,7 @@ __meta__ = {
 
 [node name="Sprite" type="Sprite" parent="."]
 light_mask = 4
+material = SubResource( 67 )
 texture = ExtResource( 2 )
 offset = Vector2( 0.5, 0 )
 hframes = 16
@@ -1699,7 +1707,7 @@ material = SubResource( 35 )
 scale = Vector2( 4, 4 )
 z_index = 9
 z_as_relative = false
-texture = ExtResource( 28 )
+texture = ExtResource( 47 )
 region_enabled = true
 region_rect = Rect2( 0, 96, 32, 32 )
 
