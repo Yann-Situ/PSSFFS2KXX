@@ -138,6 +138,10 @@ position = Vector2( 384, -8 )
 enabled = false
 
 [node name="Light" type="Node2D" parent="Environment" index="5"]
+__meta__ = {
+"_edit_group_": true,
+"_edit_lock_": true
+}
 
 [node name="Light2D10" type="Light2D" parent="Environment/Light" index="0"]
 position = Vector2( 306, 111 )
@@ -342,7 +346,7 @@ proba_stay_idle = 0.5
 palette_scheme_sampler = ExtResource( 5 )
 
 [node name="PlayerPosition" parent="." index="9"]
-position = Vector2( -238, -225 )
+position = Vector2( 84, 127 )
 
 [node name="GraffSpray" parent="." index="11" instance=ExtResource( 9 )]
 position = Vector2( -375, 137 )

@@ -186,7 +186,7 @@ func apply_damage(damage : float, duration : float = 0.0):
 
 func power_p(player,delta):
 	if holder == Global.get_current_room() :
-		add_force("attract", player.attract_force*(player.position - position).normalized())
+		add_force("attract", 1000*(player.position - position).normalized())
 
 func power_jp(player,delta):
 	pass

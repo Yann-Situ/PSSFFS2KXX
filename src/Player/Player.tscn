@@ -68,8 +68,7 @@ shader_param/tolerance = 15.0
 [sub_resource type="ShaderMaterial" id=67]
 shader = ExtResource( 28 )
 shader_param/activated = true
-shader_param/contour_color = Color( 1, 1, 1, 0.65098 )
-shader_param/light_thresh = 0.0
+shader_param/contour_color = Color( 1, 1, 0.9, 0.9 )
 
 [sub_resource type="Animation" id=59]
 length = 0.001
@@ -1433,7 +1432,6 @@ color_ramp = SubResource( 53 )
 anim_speed = 1.0
 
 [sub_resource type="StreamTexture" id=55]
-flags = 4
 load_path = "res://.import/dust_0.png-aa7e79fd880c78618fa1d60a7c8d332a.stex"
 
 [sub_resource type="CanvasItemMaterial" id=56]
@@ -1459,7 +1457,7 @@ z_as_relative = false
 collision_mask = 514
 script = ExtResource( 1 )
 air_friction = 0.1
-crouch_speed_max = 250.0
+crouch_speed_max = 200.0
 crouch_instant_speed = 50.0
 crouch_return_thresh_instant_speed = 85.0
 crouch_accel = 130.0
@@ -1486,6 +1484,7 @@ shape = SubResource( 1 )
 [node name="Actions" type="Node2D" parent="."]
 
 [node name="SpecialActionHandler" type="Node2D" parent="Actions"]
+visible = false
 script = ExtResource( 9 )
 
 [node name="Ray_fwd_up" type="RayCast2D" parent="Actions/SpecialActionHandler"]
@@ -1584,7 +1583,6 @@ scale = Vector2( 0.75, 0.75 )
 modulate = Color( 1.1, 0.3, 0.7, 1 )
 
 [node name="ShootPredictor" type="Node2D" parent="Actions"]
-position = Vector2( 1, 1 )
 script = ExtResource( 3 )
 
 [node name="Side" type="Node" parent="Actions"]
@@ -1818,6 +1816,7 @@ material = SubResource( 56 )
 position = Vector2( 0, 16 )
 
 [node name="BallHandler" type="Area2D" parent="."]
+visible = false
 collision_layer = 0
 collision_mask = 4
 script = ExtResource( 6 )
@@ -1945,9 +1944,6 @@ text = "Ball name:
 Ball mass :
 Ball friction :
 Ball bounce :"
-__meta__ = {
-"_edit_use_anchors_": false
-}
 
 [node name="Combos" type="Node" parent="."]
 

@@ -1,4 +1,4 @@
-[gd_scene load_steps=23 format=2]
+[gd_scene load_steps=24 format=2]
 
 [ext_resource path="res://src/Levels/Room.tscn" type="PackedScene" id=1]
 [ext_resource path="res://src/Levels/Portal.tscn" type="PackedScene" id=2]
@@ -13,6 +13,7 @@
 [ext_resource path="res://src/Characters/NPC/PedestrianGenerator.tscn" type="PackedScene" id=11]
 [ext_resource path="res://src/Characters/NPC/PaletteSampler1.tres" type="Resource" id=12]
 [ext_resource path="res://src/Items/Balls/BallBoum.tscn" type="PackedScene" id=13]
+[ext_resource path="res://src/Items/Interactive/Wind.tscn" type="PackedScene" id=14]
 
 [sub_resource type="Gradient" id=1]
 resource_local_to_scene = true
@@ -32,11 +33,11 @@ noise = SubResource( 3 )
 [sub_resource type="ShaderMaterial" id=5]
 shader = ExtResource( 6 )
 shader_param/octaves = 5
-shader_param/starting_amplitude = 0.414
-shader_param/starting_frequency = 0.3
+shader_param/starting_amplitude = 0.407
+shader_param/starting_frequency = 0.381
 shader_param/shift = -0.204
-shader_param/velocity = Vector2( 1, 0 )
-shader_param/fog_color = Color( 0.384314, 0.27451, 0.12549, 1 )
+shader_param/velocity = Vector2( 1.2, 0 )
+shader_param/fog_color = Color( 0.494118, 0.309804, 0.0627451, 1 )
 shader_param/noise = SubResource( 4 )
 
 [sub_resource type="Environment" id=6]
@@ -266,8 +267,6 @@ anims/calm = SubResource( 9 )
 
 [node name="PedestrianGenerator" parent="." index="10" instance=ExtResource( 11 )]
 position = Vector2( -48, -32 )
-z_index = 100
-z_as_relative = false
 x_radius = 400.0
 palette_scheme_sampler = ExtResource( 12 )
 
@@ -300,5 +299,10 @@ position = Vector2( -192, -64 )
 
 [node name="BallBoum2" parent="." index="18" instance=ExtResource( 13 )]
 position = Vector2( -192, -96 )
+
+[node name="Wind" parent="." index="19" instance=ExtResource( 14 )]
+position = Vector2( 66, -120 )
+force = Vector2( -1000, 0 )
+rectangle_extents = Vector2( 512, 128 )
 
 [connection signal="is_destroyed" from="Environment/Balls/Ball" to="RoomAnimations" method="play" binds= [ "calm" ]]

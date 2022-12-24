@@ -3,7 +3,7 @@ extends Action
 func move(delta,direction_p):
 	if S.is_onfloor :
 		if S.is_crouching :
-			if !S.is_sliding:
+			if !S.is_sliding and !S.is_landing_roll:
 				if (S.velocity.x*direction_p > P.crouch_speed_max) :
 					# in the same direction_p as velocity and faster than max
 					S.velocity.x -= direction_p*P.crouch_accel*delta

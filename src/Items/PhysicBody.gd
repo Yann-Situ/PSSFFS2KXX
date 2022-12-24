@@ -66,6 +66,9 @@ func set_start_position(position : Vector2):
 func apply_impulse(impulse):
 	linear_velocity += invmass * impulse
 
+func has_force(name : String):
+	return applied_forces.has(name)
+
 func add_force(name : String, force : Vector2):
 	applied_forces[name] = force
 

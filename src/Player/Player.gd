@@ -6,7 +6,7 @@ export (bool) var physics_enabled = true
 # Environment features (should be given by the map)
 export (float) var floor_friction = 0.2 # ratio/frame
 export (float) var air_friction = 0.0 # ratio/frame
-export (float) var attract_force = 800 # m.pix/s²
+export (float) var attract_force = 800 # m.pix/s² # don't know for what know (?)
 export (Vector2) var gravity # pix/s²
 
 # Crouch features
@@ -58,6 +58,7 @@ onready var based_gravity = Vector2(0.0,ProjectSettings.get_setting("physics/2d/
 onready var invmass = 1.0/4.0
 onready var collision_layer_save = 1
 onready var collision_mask_save = 514
+var applied_forces = {} #"force_name : value in kg*pix/s^2"
 
 var character_holder = null
 
@@ -246,7 +247,9 @@ func get_input(delta): #delta in s
 func apply_impulse(impulse):
 	S.velocity += invmass * impulse
 
-func apply_gravity(delta):
+func apply_forces(delta):
+	for force in applied_forces.values() :
+		S.velocity += invmass * force * delta
 	if S.is_onwall and S.velocity.y > 0: #fall on a wall
 		S.velocity += gravity/2.0 * delta
 		S.velocity.y = min(S.velocity.y,max_speed_fall_onwall)
@@ -255,12 +258,21 @@ func apply_gravity(delta):
 		if S.velocity.y > max_speed_fall:
 			S.velocity.y = max_speed_fall
 
+func has_force(name : String):
+	return applied_forces.has(name)
+
+func add_force(name : String, force : Vector2):
+	applied_forces[name] = force
+
+func remove_force(name : String):
+	applied_forces.erase(name)
+
 func _physics_process(delta):
 	get_input(delta)
 #	if S.velocity == Vector2.ZERO and !S.is_onfloor:
 #		print("ZERO")
 	if physics_enabled:
-		apply_gravity(delta)
+		apply_forces(delta)
 		if SpecialActionHandler.is_on_slope() and S.velocity.y > - abs(S.velocity.x) :
 			S.velocity.y = 0.5*sqrt(2) * move_and_slide_with_snap(S.velocity, 33*Vector2.DOWN, Vector2.UP, true, 4, 0.785398, false).y
 		else :
@@ -273,7 +285,7 @@ func disable_physics():
 	collision_mask_save = collision_mask
 	collision_mask = 0
 	S.velocity *= 0
-	#S.applied_force *= 0
+	applied_forces.clear()
 
 func enable_physics():
 	physics_enabled = true

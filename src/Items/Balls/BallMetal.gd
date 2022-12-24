@@ -51,7 +51,7 @@ func power_p(player,delta):
 #		add_force("player_attract", \
 #			attract_force*(player.position - position).normalized() + \
 #			mass * gravity * Vector2.UP)
-		var d = player.position - position
+		var d = player.global_position - global_position
 		self.set_linear_velocity(attract_speed*\
 			smoothstep(0.0,attract_player_radius,d.length())*d.normalized())
 		self.set_friction(0.0)
