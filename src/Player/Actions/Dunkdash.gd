@@ -42,6 +42,9 @@ func move(delta):
 #	var corrected_angle = (S.dunkdash_basket.position - P.position).angle()
 #	corrected_angle = correction_angle(corrected_angle)
 #	dash_dir = Vector2.RIGHT.rotated(corrected_angle)
+	var xx = (S.dunkdash_basket.global_position - P.global_position).x
+	S.direction_sprite = 1 if (xx > 0) else ( -1 if (xx < 0) else 0)
+		
 	var dash_velocity = effective_dash_velocity(S.dunkdash_basket)
 	if not S.is_grinding:
 		P.get_out(P.global_position, dash_velocity)

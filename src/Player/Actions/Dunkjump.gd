@@ -24,6 +24,8 @@ func move(delta):
 		direction = -1
 	else:
 		direction = 1
+	S.direction_sprite = direction
+	
 
 	if S.has_ball:
 		P.PlayerEffects.ghost_start(0.8,0.1, Color.white, S.active_ball.get_dash_gradient())
@@ -36,7 +38,8 @@ func move_jump():
 		basket = S.dunkjump_basket
 
 	var q = basket.get_closest_point(P.global_position) - P.global_position
-
+	S.direction_sprite = 1 if (q.x > 0) else ( -1 if (q.x < 0) else 0)
+	
 	if q.y == 0.0:
 		S.velocity.x = -0.5*q.x*P.gravity.y/P.dunkjump_speed
 	else : # standard case

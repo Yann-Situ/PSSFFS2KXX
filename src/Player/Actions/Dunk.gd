@@ -20,10 +20,13 @@ func move(delta):
 	S.get_node("CanDunkTimer").start(S.dunk_countdown)
 	S.get_node("ToleranceDunkJumpPressTimer").stop() # no dunkjump just after
 	#S.get_node("CanGoTimer").start(0.32)
-	
 	dunking_basket = S.dunk_basket
+	var dunk_position = dunking_basket.get_dunk_position(P.global_position)
+	var xx = (dunk_position - P.global_position).x
+	S.direction_sprite = 1 if (xx > 0) else ( -1 if (xx < 0) else 0)
+	
 	pos_tween.interpolate_property(P, "global_position", P.global_position, \
-		dunking_basket.get_dunk_position(P.global_position), \
+		dunk_position, \
 		0.32, Tween.TRANS_LINEAR, Tween.EASE_IN_OUT)
 	pos_tween.start()
 	if S.active_ball != null:

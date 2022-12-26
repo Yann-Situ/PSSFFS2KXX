@@ -84,8 +84,9 @@ func animate_from_state(S):
 		self[IsWalking] = !S.is_idle
 		self[IsSliding] = S.is_sliding
 		self[IsNotSliding] = !S.is_sliding
-
-	set_flip(S.move_direction == -1, S.move_direction == 1)
+	
+	set_flip(S.direction_sprite == -1, S.direction_sprite == 1)
+	#set_flip(S.direction_p == -1, S.direction_p == 1)
 
 func set_flip(b1,b2):
 	#set flip if b1 true or unset flip if b2 true

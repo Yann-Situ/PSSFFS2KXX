@@ -63,6 +63,7 @@ var is_idle = false
 # Utilities
 export var move_direction = 0
 var direction_p = 0
+var direction_sprite = 0
 var aim_direction = 0
 export var velocity = Vector2()
 
@@ -144,7 +145,7 @@ func set_action(v): # for non_cancelable actions
 	is_dunking = is_dunking and v == ActionType.DUNK
 	is_dunkjumping = is_dunkjumping and v == ActionType.DUNKJUMP
 	is_dunkprejumping = is_dunkprejumping and v == ActionType.DUNKJUMP
-	
+
 	if action_type != v:
 		match action_type:
 			ActionType.SHOOT:
@@ -158,7 +159,7 @@ func set_action(v): # for non_cancelable actions
 				Actions.get_node("Dunkjump").move_end()
 			_:
 				pass
-	
+
 	action_type = v
 	is_non_cancelable = action_type != ActionType.NONE
 
@@ -182,15 +183,6 @@ func update_vars(delta):
 	time += delta # still used in the current shoot vector implementation... to change
 
 	last_frame_onair = not is_onfloor
-	
-	Player.SpecialActionHandler.update_space_state()
-	is_onfloor = Player.SpecialActionHandler.is_on_floor()
-	is_onwall = Player.SpecialActionHandler.is_on_wall()
-	is_moving_fast = (abs(velocity.x) > Player.run_speed_thresh)
-	is_falling =  (not is_onfloor) and velocity.y > 0
-	is_mounting = (not is_onfloor) and velocity.y < 0
-	is_moving = (abs(velocity.x) > 10.0) or (abs(velocity.y) > 10.0)
-	is_idle = (abs(velocity.x) <= 10.0)
 
 	if (velocity.x == 0):
 		move_direction = 0
@@ -206,9 +198,19 @@ func update_vars(delta):
 	if left_p :
 		direction_p -= 1
 
-	var dir_sprite = 1;
+	var actual_direction_sprite = 1;
 	if self.get_parent().flip_h :
-		dir_sprite = -1;
+		actual_direction_sprite = -1;
+
+	Player.SpecialActionHandler.update_space_state()
+	is_onfloor = Player.SpecialActionHandler.is_on_floor()
+	is_onwall = Player.SpecialActionHandler.is_on_wall()
+	is_moving_fast = (abs(velocity.x) > Player.run_speed_thresh)
+	is_falling =  (not is_onfloor) and velocity.y > 0
+	is_mounting = (not is_onfloor) and velocity.y < 0
+	is_moving = (abs(velocity.x) > 10.0) or (abs(velocity.y) > 10.0)
+	#is_idle = (abs(velocity.x) <= 10.0)
+	is_idle = direction_p == 0
 
 	# non-cancelables :
 	#is_shooting = is_shooting
@@ -240,9 +242,9 @@ func update_vars(delta):
 	can_dunkjump = Player.SpecialActionHandler.can_dunkjump()
 	can_dunk = $CanDunkTimer.is_stopped() and ((not is_onfloor and dunk_p)) and \
 		not is_shooting and \
-		not is_dunkprejumping and Player.SpecialActionHandler.can_dunk() 
+		not is_dunkprejumping and Player.SpecialActionHandler.can_dunk()
 		# TODO: enable dunking while hanging except when hanging on the dunk_basket
-	
+
 	# cancelables :
 	is_jumping = is_jumping and not is_onfloor and is_mounting and not is_dunkdashing
 	is_walljumping = is_walljumping and is_jumping
@@ -255,12 +257,20 @@ func update_vars(delta):
 		(last_frame_onair and last_onair_velocity_y > Player.landing_velocity_thresh)) and \
 		not is_non_cancelable# stop also handled by animation
 	is_landing_roll = is_landing and (abs(velocity.x) > 100.0)
-	is_halfturning = (is_halfturning or dir_sprite*direction_p == -1) and \
+	is_halfturning = (is_halfturning or actual_direction_sprite*direction_p == -1) and \
 		is_onfloor and !(is_idle or direction_p == 0 or is_crouching or is_landing or \
 			is_onwall or is_non_cancelable) # handle by player actions
 	is_aiming = is_aiming and has_ball and active_ball != null and not is_non_cancelable
-	
+
 	is_sliding = is_sliding and is_crouching and crouch_p and not is_idle
+
+	if !is_non_cancelable:
+		if is_grinding or is_hanging or !can_go:
+			direction_sprite = move_direction
+		elif is_sliding:
+			direction_sprite = 0
+		else :
+			direction_sprite = direction_p
 
 ###############################################################################
 func disable_input():
