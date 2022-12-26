@@ -80,6 +80,11 @@ func collision_effect(collider, collider_velocity, collision_point, collision_no
 
 func change_holder(new_holder : Node):
 	assert(new_holder != null)
+	# assert(get_parent() != null) # this assertion can fail if reparenting multiple times quickly. Workaround:
+	if get_parent() == null:
+		push_error(name+".get_parent() return null because last reparenting is not yet done.")
+		return
+
 	if new_holder == holder:
 		print_debug(self.name+" reparent from "+holder.name+" to "+new_holder.name+" is ignored")
 		return
@@ -89,7 +94,8 @@ func change_holder(new_holder : Node):
 	holder = new_holder
 	# WARNING : the game seems to crash when calling change_holder(null) with# holder = null on the following line
 	_is_reparenting = true
-	get_parent().remove_child(self)
+	get_parent().remove_child(self) # if reparenting multiple times quickly, this can result in error cause get_parent is null
+
 	# Warning : the following part reparent the node and will trigger again
 	# every area/body_entered signal. This can lead to weird things when
 	# multiple nodes are retriggering their functions.
@@ -98,7 +104,6 @@ func change_holder(new_holder : Node):
 	#new_holder.add_child(self)
 	new_holder.call_deferred("add_child", self)
 	self.set_deferred("_is_reparenting", false)
-	#_is_reparenting = false
 
 func pickup(holder_node):
 	if not holder_node.is_in_group("holders"):
@@ -141,7 +146,7 @@ func _queue_free():
 ################################################################################
 func select(selector : Node):
 	if selectors.has(selector):
-		printerr(selector.name+" already in 'selectors'")
+		push_warning(selector.name+" already in 'selectors'")
 		return
 	selectors[selector] = true # or whatever
 	$Highlighter.toggle_selection(true)

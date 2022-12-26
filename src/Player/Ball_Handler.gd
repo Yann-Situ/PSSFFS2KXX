@@ -70,8 +70,6 @@ func pickup_ball(ball : Ball):
 
 func free_ball(ball : Ball): # set out  active_ball and has_ball
 	# called by ball when thrown or deleted
-	print(P.name+" free_ball")
-	print(str(P.collision_layer)+" "+str(P.collision_layer_save))
 	if S.has_ball and S.active_ball == ball:
 		S.active_ball = null
 		S.has_ball = false
@@ -79,7 +77,7 @@ func free_ball(ball : Ball): # set out  active_ball and has_ball
 			P.set_collision_mask_bit(10, false) #ball_wall collision layer
 		P.collision_mask_save &= ~(1<<10) # same as set_collision_mask_bit(10, false)
 
-		print(str(P.collision_layer)+" "+str(P.collision_layer_save))
+		#print(str(P.collision_layer)+" "+str(P.collision_layer_save))
 		print(P.name+" free_ball")
 	elif S.has_ball :
 		printerr(P.name+" free_ball on other ball")
