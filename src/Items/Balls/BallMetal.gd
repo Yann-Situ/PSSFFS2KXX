@@ -12,9 +12,10 @@ var friction_save
 
 func _ready():
 	self.mass = 3.0
-	self.set_friction(0.007)
+	self.set_friction(0.02)
 	friction_save = friction
 	self.set_bounce(0.0)
+	self.set_penetration(0.1)
 
 
 func update_linear_velocity(delta):# apply gravity and forces

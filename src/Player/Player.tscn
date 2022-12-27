@@ -1456,7 +1456,6 @@ z_index = 100
 z_as_relative = false
 collision_mask = 514
 script = ExtResource( 1 )
-air_friction = 0.1
 crouch_speed_max = 200.0
 crouch_instant_speed = 50.0
 crouch_return_thresh_instant_speed = 85.0

@@ -7,3 +7,4 @@ func _ready():
 	self.gravity_scale = 1.0
 	self.set_friction(0.0)
 	self.set_bounce(1.0)
+	self.set_penetration(0.35)

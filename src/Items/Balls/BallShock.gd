@@ -13,6 +13,7 @@ func _ready():
 	self.mass = 1.15
 	self.set_friction(0.12)
 	self.set_bounce(0.35)
+	self.set_penetration(0.35)
 	$ShockZone/CollisionShape2D.shape.radius = distance_max
 	$AnimationPlayer.play("idle")
 

@@ -23,7 +23,6 @@
 [ext_resource path="res://src/Items/Dynamics/ZipLine.tscn" type="PackedScene" id=21]
 [ext_resource path="res://assets/art/effects/light5_3.png" type="Texture" id=22]
 [ext_resource path="res://assets/art/effects/light5_2.png" type="Texture" id=23]
-[ext_resource path="res://src/Items/Balls/BallLight.tscn" type="PackedScene" id=24]
 [ext_resource path="res://src/Items/Balls/BallBouncy.tscn" type="PackedScene" id=25]
 [ext_resource path="res://src/Items/Balls/BallBubble.tscn" type="PackedScene" id=26]
 [ext_resource path="res://src/Items/Balls/BallRolling.tscn" type="PackedScene" id=27]
@@ -47,6 +46,7 @@
 [ext_resource path="res://src/Player/PlayerPosition.tscn" type="PackedScene" id=45]
 [ext_resource path="res://assets/shader/gradient.shader" type="Shader" id=46]
 [ext_resource path="res://src/Items/Balls/BallDash.tscn" type="PackedScene" id=47]
+[ext_resource path="res://src/Items/Interactive/Wind.tscn" type="PackedScene" id=48]
 
 [sub_resource type="Gradient" id=1]
 offsets = PoolRealArray( 0, 0.565574, 1 )
@@ -167,7 +167,6 @@ adjustment_contrast = 1.08
 adjustment_saturation = 1.01
 
 [sub_resource type="AnimatedTexture" id=23]
-flags = 4
 frames = 5
 fps = 8.0
 frame_0/texture = ExtResource( 18 )
@@ -478,6 +477,12 @@ destruction_momentum = 20
 [node name="Ball" parent="Environment/Balls" instance=ExtResource( 5 )]
 position = Vector2( 1856, 336 )
 
+[node name="Ball2" parent="Environment/Balls" instance=ExtResource( 5 )]
+position = Vector2( 2464, -608 )
+
+[node name="Ball3" parent="Environment/Balls" instance=ExtResource( 5 )]
+position = Vector2( 2232, -608 )
+
 [node name="BallBubble" parent="Environment/Balls" instance=ExtResource( 26 )]
 light_mask = 1
 position = Vector2( 728, 528 )
@@ -522,48 +527,26 @@ collision_mask = 6
 light_mask = 1
 position = Vector2( 1536, 520 )
 collision_mask = 6
-attract_speed = 350
-attract_player_radius = 45
-destruction_speed_thresh = 300
-destruction_momentum_min = 500
-destruction_momentum_max = 900
+
+[node name="BallMetal4" parent="Environment/Balls" instance=ExtResource( 28 )]
+light_mask = 1
+position = Vector2( 2400, -616 )
+collision_mask = 6
 
 [node name="BallMetal2" parent="Environment/Balls" instance=ExtResource( 28 )]
 light_mask = 1
 position = Vector2( 2456, 536 )
 collision_mask = 6
-attract_speed = 350
-attract_player_radius = 45
-destruction_speed_thresh = 300
-destruction_momentum_min = 500
-destruction_momentum_max = 900
 
 [node name="BallMetal3" parent="Environment/Balls" instance=ExtResource( 28 )]
 light_mask = 1
 position = Vector2( -576, -616 )
 collision_mask = 6
-attract_speed = 350
-attract_player_radius = 45
-destruction_speed_thresh = 300
-destruction_momentum_min = 500
-destruction_momentum_max = 900
-
-[node name="BallLight" parent="Environment/Balls" instance=ExtResource( 24 )]
-light_mask = 1
-position = Vector2( 624, 528 )
-collision_mask = 6
-enabled = false
 
 [node name="BallShock" parent="Environment/Balls" instance=ExtResource( 44 )]
 light_mask = 1
 position = Vector2( 936, 376 )
 collision_mask = 6
-shock_min = 401.0
-shock_max = 401.0
-shock_jump = 1850.0
-shock_fall = 5000.0
-distance_max = 64.0
-shock_timer = 0.25
 
 [node name="BallDash" parent="Environment/Balls" instance=ExtResource( 47 )]
 position = Vector2( 832, 248 )
@@ -754,7 +737,14 @@ walk_return_thresh_instant_speed = 120.0
 walk_accel = 170.0
 
 [node name="PlayerPosition" parent="." instance=ExtResource( 45 )]
-position = Vector2( 2176, -608 )
+position = Vector2( 2312, -608 )
+
+[node name="Wind" parent="." instance=ExtResource( 48 )]
+position = Vector2( 3168, -704 )
+speed = Vector2( 0, -89 )
+rectangle_extents = Vector2( 1024, 128 )
+amplitude = 25.0
+frequence = 1.1
 
 [connection signal="activated_change_signal" from="Environment/Activables/Button0" to="Environment/Activables/Spawner" method="set_activated"]
 [connection signal="activated_change_signal" from="Environment/Activables/Button1" to="Environment/Activables/Spawner2" method="set_activated"]

@@ -6,6 +6,7 @@ func _ready():
 	self.mass = 0.9
 	self.set_friction(0.04)
 	self.set_bounce(0.6)
+	self.set_penetration(0.8)
 	set_enabled(enabled)
 	
 func set_enabled(b):

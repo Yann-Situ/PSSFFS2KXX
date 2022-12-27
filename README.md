@@ -79,12 +79,13 @@ Popol Super Slam Fusion Full Speed 2KXX
    - [ ] Add dialogue system
 
 ### Code structure to implement / TODO
-* `Selector` is currently a child of `Player/Actions` and is reparent by code to be a child of `Room`. Maybe it should be a child of the room or the level, and accessed in `SpecialActionHandler` via a NodePath or through signals.
+* [ ]`Selector` is currently a child of `Player/Actions` and is reparent by code to be a child of `Room`. Maybe it should be a child of the room or the level, and accessed in `SpecialActionHandler` via a NodePath or through signals.
 * [x] Implement Explosion nodes.
-* Rework Aiming system (better physics + time stop + 2 steps shoot).
-* Rework Dunkdash target graphism.
+* [ ] Rework Aiming system (better physics + time stop + 2 steps shoot).
+* [ ] Rework Dunkdash target graphism.
 * [x] Implement Pedestrian generator (pnj shader, gradient sampler, ...).
-* GUI Graphism
+* [ ] GUI Graphism
+* [ ] On grind, player velocity is only handle by the railline, which does not take into account other forces like wind etc...
 
 ## Issues
 ### Physical movement
@@ -125,6 +126,7 @@ Popol Super Slam Fusion Full Speed 2KXX
 * [ ] Problems when passing from a block just **16 pixel** over the other block (results in tiny teleportation but visible due to camera instant movement).
 * [ ] Jitter when multiple **balls** are above each other. -> reimplement the friction
 * [ ] **Ball** located just on a spawner position results in very high velocity when spawning a ball on it.
+* [ ] Wind is not affecting Player when grinding (and hanging).
 
 ### Other
 * [x] Spawner rotation position is weird.
