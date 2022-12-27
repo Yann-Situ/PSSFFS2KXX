@@ -319,6 +319,7 @@ func reset_state():
 
 	move_direction = 0
 	direction_p = 0
+	direction_sprite = 0
 	aim_direction = 0
 	velocity = Vector2.ZERO
 

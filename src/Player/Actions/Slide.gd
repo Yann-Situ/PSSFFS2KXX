@@ -1,6 +1,7 @@
 extends Action
 
 export var slide_duration = 0.80
+var floor_friction_save
 
 func move(delta):
 	# TODO
@@ -11,11 +12,14 @@ func move(delta):
 	S.is_crouching = true
 
 	S.is_sliding = true
-	var target_friction = 0.2#P.floor_friction
+	floor_friction_save = P.floor_friction
+	var target_friction = P.floor_friction
 	var tween = get_tree().create_tween()
 	tween.tween_property(P, "floor_friction", target_friction, slide_duration).from(0.0).set_ease(Tween.EASE_IN)
 	tween.tween_callback(self, "move_end")
 	P.PlayerEffects.dust_start()
-	
+
 func move_end():
 	S.is_sliding = false
+	P.floor_friction = floor_friction_save # TODO clever system to handle
+	#friction. Currently, if the floor change during slide, we will have some problems

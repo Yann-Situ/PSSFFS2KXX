@@ -13,7 +13,7 @@ func move(delta,direction_p):
 					S.velocity.x += direction_p*P.crouch_accel*delta
 					if (S.velocity.x*direction_p > P.crouch_speed_max) :
 						S.velocity.x = direction_p*P.crouch_speed_max
-						
+
 				if -P.crouch_return_thresh_instant_speed < S.velocity.x*direction_p \
 					and S.velocity.x*direction_p < P.crouch_instant_speed :
 					S.velocity.x = direction_p*P.crouch_instant_speed

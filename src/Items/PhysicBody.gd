@@ -8,8 +8,9 @@ var should_reset = false
 #physics :
 export (float) var gravity_scale = 1.0 setget set_gravity_scale, get_gravity_scale
 export (float) var mass = 1.0 setget set_mass
-export (float) var friction = 0.05 setget set_friction
+export (float) var friction = 0.5 setget set_friction
 export (float) var bounce = 0.5 setget set_bounce
+export (float) var penetration = 0.5 setget set_penetration # for penetration in the wind
 var linear_velocity = Vector2(0.0,0.0) setget set_linear_velocity
 var applied_forces = {} #"force_name : value in kg*pix/s^2"
 
@@ -32,6 +33,8 @@ func set_friction(new_value):
 	friction = new_value
 func set_bounce(new_value):
 	bounce = new_value
+func set_penetration(new_value):
+	penetration = new_value
 
 func set_linear_velocity(v):
 	linear_velocity = v
@@ -127,7 +130,8 @@ func collision_handle(collision, delta):
 			#TODO seuil à déterminer
 			#sliding
 			#color_colision = color1
-			var vel_t = lerp(t.dot(linear_velocity), 0, friction)
+			#var vel_t = lerp(t.dot(linear_velocity), 0, friction)
+			var vel_t = GlobalMaths.apply_friction(t.dot(linear_velocity), friction, delta)
 			linear_velocity = vel_t*t
 			var motion = collision.remainder.dot(t)*t
 			move_and_collide(motion,false)
@@ -135,7 +139,8 @@ func collision_handle(collision, delta):
 		else :
 			#bouncing
 			#color_colision = color2
-			var vel_t = lerp(t.dot(bounce_linear_velocity), 0, friction)
+			#var vel_t = lerp(t.dot(bounce_linear_velocity), 0, friction)
+			var vel_t = GlobalMaths.apply_friction(t.dot(bounce_linear_velocity), friction, delta)
 			linear_velocity = vel_n*n + vel_t*t
 			var motion = collision.remainder.bounce(n)
 			move_and_collide(motion,false)#may cause pb on corners ?
