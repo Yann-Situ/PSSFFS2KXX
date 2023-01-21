@@ -1,0 +1,11 @@
+#!/bin/bash
+# vertically merge every Character$_walk.png and Character$_idle.png to a Pedestrian$.png
+
+let "i=1"
+while [ -e "Character$i""_walk.png" ]; do
+    if [ -e "Character$i""_idle.png" ];  then
+        convert "Character$i""_idle.png" "Character$i""_walk.png" "empty_anim.png" -append "Pedestrian_$i.png"
+        echo "Made Pedestrian$i"
+    fi
+    let "i=i+1"
+done

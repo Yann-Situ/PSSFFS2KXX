@@ -12,8 +12,8 @@ func move(delta):
 	S.is_crouching = true
 
 	S.is_sliding = true
-	floor_friction_save = P.floor_friction
-	var target_friction = P.floor_friction
+	floor_friction_save = GlobalMaths.unfriction_to_friction(P.floor_unfriction) # ugly: TODO change that
+	var target_friction = floor_friction_save
 	var tween = get_tree().create_tween()
 	tween.tween_property(P, "floor_friction", target_friction, slide_duration).from(0.0).set_ease(Tween.EASE_IN)
 	tween.tween_callback(self, "move_end")

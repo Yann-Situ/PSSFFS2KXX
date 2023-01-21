@@ -4,12 +4,15 @@
 [ext_resource path="res://src/Editor/ColorSampler.gd" type="Script" id=3]
 
 [sub_resource type="Curve" id=16]
+bake_resolution = 1000
 _data = [ Vector2( 0, 0 ), 4.35537, -0.0568181, 0, 0, Vector2( 0.0335196, 1 ), 0.0, 0.0, 0, 0, Vector2( 0.0614525, 1 ), 0.0, 0.0, 0, 0, Vector2( 0.100559, 0 ), 0.0, 0.0, 0, 0, Vector2( 1, 0 ), 0.0, 0.0, 0, 0 ]
 
 [sub_resource type="Curve" id=36]
+bake_resolution = 1000
 _data = [ Vector2( 0, 0 ), 0.0, 0.0, 0, 0, Vector2( 0.134078, 1 ), 0.0, 0.0, 0, 0, Vector2( 0.299754, 1 ), 0.0, 0.0, 0, 0, Vector2( 0.459459, 0.436364 ), 0.0, 0.0, 0, 0, Vector2( 0.625698, 0.552273 ), 0.0, 0.0, 0, 0, Vector2( 0.670391, 0 ), 0.0, 0.0, 0, 0 ]
 
 [sub_resource type="Curve" id=17]
+bake_resolution = 1000
 _data = [ Vector2( 0.581006, 0 ), 0.0, 1.71463, 0, 0, Vector2( 0.687151, 1 ), 0.0, 0.0, 0, 0, Vector2( 0.769042, 0 ), 0.0, 0.0, 0, 0 ]
 
 [sub_resource type="Resource" id=19]
@@ -34,6 +37,7 @@ saturation_distribution = SubResource( 21 )
 lightness_distribution = SubResource( 37 )
 
 [sub_resource type="Curve" id=28]
+bake_resolution = 1000
 _data = [ Vector2( 0, 1 ), 0.0, 0.0, 0, 0, Vector2( 0.202749, 0 ), 0.0, 0.0, 0, 0, Vector2( 0.90378, 0 ), 0.0, 0.0, 0, 0, Vector2( 1, 0.772727 ), 0.0, 0.0, 0, 0 ]
 
 [sub_resource type="Curve" id=38]
@@ -49,6 +53,7 @@ saturation_distribution = SubResource( 29 )
 lightness_distribution = SubResource( 38 )
 
 [sub_resource type="Curve" id=32]
+bake_resolution = 1000
 _data = [ Vector2( 0, 0 ), 0.0, 0.0, 0, 1, Vector2( 0.61512, 0 ), 0.0, 0.0, 0, 0, Vector2( 0.80756, 1 ), 0.0, 0.0, 0, 0, Vector2( 1, 0 ), -5.19643, 0.0, 1, 0 ]
 
 [sub_resource type="Curve" id=39]

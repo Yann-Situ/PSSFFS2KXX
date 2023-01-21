@@ -32,7 +32,7 @@ func _draw():
 		draw_line(x_radius*Vector2.LEFT, x_radius*Vector2.RIGHT, Color(0.4,0.8,0.9,0.25), 64.0)
 func generate_pedestrian(global_pos : Vector2 = self.global_position, direction : int = 0) -> Node:
 	var pedestrian = pedestrian_scene.instance()
-	pedestrian.get_node("Sprite").texture = load("res://assets/art/characters/Pedestrian_"+str(randi()%3+1)+".png")
+	pedestrian.get_node("Sprite").texture = load("res://assets/art/characters/Pedestrian_"+str(randi()%7+1)+".png")
 
 	add_child(pedestrian)
 	if palette_scheme_sampler:

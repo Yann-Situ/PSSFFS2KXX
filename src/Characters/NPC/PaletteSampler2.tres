@@ -4,13 +4,16 @@
 [ext_resource path="res://src/Editor/ColorSampler.gd" type="Script" id=3]
 
 [sub_resource type="Curve" id=16]
-_data = [ Vector2( 0, 0.327273 ), 4.35537, -0.0568181, 0, 0, Vector2( 0.036855, 1 ), 0.0, 0.0, 0, 0, Vector2( 0.0712531, 1 ), 0.0, 0.0, 0, 0, Vector2( 0.130221, 0 ), 0.0, 0.0, 0, 0, Vector2( 0.958824, 0 ), 0.0, 0.0, 0, 0, Vector2( 1, 0.381818 ), 0.0, 0.0, 0, 0 ]
+bake_resolution = 1000
+_data = [ Vector2( 0.0179641, 0 ), 4.35537, -0.0568181, 0, 0, Vector2( 0.036855, 1 ), 0.0, 0.0, 0, 0, Vector2( 0.0658683, 1 ), 0.0, 0.0, 0, 0, Vector2( 0.113772, 0 ), 0.0, 0.0, 0, 0, Vector2( 1, 0 ), 0.0, 0.0, 0, 0 ]
 
 [sub_resource type="Curve" id=36]
+bake_resolution = 1000
 _data = [ Vector2( 0, 0 ), 0.0, 0.0, 0, 0, Vector2( 0.162162, 1 ), 0.0, 0.0, 0, 0, Vector2( 0.299754, 1 ), 0.0, 0.0, 0, 0, Vector2( 0.390374, 0 ), 0.0, 0.0, 0, 0 ]
 
 [sub_resource type="Curve" id=17]
-_data = [ Vector2( 0.681818, 0 ), 0.0, 1.71463, 0, 0, Vector2( 0.828877, 1 ), 0.0, 0.0, 0, 0, Vector2( 0.8877, 0 ), 0.0, 0.0, 0, 0 ]
+bake_resolution = 1000
+_data = [ Vector2( 0.802395, 0 ), 0.0, 1.71463, 0, 0, Vector2( 0.880239, 1 ), 0.0, 0.0, 0, 0, Vector2( 0.97006, 0 ), 0.0, 0.0, 0, 0 ]
 
 [sub_resource type="Resource" id=19]
 script = ExtResource( 3 )
@@ -19,7 +22,7 @@ saturation_distribution = SubResource( 17 )
 lightness_distribution = SubResource( 36 )
 
 [sub_resource type="Curve" id=20]
-bake_resolution = 200
+bake_resolution = 1000
 _data = [ Vector2( 0.013369, 0 ), 0.0, 0.0, 0, 0, Vector2( 0.0427807, 1 ), 0.0, 0.0, 0, 0, Vector2( 0.0695187, 0 ), 0.0, 0.0, 0, 0, Vector2( 0.109626, 0 ), 0.0, 0.0, 0, 0, Vector2( 0.122995, 0.718182 ), 0.0, 0.0, 0, 0, Vector2( 0.144385, 0 ), 0.0, 0.0, 0, 0, Vector2( 0.941176, 0 ), 0.0, 0.0, 0, 0, Vector2( 0.967914, 1 ), 0.0, 0.0, 0, 0, Vector2( 1, 0 ), 0.0, 0.0, 0, 0 ]
 
 [sub_resource type="Curve" id=37]
@@ -35,9 +38,11 @@ saturation_distribution = SubResource( 21 )
 lightness_distribution = SubResource( 37 )
 
 [sub_resource type="Curve" id=28]
+bake_resolution = 1000
 _data = [ Vector2( 0, 1 ), 0.0, 0.0, 0, 0, Vector2( 0.202749, 0 ), 0.0, 0.0, 0, 0, Vector2( 0.90378, 0 ), 0.0, 0.0, 0, 0, Vector2( 1, 0.772727 ), 0.0, 0.0, 0, 0 ]
 
 [sub_resource type="Curve" id=38]
+bake_resolution = 1000
 _data = [ Vector2( 0.0628415, 0 ), 0.0, 0.0, 0, 0, Vector2( 0.221311, 0.645455 ), 0.0, 0.0, 0, 0, Vector2( 0.385246, 0 ), 0.0, 0.0, 0, 0, Vector2( 0.467213, 0 ), 0.0, 0.0, 0, 0, Vector2( 0.622951, 0.690909 ), 0.0, 0.0, 0, 0, Vector2( 0.775956, 0 ), 0.0, 0.0, 0, 0 ]
 
 [sub_resource type="Curve" id=29]

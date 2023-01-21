@@ -39,13 +39,14 @@ Popol Super Slam Fusion Full Speed 2KXX
    - [x] baskets
    - [x] spawners
    - [x] activable
-   - [x] Add destroyable blocks
+   - [x] destroyable blocks
+   - [x] ball-doors / player-doors
    - :pushpin: ziplines -> to rework
    - :pushpin: Add enemies and NPC
-   - :pushpin: Add one way platforms and ball-doors / player-doors
-   - :pushpin: pipes (TODO : change bounding box + handle multiple sides + be careful on exit_throw)
-   - :pushpin: moving platform (tilemap + pathfollow2D?)
-   - :pushpin: collectibles (spray?)
+   - :pushpin: Add one way platforms
+   - :pushpin: pipes -> rework a bit (TODO : change bounding box + handle multiple sides + be careful on exit_throw)
+   - :pushpin: moving platform (tilemap + pathfollow2D?) (Wait4Godot)
+   - [x] collectibles (spray?)
 * NPCs
    - [x] pedestrian generator
    - [ ] interactive npc
@@ -101,15 +102,16 @@ Popol Super Slam Fusion Full Speed 2KXX
     - Implement the `riding` and `hanging` states.
 * [x] **dunking** can result in `S.selected_basket.dunk()` called on `null` instance (basket is not selected anymore)
 * [x] Hard to reproduce (see video) : **dunkjump** on **jumper** can result in `Nan` camera position teleportation. (because to low to mathematically dunkjump => negative value ? division by 0.0 ?)
+* [x] High jump when `jump_jp` and `jump_jr` just before landing (because the cancelled mounting only test `jump_jr`). (also on walljumps)
 * [ ] **Dunkjumping** while only moving with floor adherence a bit far from basket results in missing the basket.
 * [ ] **release** ball when **aiming** results in error.
 * [ ] It is possible to **dunk** through walls. It can result in dunkjump particles (+ghost) emmiting (dont know why).
-* [ ] Infinite **walking** animation on 16px block stairs.
-* [ ] High jump when `jump_jp` and `jump_jr` just before landing (because the cancelled mounting only test `jump_jr`). (also on walljumps)
-* [ ] **one-way platform** make player crouch due to raycast mecanik.
+* [ ] **one-way platform** make player crouch due to raycast mecanik. This implies weird camera movement.
 * [ ] **one-way platform** make player unable to do small jumps.
 * [ ] Pressing **dunkdash** at a precise moment during **dunk** animation results in **dunkdashing** on place.
 * [ ] Pressing **jump** at a precise moment during **dunk** animation results in ungrabing the basket without any jump.
+* [ ] **Walljump** by pressing jump before touching wall can result in jump that can't be mount-cancelled (by releasing jump button).
+* [ ] **Sliding** is not canceled if the button down is released. This results in interesting yet annoying moonwalks and weird behaviours.
 
 ### Dynamic items
 * [ ] **Zipline** drop inside collision places results in stucked player.
@@ -124,7 +126,7 @@ Popol Super Slam Fusion Full Speed 2KXX
 * [x] **ShockJumping** at frame perfect when crouching on **Jumper** (or when jumping or dunkjumping) results in a huge mega jump sa mère.
 * :pushpin: Problems with physics on **slopes**.
 * [ ] Problems when passing from a block just **16 pixel** over the other block (results in tiny teleportation but visible due to camera instant movement).
-* [ ] Jitter when multiple **balls** are above each other. -> reimplement the friction
+* [ ] Jitter when multiple **balls** are above each other. -> reimplement the friction during collision.
 * [ ] **Ball** located just on a spawner position results in very high velocity when spawning a ball on it.
 * [ ] Wind is not affecting Player when grinding (and hanging).
 
@@ -137,9 +139,8 @@ Popol Super Slam Fusion Full Speed 2KXX
 * [x] Using the power of a selected ball that died results in error. => I reworked the selection system.
 * [x] If multiple explosion breaks the same bloc, it can spawn copies.
 * [x] Lag if too much balls : make a spawner limit and link the dispawn of a ball to the spawner to increase the spawn count.
-* [ ] Energy loss of `constant_energy_balls`.
 * [x] I need to adapt the boum delay: i.e apply_impulse instantly on colliding object and a bit after on far objects. need a method call_after_a_delay(apply_impulse) -> see Explosion node implementation
-* :pushpin: Need to implement Tilemap interactive objects rotation and flips.
+* :pushpin: Need to implement Tilemap interactive objects rotation and flips. (Wait4Godot)
 * [ ] On **baskets**, a ball that bounces on the ring can do multiple goals.
 
 ### Visual issues
@@ -155,7 +156,9 @@ Popol Super Slam Fusion Full Speed 2KXX
 * [ ] **shooting** just before **landing** results in `floor_shoot` just after `aim_shoot` animation
 * [ ] There is some jitter animation when passing from a **dunkjump** state to a **grind** state.
 * [ ] There is some jitter animation when passing from a **dunk** state to a **hang** state.
+* [ ] There is some jitter animation when passing from a **dunk** state to a **falling** state (by pressing down during dunk).
 * [ ] **Trail** lifetime and point_lifetime not set correctly when trail for **bubble_ball**.
+* [ ] **Player** doesn't stop walking when on floor walls. ([ ] Infinite **walking** animation on 16px block) stairs.
 
 ### Potential Glitches
 * [ ] Pressing **jump** and **dunkdash** just before landing can result in small dunkdash/jump.
