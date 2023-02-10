@@ -12,4 +12,4 @@ func set_max_life(max_life):
 
 func on_life_changed(life):
 	progress_bar.value = life
-	label.text = str(floor(progress_bar.value))+ " / "+str(floor(progress_bar.max_value))
+	#label.text = str(floor(progress_bar.value))+ " / "+str(floor(progress_bar.max_value))

@@ -38,7 +38,7 @@ func shock(shock_force : float, shock_global_position : Vector2):
 		print(self.name + " is not yet ready for a new shock")
 		return false
 	$Timer.start(shock_timer)
-	Global.camera.screen_shake(0.25,5)
+	Global.camera.screen_shake(0.25,5,global_position)
 	$ShockWaveAnim.global_position = shock_global_position
 	$ShockWaveAnim.restart()
 	$AnimationPlayer.play("shockwave")

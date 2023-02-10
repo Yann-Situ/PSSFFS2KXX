@@ -102,17 +102,17 @@ func select_ball(ball : Ball): # called by ball.select(P)
 			S.selected_ball.deselect(P)
 	S.selected_ball = ball
 	#TEMPORARY CONTROL NODE
-	var ui = P.get_node("UI/MarginContainer/HBoxContainer/ColorRect/RichTextLabel")
+	var ui = P.get_node("UI/MarginContainer/HBoxContainer/MarginContainer/TextureRect/RichTextLabel")
 	ui.clear()
-	ui.add_text("Name : "+ball.name)
-	ui.newline()
-	ui.add_text("Ball mass  : "+str(ball.mass))
-	ui.newline()
-	ui.add_text("Ball frict : "+str(ball.friction))
-	ui.newline()
-	ui.add_text("Ball bounc : "+str(ball.bounce))
-	ui.newline()
-	ui.add_text("Ball posit : "+str(ball.position - P.position))
+	ui.add_text(ball.name)
+	# ui.newline()
+	# ui.add_text("Ball mass  : "+str(ball.mass))
+	# ui.newline()
+	# ui.add_text("Ball frict : "+str(ball.friction))
+	# ui.newline()
+	# ui.add_text("Ball bounc : "+str(ball.bounce))
+	# ui.newline()
+	# ui.add_text("Ball posit : "+str(ball.position - P.position))
 
 func deselect_ball(ball : Ball): # called by ball.deselect(P)
 	assert(S.selected_ball != null)
@@ -120,7 +120,7 @@ func deselect_ball(ball : Ball): # called by ball.deselect(P)
 		S.selected_ball.power_jr(self,0.0)
 	S.selected_ball = null
 	#TEMPORARY CONTROL NODE
-	var ui = P.get_node("UI/MarginContainer/HBoxContainer/ColorRect/RichTextLabel")
+	var ui = P.get_node("UI/MarginContainer/HBoxContainer/MarginContainer/TextureRect/RichTextLabel")
 	ui.clear()
 
 func _physics_process(delta):

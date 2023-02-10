@@ -2,6 +2,7 @@ extends Camera2D
 export (float) var aim_offset = 100
 export (float) var aim_max_dist = 300
 export (float) var crouch_offset = 100
+export (float) var boum_distance2_threshold = 450*450
 export (Vector2) var move_max_offset = Vector2(128, 64)
 export (Vector2) var move_speed_threshold = Vector2(600, 800)
 export (Vector2) var initial_position = Vector2(0,-35)# relative position to the player
@@ -13,7 +14,9 @@ var offset_no_shake = offset
 func _ready():
 	pass
 
-func screen_shake(duration, power):
+func screen_shake(duration, power, boum_position : Vector2 = self.global_position):
+	if (boum_position-global_position).length_squared() > boum_distance2_threshold:
+		return
 	if power > current_shake_power:
 		current_shake_power = power
 		$Tween.interpolate_method(self, "set_random_shake_offset",

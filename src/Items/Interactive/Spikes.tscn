@@ -16,7 +16,7 @@ script = ExtResource( 2 )
 [node name="Sprite" type="Sprite" parent="."]
 texture = ExtResource( 1 )
 region_enabled = true
-region_rect = Rect2( 0, 288, 16, 16 )
+region_rect = Rect2( 64, 176, 16, 16 )
 
 [node name="StaticBody2D" type="StaticBody2D" parent="."]
 collision_layer = 2

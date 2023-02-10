@@ -574,7 +574,7 @@ handle_catch_radius = 20.0
 handle_catch_init_unit_offset = 0.096
 
 [node name="Jumper2" parent="Environment/Dynamics" instance=ExtResource( 15 )]
-position = Vector2( -112, 560 )
+position = Vector2( -112, 544 )
 jump_velocity = 800
 
 [node name="PipeBall" parent="Environment/Dynamics" instance=ExtResource( 4 )]

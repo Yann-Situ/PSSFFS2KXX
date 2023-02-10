@@ -50,7 +50,7 @@ func boum(boum_force : float, boum_global_position : Vector2):
 	$ShockWaveAnim.global_position = boum_global_position
 	$BoumParticles.restart()
 	$ShockWaveAnim.restart()
-	Global.camera.screen_shake(0.3,5)
+	Global.camera.screen_shake(0.3,5,global_position)
 
 	GlobalEffect.make_simple_explosion(boum_global_position, distance_max, \
 	0.1, 4, [boum_force, 0.0, boum_force], damage, 0.1, [self])
