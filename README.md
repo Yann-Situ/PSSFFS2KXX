@@ -1,6 +1,10 @@
 # PSSFFS2KXX
 Popol Super Slam Fusion Full Speed 2KXX
 -----
+## License ?
+No open-source license provided yet (see [this link](https://choosealicense.com/no-permission/)).
+This repository is for private use only. An open-source license will probably be released in the future.
+Copyright (c) 2023 Yann-Situ
 
 ## Specific big parts
 * graphism
