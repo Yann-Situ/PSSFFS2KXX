@@ -8,6 +8,11 @@ and consider sharing the modified result on godotshaders.com.
 
 shader_type canvas_item;
 
+/* In Godot4, SCREEN_TEXTURE has been removed in favor of using
+ * hint_screen_texture with a uniform. As a result the following line is needed
+ * for the code to work:*/
+uniform sampler2D Screen_Texture : hint_screen_texture, filter_linear_mipmap;
+
 uniform float angle = -0.3;
 uniform float position = -0.2;
 uniform float spread : hint_range(0.0, 1.0) = 0.5;
@@ -65,43 +70,43 @@ vec4 screen(vec4 base, vec4 blend){
 
 void fragment()
 {
-	
+
 	// Rotate, skew and move the UVs
 	vec2 transformed_uv = ( rotate(angle) * (UV - position) )  / ( (UV.y + spread) - (UV.y * spread) );
-	
+
 	// Animate the ray according the the new transformed UVs
 	vec2 ray1 = vec2(transformed_uv.x * ray1_density + sin(TIME * 0.1 * speed) * (ray1_density * 0.2) + seed, 1.0);
 	vec2 ray2 = vec2(transformed_uv.x * ray2_density + sin(TIME * 0.2 * speed) * (ray1_density * 0.2) + seed, 1.0);
-	
+
 	// Cut off the ray's edges
 	float cut = step(cutoff, transformed_uv.x) * step(cutoff, 1.0 - transformed_uv.x);
 	ray1 *= cut;
 	ray2 *= cut;
-	
+
 	// Apply the noise pattern (i.e. create the rays)
 	float rays;
-	
+
 	if (hdr){
-		// This is not really HDR, but check this to not clamp the two merged rays making 
+		// This is not really HDR, but check this to not clamp the two merged rays making
 		// their values go over 1.0. Can make for some nice effect
 		rays = noise(ray1) + (noise(ray2) * ray2_intensity);
 	}
 	else{
 		 rays = clamp(noise(ray1) + (noise(ray2) * ray2_intensity), 0., 1.);
 	}
-	
+
 	// Fade out edges
 	rays *= smoothstep(0.0, falloff, (1.0 - UV.y)); // Bottom
 	rays *= smoothstep(0.0 + cutoff, edge_fade + cutoff, transformed_uv.x); // Left
 	rays *= smoothstep(0.0 + cutoff, edge_fade + cutoff, 1.0 - transformed_uv.x); // Right
-	
+
 	// Color to the rays
 	vec3 shine = vec3(rays) * color.rgb;
 
 	// Try different blending modes for a nicer effect. "Screen" is included in the code,
 	// but take a look at https://godotshaders.com/snippet/blending-modes/ for more.
 	// With "Screen" blend mode:
-	shine = screen(texture(SCREEN_TEXTURE, SCREEN_UV), vec4(color)).rgb;
-	
+	shine = screen(texture(Screen_Texture, SCREEN_UV), vec4(color)).rgb;
+
 	COLOR = vec4(shine, rays * color.a);
 }

@@ -12,7 +12,7 @@ float lightness(vec4 x)
 
 void fragment() {
 	vec4 t = texture(TEXTURE, UV);
-	
+
 	if (activated && t.a < 0.5)
 	{
 		vec4 right = texture(TEXTURE,UV+vec2(TEXTURE_PIXEL_SIZE.x,0.));
@@ -28,12 +28,14 @@ void fragment() {
 		}
 		else
 		{
-			COLOR = vec4(0.0)*MODULATE;
+			//COLOR = vec4(0.0)*SHADOW_MODULATE; // TODO not yet supported on Godot4
+			COLOR = vec4(0.0);
 		}
-		
+
 	}
 	else
 	{
-		COLOR = vec4(t.rgb, t.a)*MODULATE;
+		//COLOR = vec4(t.rgb, t.a)*SHADOW_MODULATE; // TODO not yet supported on Godot4
+		COLOR = vec4(t.rgb, t.a);
 	}
 }
