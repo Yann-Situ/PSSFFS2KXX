@@ -2,7 +2,7 @@
 
 [ext_resource path="res://src/Items/Balls/Ball.tscn" type="PackedScene" id=1]
 [ext_resource path="res://src/Items/Balls/BallDash.gd" type="Script" id=2]
-[ext_resource path="res://assets/shader/gradient.shader" type="Shader" id=3]
+[ext_resource path="res://assets/shader/gradient.gdshader" type="Shader" id=3]
 [ext_resource path="res://src/Items/Interactive/Selectable.gd" type="Script" id=4]
 
 [sub_resource type="Gradient" id=1]

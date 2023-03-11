@@ -1,6 +1,6 @@
 [gd_scene load_steps=71 format=2]
 
-[ext_resource path="res://src/Levels/Room.gd" type="Script" id=1]
+[ext_resource path="res://src/Levels/Room2D.gd" type="Script" id=1]
 [ext_resource path="res://src/Platform/Tileset/TileMap1.tres" type="TileSet" id=2]
 [ext_resource path="res://src/Items/Balls/BallBoum.tscn" type="PackedScene" id=3]
 [ext_resource path="res://src/Items/Dynamics/PipeBall.tscn" type="PackedScene" id=4]
@@ -44,7 +44,7 @@
 [ext_resource path="res://src/Platform/FrontEnvironment.gd" type="Script" id=43]
 [ext_resource path="res://src/Items/Balls/BallShock.tscn" type="PackedScene" id=44]
 [ext_resource path="res://src/Player/PlayerPosition.tscn" type="PackedScene" id=45]
-[ext_resource path="res://assets/shader/gradient.shader" type="Shader" id=46]
+[ext_resource path="res://assets/shader/gradient.gdshader" type="Shader" id=46]
 [ext_resource path="res://src/Items/Balls/BallDash.tscn" type="PackedScene" id=47]
 [ext_resource path="res://src/Items/Interactive/Wind.tscn" type="PackedScene" id=48]
 

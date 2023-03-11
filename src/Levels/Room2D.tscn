@@ -10,7 +10,7 @@
 [ext_resource path="res://src/Platform/World32.gd" type="Script" id=10]
 [ext_resource path="res://src/Platform/Tileset/TileMap3.tres" type="TileSet" id=12]
 [ext_resource path="res://src/Platform/Tileset/TilesetForeground.tres" type="TileSet" id=13]
-[ext_resource path="res://src/Levels/Room.gd" type="Script" id=15]
+[ext_resource path="res://src/Levels/Room2D.gd" type="Script" id=15]
 [ext_resource path="res://src/Platform/Tileset/Back16.tres" type="TileSet" id=30]
 [ext_resource path="res://src/Platform/Tileset/World16.tres" type="TileSet" id=31]
 [ext_resource path="res://src/Platform/Tileset/Graff.tres" type="TileSet" id=32]
@@ -51,7 +51,7 @@ adjustment_enabled = true
 adjustment_contrast = 1.08
 adjustment_saturation = 1.01
 
-[node name="Room" type="Node2D"]
+[node name="Room2D" type="Node2D"]
 script = ExtResource( 15 )
 __meta__ = {
 "_edit_lock_": true,

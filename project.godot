@@ -87,7 +87,7 @@ _global_script_classes=[ {
 "base": "Node2D",
 "class": "Room2D",
 "language": "GDScript",
-"path": "res://src/Levels/Room.gd"
+"path": "res://src/Levels/Room2D.gd"
 }, {
 "base": "CollisionObject2D",
 "class": "Selectable",

@@ -1,5 +1,5 @@
 // cloudy skies shader
-// inspired from shadertoy shader made by Drift (https://www.shadertoy.com/view/4tdSWr) 
+// inspired from shadertoy shader made by Drift (https://www.gdshadertoy.com/view/4tdSWr) 
 // https://godotshaders.com/shader/cloudy-skies/
 
 // The shader code and all code snippets in this post are under MIT license and 

@@ -2,7 +2,7 @@
 
 [ext_resource path="res://src/Items/Balls/Ball.tscn" type="PackedScene" id=1]
 [ext_resource path="res://assets/art/ball/ball_fire.png" type="Texture" id=2]
-[ext_resource path="res://assets/shader/contour.shader" type="Shader" id=3]
+[ext_resource path="res://assets/shader/contour.gdshader" type="Shader" id=3]
 [ext_resource path="res://assets/art/effects/light4.png" type="Texture" id=4]
 [ext_resource path="res://assets/art/effects/round.png" type="Texture" id=5]
 [ext_resource path="res://src/Items/Balls/BallFire.gd" type="Script" id=6]

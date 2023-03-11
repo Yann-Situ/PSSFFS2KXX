@@ -7,7 +7,7 @@
 [ext_resource path="res://src/Levels/Portal.tscn" type="PackedScene" id=5]
 [ext_resource path="res://assets/art/background/ShopBackground2.png" type="Texture" id=6]
 [ext_resource path="res://src/Items/Balls/BallShock.tscn" type="PackedScene" id=7]
-[ext_resource path="res://src/Levels/Room.tscn" type="PackedScene" id=8]
+[ext_resource path="res://src/Levels/Room2D.tscn" type="PackedScene" id=8]
 [ext_resource path="res://src/Items/Dynamics/ZipLine.tscn" type="PackedScene" id=9]
 [ext_resource path="res://assets/shader/cloudsky.gdshader" type="Shader" id=10]
 [ext_resource path="res://src/Items/Interactive/GraffSpray.tscn" type="PackedScene" id=11]
@@ -62,7 +62,7 @@ adjustment_brightness = 0.92
 adjustment_contrast = 1.3
 adjustment_saturation = 1.11
 
-[node name="Room" instance=ExtResource( 8 )]
+[node name="Room2D" instance=ExtResource( 8 )]
 limit_left = -512
 limit_bottom = 512
 

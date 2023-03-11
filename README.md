@@ -142,6 +142,7 @@ Popol Super Slam Fusion Full Speed 2KXX
 * [x] I need to adapt the boum delay: i.e apply_impulse instantly on colliding object and a bit after on far objects. need a method call_after_a_delay(apply_impulse) -> see Explosion node implementation
 * :pushpin: Need to implement Tilemap interactive objects rotation and flips. (Wait4Godot)
 * [ ] On **baskets**, a ball that bounces on the ring can do multiple goals.
+* [ ] Releasing ball and changing room can result in the player not able to catch another ball.
 
 ### Visual issues
 * [x] Jitter animation when passing from a transition_in to transition_out using **rooms**.
@@ -169,7 +170,7 @@ Popol Super Slam Fusion Full Speed 2KXX
 * [ ] **Dunkjump** with pressing jump_button while pre-dunkjumping can result in high or low dunkjump.
 * [ ] At the connection between a **rail** and a solid block, if the character is falling such that they will wallslide on the block if there wasn't a rail, and is falling fast enough, the character will normally grind but with 0 initial speed.
     - At the connection between a **rail** and stairs, if the character is falling such that they will go on the slope if there wasn't a rail, and is falling fast enough, the character will normally grind but with 0 speed in the direction down the stairs.
-* [ ] Player changing **Room** while in a **BallWall** results in player not able to pickup ball. (If glitch, we need to make sure portals are away from ballwall).
+* [ ] Player changing **Room2D** while in a **BallWall** results in player not able to pickup ball. (If glitch, we need to make sure portals are away from ballwall).
 
 ### Godot Issues
 * in `Ball.gd` function `change_holder` : issue related to https://github.com/godotengine/godot/issues/14578 and https://github.com/godotengine/godot/issues/34207. See [my workaround](https://www.reddit.com/r/godot/comments/vjkaun/reparenting_node_without_removing_it_from_tree/).

@@ -82,7 +82,7 @@ script = ExtResource( 1 )
 __meta__ = {
 "_edit_group_": true,
 "_editor_description_": "*Purpose: used for teleportation of Player between rooms.
-*Requirement: It strongly depends on a Room node. A Portal node must be put under a Portals node under Room node (Room/Portals/Portal).
+*Requirement: It strongly depends on a Room2D node. A Portal node must be put under a Portals node under Room2D node (Room2D/Portals/Portal).
 "
 }
 

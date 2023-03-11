@@ -4,7 +4,7 @@
 [ext_resource path="res://src/Items/Balls/BallMetal.gd" type="Script" id=2]
 [ext_resource path="res://assets/art/ball/ball_heavy.png" type="Texture" id=3]
 [ext_resource path="res://assets/art/effects/round.png" type="Texture" id=4]
-[ext_resource path="res://assets/shader/contour.shader" type="Shader" id=5]
+[ext_resource path="res://assets/shader/contour.gdshader" type="Shader" id=5]
 
 [sub_resource type="Curve" id=1]
 _data = [ Vector2( 0, 0.856818 ), 0.0, 3.55714, 0, 0, Vector2( 1, 0.209091 ), 0.0, 0.0, 0, 0 ]
