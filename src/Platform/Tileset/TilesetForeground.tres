@@ -30,4 +30,4 @@
 1/shape_one_way = false
 1/shape_one_way_margin = 0.0
 1/shapes = [  ]
-1/z_index = 21
+; 1/z_index = 21 ; it makes the engine (Godot 4.0 and not Godot 3.5) crash I don't know why
