@@ -1,14 +1,14 @@
-tool
+@tool
 extends Node
 
-export (int) var max_trail_points = 5000
+@export (int) var max_trail_points = 5000
 
 var playing = true
 var list_of_physical_nodes = []
 var mouse_ball = null #pointer to the last selectable item that called mouse_entered
 var camera = null
 
-var current_room = null setget set_current_room, get_current_room
+var current_room = null : get = get_current_room, set = set_current_room
 var _nb_trail_points = 0
 
 func can_add_trail_point() -> bool:

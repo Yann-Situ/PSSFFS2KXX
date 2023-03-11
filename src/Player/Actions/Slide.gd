@@ -1,6 +1,6 @@
 extends Action
 
-export var slide_duration = 0.80
+@export var slide_duration = 0.80
 var floor_friction_save
 
 func move(delta):
@@ -16,7 +16,7 @@ func move(delta):
 	var target_friction = floor_friction_save
 	var tween = get_tree().create_tween()
 	tween.tween_property(P, "floor_friction", target_friction, slide_duration).from(0.0).set_ease(Tween.EASE_IN)
-	tween.tween_callback(self, "move_end")
+	tween.tween_callback(Callable(self,"move_end"))
 	P.PlayerEffects.dust_start()
 
 func move_end():

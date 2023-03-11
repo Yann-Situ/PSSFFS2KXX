@@ -1,14 +1,14 @@
 [gd_scene load_steps=11 format=2]
 
 [ext_resource path="res://src/Items/Interactive/BreakableBloc.gd" type="Script" id=1]
-[ext_resource path="res://assets/art/environment/environment-interactive.png" type="Texture" id=2]
+[ext_resource path="res://assets/art/environment/environment-interactive.png" type="Texture2D" id=2]
 [ext_resource path="res://src/Effects/DebrisParticule.tscn" type="PackedScene" id=3]
 [ext_resource path="res://src/Items/Interactive/Breakable.gd" type="Script" id=4]
-[ext_resource path="res://assets/art/effects/debris_0_8x4.png" type="Texture" id=5]
+[ext_resource path="res://assets/art/effects/debris_0_8x4.png" type="Texture2D" id=5]
 
 [sub_resource type="OccluderPolygon2D" id=1]
 resource_local_to_scene = true
-polygon = PoolVector2Array( -16, -16, 16, -16, 16, 16, -16, 16 )
+polygon = PackedVector2Array( -16, -16, 16, -16, 16, 16, -16, 16 )
 
 [sub_resource type="Animation" id=2]
 resource_name = "explode"
@@ -21,8 +21,8 @@ tracks/0/loop_wrap = true
 tracks/0/imported = false
 tracks/0/enabled = true
 tracks/0/keys = {
-"times": PoolRealArray( 0, 0.12, 0.27, 0.39 ),
-"transitions": PoolRealArray( 1, 1, 1, 1 ),
+"times": PackedFloat32Array( 0, 0.12, 0.27, 0.39 ),
+"transitions": PackedFloat32Array( 1, 1, 1, 1 ),
 "update": 1,
 "values": [ 1, 2, 3, 4 ]
 }
@@ -33,14 +33,14 @@ tracks/1/loop_wrap = true
 tracks/1/imported = false
 tracks/1/enabled = true
 tracks/1/keys = {
-"times": PoolRealArray( 0, 0.12, 0.36, 0.54 ),
-"transitions": PoolRealArray( 1, 1, 1, 1 ),
+"times": PackedFloat32Array( 0, 0.12, 0.36, 0.54 ),
+"transitions": PackedFloat32Array( 1, 1, 1, 1 ),
 "update": 0,
 "values": [ Color( 1, 1, 1, 1 ), Color( 1, 0.658824, 0.658824, 1 ), Color( 0.701961, 0.701961, 0.701961, 1 ), Color( 1, 1, 1, 0 ) ]
 }
 
 [sub_resource type="RectangleShape2D" id=3]
-extents = Vector2( 16, 16 )
+size = Vector2( 16, 16 )
 
 [sub_resource type="CanvasItemMaterial" id=4]
 resource_local_to_scene = true
@@ -51,24 +51,24 @@ particles_anim_loop = false
 
 [sub_resource type="Gradient" id=5]
 resource_local_to_scene = true
-offsets = PoolRealArray( 0, 0.561983, 0.995305, 1 )
-colors = PoolColorArray( 0.527344, 0.385079, 0.259552, 1, 0.429688, 0.280094, 0.12085, 1, 0.163086, 0.111312, 0.0904617, 0.0328639, 1, 1, 1, 0 )
+offsets = PackedFloat32Array( 0, 0.561983, 0.995305, 1 )
+colors = PackedColorArray( 0.527344, 0.385079, 0.259552, 1, 0.429688, 0.280094, 0.12085, 1, 0.163086, 0.111312, 0.0904617, 0.0328639, 1, 1, 1, 0 )
 
 [node name="BreakableBloc" type="Node2D"]
 z_index = 190
 z_as_relative = false
 script = ExtResource( 1 )
 
-[node name="Occluder" type="LightOccluder2D" parent="."]
+[node name="OccluderInstance3D" type="LightOccluder2D" parent="."]
 occluder = SubResource( 1 )
 
-[node name="Sprite" type="Sprite" parent="."]
+[node name="Sprite2D" type="Sprite2D" parent="."]
 texture = ExtResource( 2 )
 hframes = 5
 region_enabled = true
 region_rect = Rect2( 0, 256, 160, 32 )
 
-[node name="AnimationPlayer" type="AnimationPlayer" parent="Sprite"]
+[node name="AnimationPlayer" type="AnimationPlayer" parent="Sprite2D"]
 anims/explode = SubResource( 2 )
 
 [node name="Breakable" type="StaticBody2D" parent="."]

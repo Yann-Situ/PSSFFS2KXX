@@ -1,7 +1,7 @@
 extends HBoxContainer
 
-onready var progress_bar = self.get_node("LifeBar")
-onready var label = self.get_node("MarginContainer/Background/Label")
+@onready var progress_bar = self.get_node("LifeBar")
+@onready var label = self.get_node("MarginContainer/Background/Label")
 
 # Called when the node enters the scene tree for the first time.
 func _ready():

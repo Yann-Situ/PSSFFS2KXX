@@ -1,4 +1,4 @@
-tool
+@tool
 extends TileSet
 
 var brick_BG = [find_tile_by_name("brick-BG-ext"), find_tile_by_name("brick-BG-in")]

@@ -5,8 +5,8 @@ signal is_enabled
 signal is_disabled
 signal is_toggled(b)
 
-export (bool) var activated = false setget set_activated, is_activated
-export (bool) var locked = false
+@export (bool) var activated = false : get = is_activated, set = set_activated
+@export (bool) var locked = false
 
 func _init():
 	add_to_group("activables")

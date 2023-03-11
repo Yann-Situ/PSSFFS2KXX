@@ -1,12 +1,12 @@
 extends Ball
 
-export (float) var damage = 3.0#lp
-export (float) var boum_min = 400.0
-export (float) var boum_max = 700.0 # m*pix/s
-export (float) var distance_max = 64.0
-export (float) var speed_threshold = 350.0#pix/s : if the difference of speed when collision is above this value, then boum !
-export (float) var boum_timer = 1.0#s : minimum time between two consecutive boums.
-export (float) var boum_delay = 0.13#s : time between boum_effect and apply_explosion
+@export (float) var damage = 3.0#lp
+@export (float) var boum_min = 400.0
+@export (float) var boum_max = 700.0 # m*pix/s
+@export (float) var distance_max = 64.0
+@export (float) var speed_threshold = 350.0#pix/s : if the difference of speed when collision is above this value, then boum !
+@export (float) var boum_timer = 1.0#s : minimum time between two consecutive boums.
+@export (float) var boum_delay = 0.13#s : time between boum_effect and apply_explosion
 
 func _ready():
 	self.mass = 1.2
@@ -55,7 +55,7 @@ func boum(boum_force : float, boum_global_position : Vector2):
 	GlobalEffect.make_simple_explosion(boum_global_position, distance_max, \
 	0.1, 4, [boum_force, 0.0, boum_force], damage, 0.1, [self])
 	# var bodies = $BoumZone.get_overlapping_bodies()+$BoumZone.get_overlapping_areas()
-	# yield(get_tree().create_timer(boum_delay), "timeout")
+	# await get_tree().create_timer(boum_delay).timeout
 	# apply_boum_impulse(boum_force, boum_global_position, bodies)
 	return true
 

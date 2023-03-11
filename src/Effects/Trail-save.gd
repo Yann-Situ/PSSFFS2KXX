@@ -12,10 +12,10 @@ var wild_speed := 0.1
 var point_age := [0.0]
 var stopped := false
 
-onready var tween := $Decay
+@onready var tween := $Decay
 
 func _ready():
-	set_as_toplevel(true)
+	set_as_top_level(true)
 	clear_points()
 
 func stop():
@@ -31,7 +31,7 @@ func _process(delta):
 			remove_point(0)
 		for p in range(get_point_count()):
 			point_age[p] += delta
-			var rand_vector := Vector2( rand_range(-wild_speed, wild_speed), rand_range(-wild_speed, wild_speed) )
+			var rand_vector := Vector2( randf_range(-wild_speed, wild_speed), randf_range(-wild_speed, wild_speed) )
 			points[p] += gravity + ( rand_vector * wildness * point_age[p] )
 	else:
 		tick += delta
@@ -41,7 +41,7 @@ func add_point(point_position:Vector2, at_position := -1):
 	if get_point_count() > 0 and point_position.distance_to( points[get_point_count()-1] ) < min_spawn_distance:
 		return
 	point_age.append(0.0)
-	.add_point(point_position, at_position)
+	super.add_point(point_position, at_position)
 
 
 func _on_Decay_tween_all_completed():

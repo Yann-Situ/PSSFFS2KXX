@@ -31,7 +31,7 @@ func move(delta):
 	pos_tween.start()
 	if S.active_ball != null:
 		S.active_ball.on_dunk(dunking_basket)
-	#yield(get_tree().create_timer(0.32), "timeout")
+	#await get_tree().create_timer(0.32).timeout
 	
 # should be called by the animation
 func move_dunk():
@@ -44,7 +44,7 @@ func move_dunk():
 		dunking_basket.dunk(P) 	
 	
 func test_print():
-	print("Time : "+str(OS.get_ticks_msec()))
+	print("Time : "+str(Time.get_ticks_msec()))
 	
 
 func move_hang():

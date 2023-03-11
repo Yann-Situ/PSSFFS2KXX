@@ -14,8 +14,8 @@ uniform float cloudlight = 0.3;
 uniform float cloudcover = 0.2;
 uniform float cloudalpha = 8.0;
 uniform float skytint = 0.5;
-uniform vec4 skycolour1 : hint_color = vec4(0.2, 0.4, 0.6, 1.0);
-uniform vec4 skycolour2 : hint_color = vec4(0.4, 0.7, 1.0, 1.0);
+uniform vec4 skycolour1 : source_color = vec4(0.2, 0.4, 0.6, 1.0);
+uniform vec4 skycolour2 : source_color = vec4(0.4, 0.7, 1.0, 1.0);
 uniform mat2 m = mat2(vec2(1.6,1.2),vec2(-1.2,1.6)); // changement
 
 // functions

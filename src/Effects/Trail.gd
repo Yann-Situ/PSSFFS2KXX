@@ -1,24 +1,24 @@
 extends Line2D
 
-export (float) var min_point_spawn_distance := 5.0#pix
-export (float) var wildness_amplitude := 200.0#pix/s
-export (float, 0.001, 1.0) var wildness_tick := 0.02#s
+@export (float) var min_point_spawn_distance := 5.0#pix
+@export (float) var wildness_amplitude := 200.0#pix/s
+@export (float, 0.001, 1.0) var wildness_tick := 0.02#s
 
-export (float) var trail_fade_time := 5.0#s
-export (float) var point_lifetime := 0.7#s
-export (float, 0.001, 1.0) var point_lifetime_tick := 0.04#s
+@export (float) var trail_fade_time := 5.0#s
+@export (float) var point_lifetime := 0.7#s
+@export (float, 0.001, 1.0) var point_lifetime_tick := 0.04#s
 
-export (float, 0.001, 1.0) var addpoint_tick := 0.04#s
-export (float) var lifetime := 0.0#s (if <= 0.0s, then the trail stays until stop is called)
-export (bool) var autostart = true setget set_autostart
+@export (float, 0.001, 1.0) var addpoint_tick := 0.04#s
+@export (float) var lifetime := 0.0#s (if <= 0.0s, then the trail stays until stop is called)
+@export (bool) var autostart = true : set = set_autostart
 
-var node_to_trail = null setget set_node_to_trail
+var node_to_trail = null : set = set_node_to_trail
 
 var wildness_tick_current := 0.0
 var point_lifetime_tick_current := 0.0
 var addpoint_tick_current := 0.0
 var point_age := [0.0]
-onready var wildness_amplitude_per_tick = wildness_amplitude*wildness_tick#pix
+@onready var wildness_amplitude_per_tick = wildness_amplitude*wildness_tick#pix
 
 var stopped := false
 
@@ -34,7 +34,7 @@ func set_node_to_trail(node : Node2D):
 	self.z_index = node_to_trail.z_index - 1
 
 func _ready():
-	set_as_toplevel(true)
+	set_as_top_level(true)
 
 func start():
 	if lifetime > 0.0:
@@ -65,7 +65,7 @@ func _process(delta):
 		wildness_tick_current = fmod(wildness_tick_current, wildness_tick)
 		for i in range(n):
 			for p in range(get_point_count()):
-				var rand_vector := Vector2(rand_range(-1.0, 1.0), rand_range(-1.0, 1.0))
+				var rand_vector := Vector2(randf_range(-1.0, 1.0), randf_range(-1.0, 1.0))
 				points[p] += (rand_vector * wildness_amplitude_per_tick)
 	else:
 		wildness_tick_current += delta
@@ -92,7 +92,7 @@ func _add_point(point_position:Vector2, at_position := -1) -> bool:
 	if !Global.can_add_trail_point():
 		return false
 	point_age.append(0.0)
-	.add_point(point_position, at_position)
+	super.add_point(point_position, at_position)
 	Global.add_trail_point()
 	return true
 

@@ -1,17 +1,17 @@
-tool
+@tool
 extends Path2D
 
-export(float, -8.0, 8.0) var p0_slope = 0.0 setget set_slope # pix/pix
-export(int, 2, 1024) var nb_line_points = 30
+@export var p0_slope = 0.0 setget set_slope # pix/pix # (float, -8.0, 8.0)
+@export var nb_line_points = 30 # (int, 2, 1024)
 
 ## aza
-export(float,1.0, 10.0) var line_width setget set_width # pix/pix
-export(Color, RGBA) var line_modulate setget set_line_modulate
-export(Texture) var line_texture setget set_texture
+@export var line_width setget set_width # pix/pix # (float,1.0, 10.0)
+@export var line_modulate setget set_line_modulate # (Color, RGBA)
+@export var line_texture: Texture2D : set = set_texture
 
 var p0 : Vector2 # first end point
 var p1 : Vector2 # second end point (p0.x <= p1.x)
-onready var line : Line2D = $Line2D 
+@onready var line : Line2D = $Line2D 
 
 # the parabola is parametrised as follows: y = k(x - pmin.x)^2 + pmin.y
 var pmin : Vector2
@@ -34,7 +34,7 @@ func set_line_modulate(col : Color):
 		line.modulate = line_modulate
 		update_catenary()
 	
-func set_texture(texture : Texture):
+func set_texture(texture : Texture2D):
 	line_texture = texture
 	if line != null and texture != null:
 		line.texture = line_texture

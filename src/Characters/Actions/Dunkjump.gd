@@ -6,7 +6,7 @@ func move(delta):
 	# Change hitbox + other animation things like sliding etc.
 	S.is_dunkjumping = true
 	P.Effects.dust_start()
-	P.Effects.ghost_start(0.35,0.07)
+	P.Effects.ghost_start(Callable(0.35,0.07))
 	P.Effects.jump_start()
 	#print(S.dunkjump_basket)
 	var q = S.dunkjump_basket.position - P.position
@@ -22,4 +22,4 @@ func move(delta):
 	print("Velocity: "+str(S.velocity))
 	S.get_node("ToleranceDunkJumpPressTimer").stop()
 	S.get_node("CanJumpTimer").start(S.jump_countdown)
-	#P.get_node("Camera").screen_shake(0.2,10)
+	#P.get_node("Camera3D").screen_shake(0.2,10)

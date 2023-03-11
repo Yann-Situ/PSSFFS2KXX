@@ -8,8 +8,8 @@ func _ready():
 	set_gravity_scale(0.0)
 	self.set_friction(0.0)
 	self.set_bounce(1.0)
-	#$Sprite.set_material(preload("res://assets/shader/material/hologram_shadermaterial.tres"))
-	#$Sprite.set_material($Sprite.get_material().duplicate())
+	#$Sprite2D.set_material(preload("res://assets/shader/material/hologram_shadermaterial.tres"))
+	#$Sprite2D.set_material($Sprite2D.get_material().duplicate())
 
 func power_p(player,delta):
 	pass
@@ -21,7 +21,7 @@ func power_jp(player,delta):
 		#$Tween.interpolate_property(self, "position", position, player.position, 0.1)
 		$Tween.follow_property(self, "position", position, player, "position", 0.1)
 		$Tween.start()
-		var trail_instance = trail_scene.instance()
+		var trail_instance = trail_scene.instantiate()
 		trail_instance.lifetime = 0.1
 		trail_instance.wildness_amplitude = 250.0
 		trail_instance.wildness_tick = 0.02
@@ -33,7 +33,7 @@ func power_jp(player,delta):
 		trail_instance.autostart = true
 		trail_instance.node_to_trail = self
 		Global.get_current_room().add_child(trail_instance)
-		# Warning: We're not calling $Sprite.add_child(trail_instance) because
+		# Warning: We're not calling $Sprite2D.add_child(trail_instance) because
 		# the ball can be reparented during the tween of the trail, which
 		# results in canceling the tween. (see https://www.reddit.com/r/godot/comments/vjkaun/reparenting_node_without_removing_it_from_tree/)
 		$Animation.play("teleport")

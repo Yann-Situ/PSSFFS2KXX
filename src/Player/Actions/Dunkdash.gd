@@ -1,8 +1,8 @@
 extends Action
 
-export var up_distance_to_basket = 0#px
-export var can_go_delay = 0.2#s
-export(Color, RGBA) var ghost_modulate
+@export var up_distance_to_basket = 0#px
+@export var can_go_delay = 0.2#s
+@export var ghost_modulate # (Color, RGBA)
 
 var velocity_save = Vector2.ZERO
 var dash_dir = Vector2.ZERO
@@ -11,7 +11,7 @@ var nb_quadrant = 8
 func move(delta):
 	print("begindash")
 	# Change hitbox + other animation things like sliding etc.
-	#	var anim = get_parent().get_parent().get_node("Sprite/AnimationTree3")
+	#	var anim = get_parent().get_parent().get_node("Sprite2D/AnimationTree3")
 	S.is_aiming = false # cancel aiming for the moment
 	S.aim_direction = 0
 	P.ShootPredictor.clear()
@@ -22,10 +22,10 @@ func move(delta):
 	P.PlayerEffects.cloud_start()
 	P.PlayerEffects.jump_start()
 	if S.has_ball:
-		P.PlayerEffects.ghost_start(0.21,0.05, Color.white, S.active_ball.get_dash_gradient())
+		P.PlayerEffects.ghost_start(Callable(0.21,0.05).bind(Color.WHITE),S.active_ball.get_dash_gradient())
 	else:
-		P.PlayerEffects.ghost_start(0.21,0.05, ghost_modulate)
-	P.PlayerEffects.distortion_start("fast_soft", 0.75)
+		P.PlayerEffects.ghost_start(Callable(0.21,0.05).bind(ghost_modulate))
+	P.PlayerEffects.distortion_start(Callable("fast_soft",0.75))
 	Global.camera.screen_shake(0.2,10)
 
 	S.get_node("ToleranceDunkJumpPressTimer").stop()
@@ -68,7 +68,7 @@ func move_end():
 
 		if S.direction_p * S.move_direction < 0:
 			S.velocity.x *= 0.5 # again
-	#P.get_node("Sprite").modulate = Color.white
+	#P.get_node("Sprite2D").modulate = Color.WHITE
 
 func correction_angle(x:float): # for a discrete dash angle
 	var l = 2*PI/nb_quadrant

@@ -1,7 +1,7 @@
-extends Sprite
+extends Sprite2D
 
-export (Gradient) var gradient
-export (bool) var use_gradient = false
+@export (Gradient) var gradient
+@export (bool) var use_gradient = false
 var initial_alpha = 1.0
 var final_alpha = 0.0
 var duration = 1.0#s
@@ -14,7 +14,7 @@ func _ready():
 	$Tween.start()
 
 func set_modulate_rgb_from_gradient(t : float) -> void:
-	self_modulate = gradient.interpolate(t)
+	self_modulate = gradient.sample(t)
 
 func _on_Tween_tween_completed(object, key):
 	queue_free()

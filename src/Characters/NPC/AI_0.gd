@@ -1,10 +1,10 @@
 extends Node
 
-onready var Character = get_parent()
-onready var S = Character.get_node("State")
+@onready var Character = get_parent()
+@onready var S = Character.get_node("State")
 
-export (float) var ai_timer_min = 0.5 #s
-export (float) var ai_timer_max = 4.0 #s
+@export (float) var ai_timer_min = 0.5 #s
+@export (float) var ai_timer_max = 4.0 #s
 var rng = RandomNumberGenerator.new()
 
 func _ready():

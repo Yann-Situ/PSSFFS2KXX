@@ -6,7 +6,7 @@ var impact_scenes = [preload("res://src/Effects/ImpactParticle1.tscn"),
 
 func make_distortion(global_position : Vector2, animation_delay : float = 0.75,\
 animation_name : String = "subtle"):
-	var distortion = distortion_scene.instance()
+	var distortion = distortion_scene.instantiate()
 	Global.get_current_room().add_child(distortion)
 	distortion.global_position = global_position
 	distortion.z_index = Global.z_indices["foreground_2"]
@@ -18,7 +18,7 @@ func make_impact(global_position : Vector2, effect_index : int = 0):
 		effect_index = 0
 	elif effect_index >= impact_scenes.size():
 		effect_index = impact_scenes.size()-1
-	var impact = impact_scenes[effect_index].instance()
+	var impact = impact_scenes[effect_index].instantiate()
 	Global.get_current_room().add_child(impact)
 	impact.global_position = global_position
 	impact.start()

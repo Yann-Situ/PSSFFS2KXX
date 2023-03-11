@@ -1,13 +1,13 @@
 extends TextureRect
 
-export(PackedScene) var this_scene
-onready var object_cursor = get_node("/root/Editor/Editor_Object")
+@export var this_scene: PackedScene
+@onready var object_cursor = get_node("/root/Editor/Editor_Object")
 
-export (bool) var is_tile = false
-onready var cursor_sprite = object_cursor.get_node("Sprite")
+@export (bool) var is_tile = false
+@onready var cursor_sprite = object_cursor.get_node("Sprite2D")
 
 func _ready():
-	connect("gui_input",self,"_item_clicked")
+	connect("gui_input",Callable(self,"_item_clicked"))
 	pass # Replace with function body.
 
 

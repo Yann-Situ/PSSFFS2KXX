@@ -7,17 +7,17 @@ signal is_thrown
 
 enum IMPACT_EFFECT {SPIKY, METALLIC}
 
-export (IMPACT_EFFECT) var impact_effect = IMPACT_EFFECT.SPIKY
-export (float) var dust_threshold = 300.0
-export (float) var impact_threshold = 500.0
-export (float) var damage_destruction_threshold = 2.0
+@export (IMPACT_EFFECT) var impact_effect = IMPACT_EFFECT.SPIKY
+@export (float) var dust_threshold = 300.0
+@export (float) var impact_threshold = 500.0
+@export (float) var damage_destruction_threshold = 2.0
 var selectors = {}
 var impact_particles = [preload("res://src/Effects/ImpactParticle1.tscn"),
 	preload("res://src/Effects/ImpactParticle0.tscn")]
-var _is_reparenting = false setget ,is_reparenting
+var _is_reparenting = false : get = is_reparenting
 
-onready var holder = Global.get_current_room()
-onready var Highlighter = $Highlighter
+@onready var holder = Global.get_current_room()
+@onready var Highlighter = $Highlighter
 
 func _ready():
 	self.z_as_relative = false
@@ -54,7 +54,7 @@ func collision_effect(collider, collider_velocity, collision_point, collision_no
 		$Effects/DustParticle.restart()
 		if speed >= impact_threshold:
 			GlobalEffect.make_impact(collision_point, impact_effect)
-#			var impact = impact_particles[impact_effect].instance()
+#			var impact = impact_particles[impact_effect].instantiate()
 #			get_parent().add_child(impact)
 #			impact.global_position = collision_point
 #			impact.start()
@@ -117,7 +117,7 @@ func pickup(holder_node):
 
 func throw(position, velo):
 	#$TrailHandler.set_node_to_trail(self)
-	#$TrailHandler.start(2.0,0.1)
+	#$TrailHandler.start(Callable(2.0,0.1))
 	self.enable_physics()
 	var previous_holder = holder
 	change_holder(Global.get_current_room())
@@ -129,7 +129,7 @@ func throw(position, velo):
 
 func destruction(delay : float = 0.0):
 	if delay > 0.0:
-		yield(get_tree().create_timer(delay), "timeout")
+		await get_tree().create_timer(delay).timeout
 	on_destruction()
 	if holder != Global.get_current_room():
 		change_holder(Global.get_current_room())
@@ -157,13 +157,13 @@ func deselect(selector : Node):
 	if !selectors.erase(selector):
 		push_warning(selector.name+" is not in 'selectors'")
 		return
-	if selectors.keys().empty():
+	if selectors.keys().is_empty():
 		Highlighter.toggle_selection(false)
 	if selector.has_method("deselect_ball"):
 		selector.deselect_ball(self)
 
 func is_selected() -> bool:
-	return !selectors.keys().empty()
+	return !selectors.keys().is_empty()
 
 ################################################################################
 
@@ -191,7 +191,7 @@ func apply_damage(damage : float, duration : float = 0.0):
 
 func power_p(player,delta):
 	if holder == Global.get_current_room() :
-		add_force("attract", 1000*(player.position - position).normalized())
+		apply_force(1000*(player.position - position).normalized(), "attract")
 
 func power_jp(player,delta):
 	pass

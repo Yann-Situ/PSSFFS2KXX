@@ -1,11 +1,11 @@
 extends Camera2D
-export (float) var aim_offset = 100
-export (float) var aim_max_dist = 300
-export (float) var crouch_offset = 100
-export (float) var boum_distance2_threshold = 450*450
-export (Vector2) var move_max_offset = Vector2(128, 64)
-export (Vector2) var move_speed_threshold = Vector2(600, 800)
-export (Vector2) var initial_position = Vector2(0,-35)# relative position to the player
+@export (float) var aim_offset = 100
+@export (float) var aim_max_dist = 300
+@export (float) var crouch_offset = 100
+@export (float) var boum_distance2_threshold = 450*450
+@export (Vector2) var move_max_offset = Vector2(128, 64)
+@export (Vector2) var move_speed_threshold = Vector2(600, 800)
+@export (Vector2) var initial_position = Vector2(0,-35)# relative position to the player
 var target_offset = Vector2(0,0)
 var current_shake_power = 0.0
 var shake_offset = Vector2(0,0)
@@ -49,7 +49,7 @@ func set_target(target_offset_, tween_speed = 0.2):
 func set_shake_offset(vec = Vector2(0,0)):
 	shake_offset = vec
 func set_random_shake_offset(vec = Vector2(0,0)):
-	set_shake_offset(Vector2(rand_range(-vec.x,+vec.x),rand_range(-vec.y,+vec.y)))
+	set_shake_offset(Vector2(randf_range(-vec.x,+vec.x),randf_range(-vec.y,+vec.y)))
 
 func add_offset(vec = Vector2(0,0)):
 	offset = offset+vec

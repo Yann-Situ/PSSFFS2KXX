@@ -4,23 +4,23 @@ class_name Basket, "res://assets/art/icons/basket.png"
 signal is_dunked
 signal is_goaled
 
-export var speed_ball_threshold = 380 #velocity value
-export var dunk_position_offset = 16 * Vector2.DOWN
-export var dunk_position_radius = 24
-export var hang_position_offset_y = 16
-export var can_receive_dunk = true
-export var can_receive_dunkjump = true
-export var can_receive_goal = true
-export var can_receive_hang = true
+@export var speed_ball_threshold = 380 #velocity value
+@export var dunk_position_offset = 16 * Vector2.DOWN
+@export var dunk_position_radius = 24
+@export var hang_position_offset_y = 16
+@export var can_receive_dunk = true
+@export var can_receive_dunkjump = true
+@export var can_receive_goal = true
+@export var can_receive_hang = true
 
-export var dunk_cooldown = 0.75#s
-export var dunk_free_character_cooldown = 0.4#s
+@export var dunk_cooldown = 0.75#s
+@export var dunk_free_character_cooldown = 0.4#s
 
 var inside_bodies = []
 var bodies_positions = []
 var distortion_scene = preload("res://src/Effects/Distortion.tscn")
 
-onready var start_position = global_position
+@onready var start_position = global_position
 
 # Should be in any items that can be picked/placed :
 func set_start_position(position):

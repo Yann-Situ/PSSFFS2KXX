@@ -17,7 +17,7 @@ uniform float shift: hint_range(-1.0, 0.0) = -0.2;
 uniform vec2 velocity = vec2(1.0, 1.0);
 
 // Color of the fog.
-uniform vec4 fog_color: hint_color = vec4(0.0, 0.0, 0.0, 1.0);
+uniform vec4 fog_color: source_color = vec4(0.0, 0.0, 0.0, 1.0);
 
 // Noise texture; OpenSimplexNoise is great, but any filtered texture is fine.
 uniform sampler2D noise;

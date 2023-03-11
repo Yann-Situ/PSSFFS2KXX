@@ -2,7 +2,7 @@ extends AnimationTree
 
 # Declare member variables here :
 var state_machine
-onready var Player = get_parent().get_parent()
+@onready var Player = get_parent().get_parent()
 var conds = ["on_wall_cond","not_on_floor_cond","on_floor_cond","idle_cond",\
   	"falling_cond","walking_cond","jumping_cond","walljumping_cond",\
 	"dunkjumping_cond","not_dunkjumping_cond", "dunking_cond", "not_dunking_cond", \

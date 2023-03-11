@@ -20,7 +20,7 @@ uniform float ray1_density = 8.0;
 uniform float ray2_density = 30.0;
 uniform float ray2_intensity : hint_range(0.0, 1.0) = 0.3;
 
-uniform vec4 color : hint_color = vec4(1.0, 0.9, 0.65, 0.8);
+uniform vec4 color : source_color = vec4(1.0, 0.9, 0.65, 0.8);
 
 uniform bool hdr = false;
 uniform float seed = 5.0;

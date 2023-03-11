@@ -4,21 +4,21 @@ class_name Explosion#, "res://assets/art/icons/targeted.png"
 # Handle a single explosion from a source point
 signal body_explode(body, direction)
 
-export (bool) var simple_explosion = true # whether or not use the Explosion.explode_body function when body explode
-export (float) var breakable_momentum = 0.0 #kg.pix/s
-export (float) var electric_momentum = 0.0 #kg.pix/s
-export (float) var physicbody_momentum = 0.0 #kg.pix/s
-export (float) var damage = 0.0 #hp
-export (float) var damage_duration = 0.0 #s
-export (float) var initial_scale_factor = 1.0
+@export (bool) var simple_explosion = true # whether or not use the Explosion.explode_body function when body explode
+@export (float) var breakable_momentum = 0.0 #kg.pix/s
+@export (float) var electric_momentum = 0.0 #kg.pix/s
+@export (float) var physicbody_momentum = 0.0 #kg.pix/s
+@export (float) var damage = 0.0 #hp
+@export (float) var damage_duration = 0.0 #s
+@export (float) var initial_scale_factor = 1.0
 # the explosion goes from 'initial_scale_factor * momentum' at the center,
 # to  'momentum' at the radius. Doesn't apply to damages.
 
-export (float) var duration = 0.5 #s
-export (int,1,10) var explosion_steps = 3
-export (Shape2D) var collision_shape setget set_collision_shape
+@export (float) var duration = 0.5 #s
+@export (int,1,10) var explosion_steps = 3
+@export (Shape2D) var collision_shape : set = set_collision_shape
 
-export (Array) var body_exceptions = []
+@export (Array) var body_exceptions = []
 
 var exploded_bodies = [] # [body]
 var shape_radius
@@ -30,8 +30,8 @@ func set_collision_shape(s : Shape2D):
 	elif s is CapsuleShape2D:
 		shape_radius = s.height
 	elif s is RectangleShape2D:
-		shape_radius = max(s.extents.x, s.extents.y)
-	elif s is RayShape2D:
+		shape_radius = max(s.size.x, s.size.y)
+	elif s is SeparationRayShape2D:
 		shape_radius = s.length
 	elif s is SegmentShape2D:
 		shape_radius = 0.5*(s.A-s.B).length()
@@ -46,7 +46,7 @@ func _ready():
 	collision_layer = 16
 	collision_mask = 1+4+64+128+256
 	if simple_explosion:
-		connect("body_explode", self, "explode_body")
+		connect("body_explode",Callable(self,"explode_body"))
 	print("BOUM _ready "+str(duration))
 	explode()
 
@@ -63,7 +63,7 @@ func explode():
 		criteria *= criteria
 		var scale_factor = lerp(initial_scale_factor, 1.0, i/explosion_steps)
 		# wait for time_step seconds
-		yield(get_tree().create_timer(time_step), "timeout")
+		await get_tree().create_timer(time_step).timeout
 		# process bodies
 		var bodies = get_overlapping_bodies()+get_overlapping_areas()
 		#print(bodies)

@@ -2,9 +2,9 @@ extends CollisionObject2D
 class_name Selectable, "res://assets/art/icons/targeted.png"
 # Selectable.gd
 
-export var is_shoot_selectable = true setget set_is_shoot_selectable
-export var is_dash_selectable = true setget set_is_dash_selectable
-export var is_jump_selectable = true setget set_is_jump_selectable
+@export var is_shoot_selectable = true : set = set_is_shoot_selectable
+@export var is_dash_selectable = true : set = set_is_dash_selectable
+@export var is_jump_selectable = true : set = set_is_jump_selectable
 
 var shoot_selected = false # should not be modified by other function than set_selection
 var dash_selected = false # should not be modified by other function than set_selection

@@ -1,65 +1,65 @@
-extends KinematicBody2D
+extends CharacterBody2D
 class_name Player, "res://assets/art/icons/popol.png"
 
-export (bool) var physics_enabled = true
+@export (bool) var physics_enabled = true
 
 # Environment features (should be given by the map)
-export (float) var floor_unfriction = 0.18 # s
-export (float) var air_unfriction = 0.32 # s
-export (float) var attract_force = 800.0 # m.pix/s² # don't know for what know (?)
-export (Vector2) var gravity # pix/s²
+@export (float) var floor_unfriction = 0.18 # s
+@export (float) var air_unfriction = 0.32 # s
+@export (float) var attract_force = 800.0 # m.pix/s² # don't know for what know (?)
+@export (Vector2) var gravity # pix/s²
 
 # Crouch features
-export (float) var crouch_speed_max = 300.0 # pix/s
-export (float) var crouch_instant_speed = 60.0 # pix/s
-export (float) var crouch_return_thresh_instant_speed = 100.0 # pix/s
-export (float) var crouch_accel = 200.0 # pix/s²
-export (float) var landing_velocity_thresh = 400.0 # pix/s
+@export (float) var crouch_speed_max = 300.0 # pix/s
+@export (float) var crouch_instant_speed = 60.0 # pix/s
+@export (float) var crouch_return_thresh_instant_speed = 100.0 # pix/s
+@export (float) var crouch_accel = 200.0 # pix/s²
+@export (float) var landing_velocity_thresh = 400.0 # pix/s
 
 # Aerial features
-export (float) var sideaerial_speed_max = 400.0 # pix/s
-export (float) var air_instant_speed = 45.0 # pix/s
-export (float) var air_return_thresh_instant_speed = 50.0 # pix/s
-export (float) var sideaerial_accel = 220.0 # pix/s²
-export (float) var jump_speed = -425.0 # pix/s
-export (float) var dunkjump_speed = -500.0 # pix/s
-export (float) var dunkdash_speed = 600.0 # pix/s
-export (float) var max_dunkdash_distance2 = 180*180.0 # pix^2
-export (float) var max_speed_fall = 800.0 # pix/s
-export (float) var max_speed_fall_onwall = 200.0 # pix/s
-export (Vector2) var vec_walljump = Vector2(0.65, -1)
+@export (float) var sideaerial_speed_max = 400.0 # pix/s
+@export (float) var air_instant_speed = 45.0 # pix/s
+@export (float) var air_return_thresh_instant_speed = 50.0 # pix/s
+@export (float) var sideaerial_accel = 220.0 # pix/s²
+@export (float) var jump_speed = -425.0 # pix/s
+@export (float) var dunkjump_speed = -500.0 # pix/s
+@export (float) var dunkdash_speed = 600.0 # pix/s
+@export (float) var max_dunkdash_distance2 = 180*180.0 # pix^2
+@export (float) var max_speed_fall = 800.0 # pix/s
+@export (float) var max_speed_fall_onwall = 200.0 # pix/s
+@export (Vector2) var vec_walljump = Vector2(0.65, -1)
 
 # Walk and run features
-export (float) var run_speed_thresh = 350.0 # pix/s
-export (float) var run_speed_max = 400.0 # pix/s
-export (float) var walk_instant_speed = 150.0 # pix/s
-export (float) var walk_return_thresh_instant_speed = 300.0 # pix/s
-export (float) var walk_accel = 220.0 # pix/s²
+@export (float) var run_speed_thresh = 350.0 # pix/s
+@export (float) var run_speed_max = 400.0 # pix/s
+@export (float) var walk_instant_speed = 150.0 # pix/s
+@export (float) var walk_return_thresh_instant_speed = 300.0 # pix/s
+@export (float) var walk_accel = 220.0 # pix/s²
 
 # Other features
-export (float) var throw_impulse = 600.0 # kg.pix/s
+@export (float) var throw_impulse = 600.0 # kg.pix/s
 
-export (bool) var flip_h = false
+@export (bool) var flip_h = false
 
 ################################################################################
 
-onready var S = get_node("State")
-onready var SpecialActionHandler = get_node("Actions/SpecialActionHandler")
-onready var ShootPredictor = get_node("Actions/ShootPredictor")
-onready var Shooter = get_node("Shooter")
-onready var PlayerEffects = get_node("PlayerEffects")
-onready var BallHandler = get_node("BallHandler")
-onready var Camera = get_node("Camera")
-onready var LifeHandler = get_node("LifeHandler")
+@onready var S = get_node("State")
+@onready var SpecialActionHandler = get_node("Actions/SpecialActionHandler")
+@onready var ShootPredictor = get_node("Actions/ShootPredictor")
+@onready var Shooter = get_node("Shooter")
+@onready var PlayerEffects = get_node("PlayerEffects")
+@onready var BallHandler = get_node("BallHandler")
+@onready var Camera3D = get_node("Camera3D")
+@onready var LifeHandler = get_node("LifeHandler")
 
-onready var start_position = global_position
-onready var foot_vector = Vector2(0,32)
-onready var based_gravity = Vector2(0.0,ProjectSettings.get_setting("physics/2d/default_gravity")) # pix/s²
-onready var invmass = 1.0/4.0
-onready var collision_layer_save = 1
-onready var collision_mask_save = 514
-onready var floor_friction = GlobalMaths.unfriction_to_friction(floor_unfriction) # ratio/s
-onready var air_friction = GlobalMaths.unfriction_to_friction(air_unfriction) # ratio/s
+@onready var start_position = global_position
+@onready var foot_vector = Vector2(0,32)
+@onready var based_gravity = Vector2(0.0,ProjectSettings.get_setting("physics/2d/default_gravity")) # pix/s²
+@onready var invmass = 1.0/4.0
+@onready var collision_layer_save = 1
+@onready var collision_mask_save = 514
+@onready var floor_friction = GlobalMaths.unfriction_to_friction(floor_unfriction) # ratio/s
+@onready var air_friction = GlobalMaths.unfriction_to_friction(air_unfriction) # ratio/s
 var applied_forces = {} #"force_name : value in kg*pix/s^2"
 
 var character_holder = null
@@ -85,19 +85,19 @@ func _ready():
 	Global.list_of_physical_nodes.append(self)
 	self.z_as_relative = false
 	self.z_index = Global.z_indices["player_0"]
-	$Sprite.z_as_relative = false
-	$Sprite.z_index = Global.z_indices["player_0"]
+	$Sprite2D.z_as_relative = false
+	$Sprite2D.z_index = Global.z_indices["player_0"]
 	add_to_group("holders")
 	add_to_group("characters")
 	if !Global.playing:
 		Global.toggle_playing()
-	Global.camera = Camera
+	Global.camera = Camera3D
 
 	gravity = based_gravity
 
 func set_flip_h(b):
 	flip_h  = b
-	$Sprite.set_flip_h(b)
+	$Sprite2D.set_flip_h(b)
 	ShootPredictor.set_flip_h(b)
 	SpecialActionHandler.set_flip_h(b)
 
@@ -110,8 +110,8 @@ func get_input(delta): #delta in s
 		S.last_onair_velocity_y = S.velocity.y
 	if S.is_onwall :
 		S.get_node("ToleranceWallJumpTimer").start(S.tolerance_wall_jump)
-		S.last_wall_normal_direction = -1#sign(get_slide_collision(get_slide_count()-1).normal.x)
-		if $Sprite.flip_h:
+		S.last_wall_normal_direction = -1#sign(get_slide_collision(get_slide_collision_count()-1).normal.x)
+		if $Sprite2D.flip_h:
 			S.last_wall_normal_direction = 1
 
 	############### Move from input
@@ -174,7 +174,7 @@ func get_input(delta): #delta in s
 	# GRAVITY:
 
 	# SHADER:
-	#$Sprite.material.set("shader_param/speed",S.velocity)
+	#$Sprite2D.material.set("shader_param/speed",S.velocity)
 
 	# HITBOX:
 	if S.is_crouching or S.is_landing or not S.can_stand:
@@ -187,7 +187,7 @@ func get_input(delta): #delta in s
 	# CAMERA:
 	if S.is_aiming:
 		#var shoot = Vector2.ZERO
-		var target = (Camera.get_global_mouse_position() - global_position)
+		var target = (Camera3D.get_global_mouse_position() - global_position)
 		Shooter.update_target(target)
 		if Shooter.can_shoot_to_target():
 			Shooter.update_effective_can_shoot(0.0,0)
@@ -204,29 +204,29 @@ func get_input(delta): #delta in s
 #					S.active_ball.get_gravity_scale()*gravity)
 		ShootPredictor.draw(Vector2.ZERO, shoot,
 			S.active_ball.gravity*Vector2.DOWN)
-		Camera.set_offset_from_type("aim",target)
+		Camera3D.set_offset_from_type("aim",target)
 		if shoot.x > 0 :
 			S.aim_direction = 1
 		else :
 			S.aim_direction = -1
 	elif S.is_crouching :
-		var tx = Camera.move_max_offset.x * smoothstep(0.0, \
-			Camera.move_speed_threshold.x, abs(S.velocity.x)) \
+		var tx = Camera3D.move_max_offset.x * smoothstep(0.0, \
+			Camera3D.move_speed_threshold.x, abs(S.velocity.x)) \
 			* sign(S.velocity.x)
-		Camera.set_offset_from_type("move", Vector2(tx,Camera.crouch_offset), 0.2)
+		Camera3D.set_offset_from_type("move", Vector2(tx,Camera3D.crouch_offset), 0.2)
 	elif S.is_moving :
-		var tx = Camera.move_max_offset.x * smoothstep(0.0, \
-			Camera.move_speed_threshold.x, abs(S.velocity.x)) \
+		var tx = Camera3D.move_max_offset.x * smoothstep(0.0, \
+			Camera3D.move_speed_threshold.x, abs(S.velocity.x)) \
 			* sign(S.velocity.x)
-		var ty = Camera.move_max_offset.y * smoothstep(0.0, \
-			Camera.move_speed_threshold.y, abs(S.velocity.y)) \
+		var ty = Camera3D.move_max_offset.y * smoothstep(0.0, \
+			Camera3D.move_speed_threshold.y, abs(S.velocity.y)) \
 			* sign(S.velocity.y)
-		Camera.set_offset_from_type("move", Vector2(tx,ty), 0.4)
+		Camera3D.set_offset_from_type("move", Vector2(tx,ty), 0.4)
 	else :
-		Camera.set_offset_from_type("normal")
+		Camera3D.set_offset_from_type("normal")
 
 	# ANIMATION:
-	$Sprite/AnimationTree.animate_from_state(S)
+	$Sprite2D/AnimationTree.animate_from_state(S)
 
 	if S.is_aiming:
 		Shooter.update_screen_viewer_position()
@@ -263,7 +263,7 @@ func apply_forces(delta):
 func has_force(name : String):
 	return applied_forces.has(name)
 
-func add_force(name : String, force : Vector2):
+func apply_force(force : Vector2, name : String):
 	applied_forces[name] = force
 
 func remove_force(name : String):
@@ -276,9 +276,25 @@ func _physics_process(delta):
 	if physics_enabled:
 		apply_forces(delta)
 		if SpecialActionHandler.is_on_slope() and S.velocity.y > - abs(S.velocity.x) :
-			S.velocity.y = 0.5*sqrt(2) * move_and_slide_with_snap(S.velocity, 33*Vector2.DOWN, Vector2.UP, true, 4, 0.785398, false).y
+			set_velocity(S.velocity)
+			# TODOConverter40 looks that snap in Godot 4.0 is float, not vector like in Godot 3 - previous value `33*Vector2.DOWN`
+			set_up_direction(Vector2.UP)
+			set_floor_stop_on_slope_enabled(true)
+			set_max_slides(4)
+			set_floor_max_angle(0.785398)
+			# TODOConverter40 infinite_inertia were removed in Godot 4.0 - previous value `false`
+			move_and_slide()
+			S.velocity.y = 0.5*sqrt(2) * velocity.y
 		else :
-			S.velocity = move_and_slide_with_snap(S.velocity, snap_vector, Vector2.UP, true, 4, 0.785398, false)
+			set_velocity(S.velocity)
+			# TODOConverter40 looks that snap in Godot 4.0 is float, not vector like in Godot 3 - previous value `snap_vector`
+			set_up_direction(Vector2.UP)
+			set_floor_stop_on_slope_enabled(true)
+			set_max_slides(4)
+			set_floor_max_angle(0.785398)
+			# TODOConverter40 infinite_inertia were removed in Godot 4.0 - previous value `false`
+			move_and_slide()
+			S.velocity = velocity
 
 func disable_physics():
 	physics_enabled = false

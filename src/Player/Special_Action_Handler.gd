@@ -1,20 +1,20 @@
 extends Node2D
 
-onready var P = get_parent().get_parent()
-onready var S = P.get_node("State")
-onready var Selector = get_parent().get_node("Selector")
+@onready var P = get_parent().get_parent()
+@onready var S = P.get_node("State")
+@onready var Selector = get_parent().get_node("Selector")
 
-export var distaction = Vector2(8.1,0)
-export var color = Color(1.0,0.3,0.1)
-export (bool) var flip_h = false
+@export var distaction = Vector2(8.1,0)
+@export var color = Color(1.0,0.3,0.1)
+@export (bool) var flip_h = false
 var rays = []
 var rays_flip = []
 var rays_not_flip = []
 var rays_res = []
 var space_state
 
-onready var dunkjump_criteria_bests = []
-onready var dunkdash_criteria_bests = []
+@onready var dunkjump_criteria_bests = []
+@onready var dunkdash_criteria_bests = []
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -32,7 +32,7 @@ func update_space_state():
 func cast(r): #we must have updated the space_state before
 	if not r.updated:
 		r.result = space_state.intersect_ray(P.position+r.position, \
-			P.position+r.position+r.cast_to, \
+			P.position+r.position+r.target_position, \
 			[P], P.collision_mask, true, false)
 		r.updated = true
 
@@ -96,7 +96,7 @@ func update_basket_selectors():
 	var selectable_dash = null
 
 	var selectables = $dunkjump_area.get_overlapping_areas()
-	if !selectables.empty():
+	if !selectables.is_empty():
 		# choose by priority selectables that are in direction_p, closest above player
 		var could_dunkjump = not S.get_node("ToleranceJumpFloorTimer").is_stopped() and \
 			not S.is_non_cancelable and S.get_node("CanDunkjumpTimer").is_stopped()
@@ -170,7 +170,7 @@ func can_dunkdash():
 
 func can_dunk():
 	var selectables = $dunk_area.get_overlapping_areas()
-	if !selectables.empty():
+	if !selectables.is_empty():
 		var b = null
 		S.dunk_basket = b
 		var r = $dunk_area/CollisionShape2D.shape.radius
@@ -191,7 +191,7 @@ func can_dunk():
 # 	for r in rays:
 # 		if r.result:#r.is_colliding():
 # 			draw_circle(r.result.position-P.position, 2, color)
-# 			draw_line(r.position, r.position+r.cast_to, color)
+# 			draw_line(r.position, r.position+r.target_position, color)
 #
 # # Called every frame. 'delta' is the elapsed time since the previous frame.
 # func _process(delta):

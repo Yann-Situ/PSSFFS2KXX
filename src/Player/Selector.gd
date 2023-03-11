@@ -1,13 +1,13 @@
 extends Node2D
 
-onready var Player = get_parent().get_parent() # BAD TODO: change this for Global.get_player()
-onready var S = Player.get_node("State")
+@onready var Player = get_parent().get_parent() # BAD TODO: change this for Global.get_player()
+@onready var S = Player.get_node("State")
 
 var names = ["Shoot", "Dash", "Jump"]
 var selector_targets = []
 
 func _ready():
-	yield(Player.get_parent(), "ready")
+	await Player.get_parent().ready
 	for name in names:
 		var selector_target = self.get_node(name+"Target")
 		#var new_selector_target = selector_target.duplicate(15) # 7 because see Node.duplicate flags

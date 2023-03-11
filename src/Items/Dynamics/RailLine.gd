@@ -2,15 +2,15 @@
 extends Path2D
 class_name RailLine, "res://assets/art/icons/railline.png"
 
-export (bool) var invert_line_direction = false
-export (float) var character_position_offset = -32.0
-export (float) var character_position_entrance_tolerance = -16.0
-export (float) var character_collision_offset = -52.0
-export (float) var cant_get_in_again_timer = 0.2#s
+@export (bool) var invert_line_direction = false
+@export (float) var character_position_offset = -32.0
+@export (float) var character_position_entrance_tolerance = -16.0
+@export (float) var character_collision_offset = -52.0
+@export (float) var cant_get_in_again_timer = 0.2#s
 
-onready var gravity = ProjectSettings.get_setting("physics/2d/default_gravity") # pix/s²
-onready var character_offset = Vector2(0.0,character_position_offset)
-onready var collision_offset = Vector2(0.0,0.0)
+@onready var gravity = ProjectSettings.get_setting("physics/2d/default_gravity") # pix/s²
+@onready var character_offset = Vector2(0.0,character_position_offset)
+@onready var collision_offset = Vector2(0.0,0.0)
 const tolerance_annoying_case = 4.0
 
 var _particle = preload("res://src/Effects/RideParticles.tscn")
@@ -52,7 +52,7 @@ func _update_points():
 		new_segment.shape.set_b(p1+collision_offset)
 		#print("segment : "+str(p0+collision_offset)+" - "+str(p1+collision_offset))
 		collision_segments.push_back(new_segment)
-		$Area.add_child(new_segment)
+		$Area3D.add_child(new_segment)
 
 ###############################################################################
 
@@ -89,8 +89,8 @@ func _physics_process(delta):
 
 		linear_velocities[i-j] = velocity
 		position_offsets[i-j]  = position_offset
-		if path_follow.get_unit_offset() == 1.0 or \
-		   path_follow.get_unit_offset() == 0.0 or \
+		if path_follow.get_progress_ratio() == 1.0 or \
+		   path_follow.get_progress_ratio() == 0.0 or \
 		   !body.S.is_grinding :
 
 			body.get_out(body.global_position, velocity)
@@ -101,7 +101,7 @@ func _physics_process(delta):
 			# A workaround would be to queue_free and stop emitting after the
 			# for loop.
 #			temp_particles.emitting = false
-#			yield(get_tree().create_timer(temp_particles.lifetime), "timeout")
+#			await get_tree().create_timer(temp_particles.lifetime).timeout
 #			temp_path_follow.call_deferred("queue_free")
 
 	# Ugly but it works :
@@ -152,7 +152,7 @@ func _on_Area_body_entered(body):
 
 		var new_path_follow : PathFollow2D = PathFollow2D.new()
 		new_path_follow.loop = false
-		var ride_particle : Particles2D = _particle.instance()
+		var ride_particle : GPUParticles2D = _particle.instantiate()
 		ride_particle.name = "Particles"
 		if invert_line_direction:
 			ride_particle.process_material.direction.y = 1

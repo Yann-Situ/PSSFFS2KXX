@@ -27,29 +27,29 @@ func _ready():
 		var instance = null
 		match tile_set.tile_get_name(tile_id):
 			"basket0" :
-				instance = basket.instance()
-				instance.position = map_to_world(cell+Vector2(1,0))
+				instance = basket.instantiate()
+				instance.position = map_to_local(cell+Vector2(1,0))
 			"spawner0" :
-				instance = spawner.instance()
-				instance.position = map_to_world(cell+Vector2(1,1))
+				instance = spawner.instantiate()
+				instance.position = map_to_local(cell+Vector2(1,1))
 			"jumper0" :
-				instance = jumper.instance()
-				instance.position = map_to_world(cell+Vector2(1,1))
+				instance = jumper.instantiate()
+				instance.position = map_to_local(cell+Vector2(1,1))
 			"breakablebloc0" :
-				instance = breakableBloc.instance()
-				instance.position = map_to_world(cell+Vector2(1,1))
+				instance = breakableBloc.instantiate()
+				instance.position = map_to_local(cell+Vector2(1,1))
 			"spikes" :
-				instance = spikes.instance()
-				instance.position = map_to_world(cell)+Vector2(8,8)
+				instance = spikes.instantiate()
+				instance.position = map_to_local(cell)+Vector2(8,8)
 			"player_wall" :
-				instance = playerWall.instance()
-				instance.position = map_to_world(cell)+Vector2(8,8)
+				instance = playerWall.instantiate()
+				instance.position = map_to_local(cell)+Vector2(8,8)
 			"ball_wall" :
-				instance = ballWall.instance()
-				instance.position = map_to_world(cell)+Vector2(8,8)
+				instance = ballWall.instantiate()
+				instance.position = map_to_local(cell)+Vector2(8,8)
 			"buttons0" :
-				instance = button.instance()
-				instance.position = map_to_world(cell+Vector2(1,1))
+				instance = button.instantiate()
+				instance.position = map_to_local(cell+Vector2(1,1))
 
 				assert(tile_set.tile_get_tile_mode(tile_id) == 2)
 				var atlas_index : int = get_cell_autotile_coord(cell.x,cell.y).x
@@ -57,8 +57,8 @@ func _ready():
 				instance.activated = (atlas_index % 2 == 1)
 				instance.button_type = (atlas_index / 2)
 			"doors0" :
-				instance = door.instance()
-				instance.position = map_to_world(cell+Vector2(1,2))
+				instance = door.instantiate()
+				instance.position = map_to_local(cell+Vector2(1,2))
 
 				assert(tile_set.tile_get_tile_mode(tile_id) == 2)
 				var atlas_index : int = get_cell_autotile_coord(cell.x,cell.y).x

@@ -1,25 +1,25 @@
 extends Node2D
 
-onready var Player = get_parent().get_parent()
-onready var S = Player.get_node("State")
+@onready var Player = get_parent().get_parent()
+@onready var S = Player.get_node("State")
 
 var points = Array()
-export (int) var nb_points_display = 50
-export (int) var coeff_display = 6
+@export (int) var nb_points_display = 50
+@export (int) var coeff_display = 6
 var nb_points = coeff_display * nb_points_display
-export (float) var delta = .03 / coeff_display
+@export (float) var delta = .03 / coeff_display
 
 # Shoot features
-export (float) var shoot_min_speed = 100 # kg*pix/s
-export (float) var shoot_max_speed = 600 # kg*pix/s
-export (float) var shoot_max_aim_time = 1 # s
+@export (float) var shoot_min_speed = 100 # kg*pix/s
+@export (float) var shoot_max_speed = 600 # kg*pix/s
+@export (float) var shoot_max_aim_time = 1 # s
 var shoot_vector_save = Vector2()
 
 const white = Color(1,1,1,1)
 const red = Color(1,0,0,1)
-const yellorange = Color.deeppink
+const yellorange = Color.DEEP_PINK
 
-export (bool) var flip_h = false
+@export (bool) var flip_h = false
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	pass

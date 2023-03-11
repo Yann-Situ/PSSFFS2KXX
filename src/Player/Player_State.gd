@@ -1,21 +1,21 @@
 extends Node
 
-onready var Player = get_parent()
-onready var Actions = Player.get_node("Actions")
+@onready var Player = get_parent()
+@onready var Actions = Player.get_node("Actions")
 
 var frame_time_ms = 1.0/60.0 #s
 var time = 0.0#s
 
 # Countdowns and delays between actions
-export (float) var tolerance_jump_floor = 7*frame_time_ms #s
-export (float) var tolerance_jump_press = 7*frame_time_ms #s
-export (float) var tolerance_wall_jump = 7*frame_time_ms #s
-export (float) var tolerance_land_lag = 3*frame_time_ms #s
-export (float) var walljump_move_countdown = 22*frame_time_ms #s
-export (float) var jump_countdown = 10*frame_time_ms #s
-export (float) var dunkjump_countdown = 0.4#s
-export (float) var dunk_countdown = 0.9 #s
-export (float) var shoot_countdown = 30*frame_time_ms #s
+@export (float) var tolerance_jump_floor = 7*frame_time_ms #s
+@export (float) var tolerance_jump_press = 7*frame_time_ms #s
+@export (float) var tolerance_wall_jump = 7*frame_time_ms #s
+@export (float) var tolerance_land_lag = 3*frame_time_ms #s
+@export (float) var walljump_move_countdown = 22*frame_time_ms #s
+@export (float) var jump_countdown = 10*frame_time_ms #s
+@export (float) var dunkjump_countdown = 0.4#s
+@export (float) var dunk_countdown = 0.9 #s
+@export (float) var shoot_countdown = 30*frame_time_ms #s
 
 # Bool for inputs ('p' is for 'pressed', 'jp' 'just_pressed', 'jr' 'just_released')
 var right_p = false
@@ -61,11 +61,11 @@ var is_idle = false
 #var is_speeding = false
 
 # Utilities
-export var move_direction = 0
+@export var move_direction = 0
 var direction_p = 0
 var direction_sprite = 0
 var aim_direction = 0
-export var velocity = Vector2()
+@export var velocity = Vector2()
 
 # Delays and states memory # handle by Player.gd
 #var last_onfloor = 0
@@ -79,22 +79,22 @@ var last_onair_velocity_y = 0
 var last_aim_jp = 0 # still used for shoot vector
 
 # Bool for actions
-export var is_jumping = false
-export var is_walljumping = false
-export var is_landing = false
-export var is_landing_roll = false
-export var is_dunkjumping = false
-export var is_dunkprejumping = false
-export var is_dunkdashing = false
-export var is_dunking = false
-export var is_halfturning = false
-export var is_crouching = false
-export var is_aiming = false
-export var is_shooting = false
-export var is_sliding = false
+@export var is_jumping = false
+@export var is_walljumping = false
+@export var is_landing = false
+@export var is_landing_roll = false
+@export var is_dunkjumping = false
+@export var is_dunkprejumping = false
+@export var is_dunkdashing = false
+@export var is_dunking = false
+@export var is_halfturning = false
+@export var is_crouching = false
+@export var is_aiming = false
+@export var is_shooting = false
+@export var is_sliding = false
 
-export var is_grinding = false
-export var is_hanging = false
+@export var is_grinding = false
+@export var is_hanging = false
 
 var is_non_cancelable = false
 var is_dunkjumphalfturning = false
@@ -102,7 +102,7 @@ enum ActionType { NONE, SHOOT, DUNK, DUNKDASH, DUNKJUMP }
 var action_type = ActionType.NONE
 
 # Bool var
-export var has_ball = false
+@export var has_ball = false
 var active_ball = null#pointer to a ball
 var released_ball = null # useful because when the ball is released (or thrown)
 # it is immediatly detected by area_body_enter...

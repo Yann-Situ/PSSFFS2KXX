@@ -11,7 +11,7 @@ uniform float distortion = 1.0;
 uniform float radius = 1.0;
 uniform float alpha = 1.0;
 uniform float crop = 1.0;
-uniform vec4 crop_color : hint_color = vec4(0,0,0,1);
+uniform vec4 crop_color : source_color = vec4(0,0,0,1);
 
 vec2 distort(vec2 p)
 {

@@ -1,8 +1,8 @@
 extends Ball
 # Fire ball, break/burn things and disapear on bounce
 
-export var attract_force = 500#kg*pix/s^2
-export var destruction_momentum = 20##kg*pix/s
+@export var attract_force = 500#kg*pix/s^2
+@export var destruction_momentum = 20##kg*pix/s
 
 var friction_save
 
@@ -20,7 +20,7 @@ func collision_effect(collider, collider_velocity, collision_point, collision_no
 
 func power_p(player,delta):
 	if holder == null :
-		add_force("player_attract", \
+		apply_force("player_attract", \
 			attract_force*(player.position - position).normalized() + \
 			mass * gravity * Vector2.UP)
 		self.set_friction(0.0)

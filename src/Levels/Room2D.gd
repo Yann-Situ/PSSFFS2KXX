@@ -4,21 +4,21 @@ class_name Room2D
 signal exit_room
 signal exit_level
 
-export (int) var limit_left = -10000000
-export (int) var limit_top = -10000000
-export (int) var limit_right = 10000000
-export (int) var limit_bottom = 10000000
+@export (int) var limit_left = -10000000
+@export (int) var limit_top = -10000000
+@export (int) var limit_right = 10000000
+@export (int) var limit_bottom = 10000000
 
 var P = null
-var portals = {} setget , get_portals
+var portals = {} : get = get_portals
 
-export (NodePath) var meta_player # sould be set by the level
+@export (NodePath) var meta_player # sould be set by the level
 
 func update_camera_limit():
-	P.Camera.limit_left = limit_left
-	P.Camera.limit_top = limit_top
-	P.Camera.limit_right = limit_right
-	P.Camera.limit_bottom = limit_bottom
+	P.Camera3D.limit_left = limit_left
+	P.Camera3D.limit_top = limit_top
+	P.Camera3D.limit_right = limit_right
+	P.Camera3D.limit_bottom = limit_bottom
 
 func get_portals():
 	return portals
@@ -50,7 +50,7 @@ func _enter_tree():
 		#print("No meta player : create one and assign meta_player")
 		Global.set_current_room(self)
 		var player_scene = load("res://src/Player/Player.tscn")
-		var player = player_scene.instance()
+		var player = player_scene.instantiate()
 		self.add_child(player) #move it to the appropriate position
 		meta_player = player.get_path()
 		#print("---> new METAPLAYER : " + str(meta_player))
@@ -76,13 +76,13 @@ func _ready():
 
 func add_portal(portal : Portal2D):
 	portals[portal.name] = portal
-	portal.connect("enter_portal_finished", self, "unlock_portals")
-	portal.connect("exit_portal_finished", self, "lock_portals")
+	portal.connect("enter_portal_finished",Callable(self,"unlock_portals"))
+	portal.connect("exit_portal_finished",Callable(self,"lock_portals"))
 		
 
 func _unhandled_input(event):
 	if event is InputEventKey:
-		if event.pressed and event.scancode == KEY_R:
+		if event.pressed and event.keycode == KEY_R:
 			P.reset_move()
 
 ################################################################################
@@ -92,7 +92,7 @@ func exit_room(next_room : String, next_room_portal : String):
 		enter_room(next_room_portal)
 	else:
 		emit_signal("exit_room", next_room, next_room_portal)
-	#get_tree().change_scene(next_room)
+	#get_tree().change_scene_to_file(next_room)
 	#get_tree().reload_current_scene()
 
 func exit_level(exit_portal : String):

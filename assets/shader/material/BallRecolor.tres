@@ -3,9 +3,9 @@
 [ext_resource path="res://assets/shader/recolor.gdshader" type="Shader" id=1]
 
 [sub_resource type="Gradient" id=3]
-colors = PoolColorArray( 0.222656, 0.222656, 0.222656, 1, 0.765625, 0.765625, 0.765625, 1 )
+colors = PackedColorArray( 0.222656, 0.222656, 0.222656, 1, 0.765625, 0.765625, 0.765625, 1 )
 
-[sub_resource type="GradientTexture" id=4]
+[sub_resource type="GradientTexture2D" id=4]
 gradient = SubResource( 3 )
 width = 3
 

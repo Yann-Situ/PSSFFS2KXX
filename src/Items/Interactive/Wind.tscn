@@ -5,7 +5,7 @@
 
 [sub_resource type="RectangleShape2D" id=1]
 resource_local_to_scene = true
-extents = Vector2( 256, 128 )
+size = Vector2( 256, 128 )
 
 [sub_resource type="OpenSimplexNoise" id=5]
 
@@ -26,7 +26,7 @@ shader_param/noise = SubResource( 4 )
 
 [sub_resource type="Gradient" id=7]
 
-[sub_resource type="GradientTexture" id=8]
+[sub_resource type="GradientTexture2D" id=8]
 gradient = SubResource( 7 )
 width = 1
 
@@ -43,7 +43,7 @@ collision_mask = 5
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
 shape = SubResource( 1 )
 
-[node name="Sprite" type="Sprite" parent="."]
+[node name="Sprite2D" type="Sprite2D" parent="."]
 material = SubResource( 9 )
 position = Vector2( 256, 128 )
 scale = Vector2( 512, 256 )

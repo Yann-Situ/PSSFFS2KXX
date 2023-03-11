@@ -1,15 +1,15 @@
 extends Node2D
 
-export var wildness := 15.0
-export var min_spawn_distance := 5.0
-export var gravity := Vector2.UP
-export var gradient_col : Gradient = Gradient.new()
-export var width := 20.0
-export var width_curve : Curve = Curve.new()
-export var trail_fade_time := 1.0
-export var point_lifetime = 0.5
-export var tick_age := 0.04
-export var texture : Texture = load("res://assets/art/effects/trail.png")
+@export var wildness := 15.0
+@export var min_spawn_distance := 5.0
+@export var gravity := Vector2.UP
+@export var gradient_col : Gradient = Gradient.new()
+@export var width := 20.0
+@export var width_curve : Curve = Curve.new()
+@export var trail_fade_time := 1.0
+@export var point_lifetime = 0.5
+@export var tick_age := 0.04
+@export var texture : Texture2D = load("res://assets/art/effects/trail.png")
 
 var TrailScene = preload("res://src/Effects/Trail.tscn")
 var node_to_trail
@@ -25,7 +25,7 @@ func set_node_to_trail(node):
 func start(duration, tick_delay):
 	if trail != null:
 		trail.stop()
-	var trail_instance: Line2D = TrailScene.instance()
+	var trail_instance: Line2D = TrailScene.instantiate()
 	trail_instance.wildness = wildness
 	trail_instance.min_spawn_distance = min_spawn_distance
 	trail_instance.gravity = gravity
@@ -51,7 +51,7 @@ func start(duration, tick_delay):
 		$TrailTimer.start(duration)
 	$TrailTickTimer.start(tick_delay)
 	tick_delay_save = tick_delay
-	last_tick = OS.get_ticks_msec()/1000.0
+	last_tick = Time.get_ticks_msec()/1000.0
 	
 func stop():
 	$TrailTimer.stop()
@@ -60,12 +60,12 @@ func stop():
 func _on_TrailTimer_timeout():
 	if trail != null:
 		trail.stop()
-		yield(get_tree().create_timer(trail.trail_fade_time), "timeout")
+		await get_tree().create_timer(trail.trail_fade_time).timeout
 	$TrailTickTimer.stop()
 	trail = null
 	
 func _on_TrailTickTimer_timeout():
-	var tick = OS.get_ticks_msec()/1000.0
+	var tick = Time.get_ticks_msec()/1000.0
 	if tick_delay_save == 0.0:
 		print("error: tick_delay_save == 0 in "+self.name)
 		return

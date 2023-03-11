@@ -4,19 +4,19 @@ signal took_damage
 signal died
 signal life_changed
 
-export var max_life = 10.0#hp
-export var defense = 0.0#hp
-export var weakness = 1.0#hp/hp
-export var strength = 0.0#hp
+@export var max_life = 10.0#hp
+@export var defense = 0.0#hp
+@export var weakness = 1.0#hp/hp
+@export var strength = 0.0#hp
 # the damage of an attack is : damage = trg.weakness * src.strength - trg.defense
 
-export var timer_tick = 0.05#s
-onready var life = max_life setget set_life
+@export var timer_tick = 0.05#s
+@onready var life = max_life : set = set_life
 
-onready var Character = get_parent()
-onready var S = Character.get_node("State")
+@onready var Character = get_parent()
+@onready var S = Character.get_node("State")
 
-onready var life_modifiers = [] # contains Vector2(nb_remaining_ticks, amount_per_tick)
+@onready var life_modifiers = [] # contains Vector2(nb_remaining_ticks, amount_per_tick)
 var timer
 
 func set_life(v):
@@ -24,7 +24,7 @@ func set_life(v):
 		emit_signal("died")
 	life = clamp(v, 0.0, max_life)
 	#print("life : "+str(life))
-	#$Sprite.modulate = Color((life/max_life),(life/max_life)*0.5,(life/max_life)*0.8)
+	#$Sprite2D.modulate = Color((life/max_life),(life/max_life)*0.5,(life/max_life)*0.8)
 	emit_signal("life_changed", life)
 	
 func add_life(lp):
@@ -40,7 +40,7 @@ func _ready():
 	timer.one_shot = false
 	timer.autostart = false
 	timer.wait_time = timer_tick
-	timer.connect("timeout", self, "update_life_tick")
+	timer.connect("timeout",Callable(self,"update_life_tick"))
 	self.add_child(timer)
 
 func apply_damage(damage : float, duration : float = 0.0):
@@ -67,5 +67,5 @@ func update_life_tick():
 		v = life_modifiers.pop_back()
 	life_modifiers = temp
 	add_life(life_point)
-	if life_modifiers.empty():
+	if life_modifiers.is_empty():
 		timer.stop()

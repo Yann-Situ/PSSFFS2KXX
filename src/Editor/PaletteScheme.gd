@@ -48,15 +48,15 @@ func add_gradient_from_color(color : Color,\
 	l = inverse_lerp(lb,lw,l)
 
 	if l > 0.5:
-		g.set_color(0, black.linear_interpolate(white, l-0.5))
+		g.set_color(0, black.lerp(white, l-0.5))
 		g.add_point(1.5-l,white)
 	else:
 		g.add_point(0.5-l,black)
-		g.set_color(1, black.linear_interpolate(white, 0.5+l))
+		g.set_color(1, black.lerp(white, 0.5+l))
 	g.add_point(0.5, color)
 	gradients.push_back(g)
 
-func add_gradient_from_colors(colors : PoolColorArray):
+func add_gradient_from_colors(colors : PackedColorArray):
 	if colors.size() < 2:
 		push_warning("gradient with less than 2 colors")
 		return
@@ -74,6 +74,6 @@ func display():
 	for gradient in gradients:
 		s+= ("[")
 		for i in [0.5]:
-			s+=(str(gradient.interpolate(i)))
+			s+=(str(gradient.sample(i)))
 		s+=("]\n")
 	print(s)

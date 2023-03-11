@@ -1,4 +1,4 @@
-tool
+@tool
 extends TileSet
 
 # Script for tileset

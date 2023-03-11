@@ -1,8 +1,8 @@
 extends Area2D
 # Ball pickup
 
-onready var P = get_parent()
-onready var S = P.get_node("State")
+@onready var P = get_parent()
+@onready var S = P.get_node("State")
 
 const collision_mask_balls = 4
 const released_ball_delay = 0.3
@@ -63,8 +63,8 @@ func pickup_ball(ball : Ball):
 	S.has_ball = true
 	S.active_ball = ball
 	if P.physics_enabled:
-		P.set_collision_mask_bit(10, true) #ball_wall collision layer
-	P.collision_mask_save |= 1<<10 # same as set_collision_mask_bit(10,true)
+		P.set_collision_mask_value(10, true) #ball_wall collision layer
+	P.collision_mask_save |= 1<<10 # same as set_collision_mask_value(10,true)
 	ball.pickup(P)
 	ball.select(P)
 
@@ -74,8 +74,8 @@ func free_ball(ball : Ball): # set out  active_ball and has_ball
 		S.active_ball = null
 		S.has_ball = false
 		if P.physics_enabled:
-			P.set_collision_mask_bit(10, false) #ball_wall collision layer
-		P.collision_mask_save &= ~(1<<10) # same as set_collision_mask_bit(10, false)
+			P.set_collision_mask_value(10, false) #ball_wall collision layer
+		P.collision_mask_save &= ~(1<<10) # same as set_collision_mask_value(10, false)
 
 		#print(str(P.collision_layer)+" "+str(P.collision_layer_save))
 		print(P.name+" free_ball")
@@ -91,7 +91,7 @@ func throw_ball(throw_global_position, speed):
 		S.released_ball = S.active_ball
 		S.active_ball.throw(throw_global_position, speed) # will call free_ball
 		# WARNING: Ugly but it works :
-		yield(get_tree().create_timer(released_ball_delay), "timeout")
+		await get_tree().create_timer(released_ball_delay).timeout
 		S.released_ball = null
 
 func shoot_ball(): # called by animation
@@ -131,5 +131,5 @@ func _on_BallWallDetector_body_entered(body):
 	collision_mask = 0
 
 func _on_BallWallDetector_body_exited(body):
-	if $BallWallDetector.get_overlapping_bodies().empty():
+	if $BallWallDetector.get_overlapping_bodies().is_empty():
 		collision_mask = collision_mask_balls

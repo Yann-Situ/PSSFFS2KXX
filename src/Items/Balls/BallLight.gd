@@ -1,6 +1,6 @@
 extends Ball
 
-export var enabled = false setget set_enabled
+@export var enabled = false : set = set_enabled
 
 func _ready():
 	self.mass = 0.9

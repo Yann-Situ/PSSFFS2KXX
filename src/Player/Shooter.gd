@@ -1,6 +1,6 @@
 extends Node2D
 
-export (float, 0.0, 500) var aim_tau_radius = 100
+@export (float, 0.0, 500) var aim_tau_radius = 100
 
 var viewer_parameter = INF
 var vmax = INF
@@ -12,9 +12,9 @@ var target_vmin_2 = 0.0 # (pix/s)^2
 var effective_v = Vector2.ZERO# pix/s
 var effective_v_2 = 0.0# (pix/s)^2
 
-onready var P = get_parent()
-onready var S = P.get_node("State")
-onready var shader = $ShootScreen/ShootScreenShader.material
+@onready var P = get_parent()
+@onready var S = P.get_node("State")
+@onready var shader = $ShootScreen/ShootScreenShader.material
 
 ################################################################################
 
@@ -33,7 +33,7 @@ func update_viewer_parameter():
 			viewer_parameter = vmax_2/ball.gravity
 		else:
 			viewer_parameter = INF
-	shader.set_shader_param("parameter", viewer_parameter)
+	shader.set_shader_parameter("parameter", viewer_parameter)
 
 func enable_screen_viewer():
 	$ShootScreen/ShootScreenShader.visible = true
@@ -42,7 +42,7 @@ func disable_screen_viewer():
 
 func update_screen_viewer_position():
 	var player_screen_position = P.get_global_transform_with_canvas().origin
-	shader.set_shader_param("throw_position", player_screen_position)
+	shader.set_shader_parameter("throw_position", player_screen_position)
 
 ################################################################################
 
@@ -79,7 +79,7 @@ func update_effective_can_shoot(tau : float = 0.0, s = 0):
 	# due to float arithmetic, we need to force the following value to be positive :
 	var temp = max(0.0, 1 - Q.x*Q.x + 2*Q.y)
 
-	#print("%d %d", [g, temp, rad2deg(atan2(1 + s*sqrt(temp), Q.x))])
+	#print("%d %d", [g, temp, rad_to_deg(atan2(1 + s*sqrt(temp), Q.x))])
 	effective_v = polar2cartesian(v_length, -atan2(1 + s*sqrt(temp), Q.x))
 
 func tau_from_vector(vector : Vector2):

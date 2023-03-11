@@ -2,12 +2,12 @@ extends Node2D
 class_name Level
 
 #export (String) var dir_path = "res://src/Levels/LevelExample/"
-#export(Array, PackedScene) var rooms
-export (String, FILE, "*.tscn") var first_room
-export (String) var first_room_portal
+#export var rooms # (Array, PackedScene)
+@export (String, FILE, "*.tscn") var first_room
+@export (String) var first_room_portal
 
 var rooms = {}
-var current_room_instance = null setget set_current_room_instance#
+var current_room_instance = null : set = set_current_room_instance
 var player_scene = preload("res://src/Player/Player.tscn")
 var meta_player = null
 var player_save = null
@@ -30,12 +30,12 @@ func browse_rooms(room_name : String):
 			printerr("can't preload "+room_name+" because it doesn't exist.")
 			return
 
-		var room: Room2D = packed_room.instance()
+		var room: Room2D = packed_room.instantiate()
 		rooms[room_name] = room
 		print_debug("created room : "+room_name)
 		room.meta_player = $Player.get_path() # instantiate meta_player for each room
-		room.connect("exit_room", self, "change_room")
-		room.connect("exit_level", self, "exit_level")
+		room.connect("exit_room",Callable(self,"change_room"))
+		room.connect("exit_level",Callable(self,"exit_level"))
 
 		# TODO ugly but we need to call _ready on room in order to get the portals...
 		# Maybe find a system with resources ? Or store a meta room as resource, with its information
@@ -62,7 +62,7 @@ func exit_level(exit_room : String, exit_room_portal : String):
 func change_room(next_room : String, next_room_portal : String):
 	print_debug("entering "+next_room+" at the portal "+next_room_portal)
 	# TODO: pause or unpause the room when changing ?
-	if self.is_a_parent_of(current_room_instance):
+	if self.is_ancestor_of(current_room_instance):
 		self.remove_child(current_room_instance)
 	if rooms.has(next_room):
 		set_current_room_instance(rooms[next_room])

@@ -1,13 +1,13 @@
 [gd_scene load_steps=6 format=2]
 
 [ext_resource path="res://src/Items/Dynamics/ZipLine.gd" type="Script" id=1]
-[ext_resource path="res://assets/art/environment/environment-interactive.png" type="Texture" id=2]
-[ext_resource path="res://assets/art/environment/zipline.png" type="Texture" id=3]
+[ext_resource path="res://assets/art/environment/environment-interactive.png" type="Texture2D" id=2]
+[ext_resource path="res://assets/art/environment/zipline.png" type="Texture2D" id=3]
 
 [sub_resource type="Curve2D" id=1]
 resource_local_to_scene = true
 _data = {
-"points": PoolVector2Array( 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 300, 80 )
+"points": PackedVector2Array( 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 300, 80 )
 }
 
 [sub_resource type="SegmentShape2D" id=2]
@@ -24,7 +24,7 @@ player_offset = Vector2( 0, 38 )
 handle_catch_radius = 0.0
 
 [node name="Line2D" type="Line2D" parent="."]
-points = PoolVector2Array( 0, 0, 0, 0, 300, 80 )
+points = PackedVector2Array( 0, 0, 0, 0, 300, 80 )
 width = 4.0
 default_color = Color( 1, 1, 1, 1 )
 texture = ExtResource( 3 )
@@ -41,7 +41,7 @@ curve = SubResource( 1 )
 rotate = false
 loop = false
 
-[node name="Sprite" type="Sprite" parent="Path2D/PathFollow2D"]
+[node name="Sprite2D" type="Sprite2D" parent="Path2D/PathFollow2D"]
 visible = false
 texture = ExtResource( 2 )
 region_enabled = true

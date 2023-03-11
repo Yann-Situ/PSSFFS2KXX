@@ -1,16 +1,16 @@
-tool
+@tool
 extends Node2D
 
-export (int) var initial_sample_number = 0
-export (float) var x_radius = INF
-export (float) var walk_speed_min = 50.0
-export (float) var walk_speed_max = 80.0
-export (float) var ai_timer_min = 1.0 #s
-export (float) var ai_timer_max = 4.0 #s
-export (float) var proba_idle = 0.2 #
-export (float) var proba_stay_idle = 0.4 #
-export (float) var proba_change_direction = 0.4 #
-export (Resource) var palette_scheme_sampler
+@export (int) var initial_sample_number = 0
+@export (float) var x_radius = INF
+@export (float) var walk_speed_min = 50.0
+@export (float) var walk_speed_max = 80.0
+@export (float) var ai_timer_min = 1.0 #s
+@export (float) var ai_timer_max = 4.0 #s
+@export (float) var proba_idle = 0.2 #
+@export (float) var proba_stay_idle = 0.4 #
+@export (float) var proba_change_direction = 0.4 #
+@export (Resource) var palette_scheme_sampler
 
 const pedestrian_scene = preload("res://src/Characters/NPC/Pedestrian.tscn")
 
@@ -31,8 +31,8 @@ func _draw():
 	if Engine.editor_hint:
 		draw_line(x_radius*Vector2.LEFT, x_radius*Vector2.RIGHT, Color(0.4,0.8,0.9,0.25), 64.0)
 func generate_pedestrian(global_pos : Vector2 = self.global_position, direction : int = 0) -> Node:
-	var pedestrian = pedestrian_scene.instance()
-	pedestrian.get_node("Sprite").texture = load("res://assets/art/characters/Pedestrian_"+str(randi()%7+1)+".png")
+	var pedestrian = pedestrian_scene.instantiate()
+	pedestrian.get_node("Sprite2D").texture = load("res://assets/art/characters/Pedestrian_"+str(randi()%7+1)+".png")
 
 	add_child(pedestrian)
 	if palette_scheme_sampler:
@@ -63,5 +63,5 @@ func generate_random_pedestrian() -> Node:
 
 func _input(event):
 	if event is InputEventKey and event.pressed:
-		if event.scancode == KEY_T:
+		if event.keycode == KEY_T:
 			generate_random_pedestrian()

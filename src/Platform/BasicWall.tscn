@@ -1,7 +1,7 @@
 [gd_scene load_steps=2 format=2]
 
 [sub_resource type="RectangleShape2D" id=1]
-extents = Vector2( 72, 8 )
+size = Vector2( 72, 8 )
 
 [node name="BasicWall" type="StaticBody2D"]
 
@@ -10,4 +10,4 @@ shape = SubResource( 1 )
 
 [node name="Polygon2D" type="Polygon2D" parent="."]
 color = Color( 0.211765, 0.12549, 0.180392, 1 )
-polygon = PoolVector2Array( -72, -8, -72, 8, 72, 8, 72, -8 )
+polygon = PackedVector2Array( -72, -8, -72, 8, 72, 8, 72, -8 )

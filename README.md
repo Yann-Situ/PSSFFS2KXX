@@ -179,3 +179,8 @@ Copyright (c) 2023 Yann-Situ
 ### Godot Issues
 * in `Ball.gd` function `change_holder` : issue related to https://github.com/godotengine/godot/issues/14578 and https://github.com/godotengine/godot/issues/34207. See [my workaround](https://www.reddit.com/r/godot/comments/vjkaun/reparenting_node_without_removing_it_from_tree/).
 * `Z_as_relative` doesn't work through script... see this [issue](https://github.com/godotengine/godot/issues/45416).
+
+### Godot4 migration
+
+`class_name\s*(\w*),` -> `class_name $1 #,`
+`@export\b\s*\((\w*)\)\s*var\s*(\w*)` -> `@export var $2 : $1`

@@ -4,22 +4,22 @@ class_name Portal2D
 signal enter_portal_finished
 signal exit_portal_finished
 
-export (bool) var activated = true
+@export (bool) var activated = true
 
 enum PortalType {ENTRANCE, EXIT, BOTH, EXIT_LEVEL}
-export (PortalType) var portal_type = PortalType.BOTH setget set_portal_type
+@export (PortalType) var portal_type = PortalType.BOTH : set = set_portal_type
 
 enum TriggerType {ON_BODY_ENTER, ON_KEY_E}
-export (TriggerType) var trigger_type = TriggerType.ON_BODY_ENTER setget set_trigger_type
+@export (TriggerType) var trigger_type = TriggerType.ON_BODY_ENTER : set = set_trigger_type
 
-export (String,FILE, "*.tscn") var next_room setget set_next_room, get_next_room
-export (String) var next_room_portal setget set_next_room_portal, get_next_room_portal
+@export (String,FILE, "*.tscn") var next_room : get = get_next_room, set = set_next_room
+@export (String) var next_room_portal : get = get_next_room_portal, set = set_next_room_portal
 
-export (Color) var transition_color = Color.black setget set_transition_color
-export (float, EXP, 0.1, 10.0) var transition_speed = 1.0 setget set_transition_speed
+@export (Color) var transition_color = Color.BLACK : set = set_transition_color
+@export (float, EXP, 0.1, 10.0) var transition_speed = 1.0 : set = set_transition_speed
 
 var room = null
-onready var is_locked = false 
+@onready var is_locked = false 
 var P = null
 
 func set_portal_type(new_type):
@@ -30,7 +30,7 @@ func set_portal_type(new_type):
 	   portal_type == PortalType.BOTH or \
    	   portal_type == PortalType.EXIT_LEVEL :
 		if trigger_type == TriggerType.ON_BODY_ENTER:
-			$Area2D.connect("body_entered", self, "_on_Area2D_body_entered")
+			$Area2D.connect("body_entered",Callable(self,"_on_Area2D_body_entered"))
 		elif trigger_type == TriggerType.ON_KEY_E :
 			pass # TO IMPLEMENT [TODO]
 
@@ -79,7 +79,7 @@ func _ready():
 
 func reload_portal():
 	transition_out()
-	yield(get_node("AnimationPlayer"), "animation_finished")
+	await get_node("AnimationPlayer").animation_finished
 	enter_portal()
 
 func transition_in():
@@ -102,7 +102,7 @@ func transition_out():
 func exit_portal():
 	transition_out()
 	P.S.disable_input()
-	yield(get_node("AnimationPlayer"), "animation_finished")
+	await get_node("AnimationPlayer").animation_finished
 	emit_signal("exit_portal_finished")
 	
 	if portal_type != PortalType.EXIT_LEVEL:
@@ -115,7 +115,7 @@ func enter_portal():
 	P.reset_move()
 	P.S.enable_input()
 	transition_in()
-	yield(get_node("AnimationPlayer"), "animation_finished")
+	await get_node("AnimationPlayer").animation_finished
 	emit_signal("enter_portal_finished")
 
 ################################################################################

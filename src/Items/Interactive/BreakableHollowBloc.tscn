@@ -4,7 +4,7 @@
 
 [sub_resource type="OccluderPolygon2D" id=1]
 resource_local_to_scene = true
-polygon = PoolVector2Array( -16, -16, 16, -16, 16, 16, -16, 16 )
+polygon = PackedVector2Array( -16, -16, 16, -16, 16, 16, -16, 16 )
 
 [sub_resource type="CircleShape2D" id=2]
 radius = 0.0
@@ -25,8 +25,8 @@ particles_anim_loop = false
 
 [sub_resource type="Gradient" id=6]
 resource_local_to_scene = true
-offsets = PoolRealArray( 0.0375587, 0.516432, 0.995305, 1 )
-colors = PoolColorArray( 0.435547, 0.248763, 0.173538, 1, 0.429688, 0.280094, 0.12085, 1, 0.163086, 0.111312, 0.0904617, 0.0328639, 1, 1, 1, 0 )
+offsets = PackedFloat32Array( 0.0375587, 0.516432, 0.995305, 1 )
+colors = PackedColorArray( 0.435547, 0.248763, 0.173538, 1, 0.429688, 0.280094, 0.12085, 1, 0.163086, 0.111312, 0.0904617, 0.0328639, 1, 1, 1, 0 )
 
 [node name="BreakableHollowBloc" instance=ExtResource( 1 )]
 

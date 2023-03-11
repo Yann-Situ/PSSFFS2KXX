@@ -1,13 +1,13 @@
 [gd_scene load_steps=5 format=2]
 
 [sub_resource type="Gradient" id=1]
-offsets = PoolRealArray( 0.217617, 0.367876, 0.518135, 1 )
-colors = PoolColorArray( 1.2, 0.85, 0.3, 1, 1.2, 1.2, 1.2, 1, 0.550781, 0.193634, 0, 1, 0.21875, 0, 0, 0 )
+offsets = PackedFloat32Array( 0.217617, 0.367876, 0.518135, 1 )
+colors = PackedColorArray( 1.2, 0.85, 0.3, 1, 1.2, 1.2, 1.2, 1, 0.550781, 0.193634, 0, 1, 0.21875, 0, 0, 0 )
 
-[sub_resource type="GradientTexture" id=2]
+[sub_resource type="GradientTexture2D" id=2]
 gradient = SubResource( 1 )
 
-[sub_resource type="ParticlesMaterial" id=3]
+[sub_resource type="ParticleProcessMaterial" id=3]
 resource_local_to_scene = true
 flag_disable_z = true
 direction = Vector3( 0, -1, 0 )
@@ -24,11 +24,11 @@ color_ramp = SubResource( 2 )
 hue_variation = -1.0
 hue_variation_random = 0.05
 
-[sub_resource type="StreamTexture" id=4]
+[sub_resource type="CompressedTexture2D" id=4]
 flags = 4
 load_path = "res://.import/pixel.png-8e4e6cd3613230bba87e395c4cf3f3d7.stex"
 
-[node name="RideParticles" type="Particles2D"]
+[node name="RideParticles" type="GPUParticles2D"]
 amount = 14
 lifetime = 0.7
 explosiveness = 0.11

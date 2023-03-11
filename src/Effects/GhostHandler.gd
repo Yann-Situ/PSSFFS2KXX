@@ -14,7 +14,7 @@ func set_environment_node(env_node):
 ################################################################################
 
 func instance_ghost():
-	var ghost: Sprite = ghost_anim.instance()
+	var ghost: Sprite2D = ghost_anim.instantiate()
 	ghost.texture = ghost_sprite.texture
 	ghost.vframes = ghost_sprite.vframes
 	ghost.hframes = ghost_sprite.hframes
@@ -30,7 +30,7 @@ func instance_ghost():
 
 func instance_ghost_gradient(gradient : Gradient):
 	assert(gradient != null)
-	var ghost: Sprite = ghost_anim.instance()
+	var ghost: Sprite2D = ghost_anim.instantiate()
 	ghost.texture = ghost_sprite.texture
 	ghost.vframes = ghost_sprite.vframes
 	ghost.hframes = ghost_sprite.hframes

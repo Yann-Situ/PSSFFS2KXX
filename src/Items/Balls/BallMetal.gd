@@ -2,11 +2,11 @@ extends Ball
 # Metal ball, with no bouncing and large mass
 
 #export var attract_force = 2000#kg*pix/s^2
-export var attract_speed = 350#pix/s
-export var attract_player_radius = 45#pix
-export var destruction_speed_thresh = 300#pix/s
-export var destruction_momentum_min = 500##kg*pix/s
-export var destruction_momentum_max = 900##kg*pix/s
+@export var attract_speed = 350#pix/s
+@export var attract_player_radius = 45#pix
+@export var destruction_speed_thresh = 300#pix/s
+@export var destruction_momentum_min = 500##kg*pix/s
+@export var destruction_momentum_max = 900##kg*pix/s
 
 var friction_save
 
@@ -33,7 +33,7 @@ func collision_effect(collider, collider_velocity, collision_point, collision_no
 		$ImpactTimer.start()
 		$Effects/DustParticle.restart()
 		if speed >= impact_threshold:
-			var impact = impact_particles[impact_effect].instance()
+			var impact = impact_particles[impact_effect].instantiate()
 			get_parent().add_child(impact)
 			impact.global_position = collision_point
 			impact.start()
@@ -49,7 +49,7 @@ func collision_effect(collider, collider_velocity, collision_point, collision_no
 
 func power_p(player,delta):
 	if holder == null :
-#		add_force("player_attract", \
+#		apply_force("player_attract", \
 #			attract_force*(player.position - position).normalized() + \
 #			mass * gravity * Vector2.UP)
 		var d = player.global_position - global_position

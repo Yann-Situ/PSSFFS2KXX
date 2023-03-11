@@ -1,12 +1,12 @@
-extends Sprite
+extends Sprite2D
 class_name SelectorTarget, "res://assets/art/icons/target.png"
 
-export (float) var tween_speed = 0.3#s
+@export (float) var tween_speed = 0.3#s
 var selection_node = null
 
 func _ready():
 	set_process(false)
-	self.self_modulate = Color.transparent
+	self.self_modulate = Color.TRANSPARENT
 
 func update_selection(selection : Selectable):
 	if selection != selection_node:
@@ -27,14 +27,14 @@ func select():
 
 	$TweenSelfModulate.stop_all()
 	$TweenSelfModulate.interpolate_property(self, "self_modulate", \
-		self.self_modulate, Color.white, tween_speed, \
+		self.self_modulate, Color.WHITE, tween_speed, \
 		Tween.TRANS_LINEAR, Tween.EASE_IN)
 	$TweenSelfModulate.start()
 
 func deselect():
 	$TweenSelfModulate.stop_all()
 	$TweenSelfModulate.interpolate_property(self, "self_modulate", \
-		self.self_modulate, Color.transparent, tween_speed, \
+		self.self_modulate, Color.TRANSPARENT, tween_speed, \
 		Tween.TRANS_LINEAR, Tween.EASE_OUT_IN)
 	$TweenSelfModulate.start()
 	set_process(false)

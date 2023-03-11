@@ -1,9 +1,9 @@
 [gd_scene load_steps=3 format=2]
 
-[ext_resource path="res://assets/art/effects/target_1.png" type="Texture" id=1]
+[ext_resource path="res://assets/art/effects/target_1.png" type="Texture2D" id=1]
 [ext_resource path="res://src/Items/Interactive/SelectorTarget.gd" type="Script" id=2]
 
-[node name="SelectorTarget" type="Sprite"]
+[node name="SelectorTarget" type="Sprite2D"]
 light_mask = 16
 z_index = 250
 z_as_relative = false
@@ -14,4 +14,4 @@ script = ExtResource( 2 )
 
 [node name="TweenSelfModulate" type="Tween" parent="."]
 
-[connection signal="tween_completed" from="TweenPosition" to="." method="_on_TweenPosition_tween_completed"]
+[connection signal="finished" from="TweenPosition" to="." method="_on_TweenPosition_tween_completed"]

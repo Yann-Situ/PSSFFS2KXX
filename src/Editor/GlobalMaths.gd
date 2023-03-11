@@ -6,12 +6,12 @@ func get_max_radius(s : Shape2D):
 	elif s is CapsuleShape2D:
 		return s.height
 	elif s is RectangleShape2D:
-		return max(s.extents.x, s.extents.y)
-	elif s is RayShape2D:
+		return max(s.size.x, s.size.y)
+	elif s is SeparationRayShape2D:
 		return s.length
 	elif s is SegmentShape2D:
 		return 0.5*(s.A-s.B).length()
-	elif s is LineShape2D:
+	elif s is WorldBoundaryShape2D:
 		return INF
 	else:
 		push_warning("this Shape2D is not handled for max_radius, returning 0.0.")

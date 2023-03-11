@@ -1,10 +1,10 @@
 shader_type canvas_item;
 render_mode blend_mix;
 
-uniform sampler2D grad_skin: hint_black;
-uniform sampler2D grad_1: hint_black;
-uniform sampler2D grad_2: hint_black;
-uniform sampler2D grad_3: hint_black;
+uniform sampler2D grad_skin: hint_default_black;
+uniform sampler2D grad_1: hint_default_black;
+uniform sampler2D grad_2: hint_default_black;
+uniform sampler2D grad_3: hint_default_black;
 
 float lightness(vec3 x)
 {

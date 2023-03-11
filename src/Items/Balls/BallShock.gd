@@ -1,11 +1,11 @@
 extends Ball
 
-export (float) var shock_min = 401
-export (float) var shock_max = 401 # m*pix/s
-export (float) var shock_jump = 1850 # m*pix/s
-export (float) var shock_fall = 5000 # m*pix/s
-export (float) var distance_max = 64
-export (float) var shock_timer = 0.25#s
+@export (float) var shock_min = 401
+@export (float) var shock_max = 401 # m*pix/s
+@export (float) var shock_jump = 1850 # m*pix/s
+@export (float) var shock_fall = 5000 # m*pix/s
+@export (float) var distance_max = 64
+@export (float) var shock_timer = 0.25#s
 
 var distortion_scene = preload("res://src/Effects/Distortion.tscn")
 
@@ -76,7 +76,7 @@ func _on_AnimationPlayer_animation_finished(anim_name):
 		$AnimationPlayer.play("idle")
 
 func shockwave_distortion(distortion_glob_position : Vector2):
-	var distortion = distortion_scene.instance()
+	var distortion = distortion_scene.instantiate()
 	distortion.animation_delay = 0.5#s
 	distortion.z_index = 250
 	distortion.global_position = distortion_glob_position

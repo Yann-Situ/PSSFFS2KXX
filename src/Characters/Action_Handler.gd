@@ -1,11 +1,11 @@
 extends Node2D
 
-onready var Character = get_parent().get_parent()
-onready var S = Character.get_node("State")
+@onready var Character = get_parent().get_parent()
+@onready var S = Character.get_node("State")
 
-export var distaction = Vector2(8.1,0)
-export var color = Color(1.0,0.3,0.1)
-export (bool) var flip_h = false
+@export var distaction = Vector2(8.1,0)
+@export var color = Color(1.0,0.3,0.1)
+@export (bool) var flip_h = false
 var rays = []
 var rays_flip = []
 var rays_not_flip = []
@@ -24,7 +24,7 @@ func _ready():
 #	for r in rays:
 #		if r.result:#r.is_colliding():
 #			draw_circle(r.result.position-Character.position, 2, color)
-#			draw_line(r.position, r.position+r.cast_to, color)
+#			draw_line(r.position, r.position+r.target_position, color)
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 #func _process(delta):
@@ -41,7 +41,7 @@ func update_basket():
 
 	S.dunkjump_basket = null
 	var baskets = $dunkjump_area.get_overlapping_areas()
-	if !baskets.empty():
+	if !baskets.is_empty():
 		# choose by priority baskets that are in direction_p, closest above player
 		var b = baskets[0].get_parent() # `get_parent` because we're
 		# detecting the basket_area node
@@ -98,7 +98,7 @@ func update_basket():
 func cast(r): #we must have updated the space_state before
 	if not r.updated:
 		r.result = space_state.intersect_ray(Character.position+r.position, \
-			Character.position+r.position+r.cast_to, \
+			Character.position+r.position+r.target_position, \
 			[Character], Character.collision_mask, true, false)
 		r.updated = true
 
@@ -143,7 +143,7 @@ func can_dunkjump():
 
 func can_dunk():
 	var baskets = $dunk_area.get_overlapping_areas()
-	if !baskets.empty():
+	if !baskets.is_empty():
 		var b = baskets[0].get_parent() # `get_parent` because we're
 		# detecting the basket_area node
 		S.dunk_basket = b

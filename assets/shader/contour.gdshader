@@ -3,7 +3,7 @@ render_mode blend_mix;
 //render_mode unshaded;
 
 uniform bool activated = true;
-uniform vec4 contour_color : hint_color = vec4(1.2,1.0,0.9,0.65);
+uniform vec4 contour_color : source_color = vec4(1.2,1.0,0.9,0.65);
 
 float lightness(vec4 x)
 {

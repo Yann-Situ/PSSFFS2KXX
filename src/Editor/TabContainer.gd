@@ -1,6 +1,6 @@
 extends TabContainer
 
-onready var object_cursor = get_node("/root/Editor/Editor_Object")
+@onready var object_cursor = get_node("/root/Editor/Editor_Object")
 
 # Called when the node enters the scene tree for the first time.
 func _ready():

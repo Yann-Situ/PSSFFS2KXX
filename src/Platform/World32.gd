@@ -1,4 +1,4 @@
-tool
+@tool
 extends TileMap
 
 var stairs_at_left = [Vector2(1,4), Vector2(0,5), Vector2(7,4), Vector2(8,5), Vector2(10,5)]
@@ -28,7 +28,7 @@ func set_cell(x, y, tile, flip_x=false, flip_y=false, transpose=false, autotile_
 			#print("change! left ")
 			autotile_coord = next_to_stairs[1]
 		print(autotile_coord)
-	.set_cell(x, y, tile, flip_x, flip_y, transpose, autotile_coord)
+	super.set_cell(x, y, tile, flip_x, flip_y, transpose, autotile_coord)
 	
 	# to update autotile
 	#update_bitmask_area(Vector2(x,y))
