@@ -1,8 +1,8 @@
 extends Node2D
 
-@export var col1 setget set_col1 # (Color, RGBA)
-@export var col2 setget set_col2 # (Color, RGBA)
-@export var col3 setget set_col3 # (Color, RGBA)
+@export var col1 : Color setget set_col1 # (Color, RGBA)
+@export var col2 : Color setget set_col2 # (Color, RGBA)
+@export var col3 : Color setget set_col3 # (Color, RGBA)
 var gradient_destruction := Gradient.new()
 var gradient_construction := Gradient.new()
 var gradient_dunk := Gradient.new()
@@ -19,7 +19,7 @@ func set_col3(c : Color):
 	col3 = c
 	update_colors()
 
-func update_colors():	
+func update_colors():
 	var gradient_data_destruction := {
 	0.0: Color(col3.r,col3.g,col3.b,0.0),
 	0.25: col3,
@@ -39,28 +39,28 @@ func update_colors():
 	0.5: col2,
 	1.0: col3
 	}
-	
+
 	var destruction_offsets = gradient_data_destruction.keys()
 	gradient_destruction.offsets = destruction_offsets
 	gradient_destruction.colors = gradient_data_destruction.values()
-	
+
 	#destruction_offsets.invert()
 	gradient_construction.offsets = destruction_offsets
 	gradient_construction.colors = gradient_data_destruction.values()
-	
+
 	gradient_dunk.offsets = gradient_data_dunk.keys()
 	gradient_dunk.colors = gradient_data_dunk.values()
-	
+
 	gradient_main.offsets = gradient_data_main.keys()
 	gradient_main.colors = gradient_data_main.values()
-	
+
 	gradient_dash = gradient_main.duplicate()
 	for i in range(gradient_dash.get_point_count()):
 		gradient_dash.set_offset(i, 0.5*gradient_dash.get_offset(i))
 		var col = gradient_dash.get_color(i)
 		col.a *= 0.7
 		gradient_dash.set_color(i, col)
-	
+
 func _ready():
 	$Reconstruction.color_ramp = gradient_construction
 	$Destruction.color_ramp = gradient_destruction

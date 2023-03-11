@@ -4,22 +4,22 @@ class_name Portal2D
 signal enter_portal_finished
 signal exit_portal_finished
 
-@export (bool) var activated = true
+@export var activated : bool = true
 
 enum PortalType {ENTRANCE, EXIT, BOTH, EXIT_LEVEL}
-@export (PortalType) var portal_type = PortalType.BOTH : set = set_portal_type
+@export var portal_type : PortalType = PortalType.BOTH : set = set_portal_type
 
 enum TriggerType {ON_BODY_ENTER, ON_KEY_E}
-@export (TriggerType) var trigger_type = TriggerType.ON_BODY_ENTER : set = set_trigger_type
+@export var trigger_type : TriggerType = TriggerType.ON_BODY_ENTER : set = set_trigger_type
 
-@export (String,FILE, "*.tscn") var next_room : get = get_next_room, set = set_next_room
-@export (String) var next_room_portal : get = get_next_room_portal, set = set_next_room_portal
+@export_global_file("*.tscn") var next_room : get = get_next_room, set = set_next_room
+@export var next_room_portal : String : get = get_next_room_portal, set = set_next_room_portal
 
-@export (Color) var transition_color = Color.BLACK : set = set_transition_color
-@export (float, EXP, 0.1, 10.0) var transition_speed = 1.0 : set = set_transition_speed
+@export var transition_color : Color = Color.BLACK : set = set_transition_color
+@export_range(0.1, 10.0, "exp") var transition_speed : float = 1.0 : set = set_transition_speed
 
 var room = null
-@onready var is_locked = false 
+@onready var is_locked = false
 var P = null
 
 func set_portal_type(new_type):
@@ -67,7 +67,7 @@ func disp(s:String):
 #	print(name + " init")
 #	room = self.get_parent().get_parent()
 #	room.add_portal(self)
-	
+
 func _enter_tree():
 	room = get_parent().get_parent()
 	P = room.get_player()
@@ -104,7 +104,7 @@ func exit_portal():
 	P.S.disable_input()
 	await get_node("AnimationPlayer").animation_finished
 	emit_signal("exit_portal_finished")
-	
+
 	if portal_type != PortalType.EXIT_LEVEL:
 		room.exit_room(next_room, next_room_portal)
 	else :
@@ -125,4 +125,3 @@ func _on_Area2D_body_entered(body):
 	# to the following issue : https://github.com/godotengine/godot/issues/14578
 	if activated and !is_locked and body == P:
 		exit_portal()
-		

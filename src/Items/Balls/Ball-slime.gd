@@ -1,6 +1,6 @@
 extends Ball
 
-@export (float) var stuck_force = 900
+@export var stuck_force : float = 900
 var stuck = false
 
 func _ready():

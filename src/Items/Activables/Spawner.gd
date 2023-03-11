@@ -1,8 +1,8 @@
 extends Activable
 
-@export (PackedScene) var ball = null
+@export var ball : PackedScene = null
 @export var initial_velocity = Vector2(0.0,20.0)
-@export (int, 0, 256) var nb_max_balls = 64
+@export_range(0,256) var nb_max_balls : int = 64
 var nb_balls = 0
 
 # Called when the node enters the scene tree for the first time.

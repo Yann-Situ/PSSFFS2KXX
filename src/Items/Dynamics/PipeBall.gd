@@ -1,14 +1,14 @@
 @tool
 extends Activable
 
-@export (float, EXP, 20, 2000) var speed_at_exit
-@export (float, EXP, 20, 2000) var speed_inside
+@export_range(20, 2000, "exp") var speed_at_exit : float
+@export_range(20, 2000, "exp") var speed_inside : float
 
 enum PIPE_TYPE {TO_EXIT, TO_ENTRANCE, BOTH_SIDES}
-@export (PIPE_TYPE) var pipe_type = PIPE_TYPE.TO_EXIT
+@export var pipe_type : PIPE_TYPE = PIPE_TYPE.TO_EXIT
 
 enum PIPE_Z {BACK, FRONT}
-@export (PIPE_Z) var pipe_z = PIPE_Z.BACK
+@export var pipe_z : PIPE_Z = PIPE_Z.BACK
 
 var inside_bodies = []
 var path_follows = []

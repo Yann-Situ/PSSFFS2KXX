@@ -1,12 +1,13 @@
 #tool
 extends Path2D
-class_name RailLine, "res://assets/art/icons/railline.png"
+class_name RailLine
+@icon("res://assets/art/icons/railline.png")
 
-@export (bool) var invert_line_direction = false
-@export (float) var character_position_offset = -32.0
-@export (float) var character_position_entrance_tolerance = -16.0
-@export (float) var character_collision_offset = -52.0
-@export (float) var cant_get_in_again_timer = 0.2#s
+@export var invert_line_direction : bool = false
+@export var character_position_offset : float = -32.0
+@export var character_position_entrance_tolerance : float = -16.0
+@export var character_collision_offset : float = -52.0
+@export var cant_get_in_again_timer : float = 0.2#s
 
 @onready var gravity = ProjectSettings.get_setting("physics/2d/default_gravity") # pix/s²
 @onready var character_offset = Vector2(0.0,character_position_offset)

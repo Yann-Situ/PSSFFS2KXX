@@ -1,16 +1,16 @@
 extends Line2D
 
-@export (float) var min_point_spawn_distance := 5.0#pix
-@export (float) var wildness_amplitude := 200.0#pix/s
-@export (float, 0.001, 1.0) var wildness_tick := 0.02#s
+@export var min_point_spawn_distance : float := 5.0#pix
+@export var wildness_amplitude : float := 200.0#pix/s
+@export_range(0.001,1.0) var wildness_tick : float := 0.02#s
 
-@export (float) var trail_fade_time := 5.0#s
-@export (float) var point_lifetime := 0.7#s
-@export (float, 0.001, 1.0) var point_lifetime_tick := 0.04#s
+@export var trail_fade_time : float := 5.0#s
+@export var point_lifetime : float := 0.7#s
+@export_range(0.001,1.0) var wildness_tick : float := 0.04#s
 
-@export (float, 0.001, 1.0) var addpoint_tick := 0.04#s
-@export (float) var lifetime := 0.0#s (if <= 0.0s, then the trail stays until stop is called)
-@export (bool) var autostart = true : set = set_autostart
+@export_range(0.001,1.0) var wildness_tick : float := 0.04#s
+@export var lifetime : float := 0.0#s (if <= 0.0s, then the trail stays until stop is called)
+@export var autostart : bool = true : set = set_autostart
 
 var node_to_trail = null : set = set_node_to_trail
 

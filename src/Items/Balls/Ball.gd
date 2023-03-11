@@ -1,5 +1,6 @@
 extends PhysicBody
-class_name Ball, "res://assets/art/ball/ball_test.png"
+class_name Ball
+@icon("res://assets/art/ball/ball_test.png")
 
 signal is_destroyed
 signal is_picked_up
@@ -7,10 +8,10 @@ signal is_thrown
 
 enum IMPACT_EFFECT {SPIKY, METALLIC}
 
-@export (IMPACT_EFFECT) var impact_effect = IMPACT_EFFECT.SPIKY
-@export (float) var dust_threshold = 300.0
-@export (float) var impact_threshold = 500.0
-@export (float) var damage_destruction_threshold = 2.0
+@export var impact_effect : IMPACT_EFFECT = IMPACT_EFFECT.SPIKY
+@export var dust_threshold : float = 300.0
+@export var impact_threshold : float = 500.0
+@export var damage_destruction_threshold : float = 2.0
 var selectors = {}
 var impact_particles = [preload("res://src/Effects/ImpactParticle1.tscn"),
 	preload("res://src/Effects/ImpactParticle0.tscn")]

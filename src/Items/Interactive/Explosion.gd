@@ -4,21 +4,21 @@ class_name Explosion#, "res://assets/art/icons/targeted.png"
 # Handle a single explosion from a source point
 signal body_explode(body, direction)
 
-@export (bool) var simple_explosion = true # whether or not use the Explosion.explode_body function when body explode
-@export (float) var breakable_momentum = 0.0 #kg.pix/s
-@export (float) var electric_momentum = 0.0 #kg.pix/s
-@export (float) var physicbody_momentum = 0.0 #kg.pix/s
-@export (float) var damage = 0.0 #hp
-@export (float) var damage_duration = 0.0 #s
-@export (float) var initial_scale_factor = 1.0
+@export var simple_explosion : bool = true # whether or not use the Explosion.explode_body function when body explode
+@export var breakable_momentum : float = 0.0 #kg.pix/s
+@export var electric_momentum : float = 0.0 #kg.pix/s
+@export var physicbody_momentum : float = 0.0 #kg.pix/s
+@export var damage : float = 0.0 #hp
+@export var damage_duration : float = 0.0 #s
+@export var initial_scale_factor : float = 1.0
 # the explosion goes from 'initial_scale_factor * momentum' at the center,
 # to  'momentum' at the radius. Doesn't apply to damages.
 
-@export (float) var duration = 0.5 #s
-@export (int,1,10) var explosion_steps = 3
-@export (Shape2D) var collision_shape : set = set_collision_shape
+@export var duration : float = 0.5 #s
+@export_range(1,10) var explosion_steps : int = 3
+@export var collision_shape : Shape2D : set = set_collision_shape
 
-@export (Array) var body_exceptions = []
+@export var body_exceptions : Array = []
 
 var exploded_bodies = [] # [body]
 var shape_radius

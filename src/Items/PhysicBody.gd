@@ -1,16 +1,17 @@
 # A generic PhysicBody class that can handle collisions and impulse.
 extends CharacterBody2D
-class_name PhysicBody, "res://assets/art/icons/physicbody.png"
+class_name PhysicBody
+@icon("res://assets/art/icons/physicbody.png")
 
-@export (bool) var physics_enabled = true
+@export var physics_enabled : bool = true
 var should_reset = false
 
 #physics :
-@export (float) var gravity_scale = 1.0 : get = get_gravity_scale, set = set_gravity_scale
-@export (float) var mass = 1.0 : set = set_mass
-@export (float) var friction = 0.5 : set = set_friction
-@export (float) var bounce = 0.5 : set = set_bounce
-@export (float) var penetration = 0.5 setget set_penetration # for penetration in the wind
+@export var gravity_scale : float = 1.0 : get = get_gravity_scale, set = set_gravity_scale
+@export var mass : float = 1.0 : set = set_mass
+@export var friction : float = 0.5 : set = set_friction
+@export var bounce : float = 0.5 : set = set_bounce
+@export var penetration : float = 0.5 setget set_penetration # for penetration in the wind
 var linear_velocity = Vector2(0.0,0.0) : set = set_linear_velocity
 var applied_forces = {} #"force_name : value in kg*pix/s^2"
 

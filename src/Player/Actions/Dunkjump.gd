@@ -1,7 +1,7 @@
 extends Action
 
 @export var ghost_modulate # (Color, RGBA)
-@export (float) var dunkjumphalfturn_threshold
+@export var dunkjumphalfturn_threshold : float
 var basket = null
 var direction = 0
 

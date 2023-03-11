@@ -1,16 +1,16 @@
 @tool
 extends Node2D
 
-@export (int) var initial_sample_number = 0
-@export (float) var x_radius = INF
-@export (float) var walk_speed_min = 50.0
-@export (float) var walk_speed_max = 80.0
-@export (float) var ai_timer_min = 1.0 #s
-@export (float) var ai_timer_max = 4.0 #s
-@export (float) var proba_idle = 0.2 #
-@export (float) var proba_stay_idle = 0.4 #
-@export (float) var proba_change_direction = 0.4 #
-@export (Resource) var palette_scheme_sampler
+@export var initial_sample_number : int = 0
+@export var x_radius : float = INF
+@export var walk_speed_min : float = 50.0
+@export var walk_speed_max : float = 80.0
+@export var ai_timer_min : float = 1.0 #s
+@export var ai_timer_max : float = 4.0 #s
+@export var proba_idle : float = 0.2 #
+@export var proba_stay_idle : float = 0.4 #
+@export var proba_change_direction : float = 0.4 #
+@export var palette_scheme_sampler : Resource
 
 const pedestrian_scene = preload("res://src/Characters/NPC/Pedestrian.tscn")
 

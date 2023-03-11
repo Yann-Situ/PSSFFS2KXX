@@ -1,12 +1,12 @@
 extends Ball
 
-@export (float) var damage = 3.0#lp
-@export (float) var boum_min = 400.0
-@export (float) var boum_max = 700.0 # m*pix/s
-@export (float) var distance_max = 64.0
-@export (float) var speed_threshold = 350.0#pix/s : if the difference of speed when collision is above this value, then boum !
-@export (float) var boum_timer = 1.0#s : minimum time between two consecutive boums.
-@export (float) var boum_delay = 0.13#s : time between boum_effect and apply_explosion
+@export var damage : float = 3.0#lp
+@export var boum_min : float = 400.0
+@export var boum_max : float = 700.0 # m*pix/s
+@export var distance_max : float = 64.0
+@export var speed_threshold : float = 350.0#pix/s : if the difference of speed when collision is above this value, then boum !
+@export var boum_timer : float = 1.0#s : minimum time between two consecutive boums.
+@export var boum_delay : float = 0.13#s : time between boum_effect and apply_explosion
 
 func _ready():
 	self.mass = 1.2

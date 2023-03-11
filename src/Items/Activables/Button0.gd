@@ -5,8 +5,8 @@ signal activated_change_signal(b)
 
 enum BUTTON0_TYPE {PERMANENT, TIMER, PHYSICAL}
 
-@export (BUTTON0_TYPE) var button_type : set = set_button_type
-@export (float) var wait_time = 1#s
+@export var button_type : BUTTON0_TYPE : set = set_button_type
+@export var wait_time : float = 1#s
 var timer = null
 
 func set_button_type(t):

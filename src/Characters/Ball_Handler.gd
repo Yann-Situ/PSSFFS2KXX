@@ -4,7 +4,7 @@ extends Area2D
 @onready var Character = get_parent()
 @onready var S = Character.get_node("State")
 
-@export (float) var shoot_max_speed = 1000.0 # kg*pix/s
+@export var shoot_max_speed : float = 1000.0 # kg*pix/s
 var shoot_vector_save = Vector2() : get = get_shoot_vector, set = set_shoot_vector
 
 ################## Shoot features

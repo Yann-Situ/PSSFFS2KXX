@@ -2,17 +2,17 @@ extends Node2D
 
 signal move_offset(offset)
 
-@export (bool) var free_pedestrian = true # if true, connect move_offset to walk_offset
+@export var free_pedestrian : bool = true # if true, connect move_offset to walk_offset
 
-@export (float) var walk_speed_min = 50.0
-@export (float) var walk_speed_max = 80.0
-@export (float) var x_min = -INF
-@export (float) var x_max = INF
-@export (float) var ai_timer_min = 1.0 #s
-@export (float) var ai_timer_max = 4.0 #s
-@export (float) var proba_idle = 0.2 #
-@export (float) var proba_stay_idle = 0.4 #
-@export (float) var proba_change_direction = 0.4 #
+@export var walk_speed_min : float = 50.0
+@export var walk_speed_max : float = 80.0
+@export var x_min : float = -INF
+@export var x_max : float = INF
+@export var ai_timer_min : float = 1.0 #s
+@export var ai_timer_max : float = 4.0 #s
+@export var proba_idle : float = 0.2 #
+@export var proba_stay_idle : float = 0.4 #
+@export var proba_change_direction : float = 0.4 #
 var walk_speed
 
 @onready var ai = get_node("AI")

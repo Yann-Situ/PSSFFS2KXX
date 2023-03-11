@@ -1,11 +1,11 @@
 extends Ball
 
-@export (float) var shock_min = 401
-@export (float) var shock_max = 401 # m*pix/s
-@export (float) var shock_jump = 1850 # m*pix/s
-@export (float) var shock_fall = 5000 # m*pix/s
-@export (float) var distance_max = 64
-@export (float) var shock_timer = 0.25#s
+@export var shock_min : float = 401
+@export var shock_max : float = 401 # m*pix/s
+@export var shock_jump : float = 1850 # m*pix/s
+@export var shock_fall : float = 5000 # m*pix/s
+@export var distance_max : float = 64
+@export var shock_timer : float = 0.25#s
 
 var distortion_scene = preload("res://src/Effects/Distortion.tscn")
 

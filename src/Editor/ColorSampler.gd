@@ -1,9 +1,9 @@
 extends Resource
 class_name ColorSampler
 
-@export (Curve) var hue_distribution : set = set_hue_distribution
-@export (Curve) var saturation_distribution : set = set_saturation_distribution
-@export (Curve) var lightness_distribution : set = set_lightness_distribution
+@export var hue_distribution : Curve : set = set_hue_distribution
+@export var saturation_distribution : Curve : set = set_saturation_distribution
+@export var lightness_distribution : Curve : set = set_lightness_distribution
 
 var hue_sampler = Curve.new()
 var saturation_sampler = Curve.new()

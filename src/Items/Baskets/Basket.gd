@@ -1,5 +1,6 @@
 extends Node2D
-class_name Basket, "res://assets/art/icons/basket.png"
+class_name Basket
+@icon("res://assets/art/icons/basket.png")
 
 signal is_dunked
 signal is_goaled

@@ -4,8 +4,8 @@ extends Node2D
 @onready var S = Character.get_node("State")
 
 @export var distaction = Vector2(8.1,0)
-@export var color = Color(1.0,0.3,0.1)
-@export (bool) var flip_h = false
+@export var color : Color = Color(1.0,0.3,0.1)
+@export var flip_h : bool = false
 var rays = []
 var rays_flip = []
 var rays_not_flip = []

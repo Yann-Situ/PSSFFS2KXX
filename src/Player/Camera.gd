@@ -1,11 +1,11 @@
 extends Camera2D
-@export (float) var aim_offset = 100
-@export (float) var aim_max_dist = 300
-@export (float) var crouch_offset = 100
-@export (float) var boum_distance2_threshold = 450*450
-@export (Vector2) var move_max_offset = Vector2(128, 64)
-@export (Vector2) var move_speed_threshold = Vector2(600, 800)
-@export (Vector2) var initial_position = Vector2(0,-35)# relative position to the player
+@export var aim_offset : float = 100
+@export var aim_max_dist : float = 300
+@export var crouch_offset : float = 100
+@export var boum_distance2_threshold : float = 450*450
+@export var move_max_offset : Vector2 = Vector2(128, 64)
+@export var move_speed_threshold : Vector2 = Vector2(600, 800)
+@export var initial_position : Vector2 = Vector2(0,-35)# relative position to the player
 var target_offset = Vector2(0,0)
 var current_shake_power = 0.0
 var shake_offset = Vector2(0,0)

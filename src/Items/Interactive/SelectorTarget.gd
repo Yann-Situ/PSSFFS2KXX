@@ -1,7 +1,8 @@
 extends Sprite2D
-class_name SelectorTarget, "res://assets/art/icons/target.png"
+class_name SelectorTarget
+@icon("res://assets/art/icons/target.png")
 
-@export (float) var tween_speed = 0.3#s
+@export var tween_speed : float = 0.3#s
 var selection_node = null
 
 func _ready():

@@ -1,6 +1,6 @@
 extends Node2D
 
-@export (float, 0.0, 500) var aim_tau_radius = 100
+@export_range(0.0,500) var aim_tau_radius : float = 100
 
 var viewer_parameter = INF
 var vmax = INF

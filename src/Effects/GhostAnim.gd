@@ -1,7 +1,7 @@
 extends Sprite2D
 
-@export (Gradient) var gradient
-@export (bool) var use_gradient = false
+@export var gradient : Gradient
+@export var use_gradient : bool = false
 var initial_alpha = 1.0
 var final_alpha = 0.0
 var duration = 1.0#s

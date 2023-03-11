@@ -3,8 +3,8 @@ class_name Level
 
 #export (String) var dir_path = "res://src/Levels/LevelExample/"
 #export var rooms # (Array, PackedScene)
-@export (String, FILE, "*.tscn") var first_room
-@export (String) var first_room_portal
+@export_global_file("*.tscn") var first_room
+@export var first_room_portal : String
 
 var rooms = {}
 var current_room_instance = null : set = set_current_room_instance

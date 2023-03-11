@@ -1,6 +1,6 @@
 extends BackBufferCopy
 
-@export (float) var animation_delay = 1.0#s
+@export var animation_delay : float = 1.0#s
 
 # Called when the node enters the scene tree for the first time.
 func _ready():

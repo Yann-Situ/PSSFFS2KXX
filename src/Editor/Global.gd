@@ -1,7 +1,7 @@
 @tool
 extends Node
 
-@export (int) var max_trail_points = 5000
+@export var max_trail_points : int = 5000
 
 var playing = true
 var list_of_physical_nodes = []

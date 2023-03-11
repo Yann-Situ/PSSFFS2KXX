@@ -5,8 +5,8 @@ extends Node2D
 @onready var Selector = get_parent().get_node("Selector")
 
 @export var distaction = Vector2(8.1,0)
-@export var color = Color(1.0,0.3,0.1)
-@export (bool) var flip_h = false
+@export var color : Color = Color(1.0,0.3,0.1)
+@export var flip_h : bool = false
 var rays = []
 var rays_flip = []
 var rays_not_flip = []
@@ -42,7 +42,7 @@ func dunkjump_criteria_init():
 	dunkjump_criteria_bests.clear()
 	dunkjump_criteria_bests.push_back(0.0) # best_y
 	dunkjump_criteria_bests.push_back(-2) # best_direction
-	
+
 # criteria to select the dunkjump target
 func dunkjump_criteria(q : Vector2, target_direction : int) -> bool:
 	# q is basket_position - player_position
@@ -71,7 +71,7 @@ func dunkdash_criteria_init():
 	dunkdash_criteria_bests.clear()
 	dunkdash_criteria_bests.push_back(P.max_dunkdash_distance2) # best_dist2
 	dunkdash_criteria_bests.push_back(-2) # best_direction
-	
+
 # criteria to select the dunkdash target
 func dunkdash_criteria(q : Vector2, target_direction : int) -> bool:
 	var dir = target_direction # not 0 in order to make direction*d=1 if q.x=0

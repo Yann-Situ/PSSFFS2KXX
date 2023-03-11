@@ -1,7 +1,7 @@
 extends Area2D
 #Highlighter
 @onready var ball = get_parent()
-@export (Color) var selection_color = Color(1.0,1.0,0.7) #: set = set_selection_color
+@export var selection_color : Color = Color(1.0,1.0,0.7) #: set = set_selection_color
 var selection_color_mid = Color(selection_color.r*0.5, selection_color.g*0.5, selection_color.b*0.5)
 var sprite_selection
 var sprite_material

@@ -1,8 +1,8 @@
 extends Node2D
 
-@export (PackedScene) var ball = null # not yet used
+@export var ball : PackedScene = null # not yet used
 @export var jump_velocity = 500#pix/s
-@export (float) var cant_go_time = 0#s
+@export var cant_go_time : float = 0#s
 
 # Called when the node enters the scene tree for the first time.
 func _ready():

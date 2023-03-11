@@ -7,15 +7,15 @@ var frame_time_ms = 1.0/60.0 #s
 var time = 0.0#s
 
 # Countdowns and delays between actions
-@export (float) var tolerance_jump_floor = 7*frame_time_ms #s
-@export (float) var tolerance_jump_press = 7*frame_time_ms #s
-@export (float) var tolerance_wall_jump = 7*frame_time_ms #s
-@export (float) var tolerance_land_lag = 3*frame_time_ms #s
-@export (float) var walljump_move_countdown = 22*frame_time_ms #s
-@export (float) var jump_countdown = 10*frame_time_ms #s
-@export (float) var dunkjump_countdown = 0.4#s
-@export (float) var dunk_countdown = 0.9 #s
-@export (float) var shoot_countdown = 30*frame_time_ms #s
+@export var tolerance_jump_floor : float = 7*frame_time_ms #s
+@export var tolerance_jump_press : float = 7*frame_time_ms #s
+@export var tolerance_wall_jump : float = 7*frame_time_ms #s
+@export var tolerance_land_lag : float = 3*frame_time_ms #s
+@export var walljump_move_countdown : float = 22*frame_time_ms #s
+@export var jump_countdown : float = 10*frame_time_ms #s
+@export var dunkjump_countdown : float = 0.4#s
+@export var dunk_countdown : float = 0.9 #s
+@export var shoot_countdown : float = 30*frame_time_ms #s
 
 # Bool for inputs ('p' is for 'pressed', 'jp' 'just_pressed', 'jr' 'just_released')
 var right_p = false

@@ -1,10 +1,10 @@
 @tool
 extends Node2D
 
-@export (Vector2) var speed = Vector2(200,0) setget set_velocity # pix/s
-@export (Vector2) var rectangle_extents = Vector2(256,128) : set = set_extents
-@export (float) var amplitude = 20.0  # pix/s
-@export (float) var frequence = 1.0  # 1/s
+@export var speed : Vector2 = Vector2(200,0) setget set_velocity # pix/s
+@export var rectangle_extents : Vector2 = Vector2(256,128) : set = set_extents
+@export var amplitude : float = 20.0  # pix/s
+@export var frequence : float = 1.0  # 1/s
 @onready var direction = speed.normalized()
 
 func set_velocity(f : Vector2):

@@ -1,45 +1,46 @@
 extends CharacterBody2D
-class_name Player, "res://assets/art/icons/popol.png"
+class_name Player
+@icon("res://assets/art/icons/popol.png")
 
-@export (bool) var physics_enabled = true
+@export var physics_enabled : bool = true
 
 # Environment features (should be given by the map)
-@export (float) var floor_unfriction = 0.18 # s
-@export (float) var air_unfriction = 0.32 # s
-@export (float) var attract_force = 800.0 # m.pix/s² # don't know for what know (?)
-@export (Vector2) var gravity # pix/s²
+@export var floor_unfriction : float = 0.18 # s
+@export var air_unfriction : float = 0.32 # s
+@export var attract_force : float = 800.0 # m.pix/s² # don't know for what know (?)
+@export var gravity : Vector2 # pix/s²
 
 # Crouch features
-@export (float) var crouch_speed_max = 300.0 # pix/s
-@export (float) var crouch_instant_speed = 60.0 # pix/s
-@export (float) var crouch_return_thresh_instant_speed = 100.0 # pix/s
-@export (float) var crouch_accel = 200.0 # pix/s²
-@export (float) var landing_velocity_thresh = 400.0 # pix/s
+@export var crouch_speed_max : float = 300.0 # pix/s
+@export var crouch_instant_speed : float = 60.0 # pix/s
+@export var crouch_return_thresh_instant_speed : float = 100.0 # pix/s
+@export var crouch_accel : float = 200.0 # pix/s²
+@export var landing_velocity_thresh : float = 400.0 # pix/s
 
 # Aerial features
-@export (float) var sideaerial_speed_max = 400.0 # pix/s
-@export (float) var air_instant_speed = 45.0 # pix/s
-@export (float) var air_return_thresh_instant_speed = 50.0 # pix/s
-@export (float) var sideaerial_accel = 220.0 # pix/s²
-@export (float) var jump_speed = -425.0 # pix/s
-@export (float) var dunkjump_speed = -500.0 # pix/s
-@export (float) var dunkdash_speed = 600.0 # pix/s
-@export (float) var max_dunkdash_distance2 = 180*180.0 # pix^2
-@export (float) var max_speed_fall = 800.0 # pix/s
-@export (float) var max_speed_fall_onwall = 200.0 # pix/s
-@export (Vector2) var vec_walljump = Vector2(0.65, -1)
+@export var sideaerial_speed_max : float = 400.0 # pix/s
+@export var air_instant_speed : float = 45.0 # pix/s
+@export var air_return_thresh_instant_speed : float = 50.0 # pix/s
+@export var sideaerial_accel : float = 220.0 # pix/s²
+@export var jump_speed : float = -425.0 # pix/s
+@export var dunkjump_speed : float = -500.0 # pix/s
+@export var dunkdash_speed : float = 600.0 # pix/s
+@export var max_dunkdash_distance2 : float = 180*180.0 # pix^2
+@export var max_speed_fall : float = 800.0 # pix/s
+@export var max_speed_fall_onwall : float = 200.0 # pix/s
+@export var vec_walljump : Vector2 = Vector2(0.65, -1)
 
 # Walk and run features
-@export (float) var run_speed_thresh = 350.0 # pix/s
-@export (float) var run_speed_max = 400.0 # pix/s
-@export (float) var walk_instant_speed = 150.0 # pix/s
-@export (float) var walk_return_thresh_instant_speed = 300.0 # pix/s
-@export (float) var walk_accel = 220.0 # pix/s²
+@export var run_speed_thresh : float = 350.0 # pix/s
+@export var run_speed_max : float = 400.0 # pix/s
+@export var walk_instant_speed : float = 150.0 # pix/s
+@export var walk_return_thresh_instant_speed : float = 300.0 # pix/s
+@export var walk_accel : float = 220.0 # pix/s²
 
 # Other features
-@export (float) var throw_impulse = 600.0 # kg.pix/s
+@export var throw_impulse : float = 600.0 # kg.pix/s
 
-@export (bool) var flip_h = false
+@export var flip_h : bool = false
 
 ################################################################################
 

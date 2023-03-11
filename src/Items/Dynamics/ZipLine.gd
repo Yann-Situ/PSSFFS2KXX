@@ -2,17 +2,18 @@
 # Two types of zipline are implemented : Rope catch and Handle catch.
 @tool
 extends Node2D
-class_name ZipLine, "res://assets/art/icons/zipline.png"
+class_name ZipLine
+@icon("res://assets/art/icons/zipline.png")
 
 enum ZIPLINE_TYPE {ROPE_CATCH, HANDLE_CATCH}
-@export (ZIPLINE_TYPE) var zipline_type = ZIPLINE_TYPE.ROPE_CATCH
-@export (Vector2) var init_point  : get = get_init_point, set = set_init_point
-@export (Vector2) var final_point : get = get_final_point, set = set_final_point
+@export var zipline_type : ZIPLINE_TYPE = ZIPLINE_TYPE.ROPE_CATCH
+@export var init_point : Vector2  : get = get_init_point, set = set_init_point
+@export var final_point : Vector2 : get = get_final_point, set = set_final_point
 
-@export (Vector2) var player_offset = Vector2(0.0,5.0)
-@export (Vector2) var rope_offset = Vector2(0.0,10.0)
-@export (float,1.0, 20.0) var handle_catch_radius = 10.0
-@export (float, 0.0, 1.0) var handle_catch_init_unit_offset = 0.0 : set = set_handle_catch_init_unit_offset
+@export var player_offset : Vector2 = Vector2(0.0,5.0)
+@export var rope_offset : Vector2 = Vector2(0.0,10.0)
+@export_range(1.0,20.0) var handle_catch_radius : float = 10.0
+@export_range(0.0,1.0) var handle_catch_init_unit_offset : float = 0.0 : set = set_handle_catch_init_unit_offset
 
 var linear_velocity = Vector2(0.0,0.0)
 var real_rope_offset = Vector2.ZERO

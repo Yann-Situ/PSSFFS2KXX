@@ -1,7 +1,7 @@
 extends Node2D
 
-@export (float) var damage = 1.5#lp
-@export (float) var damage_duration = 0.0#s
+@export var damage : float = 1.5#lp
+@export var damage_duration : float = 0.0#s
 
 func _ready():
 	self.z_index = Global.z_indices["foreground_4"]

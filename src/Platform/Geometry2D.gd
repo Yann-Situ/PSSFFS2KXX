@@ -2,7 +2,7 @@
 class_name Geometry2D
 extends CollisionShape2D
 
-@export (Color) var color = Color(1, 1, 1, 1) : set = set_color
+@export var color : Color = Color(1, 1, 1, 1) : set = set_color
 
 func set_color(new_color):
 	color = new_color

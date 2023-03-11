@@ -1,12 +1,13 @@
 extends Node2D
-class_name Activable, "res://assets/art/icons/activable.png"
+class_name Activable
+@icon("res://assets/art/icons/activable.png")
 
 signal is_enabled
 signal is_disabled
 signal is_toggled(b)
 
-@export (bool) var activated = false : get = is_activated, set = set_activated
-@export (bool) var locked = false
+@export var activated : bool = false : get = is_activated, set = set_activated
+@export var locked : bool = false
 
 func _init():
 	add_to_group("activables")
