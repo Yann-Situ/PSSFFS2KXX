@@ -11,7 +11,8 @@ var should_reset = false
 @export var mass : float = 1.0 : set = set_mass
 @export var friction : float = 0.5 : set = set_friction
 @export var bounce : float = 0.5 : set = set_bounce
-@export var penetration : float = 0.5 setget set_penetration # for penetration in the wind
+@export var penetration : float = 0.5 :
+	set = set_penetration # for penetration in the wind
 var linear_velocity = Vector2(0.0,0.0) : set = set_linear_velocity
 var applied_forces = {} #"force_name : value in kg*pix/s^2"
 

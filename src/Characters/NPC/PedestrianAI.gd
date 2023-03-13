@@ -2,7 +2,8 @@ extends Node
 
 signal direction_changed(dir)
 
-@export var initial_direction : int = 0 setget set_initial_direction # 0 makes an idle pedestrian
+@export var initial_direction : int = 0 :
+	set = set_initial_direction # 0 makes an idle pedestrian
 @export var ai_timer_min : float = 1.0 #s
 @export var ai_timer_max : float = 4.0 #s
 @export var proba_idle : float = 0.2 #

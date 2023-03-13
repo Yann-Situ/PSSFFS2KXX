@@ -1,7 +1,8 @@
 @tool
 extends Activable
 
-@export var visual_type setget set_visual_type # (int, "type0", "type1")
+@export var visual_type :
+	set = set_visual_type # (int, "type0", "type1")
 @export var flip_h: bool = false : set = set_flip_h
 @export var mass = 5.0 # kg
 @export var momentum_threshold = 200.0 # m*pix/s
@@ -44,7 +45,7 @@ func apply_explosion(momentum : Vector2):
 
 func on_enable():
 	update_sprite(activated)
-	if !Engine.editor_hint:
+	if !Engine.is_editor_hint():
 		$OccluderInstance3D.visible = false
 		$Breakable.collision_layer = only_breakable_collision_layer
 		$Breakable.collision_mask = 0
@@ -64,7 +65,7 @@ func explode(momentum : Vector2):
 
 func on_disable():
 	update_sprite(activated)
-	if !Engine.editor_hint and is_inside_tree():
+	if !Engine.is_editor_hint() and is_inside_tree():
 		$OccluderInstance3D.visible = true
 		$Breakable.collision_layer = collision_layer_save
 		$Breakable.collision_mask = collision_mask_save

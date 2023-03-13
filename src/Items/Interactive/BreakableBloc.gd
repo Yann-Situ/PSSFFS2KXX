@@ -15,7 +15,7 @@ var _is_exploding = false # to prevent multiple explosion of the same bloc
 
 func set_content(new_content : PackedScene):
 	content = new_content
-	if Engine.editor_hint:
+	if Engine.is_editor_hint():
 		if content is PackedScene and content.can_instantiate():
 			var instance = content.instantiate()
 			if instance.has_node("Sprite2D"):

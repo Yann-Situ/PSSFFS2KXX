@@ -3,13 +3,14 @@ extends Node2D
 
 signal spray_collected(graffspray_node)
 
-@export var color : Color setget set_color # (Color, RGBA)
+@export var color : Color :
+	set = set_color # (Color, RGBA)
 var color_dark = Color.BLACK
 
 func set_color(c : Color):
 	color = c
 	color_dark = c.darkened(0.18)
-	if Engine.editor_hint:
+	if Engine.is_editor_hint():
 		update_color()
 
 func update_color():

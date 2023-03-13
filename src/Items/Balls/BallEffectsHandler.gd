@@ -1,8 +1,11 @@
 extends Node2D
 
-@export var col1 : Color setget set_col1 # (Color, RGBA)
-@export var col2 : Color setget set_col2 # (Color, RGBA)
-@export var col3 : Color setget set_col3 # (Color, RGBA)
+@export var col1 : Color :
+	set = set_col1 # (Color, RGBA)
+@export var col2 : Color :
+	set = set_col2 # (Color, RGBA)
+@export var col3 : Color :
+	set = set_col3 # (Color, RGBA)
 var gradient_destruction := Gradient.new()
 var gradient_construction := Gradient.new()
 var gradient_dunk := Gradient.new()

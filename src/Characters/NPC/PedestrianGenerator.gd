@@ -18,7 +18,7 @@ var rng = RandomNumberGenerator.new()
 
 func _ready():
 	rng.seed = hash(get_instance_id())
-	if Engine.editor_hint:
+	if Engine.is_editor_hint():
 		set_process(true)
 	else:
 		set_process(false)
@@ -28,7 +28,7 @@ func _ready():
 func _process(delta):
 	update()
 func _draw():
-	if Engine.editor_hint:
+	if Engine.is_editor_hint():
 		draw_line(x_radius*Vector2.LEFT, x_radius*Vector2.RIGHT, Color(0.4,0.8,0.9,0.25), 64.0)
 func generate_pedestrian(global_pos : Vector2 = self.global_position, direction : int = 0) -> Node:
 	var pedestrian = pedestrian_scene.instantiate()

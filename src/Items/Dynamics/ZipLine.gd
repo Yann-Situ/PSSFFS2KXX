@@ -99,7 +99,7 @@ func _process(delta):
 		body.S.velocity = veldotfi*fi
 
 		var temp_u_offset = $Path2D/PathFollow2D.get_progress_ratio()
-		$Path2D/PathFollow2D.set_offset($Path2D/PathFollow2D.get_offset()+veldotfi*delta)
+		$Path2D/PathFollow2D.set_progress($Path2D/PathFollow2D.get_progress()+veldotfi*delta)
 		#relative_position_offset = temp_u_offset*(final_point-init_point)+init_point
 		real_rope_offset = lerp(real_rope_offset, 4*temp_u_offset*(1-temp_u_offset)*rope_offset, 0.1)
 		real_player_offset = lerp(real_player_offset, player_offset, 0.1)
@@ -143,7 +143,7 @@ func _on_PlayerDetector_body_exited(body):
 		var fi =final_point-init_point
 		linear_velocity = body.S.velocity
 		inside_bodies.append(body)
-		$Path2D/PathFollow2D.set_offset(bi.dot(fi.normalized()))
+		$Path2D/PathFollow2D.set_progress(bi.dot(fi.normalized()))
 		#relative_position_offset = $Path2D/PathFollow2D.get_progress_ratio()*(final_point-init_point)+init_point
 		real_player_offset = bi - ($Path2D/PathFollow2D.global_position-self.global_position)
 		#body.disable_physics()

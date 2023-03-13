@@ -1,7 +1,8 @@
 @tool
 extends Node2D
 
-@export var speed : Vector2 = Vector2(200,0) setget set_velocity # pix/s
+@export var speed : Vector2 = Vector2(200,0) :
+	set = set_velocity # pix/s
 @export var rectangle_extents : Vector2 = Vector2(256,128) : set = set_extents
 @export var amplitude : float = 20.0  # pix/s
 @export var frequence : float = 1.0  # 1/s

@@ -1,12 +1,15 @@
 @tool
 extends Path2D
 
-@export var p0_slope = 0.0 setget set_slope # pix/pix # (float, -8.0, 8.0)
+@export var p0_slope = 0.0 :
+	set = set_slope # pix/pix # (float, -8.0, 8.0)
 @export var nb_line_points = 30 # (int, 2, 1024)
 
 ## aza
-@export var line_width setget set_width # pix/pix # (float,1.0, 10.0)
-@export var line_modulate setget set_line_modulate # (Color, RGBA)
+@export var line_width :
+	set = set_width # pix/pix # (float,1.0, 10.0)
+@export var line_modulate :
+	set = set_line_modulate # (Color, RGBA)
 @export var line_texture: Texture2D : set = set_texture
 
 var p0 : Vector2 # first end point

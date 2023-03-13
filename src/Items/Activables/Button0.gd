@@ -11,7 +11,7 @@ var timer = null
 
 func set_button_type(t):
 	button_type = t
-	if Engine.editor_hint:
+	if Engine.is_editor_hint():
 		if button_type == BUTTON0_TYPE.PERMANENT :
 			$Sprite2D.set_region_rect(Rect2(0,80,64,16))
 			
@@ -56,12 +56,12 @@ func update_Sprite(b):
 
 func on_enable():
 	update_Sprite(activated)
-	if not Engine.editor_hint:
+	if not Engine.is_editor_hint():
 		emit_signal("activated_change_signal",activated)
 
 func on_disable():
 	update_Sprite(activated)
-	if not Engine.editor_hint:
+	if not Engine.is_editor_hint():
 		emit_signal("activated_change_signal",activated)
 
 # only if PHYSICAL button :
