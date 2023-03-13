@@ -1,8 +1,8 @@
 @tool
 extends Activable
 
-@export_range(20, 2000, "exp") var speed_at_exit : float
-@export_range(20, 2000, "exp") var speed_inside : float
+@export_range(20, 2000) var speed_at_exit : float
+@export_range(20, 2000) var speed_inside : float
 
 enum PIPE_TYPE {TO_EXIT, TO_ENTRANCE, BOTH_SIDES}
 @export var pipe_type : PIPE_TYPE = PIPE_TYPE.TO_EXIT

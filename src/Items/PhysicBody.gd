@@ -1,7 +1,7 @@
 # A generic PhysicBody class that can handle collisions and impulse.
 extends CharacterBody2D
 class_name PhysicBody
-@icon("res://assets/art/icons/physicbody.png")
+# @icon("res://assets/art/icons/physicbody.png")
 
 @export var physics_enabled : bool = true
 var should_reset = false
@@ -52,7 +52,8 @@ func disable_physics():
 	physics_enabled = false
 	linear_velocity *= 0
 	applied_forces.clear()
-	layers = 0
+	collision_layer = 0
+	collision_mask = 0 # in Godot 3.x I just wrote 'layers = 0', don't remember why (?)
 	set_physics_process(false)
 
 func enable_physics():

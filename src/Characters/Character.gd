@@ -1,6 +1,6 @@
 extends PhysicBody
 class_name Character
-@icon("res://assets/art/icons/character.png")
+# @icon("res://assets/art/icons/character.png")
 
 @onready var S = get_node("State")
 @onready var ActionHandler = get_node("Actions/Action_Handler")

@@ -1,6 +1,6 @@
 extends Node2D
 class_name Activable
-@icon("res://assets/art/icons/activable.png")
+# @icon("res://assets/art/icons/activable.png")
 
 signal is_enabled
 signal is_disabled

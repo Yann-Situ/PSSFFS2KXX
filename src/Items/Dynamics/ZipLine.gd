@@ -3,7 +3,7 @@
 @tool
 extends Node2D
 class_name ZipLine
-@icon("res://assets/art/icons/zipline.png")
+# @icon("res://assets/art/icons/zipline.png")
 
 enum ZIPLINE_TYPE {ROPE_CATCH, HANDLE_CATCH}
 @export var zipline_type : ZIPLINE_TYPE = ZIPLINE_TYPE.ROPE_CATCH

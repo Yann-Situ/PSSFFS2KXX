@@ -1,6 +1,6 @@
 extends PhysicBody
 class_name Ball
-@icon("res://assets/art/ball/ball_test.png")
+# @icon("res://assets/art/ball/ball_test.png")
 
 signal is_destroyed
 signal is_picked_up

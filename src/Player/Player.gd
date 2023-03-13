@@ -1,6 +1,6 @@
 extends CharacterBody2D
 class_name Player
-@icon("res://assets/art/icons/popol.png")
+# @icon("res://assets/art/icons/popol.png")
 
 @export var physics_enabled : bool = true
 
@@ -50,7 +50,7 @@ class_name Player
 @onready var Shooter = get_node("Shooter")
 @onready var PlayerEffects = get_node("PlayerEffects")
 @onready var BallHandler = get_node("BallHandler")
-@onready var Camera3D = get_node("Camera3D")
+@onready var Camera = get_node("Camera2D")
 @onready var LifeHandler = get_node("LifeHandler")
 
 @onready var start_position = global_position
@@ -92,7 +92,7 @@ func _ready():
 	add_to_group("characters")
 	if !Global.playing:
 		Global.toggle_playing()
-	Global.camera = Camera3D
+	Global.camera = Camera
 
 	gravity = based_gravity
 
@@ -188,7 +188,7 @@ func get_input(delta): #delta in s
 	# CAMERA:
 	if S.is_aiming:
 		#var shoot = Vector2.ZERO
-		var target = (Camera3D.get_global_mouse_position() - global_position)
+		var target = (Camera.get_global_mouse_position() - global_position)
 		Shooter.update_target(target)
 		if Shooter.can_shoot_to_target():
 			Shooter.update_effective_can_shoot(0.0,0)
@@ -205,26 +205,26 @@ func get_input(delta): #delta in s
 #					S.active_ball.get_gravity_scale()*gravity)
 		ShootPredictor.draw(Vector2.ZERO, shoot,
 			S.active_ball.gravity*Vector2.DOWN)
-		Camera3D.set_offset_from_type("aim",target)
+		Camera.set_offset_from_type("aim",target)
 		if shoot.x > 0 :
 			S.aim_direction = 1
 		else :
 			S.aim_direction = -1
 	elif S.is_crouching :
-		var tx = Camera3D.move_max_offset.x * smoothstep(0.0, \
-			Camera3D.move_speed_threshold.x, abs(S.velocity.x)) \
+		var tx = Camera.move_max_offset.x * smoothstep(0.0, \
+			Camera.move_speed_threshold.x, abs(S.velocity.x)) \
 			* sign(S.velocity.x)
-		Camera3D.set_offset_from_type("move", Vector2(tx,Camera3D.crouch_offset), 0.2)
+		Camera.set_offset_from_type("move", Vector2(tx,Camera.crouch_offset), 0.2)
 	elif S.is_moving :
-		var tx = Camera3D.move_max_offset.x * smoothstep(0.0, \
-			Camera3D.move_speed_threshold.x, abs(S.velocity.x)) \
+		var tx = Camera.move_max_offset.x * smoothstep(0.0, \
+			Camera.move_speed_threshold.x, abs(S.velocity.x)) \
 			* sign(S.velocity.x)
-		var ty = Camera3D.move_max_offset.y * smoothstep(0.0, \
-			Camera3D.move_speed_threshold.y, abs(S.velocity.y)) \
+		var ty = Camera.move_max_offset.y * smoothstep(0.0, \
+			Camera.move_speed_threshold.y, abs(S.velocity.y)) \
 			* sign(S.velocity.y)
-		Camera3D.set_offset_from_type("move", Vector2(tx,ty), 0.4)
+		Camera.set_offset_from_type("move", Vector2(tx,ty), 0.4)
 	else :
-		Camera3D.set_offset_from_type("normal")
+		Camera.set_offset_from_type("normal")
 
 	# ANIMATION:
 	$Sprite2D/AnimationTree.animate_from_state(S)

@@ -16,7 +16,7 @@ enum TriggerType {ON_BODY_ENTER, ON_KEY_E}
 @export var next_room_portal : String : get = get_next_room_portal, set = set_next_room_portal
 
 @export var transition_color : Color = Color.BLACK : set = set_transition_color
-@export_range(0.1, 10.0, "exp") var transition_speed : float = 1.0 : set = set_transition_speed
+@export_range(0.1, 10.0) var transition_speed : float = 1.0 : set = set_transition_speed
 
 var room = null
 @onready var is_locked = false
@@ -27,8 +27,8 @@ func set_portal_type(new_type):
 	if portal_type == PortalType.ENTRANCE or portal_type == PortalType.BOTH:
 		pass # TO IMPLEMENT [TODO]
 	if portal_type == PortalType.EXIT or \
-	   portal_type == PortalType.BOTH or \
-   	   portal_type == PortalType.EXIT_LEVEL :
+		portal_type == PortalType.BOTH or \
+		portal_type == PortalType.EXIT_LEVEL :
 		if trigger_type == TriggerType.ON_BODY_ENTER:
 			$Area2D.connect("body_entered",Callable(self,"_on_Area2D_body_entered"))
 		elif trigger_type == TriggerType.ON_KEY_E :

@@ -1,7 +1,7 @@
 #tool
 extends Path2D
 class_name RailLine
-@icon("res://assets/art/icons/railline.png")
+# @icon("res://assets/art/icons/railline.png")
 
 @export var invert_line_direction : bool = false
 @export var character_position_offset : float = -32.0

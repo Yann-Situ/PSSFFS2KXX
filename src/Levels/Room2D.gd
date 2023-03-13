@@ -1,8 +1,8 @@
 extends Node2D
 class_name Room2D
 
-signal exit_room
-signal exit_level
+signal is_exiting_room
+signal is_exiting_level
 
 @export var limit_left : int = -10000000
 @export var limit_top : int = -10000000
@@ -91,12 +91,12 @@ func exit_room(next_room : String, next_room_portal : String):
 	if next_room == self.name:
 		enter_room(next_room_portal)
 	else:
-		emit_signal("exit_room", next_room, next_room_portal)
+		emit_signal("is_exiting_room", next_room, next_room_portal)
 	#get_tree().change_scene_to_file(next_room)
 	#get_tree().reload_current_scene()
 
 func exit_level(exit_portal : String):
-	emit_signal("exit_level", self.name, exit_portal)
+	emit_signal("is_exiting_level", self.name, exit_portal)
 
 func enter_room(entrance_portal : String):
 	update_camera_limit()
