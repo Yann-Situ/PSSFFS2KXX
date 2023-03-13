@@ -48,4 +48,4 @@ func change_direction(new_direction : int):
 	if direction != new_direction:
 		last_direction = direction
 		direction = new_direction
-		emit_signal("direction_changed", direction)
+		direction_changed.emit(direction)

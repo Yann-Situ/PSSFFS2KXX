@@ -72,4 +72,4 @@ func _process(delta):
 		direction_vector = Vector2.RIGHT
 	elif ai.direction < 0:
 		direction_vector = Vector2.LEFT
-	emit_signal("move_offset", walk_speed*direction_vector*delta)
+	move_offset.emit(walk_speed*direction_vector*delta)

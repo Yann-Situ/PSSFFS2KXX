@@ -6,7 +6,7 @@ extends CollisionShape2D
 
 func set_color(new_color):
 	color = new_color
-	update()
+	queue_redraw()
 
 func _draw():
 	var offset_position = Vector2(0, 0)

@@ -1,4 +1,4 @@
-[gd_scene load_steps=116 format=3 uid="uid://djjfl0v3y2pw5"]
+[gd_scene load_steps=117 format=3 uid="uid://djjfl0v3y2pw5"]
 
 [ext_resource type="Script" path="res://src/Player/Player.gd" id="1"]
 [ext_resource type="Texture2D" uid="uid://dcp7p8c6ldxqc" path="res://assets/art/characters/Player.png" id="2"]
@@ -1112,6 +1112,7 @@ tracks/3/keys = {
 
 [sub_resource type="Animation" id="32"]
 length = 0.8
+loop_mode = 1
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
@@ -1366,15 +1367,20 @@ advance_condition = &"is_not_cancelable"
 [sub_resource type="AnimationNodeStateMachineTransition" id="37"]
 advance_condition = &"is_cancelable"
 
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_p8a3c"]
+advance_mode = 2
+
 [sub_resource type="AnimationNodeStateMachine" id="38"]
+states/End/position = Vector2(462, 124)
+states/Start/position = Vector2(183, 119)
 states/action/node = ExtResource("45")
 states/action/position = Vector2(325, 124)
 states/stance/node = ExtResource("46")
 states/stance/position = Vector2(325, 251)
-transitions = ["stance", "action", SubResource("36"), "action", "stance", SubResource("37")]
+transitions = ["stance", "action", SubResource("36"), "action", "stance", SubResource("37"), "Start", "action", SubResource("AnimationNodeStateMachineTransition_p8a3c")]
 
 [sub_resource type="AnimationNodeBlendTree" id="39"]
-graph_offset = Vector2(696.501, 132.79)
+graph_offset = Vector2(470.549, 214.805)
 nodes/AnimationNodeBlendTree/node = ExtResource("46")
 nodes/AnimationNodeBlendTree/position = Vector2(1332.86, 632.019)
 nodes/cancelable/node = SubResource("38")
@@ -1444,7 +1450,7 @@ color_ramp = SubResource("53")
 
 [sub_resource type="CompressedTexture2D" id="55"]
 
-[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_rduje"]
+[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_e5vxp"]
 resource_local_to_scene = true
 particles_animation = true
 particles_anim_h_frames = 6
@@ -1481,9 +1487,6 @@ walk_accel = 210.0
 
 [node name="State" parent="." instance=ExtResource("5")]
 visible = false
-is_landing = true
-is_halfturning = true
-is_shooting = true
 
 [node name="Collision" type="CollisionShape2D" parent="."]
 visible = false
@@ -1736,9 +1739,9 @@ parameters/cancelable/stance/ground/conditions/is_sliding = false
 parameters/cancelable/stance/ground/conditions/is_standing = false
 parameters/cancelable/stance/ground/conditions/is_walking = false
 parameters/cancelable/stance/ground/stand_idle/playback = SubResource("47")
-parameters/cancelable/stance/stancetransition/current_state = ""
+parameters/cancelable/stance/stancetransition/current_state = "ground"
 parameters/cancelable/stance/stancetransition/transition_request = ""
-parameters/cancelable/stance/stancetransition/current_index = -1
+parameters/cancelable/stance/stancetransition/current_index = 0
 script = ExtResource("8")
 
 [node name="PlayerEffects" type="Node2D" parent="."]
@@ -1775,7 +1778,7 @@ lifetime = 0.65
 explosiveness = 0.9
 
 [node name="GrindParticles" parent="PlayerEffects" instance=ExtResource("27")]
-material = SubResource("CanvasItemMaterial_rduje")
+material = SubResource("CanvasItemMaterial_e5vxp")
 position = Vector2(0, 16)
 
 [node name="BallHandler" type="Area2D" parent="."]

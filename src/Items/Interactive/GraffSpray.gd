@@ -34,7 +34,7 @@ func _on_Area2D_body_entered(body):
 
 func collect():
 	print(name+" collected!")
-	emit_signal("spray_collected", self)
+	spray_collected.emit(self)
 	GlobalEffect.make_distortion(self.global_position, 0.5, "subtle")
 	$AnimationPlayer.play("collect")
 	await $AnimationPlayer.animation_finished

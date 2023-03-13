@@ -195,7 +195,7 @@ func can_dunk():
 #
 # # Called every frame. 'delta' is the elapsed time since the previous frame.
 # func _process(delta):
-# 	update()
+# 	queue_redraw()
 
 #############################
 func set_flip_h(b):

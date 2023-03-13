@@ -26,7 +26,7 @@ func _ready():
 			generate_random_pedestrian()
 
 func _process(delta):
-	update()
+	queue_redraw()
 func _draw():
 	if Engine.is_editor_hint():
 		draw_line(x_radius*Vector2.LEFT, x_radius*Vector2.RIGHT, Color(0.4,0.8,0.9,0.25), 64.0)

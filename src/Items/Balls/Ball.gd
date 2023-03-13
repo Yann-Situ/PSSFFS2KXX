@@ -114,7 +114,7 @@ func pickup(holder_node):
 	self.disable_physics()
 	self.z_index = holder_node.z_index+1
 	on_pickup(holder_node)
-	emit_signal("is_picked_up")
+	is_picked_up.emit()
 
 func throw(position, velo):
 	#$TrailHandler.set_node_to_trail(self)
@@ -126,7 +126,7 @@ func throw(position, velo):
 	linear_velocity = velo
 	self.z_index = Global.z_indices["ball_0"]
 	on_throw(previous_holder)
-	emit_signal("is_thrown")
+	is_thrown.emit()
 
 func destruction(delay : float = 0.0):
 	if delay > 0.0:
@@ -141,7 +141,7 @@ func destruction(delay : float = 0.0):
 
 func _queue_free():
 	print(self.name+" is DESTROYED")
-	emit_signal("is_destroyed")
+	is_destroyed.emit()
 	queue_free()
 
 ################################################################################

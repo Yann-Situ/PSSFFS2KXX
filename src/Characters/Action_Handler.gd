@@ -28,7 +28,7 @@ func _ready():
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 #func _process(delta):
-#	update()
+#	queue_redraw()
 
 func update_space_state():
 	space_state = get_world_2d().direct_space_state

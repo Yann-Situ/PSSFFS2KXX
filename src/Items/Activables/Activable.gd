@@ -24,9 +24,9 @@ func enable():
 		var temp = activated
 		activated = true
 		on_enable()
-		emit_signal("is_enabled")
+		is_enabled.emit()
 		if !temp:
-			emit_signal("is_toggled", activated)
+			is_toggled.emit(activated)
 func on_enable():
 	pass
 
@@ -36,9 +36,9 @@ func disable():
 		var temp = activated
 		activated = false
 		on_disable()
-		emit_signal("is_disabled")
+		is_disabled.emit()
 		if temp:
-			emit_signal("is_toggled", activated)
+			is_toggled.emit(activated)
 func on_disable():
 	pass
 

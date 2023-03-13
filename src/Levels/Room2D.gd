@@ -91,12 +91,12 @@ func exit_room(next_room : String, next_room_portal : String):
 	if next_room == self.name:
 		enter_room(next_room_portal)
 	else:
-		emit_signal("is_exiting_room", next_room, next_room_portal)
+		is_exiting_room.emit(next_room, next_room_portal)
 	#get_tree().change_scene_to_file(next_room)
 	#get_tree().reload_current_scene()
 
 func exit_level(exit_portal : String):
-	emit_signal("is_exiting_level", self.name, exit_portal)
+	is_exiting_level.emit(self.name, exit_portal)
 
 func enter_room(entrance_portal : String):
 	update_camera_limit()

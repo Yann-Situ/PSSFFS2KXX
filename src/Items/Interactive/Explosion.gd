@@ -71,7 +71,7 @@ func explode():
 			if !body in exploded_bodies and !body in body_exceptions:
 				var d = (body.global_position-global_position)
 				if d.length_squared() <= criteria:
-					emit_signal("body_explode", body, scale_factor*d.normalized())
+					body_explode.emit(body, scale_factor*d.normalized())
 					#explode_body(body, scale_factor*d.normalized())
 					exploded_bodies.push_back(body)
 	print("BOUM queue_free")

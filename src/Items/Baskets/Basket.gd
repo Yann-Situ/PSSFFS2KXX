@@ -38,7 +38,7 @@ func _draw():
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 #func _process(delta):
-#	update()
+#	queue_redraw()
 func _physics_process(delta):
 	var j = 0 # int because we're deleting nodes in a list we're browsing
 	for i in range(inside_bodies.size()):
@@ -78,7 +78,7 @@ func dunk(dunker : Node2D, ball : Ball = null):
 	$DunkCooldown.stop()
 	can_receive_dunk = false
 	$DunkCooldown.start(dunk_cooldown)
-	emit_signal("is_dunked")
+	is_dunked.emit()
 
 
 func get_hanged(character : Node):
@@ -96,7 +96,7 @@ func goal(ball : Ball, score):
 		goal_effects(ball, 2)
 	else :
 		goal_effects(ball, 1)
-	emit_signal("is_goaled")
+	is_goaled.emit()
 
 func goal_effects(ball : Ball, force : int = 0):
 	$Effects/LineParticle.amount = force * 16

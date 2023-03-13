@@ -21,11 +21,11 @@ var timer
 
 func set_life(v):
 	if v <= 0.0:
-		emit_signal("died")
+		died.emit()
 	life = clamp(v, 0.0, max_life)
 	#print("life : "+str(life))
 	#$Sprite2D.modulate = Color((life/max_life),(life/max_life)*0.5,(life/max_life)*0.8)
-	emit_signal("life_changed", life)
+	life_changed.emit(life)
 	
 func add_life(lp):
 	set_life(life+lp)
@@ -46,7 +46,7 @@ func _ready():
 func apply_damage(damage : float, duration : float = 0.0):
 	var d = weakness * damage - defense
 	apply_life(- max(0.0, d), duration)
-	emit_signal("took_damage", damage)
+	took_damage.emit(damage)
 	
 func apply_life(lifepoint : float, duration : float = 1.0):
 	var nb_ticks : int = max(ceil(duration/timer_tick), 1)

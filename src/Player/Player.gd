@@ -203,7 +203,7 @@ func get_input(delta): #delta in s
 #			else :
 #				ShootPredictor.draw(BallHandler.get_throw_position()-self.position, shoot+0.5*S.velocity,
 #					S.active_ball.get_gravity_scale()*gravity)
-		ShootPredictor.draw(Vector2.ZERO, shoot,
+		ShootPredictor.draw_prediction(Vector2.ZERO, shoot,
 			S.active_ball.gravity*Vector2.DOWN)
 		Camera.set_offset_from_type("aim",target)
 		if shoot.x > 0 :

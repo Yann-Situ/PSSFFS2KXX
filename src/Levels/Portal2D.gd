@@ -103,7 +103,7 @@ func exit_portal():
 	transition_out()
 	P.S.disable_input()
 	await get_node("AnimationPlayer").animation_finished
-	emit_signal("exit_portal_finished")
+	exit_portal_finished.emit()
 
 	if portal_type != PortalType.EXIT_LEVEL:
 		room.exit_room(next_room, next_room_portal)
@@ -116,7 +116,7 @@ func enter_portal():
 	P.S.enable_input()
 	transition_in()
 	await get_node("AnimationPlayer").animation_finished
-	emit_signal("enter_portal_finished")
+	exit_portal_finished.emit()
 
 ################################################################################
 
