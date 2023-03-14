@@ -35,12 +35,12 @@ func _ready():
 		timer.one_shot = true
 		timer.autostart = false
 		timer.wait_time = wait_time
-		timer.connect("timeout",Callable(self,"_on_Timer_timeout"))
+		timer.timeout.connect(self._on_Timer_timeout)
 		self.add_child(timer)
 		
 	elif button_type == BUTTON0_TYPE.PHYSICAL :
 		$Sprite2D.set_region_rect(Rect2(128,80,64,16))
-		$Area2D.connect("body_exited",Callable(self,"_on_Area2D_body_exited"))
+		$Area2D.body_exited.connect(self._on_Area2D_body_exited)
 		_on_Area2D_body_exited(null)
 	update_Sprite(activated)
 		

@@ -30,7 +30,7 @@ func set_portal_type(new_type):
 		portal_type == PortalType.BOTH or \
 		portal_type == PortalType.EXIT_LEVEL :
 		if trigger_type == TriggerType.ON_BODY_ENTER:
-			$Area2D.connect("body_entered",Callable(self,"_on_Area2D_body_entered"))
+			$Area2D.body_entered.connect(self._on_Area2D_body_entered)
 		elif trigger_type == TriggerType.ON_KEY_E :
 			pass # TO IMPLEMENT [TODO]
 

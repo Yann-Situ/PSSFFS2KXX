@@ -40,7 +40,7 @@ func _ready():
 	timer.one_shot = false
 	timer.autostart = false
 	timer.wait_time = timer_tick
-	timer.connect("timeout",Callable(self,"update_life_tick"))
+	timer.timeout.connect(self.update_life_tick)
 	self.add_child(timer)
 
 func apply_damage(damage : float, duration : float = 0.0):

@@ -5,8 +5,8 @@ signal emission_finished
 func start():
 	if not emitting:
 		emitting = true
+		self.timeout.connect(self._queue_free)
 		get_tree().create_timer(lifetime * (2 - explosiveness), false)
-		super.connect("timeout",Callable(self,"_queue_free"))
 
 func _queue_free():
 	emission_finished.emit()

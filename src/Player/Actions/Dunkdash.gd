@@ -22,10 +22,10 @@ func move(delta):
 	P.PlayerEffects.cloud_start()
 	P.PlayerEffects.jump_start()
 	if S.has_ball:
-		P.PlayerEffects.ghost_start(Callable(0.21,0.05).bind(Color.WHITE),S.active_ball.get_dash_gradient())
+		P.PlayerEffects.ghost_start(0.21,0.05, Color.WHITE,S.active_ball.get_dash_gradient())
 	else:
-		P.PlayerEffects.ghost_start(Callable(0.21,0.05).bind(ghost_modulate))
-	P.PlayerEffects.distortion_start(Callable("fast_soft",0.75))
+		P.PlayerEffects.ghost_start(0.21,0.05, ghost_modulate)
+	P.PlayerEffects.distortion_start("fast_soft",0.75)
 	Global.camera.screen_shake(0.2,10)
 
 	S.get_node("ToleranceDunkJumpPressTimer").stop()

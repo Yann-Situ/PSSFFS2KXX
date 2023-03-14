@@ -9,8 +9,8 @@ var sprite_material
 func _ready():
 	sprite_selection = ball.get_node("Sprite2D/Sprite_Selection")
 	sprite_material = ball.get_node("Sprite2D").material
-	#connect("mouse_entered",Callable(self,"_on_Selector_mouse_entered"))
-	#connect("mouse_exited",Callable(self,"_on_Selector_mouse_exited"))
+	#mouse_entered.connect(self._on_Selector_mouse_entered)
+	#mouse_exited.connect(self._on_Selector_mouse_exited)
 	#input_pickable = true
 	pass
 

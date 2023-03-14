@@ -76,8 +76,8 @@ func _ready():
 
 func add_portal(portal : Portal2D):
 	portals[portal.name] = portal
-	portal.connect("enter_portal_finished",Callable(self,"unlock_portals"))
-	portal.connect("exit_portal_finished",Callable(self,"lock_portals"))
+	portal.enter_portal_finished.connect(self.unlock_portals)
+	portal.exit_portal_finished.connect(self.lock_portals)
 
 
 func _unhandled_input(event):

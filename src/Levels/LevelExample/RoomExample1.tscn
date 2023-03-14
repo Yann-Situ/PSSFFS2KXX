@@ -54,14 +54,14 @@ adjustment_enabled = true
 adjustment_contrast = 1.08
 adjustment_saturation = 1.01
 
-[sub_resource type="Curve2D" id="Curve2D_m5sfn"]
+[sub_resource type="Curve2D" id="Curve2D_rfcyj"]
 resource_local_to_scene = true
 _data = {
 "points": PackedVector2Array(0, 0, 0, 0, 256, 120, 0, 0, 0, 0, -120, 16)
 }
 point_count = 2
 
-[sub_resource type="Curve2D" id="Curve2D_d067f"]
+[sub_resource type="Curve2D" id="Curve2D_tegtb"]
 resource_local_to_scene = true
 _data = {
 "points": PackedVector2Array(0, 0, 0, 0, 248, 16, 0, 0, 0, 0, -120, 16)
@@ -246,7 +246,7 @@ position = Vector2(-96, -32)
 [node name="ParabolaCatenary" parent="." index="7" instance=ExtResource("9")]
 z_index = 300
 position = Vector2(312, -328)
-curve = SubResource("Curve2D_m5sfn")
+curve = SubResource("Curve2D_rfcyj")
 p0_slope = 1.7
 line_width = 7.438
 line_modulate = Color(0.329412, 0.329412, 0.329412, 1)
@@ -255,7 +255,7 @@ line_texture = ExtResource("8")
 [node name="ParabolaCatenary2" parent="." index="8" instance=ExtResource("9")]
 z_index = 300
 position = Vector2(240, -328)
-curve = SubResource("Curve2D_d067f")
+curve = SubResource("Curve2D_tegtb")
 p0_slope = 1.3
 line_width = 7.438
 line_modulate = Color(0.329412, 0.329412, 0.329412, 1)

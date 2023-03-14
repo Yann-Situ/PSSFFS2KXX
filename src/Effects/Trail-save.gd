@@ -41,7 +41,7 @@ func add_point(point_position:Vector2, at_position := -1):
 	if get_point_count() > 0 and point_position.distance_to( points[get_point_count()-1] ) < min_spawn_distance:
 		return
 	point_age.append(0.0)
-	super.add_point(point_position, at_position)
+	self.add_point(point_position, at_position)
 
 
 func _on_Decay_tween_all_completed():

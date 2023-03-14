@@ -118,7 +118,7 @@ func pickup(holder_node):
 
 func throw(position, velo):
 	#$TrailHandler.set_node_to_trail(self)
-	#$TrailHandler.start(Callable(2.0,0.1))
+	#$TrailHandler.start(2.0,0.1)
 	self.enable_physics()
 	var previous_holder = holder
 	change_holder(Global.get_current_room())

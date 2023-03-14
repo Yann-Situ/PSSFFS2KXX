@@ -28,7 +28,7 @@ func set_cell(x, y, tile, flip_x=false, flip_y=false, transpose=false, autotile_
 			#print("change! left ")
 			autotile_coord = next_to_stairs[1]
 		print(autotile_coord)
-	super.set_cell(x, y, tile, flip_x, flip_y, transpose, autotile_coord)
+	self.set_cell(x, y, tile, flip_x, flip_y, transpose, autotile_coord)
 	
 	# to update autotile
 	#update_bitmask_area(Vector2(x,y))

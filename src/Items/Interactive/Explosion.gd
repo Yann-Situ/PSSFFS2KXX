@@ -46,7 +46,7 @@ func _ready():
 	collision_layer = 16
 	collision_mask = 1+4+64+128+256
 	if simple_explosion:
-		connect("body_explode",Callable(self,"explode_body"))
+		body_explode.connect(self.explode_body)
 	print("BOUM _ready "+str(duration))
 	explode()
 

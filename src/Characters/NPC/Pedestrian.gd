@@ -18,10 +18,10 @@ var walk_speed
 @onready var ai = get_node("AI")
 
 func _ready():
-	ai.connect("direction_changed",Callable(self,"update_animation"))
+	ai.direction_changed.connect(self.update_animation)
 	walk_speed = ai.rng.randf_range(walk_speed_min, walk_speed_max)
 	if free_pedestrian:
-		connect("move_offset",Callable(self,"walk_offset"))
+		move_offset.connect(self.walk_offset)
 
 func apply_palette_scheme(palette : PaletteScheme):
 	if palette.gradients.size() < 4:

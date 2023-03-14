@@ -28,9 +28,9 @@ func move(delta):
 	
 
 	if S.has_ball:
-		P.PlayerEffects.ghost_start(Callable(0.8,0.1).bind(Color.WHITE),S.active_ball.get_dash_gradient())
+		P.PlayerEffects.ghost_start(0.8,0.1, Color.WHITE,S.active_ball.get_dash_gradient())
 	else:
-		P.PlayerEffects.ghost_start(Callable(0.8,0.1).bind(ghost_modulate))
+		P.PlayerEffects.ghost_start(0.8,0.1, ghost_modulate)
 # called by animation
 func move_jump():
 	P.PlayerEffects.jump_start()

@@ -34,8 +34,8 @@ func browse_rooms(room_name : String):
 		rooms[room_name] = room
 		print_debug("created room : "+room_name)
 		room.meta_player = $Player.get_path() # instantiate meta_player for each room
-		room.connect("exit_room",Callable(self,"change_room"))
-		room.connect("exit_level",Callable(self,"exit_level"))
+		room.exit_room.connect(self.change_room)
+		room.exit_level.connect(self.exit_level)
 
 		# TODO ugly but we need to call _ready on room in order to get the portals...
 		# Maybe find a system with resources ? Or store a meta room as resource, with its information

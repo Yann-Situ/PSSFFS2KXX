@@ -44,12 +44,12 @@ func ghost_start(duration, tick_delay, selfmodulate : Color = Color(1.2,1.8,2.2,
 		$GhostHandler.self_modulate = selfmodulate
 	else :
 		$GhostHandler.gradient = gradient
-	$GhostHandler.start(Callable(duration,tick_delay))
+	$GhostHandler.start(duration,tick_delay)
 func ghost_stop(duration, tick_delay):
 	$GhostHandler.stop()
 
 func trail_start(duration, tick_delay):
-	$TrailHandler.start(Callable(duration,tick_delay))
+	$TrailHandler.start(duration,tick_delay)
 func trail_stop():
 	$TrailHandler.stop()
 

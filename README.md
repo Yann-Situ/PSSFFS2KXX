@@ -184,3 +184,9 @@ Copyright (c) 2023 Yann-Situ
 
 `class_name\s*(\w*),` -> `class_name $1 #,`
 `@export\b\s*\((\w*)\)\s*var\s*(\w*)` -> `@export var $2 : $1`
+`@export_range\((\w*),\s*((\d|\.)*),\s*((\d|\.)*)\)\s*var\s*(\w*)` -> `@export_range($2,$4) var $6 : $1`
+`emit_signal\("(\w*)"\)` -> `$1.emit()`
+`emit_signal\("(\w*),\s*(.*)"\)` -> `$1.emit($2)`
+`(\w*\.)*connect\("(\w*)",Callable\(self,"(\w*)"\)\)` -> `$1$2.connect(self.$3)`
+`start\(Callable\((.*?)\)\.bind\((.*?)\)` -> `start($1, $2`
+`start\(Callable\((.*?)\)` -> `start($1`

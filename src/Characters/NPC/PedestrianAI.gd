@@ -25,7 +25,7 @@ func _ready():
 	timer = Timer.new()
 	timer.set_one_shot(true)
 	self.add_child(timer)
-	timer.connect("timeout",Callable(self,"_on_Timer_timeout"))
+	timer.timeout.connect(self._on_Timer_timeout)
 	timer.start(rng.randf_range(ai_timer_min, ai_timer_max))
 
 func _on_Timer_timeout():

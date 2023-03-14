@@ -92,7 +92,7 @@ func _add_point(point_position:Vector2, at_position := -1) -> bool:
 	if !Global.can_add_trail_point():
 		return false
 	point_age.append(0.0)
-	super.add_point(point_position, at_position)
+	self.add_point(point_position, at_position)
 	Global.add_trail_point()
 	return true
 

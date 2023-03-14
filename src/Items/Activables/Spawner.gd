@@ -23,7 +23,7 @@ func spawn():
 		return
 	$Sprite2D/AnimationPlayer.play("spawn")
 	var newball = ball.instantiate() # Create a new ball
-	newball.connect("is_destroyed",Callable(self,"_on_Ball_is_destroyed"))
+	newball.is_destroyed.connect(self._on_Ball_is_destroyed)
 	newball.z_index = 0 #TODO change to set ball_z_index
 	Global.get_current_room().add_child(newball)
 
