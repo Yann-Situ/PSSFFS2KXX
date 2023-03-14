@@ -2,7 +2,7 @@ extends Action
 
 @export var up_distance_to_basket = 0#px
 @export var can_go_delay = 0.2#s
-@export var ghost_modulate # (Color, RGBA)
+@export var ghost_modulate : Color# (Color, RGBA)
 
 var velocity_save = Vector2.ZERO
 var dash_dir = Vector2.ZERO
@@ -44,7 +44,7 @@ func move(delta):
 #	dash_dir = Vector2.RIGHT.rotated(corrected_angle)
 	var xx = (S.dunkdash_basket.global_position - P.global_position).x
 	S.direction_sprite = 1 if (xx > 0) else ( -1 if (xx < 0) else 0)
-		
+
 	var dash_velocity = effective_dash_velocity(S.dunkdash_basket)
 	if not S.is_grinding:
 		P.get_out(P.global_position, dash_velocity)

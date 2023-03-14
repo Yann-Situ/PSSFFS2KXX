@@ -2,8 +2,8 @@ extends Resource
 class_name PaletteSchemeSampler
 
 @export var color_samplers : Array[Resource]
-@export var black : Color = ColorN("black")
-@export var white : Color = ColorN("white")
+@export var black : Color = Color.BLACK
+@export var white : Color = Color.WHITE
 
 func sample(rng : RandomNumberGenerator) -> PaletteScheme:
 	var p = PaletteScheme.new()

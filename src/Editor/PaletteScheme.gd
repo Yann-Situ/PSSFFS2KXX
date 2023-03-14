@@ -24,7 +24,7 @@ func remove_gradient(index : int):
 ################################################################################
 
 func add_gradient_from_color(color : Color,\
-		black : Color=ColorN("black"), white : Color=ColorN("white")):
+		black : Color=Color.BLACK, white : Color=Color.WHITE):
 	var g = Gradient.new()
 	var l = color.get_luminance()
 	var lw = white.get_luminance()
