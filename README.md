@@ -190,3 +190,4 @@ Copyright (c) 2023 Yann-Situ
 `(\w*\.)*connect\("(\w*)",Callable\(self,"(\w*)"\)\)` -> `$1$2.connect(self.$3)`
 `start\(Callable\((.*?)\)\.bind\((.*?)\)` -> `start($1, $2`
 `start\(Callable\((.*?)\)` -> `start($1`
+`^\s*set\s\=\s*(\w*)\s*\#(.*?\#)*\s*\((\w*),(.*?)\)`
