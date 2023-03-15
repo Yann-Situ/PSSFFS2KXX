@@ -25,8 +25,11 @@ GlobalMaths="*res://src/Global/GlobalMaths.gd"
 
 gdscript/warnings/unassigned_variable=false
 gdscript/warnings/unused_variable=false
+gdscript/warnings/unused_local_constant=0
+gdscript/warnings/unused_parameter=0
 gdscript/warnings/unused_signal=false
 gdscript/warnings/return_value_discarded=false
+gdscript/warnings/deprecated_keyword=2
 shapes/collision/shape_color=Color(1, 1, 1, 0.419608)
 gdscript/warnings/unused_argument=false
 

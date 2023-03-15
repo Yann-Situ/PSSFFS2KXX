@@ -46,12 +46,12 @@ func draw_prediction(position, vel, grav):
 		position += 1.0*vel * delta + 0.5 * grav*delta*delta # Thanks Taylor
 	queue_redraw()
 
-func draw_attract(position, vel, grav, power):
+func draw_attract(initial_position, vel, grav, power):
 	points.clear()
-	var pos_init = position
+	var pos_init = initial_position
 	for i in range(nb_points):
-		points.append(position)
-		vel += (1.002*grav + 1.002*power * (pos_init-position).normalized()) * delta
+		points.append(initial_position)
+		vel += (1.002*grav + 1.002*power * (pos_init-initial_position).normalized()) * delta
 		position += 0.998*vel * delta
 	queue_redraw()
 

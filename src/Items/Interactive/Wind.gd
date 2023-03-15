@@ -1,4 +1,4 @@
-@tool
+# @tool # some temporary tool problems
 extends Node2D
 
 @export var speed : Vector2 = Vector2(200,0) :

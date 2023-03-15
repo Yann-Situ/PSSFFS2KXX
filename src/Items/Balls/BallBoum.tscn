@@ -1,62 +1,195 @@
-[gd_scene load_steps=16 format=2]
+[gd_scene load_steps=21 format=3 uid="uid://yco4prlcetlu"]
 
-[ext_resource path="res://src/Items/Balls/Ball.tscn" type="PackedScene" id=1]
-[ext_resource path="res://assets/art/effects/shockwave_1.png" type="Texture2D" id=2]
-[ext_resource path="res://src/Items/Balls/BallBoum.gd" type="Script" id=3]
-[ext_resource path="res://assets/art/ball/ball_boum.png" type="Texture2D" id=4]
-[ext_resource path="res://assets/art/effects/round.png" type="Texture2D" id=6]
+[ext_resource type="PackedScene" path="res://src/Items/Balls/Ball.tscn" id="1"]
+[ext_resource type="Texture2D" uid="uid://dsoyoe3ww8hjd" path="res://assets/art/effects/shockwave_1.png" id="2"]
+[ext_resource type="Script" path="res://src/Items/Balls/BallBoum.gd" id="3"]
+[ext_resource type="Shader" path="res://assets/shader/contour.gdshader" id="3_emvrs"]
+[ext_resource type="Texture2D" uid="uid://d022k3w806eqv" path="res://assets/art/ball/ball_boum.png" id="4"]
+[ext_resource type="Texture2D" uid="uid://dynhxnnpu4wgg" path="res://assets/art/effects/round.png" id="6"]
 
-[sub_resource type="CircleShape2D" id=1]
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_x4vh4"]
+resource_local_to_scene = true
+shader = ExtResource("3_emvrs")
+shader_parameter/activated = false
+shader_parameter/contour_color = Color(1, 1, 0.9, 0.9)
+
+[sub_resource type="CircleShape2D" id="1"]
 resource_local_to_scene = true
 radius = 6.0
 
-[sub_resource type="Gradient" id=2]
-resource_local_to_scene = true
-offsets = PackedFloat32Array( 0, 0.00699301, 0.244755, 0.468531, 0.839161, 1 )
-colors = PackedColorArray( 1, 0, 0.580392, 0, 0, 0, 0, 0.258741, 0.535156, 0.535156, 0.535156, 0.705882, 0.839844, 0.839844, 0.839844, 1, 1, 1, 1, 1, 1, 1, 1, 0 )
+[sub_resource type="Animation" id="3"]
+resource_name = "destruction"
+length = 0.9
+tracks/0/type = "method"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Effects/Destruction")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [],
+"method": &"restart"
+}]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Effects/Destruction:emitting")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Sprite2D:modulate")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 0.2),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 1), Color(1, 1, 1, 0)]
+}
+tracks/3/type = "method"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath(".")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0.9),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [],
+"method": &"_queue_free"
+}]
+}
 
-[sub_resource type="Gradient" id=3]
-resource_local_to_scene = true
-offsets = PackedFloat32Array( 0, 0.020202, 0.131313, 0.50505, 0.808081, 1 )
-colors = PackedColorArray( 1, 0, 0.580392, 0, 1, 1, 1, 0, 1, 1, 1, 1, 0.839844, 0.839844, 0.839844, 1, 0.535156, 0.535156, 0.535156, 0.705882, 0, 0, 0, 0.258741 )
+[sub_resource type="Animation" id="4"]
+length = 1.5
+step = 0.05
+tracks/0/type = "method"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Effects/Reconstruction")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0.8),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [],
+"method": &"restart"
+}]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Effects/Reconstruction:emitting")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0.8),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+tracks/2/type = "method"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Effects/DunkParticles")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0.35),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [],
+"method": &"restart"
+}]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("Effects/DunkParticles:emitting")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0.35),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("Sprite2D:modulate")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0, 0.3, 0.5, 1.25, 1.5),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 1), Color(1, 1, 1, 1), Color(1, 1, 1, 0), Color(1, 1, 1, 0), Color(1, 1, 1, 1)]
+}
 
-[sub_resource type="CircleShape2D" id=4]
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_407ud"]
+_data = {
+"destruction": SubResource("3"),
+"dunk": SubResource("4")
+}
+
+[sub_resource type="Gradient" id="2"]
+resource_local_to_scene = true
+offsets = PackedFloat32Array(0, 0.00699301, 0.244755, 0.468531, 0.839161, 1)
+colors = PackedColorArray(1, 0, 0.580392, 0, 0, 0, 0, 0.258741, 0.535156, 0.535156, 0.535156, 0.705882, 0.839844, 0.839844, 0.839844, 1, 1, 1, 1, 1, 1, 1, 1, 0)
+
+[sub_resource type="Gradient" id="Gradient_eorql"]
+resource_local_to_scene = true
+offsets = PackedFloat32Array(0, 0.020202, 0.131313, 0.50505, 0.808081, 1)
+colors = PackedColorArray(1, 0, 0.580392, 0, 1, 1, 1, 0, 1, 1, 1, 1, 0.839844, 0.839844, 0.839844, 1, 0.535156, 0.535156, 0.535156, 0.705882, 0, 0, 0, 0.258741)
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_m8w4v"]
 radius = 64.0
 
-[sub_resource type="Curve" id=5]
-_data = [ Vector2( 0, 0.856818 ), 0.0, 3.55714, 0, 0, Vector2( 1, 0.209091 ), 0.0, 0.0, 0, 0 ]
+[sub_resource type="Curve" id="5"]
+_data = [Vector2(0, 0.856818), 0.0, 3.55714, 0, 0, Vector2(1, 0.209091), 0.0, 0.0, 0, 0]
+point_count = 2
 
-[sub_resource type="Gradient" id=6]
-offsets = PackedFloat32Array( 0, 0.342657, 0.664336, 0.965035 )
-colors = PackedColorArray( 1.5, 1.4, 1.3, 1, 1.3, 0.7, 0.1, 1, 0.99, 0.27, 0, 0.91, 0.29, 0.24, 0.24, 0.53 )
+[sub_resource type="Gradient" id="6"]
+offsets = PackedFloat32Array(0, 0.342657, 0.664336, 0.965035)
+colors = PackedColorArray(1.5, 1.4, 1.3, 1, 1.3, 0.7, 0.1, 1, 0.99, 0.27, 0, 0.91, 0.29, 0.24, 0.24, 0.53)
 
-[sub_resource type="CanvasItemMaterial" id=7]
+[sub_resource type="CanvasItemMaterial" id="7"]
 blend_mode = 1
 particles_animation = true
 particles_anim_h_frames = 7
 particles_anim_v_frames = 1
 particles_anim_loop = false
 
-[sub_resource type="Gradient" id=8]
-offsets = PackedFloat32Array( 0, 0.00813008, 1 )
-colors = PackedColorArray( 1, 1, 1, 0, 1.5, 1.3, 0.55, 1, 1, 0.2, 0, 1 )
+[sub_resource type="Gradient" id="8"]
+offsets = PackedFloat32Array(0, 0.00813008, 1)
+colors = PackedColorArray(1, 1, 1, 0, 1.5, 1.3, 0.55, 1, 1, 0.2, 0, 1)
 
-[sub_resource type="GradientTexture2D" id=9]
-gradient = SubResource( 8 )
+[sub_resource type="GradientTexture2D" id="9"]
+gradient = SubResource("8")
 width = 100
 
-[sub_resource type="ParticleProcessMaterial" id=10]
+[sub_resource type="ParticleProcessMaterial" id="10"]
 resource_local_to_scene = true
-flag_disable_z = true
-gravity = Vector3( 0, 0, 0 )
-orbit_velocity = 0.0
-orbit_velocity_random = 0.0
-color_ramp = SubResource( 9 )
-anim_speed = 1.0
+gravity = Vector3(0, 0, 0)
+color_ramp = SubResource("9")
 
-[node name="BallBoum" instance=ExtResource( 1 )]
-script = ExtResource( 3 )
-damage_destruction_threshold = 3.0
+[node name="BallBoum" instance=ExtResource("1")]
+script = ExtResource("3")
 damage = 2.0
 boum_min = 400.0
 boum_max = 700.0
@@ -64,23 +197,32 @@ distance_max = 64.0
 speed_threshold = 350.0
 boum_timer = 1.0
 boum_delay = 0.13
+damage_destruction_threshold = 3.0
 
 [node name="Sprite2D" parent="." index="0"]
-texture = ExtResource( 4 )
+material = SubResource("ShaderMaterial_x4vh4")
+texture = ExtResource("4")
 
 [node name="collision" parent="." index="1"]
-shape = SubResource( 1 )
+shape = SubResource("1")
+
+[node name="Animation" parent="." index="3"]
+libraries = {
+"": SubResource("AnimationLibrary_407ud")
+}
 
 [node name="Effects" parent="." index="4"]
-col1 = Color( 1.2, 0.65, 0.25, 1 )
-col2 = Color( 0.309804, 0.298039, 0.298039, 1 )
-col3 = Color( 0.203922, 0.203922, 0.203922, 1 )
+col1 = Color(1.2, 0.65, 0.25, 1)
+col2 = Color(0.309804, 0.298039, 0.298039, 1)
+col3 = Color(0.203922, 0.203922, 0.203922, 1)
 
 [node name="Reconstruction" parent="Effects" index="0"]
-color_ramp = SubResource( 2 )
+emission_rect_extents = Vector2(1, 1)
+color_ramp = SubResource("2")
 
 [node name="Destruction" parent="Effects" index="1"]
-color_ramp = SubResource( 3 )
+emission_rect_extents = Vector2(1, 1)
+color_ramp = SubResource("Gradient_eorql")
 
 [node name="BoumZone" type="Area2D" parent="." index="5"]
 collision_layer = 16
@@ -88,11 +230,11 @@ collision_mask = 325
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="BoumZone" index="0"]
 visible = false
-modulate = Color( 1, 0.784314, 0.278431, 1 )
-shape = SubResource( 4 )
+modulate = Color(1, 0.784314, 0.278431, 1)
+shape = SubResource("CircleShape2D_m8w4v")
 
 [node name="BoumParticles" type="CPUParticles2D" parent="." index="6"]
-position = Vector2( 0, -3.8147e-06 )
+position = Vector2(0, -3.8147e-06)
 emitting = false
 amount = 40
 lifetime = 0.8
@@ -101,34 +243,21 @@ explosiveness = 0.8
 randomness = 0.05
 lifetime_randomness = 0.29
 fract_delta = false
-local_coords = false
-texture = ExtResource( 6 )
-direction = Vector2( 0, 0 )
+texture = ExtResource("6")
+direction = Vector2(0, 0)
 spread = 180.0
-gravity = Vector2( 0, 0 )
-initial_velocity = 140.0
-initial_velocity_random = 0.76
-linear_accel = -20.0
-tangential_accel = -0.69
-damping = 100.0
-damping_random = 0.68
-scale_amount = 0.02
-scale_amount_random = 0.12
-scale_amount_curve = SubResource( 5 )
-color_ramp = SubResource( 6 )
-__meta__ = {
-"_editor_description_": ""
-}
+gravity = Vector2(0, 0)
+scale_amount_curve = SubResource("5")
+color_ramp = SubResource("6")
 
 [node name="ShockWaveAnim" type="GPUParticles2D" parent="." index="7"]
-material = SubResource( 7 )
+material = SubResource("7")
 emitting = false
 amount = 1
+process_material = SubResource("10")
+texture = ExtResource("2")
 lifetime = 0.35
 one_shot = true
-local_coords = false
-process_material = SubResource( 10 )
-texture = ExtResource( 2 )
 
 [node name="Timer" type="Timer" parent="." index="8"]
 one_shot = true

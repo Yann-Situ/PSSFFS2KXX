@@ -61,7 +61,7 @@ func explode():
 	for i in range(explosion_steps):
 		var criteria = shape_radius * (i+1)/explosion_steps
 		criteria *= criteria
-		var scale_factor = lerp(initial_scale_factor, 1.0, i/explosion_steps)
+		var scale_factor = lerp(initial_scale_factor, 1.0, (1.0*i)/explosion_steps)
 		# wait for time_step seconds
 		await get_tree().create_timer(time_step).timeout
 		# process bodies

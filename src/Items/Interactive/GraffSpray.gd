@@ -1,4 +1,4 @@
-@tool
+# @tool # some temporary tool problems
 extends Node2D
 
 signal spray_collected(graffspray_node)
@@ -11,7 +11,7 @@ func set_color(c : Color):
 	color = c
 	color_dark = c.darkened(0.18)
 	if Engine.is_editor_hint():
-		update_color()
+		update_color() # WARNING: Sprite2D not yet created...
 
 func update_color():
 	var sprite_m : ShaderMaterial = $Sprite2D.material
