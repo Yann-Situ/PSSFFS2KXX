@@ -10,8 +10,8 @@ z_as_relative = false
 texture = ExtResource( 1 )
 script = ExtResource( 2 )
 
-[node name="TweenPosition" type="Tween" parent="."]
 
-[node name="TweenSelfModulate" type="Tween" parent="."]
 
-[connection signal="finished" from="TweenPosition" to="." method="_on_TweenPosition_tween_completed"]
+
+
+

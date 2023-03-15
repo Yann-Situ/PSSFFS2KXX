@@ -25,7 +25,7 @@ func move(delta):
 	var xx = (dunk_position - P.global_position).x
 	S.direction_sprite = 1 if (xx > 0) else ( -1 if (xx < 0) else 0)
 	
-	pos_tween.interpolate_property(P, "global_position", P.global_position, \
+	pos_tween.tween_property(P, "global_position", P.global_position, \
 		dunk_position, \
 		0.32, Tween.TRANS_LINEAR, Tween.EASE_IN_OUT)
 	pos_tween.start()

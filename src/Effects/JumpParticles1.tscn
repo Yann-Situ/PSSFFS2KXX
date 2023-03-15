@@ -37,10 +37,10 @@ func start():
 	if not emitting:
 		emitting = true
 		get_tree().create_timer(lifetime * (2 - explosiveness), false)\\
-			self.connect(\"timeout\",Callable(self,\"_queue_free\"))
-			
+			self.timeout.connect(self._queue_free)
+
 func _queue_free():
-	emit_signal(\"emission_finished\")
+	emission_finished.emit()
 	queue_free()
 "
 

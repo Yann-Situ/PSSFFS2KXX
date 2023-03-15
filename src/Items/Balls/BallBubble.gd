@@ -16,11 +16,13 @@ func power_p(player,delta):
 
 func power_jp(player,delta):
 	if holder != player :
-		throw(position, Vector2.ZERO)
+		throw(global_position, Vector2.ZERO)
 		disable_physics()
-		#$Tween.interpolate_property(self, "position", position, player.position, 0.1)
-		$Tween.follow_property(self, "position", position, player, "position", 0.1)
-		$Tween.start()
+		var tween = self.create_tween()
+		tween.tween_method(self.tween_follow_property.bind(global_position,player),\
+		0.0, 1.0, 0.16)
+		tween.tween_callback(self._on_tween_completed)
+		# tween.start()
 		var trail_instance = trail_scene.instantiate()
 		trail_instance.lifetime = 0.1
 		trail_instance.wildness_amplitude = 250.0
@@ -43,7 +45,10 @@ func power_jp(player,delta):
 func power_jr(player,delta):
 	pass
 
-func _on_Tween_tween_all_completed():
+func tween_follow_property(t : float, src_pos : Vector2, trg : Node2D) -> void:
+	self.global_position = src_pos.lerp(trg.global_position,t)
+
+func _on_tween_completed():
 	if holder == Global.get_current_room() :
 		enable_physics()
 	#position == player.position

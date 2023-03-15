@@ -11,6 +11,9 @@ var current_shake_power = 0.0
 var shake_offset = Vector2(0,0)
 var offset_no_shake = offset
 
+var tween_shake = self.create_tween()
+var tween_no_shake = self.create_tween()
+
 func _ready():
 	pass
 
@@ -19,15 +22,17 @@ func screen_shake(duration, power, boum_position : Vector2 = self.global_positio
 		return
 	if power > current_shake_power:
 		current_shake_power = power
-		$Tween.interpolate_method(self, "set_random_shake_offset",
-			Vector2(power, power), Vector2(0,0), duration,
-			$Tween.TRANS_SINE, $Tween.EASE_OUT, 0)
-		$Tween.start()
+		tween_shake.kill()
+		tween_shake = self.create_tween()
+		tween_shake.tween_method(self.set_random_shake_offset,
+			Vector2(power, power), Vector2(0,0), duration)\
+			.set_trans(Tween.TRANS_SINE).set_easse(Tween.EASE_OUT)
+		tween_shake.tween_callback(self._on_tween_shake_completed)
+		# twee_shake.start() start automatically
 
-func _on_Tween_tween_completed(object, key):
-	if key == ":set_random_shake_offset":
-		shake_offset = Vector2(0,0)
-		current_shake_power = 0.0
+func _on_tween_shake_completed():
+	shake_offset = Vector2(0,0)
+	current_shake_power = 0.0
 
 func set_offset_from_type(type, direction = Vector2(0,0), tween_speed = 0.2):
 	if type == "aim":
@@ -41,10 +46,12 @@ func set_offset_from_type(type, direction = Vector2(0,0), tween_speed = 0.2):
 		target_offset = direction
 	set_target(target_offset, tween_speed)
 
-func set_target(target_offset_, tween_speed = 0.2):
-	$Tween.interpolate_property(self, "offset_no_shake", offset_no_shake, target_offset_, tween_speed,
-		$Tween.TRANS_LINEAR, $Tween.EASE_OUT_IN, 0)
-	$Tween.start()
+func set_target(target_offset_, tween_duration = 0.2):
+	tween_no_shake.kill()
+	tween_no_shake = self.create_tween()
+	tween_no_shake.tween_property(self, "offset_no_shake", target_offset,
+		tween_duration).set_trans(Tween.TRANS_LINEAR).set_ease(Tween.EASE_OUT_IN)
+	#tween_no_shake.start() start automatically
 
 func set_shake_offset(vec = Vector2(0,0)):
 	shake_offset = vec

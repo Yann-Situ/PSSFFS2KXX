@@ -157,6 +157,7 @@ func physics_process(delta): # called by _physics_process
 	else :
 		linear_velocity = move_and_slide(linear_velocity, Vector2.UP, true, 4, \
 		0.785398, false)
+		
 
 	S.velocity = linear_velocity
 

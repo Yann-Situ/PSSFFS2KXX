@@ -100,6 +100,6 @@ color_ramp = SubResource( 5 )
 [node name="Destruction" parent="Effects" index="1"]
 color_ramp = SubResource( 6 )
 
-[node name="Tween" type="Tween" parent="." index="5"]
 
-[connection signal="tween_all_completed" from="Tween" to="." method="_on_Tween_tween_all_completed"]
+
+

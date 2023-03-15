@@ -7,7 +7,7 @@
 [ext_resource type="Texture2D" uid="uid://b4ydi56jhjt5p" path="res://assets/art/background/ShopBackground2.png" id="6"]
 [ext_resource type="Texture2D" uid="uid://b8cfr623fwqvh" path="res://assets/art/background/pixelBackground3.png" id="7"]
 [ext_resource type="Texture2D" uid="uid://bkmlsn4n074ia" path="res://assets/art/background/ShopBackground4.png" id="8"]
-[ext_resource type="PackedScene" path="res://src/Items/Balls/BallFire.tscn" id="11"]
+[ext_resource type="PackedScene" uid="uid://c4ein3aak14an" path="res://src/Items/Balls/BallFire.tscn" id="11"]
 [ext_resource type="PackedScene" path="res://src/Items/Interactive/DashTarget.tscn" id="14"]
 [ext_resource type="PackedScene" path="res://src/Items/Dynamics/Jumper.tscn" id="15"]
 [ext_resource type="Texture2D" uid="uid://dlxo8jxb21u55" path="res://assets/art/effects/light5_4.png" id="16"]
@@ -28,7 +28,7 @@
 [ext_resource type="PackedScene" path="res://src/Items/Interactive/BreakableBloc.tscn" id="35"]
 [ext_resource type="PackedScene" path="res://src/Items/Interactive/Door.tscn" id="37"]
 [ext_resource type="PackedScene" path="res://src/Items/Balls/BallShock.tscn" id="44"]
-[ext_resource type="PackedScene" path="res://src/Player/PlayerPosition.tscn" id="45"]
+[ext_resource type="PackedScene" uid="uid://cjbsx2kbm5qhk" path="res://src/Player/PlayerPosition.tscn" id="45"]
 [ext_resource type="PackedScene" path="res://src/Items/Balls/BallDash.tscn" id="47"]
 [ext_resource type="PackedScene" path="res://src/Items/Interactive/Wind.tscn" id="48"]
 
@@ -66,35 +66,35 @@ _data = {
 }
 point_count = 10
 
-[sub_resource type="Curve2D" id="Curve2D_eh10k"]
+[sub_resource type="Curve2D" id="Curve2D_r4amt"]
 resource_local_to_scene = true
 _data = {
 "points": PackedVector2Array(0, 0, 0, 0, 288, 120, 0, 0, 0, 0, 0, -8)
 }
 point_count = 2
 
-[sub_resource type="Curve2D" id="Curve2D_v0qu0"]
+[sub_resource type="Curve2D" id="Curve2D_3s1ve"]
 resource_local_to_scene = true
 _data = {
 "points": PackedVector2Array(0, 0, 0, 0, 704, -240, 0, 0, 0, 0, 616, -24, 0, 0, 0, 0, 464, 88, 0, 0, 0, 0, 152, 112, 0, 0, 0, 0, 16, 80)
 }
 point_count = 5
 
-[sub_resource type="Curve2D" id="Curve2D_vnxrr"]
+[sub_resource type="Curve2D" id="Curve2D_evbsy"]
 resource_local_to_scene = true
 _data = {
 "points": PackedVector2Array(0, 0, 0, 0, 216, -296, 0, 0, 0, 0, 272, -48, 0, 0, 0, 0, 416, 64, 0, 0, 0, 0, 704, 72)
 }
 point_count = 4
 
-[sub_resource type="Curve2D" id="Curve2D_1x5qk"]
+[sub_resource type="Curve2D" id="Curve2D_cg62x"]
 resource_local_to_scene = true
 _data = {
 "points": PackedVector2Array(0, 0, 0, 0, 600, -72, 0, 0, 0, 0, 432, -32, 0, 0, 0, 0, 280, -32)
 }
 point_count = 3
 
-[sub_resource type="Curve2D" id="Curve2D_7nv3l"]
+[sub_resource type="Curve2D" id="Curve2D_x0jes"]
 resource_local_to_scene = true
 _data = {
 "points": PackedVector2Array(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 576, 0)
@@ -275,8 +275,6 @@ initial_velocity = Vector2(0, -900)
 light_mask = 1
 position = Vector2(1104, 568)
 collision_mask = 6
-attract_force = 500
-destruction_momentum = 20
 physics_enabled = false
 
 [node name="Ball" parent="Environment/Balls" instance=ExtResource("5")]
@@ -414,26 +412,26 @@ activated = false
 
 [node name="TrailLine" parent="Environment/Dynamics" instance=ExtResource("33")]
 position = Vector2(1472, 232)
-curve = SubResource("Curve2D_eh10k")
+curve = SubResource("Curve2D_r4amt")
 invert_line_direction = true
 
 [node name="TrailLine2" parent="Environment/Dynamics" instance=ExtResource("33")]
 position = Vector2(1440, -336)
-curve = SubResource("Curve2D_v0qu0")
+curve = SubResource("Curve2D_3s1ve")
 invert_line_direction = true
 
 [node name="TrailLine3" parent="Environment/Dynamics" instance=ExtResource("33")]
 position = Vector2(1008, -192)
-curve = SubResource("Curve2D_vnxrr")
+curve = SubResource("Curve2D_evbsy")
 
 [node name="TrailLine4" parent="Environment/Dynamics" instance=ExtResource("33")]
 position = Vector2(1544, -40)
-curve = SubResource("Curve2D_1x5qk")
+curve = SubResource("Curve2D_cg62x")
 invert_line_direction = true
 
 [node name="RailLine" parent="Environment/Dynamics" instance=ExtResource("33")]
 position = Vector2(192, 384)
-curve = SubResource("Curve2D_7nv3l")
+curve = SubResource("Curve2D_x0jes")
 
 [node name="Interactive" type="Node2D" parent="Environment"]
 
@@ -514,32 +512,98 @@ texture_scale = 2.56
 [node name="Character" parent="." instance=ExtResource("34")]
 modulate = Color(1, 0.988235, 0.666667, 1)
 position = Vector2(2024, -688)
-physics_enabled = false
+floor_friction = null
+air_friction = null
+attract_force = null
+crouch_speed_max = null
+crouch_instant_speed = null
+crouch_return_thresh_instant_speed = null
+crouch_accel = null
+landing_velocity_thresh = null
+sideaerial_speed_max = null
+air_instant_speed = null
+air_return_thresh_instant_speed = null
+sideaerial_accel = null
 jump_speed = -300.0
+dunk_speed = null
+max_speed_fall = null
+max_speed_fall_onwall = null
+vec_walljump = null
+run_speed_thresh = null
 run_speed_max = 250.0
 walk_instant_speed = 100.0
 walk_return_thresh_instant_speed = 120.0
 walk_accel = 170.0
+flip_h = null
+physics_enabled = false
+gravity_scale = null
+friction = null
+bounce = null
+penetration = null
 
 [node name="Character2" parent="." instance=ExtResource("34")]
 modulate = Color(0.529412, 0.941176, 1, 1)
 position = Vector2(1976, -688)
-physics_enabled = false
+floor_friction = null
+air_friction = null
+attract_force = null
+crouch_speed_max = null
+crouch_instant_speed = null
+crouch_return_thresh_instant_speed = null
+crouch_accel = null
+landing_velocity_thresh = null
+sideaerial_speed_max = null
+air_instant_speed = null
+air_return_thresh_instant_speed = null
+sideaerial_accel = null
 jump_speed = -300.0
+dunk_speed = null
+max_speed_fall = null
+max_speed_fall_onwall = null
+vec_walljump = null
+run_speed_thresh = null
 run_speed_max = 250.0
 walk_instant_speed = 100.0
 walk_return_thresh_instant_speed = 120.0
 walk_accel = 170.0
+flip_h = null
+physics_enabled = false
+gravity_scale = null
+friction = null
+bounce = null
+penetration = null
 
 [node name="Character3" parent="." instance=ExtResource("34")]
 modulate = Color(1, 0.694118, 0.996078, 1)
 position = Vector2(2000, -688)
-physics_enabled = false
+floor_friction = null
+air_friction = null
+attract_force = null
+crouch_speed_max = null
+crouch_instant_speed = null
+crouch_return_thresh_instant_speed = null
+crouch_accel = null
+landing_velocity_thresh = null
+sideaerial_speed_max = null
+air_instant_speed = null
+air_return_thresh_instant_speed = null
+sideaerial_accel = null
 jump_speed = -300.0
+dunk_speed = null
+max_speed_fall = null
+max_speed_fall_onwall = null
+vec_walljump = null
+run_speed_thresh = null
 run_speed_max = 250.0
 walk_instant_speed = 100.0
 walk_return_thresh_instant_speed = 120.0
 walk_accel = 170.0
+flip_h = null
+physics_enabled = false
+gravity_scale = null
+friction = null
+bounce = null
+penetration = null
 
 [node name="PlayerPosition" parent="." instance=ExtResource("45")]
 position = Vector2(2312, -608)

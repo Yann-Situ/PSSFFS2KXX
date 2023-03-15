@@ -170,7 +170,7 @@ func enable_contour():
 	var tween = $LightSmall/Tween
 	if tween.is_active():
 		tween.remove_all()
-	tween.interpolate_property(light, "energy", light.energy, 0.8, 0.15, 0, Tween.EASE_OUT)
+	tween.tween_property(light, "energy", light.energy, 0.8, 0.15, 0, Tween.EASE_OUT)
 	tween.start()
 
 func disable_contour():
@@ -178,5 +178,5 @@ func disable_contour():
 	var tween = $LightSmall/Tween
 	if tween.is_active():
 		tween.remove_all()
-	tween.interpolate_property(light, "energy", light.energy, 0.0, 0.15, 0, Tween.EASE_OUT)
+	tween.tween_property(light, "energy", light.energy, 0.0, 0.15, 0, Tween.EASE_OUT)
 	tween.start()

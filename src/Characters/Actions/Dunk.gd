@@ -15,7 +15,7 @@ func move(delta):
 	S.velocity.y = 0
 	
 	S.get_node("CanDunkTimer").start(S.dunk_countdown)
-	pos_tween.interpolate_property(P, "global_position", P.global_position, \
+	pos_tween.tween_property(P, "global_position", P.global_position, \
 		S.dunk_basket.get_dunk_position(P.global_position), \
 		0.32, Tween.TRANS_LINEAR)
 	pos_tween.start()

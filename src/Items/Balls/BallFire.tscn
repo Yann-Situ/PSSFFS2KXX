@@ -1,256 +1,260 @@
-[gd_scene load_steps=16 format=2]
+[gd_scene load_steps=17 format=3 uid="uid://c4ein3aak14an"]
 
-[ext_resource path="res://src/Items/Balls/Ball.tscn" type="PackedScene" id=1]
-[ext_resource path="res://assets/art/ball/ball_fire.png" type="Texture2D" id=2]
-[ext_resource path="res://assets/shader/contour.gdshader" type="Shader" id=3]
-[ext_resource path="res://assets/art/effects/light4.png" type="Texture2D" id=4]
-[ext_resource path="res://assets/art/effects/round.png" type="Texture2D" id=5]
-[ext_resource path="res://src/Items/Balls/BallFire.gd" type="Script" id=6]
+[ext_resource type="PackedScene" path="res://src/Items/Balls/Ball.tscn" id="1"]
+[ext_resource type="Texture2D" uid="uid://ca2tpae4h50bj" path="res://assets/art/ball/ball_fire.png" id="2"]
+[ext_resource type="Shader" path="res://assets/shader/contour.gdshader" id="3"]
+[ext_resource type="Texture2D" uid="uid://dfs74r3ta3oc7" path="res://assets/art/effects/light4.png" id="4"]
+[ext_resource type="Texture2D" uid="uid://dynhxnnpu4wgg" path="res://assets/art/effects/round.png" id="5"]
+[ext_resource type="Script" path="res://src/Items/Balls/BallFire.gd" id="6"]
 
-[sub_resource type="ShaderMaterial" id=1]
+[sub_resource type="ShaderMaterial" id="1"]
 resource_local_to_scene = true
-shader = ExtResource( 3 )
-shader_param/activated = true
-shader_param/contour_color = Color( 1, 0.305882, 0.305882, 1 )
-shader_param/light_thresh = 0.0
+shader = ExtResource("3")
+shader_parameter/activated = true
+shader_parameter/contour_color = Color(1, 0.305882, 0.305882, 1)
 
-[sub_resource type="CircleShape2D" id=2]
+[sub_resource type="CircleShape2D" id="2"]
 resource_local_to_scene = true
 radius = 6.0
 
-[sub_resource type="Animation" id=3]
+[sub_resource type="Animation" id="3"]
 resource_name = "destruction"
 length = 0.9
 tracks/0/type = "method"
+tracks/0/imported = false
+tracks/0/enabled = true
 tracks/0/path = NodePath("Effects/Destruction")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
-tracks/0/imported = false
-tracks/0/enabled = true
 tracks/0/keys = {
-"times": PackedFloat32Array( 0 ),
-"transitions": PackedFloat32Array( 1 ),
-"values": [ {
-"args": [  ],
-"method": "restart"
-} ]
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [],
+"method": &"restart"
+}]
 }
 tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
 tracks/1/path = NodePath("Effects/Destruction:emitting")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
-tracks/1/imported = false
-tracks/1/enabled = true
 tracks/1/keys = {
-"times": PackedFloat32Array( 0 ),
-"transitions": PackedFloat32Array( 1 ),
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
 "update": 1,
-"values": [ true ]
+"values": [true]
 }
 tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
 tracks/2/path = NodePath("Sprite2D:modulate")
 tracks/2/interp = 1
 tracks/2/loop_wrap = true
-tracks/2/imported = false
-tracks/2/enabled = true
 tracks/2/keys = {
-"times": PackedFloat32Array( 0, 0.2 ),
-"transitions": PackedFloat32Array( 1, 1 ),
+"times": PackedFloat32Array(0, 0.2),
+"transitions": PackedFloat32Array(1, 1),
 "update": 0,
-"values": [ Color( 1, 1, 1, 1 ), Color( 1, 1, 1, 0 ) ]
+"values": [Color(1, 1, 1, 1), Color(1, 1, 1, 0)]
 }
 tracks/3/type = "method"
+tracks/3/imported = false
+tracks/3/enabled = true
 tracks/3/path = NodePath(".")
 tracks/3/interp = 1
 tracks/3/loop_wrap = true
-tracks/3/imported = false
-tracks/3/enabled = true
 tracks/3/keys = {
-"times": PackedFloat32Array( 0.9 ),
-"transitions": PackedFloat32Array( 1 ),
-"values": [ {
-"args": [  ],
-"method": "queue_free"
-} ]
+"times": PackedFloat32Array(0.9),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [],
+"method": &"queue_free"
+}]
 }
 tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
 tracks/4/path = NodePath("Effects/Fire:emitting")
 tracks/4/interp = 1
 tracks/4/loop_wrap = true
-tracks/4/imported = false
-tracks/4/enabled = true
 tracks/4/keys = {
-"times": PackedFloat32Array( 0 ),
-"transitions": PackedFloat32Array( 1 ),
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
 "update": 1,
-"values": [ false ]
+"values": [false]
 }
 
-[sub_resource type="Animation" id=4]
+[sub_resource type="Animation" id="4"]
 length = 1.4
 tracks/0/type = "method"
+tracks/0/imported = false
+tracks/0/enabled = true
 tracks/0/path = NodePath("Effects/Reconstruction")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
-tracks/0/imported = false
-tracks/0/enabled = true
 tracks/0/keys = {
-"times": PackedFloat32Array( 0.9 ),
-"transitions": PackedFloat32Array( 1 ),
-"values": [ {
-"args": [  ],
-"method": "restart"
-} ]
+"times": PackedFloat32Array(0.9),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [],
+"method": &"restart"
+}]
 }
 tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
 tracks/1/path = NodePath("Effects/Reconstruction:emitting")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
-tracks/1/imported = false
-tracks/1/enabled = true
 tracks/1/keys = {
-"times": PackedFloat32Array( 0.9 ),
-"transitions": PackedFloat32Array( 1 ),
+"times": PackedFloat32Array(0.9),
+"transitions": PackedFloat32Array(1),
 "update": 1,
-"values": [ true ]
+"values": [true]
 }
 tracks/2/type = "method"
+tracks/2/imported = false
+tracks/2/enabled = true
 tracks/2/path = NodePath("Effects/DunkParticles")
 tracks/2/interp = 1
 tracks/2/loop_wrap = true
-tracks/2/imported = false
-tracks/2/enabled = true
 tracks/2/keys = {
-"times": PackedFloat32Array( 0.35 ),
-"transitions": PackedFloat32Array( 1 ),
-"values": [ {
-"args": [  ],
-"method": "restart"
-} ]
+"times": PackedFloat32Array(0.35),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [],
+"method": &"restart"
+}]
 }
 tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
 tracks/3/path = NodePath("Effects/DunkParticles:emitting")
 tracks/3/interp = 1
 tracks/3/loop_wrap = true
-tracks/3/imported = false
-tracks/3/enabled = true
 tracks/3/keys = {
-"times": PackedFloat32Array( 0.35 ),
-"transitions": PackedFloat32Array( 1 ),
+"times": PackedFloat32Array(0.35),
+"transitions": PackedFloat32Array(1),
 "update": 1,
-"values": [ true ]
+"values": [true]
 }
 tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
 tracks/4/path = NodePath("Sprite2D:modulate")
 tracks/4/interp = 1
 tracks/4/loop_wrap = true
-tracks/4/imported = false
-tracks/4/enabled = true
 tracks/4/keys = {
-"times": PackedFloat32Array( 0.3, 0.5, 1.2, 1.4 ),
-"transitions": PackedFloat32Array( 1, 1, 1, 1 ),
+"times": PackedFloat32Array(0.3, 0.5, 1.2, 1.4),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
 "update": 0,
-"values": [ Color( 1, 1, 1, 1 ), Color( 1, 1, 1, 0 ), Color( 1, 1, 1, 0 ), Color( 1, 1, 1, 1 ) ]
+"values": [Color(1, 1, 1, 1), Color(1, 1, 1, 0), Color(1, 1, 1, 0), Color(1, 1, 1, 1)]
 }
 tracks/5/type = "value"
+tracks/5/imported = false
+tracks/5/enabled = true
 tracks/5/path = NodePath("Effects/Fire:emitting")
 tracks/5/interp = 1
 tracks/5/loop_wrap = true
-tracks/5/imported = false
-tracks/5/enabled = true
 tracks/5/keys = {
-"times": PackedFloat32Array( 0.3, 1.4 ),
-"transitions": PackedFloat32Array( 1, 1 ),
+"times": PackedFloat32Array(0.3, 1.4),
+"transitions": PackedFloat32Array(1, 1),
 "update": 1,
-"values": [ false, true ]
+"values": [false, true]
 }
 tracks/6/type = "method"
+tracks/6/imported = false
+tracks/6/enabled = true
 tracks/6/path = NodePath("Effects/Fire")
 tracks/6/interp = 1
 tracks/6/loop_wrap = true
-tracks/6/imported = false
-tracks/6/enabled = true
 tracks/6/keys = {
-"times": PackedFloat32Array( 1.4 ),
-"transitions": PackedFloat32Array( 1 ),
-"values": [ {
-"args": [  ],
-"method": "restart"
-} ]
+"times": PackedFloat32Array(1.4),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [],
+"method": &"restart"
+}]
 }
 
-[sub_resource type="Gradient" id=5]
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_sc0rm"]
+_data = {
+"destruction": SubResource("3"),
+"dunk": SubResource("4")
+}
+
+[sub_resource type="Gradient" id="5"]
 resource_local_to_scene = true
-offsets = PackedFloat32Array( 0, 0.00699301, 0.232323, 0.434343, 0.839161, 1 )
-colors = PackedColorArray( 1, 0, 0.580392, 0, 0, 0, 0, 0.258741, 0.795898, 0.748553, 0.581379, 0.705882, 1, 0.727333, 0.332031, 1, 1, 0.234955, 0.171875, 1, 1, 1, 1, 0 )
+offsets = PackedFloat32Array(0, 0.00699301, 0.232323, 0.434343, 0.839161, 1)
+colors = PackedColorArray(1, 0, 0.580392, 0, 0, 0, 0, 0.258741, 0.795898, 0.748553, 0.581379, 0.705882, 1, 0.727333, 0.332031, 1, 1, 0.234955, 0.171875, 1, 1, 1, 1, 0)
 
-[sub_resource type="Gradient" id=6]
+[sub_resource type="Gradient" id="6"]
 resource_local_to_scene = true
-offsets = PackedFloat32Array( 0, 0.020202, 0.131313, 0.50505, 0.808081, 1 )
-colors = PackedColorArray( 1, 0, 0.580392, 0, 1, 1, 1, 0, 1, 1, 1, 1, 0.839844, 0.839844, 0.839844, 1, 0.535156, 0.535156, 0.535156, 0.705882, 0, 0, 0, 0.258741 )
+offsets = PackedFloat32Array(0, 0.020202, 0.131313, 0.50505, 0.808081, 1)
+colors = PackedColorArray(1, 0, 0.580392, 0, 1, 1, 1, 0, 1, 1, 1, 1, 0.839844, 0.839844, 0.839844, 1, 0.535156, 0.535156, 0.535156, 0.705882, 0, 0, 0, 0.258741)
 
-[sub_resource type="CanvasItemMaterial" id=7]
+[sub_resource type="CanvasItemMaterial" id="7"]
 
-[sub_resource type="Curve" id=8]
-_data = [ Vector2( 0, 1 ), 0.0, 1.22899, 0, 0, Vector2( 1, 0.0545454 ), -0.658523, 0.0, 0, 0 ]
+[sub_resource type="Curve" id="8"]
+_data = [Vector2(0, 1), 0.0, 1.22899, 0, 0, Vector2(1, 0.0545454), -0.658523, 0.0, 0, 0]
+point_count = 2
 
-[sub_resource type="Gradient" id=9]
-offsets = PackedFloat32Array( 0, 0.252525, 0.434343, 0.717172, 1 )
-colors = PackedColorArray( 1, 0.9646, 0.773438, 1, 0.9375, 0.699377, 0.194092, 1, 1, 0.382477, 0.167969, 1, 0.356863, 0.133333, 0.133333, 1, 0.183594, 0.183594, 0.183594, 0 )
+[sub_resource type="Gradient" id="9"]
+offsets = PackedFloat32Array(0, 0.252525, 0.434343, 0.717172, 1)
+colors = PackedColorArray(1, 0.9646, 0.773438, 1, 0.9375, 0.699377, 0.194092, 1, 1, 0.382477, 0.167969, 1, 0.356863, 0.133333, 0.133333, 1, 0.183594, 0.183594, 0.183594, 0)
 
-[node name="BallFire" instance=ExtResource( 1 )]
-script = ExtResource( 6 )
+[node name="BallFire" instance=ExtResource("1")]
+script = ExtResource("6")
+attract_force = 500
+destruction_momentum = 20
 
 [node name="Sprite2D" parent="." index="0"]
-material = SubResource( 1 )
-texture = ExtResource( 2 )
+material = SubResource("1")
+texture = ExtResource("2")
 
 [node name="collision" parent="." index="1"]
-shape = SubResource( 2 )
+shape = SubResource("2")
 
 [node name="Animation" parent="." index="3"]
-anims/destruction = SubResource( 3 )
-anims/dunk = SubResource( 4 )
+libraries = {
+"": SubResource("AnimationLibrary_sc0rm")
+}
 
 [node name="Effects" parent="." index="4"]
-col1 = Color( 1, 0.980392, 0.45098, 1 )
-col2 = Color( 0.878431, 0.494118, 0, 1 )
-col3 = Color( 0.772549, 0.0196078, 0, 1 )
+col1 = Color(1, 0.980392, 0.45098, 1)
+col2 = Color(0.878431, 0.494118, 0, 1)
+col3 = Color(0.772549, 0.0196078, 0, 1)
 
 [node name="Reconstruction" parent="Effects" index="0"]
-color_ramp = SubResource( 5 )
+emission_rect_extents = Vector2(1, 1)
+color_ramp = SubResource("5")
 
 [node name="Destruction" parent="Effects" index="1"]
-color_ramp = SubResource( 6 )
+emission_rect_extents = Vector2(1, 1)
+color_ramp = SubResource("6")
 
 [node name="Fire" type="CPUParticles2D" parent="Effects" index="4"]
 light_mask = 0
-material = SubResource( 7 )
 z_index = -1
+material = SubResource("7")
 amount = 40
 lifetime = 0.25
 explosiveness = 0.2
-local_coords = false
-texture = ExtResource( 5 )
-direction = Vector2( 0, 0 )
+texture = ExtResource("5")
+direction = Vector2(0, 0)
 spread = 180.0
-gravity = Vector2( 0, -100 )
-initial_velocity = 50.0
-initial_velocity_random = 1.0
-scale_amount = 0.12
-scale_amount_curve = SubResource( 8 )
-color_ramp = SubResource( 9 )
+gravity = Vector2(0, -100)
+scale_amount_curve = SubResource("8")
+color_ramp = SubResource("9")
 
 [node name="LightSmall" type="PointLight2D" parent="." index="5"]
-position = Vector2( -3.8147e-06, 7.62939e-06 )
-scale = Vector2( 0.25, 0.25 )
 z_as_relative = false
-texture = ExtResource( 4 )
-texture_scale = 2.56
-color = Color( 1, 0.854902, 0.419608, 1 )
+position = Vector2(-3.8147e-06, 7.62939e-06)
+scale = Vector2(0.25, 0.25)
+color = Color(1, 0.854902, 0.419608, 1)
 energy = 0.5
 range_z_max = 120
 range_item_cull_mask = 3
-__meta__ = {
-"_edit_lock_": true
-}
+texture = ExtResource("4")
+texture_scale = 2.56

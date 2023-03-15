@@ -1,4 +1,4 @@
-[gd_scene load_steps=117 format=3 uid="uid://djjfl0v3y2pw5"]
+[gd_scene load_steps=116 format=3 uid="uid://djjfl0v3y2pw5"]
 
 [ext_resource type="Script" path="res://src/Player/Player.gd" id="1"]
 [ext_resource type="Texture2D" uid="uid://dcp7p8c6ldxqc" path="res://assets/art/characters/Player.png" id="2"]
@@ -6,7 +6,6 @@
 [ext_resource type="Texture2D" uid="uid://cd7mx6yijog8j" path="res://assets/art/ball/ball_test.png" id="4"]
 [ext_resource type="PackedScene" path="res://src/Player/Player_State.tscn" id="5"]
 [ext_resource type="Script" path="res://src/Player/Ball_Handler.gd" id="6"]
-[ext_resource type="Script" path="res://src/Player/Camera.gd" id="7"]
 [ext_resource type="Script" path="res://src/Player/AnimationTree.gd" id="8"]
 [ext_resource type="Script" path="res://src/Player/Special_Action_Handler.gd" id="9"]
 [ext_resource type="Script" path="res://src/Player/Ray.gd" id="10"]
@@ -1450,7 +1449,7 @@ color_ramp = SubResource("53")
 
 [sub_resource type="CompressedTexture2D" id="55"]
 
-[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_4kmhx"]
+[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_ktjwy"]
 resource_local_to_scene = true
 particles_animation = true
 particles_anim_h_frames = 6
@@ -1778,7 +1777,7 @@ lifetime = 0.65
 explosiveness = 0.9
 
 [node name="GrindParticles" parent="PlayerEffects" instance=ExtResource("27")]
-material = SubResource("CanvasItemMaterial_4kmhx")
+material = SubResource("CanvasItemMaterial_ktjwy")
 position = Vector2(0, 16)
 
 [node name="BallHandler" type="Area2D" parent="."]
@@ -1811,20 +1810,6 @@ shape = SubResource("1")
 z_index = 100
 position = Vector2(0, -35)
 limit_smoothed = true
-script = ExtResource("7")
-__meta__ = {
-"_edit_lock_": true
-}
-crouch_offset = 96.0
-move_max_offset = Vector2(192, 64)
-
-[node name="Tween" type="Tween" parent="Camera"]
-_import_path = NodePath("")
-unique_name_in_owner = false
-process_mode = 0
-process_priority = 0
-editor_description = ""
-script = null
 
 [node name="UI" type="CanvasLayer" parent="."]
 layer = 10

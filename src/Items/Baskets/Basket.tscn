@@ -221,7 +221,7 @@ __meta__ = {
 "_edit_lock_": true
 }
 
-[node name="Tween" type="Tween" parent="LightSmall"]
+
 
 [node name="StaticBody2D" type="StaticBody2D" parent="."]
 collision_layer = 4

@@ -1,15 +1,14 @@
 extends Line2D
 
-@export var min_point_spawn_distance : float := 5.0#pix
-@export var wildness_amplitude : float := 200.0#pix/s
-@export_range(0.001,1.0) var wildness_tick : float := 0.02#s
+@export var min_point_spawn_distance : float = 5.0#pix
+@export var wildness_amplitude : float = 200.0#pix/s
+@export_range(0.001,1.0) var wildness_tick : float = 0.02#s
+@export_range(0.001,1.0) var point_lifetime_tick : float = 0.05#s
+@export_range(0.001,1.0) var addpoint_tick : float = 0.04#s
 
-@export var trail_fade_time : float := 5.0#s
-@export var point_lifetime : float := 0.7#s
-@export_range(0.001,1.0) var wildness_tick : float := 0.04#s
-
-@export_range(0.001,1.0) var wildness_tick : float := 0.04#s
-@export var lifetime : float := 0.0#s (if <= 0.0s, then the trail stays until stop is called)
+@export var trail_fade_time : float = 5.0#s
+@export var point_lifetime : float = 0.7#s
+@export var lifetime : float = 0.0#s (if <= 0.0s, then the trail stays until stop is called)
 @export var autostart : bool = true : set = set_autostart
 
 var node_to_trail = null : set = set_node_to_trail
@@ -43,10 +42,10 @@ func start():
 
 func stop():
 	stopped = true
-	$Decay.interpolate_property(self, "modulate:a", 1.0, 0.0, trail_fade_time)
-	$Decay.start()
-	#get_tree().create_timer(trail_fade_time)
-	#call_deferred("queue_free")
+	var tween_decay = self.create_tween()
+	tween_decay.tween_property(self, "modulate:a", 0.0, trail_fade_time).from(1.0)
+	tween_decay.tween_callback(self._on_tween_decay_completed)
+	#tween_decay.start()
 
 func _process(delta):
 	if point_lifetime_tick_current > point_lifetime_tick:
@@ -98,7 +97,7 @@ func _add_point(point_position:Vector2, at_position := -1) -> bool:
 
 # Warning : if the trail node has been reparented during the decay tween, this
 # function might never be called because Tween._exit_tree calls stop_all().
-func _on_Decay_tween_all_completed():
+func _on_tween_decay_completed():
 	queue_free()
 
 func _on_Timer_timeout():
