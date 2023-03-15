@@ -91,8 +91,8 @@ func _physics_process(delta):
 		linear_velocities[i-j] = velocity
 		position_offsets[i-j]  = position_offset
 		if path_follow.get_progress_ratio() == 1.0 or \
-		   path_follow.get_progress_ratio() == 0.0 or \
-		   !body.S.is_grinding :
+			path_follow.get_progress_ratio() == 0.0 or \
+			!body.S.is_grinding :
 
 			body.get_out(body.global_position, velocity)
 			j += 1 # because we deleted a node in the list we're browsing
@@ -142,13 +142,13 @@ func _on_Area_body_entered(body):
 	var closest_offset = curve.get_closest_offset(bi)
 #	if not is_in(closest_offset, 0.0, curve.get_baked_length(),5.0):
 #		print("annoying case")
-	var closest_point = curve.interpolate_baked(closest_offset-0.001)
-	var rail_dir = curve.interpolate_baked(closest_offset+0.001)-closest_point
+	var closest_point = curve.sample_baked(closest_offset-0.001)
+	var rail_dir = curve.sample_baked(closest_offset+0.001)-closest_point
 	if rail_dir.x < 0.0:
 		rail_dir = -rail_dir
 
 	if (bi-closest_point).y <= character_position_entrance_tolerance or \
-	   (rail_dir.cross(body.S.velocity) >= 0.0 and \
+			(rail_dir.cross(body.S.velocity) >= 0.0 and \
 		is_in(closest_offset, 0.0, curve.get_baked_length(),tolerance_annoying_case)) :
 
 		var new_path_follow : PathFollow2D = PathFollow2D.new()

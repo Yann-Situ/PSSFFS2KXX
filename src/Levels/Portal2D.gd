@@ -57,7 +57,7 @@ func set_transition_color(c : Color):
 
 func set_transition_speed(f : float):
 	transition_speed = f
-	$AnimationPlayer.playback_speed = f
+	$AnimationPlayer.speed_scale = f
 
 ################################################################################
 func disp(s:String):

@@ -14,21 +14,21 @@ func set_hue_distribution(c : Curve):
 	hue_sampler = compute_sampler(hue_distribution)
 	# print("Color sampler changed")
 	# for i in range(6):
-	# 	print(str(hue_sampler.interpolate_baked(i/5.0)))
+	# 	print(str(hue_sampler.sample_baked(i/5.0)))
 	emit_changed()
 func set_saturation_distribution(c : Curve):
 	saturation_distribution = c
 	saturation_sampler = compute_sampler(saturation_distribution)
 	# print("Color sampler changed")
 	# for i in range(6):
-	# 	print(str(saturation_sampler.interpolate_baked(i/5.0)))
+	# 	print(str(saturation_sampler.sample_baked(i/5.0)))
 	emit_changed()
 func set_lightness_distribution(c : Curve):
 	lightness_distribution = c
 	lightness_sampler = compute_sampler(lightness_distribution)
 	# print("Color sampler changed")
 	# for i in range(6):
-	# 	print(str(lightness_sampler.interpolate_baked(i/5.0)))
+	# 	print(str(lightness_sampler.sample_baked(i/5.0)))
 	emit_changed()
 
 func compute_sampler(distribution : Curve) -> Curve:
@@ -41,13 +41,13 @@ func compute_sampler(distribution : Curve) -> Curve:
 
 	# integration with trapeze method
 	var inv_n = 1.0/n
-	var s = 0.5 * distribution.interpolate_baked(0.0)
+	var s = 0.5 * distribution.sample_baked(0.0)
 	integral.push_back(s)
 	distribution.bake()
 	for i in range(1,n-1):
-		s += distribution.interpolate_baked(i*inv_n)
+		s += distribution.sample_baked(i*inv_n)
 		integral.push_back(s)
-	s += 0.5 * distribution.interpolate_baked(1.0)
+	s += 0.5 * distribution.sample_baked(1.0)
 	integral.push_back(s)
 
 	# invert integral
@@ -71,9 +71,9 @@ func update_samplers():
 
 # sample a color following the sampler. if sh (resp. ss, sv) is not in [0,1], use randf instead
 func sample(rng : RandomNumberGenerator, alpha : float = 1.0) -> Color:
-	var h = hue_sampler.interpolate_baked(rng.randf())
-	var s = saturation_sampler.interpolate_baked(rng.randf())
-	var l = lightness_sampler.interpolate_baked(rng.randf())
+	var h = hue_sampler.sample_baked(rng.randf())
+	var s = saturation_sampler.sample_baked(rng.randf())
+	var l = lightness_sampler.sample_baked(rng.randf())
 
 	var t = min(l,1-l)
 	var v = l + s*t

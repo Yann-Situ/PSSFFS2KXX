@@ -1,7 +1,7 @@
 @tool
 extends Activable
 
-@export_range(0,1) var visual_type : int
+@export_range(0,1) var visual_type : int = 0 :
 	set = set_visual_type # (int, "type0", "type1")
 @export var flip_h: bool = false : set = set_flip_h
 @export var mass = 5.0 # kg

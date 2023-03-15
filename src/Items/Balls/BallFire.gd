@@ -20,9 +20,8 @@ func collision_effect(collider, collider_velocity, collision_point, collision_no
 
 func power_p(player,delta):
 	if holder == null :
-		apply_force("player_attract", \
-			attract_force*(player.position - position).normalized() + \
-			mass * gravity * Vector2.UP)
+		apply_force(attract_force*(player.position - position).normalized() + \
+			mass * gravity * Vector2.UP, "player_attract")
 		self.set_friction(0.0)
 
 func power_jp(player,delta):

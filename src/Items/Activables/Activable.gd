@@ -14,45 +14,42 @@ func _init():
 
 func lock():
 	locked = true
-	
+
 func unlock():
 	locked = false
 
 func enable():
-	if not locked:
-		print("enable: " + str(self.name))
-		var temp = activated
-		activated = true
-		on_enable()
-		is_enabled.emit()
-		if !temp:
-			is_toggled.emit(activated)
+	set_activated(true)
 func on_enable():
 	pass
 
 func disable():
-	if not locked:
-		print("disable: " + str(self.name))
-		var temp = activated
-		activated = false
-		on_disable()
-		is_disabled.emit()
-		if temp:
-			is_toggled.emit(activated)
+	set_activated(false)
 func on_disable():
 	pass
 
-func set_activated(b):
+func set_activated(b):# be careful, in Godot4 we can have infinite recursion
 	if b :
-		enable()
+		if not locked:
+			print("enable: " + str(self.name))
+			var temp = activated
+			activated = true
+			on_enable()
+			is_enabled.emit()
+			if !temp:
+				is_toggled.emit(activated)
 	else :
-		disable()
+		if not locked:
+			print("disable: " + str(self.name))
+			var temp = activated
+			activated = false
+			on_disable()
+			is_disabled.emit()
+			if temp:
+				is_toggled.emit(activated)
 
 func set_not_activated(b):
-	if b :
-		disable()
-	else :
-		enable()
+	set_activated(not b)
 
 func is_activated():
 	return activated
