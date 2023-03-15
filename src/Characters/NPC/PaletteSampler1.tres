@@ -1,7 +1,7 @@
 [gd_resource type="Resource" script_class="PaletteSchemeSampler" load_steps=19 format=3 uid="uid://b5t6nuxuv7s86"]
 
-[ext_resource type="Script" path="res://src/Editor/PaletteSchemeSampler.gd" id="1"]
-[ext_resource type="Script" path="res://src/Editor/ColorSampler.gd" id="3"]
+[ext_resource type="Script" path="res://src/Global/CustomResources/PaletteSchemeSampler.gd" id="1"]
+[ext_resource type="Script" path="res://src/Global/CustomResources/ColorSampler.gd" id="3"]
 
 [sub_resource type="Curve" id="16"]
 bake_resolution = 1000

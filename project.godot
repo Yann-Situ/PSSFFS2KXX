@@ -17,9 +17,9 @@ config/icon="res://assets/art/icons/popol.png"
 
 [autoload]
 
-Global="*res://src/Editor/Global.gd"
-GlobalEffect="*res://src/Editor/GlobalEffect.gd"
-GlobalMaths="*res://src/Editor/GlobalMaths.gd"
+Global="*res://src/Global/Global.gd"
+GlobalEffect="*res://src/Global/GlobalEffect.gd"
+GlobalMaths="*res://src/Global/GlobalMaths.gd"
 
 [debug]
 
