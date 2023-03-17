@@ -1,6 +1,6 @@
 [gd_scene load_steps=17 format=3 uid="uid://c4ein3aak14an"]
 
-[ext_resource type="PackedScene" path="res://src/Items/Balls/Ball.tscn" id="1"]
+[ext_resource type="PackedScene" uid="uid://cxn2m3havcmil" path="res://src/Items/Balls/Ball.tscn" id="1"]
 [ext_resource type="Texture2D" uid="uid://ca2tpae4h50bj" path="res://assets/art/ball/ball_fire.png" id="2"]
 [ext_resource type="Shader" path="res://assets/shader/contour.gdshader" id="3"]
 [ext_resource type="Texture2D" uid="uid://dfs74r3ta3oc7" path="res://assets/art/effects/light4.png" id="4"]
@@ -227,11 +227,9 @@ col2 = Color(0.878431, 0.494118, 0, 1)
 col3 = Color(0.772549, 0.0196078, 0, 1)
 
 [node name="Reconstruction" parent="Effects" index="0"]
-emission_rect_extents = Vector2(1, 1)
 color_ramp = SubResource("5")
 
 [node name="Destruction" parent="Effects" index="1"]
-emission_rect_extents = Vector2(1, 1)
 color_ramp = SubResource("6")
 
 [node name="Fire" type="CPUParticles2D" parent="Effects" index="4"]

@@ -1,6 +1,7 @@
 [gd_scene load_steps=7 format=2]
 
 [ext_resource path="res://assets/art/effects/jumpcloud1.png" type="Texture2D" id=1]
+[ext_resource path="res://src/Effects/OneShotParticle.gd" type="Script" id=2]
 
 [sub_resource type="CanvasItemMaterial" id=1]
 resource_local_to_scene = true
@@ -28,27 +29,9 @@ radial_accel = -10.17
 color_ramp = SubResource( 3 )
 anim_speed = 1.0
 
-[sub_resource type="GDScript" id=5]
-script/source = "extends GPUParticles2D
-
-signal emission_finished
-
-func start():
-	if not emitting:
-		emitting = true
-		get_tree().create_timer(lifetime * (2 - explosiveness), false)\\
-			self.timeout.connect(self._queue_free)
-
-func _queue_free():
-	emission_finished.emit()
-	queue_free()
-"
-
 [node name="JumpParticles1" type="GPUParticles2D"]
 material = SubResource( 1 )
-position = Vector2( 0, -16 )
 z_index = 110
-z_as_relative = false
 emitting = false
 amount = 1
 lifetime = 0.35
@@ -57,4 +40,4 @@ visibility_rect = Rect2( -50, -50, 100, 100 )
 local_coords = false
 process_material = SubResource( 4 )
 texture = ExtResource( 1 )
-script = SubResource( 5 )
+script = ExtResource( 2 )

@@ -15,7 +15,7 @@ void fragment(){
 	//float ratio = TEXTURE_PIXEL_SIZE.x / TEXTURE_PIXEL_SIZE.y;
 	//vec2 scaledUV = (UV - vec2(0.5,0.0)) / vec2(ratio, 1) + vec2(0.5,0.0);
 
-	if(force == 0.0){
+	if(force <= 0.0){
 		COLOR = vec4(1.0,1.0,1.0,0.0);
 	}
 	else {

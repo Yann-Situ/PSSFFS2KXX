@@ -1,6 +1,6 @@
 [gd_scene load_steps=22 format=3 uid="uid://27jkgoi43hoq"]
 
-[ext_resource type="PackedScene" path="res://src/Items/Balls/Ball.tscn" id="1"]
+[ext_resource type="PackedScene" uid="uid://cxn2m3havcmil" path="res://src/Items/Balls/Ball.tscn" id="1"]
 [ext_resource type="Texture2D" uid="uid://p5r1v3wuny5y" path="res://assets/art/ball/ball_shock.png" id="2"]
 [ext_resource type="Texture2D" uid="uid://dbdwtry6gxl6d" path="res://assets/art/environment/TileMap.png" id="3"]
 [ext_resource type="Texture2D" uid="uid://fu2767ly07pr" path="res://assets/art/effects/shockwave_0.png" id="4"]
@@ -249,11 +249,9 @@ col2 = Color(0.392157, 0.929412, 1, 1)
 col3 = Color(0.121569, 0.14902, 0.25098, 1)
 
 [node name="Reconstruction" parent="Effects" index="0"]
-emission_rect_extents = Vector2(1, 1)
 color_ramp = SubResource("2")
 
 [node name="Destruction" parent="Effects" index="1"]
-emission_rect_extents = Vector2(1, 1)
 color_ramp = SubResource("Gradient_u1jw4")
 
 [node name="ShockZone" type="Area2D" parent="." index="5"]

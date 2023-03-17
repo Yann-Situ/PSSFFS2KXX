@@ -1,6 +1,6 @@
 [gd_scene load_steps=21 format=3 uid="uid://yco4prlcetlu"]
 
-[ext_resource type="PackedScene" path="res://src/Items/Balls/Ball.tscn" id="1"]
+[ext_resource type="PackedScene" uid="uid://cxn2m3havcmil" path="res://src/Items/Balls/Ball.tscn" id="1"]
 [ext_resource type="Texture2D" uid="uid://dsoyoe3ww8hjd" path="res://assets/art/effects/shockwave_1.png" id="2"]
 [ext_resource type="Script" path="res://src/Items/Balls/BallBoum.gd" id="3"]
 [ext_resource type="Shader" path="res://assets/shader/contour.gdshader" id="3_emvrs"]
@@ -217,11 +217,9 @@ col2 = Color(0.309804, 0.298039, 0.298039, 1)
 col3 = Color(0.203922, 0.203922, 0.203922, 1)
 
 [node name="Reconstruction" parent="Effects" index="0"]
-emission_rect_extents = Vector2(1, 1)
 color_ramp = SubResource("2")
 
 [node name="Destruction" parent="Effects" index="1"]
-emission_rect_extents = Vector2(1, 1)
 color_ramp = SubResource("Gradient_eorql")
 
 [node name="BoumZone" type="Area2D" parent="." index="5"]

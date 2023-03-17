@@ -1,40 +1,48 @@
-[gd_scene load_steps=7 format=2]
+[gd_scene load_steps=9 format=3 uid="uid://clducx30br87q"]
 
-[ext_resource path="res://src/Items/Balls/Ball.tscn" type="PackedScene" id=1]
-[ext_resource path="res://src/Items/Balls/BallRolling.gd" type="Script" id=2]
-[ext_resource path="res://assets/art/ball/ball_rolling.png" type="Texture2D" id=3]
+[ext_resource type="PackedScene" uid="uid://cxn2m3havcmil" path="res://src/Items/Balls/Ball.tscn" id="1"]
+[ext_resource type="Script" path="res://src/Items/Balls/BallRolling.gd" id="2"]
+[ext_resource type="Texture2D" uid="uid://c0pccbcwiaia5" path="res://assets/art/ball/ball_rolling.png" id="3"]
+[ext_resource type="Shader" path="res://assets/shader/contour.gdshader" id="3_uqgkx"]
 
-[sub_resource type="CircleShape2D" id=1]
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_gdj7h"]
+resource_local_to_scene = true
+shader = ExtResource("3_uqgkx")
+shader_parameter/activated = false
+shader_parameter/contour_color = Color(1, 1, 0.9, 0.9)
+
+[sub_resource type="CircleShape2D" id="1"]
 resource_local_to_scene = true
 radius = 6.0
 
-[sub_resource type="Gradient" id=2]
+[sub_resource type="Gradient" id="2"]
 resource_local_to_scene = true
-offsets = PackedFloat32Array( 0, 0.00699301, 0.244755, 0.468531, 0.839161, 1 )
-colors = PackedColorArray( 1, 0, 0.580392, 0, 0, 0, 0, 0.258741, 0.535156, 0.535156, 0.535156, 0.705882, 0.839844, 0.839844, 0.839844, 1, 1, 1, 1, 1, 1, 1, 1, 0 )
+offsets = PackedFloat32Array(0, 0.00699301, 0.244755, 0.468531, 0.839161, 1)
+colors = PackedColorArray(1, 0, 0.580392, 0, 0, 0, 0, 0.258741, 0.535156, 0.535156, 0.535156, 0.705882, 0.839844, 0.839844, 0.839844, 1, 1, 1, 1, 1, 1, 1, 1, 0)
 
-[sub_resource type="Gradient" id=3]
+[sub_resource type="Gradient" id="3"]
 resource_local_to_scene = true
-offsets = PackedFloat32Array( 0, 0.020202, 0.131313, 0.50505, 0.808081, 1 )
-colors = PackedColorArray( 1, 0, 0.580392, 0, 1, 1, 1, 0, 1, 1, 1, 1, 0.839844, 0.839844, 0.839844, 1, 0.535156, 0.535156, 0.535156, 0.705882, 0, 0, 0, 0.258741 )
+offsets = PackedFloat32Array(0, 0.020202, 0.131313, 0.50505, 0.808081, 1)
+colors = PackedColorArray(1, 0, 0.580392, 0, 1, 1, 1, 0, 1, 1, 1, 1, 0.839844, 0.839844, 0.839844, 1, 0.535156, 0.535156, 0.535156, 0.705882, 0, 0, 0, 0.258741)
 
-[node name="BallRolling" instance=ExtResource( 1 )]
-script = ExtResource( 2 )
+[node name="BallRolling" instance=ExtResource("1")]
+script = ExtResource("2")
 impact_effect = 1
 impact_threshold = 400.0
 
 [node name="Sprite2D" parent="." index="0"]
-texture = ExtResource( 3 )
+material = SubResource("ShaderMaterial_gdj7h")
+texture = ExtResource("3")
 
 [node name="collision" parent="." index="1"]
-shape = SubResource( 1 )
+shape = SubResource("1")
 
 [node name="Effects" parent="." index="4"]
-col2 = Color( 0.541176, 0.333333, 0.333333, 1 )
-col3 = Color( 0.227451, 0.192157, 0.192157, 1 )
+col2 = Color(0.541176, 0.333333, 0.333333, 1)
+col3 = Color(0.227451, 0.192157, 0.192157, 1)
 
 [node name="Reconstruction" parent="Effects" index="0"]
-color_ramp = SubResource( 2 )
+color_ramp = SubResource("2")
 
 [node name="Destruction" parent="Effects" index="1"]
-color_ramp = SubResource( 3 )
+color_ramp = SubResource("3")
