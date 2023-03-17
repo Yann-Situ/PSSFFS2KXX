@@ -20,11 +20,11 @@ input_3/auto_advance = false
 input_3/reset = true
 
 [resource]
-graph_offset = Vector2(263.889, 242.232)
+graph_offset = Vector2(-449.111, 164.476)
 nodes/air/node = ExtResource("4")
-nodes/air/position = Vector2(140, 580)
+nodes/air/position = Vector2(260, 560)
 nodes/grind/node = ExtResource("3")
-nodes/grind/position = Vector2(140, 780)
+nodes/grind/position = Vector2(120, 760)
 nodes/ground/node = ExtResource("1")
 nodes/ground/position = Vector2(100, 260)
 nodes/hang/node = ExtResource("2")

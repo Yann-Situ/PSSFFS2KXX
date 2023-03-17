@@ -1,13 +1,11 @@
 extends Action
 
-var pos_tween
+@onready var pos_tween = get_tree().create_tween()
 var dunking_basket = null
 
 func _ready():
-	pos_tween = Tween.new()
-	pos_tween.name = "PosTween"
-	add_child(pos_tween)
-	
+	pass
+
 func move(delta):
 	# Change hitbox + other animation things like sliding etc.
 	# at this point, can_dunk is true so S.dunk_basket is not null
@@ -24,28 +22,30 @@ func move(delta):
 	var dunk_position = dunking_basket.get_dunk_position(P.global_position)
 	var xx = (dunk_position - P.global_position).x
 	S.direction_sprite = 1 if (xx > 0) else ( -1 if (xx < 0) else 0)
-	
-	pos_tween.tween_property(P, "global_position", P.global_position, \
-		dunk_position, \
-		0.32, Tween.TRANS_LINEAR, Tween.EASE_IN_OUT)
-	pos_tween.start()
+
+	pos_tween.kill()
+	pos_tween = get_tree().create_tween()
+	pos_tween.tween_property(P, "global_position",\
+		dunk_position,0.32)\
+		.set_trans(Tween.TRANS_LINEAR).set_ease(Tween.EASE_IN_OUT)
+	#pos_tween.start()
 	if S.active_ball != null:
 		S.active_ball.on_dunk(dunking_basket)
 	#await get_tree().create_timer(0.32).timeout
-	
+
 # should be called by the animation
 func move_dunk():
 	# at this point, S.dunk_basket can be null
 	assert(dunking_basket != null)
 	# be careful, selected basket is sometimes null because the player got out of the zone...
 	if S.active_ball != null:
-		dunking_basket.dunk(P, S.active_ball) 
+		dunking_basket.dunk(P, S.active_ball)
 	else :
-		dunking_basket.dunk(P) 	
-	
+		dunking_basket.dunk(P)
+
 func test_print():
 	print("Time : "+str(Time.get_ticks_msec()))
-	
+
 
 func move_hang():
 	print("Hang")

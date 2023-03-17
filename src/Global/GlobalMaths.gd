@@ -29,3 +29,7 @@ func apply_friction(velocity, friction : float, delta : float):
 	var friction_pow_delta = 0.0 if friction >= 1.0 else pow(1.0-friction, delta)
 	return velocity*friction_pow_delta
 # works for flat and vector2
+
+## the polar coordinates are given as (radius, theta)
+func polar_to_cartesian(c : Vector2) -> Vector2:
+	return c.x * Vector2(cos(c.y), sin(c.y))

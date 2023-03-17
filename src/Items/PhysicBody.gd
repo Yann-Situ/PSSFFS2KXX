@@ -88,8 +88,8 @@ func _physics_process(delta):
 
 func physics_process(delta):
 	var collision = move_and_collide(linear_velocity * delta, false)
-	if collision and collision_effect(collision.collider,
-		collision.collider_velocity, collision.position, collision.normal) :
+	if collision and collision_effect(collision.get_collider(),
+		collision.get_collider_velocity(), collision.get_position(), collision.get_normal()) :
 		collision_handle(collision, delta)
 	update_linear_velocity(delta)
 
@@ -106,7 +106,7 @@ func collision_effect(collider : Object, collider_velocity : Vector2,
 	return true
 
 func collision_handle(collision, delta):
-	var n = collision.normal
+	var n = collision.get_normal()
 	var t = n.tangent()
 	#normal_colision = n
 	if collision.collider.is_in_group("physicbodies") :

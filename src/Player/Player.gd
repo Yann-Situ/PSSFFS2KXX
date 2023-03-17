@@ -50,7 +50,7 @@ class_name Player
 @onready var Shooter = get_node("Shooter")
 @onready var PlayerEffects = get_node("PlayerEffects")
 @onready var BallHandler = get_node("BallHandler")
-@onready var Camera = get_node("Camera2D")
+@onready var Camera = get_node("Camera")
 @onready var LifeHandler = get_node("LifeHandler")
 
 @onready var start_position = global_position
@@ -179,10 +179,10 @@ func get_input(delta): #delta in s
 
 	# HITBOX:
 	if S.is_crouching or S.is_landing or not S.can_stand:
-		$Collision.shape.set_extents(Vector2(8,22))
+		$Collision.shape.set_size(Vector2(8,22))
 		$Collision.position.y = 10
 	else :
-		$Collision.shape.set_extents(Vector2(8,26))
+		$Collision.shape.set_size(Vector2(8,26))
 		$Collision.position.y = 6
 
 	# CAMERA:

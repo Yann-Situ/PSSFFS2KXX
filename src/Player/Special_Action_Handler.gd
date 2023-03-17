@@ -11,7 +11,7 @@ var rays = []
 var rays_flip = []
 var rays_not_flip = []
 var rays_res = []
-var space_state
+var space_state : PhysicsDirectSpaceState2D
 
 @onready var dunkjump_criteria_bests = []
 @onready var dunkdash_criteria_bests = []
@@ -31,9 +31,10 @@ func update_space_state():
 
 func cast(r): #we must have updated the space_state before
 	if not r.updated:
-		r.result = space_state.intersect_ray(P.position+r.position, \
-			P.position+r.position+r.target_position, \
-			[P], P.collision_mask, true, false)
+		var query = PhysicsRayQueryParameters2D.create(P.position+r.position, \
+			P.position+r.position+r.target_position, P.collision_mask, [P])
+		r.intersection_info = space_state.intersect_ray(query)
+		r.result = r.intersection_info != {}
 		r.updated = true
 
 ################################################################################

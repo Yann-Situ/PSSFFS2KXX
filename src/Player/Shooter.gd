@@ -61,7 +61,7 @@ func can_shoot_to_target() -> bool:
 func update_effective_cant_shoot(tau : float = 0.0, s = 0):
 	var theta = lerp_angle(-PI/2, target_position.angle(), 0.5)
 	effective_v_2 = vmax_2
-	effective_v = polar_to_cartesian(vmax, theta)
+	effective_v = GlobalMaths.polar_to_cartesian(Vector2(vmax, theta))
 
 func update_effective_can_shoot(tau : float = 0.0, s = 0):
 	# v is shortcut for velocity
@@ -80,7 +80,7 @@ func update_effective_can_shoot(tau : float = 0.0, s = 0):
 	var temp = max(0.0, 1 - Q.x*Q.x + 2*Q.y)
 
 	#print("%d %d", [g, temp, rad_to_deg(atan2(1 + s*sqrt(temp), Q.x))])
-	effective_v = polar_to_cartesian(v_length, -atan2(1 + s*sqrt(temp), Q.x))
+	effective_v = GlobalMaths.polar_to_cartesian(Vector2(v_length, -atan2(1 + s*sqrt(temp), Q.x)))
 
 func tau_from_vector(vector : Vector2):
 	# tau from the vector (mouse_position-ball)

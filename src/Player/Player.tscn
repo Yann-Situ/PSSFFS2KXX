@@ -1,4 +1,4 @@
-[gd_scene load_steps=116 format=3 uid="uid://djjfl0v3y2pw5"]
+[gd_scene load_steps=117 format=3 uid="uid://djjfl0v3y2pw5"]
 
 [ext_resource type="Script" path="res://src/Player/Player.gd" id="1"]
 [ext_resource type="Texture2D" uid="uid://dcp7p8c6ldxqc" path="res://assets/art/characters/Player.png" id="2"]
@@ -30,16 +30,17 @@
 [ext_resource type="Script" path="res://src/Player/Actions/Release.gd" id="29"]
 [ext_resource type="Script" path="res://src/Characters/LifeHandler.gd" id="30"]
 [ext_resource type="PackedScene" path="res://src/Items/Interactive/SelectorTarget.tscn" id="31"]
-[ext_resource type="Script" path="res://src/Characters/Actions/Grind.gd" id="32"]
+[ext_resource type="Script" path="res://src/Player/Actions/Grind.gd" id="32"]
 [ext_resource type="Texture2D" uid="uid://re0pw15qy3cg" path="res://assets/art/gui/life_bar_fill.png" id="33"]
 [ext_resource type="Texture2D" uid="uid://cimpw4na3r51s" path="res://assets/art/gui/ball_info_bg.png" id="34"]
 [ext_resource type="Texture2D" uid="uid://45680n1ihqi0" path="res://assets/art/gui/life_bar_bg.png" id="35"]
 [ext_resource type="Script" path="res://src/Characters/GUI/LifeBar.gd" id="36"]
 [ext_resource type="Script" path="res://src/Items/Interactive/Damageable.gd" id="37"]
 [ext_resource type="Script" path="res://src/Player/Actions/Dunkdash.gd" id="38"]
-[ext_resource type="Script" path="res://src/Characters/Actions/Hang.gd" id="39"]
+[ext_resource type="Script" path="res://src/Player/Actions/Hang.gd" id="39"]
 [ext_resource type="Script" path="res://src/Player/Selector.gd" id="40"]
 [ext_resource type="Script" path="res://src/Player/Shooter.gd" id="41"]
+[ext_resource type="Script" path="res://src/Player/Camera.gd" id="41_uyfov"]
 [ext_resource type="Shader" path="res://assets/shader/shoot_viewer.gdshader" id="42"]
 [ext_resource type="PackedScene" path="res://src/Effects/DustParticle1.tscn" id="43"]
 [ext_resource type="Script" path="res://src/Player/Actions/Slide.gd" id="44"]
@@ -1379,7 +1380,7 @@ states/stance/position = Vector2(325, 251)
 transitions = ["stance", "action", SubResource("36"), "action", "stance", SubResource("37"), "Start", "action", SubResource("AnimationNodeStateMachineTransition_p8a3c")]
 
 [sub_resource type="AnimationNodeBlendTree" id="39"]
-graph_offset = Vector2(470.549, 214.805)
+graph_offset = Vector2(715.417, 219.48)
 nodes/AnimationNodeBlendTree/node = ExtResource("46")
 nodes/AnimationNodeBlendTree/position = Vector2(1332.86, 632.019)
 nodes/cancelable/node = SubResource("38")
@@ -1449,7 +1450,7 @@ color_ramp = SubResource("53")
 
 [sub_resource type="CompressedTexture2D" id="55"]
 
-[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_xbuex"]
+[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_xwuj4"]
 resource_local_to_scene = true
 particles_animation = true
 particles_anim_h_frames = 6
@@ -1500,60 +1501,70 @@ script = ExtResource("9")
 
 [node name="Ray_fwd_up" type="RayCast2D" parent="Actions/SpecialActionHandler"]
 position = Vector2(0, -16)
+enabled = false
 target_position = Vector2(9, 0)
 collision_mask = 514
 script = ExtResource("10")
 
 [node name="Ray_fwd_down" type="RayCast2D" parent="Actions/SpecialActionHandler"]
 position = Vector2(0, 32)
+enabled = false
 target_position = Vector2(9, 0)
 collision_mask = 514
 script = ExtResource("10")
 
 [node name="Ray_fwd_up_f" type="RayCast2D" parent="Actions/SpecialActionHandler"]
 position = Vector2(0, -16)
+enabled = false
 target_position = Vector2(-9, 0)
 collision_mask = 514
 script = ExtResource("10")
 
 [node name="Ray_fwd_down_f" type="RayCast2D" parent="Actions/SpecialActionHandler"]
 position = Vector2(0, 32)
+enabled = false
 target_position = Vector2(-9, 0)
 collision_mask = 514
 script = ExtResource("10")
 
 [node name="Ray_up_fwd" type="RayCast2D" parent="Actions/SpecialActionHandler"]
 position = Vector2(8, 0)
+enabled = false
 target_position = Vector2(0, -20)
 collision_mask = 514
 script = ExtResource("10")
 
 [node name="Ray_up_bwd" type="RayCast2D" parent="Actions/SpecialActionHandler"]
 position = Vector2(-8, 0)
+enabled = false
 target_position = Vector2(0, -20)
 collision_mask = 514
 script = ExtResource("10")
 
 [node name="Ray_down_fwd" type="RayCast2D" parent="Actions/SpecialActionHandler"]
 position = Vector2(8, 28)
+enabled = false
 target_position = Vector2(0, 5)
 collision_mask = 514
 script = ExtResource("10")
 
 [node name="Ray_down_bwd" type="RayCast2D" parent="Actions/SpecialActionHandler"]
 position = Vector2(-8, 28)
+enabled = false
 target_position = Vector2(0, 5)
 collision_mask = 514
 script = ExtResource("10")
 
 [node name="Ray_slope_fwd" type="RayCast2D" parent="Actions/SpecialActionHandler"]
 position = Vector2(8, 32)
+enabled = false
 target_position = Vector2(0, 17)
 collision_mask = 514
 script = ExtResource("10")
 
 [node name="Ray_slope_bwd" type="RayCast2D" parent="Actions/SpecialActionHandler"]
 position = Vector2(-8, 32)
+enabled = false
 target_position = Vector2(0, 17)
 collision_mask = 514
 script = ExtResource("10")
@@ -1726,7 +1737,7 @@ parameters/cancelable/stance/air/conditions/is_jumping = false
 parameters/cancelable/stance/air/conditions/is_not_onwall = false
 parameters/cancelable/stance/air/conditions/is_onwall = false
 parameters/cancelable/stance/air/fall/playback = SubResource("45")
-parameters/cancelable/stance/grind/blend_position = 0
+parameters/cancelable/stance/grind/blend_position = 0.0
 parameters/cancelable/stance/ground/playback = SubResource("46")
 parameters/cancelable/stance/ground/conditions/is_crouching = false
 parameters/cancelable/stance/ground/conditions/is_halfturning = false
@@ -1777,7 +1788,7 @@ lifetime = 0.65
 explosiveness = 0.9
 
 [node name="GrindParticles" parent="PlayerEffects" instance=ExtResource("27")]
-material = SubResource("CanvasItemMaterial_xbuex")
+material = SubResource("CanvasItemMaterial_xwuj4")
 position = Vector2(0, 16)
 
 [node name="BallHandler" type="Area2D" parent="."]
@@ -1810,6 +1821,7 @@ shape = SubResource("1")
 z_index = 100
 position = Vector2(0, -35)
 limit_smoothed = true
+script = ExtResource("41_uyfov")
 
 [node name="UI" type="CanvasLayer" parent="."]
 layer = 10
@@ -1828,6 +1840,7 @@ layout_mode = 2
 [node name="Bar" type="HBoxContainer" parent="UI/MarginContainer/HBoxContainer/VBoxContainer"]
 layout_mode = 2
 script = ExtResource("36")
+label_path = NodePath("../../MarginContainer/TextureRect/RichTextLabel")
 
 [node name="LifeBar" type="TextureProgressBar" parent="UI/MarginContainer/HBoxContainer/VBoxContainer/Bar"]
 layout_mode = 2

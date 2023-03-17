@@ -127,9 +127,9 @@ func pickup_character(character : Node):
 	inside_bodies.push_back(character)
 	bodies_positions.push_back(Vector2(character.global_position.x, \
 		self.global_position.y+hang_position_offset_y))
-	
+
 	character.get_node("Actions/Hang").move(0.01)
-	
+
 	$DunkCooldown.stop()
 	can_receive_dunk = false
 
@@ -170,7 +170,7 @@ func enable_contour():
 	var tween = $LightSmall/Tween
 	if tween.is_active():
 		tween.remove_all()
-	tween.tween_property(light, "energy", light.energy, 0.8, 0.15, 0, Tween.EASE_OUT)
+	tween.tween_property(light, "energy", 0.8, 0.15).set_trans(Tween.EASE_OUT)
 	tween.start()
 
 func disable_contour():
@@ -178,5 +178,5 @@ func disable_contour():
 	var tween = $LightSmall/Tween
 	if tween.is_active():
 		tween.remove_all()
-	tween.tween_property(light, "energy", light.energy, 0.0, 0.15, 0, Tween.EASE_OUT)
+	tween.tween_property(light, "energy", 0.0, 0.15).set_trans(Tween.EASE_OUT)
 	tween.start()

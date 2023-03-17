@@ -4,8 +4,8 @@ class_name SelectorTarget
 
 @export var tween_duration : float = 0.3#s
 var selection_node = null
-var tween_self_modulate = self.create_tween()
-var tween_position = self.create_tween()
+@onready var tween_self_modulate = self.create_tween()
+@onready var tween_position = self.create_tween()
 
 func _ready():
 	set_process(false)

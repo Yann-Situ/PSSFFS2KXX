@@ -15,10 +15,10 @@ var portals = {} : get = get_portals
 @export var meta_player : NodePath # sould be set by the level
 
 func update_camera_limit():
-	P.Camera3D.limit_left = limit_left
-	P.Camera3D.limit_top = limit_top
-	P.Camera3D.limit_right = limit_right
-	P.Camera3D.limit_bottom = limit_bottom
+	P.Camera.limit_left = limit_left
+	P.Camera.limit_top = limit_top
+	P.Camera.limit_right = limit_right
+	P.Camera.limit_bottom = limit_bottom
 
 func get_portals():
 	return portals
@@ -46,7 +46,7 @@ func _enter_tree():
 	# and assign it to meta_player
 	print(name + " enter_tree")
 	#print("METAPLAYER : " + str(meta_player))
-	if get_node(meta_player) == null: # when room is run alone from the editor for tests
+	if not has_node(meta_player): # when room is run alone from the editor for tests
 		#print("No meta player : create one and assign meta_player")
 		Global.set_current_room(self)
 		var player_scene = load("res://src/Player/Player.tscn")

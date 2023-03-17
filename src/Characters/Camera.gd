@@ -6,8 +6,8 @@ var current_shake_power = 0.0
 var shake_offset = Vector2(0,0)
 var offset_no_shake = offset
 
-var tween_shake = self.create_tween()
-var tween_no_shake = self.create_tween()
+@onready var tween_shake = self.create_tween()
+@onready var tween_no_shake = self.create_tween()
 
 func _ready():
 	pass

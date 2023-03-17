@@ -22,4 +22,4 @@ func move(delta):
 	print("Velocity: "+str(S.velocity))
 	S.get_node("ToleranceDunkJumpPressTimer").stop()
 	S.get_node("CanJumpTimer").start(S.jump_countdown)
-	#P.get_node("Camera3D").screen_shake(0.2,10)
+	#P.get_node("Camera").screen_shake(0.2,10)
