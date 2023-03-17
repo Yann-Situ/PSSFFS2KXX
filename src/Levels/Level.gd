@@ -46,7 +46,10 @@ func browse_rooms(room_name : String):
 		self.remove_child(room)
 
 		for portal in portal_nodes:
-			browse_rooms(portal.get_next_room())
+			if portal.get_next_room():
+				browse_rooms(portal.get_next_room())
+			else :
+				push_warning(portal.name+" doesn't have any value for next_room.")
 
 ################################################################################
 

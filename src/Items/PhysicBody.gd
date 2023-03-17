@@ -107,24 +107,24 @@ func collision_effect(collider : Object, collider_velocity : Vector2,
 
 func collision_handle(collision, delta):
 	var n = collision.get_normal()
-	var t = n.tangent()
+	var t = n.orthogonal()    
 	#normal_colision = n
-	if collision.collider.is_in_group("physicbodies") :
-		var m2 = collision.collider.mass
+	if collision.get_collider().is_in_group("physicbodies") :
+		var m2 = collision.get_collider().mass
 		var summass = m2 + mass
-		var dist_vect = global_position-collision.collider.get_global_position()
-		var speeddist = (linear_velocity - collision.collider_velocity).dot(dist_vect)
+		var dist_vect = global_position-collision.get_collider().get_global_position()
+		var speeddist = (linear_velocity - collision.get_collider_velocity()).dot(dist_vect)
 		linear_velocity -= 2*m2/summass*(speeddist/dist_vect.length_squared())*dist_vect
-		collision.collider.set_linear_velocity(collision.collider_velocity + 2*mass/summass*(speeddist/dist_vect.length_squared())*dist_vect)
-		#collision.collider.apply_impulse(2*m2*mass/summass*(speeddist/dist_vect.length_squared())*dist_vect)#doesn't work don't know Y
+		collision.get_collider().set_linear_velocity(collision.get_collider_velocity() + 2*mass/summass*(speeddist/dist_vect.length_squared())*dist_vect)
+		#collision.get_collider().apply_impulse(2*m2*mass/summass*(speeddist/dist_vect.length_squared())*dist_vect)#doesn't work don't know Y
 
 		# see https://docs.godotengine.org/fr/stable/classes/class_kinematiccollision2d.html#class-kinematiccollision2d-property-collider
 		# and call `collision_effect` on the collider with the right `collision`
 		# object. This requires to change collider, angle, normal etc.
-		collision.collider.collision_effect(self,linear_velocity, \
-			collision.position, collision.normal)
+		collision.get_collider().collision_effect(self,linear_velocity, \
+			collision.get_position(), collision.get_normal())
 
-		move_and_collide(collision.remainder.bounce(collision.normal),false)#may cause pb on corners ?
+		move_and_collide(collision.get_remainder().bounce(collision.get_normal()),false)#may cause pb on corners ?
 
 	else:
 		var bounce_linear_velocity = bounce*linear_velocity.bounce(n)
@@ -136,7 +136,7 @@ func collision_handle(collision, delta):
 			#var vel_t = lerp(t.dot(linear_velocity), 0, friction)
 			var vel_t = GlobalMaths.apply_friction(t.dot(linear_velocity), friction, delta)
 			linear_velocity = vel_t*t
-			var motion = collision.remainder.dot(t)*t
+			var motion = collision.get_remainder().dot(t)*t
 			move_and_collide(motion,false)
 			set_velocity(linear_velocity)
 			set_up_direction(n)
@@ -152,5 +152,5 @@ func collision_handle(collision, delta):
 			#var vel_t = lerp(t.dot(bounce_linear_velocity), 0, friction)
 			var vel_t = GlobalMaths.apply_friction(t.dot(bounce_linear_velocity), friction, delta)
 			linear_velocity = vel_n*n + vel_t*t
-			var motion = collision.remainder.bounce(n)
+			var motion = collision.get_remainder().bounce(n)
 			move_and_collide(motion,false)#may cause pb on corners ?

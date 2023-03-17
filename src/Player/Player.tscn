@@ -4,7 +4,7 @@
 [ext_resource type="Texture2D" uid="uid://dcp7p8c6ldxqc" path="res://assets/art/characters/Player.png" id="2"]
 [ext_resource type="Script" path="res://src/Player/Shoot_predictor.gd" id="3"]
 [ext_resource type="Texture2D" uid="uid://cd7mx6yijog8j" path="res://assets/art/ball/ball_test.png" id="4"]
-[ext_resource type="PackedScene" path="res://src/Player/Player_State.tscn" id="5"]
+[ext_resource type="PackedScene" uid="uid://b6mk7ytgxiui" path="res://src/Player/Player_State.tscn" id="5"]
 [ext_resource type="Script" path="res://src/Player/Ball_Handler.gd" id="6"]
 [ext_resource type="Script" path="res://src/Player/AnimationTree.gd" id="8"]
 [ext_resource type="Script" path="res://src/Player/Special_Action_Handler.gd" id="9"]
@@ -81,7 +81,7 @@ tracks/0/loop_wrap = true
 tracks/0/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
-"update": 0,
+"update": 1,
 "values": [82]
 }
 tracks/1/type = "value"
@@ -93,8 +93,20 @@ tracks/1/loop_wrap = true
 tracks/1/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
-"update": 0,
+"update": 1,
 "values": [Vector2(9, 12)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("../State:is_dunkjumping")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
 }
 
 [sub_resource type="Animation" id="5"]
@@ -121,7 +133,7 @@ tracks/1/loop_wrap = true
 tracks/1/keys = {
 "times": PackedFloat32Array(0, 0.1, 0.11, 0.12, 0.15),
 "transitions": PackedFloat32Array(1, 1, 1, 1, 1),
-"update": 0,
+"update": 1,
 "values": [Vector2(-14, -21), Vector2(-16, -20), Vector2(-14, -22), Vector2(13, -34), Vector2(13, -34)]
 }
 tracks/2/type = "method"
@@ -174,7 +186,7 @@ tracks/1/loop_wrap = true
 tracks/1/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
-"update": 0,
+"update": 1,
 "values": [Vector2(-8, 11)]
 }
 
@@ -496,7 +508,7 @@ tracks/1/loop_wrap = true
 tracks/1/keys = {
 "times": PackedFloat32Array(0, 0.2, 0.35),
 "transitions": PackedFloat32Array(1, 1, 1),
-"update": 0,
+"update": 1,
 "values": [Vector2(3, -6), Vector2(3, -6), Vector2(-7, -8)]
 }
 
@@ -524,7 +536,7 @@ tracks/1/loop_wrap = true
 tracks/1/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
-"update": 0,
+"update": 1,
 "values": [Vector2(-8, -8)]
 }
 
@@ -552,7 +564,7 @@ tracks/1/loop_wrap = true
 tracks/1/keys = {
 "times": PackedFloat32Array(0, 0.25, 0.35),
 "transitions": PackedFloat32Array(1, 1, 1),
-"update": 0,
+"update": 1,
 "values": [Vector2(-7, -6), Vector2(-9, -5), Vector2(-8, -5)]
 }
 
@@ -580,7 +592,7 @@ tracks/1/loop_wrap = true
 tracks/1/keys = {
 "times": PackedFloat32Array(0, 0.34),
 "transitions": PackedFloat32Array(1, 1),
-"update": 0,
+"update": 1,
 "values": [true, false]
 }
 tracks/2/type = "method"
@@ -606,7 +618,7 @@ tracks/3/loop_wrap = true
 tracks/3/keys = {
 "times": PackedFloat32Array(0, 0.06, 0.1, 0.11, 0.12, 0.15),
 "transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1),
-"update": 0,
+"update": 1,
 "values": [Vector2(-14, -21), Vector2(-14, -21), Vector2(-16, -20), Vector2(-12, -23), Vector2(13, -34), Vector2(13, -34)]
 }
 
@@ -633,7 +645,7 @@ tracks/1/loop_wrap = true
 tracks/1/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
-"update": 0,
+"update": 1,
 "values": [Vector2(-4, -5)]
 }
 
@@ -660,7 +672,7 @@ tracks/1/loop_wrap = true
 tracks/1/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
-"update": 0,
+"update": 1,
 "values": [Vector2(-14, 7)]
 }
 
@@ -687,7 +699,7 @@ tracks/1/loop_wrap = true
 tracks/1/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
-"update": 0,
+"update": 1,
 "values": [Vector2(-13, 6)]
 }
 
@@ -714,7 +726,7 @@ tracks/1/loop_wrap = true
 tracks/1/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
-"update": 0,
+"update": 1,
 "values": [Vector2(-14, 2)]
 }
 
@@ -741,7 +753,7 @@ tracks/1/loop_wrap = true
 tracks/1/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
-"update": 0,
+"update": 1,
 "values": [Vector2(-10, 7)]
 }
 
@@ -768,7 +780,7 @@ tracks/1/loop_wrap = true
 tracks/1/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
-"update": 0,
+"update": 1,
 "values": [Vector2(-10, 7)]
 }
 
@@ -795,7 +807,7 @@ tracks/1/loop_wrap = true
 tracks/1/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
-"update": 0,
+"update": 1,
 "values": [Vector2(-9, -1)]
 }
 
@@ -822,7 +834,7 @@ tracks/1/loop_wrap = true
 tracks/1/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
-"update": 0,
+"update": 1,
 "values": [Vector2(-13, 8)]
 }
 
@@ -904,7 +916,7 @@ tracks/1/loop_wrap = true
 tracks/1/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
-"update": 0,
+"update": 1,
 "values": [Vector2(-8, 20)]
 }
 tracks/2/type = "method"
@@ -1000,7 +1012,7 @@ tracks/1/loop_wrap = true
 tracks/1/keys = {
 "times": PackedFloat32Array(0, 0.4),
 "transitions": PackedFloat32Array(1, 1),
-"update": 0,
+"update": 1,
 "values": [true, false]
 }
 tracks/2/type = "value"
@@ -1292,7 +1304,7 @@ tracks/1/loop_wrap = true
 tracks/1/keys = {
 "times": PackedFloat32Array(0, 0.4),
 "transitions": PackedFloat32Array(1, 1),
-"update": 0,
+"update": 1,
 "values": [true, false]
 }
 tracks/2/type = "value"
@@ -1380,7 +1392,7 @@ states/stance/position = Vector2(325, 251)
 transitions = ["stance", "action", SubResource("36"), "action", "stance", SubResource("37"), "Start", "action", SubResource("AnimationNodeStateMachineTransition_p8a3c")]
 
 [sub_resource type="AnimationNodeBlendTree" id="39"]
-graph_offset = Vector2(715.417, 219.48)
+graph_offset = Vector2(762.476, 233.832)
 nodes/AnimationNodeBlendTree/node = ExtResource("46")
 nodes/AnimationNodeBlendTree/position = Vector2(1332.86, 632.019)
 nodes/cancelable/node = SubResource("38")
@@ -1450,7 +1462,7 @@ color_ramp = SubResource("53")
 
 [sub_resource type="CompressedTexture2D" id="55"]
 
-[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_xwuj4"]
+[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_2qrm0"]
 resource_local_to_scene = true
 particles_animation = true
 particles_anim_h_frames = 6
@@ -1487,6 +1499,10 @@ walk_accel = 210.0
 
 [node name="State" parent="." instance=ExtResource("5")]
 visible = false
+is_jumping = true
+is_landing = true
+is_halfturning = true
+is_shooting = true
 
 [node name="Collision" type="CollisionShape2D" parent="."]
 visible = false
@@ -1788,7 +1804,7 @@ lifetime = 0.65
 explosiveness = 0.9
 
 [node name="GrindParticles" parent="PlayerEffects" instance=ExtResource("27")]
-material = SubResource("CanvasItemMaterial_xwuj4")
+material = SubResource("CanvasItemMaterial_2qrm0")
 position = Vector2(0, 16)
 
 [node name="BallHandler" type="Area2D" parent="."]

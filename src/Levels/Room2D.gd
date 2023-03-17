@@ -10,7 +10,7 @@ signal is_exiting_level
 @export var limit_bottom : int = 10000000
 
 var P = null
-var portals = {} : get = get_portals
+var portals : Dictionary = {} : get = get_portals
 
 @export var meta_player : NodePath # sould be set by the level
 
