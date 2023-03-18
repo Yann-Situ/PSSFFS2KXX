@@ -1,4 +1,4 @@
-[gd_scene load_steps=24 format=3 uid="uid://dgjpons7cu2id"]
+[gd_scene load_steps=27 format=3 uid="uid://dgjpons7cu2id"]
 
 [ext_resource type="PackedScene" uid="uid://b5emf4je4tnag" path="res://src/Levels/Room2D.tscn" id="1"]
 [ext_resource type="PackedScene" uid="uid://b45hldwkibtqb" path="res://src/Levels/Portal.tscn" id="2"]
@@ -6,7 +6,6 @@
 [ext_resource type="PackedScene" uid="uid://27jkgoi43hoq" path="res://src/Items/Balls/BallShock.tscn" id="4"]
 [ext_resource type="PackedScene" path="res://src/Items/Interactive/DashTarget.tscn" id="5"]
 [ext_resource type="Shader" path="res://assets/shader/fog.gdshader" id="6"]
-[ext_resource type="PackedScene" uid="uid://cd2wyj207og8s" path="res://src/Items/Balls/BallDash.tscn" id="7"]
 [ext_resource type="Texture2D" uid="uid://boi3pgcflmp6r" path="res://assets/art/environment/chain0.png" id="8"]
 [ext_resource type="PackedScene" path="res://src/Items/Environment/ParabolaCatenary.tscn" id="9"]
 [ext_resource type="PackedScene" uid="uid://c6cdyqr51vbxh" path="res://src/Items/Interactive/GraffSpray.tscn" id="10"]
@@ -32,12 +31,26 @@ noise = SubResource("3")
 [sub_resource type="ShaderMaterial" id="5"]
 shader = ExtResource("6")
 shader_parameter/octaves = 5
-shader_parameter/starting_amplitude = 0.407
+shader_parameter/starting_amplitude = 0.414
 shader_parameter/starting_frequency = 0.381
 shader_parameter/shift = -0.204
 shader_parameter/velocity = Vector2(1.2, 0)
 shader_parameter/fog_color = Color(0.494118, 0.309804, 0.0627451, 1)
 shader_parameter/noise = SubResource("10")
+
+[sub_resource type="Curve2D" id="Curve2D_4mxb4"]
+resource_local_to_scene = true
+_data = {
+"points": PackedVector2Array(0, 0, 0, 0, 256, 120, 0, 0, 0, 0, -120, 16)
+}
+point_count = 2
+
+[sub_resource type="Curve2D" id="Curve2D_wqumb"]
+resource_local_to_scene = true
+_data = {
+"points": PackedVector2Array(0, 0, 0, 0, 248, 16, 0, 0, 0, 0, -120, 16)
+}
+point_count = 2
 
 [sub_resource type="Environment" id="6"]
 resource_local_to_scene = true
@@ -54,27 +67,13 @@ adjustment_enabled = true
 adjustment_contrast = 1.08
 adjustment_saturation = 1.01
 
-[sub_resource type="Curve2D" id="Curve2D_f2bxs"]
-resource_local_to_scene = true
-_data = {
-"points": PackedVector2Array(0, 0, 0, 0, 256, 120, 0, 0, 0, 0, -120, 16)
-}
-point_count = 2
-
-[sub_resource type="Curve2D" id="Curve2D_udrsq"]
-resource_local_to_scene = true
-_data = {
-"points": PackedVector2Array(0, 0, 0, 0, 248, 16, 0, 0, 0, 0, -120, 16)
-}
-point_count = 2
-
 [sub_resource type="Animation" id="9"]
 resource_name = "calm"
 length = 2.0
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("ParallaxForeground/ParallaxLayer5/Fog:material:shader_param/starting_amplitude")
+tracks/0/path = NodePath("ParallaxForeground/ParallaxLayer5/Fog:material:shader_parameter/starting_amplitude")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
@@ -137,13 +136,20 @@ _data = {
 "calm": SubResource("9")
 }
 
+[sub_resource type="PhysicsMaterial" id="PhysicsMaterial_2o73n"]
+
+[sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_utcpg"]
+distance = 16.0
+
+[sub_resource type="Gradient" id="Gradient_alvn4"]
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_j3k1s"]
+gradient = SubResource("Gradient_alvn4")
+
 [node name="RoomExample1" instance=ExtResource("1")]
 limit_left = -432
 limit_top = -640
 limit_right = 1024
-
-[node name="Map@FrontEnvironment@BallDash" parent="." index="0" instance=ExtResource("7")]
-position = Vector2(-176, -328)
 
 [node name="Portal1" parent="Portals" index="0" instance=ExtResource("2")]
 position = Vector2(-32, -32)
@@ -184,82 +190,96 @@ mouse_filter = 2
 visible = true
 color = Color(0.921569, 0.917647, 0.831373, 1)
 
-[node name="Ball" parent="Environment/Balls" index="0" instance=ExtResource("3")]
-position = Vector2(80, -16)
-
-[node name="BallShock" parent="Environment/Balls" index="1" instance=ExtResource("4")]
-z_index = 11
-position = Vector2(-232, -104)
-collision_layer = 4
-collision_mask = 6
-damage_destruction_threshold = 3.0
-
-[node name="WorldEnvironment" parent="." index="6"]
-environment = SubResource("6")
-
-[node name="ParabolaCatenary" parent="." index="7" instance=ExtResource("9")]
+[node name="ParabolaCatenary" parent="Map" index="1" instance=ExtResource("9")]
 z_index = 300
 position = Vector2(312, -328)
-curve = SubResource("Curve2D_f2bxs")
+curve = SubResource("Curve2D_4mxb4")
 p0_slope = 1.7
 line_width = 7.438
 line_modulate = Color(0.329412, 0.329412, 0.329412, 1)
 line_texture = ExtResource("8")
 
-[node name="ParabolaCatenary2" parent="." index="8" instance=ExtResource("9")]
+[node name="ParabolaCatenary2" parent="Map" index="2" instance=ExtResource("9")]
 z_index = 300
 position = Vector2(240, -328)
-curve = SubResource("Curve2D_udrsq")
+curve = SubResource("Curve2D_wqumb")
 p0_slope = 1.3
 line_width = 7.438
 line_modulate = Color(0.329412, 0.329412, 0.329412, 1)
 line_texture = ExtResource("8")
 
-[node name="PlayerPosition" parent="." index="9"]
+[node name="Ball" parent="Environment/Balls" index="0" instance=ExtResource("3")]
+position = Vector2(-168, -40)
+
+[node name="BallShock" parent="Environment/Balls" index="1" instance=ExtResource("4")]
+z_index = 11
+position = Vector2(-128, -72)
+collision_layer = 4
+collision_mask = 6
+damage_destruction_threshold = 3.0
+
+[node name="GraffSpray" parent="Environment" index="5" instance=ExtResource("10")]
+position = Vector2(288, -24)
+color = Color(0.054902, 0.568627, 0.941176, 1)
+
+[node name="GraffSpray2" parent="Environment" index="6" instance=ExtResource("10")]
+position = Vector2(248, -24)
+color = Color(1, 0, 0.890196, 1)
+
+[node name="GraffSpray4" parent="Environment" index="7" instance=ExtResource("10")]
+position = Vector2(416, -284)
+color = Color(0.890196, 0.717647, 0.0470588, 1)
+
+[node name="GraffSpray5" parent="Environment" index="8" instance=ExtResource("10")]
+position = Vector2(-361, -376)
+color = Color(0.682353, 0.682353, 0.682353, 1)
+
+[node name="GraffSpray6" parent="Environment" index="9" instance=ExtResource("10")]
+position = Vector2(-399, -29)
+color = Color(0.239216, 0.172549, 0.172549, 1)
+
+[node name="GraffSpray3" parent="Environment" index="10" instance=ExtResource("10")]
+position = Vector2(328, -24)
+color = Color(0.0862745, 0.603922, 0.411765, 1)
+
+[node name="BallBoum" parent="Environment" index="11" instance=ExtResource("13")]
+position = Vector2(-192, -64)
+
+[node name="BallBoum2" parent="Environment" index="12" instance=ExtResource("13")]
+position = Vector2(-192, -152)
+
+[node name="DashTarget2" parent="Environment" index="13" instance=ExtResource("5")]
+position = Vector2(16, -32)
+
+[node name="DashTarget" parent="Environment" index="14" instance=ExtResource("5")]
+position = Vector2(-184, -32)
+
+[node name="WorldEnvironment" parent="." index="5"]
+environment = SubResource("6")
+
+[node name="PlayerPosition" parent="." index="6"]
 position = Vector2(-96, -32)
 
-[node name="PedestrianGenerator" parent="." index="10" instance=ExtResource("11")]
+[node name="PedestrianGenerator" parent="." index="7" instance=ExtResource("11")]
 position = Vector2(-48, -32)
 x_radius = 400.0
 palette_scheme_sampler = ExtResource("12")
 
-[node name="GraffSpray" parent="." index="11" instance=ExtResource("10")]
-position = Vector2(288, -24)
-color = Color(0.054902, 0.568627, 0.941176, 1)
-
-[node name="GraffSpray2" parent="." index="12" instance=ExtResource("10")]
-position = Vector2(248, -24)
-color = Color(1, 0, 0.890196, 1)
-
-[node name="GraffSpray4" parent="." index="13" instance=ExtResource("10")]
-position = Vector2(416, -284)
-color = Color(0.890196, 0.717647, 0.0470588, 1)
-
-[node name="GraffSpray5" parent="." index="14" instance=ExtResource("10")]
-position = Vector2(-361, -376)
-color = Color(0.682353, 0.682353, 0.682353, 1)
-
-[node name="GraffSpray6" parent="." index="15" instance=ExtResource("10")]
-position = Vector2(-399, -29)
-color = Color(0.239216, 0.172549, 0.172549, 1)
-
-[node name="GraffSpray3" parent="." index="16" instance=ExtResource("10")]
-position = Vector2(328, -24)
-color = Color(0.0862745, 0.603922, 0.411765, 1)
-
-[node name="BallBoum" parent="." index="17" instance=ExtResource("13")]
-position = Vector2(-192, -64)
-
-[node name="BallBoum2" parent="." index="18" instance=ExtResource("13")]
-position = Vector2(-192, -96)
-
-[node name="DashTarget" parent="." index="19" instance=ExtResource("5")]
-position = Vector2(314, -151)
-
-[node name="DashTarget" parent="DashTarget" index="4" instance=ExtResource("5")]
-position = Vector2(-490, -215)
-
-[node name="RoomAnimations" parent="." index="20"]
+[node name="RoomAnimations" parent="." index="8"]
 libraries = {
 "": SubResource("AnimationLibrary_m5lmj")
 }
+
+[node name="Floor" type="StaticBody2D" parent="." index="9"]
+collision_layer = 2
+collision_mask = 0
+physics_material_override = SubResource("PhysicsMaterial_2o73n")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Floor" index="0"]
+position = Vector2(0, 16)
+shape = SubResource("WorldBoundaryShape2D_utcpg")
+
+[node name="Sprite2D" type="Sprite2D" parent="Floor" index="1"]
+position = Vector2(64, 32)
+scale = Vector2(16, 1)
+texture = SubResource("GradientTexture2D_j3k1s")

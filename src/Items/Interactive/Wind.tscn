@@ -16,13 +16,13 @@ noise = SubResource( 5 )
 [sub_resource type="ShaderMaterial" id=9]
 resource_local_to_scene = true
 shader = ExtResource( 2 )
-shader_param/octaves = 5
-shader_param/starting_amplitude = 0.407
-shader_param/starting_frequency = 0.381
-shader_param/shift = -0.204
-shader_param/velocity = Vector2( 3, 0 )
-shader_param/fog_color = Color( 1, 1, 1, 0.537255 )
-shader_param/noise = SubResource( 4 )
+shader_parameter/octaves = 5
+shader_parameter/starting_amplitude = 0.407
+shader_parameter/starting_frequency = 0.381
+shader_parameter/shift = -0.204
+shader_parameter/velocity = Vector2( 3, 0 )
+shader_parameter/fog_color = Color( 1, 1, 1, 0.537255 )
+shader_parameter/noise = SubResource( 4 )
 
 [sub_resource type="Gradient" id=7]
 

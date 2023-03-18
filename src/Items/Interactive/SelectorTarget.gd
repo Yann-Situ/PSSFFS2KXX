@@ -4,8 +4,8 @@ class_name SelectorTarget
 
 @export var tween_duration : float = 0.3#s
 var selection_node = null
-@onready var tween_self_modulate = self.create_tween()
-@onready var tween_position = self.create_tween()
+var tween_self_modulate : Tween
+var tween_position : Tween
 
 func _ready():
 	set_process(false)
@@ -22,7 +22,8 @@ func update_selection(selection : Selectable):
 
 func select():
 	set_process(false)
-	tween_position.kill()
+	if tween_position:
+		tween_position.kill()
 	tween_position = self.create_tween()
 	tween_position.tween_method(self.tween_position_follow_property.bind(global_position, selection_node),\
 	0.0, 1.0, tween_duration)\
@@ -30,7 +31,9 @@ func select():
 	tween_position.tween_callback(self._on_tween_position_completed)
 	# tween_position.start()
 
-	tween_self_modulate.kill()
+	if tween_self_modulate:
+
+		tween_self_modulate.kill()
 	tween_self_modulate = self.create_tween()
 	tween_self_modulate.tween_property(self, "self_modulate", \
 		Color.WHITE, tween_duration)\
@@ -38,7 +41,8 @@ func select():
 	# tween_self_modulate.start()
 
 func deselect():
-	tween_self_modulate.kill()
+	if tween_self_modulate:
+		tween_self_modulate.kill()
 	tween_self_modulate = self.create_tween()
 	tween_self_modulate.tween_property(self, "self_modulate", \
 		Color.TRANSPARENT, tween_duration)\

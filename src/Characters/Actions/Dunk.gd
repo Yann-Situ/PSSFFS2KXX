@@ -1,6 +1,6 @@
 extends Action
 
-@onready var pos_tween = get_tree().create_tween()
+var pos_tween : Tween
 
 func _ready():
 	pass
@@ -13,7 +13,8 @@ func move(delta):
 	S.velocity.y = 0
 
 	S.get_node("CanDunkTimer").start(S.dunk_countdown)
-	pos_tween.kill()
+	if pos_tween:
+		pos_tween.kill()
 	pos_tween = get_tree().create_tween()
 	pos_tween.tween_property(P, "global_position",\
 		S.dunk_basket.get_dunk_position(P.global_position),0.32)\

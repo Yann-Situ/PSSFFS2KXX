@@ -11,8 +11,8 @@ var current_shake_power = 0.0
 var shake_offset = Vector2(0,0)
 var offset_no_shake = offset
 
-@onready var tween_shake = self.create_tween()
-@onready var tween_no_shake = self.create_tween()
+var tween_shake : Tween
+var tween_no_shake : Tween
 
 func _ready():
 	pass
@@ -22,7 +22,8 @@ func screen_shake(duration, power, boum_position : Vector2 = self.global_positio
 		return
 	if power > current_shake_power:
 		current_shake_power = power
-		tween_shake.kill()
+		if tween_shake:
+			tween_shake.kill()
 		tween_shake = self.create_tween()
 		tween_shake.tween_method(self.set_random_shake_offset,
 			Vector2(power, power), Vector2(0,0), duration)\
@@ -47,7 +48,8 @@ func set_offset_from_type(type, direction = Vector2(0,0), tween_speed = 0.2):
 	set_target(target_offset, tween_speed)
 
 func set_target(target_offset_, tween_duration = 0.2):
-	tween_no_shake.kill()
+	if tween_no_shake:
+		tween_no_shake.kill()
 	tween_no_shake = self.create_tween()
 	tween_no_shake.tween_property(self, "offset_no_shake", target_offset,
 		tween_duration).set_trans(Tween.TRANS_LINEAR).set_ease(Tween.EASE_OUT_IN)

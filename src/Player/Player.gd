@@ -4,20 +4,20 @@ class_name Player
 
 @export var physics_enabled : bool = true
 
-# Environment features (should be given by the map)
+## Environment features (should be given by the map)
 @export var floor_unfriction : float = 0.18 # s
 @export var air_unfriction : float = 0.32 # s
 @export var attract_force : float = 800.0 # m.pix/s² # don't know for what know (?)
 @export var gravity : Vector2 # pix/s²
 
-# Crouch features
+## Crouch features
 @export var crouch_speed_max : float = 300.0 # pix/s
 @export var crouch_instant_speed : float = 60.0 # pix/s
 @export var crouch_return_thresh_instant_speed : float = 100.0 # pix/s
 @export var crouch_accel : float = 200.0 # pix/s²
 @export var landing_velocity_thresh : float = 400.0 # pix/s
 
-# Aerial features
+## Aerial features
 @export var sideaerial_speed_max : float = 400.0 # pix/s
 @export var air_instant_speed : float = 45.0 # pix/s
 @export var air_return_thresh_instant_speed : float = 50.0 # pix/s
@@ -30,14 +30,14 @@ class_name Player
 @export var max_speed_fall_onwall : float = 200.0 # pix/s
 @export var vec_walljump : Vector2 = Vector2(0.65, -1)
 
-# Walk and run features
+## Walk and run features
 @export var run_speed_thresh : float = 350.0 # pix/s
 @export var run_speed_max : float = 400.0 # pix/s
 @export var walk_instant_speed : float = 150.0 # pix/s
 @export var walk_return_thresh_instant_speed : float = 300.0 # pix/s
 @export var walk_accel : float = 220.0 # pix/s²
 
-# Other features
+## Other features
 @export var throw_impulse : float = 600.0 # kg.pix/s
 
 @export var flip_h : bool = false
@@ -175,15 +175,17 @@ func get_input(delta): #delta in s
 	# GRAVITY:
 
 	# SHADER:
-	#$Sprite2D.material.set("shader_param/speed",S.velocity)
+	#$Sprite2D.material.set("shader_parameter/speed",S.velocity)
 
 	# HITBOX:
 	if S.is_crouching or S.is_landing or not S.can_stand:
-		$Collision.shape.set_size(Vector2(8,22))
-		$Collision.position.y = 10
+		$Collision.shape.set_radius(8.5)
+		$Collision.shape.set_height(57)
+		$Collision.position.y = 3.5
 	else :
-		$Collision.shape.set_size(Vector2(8,26))
-		$Collision.position.y = 6
+		$Collision.shape.set_radius(8.5)
+		$Collision.shape.set_height(31)
+		$Collision.position.y = 16.5
 
 	# CAMERA:
 	if S.is_aiming:
@@ -272,30 +274,17 @@ func remove_force(name : String):
 
 func _physics_process(delta):
 	get_input(delta)
-#	if S.velocity == Vector2.ZERO and !S.is_onfloor:
-#		print("ZERO")
 	if physics_enabled:
 		apply_forces(delta)
-		if SpecialActionHandler.is_on_slope() and S.velocity.y > - abs(S.velocity.x) :
-			set_velocity(S.velocity)
-			# TODOConverter40 looks that snap in Godot 4.0 is float, not vector like in Godot 3 - previous value `33*Vector2.DOWN`
-			set_up_direction(Vector2.UP)
-			set_floor_stop_on_slope_enabled(true)
-			set_max_slides(4)
-			set_floor_max_angle(0.785398)
-			# TODOConverter40 infinite_inertia were removed in Godot 4.0 - previous value `false`
-			move_and_slide()
-			S.velocity.y = 0.5*sqrt(2) * velocity.y
-		else :
-			set_velocity(S.velocity)
-			# TODOConverter40 looks that snap in Godot 4.0 is float, not vector like in Godot 3 - previous value `snap_vector`
-			set_up_direction(Vector2.UP)
-			set_floor_stop_on_slope_enabled(true)
-			set_max_slides(4)
-			set_floor_max_angle(0.785398)
-			# TODOConverter40 infinite_inertia were removed in Godot 4.0 - previous value `false`
-			move_and_slide()
-			S.velocity = velocity
+		set_velocity(S.velocity)
+		# TODOConverter40 looks that snap in Godot 4.0 is float, not vector like in Godot 3 - previous value `snap_vector`
+		set_up_direction(Vector2.UP)
+		set_floor_stop_on_slope_enabled(true)
+		set_max_slides(4)
+		set_floor_max_angle(0.785398)
+		# TODOConverter40 infinite_inertia were removed in Godot 4.0 - previous value `false`
+		move_and_slide()
+		S.velocity = get_real_velocity()
 
 func disable_physics():
 	physics_enabled = false

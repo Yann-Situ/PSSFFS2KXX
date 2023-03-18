@@ -1,6 +1,6 @@
 extends Action
 
-@onready var pos_tween = get_tree().create_tween()
+var pos_tween : Tween
 var dunking_basket = null
 
 func _ready():
@@ -23,7 +23,9 @@ func move(delta):
 	var xx = (dunk_position - P.global_position).x
 	S.direction_sprite = 1 if (xx > 0) else ( -1 if (xx < 0) else 0)
 
-	pos_tween.kill()
+	if pos_tween:
+
+		pos_tween.kill()
 	pos_tween = get_tree().create_tween()
 	pos_tween.tween_property(P, "global_position",\
 		dunk_position,0.32)\

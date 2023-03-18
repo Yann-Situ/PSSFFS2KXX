@@ -116,7 +116,6 @@ func _ready():
 	reset_state()
 
 func _input(event):
-
 	right_p = Input.is_action_pressed('ui_right')
 	left_p = Input.is_action_pressed('ui_left')
 	jump_jp = Input.is_action_just_pressed('ui_up')
@@ -133,7 +132,6 @@ func _input(event):
 	power_jp =  Input.is_action_just_pressed("ui_power")
 	power_jr =  Input.is_action_just_released("ui_power")
 	release_jp =  Input.is_action_just_pressed("ui_release")
-
 	if jump_jp:
 		$ToleranceJumpPressTimer.start(tolerance_jump_press)
 	if dunk_jp:
@@ -197,7 +195,7 @@ func update_vars(delta):
 		direction_p += 1
 	if left_p :
 		direction_p -= 1
-
+		
 	var actual_direction_sprite = 1;
 	if self.get_parent().flip_h :
 		actual_direction_sprite = -1;

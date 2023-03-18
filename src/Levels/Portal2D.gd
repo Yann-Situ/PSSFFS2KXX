@@ -84,7 +84,7 @@ func reload_portal():
 	enter_portal()
 
 func transition_in():
-	#Transition.material.set("shader_param/center_offset", Vector2(0.0,0.0))
+	#Transition.material.set("shader_parameter/center_offset", Vector2(0.0,0.0))
 	$AnimationPlayer.play("transition_in")
 	$AnimationPlayer.advance(0.0) # to avoid jitter issues
 
@@ -94,7 +94,7 @@ func transition_out():
 	#var screenshot = ImageTexture.new()
 	#screenshot.create_from_image(img)
 	#Transition.texture = screenshot
-	#$Tween.follow_property(Transition.material, "shader_param/center_offset", \
+	#$Tween.follow_property(Transition.material, "shader_parameter/center_offset", \
 	#	Global.camera.offset, Global.camera, "offset", 1.0)
 	#$Tween.start()
 	$AnimationPlayer.play("transition_out")

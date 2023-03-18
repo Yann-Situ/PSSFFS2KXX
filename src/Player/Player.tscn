@@ -1,4 +1,4 @@
-[gd_scene load_steps=117 format=3 uid="uid://djjfl0v3y2pw5"]
+[gd_scene load_steps=118 format=3 uid="uid://djjfl0v3y2pw5"]
 
 [ext_resource type="Script" path="res://src/Player/Player.gd" id="1"]
 [ext_resource type="Texture2D" uid="uid://dcp7p8c6ldxqc" path="res://assets/art/characters/Player.png" id="2"]
@@ -48,8 +48,9 @@
 [ext_resource type="AnimationNodeBlendTree" uid="uid://cmsxpc5f28w5c" path="res://src/Player/AnimationTreeHandler/Stance.tres" id="46"]
 [ext_resource type="Texture2D" uid="uid://0q8qxsby5sw5" path="res://assets/art/effects/light2.png" id="47"]
 
-[sub_resource type="RectangleShape2D" id="1"]
-size = Vector2(8, 26)
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_a26b7"]
+radius = 8.5
+height = 57.0
 
 [sub_resource type="CircleShape2D" id="2"]
 resource_local_to_scene = true
@@ -82,7 +83,7 @@ tracks/0/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 1,
-"values": [82]
+"values": [140]
 }
 tracks/1/type = "value"
 tracks/1/imported = false
@@ -1392,7 +1393,6 @@ states/stance/position = Vector2(325, 251)
 transitions = ["stance", "action", SubResource("36"), "action", "stance", SubResource("37"), "Start", "action", SubResource("AnimationNodeStateMachineTransition_p8a3c")]
 
 [sub_resource type="AnimationNodeBlendTree" id="39"]
-graph_offset = Vector2(762.476, 233.832)
 nodes/AnimationNodeBlendTree/node = ExtResource("46")
 nodes/AnimationNodeBlendTree/position = Vector2(1332.86, 632.019)
 nodes/cancelable/node = SubResource("38")
@@ -1462,7 +1462,7 @@ color_ramp = SubResource("53")
 
 [sub_resource type="CompressedTexture2D" id="55"]
 
-[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_2qrm0"]
+[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_dqyvn"]
 resource_local_to_scene = true
 particles_animation = true
 particles_anim_h_frames = 6
@@ -1473,6 +1473,9 @@ particles_anim_loop = true
 radius = 14.0
 height = 28.0
 
+[sub_resource type="RectangleShape2D" id="1"]
+size = Vector2(17, 57)
+
 [sub_resource type="CapsuleShape2D" id="58"]
 radius = 5.0
 height = 42.0
@@ -1481,7 +1484,6 @@ height = 42.0
 light_mask = 4
 z_index = 100
 z_as_relative = false
-position = Vector2(-15, 0)
 collision_mask = 514
 script = ExtResource("1")
 crouch_speed_max = 200.0
@@ -1505,9 +1507,8 @@ is_halfturning = true
 is_shooting = true
 
 [node name="Collision" type="CollisionShape2D" parent="."]
-visible = false
-position = Vector2(0, 6)
-shape = SubResource("1")
+position = Vector2(0, 3.5)
+shape = SubResource("CapsuleShape2D_a26b7")
 
 [node name="Actions" type="Node2D" parent="."]
 
@@ -1692,7 +1693,7 @@ texture = ExtResource("2")
 offset = Vector2(0.5, 0)
 hframes = 16
 vframes = 20
-frame = 82
+frame = 140
 
 [node name="Player_Animation" type="AnimationPlayer" parent="Sprite2D"]
 libraries = {
@@ -1772,6 +1773,8 @@ script = ExtResource("8")
 
 [node name="PlayerEffects" type="Node2D" parent="."]
 script = ExtResource("13")
+metadata/_edit_lock_ = true
+metadata/_edit_group_ = true
 
 [node name="DustParticle" parent="PlayerEffects" instance=ExtResource("12")]
 modulate = Color(0.85098, 0.85098, 0.85098, 1)
@@ -1804,7 +1807,7 @@ lifetime = 0.65
 explosiveness = 0.9
 
 [node name="GrindParticles" parent="PlayerEffects" instance=ExtResource("27")]
-material = SubResource("CanvasItemMaterial_2qrm0")
+material = SubResource("CanvasItemMaterial_dqyvn")
 position = Vector2(0, 16)
 
 [node name="BallHandler" type="Area2D" parent="."]
