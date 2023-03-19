@@ -5,7 +5,7 @@ func move(delta):
 	S.aim_direction = 0
 	S.is_shooting = true
 	S.set_action(S.ActionType.SHOOT)
-	S.get_node("CanShootTimer").start(S.shoot_countdown)
+	S.get_node("CanShootTimer").start(S.countdown_shoot)
 	P.ShootPredictor.shoot_vector_save = P.shoot#P.ShootPredictor.shoot_vector()
 	S.direction_sprite = 1 if (P.shoot.x > 0) else ( -1 if (P.shoot.x < 0) else 0)
 	#Engine.time_scale = 1.0

@@ -5,6 +5,6 @@
 [resource]
 shader = ExtResource("1")
 shader_parameter/speed = Vector2(100, 100)
-shader_parameter/max_speed = 400.0
+shader_parameter/speed_max = 400.0
 shader_parameter/thresh_speed_coeff = 0.6
 shader_parameter/glow_coeff = 1.2

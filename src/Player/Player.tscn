@@ -1,4 +1,4 @@
-[gd_scene load_steps=118 format=3 uid="uid://djjfl0v3y2pw5"]
+[gd_scene load_steps=116 format=3 uid="uid://djjfl0v3y2pw5"]
 
 [ext_resource type="Script" path="res://src/Player/Player.gd" id="1"]
 [ext_resource type="Texture2D" uid="uid://dcp7p8c6ldxqc" path="res://assets/art/characters/Player.png" id="2"]
@@ -46,7 +46,6 @@
 [ext_resource type="Script" path="res://src/Player/Actions/Slide.gd" id="44"]
 [ext_resource type="AnimationNodeStateMachine" uid="uid://dcviqtnkvq3ry" path="res://src/Player/AnimationTreeHandler/Action.tres" id="45"]
 [ext_resource type="AnimationNodeBlendTree" uid="uid://cmsxpc5f28w5c" path="res://src/Player/AnimationTreeHandler/Stance.tres" id="46"]
-[ext_resource type="Texture2D" uid="uid://0q8qxsby5sw5" path="res://assets/art/effects/light2.png" id="47"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_a26b7"]
 radius = 8.5
@@ -1371,9 +1370,6 @@ _data = {
 "walljump1": SubResource("34")
 }
 
-[sub_resource type="CanvasItemMaterial" id="35"]
-blend_mode = 1
-
 [sub_resource type="AnimationNodeStateMachineTransition" id="36"]
 advance_condition = &"is_not_cancelable"
 
@@ -1462,7 +1458,7 @@ color_ramp = SubResource("53")
 
 [sub_resource type="CompressedTexture2D" id="55"]
 
-[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_a0g0n"]
+[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_is5jw"]
 resource_local_to_scene = true
 particles_animation = true
 particles_anim_h_frames = 6
@@ -1488,16 +1484,16 @@ collision_mask = 514
 script = ExtResource("1")
 crouch_speed_max = 200.0
 crouch_instant_speed = 50.0
-crouch_return_thresh_instant_speed = 85.0
+crouch_return_instant_speed_thresh = 85.0
 crouch_accel = 130.0
-landing_velocity_thresh = 310.0
-jump_speed = -382.0
-max_speed_fall = 700.0
-run_speed_thresh = 260.0
-run_speed_max = 370.0
+walk_speed_max = 370.0
+walk_speed_moving_fast_thresh = 260.0
 walk_instant_speed = 135.0
-walk_return_thresh_instant_speed = 250.0
+walk_return_instant_speed_thresh = 250.0
 walk_accel = 210.0
+jump_speed = -382.0
+fall_speed_max = 700.0
+landing_velocity_thresh = 310.0
 
 [node name="State" parent="." instance=ExtResource("5")]
 visible = false
@@ -1700,21 +1696,9 @@ libraries = {
 "": SubResource("AnimationLibrary_y1wwd")
 }
 
-[node name="light" type="Sprite2D" parent="Sprite2D"]
-visible = false
-modulate = Color(1, 1, 1, 0.227451)
-z_index = 9
-z_as_relative = false
-material = SubResource("35")
-scale = Vector2(4, 4)
-texture = ExtResource("47")
-region_enabled = true
-region_rect = Rect2(0, 96, 32, 32)
-
 [node name="AnimationTree" type="AnimationTree" parent="Sprite2D"]
 tree_root = SubResource("39")
 anim_player = NodePath("../Player_Animation")
-active = true
 parameters/AnimationNodeBlendTree/air/playback = SubResource("63")
 parameters/AnimationNodeBlendTree/air/conditions/is_jumping = false
 parameters/AnimationNodeBlendTree/air/conditions/is_not_onwall = false
@@ -1807,7 +1791,7 @@ lifetime = 0.65
 explosiveness = 0.9
 
 [node name="GrindParticles" parent="PlayerEffects" instance=ExtResource("27")]
-material = SubResource("CanvasItemMaterial_a0g0n")
+material = SubResource("CanvasItemMaterial_is5jw")
 position = Vector2(0, 16)
 
 [node name="BallHandler" type="Area2D" parent="."]
@@ -1876,15 +1860,17 @@ size_flags_horizontal = 3
 
 [node name="TextureRect" type="TextureRect" parent="UI/MarginContainer/HBoxContainer/MarginContainer"]
 layout_mode = 2
+size_flags_horizontal = 8
 texture = ExtResource("34")
 stretch_mode = 3
 
 [node name="RichTextLabel" type="RichTextLabel" parent="UI/MarginContainer/HBoxContainer/MarginContainer/TextureRect"]
 layout_mode = 0
 offset_left = 82.0
-offset_top = 16.0
+offset_top = 9.0
 offset_right = 194.0
-offset_bottom = 32.0
+offset_bottom = 25.0
+fit_content = true
 
 [node name="Combos" type="Node" parent="."]
 

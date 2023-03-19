@@ -11,7 +11,7 @@ var nb_points = coeff_display * nb_points_display
 
 # Shoot features
 @export var shoot_min_speed : float = 100 # kg*pix/s
-@export var shoot_max_speed : float = 600 # kg*pix/s
+@export var shoot_speed_max : float = 600 # kg*pix/s
 @export var shoot_max_aim_time : float = 1 # s
 var shoot_vector_save = Vector2()
 
@@ -27,7 +27,7 @@ func _ready():
 func shoot_vector(): # return shoot vector if player not moving
 	var t = S.time-S.last_aim_jp
 	t = min(shoot_max_aim_time, t)/shoot_max_aim_time
-	t = shoot_min_speed+t*(shoot_max_speed-shoot_min_speed)
+	t = shoot_min_speed+t*(shoot_speed_max-shoot_min_speed)
 	if S.active_ball != null: # to be sure
 		t = t/S.active_ball.mass
 	return t * (Global.camera.get_global_mouse_position() -

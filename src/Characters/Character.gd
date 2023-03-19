@@ -15,26 +15,26 @@ class_name Character
 # Crouch features
 @export var crouch_speed_max : float = 300 # pix/s
 @export var crouch_instant_speed : float = 60 # pix/s
-@export var crouch_return_thresh_instant_speed : float = 100 # pix/s
+@export var crouch_return_instant_speed_thresh : float = 100 # pix/s
 @export var crouch_accel : float = 200 # pix/s²
 @export var landing_velocity_thresh : float = 400 # pix/s
 
 # Aerial features
-@export var sideaerial_speed_max : float = 400 # pix/s
+@export var air_side_speed_max : float = 400 # pix/s
 @export var air_instant_speed : float = 60 # pix/s
-@export var air_return_thresh_instant_speed : float = 50 # pix/s
-@export var sideaerial_accel : float = 220 # pix/s²
+@export var air_return_instant_speed_thresh : float = 50 # pix/s
+@export var air_side_accel : float = 220 # pix/s²
 @export var jump_speed : float = -425 # pix/s
 @export var dunk_speed : float = -500 # pix/s
-@export var max_speed_fall : float = 800 # pix/s
-@export var max_speed_fall_onwall : float = 200 # pix/s
-@export var vec_walljump : Vector2 = Vector2(0.65, -1)
+@export var fall_speed_max : float = 800 # pix/s
+@export var fall_speed_max_onwall : float = 200 # pix/s
+@export var walljump_direction : Vector2 = Vector2(0.65, -1)
 
 # Walk and run features
-@export var run_speed_thresh : float = 350 # pix/s
-@export var run_speed_max : float = 400 # pix/s
+@export var walk_speed_moving_fast_thresh : float = 350 # pix/s
+@export var walk_speed_max : float = 400 # pix/s
 @export var walk_instant_speed : float = 150 # pix/s
-@export var walk_return_thresh_instant_speed : float = 300 # pix/s
+@export var walk_return_instant_speed_thresh : float = 300 # pix/s
 @export var walk_accel : float = 220 # pix/s²
 
 @export var flip_h : bool = false
@@ -166,11 +166,11 @@ func update_linear_velocity(delta):
 	if S.is_onwall and linear_velocity.y > 0:
 		#fall on a wall
 		linear_velocity.y += gravity/2.0 * delta
-		linear_velocity.y = min(linear_velocity.y,max_speed_fall_onwall)
+		linear_velocity.y = min(linear_velocity.y,fall_speed_max_onwall)
 	else :
 		linear_velocity.y += gravity * delta
-		if linear_velocity.y > max_speed_fall:
-			linear_velocity.y = max_speed_fall
+		if linear_velocity.y > fall_speed_max:
+			linear_velocity.y = fall_speed_max
 
 	for force in applied_forces.values() :
 		linear_velocity += invmass * force * delta

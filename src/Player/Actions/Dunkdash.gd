@@ -29,7 +29,7 @@ func move(delta):
 	Global.camera.screen_shake(0.2,10)
 
 	S.get_node("ToleranceDunkJumpPressTimer").stop()
-	S.get_node("CanJumpTimer").start(S.jump_countdown)
+	S.get_node("CanJumpTimer").start(S.countdown_jump)
 	S.get_node("CanGoTimer").start(can_go_delay)
 
 	velocity_save = S.velocity

@@ -10,10 +10,10 @@ var time = 0.0#s
 @export var tolerance_jump_press : float = 9*frame_time_ms #s
 @export var tolerance_wall_jump : float = 9*frame_time_ms #s
 @export var tolerance_land_lag : float = 3*frame_time_ms #s
-@export var walljump_move_countdown : float = 22*frame_time_ms #s
-@export var jump_countdown : float = 10*frame_time_ms #s
-@export var dunk_countdown : float = 100*frame_time_ms #s
-@export var shoot_countdown : float = 30*frame_time_ms #s
+@export var countdown_walljump_move : float = 22*frame_time_ms #s
+@export var countdown_jump : float = 10*frame_time_ms #s
+@export var countdown_dunk : float = 100*frame_time_ms #s
+@export var countdown_shoot : float = 30*frame_time_ms #s
 
 # Bool for inputs ('p' is for 'pressed', 'jp' 'just_pressed', 'jr' 'just_released')
 var right_p = false
@@ -132,7 +132,7 @@ func update_vars(delta):
 
 	is_onfloor = Character.ActionHandler.is_on_floor()
 	is_onwall = Character.ActionHandler.is_on_wall()
-	is_moving_fast = (abs(velocity.x) > Character.run_speed_thresh)
+	is_moving_fast = (abs(velocity.x) > Character.walk_speed_moving_fast_thresh)
 	is_falling =  (not is_onfloor) and velocity.y > 0
 	is_mounting = (not is_onfloor) and velocity.y < 0
 	is_moving = (abs(velocity.x) > 5.0) or (abs(velocity.y) > 5.0)

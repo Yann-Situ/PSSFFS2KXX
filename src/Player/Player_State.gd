@@ -7,15 +7,19 @@ var frame_time_ms = 1.0/60.0 #s
 var time = 0.0#s
 
 # Countdowns and delays between actions
+@export_group("Timers management")
+@export_subgroup("Tolerance delays", "tolerance_")
 @export var tolerance_jump_floor : float = 7*frame_time_ms #s
 @export var tolerance_jump_press : float = 7*frame_time_ms #s
 @export var tolerance_wall_jump : float = 7*frame_time_ms #s
 @export var tolerance_land_lag : float = 3*frame_time_ms #s
-@export var walljump_move_countdown : float = 22*frame_time_ms #s
-@export var jump_countdown : float = 10*frame_time_ms #s
-@export var dunkjump_countdown : float = 0.4#s
-@export var dunk_countdown : float = 0.9 #s
-@export var shoot_countdown : float = 30*frame_time_ms #s
+
+@export_subgroup("Countdown delays", "countdown_")
+@export var countdown_walljump_move : float = 22*frame_time_ms #s
+@export var countdown_jump : float = 10*frame_time_ms #s
+@export var countdown_dunkjump : float = 0.4#s
+@export var countdown_dunk : float = 0.9 #s
+@export var countdown_shoot : float = 30*frame_time_ms #s
 
 # Bool for inputs ('p' is for 'pressed', 'jp' 'just_pressed', 'jr' 'just_released')
 var right_p = false
@@ -61,11 +65,11 @@ var is_idle = false
 #var is_speeding = false
 
 # Utilities
-@export var move_direction = 0
-var direction_p = 0
-var direction_sprite = 0
-var aim_direction = 0
-@export var velocity = Vector2()
+var move_direction : int = 0
+var direction_p : int = 0
+var direction_sprite : int = 0
+var aim_direction : int = 0
+var velocity = Vector2()
 
 # Delays and states memory # handle by Player.gd
 #var last_onfloor = 0
@@ -79,6 +83,7 @@ var last_onair_velocity_y = 0
 var last_aim_jp = 0 # still used for shoot vector
 
 # Bool for actions
+@export_group("Actions flags")
 @export var is_jumping = false
 @export var is_walljumping = false
 @export var is_landing = false
@@ -195,7 +200,7 @@ func update_vars(delta):
 		direction_p += 1
 	if left_p :
 		direction_p -= 1
-		
+
 	var actual_direction_sprite = 1;
 	if self.get_parent().flip_h :
 		actual_direction_sprite = -1;
@@ -203,7 +208,7 @@ func update_vars(delta):
 	Player.SpecialActionHandler.update_space_state()
 	is_onfloor = Player.SpecialActionHandler.is_on_floor()
 	is_onwall = Player.SpecialActionHandler.is_on_wall()
-	is_moving_fast = (abs(velocity.x) > Player.run_speed_thresh)
+	is_moving_fast = (abs(velocity.x) > Player.walk_speed_moving_fast_thresh)
 	is_falling =  (not is_onfloor) and velocity.y > 0
 	is_mounting = (not is_onfloor) and velocity.y < 0
 	is_moving = (abs(velocity.x) > 10.0) or (abs(velocity.y) > 10.0)

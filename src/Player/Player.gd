@@ -10,37 +10,40 @@ class_name Player
 @export var attract_force : float = 800.0 # m.pix/s² # don't know for what know (?)
 @export var gravity : Vector2 # pix/s²
 
-## Crouch features
+@export_group("Ground features")
+@export_subgroup("Crouch properties", "crouch_")
 @export var crouch_speed_max : float = 300.0 # pix/s
 @export var crouch_instant_speed : float = 60.0 # pix/s
-@export var crouch_return_thresh_instant_speed : float = 100.0 # pix/s
+@export var crouch_return_instant_speed_thresh : float = 100.0 # pix/s
 @export var crouch_accel : float = 200.0 # pix/s²
-@export var landing_velocity_thresh : float = 400.0 # pix/s
 
-## Aerial features
-@export var sideaerial_speed_max : float = 400.0 # pix/s
-@export var air_instant_speed : float = 45.0 # pix/s
-@export var air_return_thresh_instant_speed : float = 50.0 # pix/s
-@export var sideaerial_accel : float = 220.0 # pix/s²
-@export var jump_speed : float = -425.0 # pix/s
-@export var dunkjump_speed : float = -500.0 # pix/s
-@export var dunkdash_speed : float = 600.0 # pix/s
-@export var max_dunkdash_distance2 : float = 180*180.0 # pix^2
-@export var max_speed_fall : float = 800.0 # pix/s
-@export var max_speed_fall_onwall : float = 200.0 # pix/s
-@export var vec_walljump : Vector2 = Vector2(0.65, -1)
-
-## Walk and run features
-@export var run_speed_thresh : float = 350.0 # pix/s
-@export var run_speed_max : float = 400.0 # pix/s
+@export_subgroup("Walk properties", "walk_")
+@export var walk_speed_max : float = 400.0 # pix/s
+@export var walk_speed_moving_fast_thresh : float = 350.0 # pix/s
 @export var walk_instant_speed : float = 150.0 # pix/s
-@export var walk_return_thresh_instant_speed : float = 300.0 # pix/s
+@export var walk_return_instant_speed_thresh : float = 300.0 # pix/s
 @export var walk_accel : float = 220.0 # pix/s²
 
-## Other features
+@export_group("Aerial features")
+@export_subgroup("Air horizontal motion", "air_")
+@export var air_side_speed_max : float = 400.0 # pix/s
+@export var air_instant_speed : float = 45.0 # pix/s
+@export var air_return_instant_speed_thresh : float = 50.0 # pix/s
+@export var air_side_accel : float = 220.0 # pix/s²
+
+@export_subgroup("Air vertical motion")
+@export var jump_speed : float = -425.0 # pix/s
+@export var fall_speed_max : float = 800.0 # pix/s
+@export var fall_speed_max_onwall : float = 200.0 # pix/s
+@export var walljump_direction : Vector2 = Vector2(0.65, -1)
+@export var landing_velocity_thresh : float = 400.0 # pix/s
+
+@export_group("Special features")
+@export var dunkjump_speed : float = -500.0 # pix/s
+@export var dunkdash_speed : float = 600.0 # pix/s
+@export var dunkdash_dist2_max : float = 180*180.0 # pix^2
 @export var throw_impulse : float = 600.0 # kg.pix/s
 
-@export var flip_h : bool = false
 
 ################################################################################
 
@@ -61,10 +64,10 @@ class_name Player
 @onready var collision_mask_save = 514
 @onready var floor_friction = GlobalMaths.unfriction_to_friction(floor_unfriction) # ratio/s
 @onready var air_friction = GlobalMaths.unfriction_to_friction(air_unfriction) # ratio/s
+
 var applied_forces = {} #"force_name : value in kg*pix/s^2"
-
 var character_holder = null
-
+var flip_h : bool = false
 var shoot = Vector2.ZERO
 var snap_vector = Vector2.ZERO
 
@@ -257,11 +260,11 @@ func apply_forces(delta):
 		S.velocity += invmass * force * delta
 	if S.is_onwall and S.velocity.y > 0: #fall on a wall
 		S.velocity += gravity/2.0 * delta
-		S.velocity.y = min(S.velocity.y,max_speed_fall_onwall)
+		S.velocity.y = min(S.velocity.y,fall_speed_max_onwall)
 	else :
 		S.velocity += gravity * delta
-		if S.velocity.y > max_speed_fall:
-			S.velocity.y = max_speed_fall
+		if S.velocity.y > fall_speed_max:
+			S.velocity.y = fall_speed_max
 
 func has_force(name : String):
 	return applied_forces.has(name)

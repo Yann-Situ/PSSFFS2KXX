@@ -14,27 +14,27 @@ func move(delta,direction_p):
 					if (S.velocity.x*direction_p > P.crouch_speed_max) :
 						S.velocity.x = direction_p*P.crouch_speed_max
 
-				if -P.crouch_return_thresh_instant_speed < S.velocity.x*direction_p \
+				if -P.crouch_return_instant_speed_thresh < S.velocity.x*direction_p \
 					and S.velocity.x*direction_p < P.crouch_instant_speed :
 					S.velocity.x = direction_p*P.crouch_instant_speed
 		else : #standing on the floor, maybe moving
-			if (S.velocity.x*direction_p >= P.run_speed_max) :
+			if (S.velocity.x*direction_p >= P.walk_speed_max) :
 				pass # in the same direction_p as velocity and faster than max
 			else :
 				S.velocity.x += direction_p*P.walk_accel*delta
-				if (S.velocity.x*direction_p > P.run_speed_max) :
-					S.velocity.x = direction_p*P.run_speed_max
+				if (S.velocity.x*direction_p > P.walk_speed_max) :
+					S.velocity.x = direction_p*P.walk_speed_max
 
-			if -P.walk_return_thresh_instant_speed < S.velocity.x*direction_p \
+			if -P.walk_return_instant_speed_thresh < S.velocity.x*direction_p \
 				and S.velocity.x*direction_p < P.walk_instant_speed :
 				S.velocity.x = direction_p*P.walk_instant_speed
 	else : # is in the air
-		if (S.velocity.x*direction_p >= P.sideaerial_speed_max) :
+		if (S.velocity.x*direction_p >= P.air_side_speed_max) :
 			pass
 		else :
-			S.velocity.x += direction_p * P.sideaerial_accel * delta
-			if (S.velocity.x*direction_p > P.sideaerial_speed_max) :
-				S.velocity.x = direction_p * P.sideaerial_speed_max
-		if -P.air_return_thresh_instant_speed < S.velocity.x*direction_p \
+			S.velocity.x += direction_p * P.air_side_accel * delta
+			if (S.velocity.x*direction_p > P.air_side_speed_max) :
+				S.velocity.x = direction_p * P.air_side_speed_max
+		if -P.air_return_instant_speed_thresh < S.velocity.x*direction_p \
 			and S.velocity.x*direction_p < P.air_instant_speed :
 				S.velocity.x = direction_p*P.air_instant_speed

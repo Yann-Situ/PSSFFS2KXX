@@ -70,7 +70,7 @@ func dunkjump_criteria(q : Vector2, target_direction : int) -> bool:
 
 func dunkdash_criteria_init():
 	dunkdash_criteria_bests.clear()
-	dunkdash_criteria_bests.push_back(P.max_dunkdash_distance2) # best_dist2
+	dunkdash_criteria_bests.push_back(P.dunkdash_dist2_max) # best_dist2
 	dunkdash_criteria_bests.push_back(-2) # best_direction
 
 # criteria to select the dunkdash target
@@ -83,7 +83,7 @@ func dunkdash_criteria(q : Vector2, target_direction : int) -> bool:
 	if target_direction*dir < dunkdash_criteria_bests[1]:
 		return false
 	var lq2 = q.length_squared()
-	if lq2 > P.max_dunkdash_distance2:
+	if lq2 > P.dunkdash_dist2_max:
 		return false
 	if target_direction*dir == dunkdash_criteria_bests[1] and lq2 > dunkdash_criteria_bests[0]:
 		return false

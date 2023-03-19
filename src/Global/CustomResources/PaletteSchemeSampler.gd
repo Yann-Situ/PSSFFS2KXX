@@ -1,7 +1,7 @@
 extends Resource
 class_name PaletteSchemeSampler
 
-@export var color_samplers : Array[Resource] # TODO: maybe it is possible to change that to Array[ColorSampler] in Godot4
+@export var color_samplers : Array[ColorSampler] # TODO: maybe it is possible to change that to Array[ColorSampler] in Godot4
 @export var black : Color = Color.BLACK
 @export var white : Color = Color.WHITE
 

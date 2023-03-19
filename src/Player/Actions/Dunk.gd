@@ -15,7 +15,7 @@ func move(delta):
 	P.ShootPredictor.clear()
 	S.is_dunking = true
 	S.set_action(S.ActionType.DUNK)
-	S.get_node("CanDunkTimer").start(S.dunk_countdown)
+	S.get_node("CanDunkTimer").start(S.countdown_dunk)
 	S.get_node("ToleranceDunkJumpPressTimer").stop() # no dunkjump just after
 	#S.get_node("CanGoTimer").start(0.32)
 	dunking_basket = S.dunk_basket
