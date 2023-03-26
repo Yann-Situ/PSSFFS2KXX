@@ -1,9 +1,9 @@
-[gd_scene load_steps=46 format=3 uid="uid://d1vmfw2uc4eox"]
+[gd_scene load_steps=45 format=3 uid="uid://d1vmfw2uc4eox"]
 
 [ext_resource type="Script" path="res://src/Levels/Room2D.gd" id="1"]
 [ext_resource type="PackedScene" uid="uid://yco4prlcetlu" path="res://src/Items/Balls/BallBoum.tscn" id="3"]
 [ext_resource type="PackedScene" path="res://src/Items/Dynamics/PipeBall.tscn" id="4"]
-[ext_resource type="PackedScene" path="res://src/Items/Balls/Ball.tscn" id="5"]
+[ext_resource type="PackedScene" uid="uid://cxn2m3havcmil" path="res://src/Items/Balls/Ball.tscn" id="5"]
 [ext_resource type="Texture2D" uid="uid://b4ydi56jhjt5p" path="res://assets/art/background/ShopBackground2.png" id="6"]
 [ext_resource type="Texture2D" uid="uid://b8cfr623fwqvh" path="res://assets/art/background/pixelBackground3.png" id="7"]
 [ext_resource type="Texture2D" uid="uid://bkmlsn4n074ia" path="res://assets/art/background/ShopBackground4.png" id="8"]
@@ -15,21 +15,20 @@
 [ext_resource type="Texture2D" uid="uid://bcxflf7dbeb4w" path="res://assets/art/effects/light5_1.png" id="18"]
 [ext_resource type="PackedScene" path="res://src/Items/Activables/Spawner.tscn" id="19"]
 [ext_resource type="PackedScene" path="res://src/Items/Activables/Button0.tscn" id="20"]
-[ext_resource type="PackedScene" path="res://src/Items/Dynamics/ZipLine.tscn" id="21"]
+[ext_resource type="PackedScene" uid="uid://0oao7gw1q1bh" path="res://src/Items/Dynamics/ZipLine.tscn" id="21"]
 [ext_resource type="Texture2D" uid="uid://b41scft6p0qto" path="res://assets/art/effects/light5_3.png" id="22"]
 [ext_resource type="Texture2D" uid="uid://pcstif3roi0k" path="res://assets/art/effects/light5_2.png" id="23"]
-[ext_resource type="PackedScene" path="res://src/Items/Balls/BallBouncy.tscn" id="25"]
-[ext_resource type="PackedScene" path="res://src/Items/Balls/BallBubble.tscn" id="26"]
-[ext_resource type="PackedScene" path="res://src/Items/Balls/BallRolling.tscn" id="27"]
-[ext_resource type="PackedScene" path="res://src/Items/Balls/BallMetal.tscn" id="28"]
+[ext_resource type="PackedScene" uid="uid://imtw5v2qrplf" path="res://src/Items/Balls/BallBouncy.tscn" id="25"]
+[ext_resource type="PackedScene" uid="uid://bjy7nt7bd313e" path="res://src/Items/Balls/BallBubble.tscn" id="26"]
+[ext_resource type="PackedScene" uid="uid://clducx30br87q" path="res://src/Items/Balls/BallRolling.tscn" id="27"]
+[ext_resource type="PackedScene" uid="uid://8alv0hbdmh5e" path="res://src/Items/Balls/BallMetal.tscn" id="28"]
 [ext_resource type="Texture2D" uid="uid://b4meqionddno3" path="res://assets/art/effects/light3.png" id="29"]
-[ext_resource type="PackedScene" path="res://src/Items/Dynamics/RailLine.tscn" id="33"]
-[ext_resource type="PackedScene" path="res://src/Characters/Character.tscn" id="34"]
+[ext_resource type="PackedScene" uid="uid://cjv8hfeex2clu" path="res://src/Items/Dynamics/RailLine.tscn" id="33"]
 [ext_resource type="PackedScene" path="res://src/Items/Interactive/BreakableBloc.tscn" id="35"]
 [ext_resource type="PackedScene" path="res://src/Items/Interactive/Door.tscn" id="37"]
 [ext_resource type="PackedScene" uid="uid://27jkgoi43hoq" path="res://src/Items/Balls/BallShock.tscn" id="44"]
 [ext_resource type="PackedScene" uid="uid://cjbsx2kbm5qhk" path="res://src/Player/PlayerPosition.tscn" id="45"]
-[ext_resource type="PackedScene" path="res://src/Items/Balls/BallDash.tscn" id="47"]
+[ext_resource type="PackedScene" uid="uid://cd2wyj207og8s" path="res://src/Items/Balls/BallDash.tscn" id="47"]
 [ext_resource type="PackedScene" path="res://src/Items/Interactive/Wind.tscn" id="48"]
 
 [sub_resource type="Gradient" id="1"]
@@ -66,35 +65,35 @@ _data = {
 }
 point_count = 10
 
-[sub_resource type="Curve2D" id="Curve2D_rxmmq"]
+[sub_resource type="Curve2D" id="Curve2D_t85t2"]
 resource_local_to_scene = true
 _data = {
 "points": PackedVector2Array(0, 0, 0, 0, 288, 120, 0, 0, 0, 0, 0, -8)
 }
 point_count = 2
 
-[sub_resource type="Curve2D" id="Curve2D_ul86u"]
+[sub_resource type="Curve2D" id="Curve2D_77d6s"]
 resource_local_to_scene = true
 _data = {
 "points": PackedVector2Array(0, 0, 0, 0, 704, -240, 0, 0, 0, 0, 616, -24, 0, 0, 0, 0, 464, 88, 0, 0, 0, 0, 152, 112, 0, 0, 0, 0, 16, 80)
 }
 point_count = 5
 
-[sub_resource type="Curve2D" id="Curve2D_l2pnk"]
+[sub_resource type="Curve2D" id="Curve2D_oe6k1"]
 resource_local_to_scene = true
 _data = {
 "points": PackedVector2Array(0, 0, 0, 0, 216, -296, 0, 0, 0, 0, 272, -48, 0, 0, 0, 0, 416, 64, 0, 0, 0, 0, 704, 72)
 }
 point_count = 4
 
-[sub_resource type="Curve2D" id="Curve2D_4lith"]
+[sub_resource type="Curve2D" id="Curve2D_xpby0"]
 resource_local_to_scene = true
 _data = {
 "points": PackedVector2Array(0, 0, 0, 0, 600, -72, 0, 0, 0, 0, 432, -32, 0, 0, 0, 0, 280, -32)
 }
 point_count = 3
 
-[sub_resource type="Curve2D" id="Curve2D_05fyy"]
+[sub_resource type="Curve2D" id="Curve2D_okpb6"]
 resource_local_to_scene = true
 _data = {
 "points": PackedVector2Array(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 576, 0)
@@ -372,9 +371,7 @@ final_point = Vector2(2000, 200)
 position = Vector2(288, 152)
 zipline_type = 1
 final_point = Vector2(510, 140)
-rope_offset = Vector2(0, 60)
 handle_catch_radius = 20.0
-handle_catch_init_unit_offset = 0.096
 
 [node name="Jumper2" parent="Environment/Dynamics" instance=ExtResource("15")]
 position = Vector2(-112, 544)
@@ -412,26 +409,26 @@ activated = false
 
 [node name="TrailLine" parent="Environment/Dynamics" instance=ExtResource("33")]
 position = Vector2(1472, 232)
-curve = SubResource("Curve2D_rxmmq")
+curve = SubResource("Curve2D_t85t2")
 invert_line_direction = true
 
 [node name="TrailLine2" parent="Environment/Dynamics" instance=ExtResource("33")]
 position = Vector2(1440, -336)
-curve = SubResource("Curve2D_ul86u")
+curve = SubResource("Curve2D_77d6s")
 invert_line_direction = true
 
 [node name="TrailLine3" parent="Environment/Dynamics" instance=ExtResource("33")]
 position = Vector2(1008, -192)
-curve = SubResource("Curve2D_l2pnk")
+curve = SubResource("Curve2D_oe6k1")
 
 [node name="TrailLine4" parent="Environment/Dynamics" instance=ExtResource("33")]
 position = Vector2(1544, -40)
-curve = SubResource("Curve2D_4lith")
+curve = SubResource("Curve2D_xpby0")
 invert_line_direction = true
 
 [node name="RailLine" parent="Environment/Dynamics" instance=ExtResource("33")]
 position = Vector2(192, 384)
-curve = SubResource("Curve2D_05fyy")
+curve = SubResource("Curve2D_okpb6")
 
 [node name="Interactive" type="Node2D" parent="Environment"]
 
@@ -508,102 +505,6 @@ range_item_cull_mask = 4
 shadow_enabled = true
 texture = SubResource("23")
 texture_scale = 2.56
-
-[node name="Character" parent="." instance=ExtResource("34")]
-modulate = Color(1, 0.988235, 0.666667, 1)
-position = Vector2(2024, -688)
-floor_friction = null
-air_friction = null
-attract_force = null
-crouch_speed_max = null
-crouch_instant_speed = null
-crouch_return_instant_speed_thresh = null
-crouch_accel = null
-landing_velocity_thresh = null
-air_side_speed_max = null
-air_instant_speed = null
-air_return_instant_speed_thresh = null
-air_side_accel = null
-jump_speed = -300.0
-dunk_speed = null
-fall_speed_max = null
-fall_speed_max_onwall = null
-walljump_direction = null
-walk_speed_moving_fast_thresh = null
-walk_speed_max = 250.0
-walk_instant_speed = 100.0
-walk_return_instant_speed_thresh = 120.0
-walk_accel = 170.0
-flip_h = null
-physics_enabled = false
-gravity_scale = null
-friction = null
-bounce = null
-penetration = null
-
-[node name="Character2" parent="." instance=ExtResource("34")]
-modulate = Color(0.529412, 0.941176, 1, 1)
-position = Vector2(1976, -688)
-floor_friction = null
-air_friction = null
-attract_force = null
-crouch_speed_max = null
-crouch_instant_speed = null
-crouch_return_instant_speed_thresh = null
-crouch_accel = null
-landing_velocity_thresh = null
-air_side_speed_max = null
-air_instant_speed = null
-air_return_instant_speed_thresh = null
-air_side_accel = null
-jump_speed = -300.0
-dunk_speed = null
-fall_speed_max = null
-fall_speed_max_onwall = null
-walljump_direction = null
-walk_speed_moving_fast_thresh = null
-walk_speed_max = 250.0
-walk_instant_speed = 100.0
-walk_return_instant_speed_thresh = 120.0
-walk_accel = 170.0
-flip_h = null
-physics_enabled = false
-gravity_scale = null
-friction = null
-bounce = null
-penetration = null
-
-[node name="Character3" parent="." instance=ExtResource("34")]
-modulate = Color(1, 0.694118, 0.996078, 1)
-position = Vector2(2000, -688)
-floor_friction = null
-air_friction = null
-attract_force = null
-crouch_speed_max = null
-crouch_instant_speed = null
-crouch_return_instant_speed_thresh = null
-crouch_accel = null
-landing_velocity_thresh = null
-air_side_speed_max = null
-air_instant_speed = null
-air_return_instant_speed_thresh = null
-air_side_accel = null
-jump_speed = -300.0
-dunk_speed = null
-fall_speed_max = null
-fall_speed_max_onwall = null
-walljump_direction = null
-walk_speed_moving_fast_thresh = null
-walk_speed_max = 250.0
-walk_instant_speed = 100.0
-walk_return_instant_speed_thresh = 120.0
-walk_accel = 170.0
-flip_h = null
-physics_enabled = false
-gravity_scale = null
-friction = null
-bounce = null
-penetration = null
 
 [node name="PlayerPosition" parent="." instance=ExtResource("45")]
 position = Vector2(2312, -608)

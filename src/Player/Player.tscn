@@ -1891,4 +1891,3 @@ shape = SubResource("58")
 [connection signal="body_entered" from="BallHandler" to="BallHandler" method="_on_Ball_Handler_body_entered"]
 [connection signal="body_entered" from="BallHandler/BallWallDetector" to="BallHandler" method="_on_BallWallDetector_body_entered"]
 [connection signal="body_exited" from="BallHandler/BallWallDetector" to="BallHandler" method="_on_BallWallDetector_body_exited"]
-[connection signal="life_changed" from="LifeHandler" to="UI/MarginContainer/HBoxContainer/VBoxContainer/Bar" method="on_life_changed"]

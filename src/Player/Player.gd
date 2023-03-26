@@ -55,6 +55,7 @@ class_name Player
 @onready var BallHandler = get_node("BallHandler")
 @onready var Camera = get_node("Camera")
 @onready var LifeHandler = get_node("LifeHandler")
+@onready var LifeBar = get_node("UI/MarginContainer/HBoxContainer/VBoxContainer/Bar")
 
 @onready var start_position = global_position
 @onready var foot_vector = Vector2(0,32)
@@ -79,7 +80,7 @@ func reset_holder():
 func reset_move():
 	reset_holder()
 	S.reset_state()
-	#LifeHandler.reset_life()
+	LifeHandler.reset_life()
 	set_flip_h(false)
 	reset_position()
 
@@ -233,7 +234,7 @@ func get_input(delta): #delta in s
 
 	# ANIMATION:
 	$Sprite2D/AnimationTree.animate_from_state(S)
-
+	LifeBar.set_life(LifeHandler.get_life())
 	if S.is_aiming:
 		Shooter.update_screen_viewer_position()
 	else :

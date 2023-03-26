@@ -10,15 +10,15 @@ enum ZIPLINE_TYPE {ROPE_CATCH, HANDLE_CATCH}
 @export var init_point : Vector2  : get = get_init_point, set = set_init_point
 @export var final_point : Vector2 : get = get_final_point, set = set_final_point
 
-@export var player_offset : Vector2 = Vector2(0.0,5.0)
-@export var rope_offset : Vector2 = Vector2(0.0,10.0)
+@export var player_progress : Vector2 = Vector2(0.0,5.0)
+@export var rope_progress : Vector2 = Vector2(0.0,10.0)
 @export_range(1.0,20.0) var handle_catch_radius : float = 10.0
-@export_range(0.0,1.0) var handle_catch_init_unit_offset : float = 0.0 : set = set_handle_catch_init_unit_offset
+@export_range(0.0,1.0) var handle_catch_init_unit_progress : float = 0.0 : set = set_handle_catch_init_unit_progress
 
 var linear_velocity = Vector2(0.0,0.0)
-var real_rope_offset = Vector2.ZERO
-var real_player_offset = Vector2.ZERO
-#var relative_position_offset = Vector2.ZERO
+var real_rope_progress = Vector2.ZERO
+var real_player_progress = Vector2.ZERO
+#var relative_position_progress = Vector2.ZERO
 
 var inside_bodies = []
 
@@ -58,8 +58,8 @@ func get_init_point():
 func get_final_point():
 	return final_point
 
-func set_handle_catch_init_unit_offset(v):
-	handle_catch_init_unit_offset = v
+func set_handle_catch_init_unit_progress(v):
+	handle_catch_init_unit_progress = v
 	$Path2D/PathFollow2D.set_progress_ratio(v)
 
 func _ready():
@@ -85,9 +85,9 @@ func _ready():
 		$Path2D/PathFollow2D.add_child(source)
 		source.set_owner($Path2D/PathFollow2D)
 		$Path2D/PathFollow2D/Sprite2D.visible = true
-		$Path2D/PathFollow2D.set_progress_ratio(handle_catch_init_unit_offset)
+		$Path2D/PathFollow2D.set_progress_ratio(handle_catch_init_unit_progress)
 
-	#relative_position_offset = $Path2D/PathFollow2D.get_progress_ratio()*(final_point-init_point)+init_point
+	#relative_position_progress = $Path2D/PathFollow2D.get_progress_ratio()*(final_point-init_point)+init_point
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
@@ -98,16 +98,16 @@ func _process(delta):
 		var body = inside_bodies[0]
 		body.S.velocity = veldotfi*fi
 
-		var temp_u_offset = $Path2D/PathFollow2D.get_progress_ratio()
+		var temp_u_progress = $Path2D/PathFollow2D.get_progress_ratio()
 		$Path2D/PathFollow2D.set_progress($Path2D/PathFollow2D.get_progress()+veldotfi*delta)
-		#relative_position_offset = temp_u_offset*(final_point-init_point)+init_point
-		real_rope_offset = lerp(real_rope_offset, 4*temp_u_offset*(1-temp_u_offset)*rope_offset, 0.1)
-		real_player_offset = lerp(real_player_offset, player_offset, 0.1)
+		#relative_position_progress = temp_u_progress*(final_point-init_point)+init_point
+		real_rope_progress = lerp(real_rope_progress, 4*temp_u_progress*(1-temp_u_progress)*rope_progress, 0.1)
+		real_player_progress = lerp(real_player_progress, player_progress, 0.1)
 
-		#body.position = real_player_offset+self.global_position+relative_position_offset
-		body.global_position = $Path2D/PathFollow2D.global_position+real_rope_offset+real_player_offset
-		$Line2D.set_point_position(1,$Path2D/PathFollow2D.global_position-self.global_position+real_rope_offset)
-		$Path2D/PathFollow2D/Sprite2D.offset = real_rope_offset
+		#body.position = real_player_progress+self.global_position+relative_position_progress
+		body.global_position = $Path2D/PathFollow2D.global_position+real_rope_progress+real_player_progress
+		$Line2D.set_point_position(1,$Path2D/PathFollow2D.global_position-self.global_position+real_rope_progress)
+		$Path2D/PathFollow2D/Sprite2D.offset = real_rope_progress
 
 		if $Path2D/PathFollow2D.get_progress_ratio() > 0.999 or\
 			$Path2D/PathFollow2D.get_progress_ratio() < 0.001 or\
@@ -118,13 +118,13 @@ func _process(delta):
 
 			#inside_bodies.remove(0)
 			#$Line2D.set_point_position(1,$Line2D.get_point_position(2))
-			#$Path2D/PathFollow2D/Sprite2D.offset = Vector2.ZERO
+			#$Path2D/PathFollow2D/Sprite2D.offsetq = Vector2.ZERO
 			$Timer.start()
 	else :
-		#relative_position_offset = $Path2D/PathFollow2D.get_progress_ratio()*(final_point-init_point)+init_point
-		real_rope_offset = lerp(real_rope_offset, Vector2.ZERO, 0.1)
-		$Line2D.set_point_position(1,$Path2D/PathFollow2D.global_position-self.global_position+real_rope_offset)
-		$Path2D/PathFollow2D/Sprite2D.offset = real_rope_offset
+		#relative_position_progress = $Path2D/PathFollow2D.get_progress_ratio()*(final_point-init_point)+init_point
+		real_rope_progress = lerp(real_rope_progress, Vector2.ZERO, 0.1)
+		$Line2D.set_point_position(1,$Path2D/PathFollow2D.global_position-self.global_position+real_rope_progress)
+		$Path2D/PathFollow2D/Sprite2D.offset = real_rope_progress
 
 
 func _on_PlayerDetector_body_exited(body):
@@ -144,8 +144,8 @@ func _on_PlayerDetector_body_exited(body):
 		linear_velocity = body.S.velocity
 		inside_bodies.append(body)
 		$Path2D/PathFollow2D.set_progress(bi.dot(fi.normalized()))
-		#relative_position_offset = $Path2D/PathFollow2D.get_progress_ratio()*(final_point-init_point)+init_point
-		real_player_offset = bi - ($Path2D/PathFollow2D.global_position-self.global_position)
+		#relative_position_progress = $Path2D/PathFollow2D.get_progress_ratio()*(final_point-init_point)+init_point
+		real_player_progress = bi - ($Path2D/PathFollow2D.global_position-self.global_position)
 		#body.disable_physics()
 		pickup_character(body)
 
@@ -171,5 +171,5 @@ func free_character(character : Node):
 
 func remove_body(i : int):
 	assert(i < inside_bodies.size())
-	inside_bodies.remove(i)
-	real_player_offset = Vector2.ZERO
+	inside_bodies.remove_at(i)
+	real_player_progress = Vector2.ZERO

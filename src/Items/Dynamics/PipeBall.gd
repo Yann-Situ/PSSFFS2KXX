@@ -32,7 +32,7 @@ func _process(delta):
 	for i in range(inside_bodies.size()):
 		var body = inside_bodies[i-j]
 		var path_follow = path_follows[i-j]
-		path_follow.offset += speed_inside * delta
+		path_follow.progress += speed_inside * delta
 		body.global_position = path_follow.global_position
 		if path_follow.get_progress_ratio() == 1.0:
 			body.throw(path_follow.global_position,
@@ -72,7 +72,7 @@ func _on_Area_body_entered(ball):
 				return
 
 		var new_path_follow : PathFollow2D = PathFollow2D.new()
-		new_path_follow.offset = 0
+		new_path_follow.progress = 0
 		new_path_follow.loop = false
 		self.add_child(new_path_follow)
 		# WARNING : due to the issue in Ball.gd func change_holder, this part can freeze/crash.

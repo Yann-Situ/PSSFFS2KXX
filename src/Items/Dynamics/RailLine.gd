@@ -84,7 +84,7 @@ func _physics_process(delta):
 		velocity = velocity.dot(rail_dir) * rail_dir
 		position_offset = lerp(position_offset, character_offset, 0.5)
 
-		path_follow.offset += velocity.dot(rail_dir) * delta
+		path_follow.progress += velocity.dot(rail_dir) * delta
 		body.global_position = path_follow.global_position + position_offset
 		body.S.velocity = velocity
 
@@ -139,17 +139,17 @@ func _on_Area_body_entered(body):
 			return 1
 
 	var bi = body.global_position-global_position-init_point
-	var closest_offset = curve.get_closest_offset(bi)
-#	if not is_in(closest_offset, 0.0, curve.get_baked_length(),5.0):
+	var closest_progress = curve.get_closest_offset(bi)
+#	if not is_in(closest_progress, 0.0, curve.get_baked_length(),5.0):
 #		print("annoying case")
-	var closest_point = curve.sample_baked(closest_offset-0.001)
-	var rail_dir = curve.sample_baked(closest_offset+0.001)-closest_point
+	var closest_point = curve.sample_baked(closest_progress-0.001)
+	var rail_dir = curve.sample_baked(closest_progress+0.001)-closest_point
 	if rail_dir.x < 0.0:
 		rail_dir = -rail_dir
 
 	if (bi-closest_point).y <= character_position_entrance_tolerance or \
 			(rail_dir.cross(body.S.velocity) >= 0.0 and \
-		is_in(closest_offset, 0.0, curve.get_baked_length(),tolerance_annoying_case)) :
+		is_in(closest_progress, 0.0, curve.get_baked_length(),tolerance_annoying_case)) :
 
 		var new_path_follow : PathFollow2D = PathFollow2D.new()
 		new_path_follow.loop = false
@@ -160,7 +160,7 @@ func _on_Area_body_entered(body):
 		new_path_follow.add_child(ride_particle)
 		self.add_child(new_path_follow)
 
-		new_path_follow.offset = closest_offset # approximate where the player is
+		new_path_follow.progress = closest_progress # approximate where the player is
 		rail_dir = new_path_follow.transform.x
 
 		inside_bodies.push_back(body)
@@ -195,10 +195,10 @@ func free_character(character : Node):
 func remove_body(i : int):
 	assert(i < inside_bodies.size())
 	released_bodies[inside_bodies[i]] = cant_get_in_again_timer
-	inside_bodies.remove(i)
-	linear_velocities.remove(i)
-	position_offsets.remove(i)
+	inside_bodies.remove_at(i)
+	linear_velocities.remove_at(i)
+	position_offsets.remove_at(i)
 
 	path_follows[i].get_node("Particles").emitting = false
 	paths_to_free[path_follows[i]] = path_follows[i].get_node("Particles").lifetime
-	path_follows.remove(i)
+	path_follows.remove_at(i)
