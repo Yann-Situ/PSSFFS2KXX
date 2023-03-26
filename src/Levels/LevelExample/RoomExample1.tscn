@@ -38,14 +38,14 @@ shader_parameter/velocity = Vector2(1.2, 0)
 shader_parameter/fog_color = Color(0.494118, 0.309804, 0.0627451, 1)
 shader_parameter/noise = SubResource("10")
 
-[sub_resource type="Curve2D" id="Curve2D_7q64w"]
+[sub_resource type="Curve2D" id="Curve2D_euqcl"]
 resource_local_to_scene = true
 _data = {
 "points": PackedVector2Array(0, 0, 0, 0, 256, 120, 0, 0, 0, 0, -120, 16)
 }
 point_count = 2
 
-[sub_resource type="Curve2D" id="Curve2D_0365o"]
+[sub_resource type="Curve2D" id="Curve2D_8f1n3"]
 resource_local_to_scene = true
 _data = {
 "points": PackedVector2Array(0, 0, 0, 0, 248, 16, 0, 0, 0, 0, -120, 16)
@@ -178,6 +178,7 @@ modulate = Color(0.67451, 0.65098, 0.552941, 1)
 modulate = Color(0.529412, 0.505882, 0.443137, 1)
 
 [node name="Fog" type="ColorRect" parent="ParallaxForeground/ParallaxLayer5" index="0"]
+visible = false
 material = SubResource("5")
 offset_left = -984.0
 offset_top = -851.0
@@ -193,7 +194,7 @@ color = Color(0.921569, 0.917647, 0.831373, 1)
 [node name="ParabolaCatenary" parent="Map" index="1" instance=ExtResource("9")]
 z_index = 300
 position = Vector2(312, -328)
-curve = SubResource("Curve2D_7q64w")
+curve = SubResource("Curve2D_euqcl")
 p0_slope = 1.7
 line_width = 7.438
 line_modulate = Color(0.329412, 0.329412, 0.329412, 1)
@@ -202,11 +203,15 @@ line_texture = ExtResource("8")
 [node name="ParabolaCatenary2" parent="Map" index="2" instance=ExtResource("9")]
 z_index = 300
 position = Vector2(240, -328)
-curve = SubResource("Curve2D_0365o")
+curve = SubResource("Curve2D_8f1n3")
 p0_slope = 1.3
 line_width = 7.438
 line_modulate = Color(0.329412, 0.329412, 0.329412, 1)
 line_texture = ExtResource("8")
+
+[node name="TileMap" parent="Map" index="3"]
+layer_0/tile_data = PackedInt32Array(-65533, 4, 3, -131069, 4, 2, -196605, 196612, 2, -262141, 65540, 1, -262140, 131076, 0, -262139, 131076, 0, -262138, 131076, 0, -262137, 131076, 0, -262136, 131076, 0, -262135, 131076, 0, -262134, 196612, 0, 16, 720899, 3, -65520, 720899, 1, -131056, 720899, 1, -196592, 720899, 0, 15, 655363, 3, -65521, 589827, 1, -131057, 589827, 1, -196593, 589827, 0, 14, 655363, 3, -65522, 589827, 1, -131058, 589827, 1, -196594, 589827, 0, 13, 655363, 3, -65523, 589827, 1, -131059, 589827, 1, -196595, 589827, 0, 12, 524291, 3, -65524, 524291, 2, -131060, 524291, 2, -196596, 524291, 0, -196606, 65540, 0)
+layer_1/tile_data = PackedInt32Array(-10, 720898, 2, -65546, 524290, 1, -131082, 524290, 0, -65545, 655362, 2, -131081, 655362, 0, -131080, 524290, 3, -131079, 655362, 0, -65543, 655362, 2, -65544, 524290, 0, -8, 524290, 2, -7, 655362, 3, -131078, 524290, 3, -131077, 655362, 0, -65541, 655362, 2, -65542, 524290, 0, -6, 524290, 2, -5, 655362, 3, -4, 524290, 2, -65540, 720898, 1, -131076, 524290, 0, -131075, 655362, 0, -65539, 720898, 1, -3, 655362, 2)
 
 [node name="Ball" parent="Environment/Balls" index="0" instance=ExtResource("3")]
 position = Vector2(-168, -40)
