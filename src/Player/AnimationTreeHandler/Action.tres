@@ -14,7 +14,8 @@ animation = &"dunkjump_halfturn"
 
 [sub_resource type="AnimationNodeStateMachineTransition" id="5"]
 switch_mode = 1
-advance_condition = &"is_dunkjumphalfturning"
+advance_mode = 2
+advance_expression = "is_dunkjumphalfturning"
 
 [sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_jnowj"]
 advance_mode = 2
@@ -38,7 +39,8 @@ animation = &"floor_shoot"
 
 [sub_resource type="AnimationNodeStateMachineTransition" id="10"]
 switch_mode = 1
-advance_condition = &"is_onfloor"
+advance_mode = 2
+advance_expression = "is_onfloor"
 
 [sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_apcni"]
 advance_mode = 2
@@ -52,28 +54,36 @@ states/floor_shoot/position = Vector2(336, 223)
 transitions = ["air_shoot", "floor_shoot", SubResource("10"), "Start", "air_shoot", SubResource("AnimationNodeStateMachineTransition_apcni")]
 
 [sub_resource type="AnimationNodeStateMachineTransition" id="12"]
-advance_condition = &"is_dunkjumping"
+advance_mode = 2
+advance_expression = "is_dunkjumping"
 
 [sub_resource type="AnimationNodeStateMachineTransition" id="13"]
-advance_condition = &"is_dunkdashing"
+advance_mode = 2
+advance_expression = "is_dunkdashing"
 
 [sub_resource type="AnimationNodeStateMachineTransition" id="14"]
-advance_condition = &"is_dunking"
+advance_mode = 2
+advance_expression = "is_dunking"
 
 [sub_resource type="AnimationNodeStateMachineTransition" id="15"]
-advance_condition = &"is_shooting"
+advance_mode = 2
+advance_expression = "is_shooting"
 
 [sub_resource type="AnimationNodeStateMachineTransition" id="16"]
 switch_mode = 2
+advance_mode = 2
 
 [sub_resource type="AnimationNodeStateMachineTransition" id="17"]
 switch_mode = 2
+advance_mode = 2
 
 [sub_resource type="AnimationNodeStateMachineTransition" id="18"]
-advance_condition = &"is_not_dunkdashing"
+advance_mode = 2
+advance_expression = "!is_dunkdashing"
 
 [sub_resource type="AnimationNodeStateMachineTransition" id="19"]
-advance_condition = &"is_not_dunkjumping"
+advance_mode = 2
+advance_expression = "!is_dunkjumping"
 
 [sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_lminj"]
 advance_mode = 2
@@ -91,4 +101,4 @@ states/hub/position = Vector2(639, 312)
 states/shoot/node = SubResource("11")
 states/shoot/position = Vector2(639, 551)
 transitions = ["hub", "dunkjump", SubResource("12"), "hub", "dunkdash", SubResource("13"), "hub", "dunk", SubResource("14"), "hub", "shoot", SubResource("15"), "shoot", "hub", SubResource("16"), "dunk", "hub", SubResource("17"), "dunkdash", "hub", SubResource("18"), "dunkjump", "hub", SubResource("19"), "Start", "hub", SubResource("AnimationNodeStateMachineTransition_lminj")]
-graph_offset = Vector2(0, -9.89457)
+graph_offset = Vector2(0, 161.371)

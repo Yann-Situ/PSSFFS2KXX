@@ -1,6 +1,6 @@
+@icon("res://assets/art/icons/popol.png")
 extends CharacterBody2D
 class_name Player
-# @icon("res://assets/art/icons/popol.png")
 
 @export var physics_enabled : bool = true
 
@@ -233,7 +233,12 @@ func get_input(delta): #delta in s
 		Camera.set_offset_from_type("normal")
 
 	# ANIMATION:
-	$Sprite2D/AnimationTree.animate_from_state(S)
+	#$Sprite2D/AnimationTree.animate_from_state(S)
+	if S.direction_sprite == -1:
+		self.set_flip_h(true)
+	elif S.direction_sprite == 1:
+		self.set_flip_h(false)		
+
 	LifeBar.set_life(LifeHandler.get_life())
 	if S.is_aiming:
 		Shooter.update_screen_viewer_position()
@@ -267,14 +272,14 @@ func apply_forces(delta):
 		if S.velocity.y > fall_speed_max:
 			S.velocity.y = fall_speed_max
 
-func has_force(name : String):
-	return applied_forces.has(name)
+func has_force(_name : String):
+	return applied_forces.has(_name)
 
-func apply_force(force : Vector2, name : String):
-	applied_forces[name] = force
+func apply_force(force : Vector2, _name : String):
+	applied_forces[_name] = force
 
-func remove_force(name : String):
-	applied_forces.erase(name)
+func remove_force(_name : String):
+	applied_forces.erase(_name)
 
 func _physics_process(delta):
 	get_input(delta)
@@ -304,8 +309,8 @@ func enable_physics():
 	collision_layer = collision_layer_save
 	collision_mask = collision_mask_save
 
-func set_start_position(position):
-	start_position = position
+func set_start_position(_position):
+	start_position = _position
 
 func reset_position():
 	global_position = start_position

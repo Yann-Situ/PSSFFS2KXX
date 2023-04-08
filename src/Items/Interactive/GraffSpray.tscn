@@ -228,9 +228,11 @@ color_ramp = SubResource("Gradient_ggvhg")
 light_mask = 4
 z_index = 1
 material = SubResource("1")
+position = Vector2(0, -1.98384)
 texture = ExtResource("1")
 hframes = 4
 vframes = 2
+frame = 7
 
 [node name="LightSmall" type="PointLight2D" parent="Sprite2D"]
 z_as_relative = false
@@ -239,7 +241,7 @@ scale = Vector2(1.11855, 1.11855)
 color = Color(0.902353, 0.952549, 0.958824, 1)
 energy = 1.08
 range_z_max = 160
-range_item_cull_mask = 7
+range_item_cull_mask = 3
 texture = ExtResource("4")
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]

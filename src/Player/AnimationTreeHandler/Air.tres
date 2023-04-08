@@ -11,6 +11,7 @@ animation = &"fall_loop"
 
 [sub_resource type="AnimationNodeStateMachineTransition" id="4"]
 switch_mode = 2
+advance_mode = 2
 
 [sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_g3ym4"]
 advance_mode = 2
@@ -29,22 +30,28 @@ animation = &"jump1"
 animation = &"walljump1"
 
 [sub_resource type="AnimationNodeStateMachineTransition" id="8"]
-advance_condition = &"is_onwall"
+advance_mode = 2
+advance_expression = "is_onwall"
 
 [sub_resource type="AnimationNodeStateMachineTransition" id="9"]
-advance_condition = &"is_jumping"
+advance_mode = 2
+advance_expression = "is_jumping"
 
 [sub_resource type="AnimationNodeStateMachineTransition" id="10"]
 switch_mode = 2
+advance_mode = 2
 
 [sub_resource type="AnimationNodeStateMachineTransition" id="11"]
-advance_condition = &"is_jumping"
+advance_mode = 2
+advance_expression = "is_jumping"
 
 [sub_resource type="AnimationNodeStateMachineTransition" id="12"]
 switch_mode = 2
+advance_mode = 2
 
 [sub_resource type="AnimationNodeStateMachineTransition" id="13"]
-advance_condition = &"is_not_onwall"
+advance_mode = 2
+advance_expression = "!is_onwall"
 
 [sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_71tuk"]
 advance_mode = 2

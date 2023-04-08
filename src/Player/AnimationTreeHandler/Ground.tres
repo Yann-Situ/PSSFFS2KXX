@@ -32,9 +32,11 @@ animation = &"idle_dribble"
 
 [sub_resource type="AnimationNodeStateMachineTransition" id="8"]
 switch_mode = 2
+advance_mode = 2
 
 [sub_resource type="AnimationNodeStateMachineTransition" id="9"]
 switch_mode = 2
+advance_mode = 2
 
 [sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_pnli3"]
 advance_mode = 2
@@ -51,77 +53,100 @@ transitions = ["idle", "idle_dribble", SubResource("8"), "idle_dribble", "idle",
 animation = &"walk"
 
 [sub_resource type="AnimationNodeStateMachineTransition" id="12"]
-advance_condition = &"is_crouching"
+advance_mode = 2
+advance_expression = "is_crouching"
 
 [sub_resource type="AnimationNodeStateMachineTransition" id="13"]
-advance_condition = &"is_standing"
+advance_mode = 2
+advance_expression = "!is_crouching"
 
 [sub_resource type="AnimationNodeStateMachineTransition" id="14"]
-advance_condition = &"is_idle"
+advance_mode = 2
+advance_expression = "is_idle"
 
 [sub_resource type="AnimationNodeStateMachineTransition" id="15"]
-advance_condition = &"is_walking"
+advance_mode = 2
+advance_expression = "!is_idle"
 
 [sub_resource type="AnimationNodeStateMachineTransition" id="16"]
 switch_mode = 2
+advance_mode = 2
 
 [sub_resource type="AnimationNodeStateMachineTransition" id="17"]
 priority = 2
 switch_mode = 2
+advance_mode = 2
 
 [sub_resource type="AnimationNodeStateMachineTransition" id="18"]
 switch_mode = 2
+advance_mode = 2
 
 [sub_resource type="AnimationNodeStateMachineTransition" id="19"]
-advance_condition = &"is_standing"
+advance_mode = 2
+advance_expression = "!is_crouching"
 
 [sub_resource type="AnimationNodeStateMachineTransition" id="20"]
 priority = 3
-advance_condition = &"is_crouching"
+advance_mode = 2
+advance_expression = "is_crouching"
 
 [sub_resource type="AnimationNodeStateMachineTransition" id="21"]
 priority = 2
-advance_condition = &"is_landing"
+advance_mode = 2
+advance_expression = "is_landing"
 
 [sub_resource type="AnimationNodeStateMachineTransition" id="22"]
-advance_condition = &"is_landrolling"
+advance_mode = 2
+advance_expression = "is_landing_roll"
 
 [sub_resource type="AnimationNodeStateMachineTransition" id="23"]
 priority = 3
-advance_condition = &"is_walking"
+advance_mode = 2
+advance_expression = "!is_idle"
 
 [sub_resource type="AnimationNodeStateMachineTransition" id="24"]
-advance_condition = &"is_idle"
+advance_mode = 2
+advance_expression = "is_idle"
 
 [sub_resource type="AnimationNodeStateMachineTransition" id="25"]
-advance_condition = &"is_halfturning"
+advance_mode = 2
+advance_expression = "is_halfturning"
 
 [sub_resource type="AnimationNodeStateMachineTransition" id="26"]
-advance_condition = &"is_crouching"
+advance_mode = 2
+advance_expression = "is_crouching"
 
 [sub_resource type="AnimationNodeStateMachineTransition" id="27"]
-advance_condition = &"is_halfturning"
+advance_mode = 2
+advance_expression = "is_halfturning"
 
 [sub_resource type="AnimationNodeStateMachineTransition" id="28"]
-advance_condition = &"is_idle"
+advance_mode = 2
+advance_expression = "is_idle"
 
 [sub_resource type="AnimationNodeStateMachineTransition" id="32"]
 switch_mode = 2
+advance_mode = 2
 
 [sub_resource type="AnimationNodeStateMachineTransition" id="33"]
 switch_mode = 2
+advance_mode = 2
 
 [sub_resource type="AnimationNodeStateMachineTransition" id="34"]
-advance_condition = &"is_not_sliding"
+advance_mode = 2
+advance_expression = "!is_sliding"
 
 [sub_resource type="AnimationNodeStateMachineTransition" id="35"]
-advance_condition = &"is_sliding"
+advance_mode = 2
+advance_expression = "is_sliding"
 
 [sub_resource type="AnimationNodeStateMachineTransition" id="36"]
-advance_condition = &"is_sliding"
+advance_mode = 2
+advance_expression = "is_sliding"
 
 [sub_resource type="AnimationNodeStateMachineTransition" id="37"]
-advance_condition = &"is_sliding"
+advance_mode = 2
+advance_expression = "is_sliding"
 
 [sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_iowgr"]
 advance_mode = 2
@@ -150,4 +175,4 @@ states/stand_idle/position = Vector2(909, 62)
 states/walk/node = SubResource("11")
 states/walk/position = Vector2(920, 527)
 transitions = ["walk", "crouch", SubResource("12"), "crouch", "walk", SubResource("13"), "crouch", "crouch_idle", SubResource("14"), "crouch_idle", "crouch", SubResource("15"), "land", "crouch_idle", SubResource("16"), "land_roll", "crouch", SubResource("17"), "halfturn", "walk", SubResource("18"), "crouch_idle", "stand_idle", SubResource("19"), "stand_idle", "crouch_idle", SubResource("20"), "stand_idle", "land", SubResource("21"), "stand_idle", "land_roll", SubResource("22"), "stand_idle", "walk", SubResource("23"), "walk", "stand_idle", SubResource("24"), "stand_idle", "halfturn", SubResource("25"), "halfturn", "land_roll", SubResource("26"), "walk", "halfturn", SubResource("27"), "halfturn", "stand_idle", SubResource("28"), "slide", "slide_loop", SubResource("32"), "slide_end", "crouch", SubResource("33"), "slide_loop", "slide_end", SubResource("34"), "walk", "slide", SubResource("35"), "halfturn", "slide", SubResource("36"), "land_roll", "slide", SubResource("37"), "Start", "stand_idle", SubResource("AnimationNodeStateMachineTransition_iowgr")]
-graph_offset = Vector2(0, 40.4426)
+graph_offset = Vector2(0, 281.089)
