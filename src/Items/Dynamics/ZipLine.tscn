@@ -11,7 +11,7 @@ _data = {
 }
 point_count = 2
 
-[sub_resource type="SegmentShape2D" id="SegmentShape2D_strcv"]
+[sub_resource type="SegmentShape2D" id="SegmentShape2D_5wtj5"]
 resource_local_to_scene = true
 b = Vector2(300, 80)
 
@@ -54,6 +54,6 @@ collision_layer = 8
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="PlayerDetector"]
 modulate = Color(0, 0.647059, 1, 1)
-shape = SubResource("SegmentShape2D_strcv")
+shape = SubResource("SegmentShape2D_5wtj5")
 
 [connection signal="body_exited" from="PlayerDetector" to="." method="_on_PlayerDetector_body_exited"]

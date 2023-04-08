@@ -2,13 +2,14 @@
 extends CharacterBody2D
 class_name Player
 
+var _zero_velocity_workaround = false
+
 @export var physics_enabled : bool = true
 
 ## Environment features (should be given by the map)
 @export var floor_unfriction : float = 0.18 # s
 @export var air_unfriction : float = 0.32 # s
 @export var attract_force : float = 800.0 # m.pix/s² # don't know for what know (?)
-@export var gravity : Vector2 # pix/s²
 
 @export_group("Ground features")
 @export_subgroup("Crouch properties", "crouch_")
@@ -60,6 +61,7 @@ class_name Player
 @onready var start_position = global_position
 @onready var foot_vector = Vector2(0,32)
 @onready var based_gravity = Vector2(0.0,ProjectSettings.get_setting("physics/2d/default_gravity")) # pix/s²
+@onready var gravity : Vector2 = based_gravity # pix/s²
 @onready var invmass = 1.0/4.0
 @onready var collision_layer_save = 1
 @onready var collision_mask_save = 514
@@ -98,8 +100,6 @@ func _ready():
 		Global.toggle_playing()
 	Global.camera = Camera
 
-	gravity = based_gravity
-
 func set_flip_h(b):
 	flip_h  = b
 	$Sprite2D.set_flip_h(b)
@@ -118,7 +118,7 @@ func get_input(delta): #delta in s
 		S.last_wall_normal_direction = -1#sign(get_slide_collision(get_slide_collision_count()-1).normal.x)
 		if $Sprite2D.flip_h:
 			S.last_wall_normal_direction = 1
-
+	
 	############### Move from input
 	if physics_enabled and (S.direction_p != 0) and S.can_go :
 		$Actions/Side.move(delta,S.direction_p)
@@ -179,8 +179,7 @@ func get_input(delta): #delta in s
 	# GRAVITY:
 
 	# SHADER:
-	#$Sprite2D.material.set("shader_parameter/speed",S.velocity)
-
+	
 	# HITBOX:
 	if S.is_crouching or S.is_landing or not S.can_stand:
 		$Collision.shape.set_radius(8.5)
@@ -237,9 +236,10 @@ func get_input(delta): #delta in s
 	if S.direction_sprite == -1:
 		self.set_flip_h(true)
 	elif S.direction_sprite == 1:
-		self.set_flip_h(false)		
+		self.set_flip_h(false)
 
 	LifeBar.set_life(LifeHandler.get_life())
+
 	if S.is_aiming:
 		Shooter.update_screen_viewer_position()
 	else :
@@ -264,7 +264,7 @@ func apply_impulse(impulse):
 func apply_forces(delta):
 	for force in applied_forces.values() :
 		S.velocity += invmass * force * delta
-	if S.is_onwall and S.velocity.y > 0: #fall on a wall
+	if S.is_onwall and S.velocity.y > 0.0: #fall on a wall
 		S.velocity += gravity/2.0 * delta
 		S.velocity.y = min(S.velocity.y,fall_speed_max_onwall)
 	else :
@@ -282,6 +282,9 @@ func remove_force(_name : String):
 	applied_forces.erase(_name)
 
 func _physics_process(delta):
+	#print("0: "+str(S.velocity)) # always (0.0,0.0) for some reason...
+	_zero_velocity_workaround = true
+	
 	get_input(delta)
 	if physics_enabled:
 		apply_forces(delta)
@@ -294,6 +297,8 @@ func _physics_process(delta):
 		# TODOConverter40 infinite_inertia were removed in Godot 4.0 - previous value `false`
 		move_and_slide()
 		S.velocity = get_real_velocity()
+	
+	_zero_velocity_workaround = false
 
 func disable_physics():
 	physics_enabled = false

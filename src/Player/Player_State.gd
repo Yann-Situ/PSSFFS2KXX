@@ -69,8 +69,12 @@ var move_direction : int = 0
 var direction_p : int = 0
 var direction_sprite : int = 0
 var aim_direction : int = 0
-var velocity = Vector2()
-
+var velocity = Vector2() : set = set_velocity_test
+func set_velocity_test(v:Vector2):
+	if Player._zero_velocity_workaround :
+		velocity = v
+	else:
+		push_warning(str(v))
 # Delays and states memory # handle by Player.gd
 #var last_onfloor = 0
 var last_frame_onair = false

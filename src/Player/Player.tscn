@@ -1382,9 +1382,10 @@ states/action/position = Vector2(325, 124)
 states/stance/node = ExtResource("46")
 states/stance/position = Vector2(325, 251)
 transitions = ["stance", "action", SubResource("36"), "action", "stance", SubResource("37"), "Start", "action", SubResource("AnimationNodeStateMachineTransition_p8a3c")]
+graph_offset = Vector2(0, 149.373)
 
 [sub_resource type="AnimationNodeBlendTree" id="39"]
-graph_offset = Vector2(911.476, 185.572)
+graph_offset = Vector2(902.746, 321.829)
 nodes/cancelable/node = SubResource("38")
 nodes/cancelable/position = Vector2(980, 320)
 nodes/output/position = Vector2(1240, 340)
@@ -1444,7 +1445,7 @@ color_ramp = SubResource("53")
 
 [sub_resource type="CompressedTexture2D" id="55"]
 
-[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_lt0bq"]
+[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_0kxke"]
 resource_local_to_scene = true
 particles_animation = true
 particles_anim_h_frames = 6
@@ -1733,7 +1734,7 @@ lifetime = 0.65
 explosiveness = 0.9
 
 [node name="GrindParticles" parent="PlayerEffects" instance=ExtResource("27")]
-material = SubResource("CanvasItemMaterial_lt0bq")
+material = SubResource("CanvasItemMaterial_0kxke")
 position = Vector2(0, 16)
 
 [node name="BallHandler" type="Area2D" parent="."]
