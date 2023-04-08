@@ -116,13 +116,13 @@ func pickup(holder_node):
 	on_pickup(holder_node)
 	is_picked_up.emit()
 
-func throw(position, velo):
+func throw(_position, velo):
 	#$TrailHandler.set_node_to_trail(self)
 	#$TrailHandler.start(2.0,0.1)
 	self.enable_physics()
 	var previous_holder = holder
 	change_holder(Global.get_current_room())
-	global_position = position
+	global_position = _position
 	linear_velocity = velo
 	self.z_index = Global.z_indices["ball_0"]
 	on_throw(previous_holder)

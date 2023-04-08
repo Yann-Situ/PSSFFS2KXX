@@ -8,8 +8,8 @@ var selector_targets = []
 
 func _ready():
 	await Player.get_parent().ready
-	for name in names:
-		var selector_target = self.get_node(name+"Target")
+	for _name in names:
+		var selector_target = self.get_node(_name+"Target")
 		#var new_selector_target = selector_target.duplicate(15) # 7 because see Node.duplicate flags
 		#new_selector_target.name += "STYLE"
 		self.remove_child(selector_target) # WARNING: Be careful with the reparenting..

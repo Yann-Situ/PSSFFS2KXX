@@ -38,12 +38,12 @@ func _draw():
 		#draw_line(points[i], points[i+1], red, 1)
 		draw_circle(points[i], 2, yellorange)
 
-func draw_prediction(position, vel, grav):
+func draw_prediction(_position, vel, grav):
 	points.clear()
 	for i in range(nb_points):
-		points.append(position)
+		points.append(_position)
 		vel += 1.0*grav * delta
-		position += 1.0*vel * delta + 0.5 * grav*delta*delta # Thanks Taylor
+		_position += 1.0*vel * delta + 0.5 * grav*delta*delta # Thanks Taylor
 	queue_redraw()
 
 func draw_attract(initial_position, vel, grav, power):

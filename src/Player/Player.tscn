@@ -97,18 +97,6 @@ tracks/1/keys = {
 "update": 1,
 "values": [Vector2(9, 12)]
 }
-tracks/2/type = "value"
-tracks/2/imported = false
-tracks/2/enabled = true
-tracks/2/path = NodePath("../State:is_dunkjumping")
-tracks/2/interp = 1
-tracks/2/loop_wrap = true
-tracks/2/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [false]
-}
 
 [sub_resource type="Animation" id="5"]
 length = 0.35
@@ -1841,7 +1829,20 @@ script = ExtResource("44_d6hbp")
 activated = true
 
 [node name="SpriteVelocity" type="Sprite2D" parent="UI/DebugGUI"]
-position = Vector2(19, 52)
+modulate = Color(0.403922, 0.811765, 0.886275, 1)
+position = Vector2(-150, 52)
+scale = Vector2(0.5, 1)
+texture = ExtResource("44_a1agg")
+
+[node name="SpriteSVelocity" type="Sprite2D" parent="UI/DebugGUI"]
+modulate = Color(1, 0.54902, 0.580392, 1)
+position = Vector2(150, 52)
+scale = Vector2(0.5, 1)
+texture = ExtResource("44_a1agg")
+
+[node name="SpriteDeviation" type="Sprite2D" parent="UI/DebugGUI"]
+modulate = Color(0.65098, 0.941176, 0.219608, 1)
+position = Vector2(0, 52)
 scale = Vector2(0.5, 1)
 texture = ExtResource("44_a1agg")
 

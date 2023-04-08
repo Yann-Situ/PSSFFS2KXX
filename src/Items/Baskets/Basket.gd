@@ -24,9 +24,9 @@ var distortion_scene = preload("res://src/Effects/Distortion.tscn")
 @onready var start_position = global_position
 
 # Should be in any items that can be picked/placed :
-func set_start_position(position):
-	start_position = position
-	global_position = position
+func set_start_position(_position):
+	start_position = _position
+	global_position = _position
 
 func _ready():
 	self.z_index = Global.z_indices["foreground_1"]

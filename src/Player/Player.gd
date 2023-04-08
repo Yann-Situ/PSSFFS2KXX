@@ -184,12 +184,12 @@ func get_input(delta): #delta in s
 	# HITBOX:
 	if S.is_crouching or S.is_landing or not S.can_stand:
 		$Collision.shape.set_radius(8.5)
-		$Collision.shape.set_height(57)
-		$Collision.position.y = 3.5
-	else :
-		$Collision.shape.set_radius(8.5)
 		$Collision.shape.set_height(31)
 		$Collision.position.y = 16.5
+	else :
+		$Collision.shape.set_radius(8.5)
+		$Collision.shape.set_height(57)
+		$Collision.position.y = 3.5
 
 	# CAMERA:
 	if S.is_aiming:
@@ -301,7 +301,7 @@ func disable_physics():
 	collision_layer = 0
 	collision_mask_save = collision_mask
 	collision_mask = 0
-	S.velocity *= 0
+	S.velocity *= 0.0
 	applied_forces.clear()
 
 func enable_physics():

@@ -65,21 +65,21 @@ func enable_physics():
 func reset_position():
 	global_position = start_position
 
-func set_start_position(position : Vector2):
-	start_position = position
-	global_position = position
+func set_start_position(_position : Vector2):
+	start_position = _position
+	global_position = _position
 
 func apply_impulse(impulse):
 	linear_velocity += invmass * impulse
 
-func has_force(name : String):
-	return applied_forces.has(name)
+func has_force(_name : String):
+	return applied_forces.has(_name)
 
-func apply_force(force : Vector2, name : String):
-	applied_forces[name] = force
+func apply_force(force : Vector2, _name : String):
+	applied_forces[_name] = force
 
-func remove_force(name : String):
-	applied_forces.erase(name)
+func remove_force(_name : String):
+	applied_forces.erase(_name)
 
 ###############PHYSICALPROCESS######################
 
