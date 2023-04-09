@@ -370,25 +370,13 @@ tracks/1/keys = {
 "update": 1,
 "values": [Vector2(-6, 11), Vector2(-6, 11), Vector2(-5, 11), Vector2(1, 3), Vector2(8, -9), Vector2(14, 1), Vector2(-1, 5), Vector2(-8, 5), Vector2(-5, 9), Vector2(-9, 5), Vector2(-13, -3), Vector2(-20, -14), Vector2(-20, -22), Vector2(-19, -31), Vector2(-13, -36), Vector2(-6, -40)]
 }
-tracks/2/type = "value"
+tracks/2/type = "method"
 tracks/2/imported = false
 tracks/2/enabled = true
-tracks/2/path = NodePath("../State:is_dunkjumping")
+tracks/2/path = NodePath("../Actions/Dunkjump")
 tracks/2/interp = 1
 tracks/2/loop_wrap = true
 tracks/2/keys = {
-"times": PackedFloat32Array(),
-"transitions": PackedFloat32Array(),
-"update": 1,
-"values": []
-}
-tracks/3/type = "method"
-tracks/3/imported = false
-tracks/3/enabled = true
-tracks/3/path = NodePath("../Actions/Dunkjump")
-tracks/3/interp = 1
-tracks/3/loop_wrap = true
-tracks/3/keys = {
 "times": PackedFloat32Array(0.224),
 "transitions": PackedFloat32Array(1),
 "values": [{
@@ -396,13 +384,13 @@ tracks/3/keys = {
 "method": &"move_jump"
 }]
 }
-tracks/4/type = "value"
-tracks/4/imported = false
-tracks/4/enabled = true
-tracks/4/path = NodePath("../State:is_dunkprejumping")
-tracks/4/interp = 1
-tracks/4/loop_wrap = true
-tracks/4/keys = {
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("../State:is_dunkprejumping")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
 "times": PackedFloat32Array(0.28),
 "transitions": PackedFloat32Array(1),
 "update": 1,
@@ -435,25 +423,13 @@ tracks/1/keys = {
 "update": 1,
 "values": [Vector2(-6, 11), Vector2(-6, 11), Vector2(-5, 11), Vector2(1, 3), Vector2(8, -9), Vector2(14, 1), Vector2(-1, 5), Vector2(-8, 5), Vector2(-5, 9), Vector2(-9, 5), Vector2(-13, -3), Vector2(-20, -14), Vector2(-20, -22), Vector2(-19, -31), Vector2(-13, -36), Vector2(-6, -40)]
 }
-tracks/2/type = "value"
+tracks/2/type = "method"
 tracks/2/imported = false
 tracks/2/enabled = true
-tracks/2/path = NodePath("../State:is_dunkjumping")
+tracks/2/path = NodePath("../Actions/Dunkjump")
 tracks/2/interp = 1
 tracks/2/loop_wrap = true
 tracks/2/keys = {
-"times": PackedFloat32Array(),
-"transitions": PackedFloat32Array(),
-"update": 1,
-"values": []
-}
-tracks/3/type = "method"
-tracks/3/imported = false
-tracks/3/enabled = true
-tracks/3/path = NodePath("../Actions/Dunkjump")
-tracks/3/interp = 1
-tracks/3/loop_wrap = true
-tracks/3/keys = {
 "times": PackedFloat32Array(0.224),
 "transitions": PackedFloat32Array(1),
 "values": [{
@@ -461,13 +437,13 @@ tracks/3/keys = {
 "method": &"move_jump"
 }]
 }
-tracks/4/type = "value"
-tracks/4/imported = false
-tracks/4/enabled = true
-tracks/4/path = NodePath("../State:is_dunkprejumping")
-tracks/4/interp = 1
-tracks/4/loop_wrap = true
-tracks/4/keys = {
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("../State:is_dunkprejumping")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
 "times": PackedFloat32Array(0.28),
 "transitions": PackedFloat32Array(1),
 "update": 1,
@@ -1363,29 +1339,29 @@ _data = {
 "walljump1": SubResource("34")
 }
 
-[sub_resource type="AnimationNodeStateMachineTransition" id="36"]
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_p8a3c"]
 advance_mode = 2
-advance_expression = "is_non_cancelable"
 
-[sub_resource type="AnimationNodeStateMachineTransition" id="37"]
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_1362h"]
 advance_mode = 2
 advance_expression = "!is_non_cancelable"
 
-[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_p8a3c"]
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_eq5wl"]
 advance_mode = 2
+advance_expression = "is_non_cancelable"
 
 [sub_resource type="AnimationNodeStateMachine" id="38"]
 states/End/position = Vector2(462, 124)
 states/Start/position = Vector2(183, 119)
 states/action/node = ExtResource("45")
-states/action/position = Vector2(325, 124)
+states/action/position = Vector2(338, 101)
 states/stance/node = ExtResource("46")
-states/stance/position = Vector2(325, 251)
-transitions = ["stance", "action", SubResource("36"), "action", "stance", SubResource("37"), "Start", "action", SubResource("AnimationNodeStateMachineTransition_p8a3c")]
-graph_offset = Vector2(0, 149.373)
+states/stance/position = Vector2(323, 270.611)
+transitions = ["Start", "action", SubResource("AnimationNodeStateMachineTransition_p8a3c"), "action", "stance", SubResource("AnimationNodeStateMachineTransition_1362h"), "stance", "action", SubResource("AnimationNodeStateMachineTransition_eq5wl")]
+graph_offset = Vector2(0, -33.389)
 
 [sub_resource type="AnimationNodeBlendTree" id="39"]
-graph_offset = Vector2(902.746, 321.829)
+graph_offset = Vector2(309.796, 30.0591)
 nodes/cancelable/node = SubResource("38")
 nodes/cancelable/position = Vector2(980, 320)
 nodes/output/position = Vector2(1240, 340)
@@ -1399,13 +1375,13 @@ node_connections = [&"output", 0, &"cancelable"]
 
 [sub_resource type="AnimationNodeStateMachinePlayback" id="43"]
 
-[sub_resource type="AnimationNodeStateMachinePlayback" id="44"]
+[sub_resource type="AnimationNodeStateMachinePlayback" id="AnimationNodeStateMachinePlayback_crd7q"]
 
-[sub_resource type="AnimationNodeStateMachinePlayback" id="45"]
+[sub_resource type="AnimationNodeStateMachinePlayback" id="AnimationNodeStateMachinePlayback_skx5s"]
 
-[sub_resource type="AnimationNodeStateMachinePlayback" id="46"]
+[sub_resource type="AnimationNodeStateMachinePlayback" id="AnimationNodeStateMachinePlayback_gbodl"]
 
-[sub_resource type="AnimationNodeStateMachinePlayback" id="47"]
+[sub_resource type="AnimationNodeStateMachinePlayback" id="AnimationNodeStateMachinePlayback_4diek"]
 
 [sub_resource type="CanvasItemMaterial" id="48"]
 particles_animation = true
@@ -1445,7 +1421,7 @@ color_ramp = SubResource("53")
 
 [sub_resource type="CompressedTexture2D" id="55"]
 
-[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_0kxke"]
+[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_7pvw0"]
 resource_local_to_scene = true
 particles_animation = true
 particles_anim_h_frames = 6
@@ -1484,7 +1460,6 @@ landing_velocity_thresh = 310.0
 
 [node name="State" parent="." instance=ExtResource("5")]
 visible = false
-is_jumping = true
 
 [node name="Collision" type="CollisionShape2D" parent="."]
 position = Vector2(0, 3.5)
@@ -1689,14 +1664,14 @@ parameters/cancelable/playback = SubResource("40")
 parameters/cancelable/action/playback = SubResource("41")
 parameters/cancelable/action/dunkjump/playback = SubResource("42")
 parameters/cancelable/action/shoot/playback = SubResource("43")
-parameters/cancelable/stance/air/playback = SubResource("44")
-parameters/cancelable/stance/air/fall/playback = SubResource("45")
-parameters/cancelable/stance/grind/blend_position = 0.0
-parameters/cancelable/stance/ground/playback = SubResource("46")
-parameters/cancelable/stance/ground/stand_idle/playback = SubResource("47")
-parameters/cancelable/stance/stancetransition/current_state = "ground"
-parameters/cancelable/stance/stancetransition/transition_request = ""
-parameters/cancelable/stance/stancetransition/current_index = 0
+parameters/cancelable/stance/air/playback = SubResource("AnimationNodeStateMachinePlayback_crd7q")
+parameters/cancelable/stance/air/fall/playback = SubResource("AnimationNodeStateMachinePlayback_skx5s")
+parameters/cancelable/stance/grind/blend_position = 0
+parameters/cancelable/stance/ground/playback = SubResource("AnimationNodeStateMachinePlayback_gbodl")
+parameters/cancelable/stance/ground/stand_idle/playback = SubResource("AnimationNodeStateMachinePlayback_4diek")
+parameters/cancelable/stance/stancetransition/current_state = ""
+parameters/cancelable/stance/stancetransition/transition_request = "air"
+parameters/cancelable/stance/stancetransition/current_index = -1
 
 [node name="PlayerEffects" type="Node2D" parent="."]
 script = ExtResource("13")
@@ -1734,7 +1709,7 @@ lifetime = 0.65
 explosiveness = 0.9
 
 [node name="GrindParticles" parent="PlayerEffects" instance=ExtResource("27")]
-material = SubResource("CanvasItemMaterial_0kxke")
+material = SubResource("CanvasItemMaterial_7pvw0")
 position = Vector2(0, 16)
 
 [node name="BallHandler" type="Area2D" parent="."]

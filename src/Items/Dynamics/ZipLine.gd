@@ -116,7 +116,7 @@ func _process(delta):
 
 			body.get_out(body.global_position, veldotfi*fi)
 
-			#inside_bodies.remove(0)
+			#inside_bodies.remove_at(0)
 			#$Line2D.set_point_position(1,$Line2D.get_point_position(2))
 			#$Path2D/PathFollow2D/Sprite2D.offsetq = Vector2.ZERO
 			$Timer.start()

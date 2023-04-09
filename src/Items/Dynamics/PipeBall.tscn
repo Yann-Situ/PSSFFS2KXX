@@ -1,111 +1,115 @@
-[gd_scene load_steps=14 format=2]
+[gd_scene load_steps=14 format=3 uid="uid://cn3mh5kug88g3"]
 
-[ext_resource path="res://src/Items/Dynamics/PipeBall.gd" type="Script" id=1]
-[ext_resource path="res://assets/art/environment/environment-interactive.png" type="Texture2D" id=2]
-[ext_resource path="res://assets/art/ball/ball_particle.png" type="Texture2D" id=3]
-[ext_resource path="res://src/Items/Interactive/Electric.gd" type="Script" id=4]
+[ext_resource type="Script" path="res://src/Items/Dynamics/PipeBall.gd" id="1"]
+[ext_resource type="Texture2D" uid="uid://bcddludfh8obw" path="res://assets/art/environment/environment-interactive.png" id="2"]
+[ext_resource type="Texture2D" uid="uid://cntdvutmbk0dn" path="res://assets/art/ball/ball_particle.png" id="3"]
+[ext_resource type="Script" path="res://src/Items/Interactive/Electric.gd" id="4"]
 
-[sub_resource type="RectangleShape2D" id=1]
-size = Vector2( 16, 16 )
+[sub_resource type="RectangleShape2D" id="1"]
+size = Vector2(32, 32)
 
-[sub_resource type="AtlasTexture" id=2]
-atlas = ExtResource( 2 )
-region = Rect2( 128, 96, 32, 32 )
+[sub_resource type="AtlasTexture" id="2"]
+atlas = ExtResource("2")
+region = Rect2(128, 96, 32, 32)
 
-[sub_resource type="AtlasTexture" id=3]
-atlas = ExtResource( 2 )
-region = Rect2( 160, 96, 32, 32 )
+[sub_resource type="AtlasTexture" id="3"]
+atlas = ExtResource("2")
+region = Rect2(160, 96, 32, 32)
 
-[sub_resource type="AtlasTexture" id=4]
-atlas = ExtResource( 2 )
-region = Rect2( 192, 96, 32, 32 )
+[sub_resource type="AtlasTexture" id="4"]
+atlas = ExtResource("2")
+region = Rect2(192, 96, 32, 32)
 
-[sub_resource type="AtlasTexture" id=5]
-atlas = ExtResource( 2 )
-region = Rect2( 224, 96, 32, 32 )
+[sub_resource type="AtlasTexture" id="5"]
+atlas = ExtResource("2")
+region = Rect2(224, 96, 32, 32)
 
-[sub_resource type="AtlasTexture" id=6]
-atlas = ExtResource( 2 )
-region = Rect2( 96, 96, 32, 32 )
+[sub_resource type="AtlasTexture" id="6"]
+atlas = ExtResource("2")
+region = Rect2(96, 96, 32, 32)
 
-[sub_resource type="SpriteFrames" id=7]
-animations = [ {
-"frames": [ SubResource( 2 ), SubResource( 3 ), SubResource( 4 ), SubResource( 5 ) ],
+[sub_resource type="SpriteFrames" id="7"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("2")
+}, {
+"duration": 1.0,
+"texture": SubResource("3")
+}, {
+"duration": 1.0,
+"texture": SubResource("4")
+}, {
+"duration": 1.0,
+"texture": SubResource("5")
+}],
 "loop": true,
-"name": "active",
+"name": &"active",
 "speed": 5.0
 }, {
-"frames": [ SubResource( 6 ) ],
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("6")
+}],
 "loop": true,
-"name": "not_active",
+"name": &"not_active",
 "speed": 5.0
-} ]
+}]
 
-[sub_resource type="CircleShape2D" id=8]
+[sub_resource type="CircleShape2D" id="8"]
 radius = 16.0
 
-[sub_resource type="Gradient" id=9]
-offsets = PackedFloat32Array( 0.00469484, 0.525822, 0.751174, 0.99061 )
-colors = PackedColorArray( 2, 1, 1.4, 0, 1, 1, 1, 1, 1, 0.882874, 0.605469, 0.67451, 0.363281, 0.00709534, 0.00709534, 0 )
+[sub_resource type="Gradient" id="9"]
+offsets = PackedFloat32Array(0.00469484, 0.525822, 0.751174, 0.99061)
+colors = PackedColorArray(2, 1, 1.4, 0, 1, 1, 1, 1, 1, 0.882874, 0.605469, 0.67451, 0.363281, 0.00709534, 0.00709534, 0)
 
 [node name="PipeBall" type="Path2D"]
-self_modulate = Color( 1, 1, 1, 0.701961 )
+self_modulate = Color(1, 1, 1, 0.701961)
 z_index = 90
 z_as_relative = false
-curve = null
-script = ExtResource( 1 )
-activated = true
+script = ExtResource("1")
 speed_at_exit = 101.72
 speed_inside = 102.835
+activated = true
 
 [node name="PathFollow2D" type="PathFollow2D" parent="."]
-position = Vector2( 928, 528 )
 
 [node name="Entrance" type="StaticBody2D" parent="."]
 collision_layer = 130
 collision_mask = 7
-script = ExtResource( 4 )
+script = ExtResource("4")
 
 [node name="CollisionShape3D" type="CollisionShape2D" parent="Entrance"]
-shape = SubResource( 1 )
+shape = SubResource("1")
 
 [node name="Sprite2D" type="AnimatedSprite2D" parent="Entrance"]
-frames = SubResource( 7 )
-animation = "active"
-playing = true
+sprite_frames = SubResource("7")
+animation = &"active"
 
 [node name="Area3D" type="Area2D" parent="Entrance"]
 collision_layer = 8
 collision_mask = 4
 
 [node name="CollisionShape3D" type="CollisionShape2D" parent="Entrance/Area3D"]
-modulate = Color( 0, 0.694118, 1, 1 )
-position = Vector2( 0, -16 )
-shape = SubResource( 8 )
+modulate = Color(0, 0.694118, 1, 1)
+position = Vector2(0, -16)
+shape = SubResource("8")
 
 [node name="Particles" type="CPUParticles2D" parent="Entrance"]
-position = Vector2( 0, -25 )
 z_index = -1
+position = Vector2(0, -25)
 amount = 18
 lifetime = 1.5
 preprocess = 1.5
 randomness = 0.05
 lifetime_randomness = 0.29
 fract_delta = false
-texture = ExtResource( 3 )
+texture = ExtResource("3")
 emission_shape = 2
-emission_rect_extents = Vector2( 12, 4 )
-direction = Vector2( 0, 1 )
+emission_sphere_radius = 1.0
+direction = Vector2(0, 1)
 spread = 0.0
-gravity = Vector2( 0, 0 )
-initial_velocity = 10.0
-initial_velocity_random = 0.36
-linear_accel = 12.8
-tangential_accel = -0.69
-scale_amount_random = 0.95
-color_ramp = SubResource( 9 )
-__meta__ = {
-"_editor_description_": ""
-}
+gravity = Vector2(0, 0)
+color_ramp = SubResource("9")
 
 [connection signal="body_entered" from="Entrance/Area3D" to="." method="_on_Area_body_entered"]

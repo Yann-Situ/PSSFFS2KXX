@@ -46,7 +46,8 @@ func explode(momentum : Vector2):
 	if !_is_exploding: # to prevent multiple explosion of the same bloc
 		_is_exploding = true
 		$DebrisParticle.direction = momentum
-		$DebrisParticle.initial_velocity = inv_mass * momentum.length()
+		$DebrisParticle.initial_velocity_min = 0.5*inv_mass * momentum.length()
+		$DebrisParticle.initial_velocity_min = 1.5*inv_mass * momentum.length()
 		$DebrisParticle.restart()
 		$OccluderInstance3D.visible = false
 		$Breakable.collision_layer = 0

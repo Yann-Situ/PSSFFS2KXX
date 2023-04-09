@@ -20,6 +20,7 @@ signal is_goaled
 var inside_bodies = []
 var bodies_positions = []
 var distortion_scene = preload("res://src/Effects/Distortion.tscn")
+var tween_light : Tween
 
 @onready var start_position = global_position
 
@@ -154,8 +155,8 @@ func _on_DunkCooldown_timeout():
 
 func remove_body(i : int):
 	assert(i < inside_bodies.size())
-	inside_bodies.remove(i)
-	bodies_positions.remove(i)
+	inside_bodies.remove_at(i)
+	bodies_positions.remove_at(i)
 
 ################################################################################
 
@@ -167,16 +168,15 @@ func set_selection(type : int, value : bool):
 
 func enable_contour():
 	var light = $LightSmall
-	var tween = $LightSmall/Tween
-	if tween.is_active():
-		tween.remove_all()
-	tween.tween_property(light, "energy", 0.8, 0.15).set_trans(Tween.EASE_OUT)
-	tween.start()
+	if tween_light:
+		tween_light.kill()
+	tween_light = self.create_tween()
+	tween_light.tween_property(light, "energy", 0.8, 0.15).set_ease(Tween.EASE_OUT)
+
 
 func disable_contour():
 	var light = $LightSmall
-	var tween = $LightSmall/Tween
-	if tween.is_active():
-		tween.remove_all()
-	tween.tween_property(light, "energy", 0.0, 0.15).set_trans(Tween.EASE_OUT)
-	tween.start()
+	if tween_light:
+		tween_light.kill()
+	tween_light = self.create_tween()
+	tween_light.tween_property(light, "energy", 0.0, 0.15).set_ease(Tween.EASE_OUT)

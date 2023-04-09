@@ -99,9 +99,9 @@ func free_ball(ball): # set out  active_ball and has_ball
 func remove_ball(i : int):
 	assert(i < inside_bodies.size())
 	inside_bodies[i].z_index = Global.z_indices["ball_0"]
-	inside_bodies.remove(i)
+	inside_bodies.remove_at(i)
 	path_follows[i].queue_free()
-	path_follows.remove(i)
+	path_follows.remove_at(i)
 
 ################################################################################
 

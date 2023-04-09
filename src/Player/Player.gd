@@ -57,6 +57,7 @@ var _zero_velocity_workaround = false
 @onready var Camera = get_node("Camera")
 @onready var LifeHandler = get_node("LifeHandler")
 @onready var LifeBar = get_node("UI/MarginContainer/HBoxContainer/VBoxContainer/Bar")
+@onready var animation_tree = get_node("Sprite2D/AnimationTree")
 
 @onready var start_position = global_position
 @onready var foot_vector = Vector2(0,32)
@@ -118,7 +119,7 @@ func get_input(delta): #delta in s
 		S.last_wall_normal_direction = -1#sign(get_slide_collision(get_slide_collision_count()-1).normal.x)
 		if $Sprite2D.flip_h:
 			S.last_wall_normal_direction = 1
-	
+
 	############### Move from input
 	if physics_enabled and (S.direction_p != 0) and S.can_go :
 		$Actions/Side.move(delta,S.direction_p)
@@ -179,7 +180,7 @@ func get_input(delta): #delta in s
 	# GRAVITY:
 
 	# SHADER:
-	
+
 	# HITBOX:
 	if S.is_crouching or S.is_landing or not S.can_stand:
 		$Collision.shape.set_radius(8.5)
@@ -284,7 +285,7 @@ func remove_force(_name : String):
 func _physics_process(delta):
 	#print("0: "+str(S.velocity)) # always (0.0,0.0) for some reason...
 	_zero_velocity_workaround = true
-	
+
 	get_input(delta)
 	if physics_enabled:
 		apply_forces(delta)
@@ -297,7 +298,7 @@ func _physics_process(delta):
 		# TODOConverter40 infinite_inertia were removed in Godot 4.0 - previous value `false`
 		move_and_slide()
 		S.velocity = get_real_velocity()
-	
+
 	_zero_velocity_workaround = false
 
 func disable_physics():

@@ -191,3 +191,15 @@ Copyright (c) 2023 Yann-Situ
 `start\(Callable\((.*?)\)\.bind\((.*?)\)` -> `start($1, $2`
 `start\(Callable\((.*?)\)` -> `start($1`
 `^\s*set\s\=\s*(\w*)\s*\#(.*?\#)*\s*\((\w*),(.*?)\)`
+
+List of things to do
+- physics problem with grind
+- double dash make the player stuck
+- state machines have memory (we need to restart the state machine when reentering it)
+- dunk player position
+- hang player position
+- ball rework
+- player_friction and forces using Alterable
+- catch and ball release
+- background rework
+- tileset/map rework

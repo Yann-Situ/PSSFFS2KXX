@@ -19,7 +19,7 @@ func add_gradient(gradient : Gradient, index : int = -1):
 		gradients.insert(index, gradient)
 
 func remove_gradient(index : int):
-	gradients.remove(index)
+	gradients.remove_at(index)
 
 ################################################################################
 

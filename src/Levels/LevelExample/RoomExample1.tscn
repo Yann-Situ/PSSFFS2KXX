@@ -1,4 +1,4 @@
-[gd_scene load_steps=27 format=3 uid="uid://dgjpons7cu2id"]
+[gd_scene load_steps=28 format=3 uid="uid://dgjpons7cu2id"]
 
 [ext_resource type="PackedScene" uid="uid://b5emf4je4tnag" path="res://src/Levels/Room2D.tscn" id="1"]
 [ext_resource type="PackedScene" uid="uid://b45hldwkibtqb" path="res://src/Levels/Portal.tscn" id="2"]
@@ -12,6 +12,7 @@
 [ext_resource type="PackedScene" path="res://src/Characters/NPC/PedestrianGenerator.tscn" id="11"]
 [ext_resource type="Resource" uid="uid://b5t6nuxuv7s86" path="res://src/Characters/NPC/PaletteSampler1.tres" id="12"]
 [ext_resource type="PackedScene" uid="uid://yco4prlcetlu" path="res://src/Items/Balls/BallBoum.tscn" id="13"]
+[ext_resource type="PackedScene" uid="uid://bola66fqnywdi" path="res://src/Items/Baskets/Basket.tscn" id="13_42q2t"]
 
 [sub_resource type="Gradient" id="1"]
 resource_local_to_scene = true
@@ -38,14 +39,14 @@ shader_parameter/velocity = Vector2(1.2, 0)
 shader_parameter/fog_color = Color(0.494118, 0.309804, 0.0627451, 1)
 shader_parameter/noise = SubResource("10")
 
-[sub_resource type="Curve2D" id="Curve2D_vsyfw"]
+[sub_resource type="Curve2D" id="Curve2D_mba7t"]
 resource_local_to_scene = true
 _data = {
 "points": PackedVector2Array(0, 0, 0, 0, 256, 120, 0, 0, 0, 0, -120, 16)
 }
 point_count = 2
 
-[sub_resource type="Curve2D" id="Curve2D_cdjci"]
+[sub_resource type="Curve2D" id="Curve2D_5yol7"]
 resource_local_to_scene = true
 _data = {
 "points": PackedVector2Array(0, 0, 0, 0, 248, 16, 0, 0, 0, 0, -120, 16)
@@ -194,7 +195,7 @@ color = Color(0.921569, 0.917647, 0.831373, 1)
 [node name="ParabolaCatenary" parent="Map" index="1" instance=ExtResource("9")]
 z_index = 300
 position = Vector2(312, -328)
-curve = SubResource("Curve2D_vsyfw")
+curve = SubResource("Curve2D_mba7t")
 p0_slope = 1.7
 line_width = 7.438
 line_modulate = Color(0.329412, 0.329412, 0.329412, 1)
@@ -203,7 +204,7 @@ line_texture = ExtResource("8")
 [node name="ParabolaCatenary2" parent="Map" index="2" instance=ExtResource("9")]
 z_index = 300
 position = Vector2(240, -328)
-curve = SubResource("Curve2D_cdjci")
+curve = SubResource("Curve2D_5yol7")
 p0_slope = 1.3
 line_width = 7.438
 line_modulate = Color(0.329412, 0.329412, 0.329412, 1)
@@ -288,3 +289,6 @@ shape = SubResource("WorldBoundaryShape2D_utcpg")
 position = Vector2(64, 32)
 scale = Vector2(16, 1)
 texture = SubResource("GradientTexture2D_j3k1s")
+
+[node name="Basket" parent="." index="10" instance=ExtResource("13_42q2t")]
+position = Vector2(16, -232)
