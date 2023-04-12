@@ -13,8 +13,12 @@ func power_p(player,delta):
 
 func power_jp(player,delta):
 	if holder == player:
-		player.gravity = Vector2.ZERO
+		# player.gravity = Vector2.ZERO
+		# deprecated
+		pass
 
 func power_jr(player,delta):
 	if holder == player:
-		player.gravity = player.based_gravity
+		# player.gravity = player.based_gravity
+		# deprecated
+		pass

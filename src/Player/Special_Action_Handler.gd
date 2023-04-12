@@ -1,6 +1,6 @@
 extends Node2D
 
-@onready var P = get_parent().get_parent()
+@onready var P : Player = get_parent().get_parent() 
 @onready var S = P.get_node("State")
 @onready var Selector = get_parent().get_node("Selector")
 
@@ -57,7 +57,7 @@ func dunkjump_criteria(q : Vector2, target_direction : int) -> bool:
 		dir = -1
 	var Delta = P.dunkjump_speed*q.x/q.y
 	Delta = Delta*Delta
-	Delta += 2*P.gravity.y * q.x*q.x/q.y
+	Delta += 2*P.default_gravity.y * q.x*q.x/q.y
 
 	if Delta <= 0.0 or target_direction*dir < dunkjump_criteria_bests[1]:
 		return false

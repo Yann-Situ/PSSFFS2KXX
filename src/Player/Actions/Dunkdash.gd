@@ -17,7 +17,9 @@ func move(delta):
 	P.ShootPredictor.clear()
 	S.is_dunkdashing = true
 	S.set_action(S.ActionType.DUNKDASH)
-	P.gravity = Vector2.ZERO
+	
+	#P.gravity = Vector2.ZERO
+	P.add_force(P.anti_gravity_alterer)
 
 	P.PlayerEffects.cloud_start()
 	P.PlayerEffects.jump_start()
@@ -53,7 +55,7 @@ func move(delta):
 
 func move_end():
 	print("enddash")
-	P.gravity = P.based_gravity
+	P.remove_force(P.anti_gravity_alterer)
 
 	if not S.is_grinding:
 		var temp_vel_l = S.velocity.length()

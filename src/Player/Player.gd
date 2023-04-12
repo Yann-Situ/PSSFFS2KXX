@@ -6,6 +6,7 @@ var _zero_velocity_workaround = false
 
 @export var physics_enabled : bool = true
 
+@export var mass : float = 4.0 # kg
 ## Environment features (should be given by the map)
 @export var floor_unfriction : float = 0.18 # s
 @export var air_unfriction : float = 0.32 # s
@@ -61,15 +62,16 @@ var _zero_velocity_workaround = false
 
 @onready var start_position = global_position
 @onready var foot_vector = Vector2(0,32)
-@onready var based_gravity = Vector2(0.0,ProjectSettings.get_setting("physics/2d/default_gravity")) # pix/s²
-@onready var gravity : Vector2 = based_gravity # pix/s²
-@onready var invmass = 1.0/4.0
+@onready var default_gravity = Vector2(0.0,ProjectSettings.get_setting("physics/2d/default_gravity")) # pix/s²
+@onready var invmass = 1.0/mass
 @onready var collision_layer_save = 1
 @onready var collision_mask_save = 514
 @onready var floor_friction = GlobalMaths.unfriction_to_friction(floor_unfriction) # ratio/s
 @onready var air_friction = GlobalMaths.unfriction_to_friction(air_unfriction) # ratio/s
 
-var applied_forces = {} #"force_name : value in kg*pix/s^2"
+@onready var force_alterable = Alterable.new(mass*default_gravity)
+@onready var anti_gravity_alterer = AltererAdditive.new(-mass*default_gravity)
+
 var character_holder = null
 var flip_h : bool = false
 var shoot = Vector2.ZERO
@@ -84,6 +86,8 @@ func reset_move():
 	reset_holder()
 	S.reset_state()
 	LifeHandler.reset_life()
+	force_alterable.clear_alterers()
+	force_alterable.set_base_value(mass*default_gravity)
 	set_flip_h(false)
 	reset_position()
 
@@ -263,24 +267,18 @@ func apply_impulse(impulse):
 	S.velocity += invmass * impulse
 
 func apply_forces(delta):
-	for force in applied_forces.values() :
-		S.velocity += invmass * force * delta
+	var force = force_alterable.get_value()
+	S.velocity += invmass * delta * force
 	if S.is_onwall and S.velocity.y > 0.0: #fall on a wall
-		S.velocity += gravity/2.0 * delta
 		S.velocity.y = min(S.velocity.y,fall_speed_max_onwall)
 	else :
-		S.velocity += gravity * delta
-		if S.velocity.y > fall_speed_max:
-			S.velocity.y = fall_speed_max
+		S.velocity.y = min(S.velocity.y,fall_speed_max)
 
-func has_force(_name : String):
-	return applied_forces.has(_name)
+func add_force(force_alterer : Alterer):
+	force_alterable.add_alterer(force_alterer)
 
-func apply_force(force : Vector2, _name : String):
-	applied_forces[_name] = force
-
-func remove_force(_name : String):
-	applied_forces.erase(_name)
+func remove_force(force_alterer : Alterer):
+	force_alterable.remove_alterer(force_alterer)
 
 func _physics_process(delta):
 	#print("0: "+str(S.velocity)) # always (0.0,0.0) for some reason...
@@ -308,7 +306,7 @@ func disable_physics():
 	collision_mask_save = collision_mask
 	collision_mask = 0
 	S.velocity *= 0.0
-	applied_forces.clear()
+
 
 func enable_physics():
 	physics_enabled = true

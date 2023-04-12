@@ -21,6 +21,7 @@ func set_extents(e : Vector2):
 
 func _ready():
 	$Sprite2D.material.set_shader_parameter("velocity", -0.02*speed)
+	push_warning("Wind.gd is deprecated")
 
 func _physics_process(delta):
 	for body in $Area2D.get_overlapping_bodies():

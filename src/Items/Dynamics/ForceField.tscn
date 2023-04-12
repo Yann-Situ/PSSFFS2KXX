@@ -1,0 +1,34 @@
+[gd_scene load_steps=5 format=3 uid="uid://ceqtyb2ekket"]
+
+[ext_resource type="Script" path="res://src/Items/Dynamics/ForceField.gd" id="1_u3ypm"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_jwblh"]
+resource_local_to_scene = true
+size = Vector2(256, 128)
+
+[sub_resource type="Gradient" id="Gradient_81okp"]
+colors = PackedColorArray(0, 0, 0, 0.498039, 1, 1, 1, 0.686275)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_bjf2t"]
+resource_local_to_scene = true
+gradient = SubResource("Gradient_81okp")
+width = 256
+height = 128
+fill = 1
+fill_from = Vector2(0.5, 0.5)
+
+[node name="ForceField" type="Node2D"]
+script = ExtResource("1_u3ypm")
+
+[node name="Area2D" type="Area2D" parent="."]
+collision_layer = 8
+collision_mask = 5
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+shape = SubResource("RectangleShape2D_jwblh")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = SubResource("GradientTexture2D_bjf2t")
+
+[connection signal="body_entered" from="Area2D" to="." method="_on_Area2D_body_entered"]
+[connection signal="body_exited" from="Area2D" to="." method="_on_Area2D_body_exited"]
