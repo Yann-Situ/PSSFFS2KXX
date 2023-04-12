@@ -82,4 +82,4 @@ func sample(rng : RandomNumberGenerator, alpha : float = 1.0) -> Color:
 	else :
 		s = 2*(1-l/v)
 	#print("sample "+str(Color().from_hsv(h,s,v,alpha)))
-	return Color().from_hsv(h,s,v,alpha)
+	return Color.from_hsv(h,s,v,alpha)

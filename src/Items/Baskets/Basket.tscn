@@ -1,4 +1,4 @@
-[gd_scene load_steps=32 format=3 uid="uid://bola66fqnywdi"]
+[gd_scene load_steps=29 format=3 uid="uid://bola66fqnywdi"]
 
 [ext_resource type="Texture2D" uid="uid://bcddludfh8obw" path="res://assets/art/environment/environment-interactive.png" id="1"]
 [ext_resource type="Script" path="res://src/Items/Baskets/Basket.gd" id="2"]
@@ -139,28 +139,18 @@ particles_anim_h_frames = 32
 particles_anim_v_frames = 1
 particles_anim_loop = true
 
-[sub_resource type="Curve" id="16"]
-max_value = 2.0
-_data = [Vector2(0, 1.02727), 0.0, 2.46857, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
-point_count = 2
-
-[sub_resource type="CurveTexture" id="17"]
-width = 100
-curve = SubResource("16")
-
 [sub_resource type="GradientTexture2D" id="18"]
 
 [sub_resource type="ParticleProcessMaterial" id="19"]
 lifetime_randomness = 0.33
-emission_shape = 2
-emission_sphere_radius = 1.0
+emission_shape = 3
+emission_box_extents = Vector3(16, 1, 1)
 direction = Vector3(0, -1, 0)
 spread = 0.0
 gravity = Vector3(0, -100, 0)
 color_ramp = SubResource("18")
-anim_speed_curve = SubResource("17")
-
-[sub_resource type="CompressedTexture2D" id="20"]
+anim_speed_min = 1.0
+anim_speed_max = 1.0
 
 [node name="Basket" type="Node2D"]
 z_index = 16
@@ -245,7 +235,6 @@ material = SubResource("15")
 emitting = false
 amount = 32
 process_material = SubResource("19")
-texture = SubResource("20")
 one_shot = true
 explosiveness = 0.41
 

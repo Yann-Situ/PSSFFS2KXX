@@ -1,4 +1,4 @@
-[gd_scene load_steps=28 format=3 uid="uid://dgjpons7cu2id"]
+[gd_scene load_steps=29 format=3 uid="uid://dgjpons7cu2id"]
 
 [ext_resource type="PackedScene" uid="uid://b5emf4je4tnag" path="res://src/Levels/Room2D.tscn" id="1"]
 [ext_resource type="PackedScene" uid="uid://b45hldwkibtqb" path="res://src/Levels/Portal.tscn" id="2"]
@@ -13,6 +13,7 @@
 [ext_resource type="Resource" uid="uid://b5t6nuxuv7s86" path="res://src/Characters/NPC/PaletteSampler1.tres" id="12"]
 [ext_resource type="PackedScene" uid="uid://yco4prlcetlu" path="res://src/Items/Balls/BallBoum.tscn" id="13"]
 [ext_resource type="PackedScene" uid="uid://bola66fqnywdi" path="res://src/Items/Baskets/Basket.tscn" id="13_42q2t"]
+[ext_resource type="PackedScene" uid="uid://ceqtyb2ekket" path="res://src/Items/Dynamics/ForceField.tscn" id="14_o3800"]
 
 [sub_resource type="Gradient" id="1"]
 resource_local_to_scene = true
@@ -39,14 +40,14 @@ shader_parameter/velocity = Vector2(1.2, 0)
 shader_parameter/fog_color = Color(0.494118, 0.309804, 0.0627451, 1)
 shader_parameter/noise = SubResource("10")
 
-[sub_resource type="Curve2D" id="Curve2D_mba7t"]
+[sub_resource type="Curve2D" id="Curve2D_0marp"]
 resource_local_to_scene = true
 _data = {
 "points": PackedVector2Array(0, 0, 0, 0, 256, 120, 0, 0, 0, 0, -120, 16)
 }
 point_count = 2
 
-[sub_resource type="Curve2D" id="Curve2D_5yol7"]
+[sub_resource type="Curve2D" id="Curve2D_s6n0a"]
 resource_local_to_scene = true
 _data = {
 "points": PackedVector2Array(0, 0, 0, 0, 248, 16, 0, 0, 0, 0, -120, 16)
@@ -195,7 +196,7 @@ color = Color(0.921569, 0.917647, 0.831373, 1)
 [node name="ParabolaCatenary" parent="Map" index="1" instance=ExtResource("9")]
 z_index = 300
 position = Vector2(312, -328)
-curve = SubResource("Curve2D_mba7t")
+curve = SubResource("Curve2D_0marp")
 p0_slope = 1.7
 line_width = 7.438
 line_modulate = Color(0.329412, 0.329412, 0.329412, 1)
@@ -204,20 +205,26 @@ line_texture = ExtResource("8")
 [node name="ParabolaCatenary2" parent="Map" index="2" instance=ExtResource("9")]
 z_index = 300
 position = Vector2(240, -328)
-curve = SubResource("Curve2D_5yol7")
+curve = SubResource("Curve2D_s6n0a")
 p0_slope = 1.3
 line_width = 7.438
 line_modulate = Color(0.329412, 0.329412, 0.329412, 1)
 line_texture = ExtResource("8")
 
 [node name="TileMap" parent="Map" index="3"]
-layer_0/tile_data = PackedInt32Array(-65533, 4, 3, -131069, 4, 2, -196605, 196612, 2, -262141, 65540, 1, -262140, 131076, 0, -262139, 131076, 0, -262138, 131076, 0, -262137, 131076, 0, -262136, 131076, 0, -262135, 131076, 0, -262134, 196612, 0, 16, 720899, 3, -65520, 720899, 1, -131056, 720899, 1, -196592, 720899, 0, 15, 655363, 3, -65521, 589827, 1, -131057, 589827, 1, -196593, 589827, 0, 14, 655363, 3, -65522, 589827, 1, -131058, 589827, 1, -196594, 589827, 0, 13, 655363, 3, -65523, 589827, 1, -131059, 589827, 1, -196595, 589827, 0, 12, 524291, 3, -65524, 524291, 2, -131060, 524291, 2, -196596, 524291, 0, -196606, 65540, 0)
+layer_0/tile_data = PackedInt32Array(-65533, 4, 3, -131069, 4, 2, -196605, 196612, 2, -262141, 65540, 1, -262140, 131076, 0, -262139, 131076, 0, -262138, 131076, 0, -262137, 131076, 0, -262136, 131076, 0, -262135, 131076, 0, -262134, 196612, 0, 16, 720899, 3, -65520, 720899, 1, -131056, 720899, 1, -196592, 720899, 0, 15, 655363, 3, -65521, 589827, 1, -131057, 589827, 1, -196593, 589827, 0, 14, 655363, 3, -65522, 589827, 1, -131058, 589827, 1, -196594, 589827, 0, 13, 655363, 3, -65523, 589827, 1, -131059, 589827, 1, -196595, 589827, 0, 12, 524291, 3, -65524, 524291, 2, -131060, 524291, 2, -196596, 524291, 0, -196606, 65540, 0, 131057, 524291, 3, 65521, 524291, 2, -15, 524291, 2, -65551, 524291, 2, -131087, 524291, 2, -196623, 524291, 2, -262159, 524291, 2, -327695, 524291, 2, -393231, 524291, 2, -458767, 524291, 2, -524303, 524291, 2, -589839, 524291, 2, -655375, 524291, 2, -720911, 524291, 2, -786447, 524291, 2, -851983, 524291, 0, -851982, 720899, 0, -786446, 720899, 1, -720910, 720899, 1, -655374, 720899, 1, -589838, 720899, 1, -524302, 720899, 1, -458766, 720899, 1, -393230, 720899, 1, -327694, 720899, 1, -262158, 720899, 1, -196622, 720899, 1, -131086, 720899, 1, -65550, 720899, 1, -14, 720899, 1, 65522, 720899, 1, 131058, 720899, 3, -262154, 3, 3, -327690, 3, 2, -393226, 3, 2, -458762, 3, 2, -524298, 3, 2, -589834, 262147, 2, -655370, 524291, 0, -655369, 589827, 0, -655368, 589827, 0, -655367, 589827, 0, -655366, 720899, 0, -589830, 720899, 3, -589831, 655363, 3, -589832, 655363, 3, -589833, 655363, 3, -524297, 524292, 0, -524296, 589828, 0, -524295, 393220, 0, -458759, 720900, 1, -458760, 589828, 1, -458761, 524292, 2, -393225, 524292, 3, -393224, 655364, 3, -393223, 720900, 3, -196618, 4, 0, -524294, 196612, 0, -13, 524293, 3, -65549, 524293, 2, -131085, 524293, 2, -196621, 524293, 2, -262157, 524293, 2, -327693, 524293, 2, -393229, 524293, 2, -458765, 524293, 2, -524301, 524293, 2, -589837, 524293, 2, -655373, 524293, 2, -655372, 589829, 1, -720908, 589829, 1, -655371, 720901, 1, -589835, 720901, 1, -524299, 720901, 1, -458763, 720901, 1, -393227, 720901, 1, -327691, 720901, 1, -262155, 720901, 1, -196619, 720901, 1, -131083, 720901, 1, -65547, 720901, 1, -11, 720901, 3, -12, 655365, 3, -65548, 589829, 1, -262156, 589829, 1, -327692, 589829, 1, -393228, 589829, 1, -458764, 589829, 1, -524300, 589829, 1, -589836, 589829, 1, -196620, 589829, 1, -131084, 589829, 1, -720907, 393221, 2, -720909, 524293, 2, -786445, 524293, 2, -851981, 524293, 0, -786444, 589829, 1, -851980, 589829, 0, -851979, 589829, 0, -851978, 589829, 0, -786442, 589829, 1, -786443, 589829, 1, -786441, 589829, 1, -786440, 589829, 1, -786439, 589829, 1, -720903, 655365, 3, -720902, 720901, 3, -786438, 720901, 1, -851974, 720901, 0, -851975, 589829, 0, -851976, 589829, 0, -851977, 589829, 0, -720906, 655365, 3, -720905, 655365, 3, -720904, 655365, 3)
 layer_1/tile_data = PackedInt32Array(-10, 720898, 2, -65546, 524290, 1, -131082, 524290, 0, -65545, 655362, 2, -131081, 655362, 0, -131080, 524290, 3, -131079, 655362, 0, -65543, 655362, 2, -65544, 524290, 0, -8, 524290, 2, -7, 655362, 3, -131078, 524290, 3, -131077, 655362, 0, -65541, 655362, 2, -65542, 524290, 0, -6, 524290, 2, -5, 655362, 3, -4, 524290, 2, -65540, 720898, 1, -131076, 524290, 0, -131075, 655362, 0, -65539, 720898, 1, -3, 655362, 2)
 
 [node name="Ball" parent="Environment/Balls" index="0" instance=ExtResource("3")]
 position = Vector2(-168, -40)
 
-[node name="BallShock" parent="Environment/Balls" index="1" instance=ExtResource("4")]
+[node name="Ball2" parent="Environment/Balls" index="1" instance=ExtResource("3")]
+position = Vector2(168, -160)
+
+[node name="Ball3" parent="Environment/Balls" index="2" instance=ExtResource("3")]
+position = Vector2(160, -224)
+
+[node name="BallShock" parent="Environment/Balls" index="3" instance=ExtResource("4")]
 z_index = 11
 position = Vector2(-128, -72)
 collision_layer = 4
@@ -258,7 +265,10 @@ position = Vector2(-192, -152)
 position = Vector2(16, -32)
 
 [node name="DashTarget" parent="Environment" index="14" instance=ExtResource("5")]
-position = Vector2(-184, -32)
+position = Vector2(-64, -328)
+
+[node name="DashTarget3" parent="Environment" index="15" instance=ExtResource("5")]
+position = Vector2(-360, -312)
 
 [node name="WorldEnvironment" parent="." index="5"]
 environment = SubResource("6")
@@ -292,3 +302,17 @@ texture = SubResource("GradientTexture2D_j3k1s")
 
 [node name="Basket" parent="." index="10" instance=ExtResource("13_42q2t")]
 position = Vector2(16, -232)
+
+[node name="ForceField" parent="." index="11" instance=ExtResource("14_o3800")]
+position = Vector2(-296, -344)
+base_force = Vector2(8000, -1000)
+amplitude = 200.0
+period = 1.0
+rectangle_extents = Vector2(480, 200)
+
+[node name="ForceField2" parent="." index="12" instance=ExtResource("14_o3800")]
+position = Vector2(408, -288)
+base_force = Vector2(0, -2100)
+amplitude = 500.0
+period = 1.0
+rectangle_extents = Vector2(256, 480)

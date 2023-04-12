@@ -101,7 +101,8 @@ func goal(ball : Ball, score):
 
 func goal_effects(ball : Ball, force : int = 0):
 	$Effects/LineParticle.amount = force * 16
-	$Effects/LineParticle.process_material.initial_velocity = -40 + force * 80
+	$Effects/LineParticle.process_material.initial_velocity_min = -60.0 + force * 80.0
+	$Effects/LineParticle.process_material.initial_velocity_max = -20.0 + force * 80.0
 	$Effects/LineParticle.process_material.color_ramp.gradient = ball.get_main_gradient()
 	$Effects/LineParticle.restart()
 	if force > 1:
