@@ -1,52 +1,38 @@
-[gd_scene load_steps=8 format=2]
+[gd_scene load_steps=6 format=3 uid="uid://br3tr8mssgqev"]
 
-[ext_resource path="res://assets/art/effects/jumpcloud1.png" type="Texture2D" id=1]
+[ext_resource type="Texture2D" uid="uid://baikgm8nq4xli" path="res://assets/art/effects/jumpcloud1.png" id="1"]
 
-[sub_resource type="CanvasItemMaterial" id=1]
+[sub_resource type="CanvasItemMaterial" id="1"]
 resource_local_to_scene = true
 particles_animation = true
 particles_anim_h_frames = 6
 particles_anim_v_frames = 1
 particles_anim_loop = true
 
-[sub_resource type="Curve" id=7]
-_data = [ Vector2( 0, 0.993182 ), 0.0, 0.0, 0, 0, Vector2( 0.611111, 0.295455 ), -1.47273, -1.47273, 0, 0, Vector2( 1, 0 ), 0.0, 0.0, 0, 0 ]
+[sub_resource type="Gradient" id="4"]
+offsets = PackedFloat32Array(0, 0.554404, 1)
+colors = PackedColorArray(1.30196, 1.2, 1.2, 0.968627, 0.976471, 0.72549, 0.4, 0.85098, 0.45098, 0.0941176, 0.0941176, 0.34902)
 
-[sub_resource type="CurveTexture" id=8]
-width = 128
-curve = SubResource( 7 )
-
-[sub_resource type="Gradient" id=4]
-offsets = PackedFloat32Array( 0, 0.554404, 1 )
-colors = PackedColorArray( 1.30196, 1.2, 1.2, 0.968627, 0.976471, 0.72549, 0.4, 0.85098, 0.45098, 0.0941176, 0.0941176, 0.34902 )
-
-[sub_resource type="GradientTexture2D" id=5]
-gradient = SubResource( 4 )
+[sub_resource type="GradientTexture2D" id="5"]
+gradient = SubResource("4")
 width = 100
 
-[sub_resource type="ParticleProcessMaterial" id=6]
-flag_disable_z = true
-direction = Vector3( 0, 0, 0 )
+[sub_resource type="ParticleProcessMaterial" id="6"]
+direction = Vector3(0, 0, 0)
 spread = 0.0
-gravity = Vector3( 0, 0, 0 )
-orbit_velocity = 0.0
-orbit_velocity_random = 0.0
-radial_accel = -10.17
-color_ramp = SubResource( 5 )
-hue_variation = 0.01
-hue_variation_random = 1.0
-anim_speed = 1.0
-anim_speed_curve = SubResource( 8 )
+gravity = Vector3(0, 0, 0)
+color_ramp = SubResource("5")
+anim_speed_min = 1.0
+anim_speed_max = 1.0
 
 [node name="GrindParticles" type="GPUParticles2D"]
-material = SubResource( 1 )
-position = Vector2( 0, -16 )
 z_index = 110
 z_as_relative = false
+material = SubResource("1")
+position = Vector2(0, -16)
 emitting = false
 amount = 7
+process_material = SubResource("6")
+texture = ExtResource("1")
 lifetime = 0.6
-visibility_rect = Rect2( -50, -50, 100, 100 )
-local_coords = false
-process_material = SubResource( 6 )
-texture = ExtResource( 1 )
+visibility_rect = Rect2(-50, -50, 100, 100)

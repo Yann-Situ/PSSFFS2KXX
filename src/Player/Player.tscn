@@ -24,7 +24,7 @@
 [ext_resource type="Script" path="res://src/Player/Actions/Crouch.gd" id="24"]
 [ext_resource type="PackedScene" path="res://src/Effects/TrailHandler.tscn" id="25"]
 [ext_resource type="Texture2D" uid="uid://bnkguf1n8jesq" path="res://assets/art/effects/trail.png" id="26"]
-[ext_resource type="PackedScene" path="res://src/Effects/GrindParticles.tscn" id="27"]
+[ext_resource type="PackedScene" uid="uid://br3tr8mssgqev" path="res://src/Effects/GrindParticles.tscn" id="27"]
 [ext_resource type="Shader" path="res://assets/shader/contour.gdshader" id="28"]
 [ext_resource type="Script" path="res://src/Player/Actions/Release.gd" id="29"]
 [ext_resource type="Script" path="res://src/Characters/LifeHandler.gd" id="30"]
