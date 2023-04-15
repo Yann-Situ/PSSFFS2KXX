@@ -57,7 +57,7 @@ func dunkjump_criteria(q : Vector2, target_direction : int) -> bool:
 		dir = -1
 	var Delta = P.dunkjump_speed*q.x/q.y
 	Delta = Delta*Delta
-	Delta += 2*P.default_gravity.y * q.x*q.x/q.y
+	Delta += 2*Global.default_gravity.y * q.x*q.x/q.y
 
 	if Delta <= 0.0 or target_direction*dir < dunkjump_criteria_bests[1]:
 		return false

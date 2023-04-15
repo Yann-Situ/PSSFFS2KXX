@@ -62,15 +62,14 @@ var _zero_velocity_workaround = false
 
 @onready var start_position = global_position
 @onready var foot_vector = Vector2(0,32)
-@onready var default_gravity = Vector2(0.0,ProjectSettings.get_setting("physics/2d/default_gravity")) # pix/s²
 @onready var invmass = 1.0/mass
 @onready var collision_layer_save = 1
 @onready var collision_mask_save = 514
 @onready var floor_friction = GlobalMaths.unfriction_to_friction(floor_unfriction) # ratio/s
 @onready var air_friction = GlobalMaths.unfriction_to_friction(air_unfriction) # ratio/s
 
-@onready var force_alterable = Alterable.new(mass*default_gravity)
-@onready var anti_gravity_alterer = AltererAdditive.new(-mass*default_gravity)
+@onready var force_alterable = Alterable.new(Vector2.ZERO)
+@onready var gravity_alterer = AltererAdditive.new(mass*Global.default_gravity)
 
 var character_holder = null
 var flip_h : bool = false
@@ -87,7 +86,7 @@ func reset_move():
 	S.reset_state()
 	LifeHandler.reset_life()
 	force_alterable.clear_alterers()
-	force_alterable.set_base_value(mass*default_gravity)
+	force_alterable.add_alterer(gravity_alterer)
 	set_flip_h(false)
 	reset_position()
 
@@ -103,6 +102,7 @@ func _ready():
 	add_to_group("characters")
 	if !Global.playing:
 		Global.toggle_playing()
+	force_alterable.add_alterer(gravity_alterer)
 	Global.camera = Camera
 
 func set_flip_h(b):

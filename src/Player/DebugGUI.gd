@@ -19,7 +19,7 @@ func _process(delta):
 	s = player.S.velocity * 1.0/player.walk_speed_max
 	$SpriteSVelocity.set_scale(Vector2(0.5,0.2+1.3*s.length()))
 	$SpriteSVelocity.set_rotation(Vector2.UP.angle_to(s))
-	s = player.force_alterable.get_value() * 1.0/player.default_gravity.length()
+	s = player.force_alterable.get_value() * 1.0/Global.default_gravity.length()
 	$SpriteVelocity.set_scale(Vector2(0.5,0.8*s.length()))
 	$SpriteVelocity.set_rotation(Vector2.UP.angle_to(s))
 	s = (player.velocity-player.S.velocity) * 1.0/player.walk_speed_max
