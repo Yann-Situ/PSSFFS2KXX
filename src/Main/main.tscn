@@ -65,35 +65,35 @@ _data = {
 }
 point_count = 10
 
-[sub_resource type="Curve2D" id="Curve2D_hv383"]
+[sub_resource type="Curve2D" id="Curve2D_dekpb"]
 resource_local_to_scene = true
 _data = {
 "points": PackedVector2Array(0, 0, 0, 0, 288, 120, 0, 0, 0, 0, 0, -8)
 }
 point_count = 2
 
-[sub_resource type="Curve2D" id="Curve2D_l4vg2"]
+[sub_resource type="Curve2D" id="Curve2D_vkabw"]
 resource_local_to_scene = true
 _data = {
 "points": PackedVector2Array(0, 0, 0, 0, 704, -240, 0, 0, 0, 0, 616, -24, 0, 0, 0, 0, 464, 88, 0, 0, 0, 0, 152, 112, 0, 0, 0, 0, 16, 80)
 }
 point_count = 5
 
-[sub_resource type="Curve2D" id="Curve2D_pmwn1"]
+[sub_resource type="Curve2D" id="Curve2D_4u1re"]
 resource_local_to_scene = true
 _data = {
 "points": PackedVector2Array(0, 0, 0, 0, 216, -296, 0, 0, 0, 0, 272, -48, 0, 0, 0, 0, 416, 64, 0, 0, 0, 0, 704, 72)
 }
 point_count = 4
 
-[sub_resource type="Curve2D" id="Curve2D_tw8do"]
+[sub_resource type="Curve2D" id="Curve2D_eg5bq"]
 resource_local_to_scene = true
 _data = {
 "points": PackedVector2Array(0, 0, 0, 0, 600, -72, 0, 0, 0, 0, 432, -32, 0, 0, 0, 0, 280, -32)
 }
 point_count = 3
 
-[sub_resource type="Curve2D" id="Curve2D_x0kpb"]
+[sub_resource type="Curve2D" id="Curve2D_xqnno"]
 resource_local_to_scene = true
 _data = {
 "points": PackedVector2Array(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 576, 0)
@@ -409,26 +409,26 @@ activated = false
 
 [node name="TrailLine" parent="Environment/Dynamics" instance=ExtResource("33")]
 position = Vector2(1472, 232)
-curve = SubResource("Curve2D_hv383")
+curve = SubResource("Curve2D_dekpb")
 invert_line_direction = true
 
 [node name="TrailLine2" parent="Environment/Dynamics" instance=ExtResource("33")]
 position = Vector2(1440, -336)
-curve = SubResource("Curve2D_l4vg2")
+curve = SubResource("Curve2D_vkabw")
 invert_line_direction = true
 
 [node name="TrailLine3" parent="Environment/Dynamics" instance=ExtResource("33")]
 position = Vector2(1008, -192)
-curve = SubResource("Curve2D_pmwn1")
+curve = SubResource("Curve2D_4u1re")
 
 [node name="TrailLine4" parent="Environment/Dynamics" instance=ExtResource("33")]
 position = Vector2(1544, -40)
-curve = SubResource("Curve2D_tw8do")
+curve = SubResource("Curve2D_eg5bq")
 invert_line_direction = true
 
 [node name="RailLine" parent="Environment/Dynamics" instance=ExtResource("33")]
 position = Vector2(192, 384)
-curve = SubResource("Curve2D_x0kpb")
+curve = SubResource("Curve2D_xqnno")
 
 [node name="Interactive" type="Node2D" parent="Environment"]
 

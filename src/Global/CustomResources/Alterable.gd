@@ -64,6 +64,9 @@ func remove_alterer(alterer : Alterer):
 		push_warning("alterer "+str(alterer.get_instance_id())+" not found.")
 
 func clear_alterers():
+	for alterer in alterers.values():
+		alterer.is_done.disconnect(_on_alterer_is_done.bind(alterer))
+		alterer.has_changed.disconnect(set_is_up_to_date.bind(false))
 	alterers.clear()
 	set_is_up_to_date(false)
 	emit_changed()

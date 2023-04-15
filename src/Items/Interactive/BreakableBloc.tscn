@@ -47,14 +47,14 @@ _data = {
 [sub_resource type="RectangleShape2D" id="3"]
 size = Vector2(32, 32)
 
-[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_8i7dq"]
+[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_hwhcx"]
 resource_local_to_scene = true
 particles_animation = true
 particles_anim_h_frames = 8
 particles_anim_v_frames = 1
 particles_anim_loop = false
 
-[sub_resource type="Gradient" id="Gradient_15xsg"]
+[sub_resource type="Gradient" id="Gradient_w280k"]
 resource_local_to_scene = true
 offsets = PackedFloat32Array(0, 0.561983, 0.995305, 1)
 colors = PackedColorArray(0.527344, 0.385079, 0.259552, 1, 0.429688, 0.280094, 0.12085, 1, 0.163086, 0.111312, 0.0904617, 0.0328639, 1, 1, 1, 0)
@@ -89,10 +89,10 @@ shape = SubResource("3")
 [node name="DebrisParticle" parent="." instance=ExtResource("3")]
 z_index = 90
 z_as_relative = false
-material = SubResource("CanvasItemMaterial_8i7dq")
+material = SubResource("CanvasItemMaterial_hwhcx")
 amount = 25
 explosiveness = 0.92
 texture = ExtResource("5")
 emission_sphere_radius = 1.0
 spread = 60.48
-color_ramp = SubResource("Gradient_15xsg")
+color_ramp = SubResource("Gradient_w280k")
