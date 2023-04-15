@@ -8,10 +8,9 @@ signal is_thrown
 
 enum IMPACT_EFFECT {SPIKY, METALLIC}
 
-@export var physics_enabled : bool = true
 @export var impact_effect : IMPACT_EFFECT = IMPACT_EFFECT.SPIKY
-@export var dust_threshold : float = 300.0#pix/(s kg) (impulse)
-@export var impact_threshold : float = 500.0#
+@export var dust_threshold : float = 100.0#pix/(s kg) (impulse)
+@export var impact_threshold : float = 200.0#
 @export var damage_destruction_threshold : float = 2.0
 @export var attract_force : float = 1000.0
 var selectors = {}
@@ -32,6 +31,8 @@ var _is_reparenting = false : get = is_reparenting
 @onready var invmass = 1/mass
 @onready var dust_threshold2 : float = dust_threshold*dust_threshold#
 @onready var impact_threshold2 : float = impact_threshold*impact_threshold#
+
+var physics_enabled = true
 
 func _ready():
 	Global.list_of_physical_nodes.append(self)
@@ -68,7 +69,7 @@ func get_dash_gradient() -> Gradient:
 func _integrate_forces(state):
 	for i in state.get_contact_count():
 		collision_effect(state.get_contact_collider_object(i), \
-			state.get_contact_impulse(i), \
+			state.get_contact_collider_velocity_at_position(i), \
 			state.get_contact_local_position(i), \
 			state.get_contact_local_normal(i))
 
@@ -82,33 +83,38 @@ func reset_position():
 		global_position = start_position
 		enable_physics()
 
-func collision_effect(collider, collision_impulse, collision_point, collision_normal):
-	var impulse2 = collision_impulse.length_squared()
-	if impulse2 >= dust_threshold2:
+func collision_effect(collider, collider_velocity, collision_point, collision_normal):
+	var speed = (linear_velocity-collider_velocity).dot(collision_normal)
+	if speed >= dust_threshold:
 		$Effects/DustParticle.restart()
-		if impulse2 >= impact_threshold2:
+		if speed >= impact_threshold:
 			GlobalEffect.make_impact(collision_point, impact_effect)
 #			var impact = impact_particles[impact_effect].instantiate()
 #			get_parent().add_child(impact)
 #			impact.global_position = collision_point
 #			impact.start()
-	return true
 
 func add_force(force_alterer : Alterer):
 	force_alterable.add_alterer(force_alterer)
-
 func remove_force(force_alterer : Alterer):
 	force_alterable.remove_alterer(force_alterer)
+func get_force():
+	force_alterable.get_value()
 
 func disable_physics():
 	physics_enabled = false
-	set_freeze_enabled(false)
+	set_freeze_enabled(true)
+	collision_layer = 0
+	collision_mask = 0
 	set_linear_velocity(Vector2.ZERO)
-
+	force_alterable.clear_alterers()
+	add_force(gravity_alterer)
 
 func enable_physics():
 	physics_enabled = true
-	set_freeze_enabled(true)
+	collision_layer = collision_layer_save
+	collision_mask = collision_mask_save
+	set_freeze_enabled(false)
 
 ###########################################################
 

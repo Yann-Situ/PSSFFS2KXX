@@ -1,4 +1,4 @@
-[gd_scene load_steps=29 format=3 uid="uid://dgjpons7cu2id"]
+[gd_scene load_steps=30 format=3 uid="uid://dgjpons7cu2id"]
 
 [ext_resource type="PackedScene" uid="uid://b5emf4je4tnag" path="res://src/Levels/Room2D.tscn" id="1"]
 [ext_resource type="PackedScene" uid="uid://b45hldwkibtqb" path="res://src/Levels/Portal.tscn" id="2"]
@@ -14,6 +14,7 @@
 [ext_resource type="PackedScene" uid="uid://yco4prlcetlu" path="res://src/Items/Balls/BallBoum.tscn" id="13"]
 [ext_resource type="PackedScene" uid="uid://bola66fqnywdi" path="res://src/Items/Baskets/Basket.tscn" id="13_42q2t"]
 [ext_resource type="PackedScene" uid="uid://ceqtyb2ekket" path="res://src/Items/Dynamics/ForceField.tscn" id="14_o3800"]
+[ext_resource type="PackedScene" uid="uid://btmtdc7t0r0ru" path="res://src/Items/Balls/NewBall.tscn" id="15_7r1y1"]
 
 [sub_resource type="Gradient" id="1"]
 resource_local_to_scene = true
@@ -40,14 +41,14 @@ shader_parameter/velocity = Vector2(1.2, 0)
 shader_parameter/fog_color = Color(0.494118, 0.309804, 0.0627451, 1)
 shader_parameter/noise = SubResource("10")
 
-[sub_resource type="Curve2D" id="Curve2D_ugpct"]
+[sub_resource type="Curve2D" id="Curve2D_q8tux"]
 resource_local_to_scene = true
 _data = {
 "points": PackedVector2Array(0, 0, 0, 0, 256, 120, 0, 0, 0, 0, -120, 16)
 }
 point_count = 2
 
-[sub_resource type="Curve2D" id="Curve2D_pw5g1"]
+[sub_resource type="Curve2D" id="Curve2D_ubadn"]
 resource_local_to_scene = true
 _data = {
 "points": PackedVector2Array(0, 0, 0, 0, 248, 16, 0, 0, 0, 0, -120, 16)
@@ -167,10 +168,11 @@ transition_color = Color(0.317647, 0, 0.352941, 1)
 transition_speed = 1.5
 
 [node name="TextureRect" parent="ParallaxBackground/ParallaxLayer" index="0"]
-offset_left = -50.0
-offset_top = 450.0
-offset_right = 450.0
-offset_bottom = 1350.0
+offset_left = 0.0
+offset_top = 0.0
+offset_right = 900.0
+offset_bottom = 500.0
+rotation = 0.0
 texture = SubResource("2")
 
 [node name="ParallaxLayer3" parent="ParallaxBackground" index="2"]
@@ -196,7 +198,7 @@ color = Color(0.921569, 0.917647, 0.831373, 1)
 [node name="ParabolaCatenary" parent="Map" index="1" instance=ExtResource("9")]
 z_index = 300
 position = Vector2(312, -328)
-curve = SubResource("Curve2D_ugpct")
+curve = SubResource("Curve2D_q8tux")
 p0_slope = 1.7
 line_width = 7.438
 line_modulate = Color(0.329412, 0.329412, 0.329412, 1)
@@ -205,7 +207,7 @@ line_texture = ExtResource("8")
 [node name="ParabolaCatenary2" parent="Map" index="2" instance=ExtResource("9")]
 z_index = 300
 position = Vector2(240, -328)
-curve = SubResource("Curve2D_pw5g1")
+curve = SubResource("Curve2D_ubadn")
 p0_slope = 1.3
 line_width = 7.438
 line_modulate = Color(0.329412, 0.329412, 0.329412, 1)
@@ -216,13 +218,13 @@ layer_0/tile_data = PackedInt32Array(-65533, 4, 3, -131069, 4, 2, -196605, 19661
 layer_1/tile_data = PackedInt32Array(-10, 720898, 2, -65546, 524290, 1, -131082, 524290, 0, -65545, 655362, 2, -131081, 655362, 0, -131080, 524290, 3, -131079, 655362, 0, -65543, 655362, 2, -65544, 524290, 0, -8, 524290, 2, -7, 655362, 3, -131078, 524290, 3, -131077, 655362, 0, -65541, 655362, 2, -65542, 524290, 0, -6, 524290, 2, -5, 655362, 3, -4, 524290, 2, -65540, 720898, 1, -131076, 524290, 0, -131075, 655362, 0, -65539, 720898, 1, -3, 655362, 2)
 
 [node name="Ball" parent="Environment/Balls" index="0" instance=ExtResource("3")]
-position = Vector2(-168, -40)
+position = Vector2(-224, -32)
 
 [node name="Ball2" parent="Environment/Balls" index="1" instance=ExtResource("3")]
-position = Vector2(168, -160)
+position = Vector2(192, -16)
 
 [node name="Ball3" parent="Environment/Balls" index="2" instance=ExtResource("3")]
-position = Vector2(160, -224)
+position = Vector2(184, -80)
 
 [node name="BallShock" parent="Environment/Balls" index="3" instance=ExtResource("4")]
 z_index = 11
@@ -316,3 +318,24 @@ base_force = Vector2(0, -2100)
 amplitude = 500.0
 period = 1.0
 rectangle_extents = Vector2(256, 480)
+
+[node name="NewBall" parent="." index="13" instance=ExtResource("15_7r1y1")]
+position = Vector2(88, -200)
+
+[node name="NewBall2" parent="." index="14" instance=ExtResource("15_7r1y1")]
+position = Vector2(88, -224)
+
+[node name="NewBall3" parent="." index="15" instance=ExtResource("15_7r1y1")]
+position = Vector2(96, -240)
+
+[node name="NewBall4" parent="." index="16" instance=ExtResource("15_7r1y1")]
+position = Vector2(80, -272)
+
+[node name="NewBall5" parent="." index="17" instance=ExtResource("15_7r1y1")]
+position = Vector2(104, -136)
+
+[node name="NewBall6" parent="." index="18" instance=ExtResource("15_7r1y1")]
+position = Vector2(72, -104)
+
+[node name="NewBall7" parent="." index="19" instance=ExtResource("15_7r1y1")]
+position = Vector2(64, -128)

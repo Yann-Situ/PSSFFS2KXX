@@ -1421,7 +1421,7 @@ color_ramp = SubResource("53")
 
 [sub_resource type="CompressedTexture2D" id="55"]
 
-[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_cqpx7"]
+[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_ysrfu"]
 resource_local_to_scene = true
 particles_animation = true
 particles_anim_h_frames = 6
@@ -1429,8 +1429,8 @@ particles_anim_v_frames = 1
 particles_anim_loop = true
 
 [sub_resource type="CapsuleShape2D" id="57"]
-radius = 14.0
-height = 28.0
+radius = 28.0
+height = 56.0
 
 [sub_resource type="RectangleShape2D" id="1"]
 size = Vector2(17, 57)
@@ -1633,7 +1633,6 @@ script = ExtResource("41")
 [node name="ShootScreen" type="CanvasLayer" parent="Shooter"]
 
 [node name="ShootScreenShader" type="ColorRect" parent="Shooter/ShootScreen"]
-visible = false
 material = SubResource("4")
 anchors_preset = 15
 anchor_right = 1.0
@@ -1709,11 +1708,10 @@ lifetime = 0.65
 explosiveness = 0.9
 
 [node name="GrindParticles" parent="PlayerEffects" instance=ExtResource("27")]
-material = SubResource("CanvasItemMaterial_cqpx7")
+material = SubResource("CanvasItemMaterial_ysrfu")
 position = Vector2(0, 16)
 
 [node name="BallHandler" type="Area2D" parent="."]
-visible = false
 collision_layer = 0
 collision_mask = 4
 script = ExtResource("6")

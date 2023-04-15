@@ -1,5 +1,5 @@
 extends Area2D
-# Ball pickup
+# Ball pickup, thrower, shooter, selector, ballwaller
 
 @onready var P = get_parent()
 @onready var S = P.get_node("State")
@@ -58,7 +58,7 @@ func set_has_ball_position():
 #		- reparenting system
 #		- ball.on_throw(old_holder) # additional effect
 
-func pickup_ball(ball : Ball):
+func pickup_ball(ball : NewBall):
 	print(P.name+" pickup "+ball.name)
 	S.has_ball = true
 	S.active_ball = ball
@@ -68,7 +68,7 @@ func pickup_ball(ball : Ball):
 	ball.pickup(P)
 	ball.select(P)
 
-func free_ball(ball : Ball): # set out  active_ball and has_ball
+func free_ball(ball : NewBall): # set out  active_ball and has_ball
 	# called by ball when thrown or deleted
 	if S.has_ball and S.active_ball == ball:
 		S.active_ball = null
@@ -97,7 +97,7 @@ func throw_ball(throw_global_position, speed):
 func shoot_ball(): # called by animation
 	throw_ball(get_throw_position(), P.ShootPredictor.shoot_vector_save + 0.5*S.velocity)
 
-func select_ball(ball : Ball): # called by ball.select(P)
+func select_ball(ball : NewBall): # called by ball.select(P)
 	if S.selected_ball != null and S.selected_ball != ball:
 			S.selected_ball.deselect(P)
 	S.selected_ball = ball
@@ -114,7 +114,7 @@ func select_ball(ball : Ball): # called by ball.select(P)
 	# ui.newline()
 	# ui.add_text("Ball posit : "+str(ball.position - P.position))
 
-func deselect_ball(ball : Ball): # called by ball.deselect(P)
+func deselect_ball(ball : NewBall): # called by ball.deselect(P)
 	assert(S.selected_ball != null)
 	if S.power_p:
 		S.selected_ball.power_jr(self,0.0)
@@ -123,7 +123,7 @@ func deselect_ball(ball : Ball): # called by ball.deselect(P)
 	var ui = P.get_node("UI/MarginContainer/HBoxContainer/MarginContainer/TextureRect/RichTextLabel")
 	ui.clear()
 
-func _physics_process(delta):
+func _physics_process(delta):#TODO use set_physics_process in pickup
 	if S.has_ball and S.active_ball != null :
 		set_has_ball_position()
 

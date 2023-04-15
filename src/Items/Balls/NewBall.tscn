@@ -9,7 +9,7 @@
 [ext_resource type="PackedScene" path="res://src/Effects/DustParticle.tscn" id="7_g60ov"]
 
 [sub_resource type="PhysicsMaterial" id="PhysicsMaterial_ebura"]
-friction = 0.0
+friction = 0.2
 bounce = 0.7
 
 [sub_resource type="CircleShape2D" id="1"]
@@ -188,10 +188,12 @@ z_as_relative = false
 collision_layer = 260
 collision_mask = 1030
 input_pickable = true
+mass = 1.2
 physics_material_override = SubResource("PhysicsMaterial_ebura")
 max_contacts_reported = 4
 contact_monitor = true
 script = ExtResource("1_cfj1x")
+impact_threshold = 250.0
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 light_mask = 4

@@ -53,7 +53,7 @@ func disable_physics():
 	linear_velocity *= 0
 	applied_forces.clear()
 	collision_layer = 0
-	collision_mask = 0 # in Godot 3.x I just wrote 'layers = 0', don't remember why (?)
+	collision_mask = 0
 	set_physics_process(false)
 
 func enable_physics():
@@ -72,14 +72,14 @@ func set_start_position(_position : Vector2):
 func apply_impulse(impulse):
 	linear_velocity += invmass * impulse
 
-func has_force(_name : String):
-	return applied_forces.has(_name)
-
-func apply_force(force : Vector2, _name : String):
-	applied_forces[_name] = force
-
-func remove_force(_name : String):
-	applied_forces.erase(_name)
+#func has_force(_name : String):
+#	return applied_forces.has(_name)
+#
+#func apply_force(force : Vector2, _name : String):
+#	applied_forces[_name] = force
+#
+#func remove_force(_name : String):
+#	applied_forces.erase(_name)
 
 ###############PHYSICALPROCESS######################
 

@@ -35,8 +35,8 @@ func _on_Area2D_body_entered(body):
 			tween_force.play()
 
 func _on_Area2D_body_exited(body):
-	# if body.has_method("remove_force"): # temprarily we use only players TODO
-	if body is Player:
+	if body.has_method("remove_force"): # temprarily we use only players TODO
+	#if body is Player:dd
 		body.remove_force(force_alterer)
 		if $Area2D.get_overlapping_bodies().is_empty():
 			tween_force.pause()

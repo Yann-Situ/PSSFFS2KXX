@@ -29,8 +29,8 @@ func update_viewer_parameter():
 		var ball = S.active_ball
 		vmax = max(0.0000001, P.throw_impulse * ball.invmass)
 		vmax_2 = vmax*vmax
-		if ball.gravity != 0.0 :
-			viewer_parameter = vmax_2/ball.gravity
+		if ball.gravity_scale != 0.0 :
+			viewer_parameter = vmax_2/(ball.gravity_scale*Global.default_gravity.y)
 		else:
 			viewer_parameter = INF
 	shader.set_shader_parameter("parameter", viewer_parameter)
@@ -50,7 +50,7 @@ func update_target(target : Vector2):
 	target_position = target
 	if S.active_ball != null:
 		var ball = S.active_ball
-		target_vmin_2 = ball.gravity*(target.length() - target.y)
+		target_vmin_2 = (ball.gravity_scale*Global.default_gravity.y)*(target.length() - target.y)
 	else :
 		printerr("Null S.active_ball")
 		target_vmin_2 = 0.0
@@ -67,7 +67,7 @@ func update_effective_can_shoot(tau : float = 0.0, s = 0):
 	# v is shortcut for velocity
 	tau = clamp(tau, 0.0, 1.0)
 	s = sign(s)
-	var g = S.active_ball.gravity
+	var g = (S.active_ball.gravity_scale*Global.default_gravity.y)
 	var v_length = lerp(sqrt(target_vmin_2), vmax, tau)
 	effective_v_2 = v_length*v_length
 

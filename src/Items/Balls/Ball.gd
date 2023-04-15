@@ -190,13 +190,4 @@ func apply_damage(damage : float, duration : float = 0.0):
 
 ################################################################################
 
-func power_p(player,delta):
-	if holder == Global.get_current_room() :
-		apply_force(1000*(player.position - position).normalized(), "attract")
 
-func power_jp(player,delta):
-	pass
-
-func power_jr(player,delta):
-	if holder == Global.get_current_room() :
-		remove_force("attract")

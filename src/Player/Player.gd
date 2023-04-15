@@ -214,7 +214,7 @@ func get_input(delta): #delta in s
 #				ShootPredictor.draw(BallHandler.get_throw_position()-self.position, shoot+0.5*S.velocity,
 #					S.active_ball.get_gravity_scale()*gravity)
 		ShootPredictor.draw_prediction(Vector2.ZERO, shoot,
-			S.active_ball.gravity*Vector2.DOWN)
+			(S.active_ball.gravity_scale*Global.default_gravity.y)*Vector2.DOWN)
 		Camera.set_offset_from_type("aim",target)
 		if shoot.x > 0 :
 			S.aim_direction = 1
@@ -339,13 +339,13 @@ func get_out(out_global_position : Vector2, velo : Vector2):
 
 ################################################################################
 # For `holders` group
-func free_ball(ball : Ball):
+func free_ball(ball : NewBall):
 	# set out  active_ball and has_ball
 	BallHandler.free_ball(ball)
 
 ################################################################################
 # For ball selection
-func select_ball(ball : Ball):
+func select_ball(ball : NewBall):
 	BallHandler.select_ball(ball)
-func deselect_ball(ball : Ball):
+func deselect_ball(ball : NewBall):
 	BallHandler.deselect_ball(ball)
