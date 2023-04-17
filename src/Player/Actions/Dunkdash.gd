@@ -19,7 +19,7 @@ func move(delta):
 	S.set_action(S.ActionType.DUNKDASH)
 	
 	#P.gravity = Vector2.ZERO
-	P.remove_force(P.gravity_alterer)
+	P.remove_accel(Global.gravity_alterer)
 
 	P.PlayerEffects.cloud_start()
 	P.PlayerEffects.jump_start()
@@ -55,7 +55,7 @@ func move(delta):
 
 func move_end():
 	print("enddash")
-	P.add_force(P.gravity_alterer)
+	P.add_accel(Global.gravity_alterer) # TODO check if it is in an antigravity zone ?
 
 	if not S.is_grinding:
 		var temp_vel_l = S.velocity.length()

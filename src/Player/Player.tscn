@@ -1421,7 +1421,7 @@ color_ramp = SubResource("53")
 
 [sub_resource type="CompressedTexture2D" id="55"]
 
-[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_ysrfu"]
+[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_udirl"]
 resource_local_to_scene = true
 particles_animation = true
 particles_anim_h_frames = 6
@@ -1460,6 +1460,7 @@ landing_velocity_thresh = 310.0
 
 [node name="State" parent="." instance=ExtResource("5")]
 visible = false
+is_jumping = true
 
 [node name="Collision" type="CollisionShape2D" parent="."]
 position = Vector2(0, 3.5)
@@ -1576,9 +1577,6 @@ scale = Vector2(0.75, 0.75)
 [node name="JumpTarget" parent="Actions/Selector" instance=ExtResource("31")]
 modulate = Color(1.1, 0.3, 0.7, 1)
 
-[node name="ShootPredictor" type="Node2D" parent="Actions"]
-script = ExtResource("3")
-
 [node name="Side" type="Node" parent="Actions"]
 script = ExtResource("15")
 
@@ -1639,6 +1637,9 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 mouse_filter = 2
 color = Color(1, 1, 1, 0)
+
+[node name="ShootPredictor" type="Node2D" parent="Shooter"]
+script = ExtResource("3")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 light_mask = 4
@@ -1708,7 +1709,7 @@ lifetime = 0.65
 explosiveness = 0.9
 
 [node name="GrindParticles" parent="PlayerEffects" instance=ExtResource("27")]
-material = SubResource("CanvasItemMaterial_ysrfu")
+material = SubResource("CanvasItemMaterial_udirl")
 position = Vector2(0, 16)
 
 [node name="BallHandler" type="Area2D" parent="."]

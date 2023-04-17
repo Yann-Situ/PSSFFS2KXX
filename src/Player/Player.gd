@@ -51,7 +51,7 @@ var _zero_velocity_workaround = false
 
 @onready var S = get_node("State")
 @onready var SpecialActionHandler = get_node("Actions/SpecialActionHandler")
-@onready var ShootPredictor = get_node("Actions/ShootPredictor")
+@onready var ShootPredictor = get_node("Shooter/ShootPredictor")
 @onready var Shooter = get_node("Shooter")
 @onready var PlayerEffects = get_node("PlayerEffects")
 @onready var BallHandler = get_node("BallHandler")
@@ -69,7 +69,8 @@ var _zero_velocity_workaround = false
 @onready var air_friction = GlobalMaths.unfriction_to_friction(air_unfriction) # ratio/s
 
 @onready var force_alterable = Alterable.new(Vector2.ZERO)
-@onready var gravity_alterer = AltererAdditive.new(mass*Global.default_gravity)
+@onready var speed_alterable = Alterable.new(Vector2.ZERO)
+@onready var accel_alterable = Alterable.new(Vector2.ZERO)
 
 var character_holder = null
 var flip_h : bool = false
@@ -86,7 +87,9 @@ func reset_move():
 	S.reset_state()
 	LifeHandler.reset_life()
 	force_alterable.clear_alterers()
-	force_alterable.add_alterer(gravity_alterer)
+	speed_alterable.clear_alterers()
+	accel_alterable.clear_alterers()
+	accel_alterable.add_alterer(Global.gravity_alterer)
 	set_flip_h(false)
 	reset_position()
 
@@ -102,7 +105,7 @@ func _ready():
 	add_to_group("characters")
 	if !Global.playing:
 		Global.toggle_playing()
-	force_alterable.add_alterer(gravity_alterer)
+	accel_alterable.add_alterer(Global.gravity_alterer)
 	Global.camera = Camera
 
 func set_flip_h(b):
@@ -206,15 +209,9 @@ func get_input(delta): #delta in s
 		else :
 			Shooter.update_effective_cant_shoot(0.0,0)
 			shoot = Shooter.effective_v
-#			shoot = ShootPredictor.shoot_vector()
-#			if S.power_p and S.selected_ball == S.active_ball :
-#				ShootPredictor.draw_attract(BallHandler.get_throw_position()-self.position, shoot+0.5*S.velocity,
-#					S.active_ball.get_gravity_scale()*gravity, attract_force/S.active_ball.mass)
-#			else :
-#				ShootPredictor.draw(BallHandler.get_throw_position()-self.position, shoot+0.5*S.velocity,
-#					S.active_ball.get_gravity_scale()*gravity)
+			
 		ShootPredictor.draw_prediction(Vector2.ZERO, shoot,
-			(S.active_ball.gravity_scale*Global.default_gravity.y)*Vector2.DOWN)
+			(Shooter.global_gravity_scale_TODO*Global.default_gravity.y)*Vector2.DOWN)
 		Camera.set_offset_from_type("aim",target)
 		if shoot.x > 0 :
 			S.aim_direction = 1
@@ -266,9 +263,11 @@ func get_input(delta): #delta in s
 func apply_impulse(impulse):
 	S.velocity += invmass * impulse
 
-func apply_forces(delta):
+func apply_forces_accel(delta):
 	var force = force_alterable.get_value()
 	S.velocity += invmass * delta * force
+	var accel = accel_alterable.get_value()
+	S.velocity += delta * accel
 	if S.is_onwall and S.velocity.y > 0.0: #fall on a wall
 		S.velocity.y = min(S.velocity.y,fall_speed_max_onwall)
 	else :
@@ -276,9 +275,16 @@ func apply_forces(delta):
 
 func add_force(force_alterer : Alterer):
 	force_alterable.add_alterer(force_alterer)
-
 func remove_force(force_alterer : Alterer):
 	force_alterable.remove_alterer(force_alterer)
+func add_accel(accel_alterer : Alterer):
+	accel_alterable.add_alterer(accel_alterer)
+func remove_accel(accel_alterer : Alterer):
+	accel_alterable.remove_alterer(accel_alterer)
+func add_speed(speed_alterer : Alterer):
+	speed_alterable.add_alterer(speed_alterer)
+func remove_speed(speed_alterer : Alterer):
+	speed_alterable.remove_alterer(speed_alterer)
 
 func _physics_process(delta):
 	#print("0: "+str(S.velocity)) # always (0.0,0.0) for some reason...
@@ -286,8 +292,8 @@ func _physics_process(delta):
 
 	get_input(delta)
 	if physics_enabled:
-		apply_forces(delta)
-		set_velocity(S.velocity)
+		apply_forces_accel(delta)
+		set_velocity(S.velocity+speed_alterable.get_value())
 		# TODOConverter40 looks that snap in Godot 4.0 is float, not vector like in Godot 3 - previous value `snap_vector`
 		set_up_direction(Vector2.UP)
 		set_floor_stop_on_slope_enabled(true)
@@ -295,7 +301,7 @@ func _physics_process(delta):
 		set_floor_max_angle(0.785398)
 		# TODOConverter40 infinite_inertia were removed in Godot 4.0 - previous value `false`
 		move_and_slide()
-		S.velocity = get_real_velocity()
+		S.velocity = get_real_velocity()-speed_alterable.get_value()
 
 	_zero_velocity_workaround = false
 

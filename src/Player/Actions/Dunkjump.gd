@@ -36,10 +36,10 @@ func move_jump():
 	P.PlayerEffects.jump_start()
 	if S.dunkjump_basket != null:
 		basket = S.dunkjump_basket
-
+	
 	var q = basket.get_closest_point(P.global_position) - P.global_position
 	S.direction_sprite = 1 if (q.x > 0) else ( -1 if (q.x < 0) else 0)
-
+	P._zero_velocity_workaround = true
 	if q.y == 0.0:
 		S.velocity.x = -0.5*q.x*Global.default_gravity.y/P.dunkjump_speed
 	else : # standard case
@@ -59,9 +59,9 @@ func move_jump():
 			else :
 				S.velocity.x = velocity_x1
 	S.velocity.y = P.dunkjump_speed
+	P._zero_velocity_workaround = false
 	S.is_dunkjumphalfturning = (q.x*direction < dunkjumphalfturn_threshold)
 	#print("Velocity: "+str(S.velocity))
 	Global.camera.screen_shake(0.2,10)
-
 func move_end():
 	pass

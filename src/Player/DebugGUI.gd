@@ -17,11 +17,11 @@ func _ready():
 func _process(delta):
 	var s=Vector2.ZERO
 	s = player.S.velocity * 1.0/player.walk_speed_max
-	$SpriteSVelocity.set_scale(Vector2(0.5,0.2+1.3*s.length()))
+	$SpriteSVelocity.set_scale(Vector2(0.5,0.1+1.3*s.length()))
 	$SpriteSVelocity.set_rotation(Vector2.UP.angle_to(s))
-	s = player.force_alterable.get_value() * 1.0/Global.default_gravity.length()
-	$SpriteVelocity.set_scale(Vector2(0.5,0.8*s.length()))
+	s = player.get_real_velocity() * 1.0/player.walk_speed_max
+	$SpriteVelocity.set_scale(Vector2(0.5,0.1+1.3*s.length()))
 	$SpriteVelocity.set_rotation(Vector2.UP.angle_to(s))
-	s = (player.velocity-player.S.velocity) * 1.0/player.walk_speed_max
-	$SpriteDeviation.set_scale(Vector2(0.5,1.3*s.length()))
+	s = player.force_alterable.get_value() * 1.0/Global.default_gravity.length()
+	$SpriteDeviation.set_scale(Vector2(0.5,0.8*s.length()))
 	$SpriteDeviation.set_rotation(Vector2.UP.angle_to(s))

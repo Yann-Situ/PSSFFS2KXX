@@ -95,7 +95,7 @@ func throw_ball(throw_global_position, speed):
 		S.released_ball = null
 
 func shoot_ball(): # called by animation
-	throw_ball(get_throw_position(), P.ShootPredictor.shoot_vector_save + 0.5*S.velocity)
+	throw_ball(get_throw_position(), P.ShootPredictor.shoot_vector_save)
 
 func select_ball(ball : NewBall): # called by ball.select(P)
 	if S.selected_ball != null and S.selected_ball != ball:
