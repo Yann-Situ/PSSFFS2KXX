@@ -1,36 +1,31 @@
 extends Ball
 # Fire ball, break/burn things and disapear on bounce
 
-@export var attract_force = 500#kg*pix/s^2
 @export var destruction_momentum = 20##kg*pix/s
 
 var friction_save
 
 func _ready():
-	self.mass = 1.0
-	self.set_friction(0.05)
-	friction_save = friction
-	self.set_bounce(0.5)
+	super()
 
 func collision_effect(collider, collider_velocity, collision_point, collision_normal):
 	destruction(0.01)
 	if collider.is_in_group("breakables"):
 		return !collider.apply_explosion(destruction_momentum  * collision_normal)
-	return true
 
 func power_p(player,delta):
-	if holder == null :
-		apply_force(attract_force*(player.position - position).normalized() + \
-			mass * gravity * Vector2.UP, "player_attract")
-		self.set_friction(0.0)
+	if holder == Global.get_current_room() :
+		attract_alterer.set_value(attract_force*(player.global_position - global_position).normalized())
 
 func power_jp(player,delta):
-	linear_velocity = Vector2.ZERO
-	
+	if holder == Global.get_current_room() :
+		add_accel(attract_alterer)
+		remove_accel(Global.gravity_alterer)
+
 func power_jr(player,delta):
-	if holder == null :
-		remove_force("player_attract")
-		self.set_friction(friction_save)
+	if has_accel(attract_alterer) :
+		remove_accel(attract_alterer)
+		add_accel(Global.gravity_alterer)
 
 func on_pickup(holder):
 	pass

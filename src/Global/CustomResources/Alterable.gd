@@ -31,9 +31,14 @@ func get_value():
 func set_is_up_to_date(b : bool):
 	is_up_to_date = b
 	# self.value_changed.emit()# useless for the moment
+	
+####################################################################################################
 
+func has_alterer(alterer : Alterer):
+	return alterers.has(alterer.get_instance_id())
+	
 func add_alterer(alterer : Alterer):
-	if alterers.has(alterer.get_instance_id()):
+	if has_alterer(alterer):
 		push_warning("alterer "+str(alterer.get_instance_id())+" already added.")
 	else:
 		alterers[alterer.get_instance_id()] = alterer
@@ -42,24 +47,24 @@ func add_alterer(alterer : Alterer):
 		set_is_up_to_date(false)
 		emit_changed()
 
-## this method is called by the alterer when it is done
-func _on_alterer_is_done(alterer : Alterer):
-	if alterers.has(alterer.get_instance_id()):
-		base_value = alterer.alter_done(base_value) # TODO this can induce problems when using also multiplicative
-		remove_alterer(alterer)
-	else:
-		push_warning("alterer "+str(alterer.get_instance_id())+" not found.")
-
 ## Note that removing the alterer removes also its effect.
 ## If you want to remove the alterer but keeping permanent effects, use the alterer.stop() function,
 ## which should call the _on_alterer_is_done function
 func remove_alterer(alterer : Alterer):
-	if alterers.has(alterer.get_instance_id()):
+	if has_alterer(alterer):
 		alterer.is_done.disconnect(_on_alterer_is_done.bind(alterer))
 		alterer.has_changed.disconnect(set_is_up_to_date.bind(false))
 		alterers.erase(alterer.get_instance_id())
 		set_is_up_to_date(false)
 		emit_changed()
+	else:
+		push_warning("alterer "+str(alterer.get_instance_id())+" not found.")
+
+## this method is called by the alterer when it is done
+func _on_alterer_is_done(alterer : Alterer):
+	if has_alterer(alterer):
+		base_value = alterer.alter_done(base_value) # TODO this can induce problems when using also multiplicative
+		remove_alterer(alterer)
 	else:
 		push_warning("alterer "+str(alterer.get_instance_id())+" not found.")
 

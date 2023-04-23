@@ -1,9 +1,13 @@
-[gd_scene load_steps=11 format=3 uid="uid://bp35noq8krghh"]
+[gd_scene load_steps=12 format=3 uid="uid://bp35noq8krghh"]
 
 [ext_resource type="PackedScene" uid="uid://cxn2m3havcmil" path="res://src/Items/Balls/Ball.tscn" id="1"]
 [ext_resource type="Shader" path="res://assets/shader/contour.gdshader" id="2"]
 [ext_resource type="Texture2D" uid="uid://0q8qxsby5sw5" path="res://assets/art/effects/light2.png" id="3"]
 [ext_resource type="Script" path="res://src/Items/Balls/BallLight.gd" id="7"]
+
+[sub_resource type="PhysicsMaterial" id="PhysicsMaterial_kiy7j"]
+friction = 0.2
+bounce = 0.2
 
 [sub_resource type="ShaderMaterial" id="5"]
 resource_local_to_scene = true
@@ -60,10 +64,11 @@ _data = {
 }
 
 [node name="BallLight" instance=ExtResource("1")]
+mass = 0.5
+physics_material_override = SubResource("PhysicsMaterial_kiy7j")
 script = ExtResource("7")
 enabled = false
-mass = 0.9
-bounce = 0.6
+impact_effect = 1
 
 [node name="Sprite2D" parent="." index="0"]
 self_modulate = Color(1.5, 1.3, 0.2, 1)

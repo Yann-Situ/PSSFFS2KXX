@@ -1,11 +1,18 @@
-[gd_scene load_steps=21 format=3 uid="uid://yco4prlcetlu"]
+[gd_scene load_steps=32 format=3 uid="uid://yco4prlcetlu"]
 
-[ext_resource type="PackedScene" uid="uid://cxn2m3havcmil" path="res://src/Items/Balls/Ball.tscn" id="1"]
 [ext_resource type="Texture2D" uid="uid://dsoyoe3ww8hjd" path="res://assets/art/effects/shockwave_1.png" id="2"]
 [ext_resource type="Script" path="res://src/Items/Balls/BallBoum.gd" id="3"]
 [ext_resource type="Shader" path="res://assets/shader/contour.gdshader" id="3_emvrs"]
 [ext_resource type="Texture2D" uid="uid://d022k3w806eqv" path="res://assets/art/ball/ball_boum.png" id="4"]
+[ext_resource type="Texture2D" uid="uid://dhu7eccs5egsg" path="res://assets/art/ball/ball_selection.png" id="4_gcg44"]
+[ext_resource type="Script" path="res://src/Items/Balls/Highlighter.gd" id="5_0u0m5"]
 [ext_resource type="Texture2D" uid="uid://dynhxnnpu4wgg" path="res://assets/art/effects/round.png" id="6"]
+[ext_resource type="Script" path="res://src/Items/Balls/BallEffectsHandler.gd" id="6_yy22q"]
+[ext_resource type="PackedScene" path="res://src/Effects/DustParticle.tscn" id="8_0baep"]
+
+[sub_resource type="PhysicsMaterial" id="PhysicsMaterial_88whb"]
+friction = 0.35
+bounce = 0.15
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_x4vh4"]
 resource_local_to_scene = true
@@ -16,6 +23,9 @@ shader_parameter/contour_color = Color(1, 1, 0.9, 0.9)
 [sub_resource type="CircleShape2D" id="1"]
 resource_local_to_scene = true
 radius = 6.0
+
+[sub_resource type="CircleShape2D" id="2"]
+radius = 16.0
 
 [sub_resource type="Animation" id="3"]
 resource_name = "destruction"
@@ -147,24 +157,44 @@ _data = {
 "dunk": SubResource("4")
 }
 
-[sub_resource type="Gradient" id="2"]
+[sub_resource type="CompressedTexture2D" id="5"]
+
+[sub_resource type="Curve" id="6"]
+_data = [Vector2(0, 0.0886364), 0.0, 0.215584, 0, 0, Vector2(0.554217, 0.952273), 0.425641, 0.425641, 0, 0, Vector2(1, 1), -0.570101, 0.0, 0, 0]
+point_count = 3
+
+[sub_resource type="Gradient" id="Gradient_vw3tp"]
 resource_local_to_scene = true
 offsets = PackedFloat32Array(0, 0.00699301, 0.244755, 0.468531, 0.839161, 1)
 colors = PackedColorArray(1, 0, 0.580392, 0, 0, 0, 0, 0.258741, 0.535156, 0.535156, 0.535156, 0.705882, 0.839844, 0.839844, 0.839844, 1, 1, 1, 1, 1, 1, 1, 1, 0)
+
+[sub_resource type="Curve" id="9"]
+_data = [Vector2(0, 1), 0.0, 0.215584, 0, 0, Vector2(0.786325, 1), -1.57233, -1.57233, 0, 0, Vector2(1, 0.4), -2.73506, 0.0, 0, 0]
+point_count = 3
 
 [sub_resource type="Gradient" id="Gradient_eorql"]
 resource_local_to_scene = true
 offsets = PackedFloat32Array(0, 0.020202, 0.131313, 0.50505, 0.808081, 1)
 colors = PackedColorArray(1, 0, 0.580392, 0, 1, 1, 1, 0, 1, 1, 1, 1, 0.839844, 0.839844, 0.839844, 1, 0.535156, 0.535156, 0.535156, 0.705882, 0, 0, 0, 0.258741)
 
+[sub_resource type="CompressedTexture2D" id="11"]
+
+[sub_resource type="Curve" id="12"]
+_data = [Vector2(0, 0.784091), 0.0, 3.55714, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="Gradient" id="13"]
+offsets = PackedFloat32Array(0.020979, 0.27972, 0.75, 1)
+colors = PackedColorArray(1, 0.954956, 0.859375, 0, 0.820312, 0.799805, 0.78186, 1, 0.538086, 0.369934, 0.475029, 0.34, 0.129412, 0.0705882, 0.172549, 0)
+
 [sub_resource type="CircleShape2D" id="CircleShape2D_m8w4v"]
 radius = 64.0
 
-[sub_resource type="Curve" id="5"]
+[sub_resource type="Curve" id="Curve_x7wi1"]
 _data = [Vector2(0, 0.856818), 0.0, 3.55714, 0, 0, Vector2(1, 0.209091), 0.0, 0.0, 0, 0]
 point_count = 2
 
-[sub_resource type="Gradient" id="6"]
+[sub_resource type="Gradient" id="Gradient_wo3ns"]
 offsets = PackedFloat32Array(0, 0.342657, 0.664336, 0.965035)
 colors = PackedColorArray(1.5, 1.4, 1.3, 1, 1.3, 0.7, 0.1, 1, 0.99, 0.27, 0, 0.91, 0.29, 0.24, 0.24, 0.53)
 
@@ -179,61 +209,148 @@ particles_anim_loop = false
 offsets = PackedFloat32Array(0, 0.00813008, 1)
 colors = PackedColorArray(1, 1, 1, 0, 1.5, 1.3, 0.55, 1, 1, 0.2, 0, 1)
 
-[sub_resource type="GradientTexture2D" id="9"]
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_kcj64"]
 gradient = SubResource("8")
 width = 100
 
 [sub_resource type="ParticleProcessMaterial" id="10"]
 resource_local_to_scene = true
 gravity = Vector3(0, 0, 0)
-color_ramp = SubResource("9")
+color_ramp = SubResource("GradientTexture2D_kcj64")
 anim_speed_min = 1.0
 anim_speed_max = 1.0
 
-[node name="BallBoum" instance=ExtResource("1")]
+[node name="BallBoum" type="RigidBody2D"]
+light_mask = 4
+z_index = 110
+z_as_relative = false
+collision_layer = 260
+collision_mask = 1030
+input_pickable = true
+mass = 3.0
+physics_material_override = SubResource("PhysicsMaterial_88whb")
+gravity_scale = 0.0
+lock_rotation = true
 script = ExtResource("3")
 damage = 2.0
-boum_min = 400.0
-boum_max = 700.0
-distance_max = 64.0
-speed_threshold = 350.0
-boum_timer = 1.0
-boum_delay = 0.13
+speed_threshold = 120.0
+impact_effect = 1
+dust_threshold = 25.0
+impact_threshold = 50.0
 damage_destruction_threshold = 3.0
 
-[node name="Sprite2D" parent="." index="0"]
+[node name="Sprite2D" type="Sprite2D" parent="."]
+light_mask = 4
 material = SubResource("ShaderMaterial_x4vh4")
 texture = ExtResource("4")
 
-[node name="collision" parent="." index="1"]
+[node name="Sprite_Selection" type="Sprite2D" parent="Sprite2D"]
+visible = false
+modulate = Color(0.980392, 0.803922, 0.498039, 1)
+texture = ExtResource("4_gcg44")
+
+[node name="collision" type="CollisionShape2D" parent="."]
+visible = false
 shape = SubResource("1")
 
-[node name="Animation" parent="." index="3"]
+[node name="Highlighter" type="Area2D" parent="."]
+collision_layer = 8
+collision_mask = 0
+script = ExtResource("5_0u0m5")
+selection_color = Color(1, 1, 0.9, 0.9)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Highlighter"]
+visible = false
+shape = SubResource("2")
+
+[node name="Animation" type="AnimationPlayer" parent="."]
 libraries = {
 "": SubResource("AnimationLibrary_407ud")
 }
 
-[node name="Effects" parent="." index="4"]
+[node name="Effects" type="Node2D" parent="."]
+script = ExtResource("6_yy22q")
 col1 = Color(1.2, 0.65, 0.25, 1)
 col2 = Color(0.309804, 0.298039, 0.298039, 1)
 col3 = Color(0.203922, 0.203922, 0.203922, 1)
 
-[node name="Reconstruction" parent="Effects" index="0"]
-color_ramp = SubResource("2")
+[node name="Reconstruction" type="CPUParticles2D" parent="Effects"]
+emitting = false
+amount = 24
+lifetime = 0.85
+one_shot = true
+speed_scale = 1.5
+explosiveness = 0.61
+lifetime_randomness = 0.29
+fract_delta = false
+texture = SubResource("5")
+emission_shape = 3
+emission_rect_extents = Vector2(1, 1)
+direction = Vector2(0, 0)
+spread = 180.0
+gravity = Vector2(0, 0)
+scale_amount_curve = SubResource("6")
+color_ramp = SubResource("Gradient_vw3tp")
 
-[node name="Destruction" parent="Effects" index="1"]
+[node name="Destruction" type="CPUParticles2D" parent="Effects"]
+emitting = false
+amount = 32
+lifetime = 1.2
+one_shot = true
+speed_scale = 1.4
+explosiveness = 0.4
+fract_delta = false
+texture = ExtResource("6")
+emission_shape = 5
+emission_points = PackedVector2Array(5, 0, 3.6, 3.6, 0, 5, -3.6, 3.6, -5, 0, -3.6, -3.6, 0, -5, 3.6, -3.6)
+emission_normals = PackedVector2Array(1, 0, 0.7, 0.7, 0, 1, -0.7, 0.7, -1, 0, -0.7, -0.7, 0, -1, 0.7, -0.7)
+emission_colors = PackedColorArray()
+direction = Vector2(0, 0)
+spread = 0.0
+gravity = Vector2(0, 0)
+initial_velocity_min = 80.0
+initial_velocity_max = 80.0
+orbit_velocity_min = 0.2
+orbit_velocity_max = 0.2
+damping_min = 80.0
+damping_max = 80.0
+scale_amount_min = 0.06
+scale_amount_max = 0.06
+scale_amount_curve = SubResource("9")
 color_ramp = SubResource("Gradient_eorql")
 
-[node name="BoumZone" type="Area2D" parent="." index="5"]
+[node name="DunkParticles" type="CPUParticles2D" parent="Effects"]
+z_index = 99
+z_as_relative = false
+position = Vector2(0, -3.8147e-06)
+emitting = false
+amount = 50
+one_shot = true
+explosiveness = 0.7
+randomness = 0.05
+lifetime_randomness = 0.29
+fract_delta = false
+texture = SubResource("11")
+direction = Vector2(0, 0)
+spread = 180.0
+gravity = Vector2(0, -100)
+scale_amount_curve = SubResource("12")
+color_ramp = SubResource("13")
+
+[node name="DustParticle" parent="Effects" instance=ExtResource("8_0baep")]
+z_index = -1
+amount = 10
+
+[node name="BoumZone" type="Area2D" parent="."]
 collision_layer = 16
 collision_mask = 325
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="BoumZone" index="0"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="BoumZone"]
 visible = false
 modulate = Color(1, 0.784314, 0.278431, 1)
 shape = SubResource("CircleShape2D_m8w4v")
 
-[node name="BoumParticles" type="CPUParticles2D" parent="." index="6"]
+[node name="BoumParticles" type="CPUParticles2D" parent="."]
 position = Vector2(0, -3.8147e-06)
 emitting = false
 amount = 45
@@ -255,10 +372,10 @@ damping_min = 50.0
 damping_max = 60.0
 scale_amount_min = 0.12
 scale_amount_max = 0.3
-scale_amount_curve = SubResource("5")
-color_ramp = SubResource("6")
+scale_amount_curve = SubResource("Curve_x7wi1")
+color_ramp = SubResource("Gradient_wo3ns")
 
-[node name="ShockWaveAnim" type="GPUParticles2D" parent="." index="7"]
+[node name="ShockWaveAnim" type="GPUParticles2D" parent="."]
 material = SubResource("7")
 emitting = false
 amount = 1
@@ -267,5 +384,8 @@ texture = ExtResource("2")
 lifetime = 0.35
 one_shot = true
 
-[node name="Timer" type="Timer" parent="." index="8"]
+[node name="Timer" type="Timer" parent="."]
 one_shot = true
+
+[connection signal="mouse_entered" from="Highlighter" to="Highlighter" method="_on_Selector_mouse_entered" flags=18]
+[connection signal="mouse_exited" from="Highlighter" to="Highlighter" method="_on_Selector_mouse_exited" flags=18]

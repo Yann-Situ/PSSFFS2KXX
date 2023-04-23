@@ -1,9 +1,13 @@
-[gd_scene load_steps=15 format=3 uid="uid://cd2wyj207og8s"]
+[gd_scene load_steps=16 format=3 uid="uid://cd2wyj207og8s"]
 
-[ext_resource type="PackedScene" path="res://src/Items/Balls/Ball.tscn" id="1"]
+[ext_resource type="PackedScene" uid="uid://cxn2m3havcmil" path="res://src/Items/Balls/Ball.tscn" id="1"]
 [ext_resource type="Script" path="res://src/Items/Balls/BallDash.gd" id="2"]
 [ext_resource type="Shader" path="res://assets/shader/gradient.gdshader" id="3"]
 [ext_resource type="Script" path="res://src/Items/Interactive/Selectable.gd" id="4"]
+
+[sub_resource type="PhysicsMaterial" id="PhysicsMaterial_tvgov"]
+friction = 0.7
+bounce = 0.4
 
 [sub_resource type="Gradient" id="1"]
 offsets = PackedFloat32Array(0, 0.482456, 0.859649, 0.973684)
@@ -166,6 +170,8 @@ colors = PackedColorArray(1, 0, 0.580392, 0, 1, 1, 1, 0, 1, 1, 1, 1, 0.839844, 0
 radius = 0.01
 
 [node name="BallDash" instance=ExtResource("1")]
+mass = 0.85
+physics_material_override = SubResource("PhysicsMaterial_tvgov")
 script = ExtResource("2")
 
 [node name="Sprite2D" parent="." index="0"]
@@ -185,11 +191,9 @@ col2 = Color(0.858824, 0.0823529, 0.968627, 1)
 col3 = Color(0.364706, 0.184314, 0.482353, 1)
 
 [node name="Reconstruction" parent="Effects" index="0"]
-emission_rect_extents = Vector2(1, 1)
 color_ramp = SubResource("5")
 
 [node name="Destruction" parent="Effects" index="1"]
-emission_rect_extents = Vector2(1, 1)
 color_ramp = SubResource("6")
 
 [node name="DashArea" type="Area2D" parent="." index="5"]

@@ -94,9 +94,9 @@ var action_type = ActionType.NONE
 
 # Bool var
 @export var has_ball = false
-var active_ball : NewBall = null#pointer to a ball
-var released_ball : NewBall  = null # useful because when the ball is released (or thrown), it is immediatly detected by area_body_enter...
-var selected_ball : NewBall  = null#pointer to the selected ball
+var active_ball : Ball = null#pointer to a ball
+var released_ball : Ball  = null # useful because when the ball is released (or thrown), it is immediatly detected by area_body_enter...
+var selected_ball : Ball  = null#pointer to the selected ball
 var dunkjump_basket = null#pointer to the basket to dunkjump
 var dunkdash_basket = null#pointer to the basket to dunkdash
 var shoot_basket = null#pointer to the basket to shoot

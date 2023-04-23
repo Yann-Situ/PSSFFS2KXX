@@ -1,4 +1,4 @@
-[gd_scene load_steps=22 format=3 uid="uid://cxn2m3havcmil"]
+[gd_scene load_steps=23 format=3 uid="uid://cxn2m3havcmil"]
 
 [ext_resource type="Texture2D" uid="uid://dhu7eccs5egsg" path="res://assets/art/ball/ball_selection.png" id="1"]
 [ext_resource type="Script" path="res://src/Items/Balls/Ball.gd" id="2"]
@@ -6,7 +6,12 @@
 [ext_resource type="Material" uid="uid://dk0f4vjr0y0q3" path="res://assets/shader/material/contour_shadermaterial.tres" id="4"]
 [ext_resource type="PackedScene" path="res://src/Effects/DustParticle.tscn" id="5"]
 [ext_resource type="Script" path="res://src/Items/Balls/BallEffectsHandler.gd" id="7"]
+[ext_resource type="Texture2D" uid="uid://dynhxnnpu4wgg" path="res://assets/art/effects/round.png" id="7_fisxc"]
 [ext_resource type="Script" path="res://src/Items/Balls/Highlighter.gd" id="8"]
+
+[sub_resource type="PhysicsMaterial" id="PhysicsMaterial_j8ut1"]
+friction = 0.5
+bounce = 0.5
 
 [sub_resource type="CircleShape2D" id="1"]
 resource_local_to_scene = true
@@ -156,8 +161,6 @@ resource_local_to_scene = true
 offsets = PackedFloat32Array(0, 0.00699301, 0.244755, 0.468531, 0.839161, 1)
 colors = PackedColorArray(1, 0, 0.580392, 0, 0, 0, 0, 0.258741, 0.535156, 0.535156, 0.535156, 0.705882, 0.839844, 0.839844, 0.839844, 1, 1, 1, 1, 1, 1, 1, 1, 0)
 
-[sub_resource type="CompressedTexture2D" id="8"]
-
 [sub_resource type="Curve" id="9"]
 _data = [Vector2(0, 1), 0.0, 0.215584, 0, 0, Vector2(0.786325, 1), -1.57233, -1.57233, 0, 0, Vector2(1, 0.4), -2.73506, 0.0, 0, 0]
 point_count = 3
@@ -177,13 +180,16 @@ point_count = 2
 offsets = PackedFloat32Array(0.020979, 0.27972, 0.75, 1)
 colors = PackedColorArray(1, 0.954956, 0.859375, 0, 0.820312, 0.799805, 0.78186, 1, 0.538086, 0.369934, 0.475029, 0.34, 0.129412, 0.0705882, 0.172549, 0)
 
-[node name="Ball" type="CharacterBody2D"]
+[node name="Ball" type="RigidBody2D"]
 light_mask = 4
 z_index = 110
 z_as_relative = false
 collision_layer = 260
 collision_mask = 1030
 input_pickable = true
+physics_material_override = SubResource("PhysicsMaterial_j8ut1")
+gravity_scale = 0.0
+lock_rotation = true
 script = ExtResource("2")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
@@ -241,19 +247,28 @@ color_ramp = SubResource("7")
 
 [node name="Destruction" type="CPUParticles2D" parent="Effects"]
 emitting = false
-amount = 24
+amount = 32
 lifetime = 1.2
 one_shot = true
 speed_scale = 1.4
-explosiveness = 0.8
-lifetime_randomness = 0.29
+explosiveness = 0.4
 fract_delta = false
-texture = SubResource("8")
-emission_shape = 3
-emission_rect_extents = Vector2(1, 1)
+texture = ExtResource("7_fisxc")
+emission_shape = 5
+emission_points = PackedVector2Array(5, 0, 3.6, 3.6, 0, 5, -3.6, 3.6, -5, 0, -3.6, -3.6, 0, -5, 3.6, -3.6)
+emission_normals = PackedVector2Array(1, 0, 0.7, 0.7, 0, 1, -0.7, 0.7, -1, 0, -0.7, -0.7, 0, -1, 0.7, -0.7)
+emission_colors = PackedColorArray()
 direction = Vector2(0, 0)
-spread = 180.0
+spread = 0.0
 gravity = Vector2(0, 0)
+initial_velocity_min = 80.0
+initial_velocity_max = 80.0
+orbit_velocity_min = 0.2
+orbit_velocity_max = 0.2
+damping_min = 80.0
+damping_max = 80.0
+scale_amount_min = 0.06
+scale_amount_max = 0.06
 scale_amount_curve = SubResource("9")
 color_ramp = SubResource("10")
 

@@ -61,7 +61,7 @@ func _on_basket_area_body_entered(body):
 		if score > 0.0:
 			goal(body,score)
 
-func dunk(dunker : Node2D, ball : NewBall = null):
+func dunk(dunker : Node2D, ball : Ball = null):
 	if not can_receive_dunk:
 		push_warning("can_receive_dunk is false but basket.dunk() was called.")
 		return
@@ -91,7 +91,7 @@ func get_hanged(character : Node):
 		return 1
 	pickup_character(character)
 
-func goal(ball : NewBall, score):
+func goal(ball : Ball, score):
 	print("GOOOAL!")
 	if score > speed_ball_threshold:
 		goal_effects(ball, 2)
@@ -99,7 +99,7 @@ func goal(ball : NewBall, score):
 		goal_effects(ball, 1)
 	is_goaled.emit()
 
-func goal_effects(ball : NewBall, force : int = 0):
+func goal_effects(ball : Ball, force : int = 0):
 	$Effects/LineParticle.amount = force * 16
 	$Effects/LineParticle.process_material.initial_velocity_min = -60.0 + force * 80.0
 	$Effects/LineParticle.process_material.initial_velocity_max = -20.0 + force * 80.0

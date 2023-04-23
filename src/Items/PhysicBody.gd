@@ -69,7 +69,7 @@ func set_start_position(_position : Vector2):
 	start_position = _position
 	global_position = _position
 
-func apply_impulse(impulse):
+func add_impulse(impulse):
 	linear_velocity += invmass * impulse
 
 #func has_force(_name : String):
@@ -116,7 +116,7 @@ func collision_handle(collision, delta):
 		var speeddist = (linear_velocity - collision.get_collider_velocity()).dot(dist_vect)
 		linear_velocity -= 2*m2/summass*(speeddist/dist_vect.length_squared())*dist_vect
 		collision.get_collider().set_linear_velocity(collision.get_collider_velocity() + 2*mass/summass*(speeddist/dist_vect.length_squared())*dist_vect)
-		#collision.get_collider().apply_impulse(2*m2*mass/summass*(speeddist/dist_vect.length_squared())*dist_vect)#doesn't work don't know Y
+		#collision.get_collider().add_impulse(2*m2*mass/summass*(speeddist/dist_vect.length_squared())*dist_vect)#doesn't work don't know Y
 
 		# see https://docs.godotengine.org/fr/stable/classes/class_kinematiccollision2d.html#class-kinematiccollision2d-property-collider
 		# and call `collision_effect` on the collider with the right `collision`

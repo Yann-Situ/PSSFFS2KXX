@@ -82,7 +82,7 @@ func explode_body(body : Node2D, direction : Vector2):
 		body.apply_explosion(breakable_momentum*direction)
 	if body.is_in_group("electrics"):
 		body.apply_shock(electric_momentum*direction)
-	if body.is_in_group("physicbodies") or body is Player:
-		body.apply_impulse(physicbody_momentum*direction)
+	if body.has_method("add_impulse"):
+		body.add_impulse(physicbody_momentum*direction)
 	if body.is_in_group("damageables"):
 		body.apply_damage(damage, damage_duration)

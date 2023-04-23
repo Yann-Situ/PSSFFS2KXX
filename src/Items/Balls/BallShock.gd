@@ -10,10 +10,7 @@ extends Ball
 var distortion_scene = preload("res://src/Effects/Distortion.tscn")
 
 func _ready():
-	self.mass = 1.15
-	self.set_friction(0.12)
-	self.set_bounce(0.35)
-	self.set_penetration(0.35)
+	super()
 	$ShockZone/CollisionShape2D.shape.radius = distance_max
 	$AnimationPlayer.play("idle")
 
@@ -27,9 +24,9 @@ func apply_shock_impulse(shock_force : float, shock_global_position : Vector2, b
 				b.apply_shock(momentum)
 				if b.get_parent().is_in_group("activables"):
 					b.get_parent().toggle_activated(true)
-			if b.is_in_group("physicbodies"):
+			if b.is_in_group("physicbodies") or b.is_in_group("situbodies"):
 				b.set_linear_velocity(Vector2.ZERO)
-				b.apply_impulse(momentum)
+				b.add_impulse(momentum)
 			elif b.is_in_group("breakables"):
 				b.apply_explosion(momentum)
 
@@ -58,10 +55,10 @@ func power_jp(player,delta):
 					player.get_node("Actions/Jump").move(0.001,-player.invmass*shock_jump)
 				else :
 					printerr("In "+name+" : player doesn't have a node Actions/Jump")
-					player.apply_impulse(shock_jump*Vector2.UP)
+					player.add_impulse(shock_jump*Vector2.UP)
 				shock(shock_max, player.global_position+40*Vector2.DOWN)
 			elif !player.S.is_onfloor and player.S.crouch_p:
-				player.apply_impulse(shock_fall*Vector2.DOWN)
+				player.add_impulse(shock_fall*Vector2.DOWN)
 				shock(shock_max, player.global_position)
 			else :
 				shock(shock_max, player.global_position)

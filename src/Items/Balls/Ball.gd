@@ -1,6 +1,6 @@
-extends PhysicBody
+@icon("res://assets/art/ball/ball_test.png")
+extends SituBody
 class_name Ball
-# @icon("res://assets/art/ball/ball_test.png")
 
 signal is_destroyed
 signal is_picked_up
@@ -9,18 +9,22 @@ signal is_thrown
 enum IMPACT_EFFECT {SPIKY, METALLIC}
 
 @export var impact_effect : IMPACT_EFFECT = IMPACT_EFFECT.SPIKY
-@export var dust_threshold : float = 300.0
-@export var impact_threshold : float = 500.0
+@export var dust_threshold : float = 100.0#pix/(s kg) (impulse)
+@export var impact_threshold : float = 200.0#
 @export var damage_destruction_threshold : float = 2.0
+@export var attract_force : float = 1000.0
 var selectors = {}
-var impact_particles = [preload("res://src/Effects/ImpactParticle1.tscn"),
-	preload("res://src/Effects/ImpactParticle0.tscn")]
 var _is_reparenting = false : get = is_reparenting
 
 @onready var holder = Global.get_current_room()
 @onready var Highlighter = $Highlighter
+@onready var dust_threshold2 : float = dust_threshold*dust_threshold#
+@onready var impact_threshold2 : float = impact_threshold*impact_threshold#
+@onready var attract_alterer = AltererAdditive.new(Vector2.ZERO)
 
 func _ready():
+	super()# call _ready() of SituBody
+
 	self.z_as_relative = false
 	self.z_index = Global.z_indices["ball_0"]
 	add_to_group("balls")
@@ -33,24 +37,18 @@ func is_reparenting():
 
 func get_main_color() -> Color:
 	return $Effects.col2
-
 func get_main_gradient() -> Gradient:
 	return $Effects.gradient_main.duplicate()
-
 func get_dash_gradient() -> Gradient:
 	return $Effects.gradient_dash.duplicate()
 #func _draw():
 #	# draw collision normal
 #	draw_line(Vector2(0.0,0.0), Vector2(0.0,0.0)+50.0*normal_colision, color_colision)
 
-###########################################################
-func reset_position():
-	if holder != Global.get_current_room():
-		throw(Vector2.ZERO,Vector2.ZERO)
-	global_position = start_position
+################### SITUBODY override ###################################
 
 func collision_effect(collider, collider_velocity, collision_point, collision_normal):
-	var speed = (linear_velocity-collider_velocity).length()
+	var speed = (linear_velocity-collider_velocity).dot(collision_normal)
 	if speed >= dust_threshold:
 		$Effects/DustParticle.restart()
 		if speed >= impact_threshold:
@@ -59,7 +57,6 @@ func collision_effect(collider, collider_velocity, collision_point, collision_no
 #			get_parent().add_child(impact)
 #			impact.global_position = collision_point
 #			impact.start()
-	return true
 
 ###########################################################
 
@@ -119,12 +116,13 @@ func pickup(holder_node):
 func throw(_position, velo):
 	#$TrailHandler.set_node_to_trail(self)
 	#$TrailHandler.start(2.0,0.1)
-	self.enable_physics()
 	var previous_holder = holder
 	change_holder(Global.get_current_room())
+	assert(self.is_freeze_enabled())
 	global_position = _position
 	linear_velocity = velo
 	self.z_index = Global.z_indices["ball_0"]
+	self.enable_physics()
 	on_throw(previous_holder)
 	is_thrown.emit()
 
@@ -190,4 +188,15 @@ func apply_damage(damage : float, duration : float = 0.0):
 
 ################################################################################
 
+func power_p(player,delta):
+	if holder == Global.get_current_room() :
+		attract_alterer.set_value(attract_force*(player.global_position - global_position).normalized())
 
+
+func power_jp(player,delta):
+	if holder == Global.get_current_room() :
+		add_force(attract_alterer)
+
+func power_jr(player,delta):
+	if has_force(attract_alterer) :
+		remove_force(attract_alterer)

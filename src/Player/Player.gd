@@ -209,7 +209,7 @@ func get_input(delta): #delta in s
 		else :
 			Shooter.update_effective_cant_shoot(0.0,0)
 			shoot = Shooter.effective_v
-			
+
 		ShootPredictor.draw_prediction(Vector2.ZERO, shoot,
 			(Shooter.global_gravity_scale_TODO*Global.default_gravity.y)*Vector2.DOWN)
 		Camera.set_offset_from_type("aim",target)
@@ -260,8 +260,10 @@ func get_input(delta): #delta in s
 
 ################################################################################
 # For physicbody
-func apply_impulse(impulse):
+func add_impulse(impulse : Vector2):
+	_zero_velocity_workaround = true
 	S.velocity += invmass * impulse
+	_zero_velocity_workaround = false
 
 func apply_forces_accel(delta):
 	var force = force_alterable.get_value()
@@ -273,14 +275,22 @@ func apply_forces_accel(delta):
 	else :
 		S.velocity.y = min(S.velocity.y,fall_speed_max)
 
+func has_force(force_alterer : Alterer):
+	return force_alterable.has_alterer(force_alterer)
 func add_force(force_alterer : Alterer):
 	force_alterable.add_alterer(force_alterer)
 func remove_force(force_alterer : Alterer):
 	force_alterable.remove_alterer(force_alterer)
+
+func has_accel(accel_alterer : Alterer):
+	return accel_alterable.has_alterer(accel_alterer)
 func add_accel(accel_alterer : Alterer):
 	accel_alterable.add_alterer(accel_alterer)
 func remove_accel(accel_alterer : Alterer):
 	accel_alterable.remove_alterer(accel_alterer)
+
+func has_speed(speed_alterer : Alterer):
+	return speed_alterable.has_alterer(speed_alterer)
 func add_speed(speed_alterer : Alterer):
 	speed_alterable.add_alterer(speed_alterer)
 func remove_speed(speed_alterer : Alterer):
@@ -313,7 +323,6 @@ func disable_physics():
 	collision_mask = 0
 	S.velocity *= 0.0
 
-
 func enable_physics():
 	physics_enabled = true
 	collision_layer = collision_layer_save
@@ -345,13 +354,13 @@ func get_out(out_global_position : Vector2, velo : Vector2):
 
 ################################################################################
 # For `holders` group
-func free_ball(ball : NewBall):
+func free_ball(ball : Ball):
 	# set out  active_ball and has_ball
 	BallHandler.free_ball(ball)
 
 ################################################################################
 # For ball selection
-func select_ball(ball : NewBall):
+func select_ball(ball : Ball):
 	BallHandler.select_ball(ball)
-func deselect_ball(ball : NewBall):
+func deselect_ball(ball : Ball):
 	BallHandler.deselect_ball(ball)

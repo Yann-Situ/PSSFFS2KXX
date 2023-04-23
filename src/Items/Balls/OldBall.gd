@@ -1,5 +1,5 @@
-extends RigidBody2D
-class_name NewBall
+extends "res://src/Items/PhysicBody.gd"
+class_name OldBall
 # @icon("res://assets/art/ball/ball_test.png")
 
 signal is_destroyed
@@ -9,10 +9,9 @@ signal is_thrown
 enum IMPACT_EFFECT {SPIKY, METALLIC}
 
 @export var impact_effect : IMPACT_EFFECT = IMPACT_EFFECT.SPIKY
-@export var dust_threshold : float = 100.0#pix/(s kg) (impulse)
-@export var impact_threshold : float = 200.0#
+@export var dust_threshold : float = 300.0
+@export var impact_threshold : float = 500.0
 @export var damage_destruction_threshold : float = 2.0
-@export var attract_force : float = 1000.0
 var selectors = {}
 var impact_particles = [preload("res://src/Effects/ImpactParticle1.tscn"),
 	preload("res://src/Effects/ImpactParticle0.tscn")]
@@ -20,35 +19,12 @@ var _is_reparenting = false : get = is_reparenting
 
 @onready var holder = Global.get_current_room()
 @onready var Highlighter = $Highlighter
-@onready var start_position = global_position
-@onready var collision_layer_save = collision_layer
-@onready var collision_mask_save = collision_mask
-
-@onready var force_alterable = Alterable.new(Vector2.ZERO)
-@onready var gravity_alterer = AltererAdditive.new(mass*Global.default_gravity)
-@onready var attract_alterer = AltererAdditive.new(Vector2.ZERO)
-
-@onready var invmass = 1/mass
-@onready var dust_threshold2 : float = dust_threshold*dust_threshold#
-@onready var impact_threshold2 : float = impact_threshold*impact_threshold#
-
-var physics_enabled = true
 
 func _ready():
-	Global.list_of_physical_nodes.append(self)
-	if !Global.playing or !physics_enabled:
-		disable_physics()
-	add_to_group("physicbodies")
-
 	self.z_as_relative = false
 	self.z_index = Global.z_indices["ball_0"]
 	add_to_group("balls")
 	add_to_group("damageables")
-
-	set_gravity_scale(0.0) # we compute gravity using force_alterer
-	set_max_contacts_reported(4)
-	set_lock_rotation_enabled(true)
-	add_force(gravity_alterer)
 	assert(holder != null)
 
 # Warning: workaround because of https://www.reddit.com/r/godot/comments/vjkaun/reparenting_node_without_removing_it_from_tree/
@@ -57,8 +33,10 @@ func is_reparenting():
 
 func get_main_color() -> Color:
 	return $Effects.col2
+
 func get_main_gradient() -> Gradient:
 	return $Effects.gradient_main.duplicate()
+
 func get_dash_gradient() -> Gradient:
 	return $Effects.gradient_dash.duplicate()
 #func _draw():
@@ -66,25 +44,13 @@ func get_dash_gradient() -> Gradient:
 #	draw_line(Vector2(0.0,0.0), Vector2(0.0,0.0)+50.0*normal_colision, color_colision)
 
 ###########################################################
-func _integrate_forces(state):
-	for i in state.get_contact_count():
-		collision_effect(state.get_contact_collider_object(i), \
-			state.get_contact_collider_velocity_at_position(i), \
-			state.get_contact_local_position(i), \
-			state.get_contact_local_normal(i))
-
-	constant_force = force_alterable.get_value()
-
 func reset_position():
-	disable_physics()
 	if holder != Global.get_current_room():
-		throw(start_position,Vector2.ZERO)
-	else:
-		global_position = start_position
-		enable_physics()
+		throw(Vector2.ZERO,Vector2.ZERO)
+	global_position = start_position
 
 func collision_effect(collider, collider_velocity, collision_point, collision_normal):
-	var speed = (linear_velocity-collider_velocity).dot(collision_normal)
+	var speed = (linear_velocity-collider_velocity).length()
 	if speed >= dust_threshold:
 		$Effects/DustParticle.restart()
 		if speed >= impact_threshold:
@@ -93,28 +59,7 @@ func collision_effect(collider, collider_velocity, collision_point, collision_no
 #			get_parent().add_child(impact)
 #			impact.global_position = collision_point
 #			impact.start()
-
-func add_force(force_alterer : Alterer):
-	force_alterable.add_alterer(force_alterer)
-func remove_force(force_alterer : Alterer):
-	force_alterable.remove_alterer(force_alterer)
-func get_force():
-	force_alterable.get_value()
-
-func disable_physics():
-	physics_enabled = false
-	set_freeze_enabled(true)
-	collision_layer = 0
-	collision_mask = 0
-	set_linear_velocity(Vector2.ZERO)
-	force_alterable.clear_alterers()
-	add_force(gravity_alterer)
-
-func enable_physics():
-	physics_enabled = true
-	collision_layer = collision_layer_save
-	collision_mask = collision_mask_save
-	set_freeze_enabled(false)
+	return true
 
 ###########################################################
 
@@ -174,13 +119,12 @@ func pickup(holder_node):
 func throw(_position, velo):
 	#$TrailHandler.set_node_to_trail(self)
 	#$TrailHandler.start(2.0,0.1)
+	self.enable_physics()
 	var previous_holder = holder
 	change_holder(Global.get_current_room())
-	assert(self.is_freeze_enabled())
 	global_position = _position
 	linear_velocity = velo
 	self.z_index = Global.z_indices["ball_0"]
-	self.enable_physics()
 	on_throw(previous_holder)
 	is_thrown.emit()
 
@@ -245,16 +189,3 @@ func apply_damage(damage : float, duration : float = 0.0):
 		destruction(0.0)
 
 ################################################################################
-
-func power_p(player,delta):
-	if holder == Global.get_current_room() :
-		attract_alterer.set_value(attract_force*(player.global_position - global_position).normalized())
-
-
-func power_jp(player,delta):
-	if holder == Global.get_current_room() :
-		add_force(attract_alterer)
-
-func power_jr(player,delta):
-	if holder == Global.get_current_room() :
-		remove_force(attract_alterer)

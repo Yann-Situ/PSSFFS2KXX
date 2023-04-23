@@ -4,10 +4,8 @@ extends Ball
 var trail_scene = preload("res://src/Effects/Trail.tscn")
 
 func _ready():
-	self.mass = 1.5
-	set_gravity_scale(0.0)
-	self.set_friction(0.0)
-	self.set_bounce(1.0)
+	super()
+	remove_accel(Global.gravity_alterer)
 	#$Sprite2D.set_material(preload("res://assets/shader/material/hologram_shadermaterial.tres"))
 	#$Sprite2D.set_material($Sprite2D.get_material().duplicate())
 
@@ -16,7 +14,6 @@ func power_p(player,delta):
 
 func power_jp(player,delta):
 	if holder != player :
-		throw(global_position, Vector2.ZERO)
 		disable_physics()
 		var tween = self.create_tween()
 		tween.tween_method(self.tween_follow_property.bind(global_position,player),\
@@ -38,6 +35,8 @@ func power_jp(player,delta):
 		# Warning: We're not calling $Sprite2D.add_child(trail_instance) because
 		# the ball can be reparented during the tween of the trail, which
 		# results in canceling the tween. (see https://www.reddit.com/r/godot/comments/vjkaun/reparenting_node_without_removing_it_from_tree/)
+		
+		throw(global_position, Vector2.ZERO)
 		$Animation.play("teleport")
 	else :
 		player.position.y -= 100
