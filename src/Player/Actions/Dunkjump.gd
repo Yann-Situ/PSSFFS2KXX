@@ -36,7 +36,7 @@ func move_jump():
 	P.PlayerEffects.jump_start()
 	if S.dunkjump_basket != null:
 		basket = S.dunkjump_basket
-	
+
 	var q = basket.get_closest_point(P.global_position) - P.global_position
 	S.direction_sprite = 1 if (q.x > 0) else ( -1 if (q.x < 0) else 0)
 	P._zero_velocity_workaround = true

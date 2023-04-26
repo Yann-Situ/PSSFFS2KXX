@@ -261,9 +261,7 @@ func get_input(delta): #delta in s
 ################################################################################
 # For physicbody
 func add_impulse(impulse : Vector2):
-	_zero_velocity_workaround = true
-	S.velocity += invmass * impulse
-	_zero_velocity_workaround = false
+	S.set_velocity_safe(S.velocity + invmass * impulse)
 
 func apply_forces_accel(delta):
 	var force = force_alterable.get_value()

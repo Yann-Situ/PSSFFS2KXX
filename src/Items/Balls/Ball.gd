@@ -53,10 +53,6 @@ func collision_effect(collider, collider_velocity, collision_point, collision_no
 		$Effects/DustParticle.restart()
 		if speed >= impact_threshold:
 			GlobalEffect.make_impact(collision_point, impact_effect)
-#			var impact = impact_particles[impact_effect].instantiate()
-#			get_parent().add_child(impact)
-#			impact.global_position = collision_point
-#			impact.start()
 
 ###########################################################
 

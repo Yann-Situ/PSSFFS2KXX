@@ -42,7 +42,17 @@ func set_collision_shape(s : Shape2D):
 func _ready():
 	var collision_node = CollisionShape2D.new()
 	collision_node.shape = collision_shape
+	
+	# TODO: error here
 	add_child(collision_node)
+	#	E 0:01:47:0254   Explosion.gd:45 @ _ready(): Can't change this state while flushing queries. Use call_deferred() or set_deferred() to change monitoring state instead.
+	#  <Erreur C++>   Condition "area->get_space() && flushing_queries" is true.
+	#  <C++ Source>   servers/physics_2d/godot_physics_server_2d.cpp:355 @ area_set_shape_disabled()
+	#  <Pile des appels>Explosion.gd:45 @ _ready()
+	#                 GlobalEffect.gd:46 @ make_simple_explosion()
+	#                 BallBoum.gd:54 @ boum()
+	#                 BallBoum.gd:19 @ collision_effect()
+	#                 SituBody.gd:63 @ _integrate_forces()
 	collision_layer = 16
 	collision_mask = 1+4+64+128+256
 	if simple_explosion:

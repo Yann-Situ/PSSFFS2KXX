@@ -115,6 +115,11 @@ func set_velocity(v : Vector2):
 		# TODO here is some weird behaviour: velocity is set to (0,0) each frame when the animationTree is activated
 		#push_warning(str(v))
 		pass
+func set_velocity_safe(v : Vector2):
+	player._zero_velocity_workaround = true
+	set_velocity(v)
+	player._zero_velocity_workaround = false
+
 
 func _ready():
 	reset_state()

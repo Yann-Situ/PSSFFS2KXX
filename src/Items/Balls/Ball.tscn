@@ -1,4 +1,4 @@
-[gd_scene load_steps=23 format=3 uid="uid://cxn2m3havcmil"]
+[gd_scene load_steps=22 format=3 uid="uid://cxn2m3havcmil"]
 
 [ext_resource type="Texture2D" uid="uid://dhu7eccs5egsg" path="res://assets/art/ball/ball_selection.png" id="1"]
 [ext_resource type="Script" path="res://src/Items/Balls/Ball.gd" id="2"]
@@ -20,9 +20,25 @@ radius = 6.0
 [sub_resource type="CircleShape2D" id="2"]
 radius = 16.0
 
+[sub_resource type="Animation" id="Animation_4ingn"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(1, 1)]
+}
+
 [sub_resource type="Animation" id="Animation_yhsxj"]
 resource_name = "destruction"
 length = 0.9
+step = 0.025
 tracks/0/type = "method"
 tracks/0/imported = false
 tracks/0/enabled = true
@@ -30,7 +46,7 @@ tracks/0/path = NodePath("Effects/Destruction")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
-"times": PackedFloat32Array(0),
+"times": PackedFloat32Array(0.1),
 "transitions": PackedFloat32Array(1),
 "values": [{
 "args": [],
@@ -44,7 +60,7 @@ tracks/1/path = NodePath("Effects/Destruction:emitting")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
-"times": PackedFloat32Array(0),
+"times": PackedFloat32Array(0.1),
 "transitions": PackedFloat32Array(1),
 "update": 1,
 "values": [true]
@@ -56,10 +72,10 @@ tracks/2/path = NodePath("Sprite2D:modulate")
 tracks/2/interp = 1
 tracks/2/loop_wrap = true
 tracks/2/keys = {
-"times": PackedFloat32Array(0, 0.2),
-"transitions": PackedFloat32Array(1, 1),
+"times": PackedFloat32Array(0, 0.1, 0.3),
+"transitions": PackedFloat32Array(1, 1, 1),
 "update": 0,
-"values": [Color(1, 1, 1, 1), Color(1, 1, 1, 0)]
+"values": [Color(1.5, 1.5, 1.5, 1), Color(1, 1, 1, 1), Color(1, 1, 1, 0)]
 }
 tracks/3/type = "method"
 tracks/3/imported = false
@@ -74,6 +90,18 @@ tracks/3/keys = {
 "args": [],
 "method": &"_queue_free"
 }]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("Sprite2D:scale")
+tracks/4/interp = 2
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0, 0.3),
+"transitions": PackedFloat32Array(2, 1),
+"update": 0,
+"values": [Vector2(1.6, 1.6), Vector2(0, 0)]
 }
 
 [sub_resource type="Animation" id="Animation_jb6dc"]
@@ -146,11 +174,10 @@ tracks/4/keys = {
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_yfq11"]
 _data = {
+"RESET": SubResource("Animation_4ingn"),
 "destruction": SubResource("Animation_yhsxj"),
 "dunk": SubResource("Animation_jb6dc")
 }
-
-[sub_resource type="CompressedTexture2D" id="5"]
 
 [sub_resource type="Curve" id="6"]
 _data = [Vector2(0, 0.0886364), 0.0, 0.215584, 0, 0, Vector2(0.554217, 0.952273), 0.425641, 0.425641, 0, 0, Vector2(1, 1), -0.570101, 0.0, 0, 0]
@@ -170,8 +197,6 @@ resource_local_to_scene = true
 offsets = PackedFloat32Array(0, 0.020202, 0.131313, 0.50505, 0.808081, 1)
 colors = PackedColorArray(1, 0, 0.580392, 0, 1, 1, 1, 0, 1, 1, 1, 1, 0.839844, 0.839844, 0.839844, 1, 0.533333, 0.533333, 0.533333, 0.705882, 0, 0, 0, 0.258824)
 
-[sub_resource type="CompressedTexture2D" id="11"]
-
 [sub_resource type="Curve" id="12"]
 _data = [Vector2(0, 0.784091), 0.0, 3.55714, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
 point_count = 2
@@ -189,6 +214,8 @@ collision_mask = 1030
 input_pickable = true
 physics_material_override = SubResource("PhysicsMaterial_j8ut1")
 gravity_scale = 0.0
+continuous_cd = 2
+max_contacts_reported = 4
 lock_rotation = true
 script = ExtResource("2")
 
@@ -229,19 +256,22 @@ col3 = Color(0.317647, 0.333333, 0.345098, 1)
 
 [node name="Reconstruction" type="CPUParticles2D" parent="Effects"]
 emitting = false
-amount = 24
+amount = 16
 lifetime = 0.85
 one_shot = true
 speed_scale = 1.5
-explosiveness = 0.61
+explosiveness = 0.64
 lifetime_randomness = 0.29
 fract_delta = false
-texture = SubResource("5")
+local_coords = true
+texture = ExtResource("7_fisxc")
 emission_shape = 3
 emission_rect_extents = Vector2(1, 1)
 direction = Vector2(0, 0)
 spread = 180.0
 gravity = Vector2(0, 0)
+scale_amount_min = 0.12
+scale_amount_max = 0.12
 scale_amount_curve = SubResource("6")
 color_ramp = SubResource("7")
 
@@ -283,10 +313,14 @@ explosiveness = 0.7
 randomness = 0.05
 lifetime_randomness = 0.29
 fract_delta = false
-texture = SubResource("11")
+texture = ExtResource("7_fisxc")
 direction = Vector2(0, 0)
 spread = 180.0
 gravity = Vector2(0, -100)
+initial_velocity_min = 16.0
+initial_velocity_max = 32.0
+scale_amount_min = 0.16
+scale_amount_max = 0.16
 scale_amount_curve = SubResource("12")
 color_ramp = SubResource("13")
 

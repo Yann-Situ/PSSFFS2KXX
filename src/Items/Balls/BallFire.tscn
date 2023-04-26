@@ -353,6 +353,7 @@ amount = 10
 light_mask = 0
 z_index = -1
 material = SubResource("7")
+emitting = false
 amount = 40
 lifetime = 0.25
 explosiveness = 0.2

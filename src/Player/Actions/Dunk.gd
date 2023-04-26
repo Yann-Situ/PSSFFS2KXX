@@ -27,9 +27,13 @@ func move(delta):
 
 		pos_tween.kill()
 	pos_tween = get_tree().create_tween()
+	pos_tween.set_parallel(false)
 	pos_tween.tween_property(P, "global_position",\
 		dunk_position,0.32)\
 		.set_trans(Tween.TRANS_LINEAR).set_ease(Tween.EASE_IN_OUT)
+	pos_tween.tween_property(P, "global_position",\
+		dunk_position,0.32)\
+		.set_trans(Tween.TRANS_LINEAR)
 	#pos_tween.start()
 	if S.active_ball != null:
 		S.active_ball.on_dunk(dunking_basket)
@@ -47,7 +51,6 @@ func move_dunk():
 
 func test_print():
 	print("Time : "+str(Time.get_ticks_msec()))
-
 
 func move_hang():
 	print("Hang")

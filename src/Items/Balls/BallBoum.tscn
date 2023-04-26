@@ -232,12 +232,6 @@ physics_material_override = SubResource("PhysicsMaterial_88whb")
 gravity_scale = 0.0
 lock_rotation = true
 script = ExtResource("3")
-damage = 2.0
-speed_threshold = 120.0
-impact_effect = 1
-dust_threshold = 25.0
-impact_threshold = 50.0
-damage_destruction_threshold = 3.0
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 light_mask = 4
