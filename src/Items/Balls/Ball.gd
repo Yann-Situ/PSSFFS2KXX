@@ -108,6 +108,7 @@ func pickup(holder_node):
 	self.z_index = holder_node.z_index+1
 	on_pickup(holder_node)
 	is_picked_up.emit()
+	$Effects/Reconstruction.restart()
 
 func throw(_position, velo):
 	#$TrailHandler.set_node_to_trail(self)

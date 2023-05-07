@@ -1438,7 +1438,7 @@ color_ramp = SubResource("53")
 
 [sub_resource type="CompressedTexture2D" id="55"]
 
-[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_te5r3"]
+[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_5yu3v"]
 resource_local_to_scene = true
 particles_animation = true
 particles_anim_h_frames = 6
@@ -1461,6 +1461,8 @@ light_mask = 4
 z_index = 100
 z_as_relative = false
 collision_mask = 514
+floor_max_angle = 0.886627
+platform_on_leave = 2
 script = ExtResource("1")
 crouch_speed_max = 200.0
 crouch_instant_speed = 50.0
@@ -1726,7 +1728,7 @@ lifetime = 0.65
 explosiveness = 0.9
 
 [node name="GrindParticles" parent="PlayerEffects" instance=ExtResource("27")]
-material = SubResource("CanvasItemMaterial_te5r3")
+material = SubResource("CanvasItemMaterial_5yu3v")
 position = Vector2(0, 16)
 
 [node name="BallHandler" type="Area2D" parent="."]

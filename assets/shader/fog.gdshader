@@ -27,7 +27,7 @@ float rand(vec2 uv) {
 	float frequency = starting_frequency;
 	float output = 0.0;
 	for (int i = 0; i < octaves; i++) {
-		output += texture(noise, uv * frequency).x * amplitude;
+		output += texture(noise, mod(uv,2.5) * frequency).x * amplitude;
 		amplitude /= 2.0;
 		frequency *= 2.0;
 	}

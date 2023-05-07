@@ -84,6 +84,6 @@ lightness_distribution = SubResource("39")
 [resource]
 resource_local_to_scene = true
 script = ExtResource("1")
-color_samplers = Array[Resource]([SubResource("19"), SubResource("23"), SubResource("31"), SubResource("35")])
+color_samplers = [SubResource("19"), SubResource("23"), SubResource("31"), SubResource("35")]
 black = Color(0.215686, 0.0509804, 0.168627, 1)
 white = Color(0.976471, 0.952941, 0.713726, 1)
