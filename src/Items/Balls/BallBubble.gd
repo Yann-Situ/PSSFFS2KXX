@@ -9,6 +9,24 @@ func _ready():
 	#$Sprite2D.set_material(preload("res://assets/shader/material/hologram_shadermaterial.tres"))
 	#$Sprite2D.set_material($Sprite2D.get_material().duplicate())
 
+func make_electric_trail():
+	var trail_instance = trail_scene.instantiate()
+	trail_instance.lifetime = 0.1
+	trail_instance.wildness_amplitude = 250.0
+	trail_instance.wildness_tick = 0.02
+	trail_instance.trail_fade_time = 0.1
+	trail_instance.point_lifetime = 0.25
+	trail_instance.addpoint_tick = 0.005
+	trail_instance.width = 8.0
+	trail_instance.gradient = get_main_gradient()
+	trail_instance.autostart = true
+	trail_instance.node_to_trail = self
+	Global.get_current_room().add_child(trail_instance)
+	# Warning: We're not calling $Sprite2D.add_child(trail_instance) because
+	# the ball can be reparented during the tween of the trail, which
+	# results in canceling the tween. (see https://www.reddit.com/r/godot/comments/vjkaun/reparenting_node_without_removing_it_from_tree/)
+	
+
 func power_p(player,delta):
 	pass
 
@@ -20,21 +38,7 @@ func power_jp(player,delta):
 		0.0, 1.0, 0.16)
 		tween.tween_callback(self._on_tween_completed)
 		# tween.start()
-		var trail_instance = trail_scene.instantiate()
-		trail_instance.lifetime = 0.1
-		trail_instance.wildness_amplitude = 250.0
-		trail_instance.wildness_tick = 0.02
-		trail_instance.trail_fade_time = 0.1
-		trail_instance.point_lifetime = 0.25
-		trail_instance.addpoint_tick = 0.005
-		trail_instance.width = 8.0
-		trail_instance.gradient = get_main_gradient()
-		trail_instance.autostart = true
-		trail_instance.node_to_trail = self
-		Global.get_current_room().add_child(trail_instance)
-		# Warning: We're not calling $Sprite2D.add_child(trail_instance) because
-		# the ball can be reparented during the tween of the trail, which
-		# results in canceling the tween. (see https://www.reddit.com/r/godot/comments/vjkaun/reparenting_node_without_removing_it_from_tree/)
+		make_electric_trail()
 		
 		throw(global_position, Vector2.ZERO)
 		$Animation.play("teleport")
@@ -51,3 +55,7 @@ func _on_tween_completed():
 	if holder == Global.get_current_room() :
 		enable_physics()
 	#position == player.position
+
+func on_dunkdash_start(player: Player):
+	make_electric_trail()
+	make_electric_trail()

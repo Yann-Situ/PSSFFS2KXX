@@ -45,7 +45,7 @@ shape = SubResource("1")
 [node name="Effects" parent="." index="4"]
 col1 = Color(1, 0.745098, 0.517647, 1)
 col2 = Color(0.843137, 0.258824, 0.545098, 1)
-col3 = Color(0.580392, 0.27451, 0, 1)
+col3 = Color(0.686275, 0.0588235, 0.254902, 1)
 
 [node name="Reconstruction" parent="Effects" index="0"]
 color_ramp = SubResource("2")

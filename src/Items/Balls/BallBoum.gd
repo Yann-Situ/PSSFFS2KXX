@@ -49,7 +49,7 @@ func boum(boum_force : float, boum_global_position : Vector2):
 	$BoumParticles.restart()
 	$ShockWaveAnim.restart()
 	Global.camera.screen_shake(0.3,5,global_position)
-	
+
 	var boum_impulse = 1.2*boum_force
 	GlobalEffect.make_simple_explosion(boum_global_position, distance_max, \
 	0.1, 4, [boum_force, 0.0, boum_impulse], damage, 0.1, [self])
@@ -69,6 +69,10 @@ func power_jp(player,delta):
 
 func power_jr(player,delta):
 	pass
+
+func on_dunkdash_start(player: Player):
+	$BoumParticles.global_position = player.global_position
+	$BoumParticles.restart()
 
 func on_destruction(): # call before changing holder, disable_physics and deleting selectors
 	boum(boum_min, self.global_position)

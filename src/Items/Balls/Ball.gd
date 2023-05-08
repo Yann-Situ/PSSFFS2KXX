@@ -176,6 +176,13 @@ func on_dunk(basket : Node = null):
 func on_goal():
 	pass
 
+# call by the dunkdash script
+func on_dunkdash_start(player: Player):
+	pass
+# call by the dunkdash script
+func on_dunkdash_end(player: Player):
+	pass
+
 func on_destruction(): # call before changing holder, disable_physics and deleting selectors
 	pass
 

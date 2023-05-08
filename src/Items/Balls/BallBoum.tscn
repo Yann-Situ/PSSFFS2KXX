@@ -191,7 +191,7 @@ colors = PackedColorArray(1, 0.954956, 0.859375, 0, 0.820312, 0.799805, 0.78186,
 radius = 64.0
 
 [sub_resource type="Curve" id="Curve_x7wi1"]
-_data = [Vector2(0, 0.856818), 0.0, 3.55714, 0, 0, Vector2(1, 0.209091), 0.0, 0.0, 0, 0]
+_data = [Vector2(0, 0.763636), 0.0, 3.55714, 0, 0, Vector2(1, 0.209091), 0.0, 0.0, 0, 0]
 point_count = 2
 
 [sub_resource type="Gradient" id="Gradient_wo3ns"]
@@ -347,7 +347,7 @@ shape = SubResource("CircleShape2D_m8w4v")
 [node name="BoumParticles" type="CPUParticles2D" parent="."]
 position = Vector2(0, -3.8147e-06)
 emitting = false
-amount = 45
+amount = 40
 lifetime = 0.8
 one_shot = true
 explosiveness = 0.8
@@ -355,17 +355,21 @@ randomness = 0.05
 lifetime_randomness = 0.29
 fract_delta = false
 texture = ExtResource("6")
+emission_shape = 1
+emission_sphere_radius = 8.0
 direction = Vector2(0, 0)
 spread = 180.0
 gravity = Vector2(0, 0)
-initial_velocity_min = 110.0
-initial_velocity_max = 200.0
-linear_accel_min = -75.0
-linear_accel_max = -25.0
-damping_min = 50.0
-damping_max = 60.0
-scale_amount_min = 0.12
-scale_amount_max = 0.3
+initial_velocity_min = 120.0
+initial_velocity_max = 180.0
+linear_accel_min = -80.0
+linear_accel_max = -50.0
+radial_accel_min = 20.0
+radial_accel_max = 40.0
+damping_min = 80.0
+damping_max = 100.0
+scale_amount_min = 0.14
+scale_amount_max = 0.24
 scale_amount_curve = SubResource("Curve_x7wi1")
 color_ramp = SubResource("Gradient_wo3ns")
 

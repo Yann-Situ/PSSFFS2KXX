@@ -17,7 +17,7 @@ func move(delta):
 	P.ShootPredictor.clear()
 	S.is_dunkdashing = true
 	S.set_action(S.ActionType.DUNKDASH)
-	
+
 	#P.gravity = Vector2.ZERO
 	P.remove_accel(Global.gravity_alterer)
 
@@ -25,6 +25,7 @@ func move(delta):
 	P.PlayerEffects.jump_start()
 	if S.has_ball:
 		P.PlayerEffects.ghost_start(0.21,0.05, Color.WHITE,S.active_ball.get_dash_gradient())
+		S.active_ball.on_dunkdash_start(P)
 	else:
 		P.PlayerEffects.ghost_start(0.21,0.05, ghost_modulate)
 	P.PlayerEffects.distortion_start("fast_soft",0.75)
@@ -71,6 +72,9 @@ func move_end():
 		if S.direction_p * S.move_direction < 0:
 			S.velocity.x *= 0.5 # again
 	#P.get_node("Sprite2D").modulate = Color.WHITE
+
+	if S.has_ball: # WARNING the ball can change during the dash!
+		S.active_ball.on_dunkdash_end(P)
 
 func correction_angle(x:float): # for a discrete dash angle
 	var l = 2*PI/nb_quadrant

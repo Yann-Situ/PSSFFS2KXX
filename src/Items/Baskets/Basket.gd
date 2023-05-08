@@ -98,6 +98,7 @@ func goal(ball : Ball, score):
 	else :
 		goal_effects(ball, 1)
 	is_goaled.emit()
+	ball.on_goal()
 
 func goal_effects(ball : Ball, force : int = 0):
 	$Effects/LineParticle.amount = force * 16
