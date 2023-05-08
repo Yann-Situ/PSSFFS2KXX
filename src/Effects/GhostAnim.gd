@@ -8,16 +8,16 @@ var duration = 1.0#s
 
 func _ready():
 	var tween = self.create_tween().set_parallel(true)
-	tween.tween_property(self, "modulate:a", final_alpha, 0.5*duration)\
-	.from(initial_alpha)\
+	tween.tween_method(self.set_modulate_a, 0.0, 1.0, 0.5*duration)\
 	.set_delay(0.5*duration)
-	# TODO: modulate is not working with shaders...
 	if use_gradient :
 		assert(gradient != null)
-		tween.tween_method(self.set_modulate_rgb_from_gradient, 0.0, 1.0, 0.5*duration)\
-		.set_delay(0.5*duration)
+		tween.tween_method(self.set_modulate_rgb_from_gradient, 0.0, 1.0, duration)
 	tween.chain().tween_callback(self.queue_free)
 	# tween.start() now starts automatically
 
 func set_modulate_rgb_from_gradient(t : float) -> void:
-	self_modulate = gradient.sample(t)
+	self.material.set_shader_parameter("modulate", gradient.sample(t))
+
+func set_modulate_a(t : float) -> void:
+	self.material.set_shader_parameter("alpha", (1-t)*initial_alpha + t*final_alpha)
