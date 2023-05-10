@@ -17,8 +17,33 @@ Copyright (c) 2023 Yann-Situ
 * level system
 * saving system
 * GUI for menus
-* GUI for in-game
+* HUD
 * story
+
+### Code structure to (re)implement
+* [ ]`Selector` is currently a child of `Player/Actions` and is reparent by code to be a child of `Room`. Maybe it should be a child of the room or the level, and accessed in `SpecialActionHandler` via a NodePath or through signals.
+* [x] Implement Explosion nodes.
+* [ ] Rework Aiming system (better physics + time stop + 2 steps shoot).
+* [ ] Rework Dunkdash target graphism.
+* [x] Implement Pedestrian generator (pnj shader, gradient sampler, ...).
+* [ ] GUI Graphism
+* [ ] On grind, player velocity is only handle by the railline, which does not take into account other forces like wind etc...
+
+### Godot4 migration
+
+List of things to do
+- [ ] physics problem with grind
+- :pushpin: dunk player position
+- :pushpin: hang player position
+- [ ] double dash make the player stuck
+- [ ] state machines have memory now... (we need to restart the state machine when reentering it)
+- :pushpin: S.velocity is set to Vec2(0.0) every frame when animation_tree is active (really weird bug) [currently a temporary solution]
+- :pushpin: ball rework (currently a rigidbody implementation but there are physics annoying bugs https://github.com/godotengine/godot/issues/76610)
+- [x] player_friction and forces using Alterable
+- [ ] catch and ball release
+- [ ] tileset/map rework
+
+Pull request to master when **ball physics** and **player animations** will be correctly handled.
 
 ## Work to do
 * Graphism :
@@ -29,7 +54,7 @@ Copyright (c) 2023 Yann-Situ
    - [ ] GUI graphism such as tag-police
    - :pushpin: other characters/npc
    - [ ] adinkra symbols
-* Moveset improvment :
+* Moveset improvment:
    - [x] add dunk
    - [x] handle crouch
    - [x] add landing anim
@@ -48,7 +73,7 @@ Copyright (c) 2023 Yann-Situ
    - :pushpin: ziplines -> to rework
    - :pushpin: Add enemies and NPC
    - :pushpin: Add one way platforms
-   - :pushpin: pipes -> rework a bit (TODO : change bounding box + handle multiple sides + be careful on exit_throw)
+   - :pushpin: pipes -> rework a bit (TODO: change bounding box + handle multiple sides + be careful on exit_throw)
    - :pushpin: moving platform (tilemap + pathfollow2D?) (Wait4Godot)
    - [x] collectibles (spray?)
 * NPCs
@@ -68,6 +93,7 @@ Copyright (c) 2023 Yann-Situ
    - :pushpin: handle interactions with environment elements
    - :pushpin: Add new powers when selection+active (such as megaBOUM, dash, RollingDestroying...)
    - [ ] improve animation of balls
+   - [ ] add some juice and more effects
    - [ ] squish anim for squish balls
 * Juice :
    - [x] Camera shake on heavy ball, dunks and other style action
@@ -78,19 +104,10 @@ Copyright (c) 2023 Yann-Situ
    - [ ] add musics
    - [ ] handle music variations
 * Add UIs
-   - [ ] Add HUD
+   - :pushpin: Add HUD
    - [ ] Add menus
    - [ ] Add WorldMap and level selection
    - [ ] Add dialogue system
-
-### Code structure to implement / TODO
-* [ ]`Selector` is currently a child of `Player/Actions` and is reparent by code to be a child of `Room`. Maybe it should be a child of the room or the level, and accessed in `SpecialActionHandler` via a NodePath or through signals.
-* [x] Implement Explosion nodes.
-* [ ] Rework Aiming system (better physics + time stop + 2 steps shoot).
-* [ ] Rework Dunkdash target graphism.
-* [x] Implement Pedestrian generator (pnj shader, gradient sampler, ...).
-* [ ] GUI Graphism
-* [ ] On grind, player velocity is only handle by the railline, which does not take into account other forces like wind etc...
 
 ## Issues
 ### Physical movement
@@ -105,7 +122,7 @@ Copyright (c) 2023 Yann-Situ
 * [x] Characters can leave **rail** if Player press **crouch** on it.
     - Implement the `riding` and `hanging` states.
 * [x] **dunking** can result in `S.selected_basket.dunk()` called on `null` instance (basket is not selected anymore)
-* [x] Hard to reproduce (see video) : **dunkjump** on **jumper** can result in `Nan` camera position teleportation. (because to low to mathematically dunkjump => negative value ? division by 0.0 ?)
+* [x] Hard to reproduce (see video): **dunkjump** on **jumper** can result in `Nan` camera position teleportation. (because to low to mathematically dunkjump => negative value ? division by 0.0 ?)
 * [x] High jump when `jump_jp` and `jump_jr` just before landing (because the cancelled mounting only test `jump_jr`). (also on walljumps)
 * [ ] **Dunkjumping** while only moving with floor adherence a bit far from basket results in missing the basket.
 * [ ] **release** ball when **aiming** results in error.
@@ -128,9 +145,9 @@ Copyright (c) 2023 Yann-Situ
 * [x] TileMap hitboxes (bounce on corners of each tile + balls pass through 2 adjacent tiles). **size up the hitboxes smartly**
 * [x] Physic of balls when picked up (stay phisically on the ground...). **complicated** see rigidbody functions and how `integrate_force()` works.
 * [x] **ShockJumping** at frame perfect when crouching on **Jumper** (or when jumping or dunkjumping) results in a huge mega jump sa mère.
-* :pushpin: Problems with physics on **slopes**.
+* :pushpin: Problems with physics on **slopes** [DAMN IT].
 * [ ] Problems when passing from a block just **16 pixel** over the other block (results in tiny teleportation but visible due to camera instant movement).
-* [ ] Jitter when multiple **balls** are above each other. -> reimplement the friction during collision.
+* [ ] Jitter when multiple **balls** are above each other. -> reimplement the friction during collision [TO TEST].
 * [ ] **Ball** located just on a spawner position results in very high velocity when spawning a ball on it.
 * [ ] Wind is not affecting Player when grinding (and hanging).
 
@@ -164,6 +181,7 @@ Copyright (c) 2023 Yann-Situ
 * [ ] There is some jitter animation when passing from a **dunk** state to a **falling** state (by pressing down during dunk).
 * [ ] **Trail** lifetime and point_lifetime not set correctly when trail for **bubble_ball**.
 * [ ] **Player** doesn't stop walking when on floor walls. ([ ] Infinite **walking** animation on 16px block) stairs.
+* [ ] **Mirror** weird effect near the border of the camera some times.
 
 ### Potential Glitches
 * [ ] Pressing **jump** and **dunkdash** just before landing can result in small dunkdash/jump.
@@ -177,10 +195,11 @@ Copyright (c) 2023 Yann-Situ
 * [ ] Player changing **Room2D** while in a **BallWall** results in player not able to pickup ball. (If glitch, we need to make sure portals are away from ballwall).
 
 ### Godot Issues
-* in `Ball.gd` function `change_holder` : issue related to https://github.com/godotengine/godot/issues/14578 and https://github.com/godotengine/godot/issues/34207. See [my workaround](https://www.reddit.com/r/godot/comments/vjkaun/reparenting_node_without_removing_it_from_tree/).
+* in `Ball.gd` function `change_holder`: issue related to https://github.com/godotengine/godot/issues/14578 and https://github.com/godotengine/godot/issues/34207. See [my workaround](https://www.reddit.com/r/godot/comments/vjkaun/reparenting_node_without_removing_it_from_tree/).
 * `Z_as_relative` doesn't work through script... see this [issue](https://github.com/godotengine/godot/issues/45416).
+* Weird bounce and tunneling effect for rigidbodies: https://github.com/godotengine/godot/issues/76610. This is probably the most annoying one, because the workarounds are tedious and hard (recode physics or use tile_baker and hope it works).
 
-### Godot4 migration
+## Memories
 
 `class_name\s*(\w*),` -> `class_name $1 #,`
 `@export\b\s*\((\w*)\)\s*var\s*(\w*)` -> `@export var $2 : $1`
@@ -191,15 +210,3 @@ Copyright (c) 2023 Yann-Situ
 `start\(Callable\((.*?)\)\.bind\((.*?)\)` -> `start($1, $2`
 `start\(Callable\((.*?)\)` -> `start($1`
 `^\s*set\s\=\s*(\w*)\s*\#(.*?\#)*\s*\((\w*),(.*?)\)`
-
-List of things to do
-- physics problem with grind
-- double dash make the player stuck
-- state machines have memory (we need to restart the state machine when reentering it)
-- dunk player position
-- hang player position
-- ball rework
-- player_friction and forces using Alterable
-- catch and ball release
-- background rework
-- tileset/map rework

@@ -1,4 +1,4 @@
-[gd_scene load_steps=113 format=3 uid="uid://djjfl0v3y2pw5"]
+[gd_scene load_steps=114 format=3 uid="uid://djjfl0v3y2pw5"]
 
 [ext_resource type="Script" path="res://src/Player/Player.gd" id="1"]
 [ext_resource type="Texture2D" uid="uid://dcp7p8c6ldxqc" path="res://assets/art/characters/Player.png" id="2"]
@@ -335,6 +335,47 @@ tracks/0/keys = {
 "transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1),
 "update": 1,
 "values": [48, 49, 50, 51, 52, 53, 54, 55]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("../BallHandler/HasBallPosition:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.03, 0.07, 0.09, 0.11, 0.13, 0.15, 0.17),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [Vector2(8, -9), Vector2(7, -5), Vector2(6, 0), Vector2(-6, 4), Vector2(-13, 0), Vector2(-15, -2), Vector2(-15, -1), Vector2(-14, 0)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("../State:is_dunkdashing")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0.18),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+
+[sub_resource type="Animation" id="Animation_v6wwf"]
+resource_name = "dunkdash_2"
+length = 0.36
+step = 0.03
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.03, 0.06, 0.09, 0.12, 0.15, 0.18, 0.21, 0.24, 0.27, 0.3, 0.33),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [258, 259, 260, 261, 262, 263, 264, 265, 266, 267, 54, 55]
 }
 tracks/1/type = "value"
 tracks/1/imported = false
@@ -1327,6 +1368,7 @@ _data = {
 "crouch_idle": SubResource("8"),
 "dunk": SubResource("9"),
 "dunkdash": SubResource("10"),
+"dunkdash_2": SubResource("Animation_v6wwf"),
 "dunkjump": SubResource("11"),
 "dunkjump_halfturn": SubResource("12"),
 "fall": SubResource("13"),
@@ -1378,7 +1420,6 @@ transitions = ["Start", "action", SubResource("AnimationNodeStateMachineTransiti
 graph_offset = Vector2(0, -33.389)
 
 [sub_resource type="AnimationNodeBlendTree" id="39"]
-graph_offset = Vector2(309.796, 30.0591)
 nodes/cancelable/node = SubResource("38")
 nodes/cancelable/position = Vector2(980, 320)
 nodes/output/position = Vector2(1240, 340)
@@ -1438,7 +1479,7 @@ color_ramp = SubResource("53")
 
 [sub_resource type="CompressedTexture2D" id="55"]
 
-[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_5yu3v"]
+[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_my32x"]
 resource_local_to_scene = true
 particles_animation = true
 particles_anim_h_frames = 6
@@ -1728,7 +1769,7 @@ lifetime = 0.65
 explosiveness = 0.9
 
 [node name="GrindParticles" parent="PlayerEffects" instance=ExtResource("27")]
-material = SubResource("CanvasItemMaterial_5yu3v")
+material = SubResource("CanvasItemMaterial_my32x")
 position = Vector2(0, 16)
 
 [node name="BallHandler" type="Area2D" parent="."]

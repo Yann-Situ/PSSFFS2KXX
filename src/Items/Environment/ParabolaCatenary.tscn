@@ -1,34 +1,33 @@
-[gd_scene load_steps=4 format=2]
+[gd_scene load_steps=4 format=3 uid="uid://bdepe4j1x2ie8"]
 
-[ext_resource path="res://src/Items/Environment/ParabolaCatenary.gd" type="Script" id=1]
-[ext_resource path="res://assets/art/environment/zipline.png" type="Texture2D" id=2]
+[ext_resource type="Script" path="res://src/Items/Environment/ParabolaCatenary.gd" id="1"]
+[ext_resource type="Texture2D" uid="uid://bj52wrjij7odv" path="res://assets/art/environment/zipline.png" id="2"]
 
-[sub_resource type="Curve2D" id=1]
+[sub_resource type="Curve2D" id="1"]
 resource_local_to_scene = true
 _data = {
-"points": PackedVector2Array( 0, 0, 0, 0, 264, 120, 0, 0, 0, 0, -120, 16 )
+"points": PackedVector2Array(0, 0, 0, 0, 264, 120, 0, 0, 0, 0, -120, 16)
 }
+point_count = 2
 
 [node name="ParabolaCatenary" type="Path2D"]
-self_modulate = Color( 1, 1, 1, 0.701961 )
-position = Vector2( 296, 8 )
+self_modulate = Color(1, 1, 1, 0.701961)
 z_index = 80
 z_as_relative = false
-curve = SubResource( 1 )
-script = ExtResource( 1 )
-__meta__ = {
-"_edit_group_": true
-}
+position = Vector2(296, 8)
+curve = SubResource("1")
+script = ExtResource("1")
 p0_slope = 3.0
 line_width = 4.0
-line_modulate = Color( 0.627451, 0.627451, 0.627451, 1 )
-line_texture = ExtResource( 2 )
+line_modulate = Color(0.627451, 0.627451, 0.627451, 1)
+line_texture = ExtResource("2")
 
 [node name="Line2D" type="Line2D" parent="."]
-points = PackedVector2Array( -120, 16 )
+modulate = Color(0.627451, 0.627451, 0.627451, 1)
+texture_repeat = 2
+points = PackedVector2Array(-120, 16, -107.2, 53.2355, -94.4, 88.1422, -81.6, 120.72, -68.8, 150.969, -56, 178.889, -43.2, 204.48, -30.4, 227.742, -17.6, 248.676, -4.79999, 267.28, 8.00001, 283.556, 20.8, 297.502, 33.6, 309.12, 46.4, 318.409, 59.2, 325.369, 72, 330, 84.8, 332.302, 97.6, 332.276, 110.4, 329.92, 123.2, 325.236, 136, 318.222, 148.8, 308.88, 161.6, 297.209, 174.4, 283.209, 187.2, 266.88, 200, 248.222, 212.8, 227.235, 225.6, 203.92, 238.4, 178.275, 251.2, 150.302, 264, 120)
 width = 4.0
-default_color = Color( 1, 1, 1, 1 )
-texture = ExtResource( 2 )
+texture = ExtResource("2")
 texture_mode = 1
 joint_mode = 2
 begin_cap_mode = 2

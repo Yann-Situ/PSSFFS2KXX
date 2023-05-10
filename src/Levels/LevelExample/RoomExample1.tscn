@@ -1,4 +1,4 @@
-[gd_scene load_steps=42 format=3 uid="uid://dgjpons7cu2id"]
+[gd_scene load_steps=43 format=3 uid="uid://dgjpons7cu2id"]
 
 [ext_resource type="PackedScene" uid="uid://b5emf4je4tnag" path="res://src/Levels/Room2D.tscn" id="1"]
 [ext_resource type="PackedScene" uid="uid://b45hldwkibtqb" path="res://src/Levels/Portal.tscn" id="2"]
@@ -7,11 +7,11 @@
 [ext_resource type="PackedScene" path="res://src/Items/Interactive/DashTarget.tscn" id="5"]
 [ext_resource type="Shader" path="res://assets/shader/fog.gdshader" id="6"]
 [ext_resource type="Texture2D" uid="uid://boi3pgcflmp6r" path="res://assets/art/environment/chain0.png" id="8"]
-[ext_resource type="PackedScene" path="res://src/Items/Environment/ParabolaCatenary.tscn" id="9"]
+[ext_resource type="PackedScene" uid="uid://bdepe4j1x2ie8" path="res://src/Items/Environment/ParabolaCatenary.tscn" id="9"]
 [ext_resource type="PackedScene" uid="uid://c6cdyqr51vbxh" path="res://src/Items/Interactive/GraffSpray.tscn" id="10"]
 [ext_resource type="PackedScene" path="res://src/Characters/NPC/PedestrianGenerator.tscn" id="11"]
 [ext_resource type="Resource" uid="uid://b5t6nuxuv7s86" path="res://src/Characters/NPC/PaletteSampler1.tres" id="12"]
-[ext_resource type="PackedScene" path="res://src/Map/BallWall.tscn" id="12_0llc8"]
+[ext_resource type="PackedScene" uid="uid://c8wbmpidigot6" path="res://src/Map/BallWall.tscn" id="12_0llc8"]
 [ext_resource type="PackedScene" uid="uid://yco4prlcetlu" path="res://src/Items/Balls/BallBoum.tscn" id="13"]
 [ext_resource type="PackedScene" uid="uid://bola66fqnywdi" path="res://src/Items/Baskets/Basket.tscn" id="13_42q2t"]
 [ext_resource type="PackedScene" uid="uid://ceqtyb2ekket" path="res://src/Items/Dynamics/ForceField.tscn" id="14_o3800"]
@@ -24,6 +24,7 @@
 [ext_resource type="PackedScene" uid="uid://clducx30br87q" path="res://src/Items/Balls/BallRolling.tscn" id="21_wbtoo"]
 [ext_resource type="PackedScene" uid="uid://dalyby7b6ctua" path="res://src/Items/Balls/BallGravity.tscn" id="23_wma3b"]
 [ext_resource type="PackedScene" uid="uid://babjtotux2mv3" path="res://src/Map/MovingPlatform.tscn" id="24_w6usv"]
+[ext_resource type="PackedScene" uid="uid://dfka4lp6t6tym" path="res://src/Effects/Mirror.tscn" id="26_ghqss"]
 
 [sub_resource type="Gradient" id="1"]
 resource_local_to_scene = true
@@ -54,17 +55,50 @@ shader_parameter/velocity = Vector2(0.4, 0)
 shader_parameter/fog_color = Color(0.454902, 0.384314, 0.231373, 0.513726)
 shader_parameter/noise = SubResource("10")
 
-[sub_resource type="Curve2D" id="Curve2D_im5sg"]
+[sub_resource type="Curve2D" id="Curve2D_1jgxe"]
 resource_local_to_scene = true
 _data = {
-"points": PackedVector2Array(0, 0, 0, 0, 256, 120, 0, 0, 0, 0, -120, 16)
+"points": PackedVector2Array(0, 0, 0, 0, 512, -16, 0, 0, 0, 0, -192, 24)
 }
 point_count = 2
 
-[sub_resource type="Curve2D" id="Curve2D_0eajm"]
+[sub_resource type="Curve2D" id="Curve2D_c3ey3"]
 resource_local_to_scene = true
 _data = {
-"points": PackedVector2Array(0, 0, 0, 0, 248, 16, 0, 0, 0, 0, -120, 16)
+"points": PackedVector2Array(0, 0, 0, 0, 584, -56, 0, 0, 0, 0, -120, 16)
+}
+point_count = 2
+
+[sub_resource type="Curve2D" id="Curve2D_cvusm"]
+resource_local_to_scene = true
+_data = {
+"points": PackedVector2Array(0, 0, 0, 0, 264, 288, 0, 0, 0, 0, -240, 16)
+}
+point_count = 2
+
+[sub_resource type="Curve2D" id="Curve2D_03w3q"]
+resource_local_to_scene = true
+_data = {
+"points": PackedVector2Array(0, 0, 0, 0, 264, 288, 0, 0, 0, 0, -240, 16)
+}
+point_count = 2
+
+[sub_resource type="Curve2D" id="Curve2D_8p2p8"]
+resource_local_to_scene = true
+_data = {
+"points": PackedVector2Array(0, 0, 0, 0, 264, 288, 0, 0, 0, 0, -240, 16)
+}
+point_count = 2
+
+[sub_resource type="Curve2D" id="Curve2D_hjlht"]
+_data = {
+"points": PackedVector2Array(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 448, 0)
+}
+point_count = 2
+
+[sub_resource type="Curve2D" id="Curve2D_g7x84"]
+_data = {
+"points": PackedVector2Array(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, -248)
 }
 point_count = 2
 
@@ -157,39 +191,6 @@ _data = {
 [sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_utcpg"]
 distance = 16.0
 
-[sub_resource type="Curve2D" id="Curve2D_b1ruh"]
-resource_local_to_scene = true
-_data = {
-"points": PackedVector2Array(0, 0, 0, 0, 264, 288, 0, 0, 0, 0, -240, 16)
-}
-point_count = 2
-
-[sub_resource type="Curve2D" id="Curve2D_4yq5q"]
-resource_local_to_scene = true
-_data = {
-"points": PackedVector2Array(0, 0, 0, 0, 264, 288, 0, 0, 0, 0, -240, 16)
-}
-point_count = 2
-
-[sub_resource type="Curve2D" id="Curve2D_wt487"]
-resource_local_to_scene = true
-_data = {
-"points": PackedVector2Array(0, 0, 0, 0, 264, 288, 0, 0, 0, 0, -240, 16)
-}
-point_count = 2
-
-[sub_resource type="Curve2D" id="Curve2D_hjlht"]
-_data = {
-"points": PackedVector2Array(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 448, 0)
-}
-point_count = 2
-
-[sub_resource type="Curve2D" id="Curve2D_g7x84"]
-_data = {
-"points": PackedVector2Array(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, -248)
-}
-point_count = 2
-
 [node name="RoomExample1" instance=ExtResource("1")]
 limit_left = -480
 limit_top = -640
@@ -251,20 +252,20 @@ color = Color(0.976471, 0.894118, 0.815686, 1)
 
 [node name="ParabolaCatenary" parent="Map" index="1" instance=ExtResource("9")]
 z_index = 300
-position = Vector2(312, -328)
-curve = SubResource("Curve2D_im5sg")
-p0_slope = 1.7
+position = Vector2(32, -384)
+curve = SubResource("Curve2D_1jgxe")
+p0_slope = 0.597
 line_width = 7.438
 line_modulate = Color(0.329412, 0.329412, 0.329412, 1)
 line_texture = ExtResource("8")
 
 [node name="ParabolaCatenary2" parent="Map" index="2" instance=ExtResource("9")]
 z_index = 300
-position = Vector2(240, -328)
-curve = SubResource("Curve2D_0eajm")
-p0_slope = 1.3
-line_width = 7.438
-line_modulate = Color(0.329412, 0.329412, 0.329412, 1)
+position = Vector2(-40, -384)
+curve = SubResource("Curve2D_c3ey3")
+p0_slope = 0.969
+line_width = 7.0
+line_modulate = Color(0.196078, 0.196078, 0.196078, 1)
 line_texture = ExtResource("8")
 
 [node name="TileMap" parent="Map" index="3"]
@@ -366,11 +367,108 @@ position = Vector2(552, -152)
 [node name="BallWall20" parent="Environment/ballwalls" index="19" instance=ExtResource("12_0llc8")]
 position = Vector2(552, -136)
 
+[node name="Basket" parent="Environment" index="6" instance=ExtResource("13_42q2t")]
+position = Vector2(16, -232)
+
+[node name="Basket2" parent="Environment" index="7" instance=ExtResource("13_42q2t")]
+position = Vector2(1936, -136)
+
+[node name="ForceField" parent="Environment" index="8" instance=ExtResource("14_o3800")]
+position = Vector2(-296, -344)
+base_force = Vector2(8000, -1000)
+amplitude = 200.0
+period = 1.0
+rectangle_extents = Vector2(480, 200)
+
+[node name="ForceField2" parent="Environment" index="9" instance=ExtResource("14_o3800")]
+position = Vector2(416, -448)
+base_force = Vector2(0, -2100)
+amplitude = 500.0
+period = 1.0
+rectangle_extents = Vector2(256, 480)
+
+[node name="ParabolaCatenary" parent="Environment" index="10" instance=ExtResource("9")]
+position = Vector2(1688, -464)
+curve = SubResource("Curve2D_cvusm")
+p0_slope = 1.553
+
+[node name="ParabolaCatenary2" parent="Environment" index="11" instance=ExtResource("9")]
+position = Vector2(1688, -464)
+curve = SubResource("Curve2D_03w3q")
+p0_slope = 1.312
+
+[node name="ParabolaCatenary3" parent="Environment" index="12" instance=ExtResource("9")]
+position = Vector2(1688, -464)
+curve = SubResource("Curve2D_8p2p8")
+p0_slope = 1.473
+line_width = 4.28
+line_texture = ExtResource("8")
+
+[node name="Ball" parent="Environment" index="13" instance=ExtResource("3")]
+position = Vector2(336, -152)
+
+[node name="BallBoum" parent="Environment" index="14" instance=ExtResource("13")]
+position = Vector2(792, -128)
+
+[node name="BallBouncy" parent="Environment" index="15" instance=ExtResource("15_n0460")]
+position = Vector2(1536, -296)
+continuous_cd = 0
+max_contacts_reported = 0
+
+[node name="BallBubble" parent="Environment" index="16" instance=ExtResource("16_kdw4g")]
+position = Vector2(920, -128)
+continuous_cd = 0
+max_contacts_reported = 0
+
+[node name="BallDash" parent="Environment" index="17" instance=ExtResource("17_onfxu")]
+position = Vector2(1456, -152)
+continuous_cd = 0
+max_contacts_reported = 0
+
+[node name="BallFire" parent="Environment" index="18" instance=ExtResource("18_ccy33")]
+position = Vector2(1048, -128)
+
+[node name="BallLight" parent="Environment" index="19" instance=ExtResource("19_7m03s")]
+position = Vector2(1608, -112)
+continuous_cd = 0
+max_contacts_reported = 0
+
+[node name="BallLight2" parent="Environment" index="20" instance=ExtResource("19_7m03s")]
+position = Vector2(1376, -56)
+continuous_cd = 0
+max_contacts_reported = 0
+
+[node name="BallMetal" parent="Environment" index="21" instance=ExtResource("20_prt1f")]
+position = Vector2(1288, -120)
+
+[node name="BallRolling" parent="Environment" index="22" instance=ExtResource("21_wbtoo")]
+position = Vector2(1320, -120)
+continuous_cd = 0
+max_contacts_reported = 0
+
+[node name="BallShock" parent="Environment" index="23" instance=ExtResource("4")]
+position = Vector2(1496, -88)
+continuous_cd = 0
+max_contacts_reported = 0
+
+[node name="BallGravity" parent="Environment" index="24" instance=ExtResource("23_wma3b")]
+position = Vector2(208, -24)
+continuous_cd = 0
+max_contacts_reported = 0
+
+[node name="MovingPlatform" parent="Environment" index="25" instance=ExtResource("24_w6usv")]
+position = Vector2(1472, -64)
+curve = SubResource("Curve2D_hjlht")
+
+[node name="MovingPlatform2" parent="Environment" index="26" instance=ExtResource("24_w6usv")]
+position = Vector2(1336, 64)
+curve = SubResource("Curve2D_g7x84")
+
 [node name="WorldEnvironment" parent="." index="5"]
 environment = SubResource("6")
 
 [node name="PlayerPosition" parent="." index="6"]
-position = Vector2(1048, 0)
+position = Vector2(464, -128)
 
 [node name="PedestrianGenerator" parent="." index="7" instance=ExtResource("11")]
 position = Vector2(-48, -32)
@@ -392,99 +490,30 @@ physics_material_override = SubResource("PhysicsMaterial_2o73n")
 position = Vector2(0, 16)
 shape = SubResource("WorldBoundaryShape2D_utcpg")
 
-[node name="Basket" parent="." index="10" instance=ExtResource("13_42q2t")]
-position = Vector2(16, -232)
+[node name="Mirror" parent="." index="10" instance=ExtResource("26_ghqss")]
+z_index = 200
+z_as_relative = false
+position = Vector2(1296, 42)
+scale = Vector2(1.28125, 1)
+rect = Rect2(-512, -300, 1024, 600)
+extents = Vector2(1024, 600)
+water_albedo = Color(0.427451, 0.764706, 0.847059, 1)
+water_opacity = 0.299
+water_speed = 0.15
+wave_distortion = 0.015
+wave_harmonics = 8
+blur = 0.3
 
-[node name="Basket2" parent="." index="11" instance=ExtResource("13_42q2t")]
-position = Vector2(1936, -136)
-
-[node name="ForceField" parent="." index="12" instance=ExtResource("14_o3800")]
-position = Vector2(-296, -344)
-base_force = Vector2(8000, -1000)
-amplitude = 200.0
-period = 1.0
-rectangle_extents = Vector2(480, 200)
-
-[node name="ForceField2" parent="." index="13" instance=ExtResource("14_o3800")]
-position = Vector2(416, -448)
-base_force = Vector2(0, -2100)
-amplitude = 500.0
-period = 1.0
-rectangle_extents = Vector2(256, 480)
-
-[node name="ParabolaCatenary" parent="." index="14" instance=ExtResource("9")]
-position = Vector2(1688, -464)
-curve = SubResource("Curve2D_b1ruh")
-p0_slope = 1.553
-
-[node name="ParabolaCatenary2" parent="." index="15" instance=ExtResource("9")]
-position = Vector2(1688, -464)
-curve = SubResource("Curve2D_4yq5q")
-p0_slope = 1.312
-
-[node name="ParabolaCatenary3" parent="." index="16" instance=ExtResource("9")]
-position = Vector2(1688, -464)
-curve = SubResource("Curve2D_wt487")
-p0_slope = 1.473
-line_width = 4.28
-line_texture = ExtResource("8")
-
-[node name="Ball" parent="." index="17" instance=ExtResource("3")]
-position = Vector2(336, -152)
-
-[node name="BallBoum" parent="." index="18" instance=ExtResource("13")]
-position = Vector2(792, -128)
-
-[node name="BallBouncy" parent="." index="19" instance=ExtResource("15_n0460")]
-position = Vector2(1536, -296)
-continuous_cd = 0
-max_contacts_reported = 0
-
-[node name="BallBubble" parent="." index="20" instance=ExtResource("16_kdw4g")]
-position = Vector2(920, -128)
-continuous_cd = 0
-max_contacts_reported = 0
-
-[node name="BallDash" parent="." index="21" instance=ExtResource("17_onfxu")]
-position = Vector2(1456, -152)
-continuous_cd = 0
-max_contacts_reported = 0
-
-[node name="BallFire" parent="." index="22" instance=ExtResource("18_ccy33")]
-position = Vector2(1048, -128)
-
-[node name="BallLight" parent="." index="23" instance=ExtResource("19_7m03s")]
-position = Vector2(1608, -112)
-continuous_cd = 0
-max_contacts_reported = 0
-
-[node name="BallLight2" parent="." index="24" instance=ExtResource("19_7m03s")]
-position = Vector2(1376, -56)
-continuous_cd = 0
-max_contacts_reported = 0
-
-[node name="BallMetal" parent="." index="25" instance=ExtResource("20_prt1f")]
-position = Vector2(1288, -120)
-
-[node name="BallRolling" parent="." index="26" instance=ExtResource("21_wbtoo")]
-position = Vector2(1320, -120)
-continuous_cd = 0
-max_contacts_reported = 0
-
-[node name="BallShock" parent="." index="27" instance=ExtResource("4")]
-position = Vector2(1496, -88)
-continuous_cd = 0
-max_contacts_reported = 0
-
-[node name="BallGravity" parent="." index="28" instance=ExtResource("23_wma3b")]
-position = Vector2(208, -24)
-continuous_cd = 0
-max_contacts_reported = 0
-
-[node name="MovingPlatform" parent="." index="29" instance=ExtResource("24_w6usv")]
-position = Vector2(1472, -64)
-curve = SubResource("Curve2D_hjlht")
-
-[node name="MovingPlatform2" parent="." index="30" instance=ExtResource("24_w6usv")]
-position = Vector2(1336, 64)
-curve = SubResource("Curve2D_g7x84")
+[node name="Mirror2" parent="." index="11" instance=ExtResource("26_ghqss")]
+z_index = 180
+z_as_relative = false
+position = Vector2(-160, 1)
+scale = Vector2(4, 1)
+rect = Rect2(-64, -350, 128, 700)
+extents = Vector2(128, 700)
+water_albedo = Color(0.156863, 0.270588, 0.596078, 0.85098)
+water_opacity = -0.5
+water_speed = 0.0
+wave_distortion = 0.0
+wave_harmonics = 0
+blur = 1.5
