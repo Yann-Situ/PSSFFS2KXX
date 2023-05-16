@@ -7,7 +7,7 @@ extends Ball
 @export var distance_max : float = 64
 @export var shock_timer : float = 0.25#s
 
-var distortion_scene = preload("res://src/Effects/Distortion.tscn")
+@export var distortion_resource : DistortionResource
 
 func _ready():
 	super()
@@ -73,9 +73,6 @@ func _on_AnimationPlayer_animation_finished(anim_name):
 		$AnimationPlayer.play("idle")
 
 func shockwave_distortion(distortion_glob_position : Vector2):
-	var distortion = distortion_scene.instantiate()
-	distortion.animation_delay = 0.5#s
-	distortion.z_index = 250
-	distortion.global_position = distortion_glob_position
-	Global.get_current_room().add_child(distortion)
-	distortion.start("fast")
+	distortion_resource.make_instance(distortion_glob_position)
+	#GlobalEffect.make_distortion(distortion_glob_position, 0.5,\
+	#	"fast", Vector2(110,110), 250)

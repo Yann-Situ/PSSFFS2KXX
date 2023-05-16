@@ -190,12 +190,10 @@ func get_input(delta): #delta in s
 
 	# HITBOX:
 	if S.is_crouching or S.is_landing or not S.can_stand:
-		$Collision.shape.set_radius(8.5)
-		$Collision.shape.set_height(31)
+		$Collision.shape.set_size(Vector2(17,31))
 		$Collision.position.y = 16.5
 	else :
-		$Collision.shape.set_radius(8.5)
-		$Collision.shape.set_height(57)
+		$Collision.shape.set_size(Vector2(17,57))
 		$Collision.position.y = 3.5
 
 	# CAMERA:

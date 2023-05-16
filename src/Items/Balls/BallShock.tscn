@@ -1,8 +1,8 @@
-[gd_scene load_steps=23 format=3 uid="uid://27jkgoi43hoq"]
+[gd_scene load_steps=25 format=3 uid="uid://27jkgoi43hoq"]
 
 [ext_resource type="PackedScene" uid="uid://cxn2m3havcmil" path="res://src/Items/Balls/Ball.tscn" id="1"]
 [ext_resource type="Texture2D" uid="uid://p5r1v3wuny5y" path="res://assets/art/ball/ball_shock.png" id="2"]
-[ext_resource type="Texture2D" uid="uid://dbdwtry6gxl6d" path="res://assets/art/environment/TileMap.png" id="3"]
+[ext_resource type="Script" path="res://src/Effects/Resources/DistortionResource.gd" id="3_wuggy"]
 [ext_resource type="Texture2D" uid="uid://fu2767ly07pr" path="res://assets/art/effects/shockwave_0.png" id="4"]
 [ext_resource type="Script" path="res://src/Items/Balls/BallShock.gd" id="5"]
 [ext_resource type="Shader" path="res://assets/shader/contour.gdshader" id="6"]
@@ -10,6 +10,13 @@
 [sub_resource type="PhysicsMaterial" id="PhysicsMaterial_wloox"]
 friction = 0.85
 bounce = 0.2
+
+[sub_resource type="Resource" id="Resource_naugh"]
+script = ExtResource("3_wuggy")
+animation_delay = 0.5
+animation_name = "fast"
+size = Vector2(120, 120)
+z_index = 250
 
 [sub_resource type="ShaderMaterial" id="11"]
 resource_local_to_scene = true
@@ -164,6 +171,9 @@ colors = PackedColorArray(1, 0, 0.580392, 0, 1, 1, 1, 0, 1, 1, 1, 1, 0.839844, 0
 [sub_resource type="CircleShape2D" id="CircleShape2D_gwi7s"]
 radius = 64.0
 
+[sub_resource type="Animation" id="Animation_w87na"]
+length = 0.001
+
 [sub_resource type="Animation" id="5"]
 length = 0.6
 loop_mode = 1
@@ -199,6 +209,7 @@ tracks/0/keys = {
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_lctft"]
 _data = {
+"RESET": SubResource("Animation_w87na"),
 "idle": SubResource("5"),
 "shockwave": SubResource("6")
 }
@@ -235,7 +246,8 @@ shock_jump = 1850.0
 shock_fall = 5000.0
 distance_max = 64.0
 shock_timer = 0.25
-impact_effect = 1
+distortion_resource = SubResource("Resource_naugh")
+impact_effect = 4
 dust_threshold = 35.0
 impact_threshold = 60.0
 
@@ -272,6 +284,7 @@ visible = false
 shape = SubResource("CircleShape2D_gwi7s")
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="." index="6"]
+autoplay = "idle"
 libraries = {
 "": SubResource("AnimationLibrary_lctft")
 }
@@ -287,11 +300,7 @@ process_material = SubResource("10")
 texture = ExtResource("4")
 lifetime = 0.35
 one_shot = true
-
-[node name="Sprite2" type="Sprite2D" parent="." index="9"]
-visible = false
-z_index = -1
-position = Vector2(-8, -64)
-texture = ExtResource("3")
+interpolate = false
+fract_delta = false
 
 [connection signal="animation_finished" from="AnimationPlayer" to="." method="_on_AnimationPlayer_animation_finished"]

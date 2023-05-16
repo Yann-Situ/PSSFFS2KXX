@@ -26,7 +26,6 @@ func move(delta):
 		direction = 1
 	S.direction_sprite = direction
 
-
 	if S.has_ball:
 		P.PlayerEffects.ghost_start(0.8,0.1, Color.WHITE,S.active_ball.get_dash_gradient())
 	else:
@@ -65,3 +64,6 @@ func move_jump():
 	Global.camera.screen_shake(0.2,10)
 func move_end():
 	pass
+
+func stop_time():
+	GlobalEffect.stop_time(0.1)

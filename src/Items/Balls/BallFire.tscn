@@ -245,6 +245,7 @@ physics_material_override = SubResource("PhysicsMaterial_d1r0v")
 gravity_scale = 0.0
 lock_rotation = true
 script = ExtResource("6")
+impact_effect = 6
 metadata/_edit_group_ = true
 
 [node name="Sprite2D" type="Sprite2D" parent="."]

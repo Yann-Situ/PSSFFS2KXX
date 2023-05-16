@@ -2372,36 +2372,38 @@ z_index = -82
 color = Color(0.987793, 0.9375, 1, 1)
 
 [node name="TileMap" type="TileMap" parent="Map"]
+z_as_relative = false
 tile_set = SubResource("TileSet_u4we3")
 format = 2
 layer_0/name = "Solid"
+layer_0/z_index = 150
 layer_1/name = "Background"
 layer_1/enabled = true
 layer_1/modulate = Color(1, 1, 1, 1)
 layer_1/y_sort_enabled = false
 layer_1/y_sort_origin = 0
-layer_1/z_index = -3
+layer_1/z_index = 70
 layer_1/tile_data = PackedInt32Array()
 layer_2/name = "Graffitis"
 layer_2/enabled = true
 layer_2/modulate = Color(1, 1, 1, 1)
 layer_2/y_sort_enabled = false
 layer_2/y_sort_origin = 0
-layer_2/z_index = -2
+layer_2/z_index = 80
 layer_2/tile_data = PackedInt32Array()
 layer_3/name = "Scenery"
 layer_3/enabled = true
 layer_3/modulate = Color(1, 1, 1, 1)
 layer_3/y_sort_enabled = false
 layer_3/y_sort_origin = 0
-layer_3/z_index = -1
+layer_3/z_index = 90
 layer_3/tile_data = PackedInt32Array()
 layer_4/name = "Foreground"
 layer_4/enabled = true
 layer_4/modulate = Color(1, 1, 1, 1)
 layer_4/y_sort_enabled = false
 layer_4/y_sort_origin = 0
-layer_4/z_index = 1
+layer_4/z_index = 160
 layer_4/tile_data = PackedInt32Array()
 
 [node name="Environment" type="Node2D" parent="."]

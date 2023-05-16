@@ -6,9 +6,7 @@ signal is_destroyed
 signal is_picked_up
 signal is_thrown
 
-enum IMPACT_EFFECT {SPIKY, METALLIC}
-
-@export var impact_effect : IMPACT_EFFECT = IMPACT_EFFECT.SPIKY
+@export var impact_effect : GlobalEffect.IMPACT_TYPE = GlobalEffect.IMPACT_TYPE.ZERO
 @export var dust_threshold : float = 100.0#pix/(s kg) (impulse)
 @export var impact_threshold : float = 200.0#
 @export var damage_destruction_threshold : float = 2.0
@@ -52,7 +50,7 @@ func collision_effect(collider, collider_velocity, collision_point, collision_no
 	if speed >= dust_threshold:
 		$Effects/DustParticle.restart()
 		if speed >= impact_threshold:
-			GlobalEffect.make_impact(collision_point, impact_effect)
+			GlobalEffect.make_impact(collision_point, impact_effect, collision_normal)
 
 ###########################################################
 

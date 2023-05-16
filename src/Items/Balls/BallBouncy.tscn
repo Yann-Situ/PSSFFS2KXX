@@ -33,6 +33,7 @@ colors = PackedColorArray(1, 0, 0.580392, 0, 1, 1, 1, 0, 1, 1, 1, 1, 0.839844, 0
 mass = 0.7
 physics_material_override = SubResource("PhysicsMaterial_ucddd")
 script = ExtResource("2")
+impact_effect = 5
 
 [node name="Sprite2D" parent="." index="0"]
 modulate = Color(1.5, 1.5, 1.5, 1)

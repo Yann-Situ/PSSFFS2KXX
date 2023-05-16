@@ -1,17 +1,17 @@
-[gd_scene load_steps=7 format=3 uid="uid://cfm38odq6p746"]
+[gd_scene load_steps=7 format=3 uid="uid://bprm53dx8o8n4"]
 
-[ext_resource type="Texture2D" uid="uid://bmd73377gex3a" path="res://assets/art/effects/impact_1.png" id="1"]
-[ext_resource type="Script" path="res://src/Effects/OneShotParticle.gd" id="2"]
+[ext_resource type="Texture2D" uid="uid://b3ptvum46u88q" path="res://assets/art/effects/impact/impact_bounce.png" id="1_0gyc5"]
+[ext_resource type="Script" path="res://src/Effects/OneShotParticle.gd" id="2_00ocl"]
 
 [sub_resource type="CanvasItemMaterial" id="1"]
 particles_animation = true
-particles_anim_h_frames = 5
+particles_anim_h_frames = 6
 particles_anim_v_frames = 1
 particles_anim_loop = true
 
 [sub_resource type="Gradient" id="Gradient_yvnj2"]
-offsets = PackedFloat32Array(0, 0.365385, 1)
-colors = PackedColorArray(1, 1, 1, 1, 0.976471, 0.976471, 0.976471, 1, 0.87451, 0.87451, 0.87451, 0)
+offsets = PackedFloat32Array(0, 0.588235, 1)
+colors = PackedColorArray(1, 1, 1, 1, 0.929412, 0.929412, 0.929412, 1, 0.87451, 0.87451, 0.87451, 0)
 
 [sub_resource type="GradientTexture1D" id="GradientTexture1D_g4w3a"]
 gradient = SubResource("Gradient_yvnj2")
@@ -25,14 +25,15 @@ color_ramp = SubResource("GradientTexture1D_g4w3a")
 anim_speed_min = 1.0
 anim_speed_max = 1.0
 
-[node name="ImpactParticle1" type="GPUParticles2D"]
+[node name="ImpactParticles" type="GPUParticles2D"]
 z_index = 110
 z_as_relative = false
 material = SubResource("1")
 emitting = false
 amount = 1
 process_material = SubResource("4")
-texture = ExtResource("1")
+texture = ExtResource("1_0gyc5")
 lifetime = 0.35
 one_shot = true
-script = ExtResource("2")
+script = ExtResource("2_00ocl")
+offset = Vector2(0, -18)

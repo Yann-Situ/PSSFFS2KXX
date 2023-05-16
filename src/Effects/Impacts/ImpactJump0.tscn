@@ -1,12 +1,12 @@
-[gd_scene load_steps=7 format=3 uid="uid://ccumhjla47fuk"]
+[gd_scene load_steps=7 format=3 uid="uid://kictoc8utrs4"]
 
-[ext_resource type="Texture2D" uid="uid://baikgm8nq4xli" path="res://assets/art/effects/jumpcloud1.png" id="1"]
+[ext_resource type="Texture2D" uid="uid://u5aw80n860pa" path="res://assets/art/effects/jumpcloud.png" id="1"]
 [ext_resource type="Script" path="res://src/Effects/OneShotParticle.gd" id="2"]
 
 [sub_resource type="CanvasItemMaterial" id="1"]
 resource_local_to_scene = true
 particles_animation = true
-particles_anim_h_frames = 6
+particles_anim_h_frames = 4
 particles_anim_v_frames = 1
 particles_anim_loop = true
 
@@ -24,7 +24,7 @@ color_ramp = SubResource("3")
 anim_speed_min = 1.0
 anim_speed_max = 1.0
 
-[node name="JumpParticles1" type="GPUParticles2D"]
+[node name="ImpactParticles" type="GPUParticles2D"]
 z_index = 110
 material = SubResource("1")
 emitting = false
@@ -35,3 +35,4 @@ lifetime = 0.35
 one_shot = true
 visibility_rect = Rect2(-50, -50, 100, 100)
 script = ExtResource("2")
+offset = Vector2(0, -33)

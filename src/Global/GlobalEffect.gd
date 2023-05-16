@@ -1,27 +1,49 @@
 extends Node
 
 var distortion_scene = preload("res://src/Effects/Distortion.tscn")
-var impact_scenes = [preload("res://src/Effects/ImpactParticle1.tscn"),
-	preload("res://src/Effects/ImpactParticle0.tscn")]
+enum IMPACT_TYPE {ZERO, JUMP0, JUMP1, SPIKES, SPARKS, BOUNCE, CIRCLE}
+var impact_scenes = [\
+	preload("res://src/Effects/Impacts/Impact0.tscn"),\
+	preload("res://src/Effects/Impacts/ImpactJump0.tscn"),\
+	preload("res://src/Effects/Impacts/ImpactJump1.tscn"),\
+	preload("res://src/Effects/Impacts/ImpactSpikes.tscn"),\
+	preload("res://src/Effects/Impacts/ImpactSparks.tscn"),\
+	preload("res://src/Effects/Impacts/ImpactBounce.tscn"),\
+	preload("res://src/Effects/Impacts/ImpactCircles.tscn")
+	]
+
+var tween_pause : Tween
+
+func set_pause(b: bool):
+	get_tree().paused = b
+	#Engine.time_scale = time_scale
+
+func stop_time(duration : float):
+	if tween_pause:
+		tween_pause.kill()
+	tween_pause = self.create_tween().set_pause_mode(Tween.TWEEN_PAUSE_PROCESS)
+	tween_pause.tween_callback(self.set_pause.bind(true))
+	tween_pause.tween_interval(duration)
+	tween_pause.tween_callback(self.set_pause.bind(false))
 
 func make_distortion(global_position : Vector2, animation_delay : float = 0.75,\
-animation_name : String = "subtle"):
+animation_name : String = "subtle", size : Vector2 = Vector2(128,128),\
+_z_index : int = Global.z_indices["foreground_2"]):
 	var distortion = distortion_scene.instantiate()
 	Global.get_current_room().add_child(distortion)
 	distortion.global_position = global_position
-	distortion.z_index = Global.z_indices["foreground_2"]
+	distortion.z_index = _z_index
 	distortion.animation_delay = animation_delay
+	distortion.size = size
 	distortion.start(animation_name)
 
-func make_impact(global_position : Vector2, effect_index : int = 0):
-	if effect_index < 0:
-		effect_index = 0
-	elif effect_index >= impact_scenes.size():
-		effect_index = impact_scenes.size()-1
-	var impact = impact_scenes[effect_index].instantiate()
+func make_impact(global_position : Vector2, impact_type : IMPACT_TYPE = IMPACT_TYPE.ZERO, normal : Vector2 = Vector2.UP):
+	assert(int(impact_type) >= 0)
+	assert(int(impact_type) < impact_scenes.size())
+	var impact = impact_scenes[impact_type].instantiate()
 	Global.get_current_room().add_child(impact)
 	impact.global_position = global_position
-	impact.start()
+	impact.start(normal)
 
 func make_simple_explosion(global_position : Vector2, radius : float,
 duration : float = 0.5, explosion_steps = 3,

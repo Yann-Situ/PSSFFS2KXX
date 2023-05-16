@@ -207,7 +207,7 @@ physics_material_override = SubResource("PhysicsMaterial_gegxw")
 gravity_scale = 0.0
 lock_rotation = true
 script = ExtResource("2")
-impact_effect = 1
+impact_effect = 4
 dust_threshold = 10.0
 impact_threshold = 20.0
 

@@ -38,7 +38,6 @@ func power_jp(player,delta):
 		0.0, 1.0, 0.16)
 		tween.tween_callback(self._on_tween_completed)
 		# tween.start()
-		make_electric_trail()
 		
 		throw(global_position, Vector2.ZERO)
 		$Animation.play("teleport")
@@ -55,7 +54,9 @@ func _on_tween_completed():
 	if holder == Global.get_current_room() :
 		enable_physics()
 	#position == player.position
-
+	
+func on_throw(previous_holder : Node):
+	make_electric_trail()
 func on_dunkdash_start(player: Player):
 	make_electric_trail()
 	make_electric_trail()

@@ -1,6 +1,12 @@
 extends BackBufferCopy
 
 @export var animation_delay : float = 1.0#s
+@export var size : Vector2 = Vector2(128,128) : set = set_size#s
+
+func set_size(v : Vector2):
+	size = v
+	$Shader.texture.width = size.x
+	$Shader.texture.height = size.y
 
 # Called when the node enters the scene tree for the first time.
 func _ready():

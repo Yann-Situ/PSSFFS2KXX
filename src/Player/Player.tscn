@@ -48,9 +48,8 @@
 [ext_resource type="AnimationNodeStateMachine" uid="uid://dcviqtnkvq3ry" path="res://src/Player/AnimationTreeHandler/Action.tres" id="45"]
 [ext_resource type="AnimationNodeBlendTree" uid="uid://cmsxpc5f28w5c" path="res://src/Player/AnimationTreeHandler/Stance.tres" id="46"]
 
-[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_a26b7"]
-radius = 8.5
-height = 57.0
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_0vsxb"]
+size = Vector2(8.5, 57)
 
 [sub_resource type="CircleShape2D" id="2"]
 resource_local_to_scene = true
@@ -453,6 +452,20 @@ tracks/3/keys = {
 "transitions": PackedFloat32Array(1),
 "update": 1,
 "values": [false]
+}
+tracks/4/type = "method"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("../Actions/Dunkjump")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0.056),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [],
+"method": &"stop_time"
+}]
 }
 
 [sub_resource type="Animation" id="12"]
@@ -1420,6 +1433,7 @@ transitions = ["Start", "action", SubResource("AnimationNodeStateMachineTransiti
 graph_offset = Vector2(0, -33.389)
 
 [sub_resource type="AnimationNodeBlendTree" id="39"]
+graph_offset = Vector2(-76.1234, 97.094)
 nodes/cancelable/node = SubResource("38")
 nodes/cancelable/position = Vector2(980, 320)
 nodes/output/position = Vector2(1240, 340)
@@ -1479,7 +1493,7 @@ color_ramp = SubResource("53")
 
 [sub_resource type="CompressedTexture2D" id="55"]
 
-[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_my32x"]
+[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_o5px7"]
 resource_local_to_scene = true
 particles_animation = true
 particles_anim_h_frames = 6
@@ -1524,7 +1538,7 @@ is_jumping = true
 
 [node name="Collision" type="CollisionShape2D" parent="."]
 position = Vector2(0, 3.5)
-shape = SubResource("CapsuleShape2D_a26b7")
+shape = SubResource("RectangleShape2D_0vsxb")
 
 [node name="Actions" type="Node2D" parent="."]
 
@@ -1769,7 +1783,7 @@ lifetime = 0.65
 explosiveness = 0.9
 
 [node name="GrindParticles" parent="PlayerEffects" instance=ExtResource("27")]
-material = SubResource("CanvasItemMaterial_my32x")
+material = SubResource("CanvasItemMaterial_o5px7")
 position = Vector2(0, 16)
 
 [node name="BallHandler" type="Area2D" parent="."]

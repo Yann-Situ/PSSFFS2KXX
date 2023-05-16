@@ -8,15 +8,16 @@
 resource_local_to_scene = true
 shader = ExtResource("3")
 shader_parameter/center = Vector2(0.5, 0.5)
-shader_parameter/force = 0.000342882
-shader_parameter/size = 0.00728863
-shader_parameter/thickness = 0.00243386
+shader_parameter/force = 0.0
+shader_parameter/size = 0.5
+shader_parameter/thickness = 0.0
 
 [sub_resource type="Gradient" id="2"]
 
 [sub_resource type="GradientTexture2D" id="3"]
 gradient = SubResource("2")
-width = 100
+width = 128
+height = 128
 
 [sub_resource type="Animation" id="4"]
 resource_name = "fast"
@@ -271,7 +272,6 @@ script = ExtResource("1")
 
 [node name="Shader" type="Sprite2D" parent="."]
 material = SubResource("1")
-scale = Vector2(1.28, 2)
 texture = SubResource("3")
 
 [node name="Sprite2" type="Sprite2D" parent="."]

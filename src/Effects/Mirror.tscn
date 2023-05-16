@@ -17,19 +17,20 @@ shader_parameter/water_speed = 0.05
 shader_parameter/wave_distortion = 0.01
 shader_parameter/wave_harmonics = 5
 shader_parameter/water_texture_on = false
-shader_parameter/texture_height = 64.0
+shader_parameter/texture_height = 128.0
 shader_parameter/blur = 0.5
 shader_parameter/noise_texture = SubResource("NoiseTexture2D_d3jb3")
 
 [node name="Mirror" type="BackBufferCopy"]
 editor_description = "WARNING: the user can modify the transform.x of the mirror, but to modify the transform.y without scaling the mirror effect, the user nee to use the 'extents.y' variable. "
 copy_mode = 2
+rect = Rect2(-64, -64, 128, 128)
 script = ExtResource("1_qwf2l")
 
 [node name="ColorRect" type="ColorRect" parent="."]
 material = SubResource("ShaderMaterial_0w2m7")
-offset_left = -65.0
-offset_top = -77.0
-offset_right = 66.0
-offset_bottom = 78.0
+offset_left = -64.0
+offset_top = -64.0
+offset_right = 64.0
+offset_bottom = 64.0
 mouse_filter = 2

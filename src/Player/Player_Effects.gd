@@ -5,7 +5,7 @@ extends Node2D
 
 var ghost_anim = preload("res://src/Effects/GhostAnim.tscn")
 var distortion_scene = preload("res://src/Effects/Distortion.tscn")
-var jump_particles1 = preload("res://src/Effects/JumpParticles1.tscn")
+#var jump_particles1 = preload("res://src/Effects/JumpParticles1.tscn")
 
 var ghost_sprite
 
@@ -18,10 +18,12 @@ func process_effects():
 	pass
 
 func jump_start():
-	var jump = jump_particles1.instantiate()
-	get_parent().add_child(jump)
-	jump.global_position = Player.global_position + Player.foot_vector + Vector2(0,-9)
-	jump.start()
+	GlobalEffect.make_impact(Player.global_position + Player.foot_vector, \
+		GlobalEffect.IMPACT_TYPE.JUMP1, Vector2.UP)
+#	var jump = jump_particles1.instantiate()
+#	get_parent().add_child(jump)
+#	jump.global_position = Player.global_position + Player.foot_vector + Vector2(0,-9)
+#	jump.start()
 
 func dust_start():
 	$DustParticle.restart()
