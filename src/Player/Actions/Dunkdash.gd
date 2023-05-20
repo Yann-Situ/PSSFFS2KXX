@@ -1,6 +1,6 @@
 extends Action
 
-@export var up_distance_to_basket = 0#px
+#@export var up_distance_to_basket = 0#px
 @export var can_go_delay = 0.2#s
 @export var ghost_modulate : Color# (Color, RGBA)
 

@@ -1531,6 +1531,8 @@ walk_accel = 210.0
 jump_speed = -382.0
 fall_speed_max = 700.0
 landing_velocity_thresh = 310.0
+dunkjump_speed = -510.0
+dunkdash_speed = 700.0
 
 [node name="State" parent="." instance=ExtResource("5")]
 visible = false
