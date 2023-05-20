@@ -1,110 +1,111 @@
-[gd_scene load_steps=11 format=2]
+[gd_scene load_steps=12 format=3 uid="uid://bcnnkalot4kb0"]
 
-[ext_resource path="res://assets/art/environment/environment-interactive.png" type="Texture2D" id=1]
-[ext_resource path="res://src/Items/Dynamics/Jumper.gd" type="Script" id=2]
-[ext_resource path="res://src/Effects/LineParticle.tscn" type="PackedScene" id=3]
+[ext_resource type="Texture2D" uid="uid://bcddludfh8obw" path="res://assets/art/environment/environment-interactive.png" id="1"]
+[ext_resource type="Script" path="res://src/Items/Dynamics/Jumper.gd" id="2"]
+[ext_resource type="PackedScene" path="res://src/Effects/LineParticle.tscn" id="3"]
 
-[sub_resource type="CanvasItemMaterial" id=7]
+[sub_resource type="CanvasItemMaterial" id="7"]
 particles_animation = true
 particles_anim_h_frames = 32
 particles_anim_v_frames = 1
 particles_anim_loop = true
 
-[sub_resource type="ParticleProcessMaterial" id=8]
+[sub_resource type="ParticleProcessMaterial" id="8"]
 lifetime_randomness = 0.33
 emission_shape = 2
-emission_box_extents = Vector3( 12, 1, 1 )
-flag_disable_z = true
-direction = Vector3( 0, 1, 0 )
+emission_sphere_radius = 1.0
+direction = Vector3(0, 1, 0)
 spread = 180.0
-gravity = Vector3( 0, -100, 0 )
-orbit_velocity = 0.0
-orbit_velocity_random = 0.0
-damping = 43.64
-color = Color( 1, 1, 1, 0.839216 )
-anim_speed = 1.0
+gravity = Vector3(0, -100, 0)
+color = Color(1, 1, 1, 0.839216)
 
-[sub_resource type="CompressedTexture2D" id=9]
-load_path = "res://.import/line_particule.png-a121e21732928f808962c84ee5009984.stex"
+[sub_resource type="CompressedTexture2D" id="9"]
 
-[sub_resource type="RectangleShape2D" id=10]
-size = Vector2( 8, 4 )
+[sub_resource type="ConvexPolygonShape2D" id="ConvexPolygonShape2D_1gw0x"]
+points = PackedVector2Array(-8, -4, 8, -4, 16, 4, -16, 4)
 
-[sub_resource type="RectangleShape2D" id=11]
-size = Vector2( 16, 8 )
+[sub_resource type="RectangleShape2D" id="11"]
+size = Vector2(32, 16)
 
-[sub_resource type="Animation" id=12]
+[sub_resource type="Animation" id="12"]
 length = 0.001
 tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
 tracks/0/path = NodePath("Sprite2D:frame")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
-tracks/0/imported = false
-tracks/0/enabled = true
 tracks/0/keys = {
-"times": PackedFloat32Array( 0 ),
-"transitions": PackedFloat32Array( 1 ),
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
 "update": 0,
-"values": [ 0 ]
+"values": [0]
 }
 
-[sub_resource type="Animation" id=13]
+[sub_resource type="Animation" id="13"]
 resource_name = "jump"
 length = 0.7
 tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
 tracks/0/path = NodePath("Sprite2D:frame")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
-tracks/0/imported = false
-tracks/0/enabled = true
 tracks/0/keys = {
-"times": PackedFloat32Array( 0, 0.02, 0.2, 0.3, 0.4, 0.5, 0.6 ),
-"transitions": PackedFloat32Array( 1, 1, 1, 1, 1, 1, 1 ),
+"times": PackedFloat32Array(0, 0.02, 0.2, 0.3, 0.4, 0.5, 0.6),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1),
 "update": 1,
-"values": [ 0, 1, 1, 2, 3, 4, 0 ]
+"values": [0, 1, 1, 2, 3, 4, 0]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_a0svt"]
+_data = {
+"RESET": SubResource("12"),
+"jump": SubResource("13")
 }
 
 [node name="Jumper" type="Node2D"]
 z_index = 160
 z_as_relative = false
-script = ExtResource( 2 )
+script = ExtResource("2")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 z_index = 150
 z_as_relative = false
-texture = ExtResource( 1 )
+texture = ExtResource("1")
 hframes = 5
 region_enabled = true
-region_rect = Rect2( 192, 64, 160, 32 )
+region_rect = Rect2(192, 64, 160, 32)
 
-[node name="LineParticle" parent="Sprite2D" instance=ExtResource( 3 )]
-material = SubResource( 7 )
+[node name="LineParticle" parent="Sprite2D" instance=ExtResource("3")]
 z_index = -1
+material = SubResource("7")
 emitting = false
 amount = 5
+process_material = SubResource("8")
+texture = SubResource("9")
 speed_scale = 1.6
-process_material = SubResource( 8 )
-texture = SubResource( 9 )
 
 [node name="Area2D" type="Area2D" parent="."]
 collision_layer = 8
 collision_mask = 5
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
-modulate = Color( 0, 0.576471, 1, 1 )
-position = Vector2( 0, -4 )
-shape = SubResource( 10 )
+modulate = Color(0, 0.576471, 1, 1)
+position = Vector2(0, -4)
+shape = SubResource("ConvexPolygonShape2D_1gw0x")
 
 [node name="StaticBody2D" type="StaticBody2D" parent="."]
 collision_layer = 2
 collision_mask = 135
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D"]
-position = Vector2( 0, 8 )
-shape = SubResource( 11 )
+position = Vector2(0, 8)
+shape = SubResource("11")
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
-anims/RESET = SubResource( 12 )
-anims/jump = SubResource( 13 )
+libraries = {
+"": SubResource("AnimationLibrary_a0svt")
+}
 
 [connection signal="body_entered" from="Area2D" to="." method="_on_Area2D_body_entered"]

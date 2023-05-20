@@ -193,6 +193,7 @@ Pull request to master when **ball physics** and **player animations** will be c
 * [ ] At the connection between a **rail** and a solid block, if the character is falling such that they will wallslide on the block if there wasn't a rail, and is falling fast enough, the character will normally grind but with 0 initial speed.
     - At the connection between a **rail** and stairs, if the character is falling such that they will go on the slope if there wasn't a rail, and is falling fast enough, the character will normally grind but with 0 speed in the direction down the stairs.
 * [ ] Player changing **Room2D** while in a **BallWall** results in player not able to pickup ball. (If glitch, we need to make sure portals are away from ballwall).
+* [ ] Balls can perform too big jumps at the junction of multiple **Jumpers**. This is due to `apply_impulse` not changing immediately the velocity value of a RigidBody2D. This implies applying two times the jump_impulse, which is designed to compensate the original velocity and apply the jump_velocity.
 
 ### Godot Issues
 * in `Ball.gd` function `change_holder`: issue related to https://github.com/godotengine/godot/issues/14578 and https://github.com/godotengine/godot/issues/34207. See [my workaround](https://www.reddit.com/r/godot/comments/vjkaun/reparenting_node_without_removing_it_from_tree/).

@@ -117,7 +117,7 @@ func select_ball(ball : Ball): # called by ball.select(P)
 func deselect_ball(ball : Ball): # called by ball.deselect(P)
 	assert(S.selected_ball != null)
 	if S.power_p:
-		S.selected_ball.power_jr(self,0.0)
+		S.selected_ball.power_jr(P,0.0)
 	S.selected_ball = null
 	#TEMPORARY CONTROL NODE
 	var ui = P.get_node("UI/MarginContainer/HBoxContainer/MarginContainer/TextureRect/RichTextLabel")
