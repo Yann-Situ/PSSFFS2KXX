@@ -38,7 +38,7 @@ List of things to do
 - [ ] double dash make the player stuck
 - [ ] state machines have memory now... (we need to restart the state machine when reentering it)
 - :pushpin: S.velocity is set to Vec2(0.0) every frame when animation_tree is active (really weird bug) [currently a temporary solution]
-- :pushpin: ball rework (currently a rigidbody implementation but there are physics annoying bugs https://github.com/godotengine/godot/issues/76610)
+- [x] ball rework (currently a rigidbody implementation but there are physics annoying bugs https://github.com/godotengine/godot/issues/76610) (Solved using [GodotTilemapBaker](https://github.com/popcar2/GodotTilemapBaker/tree/main))
 - [x] player_friction and forces using Alterable
 - [ ] catch and ball release
 - [ ] tileset/map rework

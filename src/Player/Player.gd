@@ -45,6 +45,7 @@ var _zero_velocity_workaround = false
 @export var dunkdash_speed : float = 600.0 # pix/s
 @export var dunkdash_dist2_max : float = 180*180.0 # pix^2
 @export var throw_impulse : float = 600.0 # kg.pix/s
+@export var time_scale : float = 1.0 # kg.pix/s
 
 
 ################################################################################
@@ -294,6 +295,7 @@ func remove_speed(speed_alterer : Alterer):
 
 func _physics_process(delta):
 	#print("0: "+str(S.velocity)) # always (0.0,0.0) for some reason...
+	delta *= time_scale
 	_zero_velocity_workaround = true
 
 	get_input(delta)

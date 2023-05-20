@@ -42,10 +42,12 @@ func power_jp(player,delta):
 		throw(global_position, Vector2.ZERO)
 		$Animation.play("teleport")
 	else :
-		player.position.y -= 100
+		#player.position.y -= 100
+		player.time_scale = 0.5
 
 func power_jr(player,delta):
 	pass
+	player.time_scale = 1.0
 
 func tween_follow_property(t : float, src_pos : Vector2, trg : Node2D) -> void:
 	self.global_position = src_pos.lerp(trg.global_position,t)

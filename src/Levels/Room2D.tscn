@@ -1,4 +1,4 @@
-[gd_scene load_steps=21 format=3 uid="uid://b5emf4je4tnag"]
+[gd_scene load_steps=22 format=3 uid="uid://b5emf4je4tnag"]
 
 [ext_resource type="PackedScene" uid="uid://cjbsx2kbm5qhk" path="res://src/Player/PlayerPosition.tscn" id="1"]
 [ext_resource type="Script" path="res://src/Levels/RoomAnimations.gd" id="3"]
@@ -10,6 +10,7 @@
 [ext_resource type="Texture2D" uid="uid://bb754ianhph1u" path="res://assets/art/background/pixelBackground6.png" id="8"]
 [ext_resource type="Texture2D" uid="uid://cymujkg2l23lw" path="res://assets/art/tileset/tileset6.png" id="8_vm2wo"]
 [ext_resource type="Texture2D" uid="uid://6npg3kvsss21" path="res://assets/art/tileset/tileset7.png" id="9_w3tnb"]
+[ext_resource type="Script" path="res://src/Map/TilemapCollisionBaker.gd" id="10_kq0sn"]
 [ext_resource type="Script" path="res://src/Levels/Room2D.gd" id="15"]
 
 [sub_resource type="Gradient" id="1"]
@@ -2231,7 +2232,7 @@ texture_region_size = Vector2i(32, 32)
 
 [sub_resource type="TileSet" id="TileSet_u4we3"]
 tile_size = Vector2i(32, 32)
-physics_layer_0/collision_layer = 2
+physics_layer_0/collision_layer = 0
 physics_layer_0/collision_mask = 0
 terrain_set_0/mode = 0
 terrain_set_0/terrain_0/name = "ForeBrick"
@@ -2405,6 +2406,13 @@ layer_4/y_sort_enabled = false
 layer_4/y_sort_origin = 0
 layer_4/z_index = 160
 layer_4/tile_data = PackedInt32Array()
+
+[node name="TileMapBody" type="StaticBody2D" parent="Map"]
+modulate = Color(1, 0.752941, 0.803922, 1)
+collision_layer = 2
+collision_mask = 0
+script = ExtResource("10_kq0sn")
+tilemap_nodepath = NodePath("../TileMap")
 
 [node name="Environment" type="Node2D" parent="."]
 

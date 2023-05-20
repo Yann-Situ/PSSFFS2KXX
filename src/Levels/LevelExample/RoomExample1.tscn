@@ -1,4 +1,4 @@
-[gd_scene load_steps=43 format=3 uid="uid://dgjpons7cu2id"]
+[gd_scene load_steps=55 format=3 uid="uid://dgjpons7cu2id"]
 
 [ext_resource type="PackedScene" uid="uid://b5emf4je4tnag" path="res://src/Levels/Room2D.tscn" id="1"]
 [ext_resource type="PackedScene" uid="uid://b45hldwkibtqb" path="res://src/Levels/Portal.tscn" id="2"]
@@ -55,35 +55,77 @@ shader_parameter/velocity = Vector2(0.4, 0)
 shader_parameter/fog_color = Color(0.454902, 0.384314, 0.231373, 0.513726)
 shader_parameter/noise = SubResource("10")
 
-[sub_resource type="Curve2D" id="Curve2D_6j04w"]
+[sub_resource type="Curve2D" id="Curve2D_ail7i"]
 resource_local_to_scene = true
 _data = {
 "points": PackedVector2Array(0, 0, 0, 0, 512, -16, 0, 0, 0, 0, -192, 24)
 }
 point_count = 2
 
-[sub_resource type="Curve2D" id="Curve2D_b83y3"]
+[sub_resource type="Curve2D" id="Curve2D_mni42"]
 resource_local_to_scene = true
 _data = {
 "points": PackedVector2Array(0, 0, 0, 0, 584, -80, 0, 0, 0, 0, -120, 16)
 }
 point_count = 2
 
-[sub_resource type="Curve2D" id="Curve2D_xfnqf"]
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_xybge"]
+size = Vector2(64, 448)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_wy7pa"]
+size = Vector2(32, 96)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_w8c6v"]
+size = Vector2(128, 64)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_g38wr"]
+size = Vector2(160, 96)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_qea4i"]
+size = Vector2(64, 32)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_nybtd"]
+size = Vector2(1152, 32)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_4p07a"]
+size = Vector2(32, 64)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_f53uq"]
+size = Vector2(256, 32)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_cn35x"]
+size = Vector2(192, 32)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_pcqp5"]
+size = Vector2(224, 32)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_iptqp"]
+size = Vector2(256, 32)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_rtgjd"]
+size = Vector2(2528, 320)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_3f4eh"]
+size = Vector2(1504, 64)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_b3kul"]
+size = Vector2(96, 480)
+
+[sub_resource type="Curve2D" id="Curve2D_s0e01"]
 resource_local_to_scene = true
 _data = {
 "points": PackedVector2Array(0, 0, 0, 0, 264, 288, 0, 0, 0, 0, -240, 16)
 }
 point_count = 2
 
-[sub_resource type="Curve2D" id="Curve2D_xvd5b"]
+[sub_resource type="Curve2D" id="Curve2D_66buc"]
 resource_local_to_scene = true
 _data = {
 "points": PackedVector2Array(0, 0, 0, 0, 264, 288, 0, 0, 0, 0, -240, 16)
 }
 point_count = 2
 
-[sub_resource type="Curve2D" id="Curve2D_0nq3m"]
+[sub_resource type="Curve2D" id="Curve2D_m031s"]
 resource_local_to_scene = true
 _data = {
 "points": PackedVector2Array(0, 0, 0, 0, 264, 288, 0, 0, 0, 0, -240, 16)
@@ -186,11 +228,6 @@ _data = {
 "calm": SubResource("9")
 }
 
-[sub_resource type="PhysicsMaterial" id="PhysicsMaterial_2o73n"]
-
-[sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_utcpg"]
-distance = 16.0
-
 [node name="RoomExample1" instance=ExtResource("1")]
 limit_left = -480
 limit_top = -640
@@ -248,12 +285,12 @@ mouse_filter = 2
 
 [node name="CanvasModulate" parent="Map" index="0"]
 visible = true
-color = Color(0.278431, 0.184314, 0.0313726, 1)
+color = Color(1, 0.843137, 0.67451, 1)
 
 [node name="ParabolaCatenary" parent="Map" index="1" instance=ExtResource("9")]
 z_index = 300
 position = Vector2(32, -384)
-curve = SubResource("Curve2D_6j04w")
+curve = SubResource("Curve2D_ail7i")
 p0_slope = 0.597
 line_width = 7.438
 line_modulate = Color(0.329412, 0.329412, 0.329412, 1)
@@ -262,7 +299,7 @@ line_texture = ExtResource("8")
 [node name="ParabolaCatenary2" parent="Map" index="2" instance=ExtResource("9")]
 z_index = 300
 position = Vector2(-40, -384)
-curve = SubResource("Curve2D_b83y3")
+curve = SubResource("Curve2D_mni42")
 p0_slope = 0.969
 line_width = 7.0
 line_modulate = Color(0.196078, 0.196078, 0.196078, 1)
@@ -273,6 +310,62 @@ layer_0/tile_data = PackedInt32Array(-65533, 4, 3, -131069, 4, 2, -196605, 19661
 layer_1/tile_data = PackedInt32Array(-10, 720898, 2, -65546, 524290, 1, -131082, 524290, 0, -65545, 655362, 2, -131081, 655362, 0, -131080, 524290, 3, -131079, 655362, 0, -65543, 655362, 2, -65544, 524290, 0, -8, 524290, 2, -7, 655362, 3, -131078, 524290, 3, -131077, 655362, 0, -65541, 655362, 2, -65542, 524290, 0, -6, 524290, 2, -5, 655362, 3, -4, 524290, 2, -65540, 720898, 1, -131076, 524290, 0, -131075, 655362, 0, -65539, 720898, 1, -3, 655362, 2, -11, 720901, 3, -65547, 720901, 1, -131083, 720901, 1, -196619, 720901, 1, -262155, 720901, 1, -327691, 720901, 1, -393227, 720901, 1, -458763, 720901, 1, -524299, 393221, 2, -589835, 589829, 1, -655371, 393221, 1, -720907, 720901, 1, -786443, 720901, 1, -851979, 393221, 0, -12, 655365, 3, -65548, 589829, 1, -131084, 589829, 1, -196620, 589829, 1, -262156, 589829, 1, -327692, 589829, 1, -393228, 589829, 1, -458764, 589829, 1, -524300, 589829, 1, -589836, 589829, 1, -655372, 589829, 1, -720908, 589829, 1, -786444, 589829, 1, -851980, 589829, 0, -13, 524293, 3, -65549, 524293, 2, -131085, 524293, 2, -196621, 524293, 2, -262157, 524293, 2, -327693, 524293, 2, -393229, 524293, 2, -458765, 524293, 2, -524301, 524293, 2, -589837, 524293, 2, -655373, 524293, 2, -720909, 524293, 2, -786445, 524293, 2, -851981, 524293, 0, -851974, 131077, 0, -851975, 131077, 1, -851976, 131077, 0, -851977, 131077, 1, -851978, 131077, 0, -786441, 5, 2, -720905, 5, 2, -786439, 5, 2, -720903, 5, 2, -524293, 720901, 3, -589829, 720901, 1, -655365, 458757, 1, -720901, 5, 2, -786437, 5, 2, -851973, 196613, 1, -524294, 655365, 3, -589830, 589829, 1, -655366, 589829, 0, -524295, 655365, 3, -589831, 589829, 1, -655367, 655365, 0, -524296, 655365, 3, -589832, 589829, 1, -655368, 589829, 0, -524297, 655365, 3, -589833, 589829, 1, -655369, 655365, 0, -524298, 655365, 3, -589834, 589829, 1, -655370, 589829, 0)
 layer_4/modulate = Color(0.8, 0.8, 0.8, 1)
 layer_4/tile_data = PackedInt32Array(-65528, 655362, 2, -131064, 655362, 1, -196600, 655362, 0, -65529, 589826, 2, -131065, 720898, 3, -196601, 589826, 0, -65530, 524290, 2, -131066, 524290, 1, -196602, 524290, 0, -65531, 655362, 2, -131067, 655362, 1, -196603, 655362, 0, -65532, 524290, 2, -131068, 524290, 1, -196604, 524290, 0, -65526, 655362, 2, -131062, 655362, 1, -196598, 655362, 0, -65527, 524290, 2, -131063, 524290, 1, -196599, 524290, 0)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Map/TileMapBody" index="0"]
+position = Vector2(-448, -224)
+shape = SubResource("RectangleShape2D_xybge")
+
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="Map/TileMapBody" index="1"]
+position = Vector2(-304, -144)
+shape = SubResource("RectangleShape2D_wy7pa")
+
+[node name="CollisionShape2D3" type="CollisionShape2D" parent="Map/TileMapBody" index="2"]
+position = Vector2(-256, -224)
+shape = SubResource("RectangleShape2D_w8c6v")
+
+[node name="CollisionShape2D4" type="CollisionShape2D" parent="Map/TileMapBody" index="3"]
+position = Vector2(-240, -304)
+shape = SubResource("RectangleShape2D_g38wr")
+
+[node name="CollisionShape2D5" type="CollisionShape2D" parent="Map/TileMapBody" index="4"]
+position = Vector2(96, -80)
+shape = SubResource("RectangleShape2D_qea4i")
+
+[node name="CollisionShape2D6" type="CollisionShape2D" parent="Map/TileMapBody" index="5"]
+position = Vector2(96, 16)
+shape = SubResource("RectangleShape2D_nybtd")
+
+[node name="CollisionShape2D7" type="CollisionShape2D" parent="Map/TileMapBody" index="6"]
+position = Vector2(112, -32)
+shape = SubResource("RectangleShape2D_4p07a")
+
+[node name="CollisionShape2D8" type="CollisionShape2D" parent="Map/TileMapBody" index="7"]
+position = Vector2(224, -112)
+shape = SubResource("RectangleShape2D_f53uq")
+
+[node name="CollisionShape2D9" type="CollisionShape2D" parent="Map/TileMapBody" index="8"]
+position = Vector2(480, -80)
+shape = SubResource("RectangleShape2D_cn35x")
+
+[node name="CollisionShape2D10" type="CollisionShape2D" parent="Map/TileMapBody" index="9"]
+position = Vector2(496, -48)
+shape = SubResource("RectangleShape2D_pcqp5")
+
+[node name="CollisionShape2D11" type="CollisionShape2D" parent="Map/TileMapBody" index="10"]
+position = Vector2(512, -16)
+shape = SubResource("RectangleShape2D_iptqp")
+
+[node name="CollisionShape2D12" type="CollisionShape2D" parent="Map/TileMapBody" index="11"]
+position = Vector2(784, 192)
+shape = SubResource("RectangleShape2D_rtgjd")
+
+[node name="CollisionShape2D13" type="CollisionShape2D" parent="Map/TileMapBody" index="12"]
+position = Vector2(1296, -480)
+shape = SubResource("RectangleShape2D_3f4eh")
+
+[node name="CollisionShape2D14" type="CollisionShape2D" parent="Map/TileMapBody" index="13"]
+position = Vector2(2000, -208)
+shape = SubResource("RectangleShape2D_b3kul")
 
 [node name="DashTarget2" parent="Environment/Dynamics" index="0" instance=ExtResource("5")]
 position = Vector2(16, -32)
@@ -391,17 +484,17 @@ rectangle_extents = Vector2(256, 480)
 
 [node name="ParabolaCatenary" parent="Environment" index="10" instance=ExtResource("9")]
 position = Vector2(1688, -464)
-curve = SubResource("Curve2D_xfnqf")
+curve = SubResource("Curve2D_s0e01")
 p0_slope = 1.553
 
 [node name="ParabolaCatenary2" parent="Environment" index="11" instance=ExtResource("9")]
 position = Vector2(1688, -464)
-curve = SubResource("Curve2D_xvd5b")
+curve = SubResource("Curve2D_66buc")
 p0_slope = 1.312
 
 [node name="ParabolaCatenary3" parent="Environment" index="12" instance=ExtResource("9")]
 position = Vector2(1688, -464)
-curve = SubResource("Curve2D_0nq3m")
+curve = SubResource("Curve2D_m031s")
 p0_slope = 1.473
 line_width = 4.28
 line_texture = ExtResource("8")
@@ -477,17 +570,7 @@ libraries = {
 "": SubResource("AnimationLibrary_m5lmj")
 }
 
-[node name="Floor" type="StaticBody2D" parent="." index="9"]
-position = Vector2(0, 64)
-collision_layer = 2
-collision_mask = 0
-physics_material_override = SubResource("PhysicsMaterial_2o73n")
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Floor" index="0"]
-position = Vector2(0, 16)
-shape = SubResource("WorldBoundaryShape2D_utcpg")
-
-[node name="Mirror" parent="." index="10" instance=ExtResource("26_ghqss")]
+[node name="Mirror" parent="." index="9" instance=ExtResource("26_ghqss")]
 z_index = 200
 z_as_relative = false
 position = Vector2(1296, 42)
@@ -502,7 +585,7 @@ wave_harmonics = 8
 blur = 0.3
 metadata/_edit_lock_ = true
 
-[node name="Mirror2" parent="." index="11" instance=ExtResource("26_ghqss")]
+[node name="Mirror2" parent="." index="10" instance=ExtResource("26_ghqss")]
 z_index = 180
 z_as_relative = false
 position = Vector2(-160, 1)
@@ -517,5 +600,5 @@ wave_harmonics = 0
 blur = 1.5
 metadata/_edit_lock_ = true
 
-[node name="BallShock" parent="." index="12" instance=ExtResource("4")]
+[node name="BallShock" parent="." index="11" instance=ExtResource("4")]
 position = Vector2(1136, 24)
