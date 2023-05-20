@@ -55,35 +55,35 @@ shader_parameter/velocity = Vector2(0.4, 0)
 shader_parameter/fog_color = Color(0.454902, 0.384314, 0.231373, 0.513726)
 shader_parameter/noise = SubResource("10")
 
-[sub_resource type="Curve2D" id="Curve2D_nkwau"]
+[sub_resource type="Curve2D" id="Curve2D_6j04w"]
 resource_local_to_scene = true
 _data = {
 "points": PackedVector2Array(0, 0, 0, 0, 512, -16, 0, 0, 0, 0, -192, 24)
 }
 point_count = 2
 
-[sub_resource type="Curve2D" id="Curve2D_isqky"]
+[sub_resource type="Curve2D" id="Curve2D_b83y3"]
 resource_local_to_scene = true
 _data = {
 "points": PackedVector2Array(0, 0, 0, 0, 584, -80, 0, 0, 0, 0, -120, 16)
 }
 point_count = 2
 
-[sub_resource type="Curve2D" id="Curve2D_0xuvk"]
+[sub_resource type="Curve2D" id="Curve2D_xfnqf"]
 resource_local_to_scene = true
 _data = {
 "points": PackedVector2Array(0, 0, 0, 0, 264, 288, 0, 0, 0, 0, -240, 16)
 }
 point_count = 2
 
-[sub_resource type="Curve2D" id="Curve2D_hi2n4"]
+[sub_resource type="Curve2D" id="Curve2D_xvd5b"]
 resource_local_to_scene = true
 _data = {
 "points": PackedVector2Array(0, 0, 0, 0, 264, 288, 0, 0, 0, 0, -240, 16)
 }
 point_count = 2
 
-[sub_resource type="Curve2D" id="Curve2D_2sn2n"]
+[sub_resource type="Curve2D" id="Curve2D_0nq3m"]
 resource_local_to_scene = true
 _data = {
 "points": PackedVector2Array(0, 0, 0, 0, 264, 288, 0, 0, 0, 0, -240, 16)
@@ -248,12 +248,12 @@ mouse_filter = 2
 
 [node name="CanvasModulate" parent="Map" index="0"]
 visible = true
-color = Color(0.976471, 0.894118, 0.815686, 1)
+color = Color(0.278431, 0.184314, 0.0313726, 1)
 
 [node name="ParabolaCatenary" parent="Map" index="1" instance=ExtResource("9")]
 z_index = 300
 position = Vector2(32, -384)
-curve = SubResource("Curve2D_nkwau")
+curve = SubResource("Curve2D_6j04w")
 p0_slope = 0.597
 line_width = 7.438
 line_modulate = Color(0.329412, 0.329412, 0.329412, 1)
@@ -262,7 +262,7 @@ line_texture = ExtResource("8")
 [node name="ParabolaCatenary2" parent="Map" index="2" instance=ExtResource("9")]
 z_index = 300
 position = Vector2(-40, -384)
-curve = SubResource("Curve2D_isqky")
+curve = SubResource("Curve2D_b83y3")
 p0_slope = 0.969
 line_width = 7.0
 line_modulate = Color(0.196078, 0.196078, 0.196078, 1)
@@ -391,17 +391,17 @@ rectangle_extents = Vector2(256, 480)
 
 [node name="ParabolaCatenary" parent="Environment" index="10" instance=ExtResource("9")]
 position = Vector2(1688, -464)
-curve = SubResource("Curve2D_0xuvk")
+curve = SubResource("Curve2D_xfnqf")
 p0_slope = 1.553
 
 [node name="ParabolaCatenary2" parent="Environment" index="11" instance=ExtResource("9")]
 position = Vector2(1688, -464)
-curve = SubResource("Curve2D_hi2n4")
+curve = SubResource("Curve2D_xvd5b")
 p0_slope = 1.312
 
 [node name="ParabolaCatenary3" parent="Environment" index="12" instance=ExtResource("9")]
 position = Vector2(1688, -464)
-curve = SubResource("Curve2D_2sn2n")
+curve = SubResource("Curve2D_0nq3m")
 p0_slope = 1.473
 line_width = 4.28
 line_texture = ExtResource("8")
@@ -515,6 +515,7 @@ water_speed = 0.0
 wave_distortion = 0.0
 wave_harmonics = 0
 blur = 1.5
+metadata/_edit_lock_ = true
 
 [node name="BallShock" parent="." index="12" instance=ExtResource("4")]
 position = Vector2(1136, 24)

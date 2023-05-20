@@ -248,8 +248,8 @@ distance_max = 64.0
 shock_timer = 0.25
 distortion_resource = SubResource("Resource_naugh")
 impact_effect = 4
-dust_threshold = 35.0
-impact_threshold = 60.0
+dust_threshold = 15.0
+impact_threshold = 35.0
 
 [node name="Sprite2D" parent="." index="0"]
 material = SubResource("11")

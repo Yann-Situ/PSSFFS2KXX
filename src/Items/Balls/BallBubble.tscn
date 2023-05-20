@@ -211,6 +211,8 @@ mass = 2.0
 physics_material_override = SubResource("PhysicsMaterial_ihk3h")
 script = ExtResource("2")
 impact_effect = 3
+dust_threshold = 80.0
+impact_threshold = 150.0
 
 [node name="Sprite2D" parent="." index="0"]
 self_modulate = Color(1, 1.2, 1.2, 1)

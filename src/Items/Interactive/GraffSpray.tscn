@@ -159,6 +159,18 @@ tracks/4/keys = {
 "update": 0,
 "values": [Vector2(1, 1), Vector2(1.35, 1.35), Vector2(1, 1), Vector2(1e-05, 1e-05)]
 }
+tracks/5/type = "value"
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/path = NodePath("Sprite2D/LightSmall:energy")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(4, 1.27456),
+"update": 0,
+"values": [1.08, 0.0]
+}
 
 [sub_resource type="Animation" id="3"]
 resource_name = "idle"
@@ -228,20 +240,19 @@ color_ramp = SubResource("Gradient_ggvhg")
 light_mask = 4
 z_index = 1
 material = SubResource("1")
-position = Vector2(0, -1.98384)
 texture = ExtResource("1")
 hframes = 4
 vframes = 2
-frame = 7
 
 [node name="LightSmall" type="PointLight2D" parent="Sprite2D"]
 z_as_relative = false
-position = Vector2(0, -4.96296)
-scale = Vector2(1.11855, 1.11855)
+position = Vector2(0, -4)
+scale = Vector2(1.5, 1.5)
 color = Color(0.902353, 0.952549, 0.958824, 1)
 energy = 1.08
+blend_mode = 2
 range_z_max = 160
-range_item_cull_mask = 3
+range_item_cull_mask = 7
 texture = ExtResource("4")
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]

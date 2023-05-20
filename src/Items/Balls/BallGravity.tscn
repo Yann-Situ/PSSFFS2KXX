@@ -26,6 +26,8 @@ colors = PackedColorArray(1, 0, 0.580392, 0, 1, 1, 1, 0, 1, 1, 1, 1, 0.839844, 0
 
 [node name="BallGravity" instance=ExtResource("1_ysam6")]
 script = ExtResource("2_ju1rt")
+dust_threshold = 50.0
+impact_threshold = 100.0
 
 [node name="Sprite2D" parent="." index="0"]
 modulate = Color(0.360784, 1, 1, 1)

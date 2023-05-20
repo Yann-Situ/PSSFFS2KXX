@@ -30,6 +30,7 @@ func set_blur(v: float):
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
+	visible = true
 	update_rectangle()
 
 func set_extents(r : Vector2):
