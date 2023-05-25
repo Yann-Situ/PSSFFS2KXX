@@ -20,8 +20,8 @@ Copyright (c) 2023 Yann-Situ
 * HUD
 * story
 
-### Code structure to (re)implement
-* [ ]`Selector` is currently a child of `Player/Actions` and is reparent by code to be a child of `Room`. Maybe it should be a child of the room or the level, and accessed in `SpecialActionHandler` via a NodePath or through signals.
+### Code structure to (re)implementq
+* [ ] `Selector` is currently a child of `Player/Actions` and is reparent by code to be a child of `Room`. Maybe it should be a child of the room or the level, and accessed in `SpecialActionHandler` via a NodePath or through signals.
 * [x] Implement Explosion nodes.
 * [ ] Rework Aiming system (better physics + time stop + 2 steps shoot).
 * [ ] Rework Dunkdash target graphism.
@@ -125,31 +125,34 @@ Pull request to master when **ball physics** and **player animations** will be c
 * [x] Hard to reproduce (see video): **dunkjump** on **jumper** can result in `Nan` camera position teleportation. (because to low to mathematically dunkjump => negative value ? division by 0.0 ?)
 * [x] High jump when `jump_jp` and `jump_jr` just before landing (because the cancelled mounting only test `jump_jr`). (also on walljumps)
 * [ ] **Dunkjumping** while only moving with floor adherence a bit far from basket results in missing the basket.
+* [ ] **Dunkjumping** while only moving with floor adherence a bit far from basket results in missing the basket.
 * [ ] **release** ball when **aiming** results in error.
-* [ ] It is possible to **dunk** through walls. It can result in dunkjump particles (+ghost) emmiting (dont know why).
+* [ ] It is possible to **dunk** through walls. It can result in dunkjump particles (+ghost) emmiting (dont know why). [TODO TEST]
 * [ ] **one-way platform** make player crouch due to raycast mecanik. This implies weird camera movement.
 * [ ] **one-way platform** make player unable to do small jumps.
 * [ ] Pressing **dunkdash** at a precise moment during **dunk** animation results in **dunkdashing** on place.
 * [ ] Pressing **jump** at a precise moment during **dunk** animation results in ungrabing the basket without any jump.
 * [ ] **Walljump** by pressing jump before touching wall can result in jump that can't be mount-cancelled (by releasing jump button).
 * [ ] **Sliding** is not canceled if the button down is released. This results in interesting yet annoying moonwalks and weird behaviours.
+* [ ] **BulletTime** (pause scene) can eat input, currently resulting in dunking after a dunkjump even if the dunk button is not pressed.
 
 ### Dynamic items
 * [ ] **Zipline** drop inside collision places results in stucked player.
 * [ ] Get out from **zipline** just after passing over a **Jumper** results in sliding (like on ice) because **can_go_timer** was changed.
-* [ ] (?) Stuck colliding on a **rail** can result in building speed. [need tests]
+* [ ] (?) Stuck colliding on a **rail** can result in building speed. [TODO TEST]
 * [ ] Entering **Pipe** at perfect frame when disabling the **Pipe** can result in a disabled ball floating in the air. -> don't stop the tween to enter the pipe when disabling the pipe. [Hard to reproduce, it happened once]
 
 
 ### Misc physics
 * [x] TileMap hitboxes (bounce on corners of each tile + balls pass through 2 adjacent tiles). **size up the hitboxes smartly**
-* [x] Physic of balls when picked up (stay phisically on the ground...). **complicated** see rigidbody functions and how `integrate_force()` works.
+* [x] Physic of balls when picked up (stay physically on the ground...). **complicated** see rigidbody functions and how `integrate_force()` works.
 * [x] **ShockJumping** at frame perfect when crouching on **Jumper** (or when jumping or dunkjumping) results in a huge mega jump sa mère.
 * :pushpin: Problems with physics on **slopes** [DAMN IT].
 * [ ] Problems when passing from a block just **16 pixel** over the other block (results in tiny teleportation but visible due to camera instant movement).
-* [ ] Jitter when multiple **balls** are above each other. -> reimplement the friction during collision [TO TEST].
-* [ ] **Ball** located just on a spawner position results in very high velocity when spawning a ball on it.
+* [ ] Jitter when multiple **balls** are above each other (with rigidbodies, physicbodies and situbodies). [TODO TEST].
+* [ ] **Ball** located just on a spawner position results in very high velocity when spawning a ball on it (hard to reproduce).
 * [ ] Wind is not affecting Player when grinding (and hanging).
+* :pushpin: annoying tunneling and tile junction bounce problems. See this [issue](https://github.com/godotengine/godot/issues/76610). Partially resolved using [TilemapBaker](https://github.com/popcar2/GodotTilemapBaker). Still some problems at the junction between custom blocks (box, jumpers, ...).
 
 ### Other
 * [x] Spawner rotation position is weird.
@@ -161,7 +164,7 @@ Pull request to master when **ball physics** and **player animations** will be c
 * [x] If multiple explosion breaks the same bloc, it can spawn copies.
 * [x] Lag if too much balls : make a spawner limit and link the dispawn of a ball to the spawner to increase the spawn count.
 * [x] I need to adapt the boum delay: i.e apply_impulse instantly on colliding object and a bit after on far objects. need a method call_after_a_delay(apply_impulse) -> see Explosion node implementation
-* :pushpin: Need to implement Tilemap interactive objects rotation and flips. (Wait4Godot)
+* :pushpin: Need to implement Tilemap interactive objects rotation and flips. [TODO Wait4Godot]
 * [ ] On **baskets**, a ball that bounces on the ring can do multiple goals.
 * [ ] Releasing ball and changing room can result in the player not able to catch another ball.
 
@@ -174,7 +177,7 @@ Pull request to master when **ball physics** and **player animations** will be c
 * [x] **Bubble/Zap ball teleportation** trailhandler can act very weirdly if used quickly repeatly.
 * [x] **Player** catching ball while inside **BallWall** results in stuck player. [Maybe disable the player catch area while inside ballwall?]
 * [x] The `shoot_previewer` shows a trajectory slightly above the real one.
-* [ ] **Effects** **Particles** that are displayed outside the window are displayed after when they reenter the window.
+* [ ] **Effects** **Particles** that are displayed outside the window are displayed after when they re-enter the camera.
 * [ ] **shooting** just before **landing** results in `floor_shoot` just after `aim_shoot` animation
 * [ ] There is some jitter animation when passing from a **dunkjump** state to a **grind** state.
 * [ ] There is some jitter animation when passing from a **dunk** state to a **hang** state.
@@ -184,11 +187,11 @@ Pull request to master when **ball physics** and **player animations** will be c
 * [ ] **Mirror** weird effect near the border of the camera some times.
 
 ### Potential Glitches
-* [ ] Pressing **jump** and **dunkdash** just before landing can result in small dunkdash/jump.
 * [ ] **Jumping** (from ground) just before entering a **rail** can result in a boost grind.
+* [ ] Pressing **jump** and **dunkdash** just before landing can result in small dunkdash/jump.
 * [ ] **Dunkdashing** just before entering a **rail** can result in a dash boost grind.
-* [ ] **Dunkjump** through a **one way platform** resets the dash.
 * [ ] Up-**Dunkdash** just after a **Jump** or a **ShockJump** results in high **Dunkdash**.
+* [ ] **Dunkjump** through a **one way platform** resets the dash.
 * [ ] **Dunkjump** with pressing jump_button while pre-dunkjumping can result in high or low dunkjump.
 * [ ] At the connection between a **rail** and a solid block, if the character is falling such that they will wallslide on the block if there wasn't a rail, and is falling fast enough, the character will normally grind but with 0 initial speed.
     - At the connection between a **rail** and stairs, if the character is falling such that they will go on the slope if there wasn't a rail, and is falling fast enough, the character will normally grind but with 0 speed in the direction down the stairs.
