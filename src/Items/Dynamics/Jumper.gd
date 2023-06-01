@@ -19,16 +19,7 @@ func _ready():
 
 func _on_Area2D_body_entered(body):
 	if body.is_in_group("situbodies"):
-		# first delete the normal velocity of the body
-		var velocity_change = Vector2.ZERO
-		velocity_change -= body.linear_velocity.dot(jump_direction)*jump_direction
-		# then apply the jump impulse
-		velocity_change += jump_velocity*jump_direction
-		body.add_impulse(body.mass*velocity_change)
-		# TODO: add impulse does not modify immediatly the velocity.
-		# As a result, two or more jumpers can be triggered by a ball before updating velocity,
-		# resulting in applying multiple jump_velocity (big jumps)
-		# 
+		body.override_impulse(body.mass*jump_velocity*jump_direction)
 		$AnimationPlayer.stop(true)
 		$AnimationPlayer.play("jump")
 	elif body.is_in_group("characters"):

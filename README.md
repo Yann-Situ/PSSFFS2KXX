@@ -138,12 +138,12 @@ Pull request to master when **ball physics** and **player animations** will be c
     - Implement character holder group with `free_character` and `pickup_character` methods.
 * [x] Characters can leave **rail** if Player press **crouch** on it.
     - Implement the `riding` and `hanging` states.
+* [x] Balls can perform too big jumps at the junction of multiple **Jumpers**. This is due to `apply_impulse` not changing immediately the velocity value of a RigidBody2D. This implies applying two times the *jump_impulse*, which is designed to compensate the original velocity and apply the *jump_velocity*. [resolved by implementing a smart `override_impulse` that cancel directional velocity and apply impulse, but solely the last call before `integrate_force` will have an effect]
 * [ ] A ball that bounces on the ring of a **basket** can do multiple goals.
 * [ ] **Zipline** drop inside collision places results in stucked player.
 * [ ] Get out from **zipline** just after passing over a **Jumper** results in sliding (like on ice) because **can_go_timer** was changed. [TODO REWORK **Zipline** and **Rails**]
 * [ ] Stuck colliding on a **rail** can result in building speed. [TODO TEST]
 * [ ] Entering **Pipe** at perfect frame when disabling the **Pipe** can result in a disabled ball floating in the air. -> don't stop the tween to enter the pipe when disabling the pipe. [hard to reproduce, it happened once]
-* [ ] Balls can perform too big jumps at the junction of multiple **Jumpers**. This is due to `apply_impulse` not changing immediately the velocity value of a RigidBody2D. This implies applying two times the *jump_impulse*, which is designed to compensate the original velocity and apply the *jump_velocity*. [TODO implement a smart `override_velocity` that cancel and change the *velocity* using impulses, but only the last call before `integrate_force` will have an effect]
 
 ### Physics
 * [x] TileMap hitboxes (bounce on corners of each tile + balls pass through 2 adjacent tiles). **size up the hitboxes smartly**

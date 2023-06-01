@@ -14,6 +14,9 @@ class_name SituBody
 
 @onready var invmass : float = 1.0/mass
 
+var _override_impulse_bool = false
+var _override_impulse_value = Vector2.ZERO
+
 func _set(_name, value):
 	match _name:
 		"mass":
@@ -67,6 +70,10 @@ func _integrate_forces(state):
 
 	constant_force = force_alterable.get_value()
 	constant_force += mass*accel_alterable.get_value()
+	if _override_impulse_bool:
+		var d = _override_impulse_value.normalized()
+		add_impulse(-mass*linear_velocity.dot(d)*d + _override_impulse_value)
+		_override_impulse_bool = false
 
 func collision_effect(collider : Node, collider_velocity : Vector2, collision_point : Vector2, collision_normal : Vector2):
 	pass
@@ -93,6 +100,16 @@ func remove_accel(accel_alterer : Alterer):
 func add_impulse(impulse : Vector2):
 	_on_impulse(impulse)
 	apply_impulse(impulse)
+
+## designed to apply an impulse but cancelling the previous velocity in the same
+## direction as the impulse. Typically used by jumpers.
+## The necessity of such a function is due to the fact that apply_impulse does
+## not modify immediatly the velocity, so we need to reset the velocity once per
+## physics frame at maximum.
+## The last call of this function in the same frame will be aplied.
+func override_impulse(impulse : Vector2):
+	_override_impulse_bool = true
+	_override_impulse_value = impulse
 
 func get_force():
 	force_alterable.get_value()
