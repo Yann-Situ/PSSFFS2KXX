@@ -59,7 +59,7 @@ func explode(momentum : Vector2):
 	$OccluderInstance3D.visible = false
 	$Breakable.collision_layer = 0
 	$Breakable.collision_mask = 0
-	false # self.lock() # TODOConverter40, Image no longer requires locking, `false` helps to not break one line if/else, so it can freely be removed
+	self.lock() 
 	await get_tree().create_timer($DebrisParticle.lifetime*1.5).timeout
 	queue_free()
 

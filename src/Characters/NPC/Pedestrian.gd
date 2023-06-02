@@ -58,13 +58,16 @@ func update_animation(direction : int):
 	if direction > 0:
 		$AnimationPlayer.play("walk")
 		walk_speed = ai.rng.randf_range(walk_speed_min, walk_speed_max)
+		$AnimationPlayer.speed_scale = 2.0*walk_speed/(walk_speed_max+walk_speed_min)
 		$Sprite2D.flip_h = false
 	elif direction < 0:
 		$AnimationPlayer.play("walk")
 		walk_speed = ai.rng.randf_range(walk_speed_min, walk_speed_max)
+		$AnimationPlayer.speed_scale = 2.0*walk_speed/(walk_speed_max+walk_speed_min)
 		$Sprite2D.flip_h = true
 	else:
 		$AnimationPlayer.play("idle")
+		$AnimationPlayer.speed_scale = 1.0
 
 func _process(delta):
 	var direction_vector = Vector2.ZERO
