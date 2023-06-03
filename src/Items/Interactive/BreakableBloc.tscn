@@ -1,10 +1,9 @@
-[gd_scene load_steps=12 format=3 uid="uid://d1iceb4hkwose"]
+[gd_scene load_steps=11 format=3 uid="uid://d1iceb4hkwose"]
 
 [ext_resource type="Script" path="res://src/Items/Interactive/BreakableBloc.gd" id="1"]
 [ext_resource type="Texture2D" uid="uid://bcddludfh8obw" path="res://assets/art/environment/environment-interactive.png" id="2"]
-[ext_resource type="PackedScene" path="res://src/Effects/DebrisParticule.tscn" id="3"]
+[ext_resource type="PackedScene" uid="uid://6uemq1bkxgpn" path="res://src/Effects/DebrisParticule.tscn" id="3"]
 [ext_resource type="Script" path="res://src/Items/Interactive/Breakable.gd" id="4"]
-[ext_resource type="Texture2D" uid="uid://b7t6do8nu1247" path="res://assets/art/effects/debris_0_8x4.png" id="5"]
 
 [sub_resource type="OccluderPolygon2D" id="1"]
 resource_local_to_scene = true
@@ -47,14 +46,14 @@ _data = {
 [sub_resource type="RectangleShape2D" id="3"]
 size = Vector2(32, 32)
 
-[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_qyega"]
+[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_cyff5"]
 resource_local_to_scene = true
 particles_animation = true
 particles_anim_h_frames = 8
 particles_anim_v_frames = 1
 particles_anim_loop = false
 
-[sub_resource type="Gradient" id="Gradient_q0dr3"]
+[sub_resource type="Gradient" id="Gradient_0re7n"]
 resource_local_to_scene = true
 offsets = PackedFloat32Array(0, 0.561983, 0.995305, 1)
 colors = PackedColorArray(0.527344, 0.385079, 0.259552, 1, 0.429688, 0.280094, 0.12085, 1, 0.163086, 0.111312, 0.0904617, 0.0328639, 1, 1, 1, 0)
@@ -89,10 +88,9 @@ shape = SubResource("3")
 [node name="DebrisParticle" parent="." instance=ExtResource("3")]
 z_index = 90
 z_as_relative = false
-material = SubResource("CanvasItemMaterial_qyega")
+material = SubResource("CanvasItemMaterial_cyff5")
 amount = 25
 explosiveness = 0.92
-texture = ExtResource("5")
 emission_sphere_radius = 1.0
 spread = 60.48
-color_ramp = SubResource("Gradient_q0dr3")
+color_ramp = SubResource("Gradient_0re7n")

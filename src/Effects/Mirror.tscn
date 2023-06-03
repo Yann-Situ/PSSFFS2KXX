@@ -6,6 +6,7 @@
 [sub_resource type="FastNoiseLite" id="FastNoiseLite_a0s1y"]
 
 [sub_resource type="NoiseTexture2D" id="NoiseTexture2D_d3jb3"]
+seamless = true
 noise = SubResource("FastNoiseLite_a0s1y")
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_0w2m7"]
