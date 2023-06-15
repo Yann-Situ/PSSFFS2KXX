@@ -1,7 +1,11 @@
 extends Resource
 class_name PaletteScheme
-
+## Just contain a list of gradients. Often dark-to-light gradients to colorize
+## sprites with a palette.
 var gradients = [] # (Array, Gradient)
+
+func size() -> int:
+	return gradients.size()
 
 func get_gradient(i : int) -> Gradient:
 	if i < gradients.size() and i >= 0:
@@ -18,17 +22,22 @@ func add_gradient(gradient : Gradient, index : int = -1):
 	else :
 		gradients.insert(index, gradient)
 
+func add_cosine_gradient(cosine_gradient : CosineGradient, index : int = -1):
+	add_gradient(cosine_gradient.to_gradient(), index)
+
 func remove_gradient(index : int):
 	gradients.remove_at(index)
 
 ################################################################################
+func get_lightness(c : Color) -> float:
+	return 0.2076*c.r + 0.7002*c.g + 0.0922*c.b
 
 func add_gradient_from_color(color : Color,\
 		black : Color=Color.BLACK, white : Color=Color.WHITE):
 	var g = Gradient.new()
-	var l = color.get_luminance()
-	var lw = white.get_luminance()
-	var lb = black.get_luminance()
+	var l = get_lightness(color)
+	var lw = get_lightness(white)
+	var lb = get_lightness(black)
 	if lw < lb: # swap variables
 		var lb_s = lb
 		var black_s = black
@@ -37,11 +46,11 @@ func add_gradient_from_color(color : Color,\
 		lw = lb_s
 		white = black_s
 
-	if lw < l and l > 0:
+	if lw < l and l > 0.0:
 		var t = lw/l
 		color =  Color(t*color.r, t*color.g, t*color.b)
 		l = lw
-	elif lb > l and l > 0:
+	elif lb > l and l > 0.0:
 		var t = lb/l
 		color =  Color(t*color.r, t*color.g, t*color.b)
 		l = lb
@@ -51,8 +60,8 @@ func add_gradient_from_color(color : Color,\
 		g.set_color(0, black.lerp(white, l-0.5))
 		g.add_point(1.5-l,white)
 	else:
-		g.add_point(0.5-l,black)
 		g.set_color(1, black.lerp(white, 0.5+l))
+		g.add_point(0.5-l,black)
 	g.add_point(0.5, color)
 	gradients.push_back(g)
 

@@ -10,7 +10,7 @@ extends Node2D
 @export var proba_idle : float = 0.2 #
 @export var proba_stay_idle : float = 0.4 #
 @export var proba_change_direction : float = 0.4 #
-@export var palette_scheme_sampler : Resource
+@export var palette_scheme_sampler : PaletteSchemeSampler
 
 const pedestrian_scene = preload("res://src/Characters/NPC/Pedestrian.tscn")
 

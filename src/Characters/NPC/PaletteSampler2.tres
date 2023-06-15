@@ -1,7 +1,7 @@
 [gd_resource type="Resource" script_class="PaletteSchemeSampler" load_steps=19 format=3 uid="uid://c56aladobxbf8"]
 
 [ext_resource type="Script" path="res://src/Global/CustomResources/PaletteSchemeSampler.gd" id="1"]
-[ext_resource type="Script" path="res://src/Global/CustomResources/ColorSampler.gd" id="3"]
+[ext_resource type="Script" path="res://src/Global/CustomResources/ColorDistribution.gd" id="3"]
 
 [sub_resource type="Curve" id="16"]
 bake_resolution = 1000
@@ -23,6 +23,7 @@ script = ExtResource("3")
 hue_distribution = SubResource("16")
 saturation_distribution = SubResource("17")
 lightness_distribution = SubResource("36")
+weight = 1.0
 
 [sub_resource type="Curve" id="20"]
 bake_resolution = 1000
@@ -42,6 +43,7 @@ script = ExtResource("3")
 hue_distribution = SubResource("20")
 saturation_distribution = SubResource("21")
 lightness_distribution = SubResource("37")
+weight = 1.0
 
 [sub_resource type="Curve" id="28"]
 bake_resolution = 1000
@@ -62,6 +64,7 @@ script = ExtResource("3")
 hue_distribution = SubResource("28")
 saturation_distribution = SubResource("29")
 lightness_distribution = SubResource("38")
+weight = 1.0
 
 [sub_resource type="Curve" id="32"]
 _data = [Vector2(0, 1), 0.0, -12.0645, 0, 1, Vector2(0.0828877, 0), 0.0, 0.0, 0, 0, Vector2(0.92246, 0), 0.0, 0.0, 0, 0, Vector2(1, 1), 12.8965, 0.0, 1, 0]
@@ -80,10 +83,11 @@ script = ExtResource("3")
 hue_distribution = SubResource("32")
 saturation_distribution = SubResource("33")
 lightness_distribution = SubResource("39")
+weight = 1.0
 
 [resource]
 resource_local_to_scene = true
 script = ExtResource("1")
-color_samplers = [SubResource("19"), SubResource("23"), SubResource("31"), SubResource("35")]
+color_samplers = Array[Resource("res://src/Global/CustomResources/ColorSampler.gd")]([SubResource("19"), SubResource("23"), SubResource("31"), SubResource("35")])
 black = Color(0.215686, 0.0509804, 0.168627, 1)
 white = Color(0.976471, 0.952941, 0.713726, 1)
