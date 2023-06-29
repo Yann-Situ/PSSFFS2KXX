@@ -302,12 +302,12 @@ func _physics_process(delta):
 	if physics_enabled:
 		apply_forces_accel(delta)
 		set_velocity(S.velocity+speed_alterable.get_value())
-		# TODOConverter40 looks that snap in Godot 4.0 is float, not vector like in Godot 3 - previous value `snap_vector`
+		# Converter4.0 looks that snap in Godot 4.0 is float, not vector like in Godot 3 - previous value `snap_vector`
 		set_up_direction(Vector2.UP)
 		set_floor_stop_on_slope_enabled(true)
 		set_max_slides(4)
 		set_floor_max_angle(0.785398)
-		# TODOConverter40 infinite_inertia were removed in Godot 4.0 - previous value `false`
+		# Converter4.0 infinite_inertia were removed in Godot 4.0 - previous value `false`
 		move_and_slide()
 		S.velocity = get_real_velocity()-speed_alterable.get_value()
 

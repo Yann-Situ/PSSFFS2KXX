@@ -56,7 +56,7 @@ func move(delta):
 
 func move_end():
 	print("enddash")
-	P.add_accel(Global.gravity_alterer) # TODO check if it is in an antigravity zone ?
+	P.add_accel(Global.gravity_alterer) # TODO check if it is in an antigravity zone ? or set a 0-multiplicative alterer
 
 	if not S.is_grinding:
 		var temp_vel_l = S.velocity.length()

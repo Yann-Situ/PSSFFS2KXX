@@ -83,7 +83,7 @@ func explode():
 				var d = (body.global_position-global_position)
 				if d.length_squared() <= criteria:
 					body_explode.emit(body, scale_factor*d.normalized())
-					#TODO : we actually need to checkthe nearest point of the body and not its center.
+					#TODO : we actually need to check the nearest point of the body and not its center.
 					# A workaround would be to use explosion_steps collision_shapes (or Area2D).
 					#explode_body(body, scale_factor*d.normalized())
 					exploded_bodies.push_back(body)

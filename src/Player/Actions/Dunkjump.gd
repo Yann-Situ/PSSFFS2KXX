@@ -47,7 +47,6 @@ func move_jump():
 		var sq_discriminant = B*B-4*C
 
 		if sq_discriminant < 0.0: # should not happen
-			#TODO implement this case ?
 			S.velocity.x = -0.5*q.x*Global.default_gravity.y/P.dunkjump_speed
 		else:
 			sq_discriminant = sqrt(sq_discriminant)

@@ -107,7 +107,7 @@ func collision_effect(collider : Object, collider_velocity : Vector2,
 
 func collision_handle(collision, delta):
 	var n = collision.get_normal()
-	var t = n.orthogonal()    
+	var t = n.orthogonal()
 	#normal_colision = n
 	if collision.get_collider().is_in_group("physicbodies") :
 		var m2 = collision.get_collider().mass
@@ -130,7 +130,7 @@ func collision_handle(collision, delta):
 		var bounce_linear_velocity = bounce*linear_velocity.bounce(n)
 		var vel_n = n.dot(bounce_linear_velocity)
 		if vel_n < 2.5*gravity*delta:
-			#TODO seuil à déterminer
+			#TODO sliding threshold to establish
 			#sliding
 			#color_colision = color1
 			#var vel_t = lerp(t.dot(linear_velocity), 0, friction)
@@ -143,7 +143,6 @@ func collision_handle(collision, delta):
 			set_floor_stop_on_slope_enabled(false)
 			set_max_slides(4)
 			set_floor_max_angle(0.79)
-			# TODOConverter40 infinite_inertia were removed in Godot 4.0 - previous value `false`
 			move_and_slide()
 			#linear_velocity = velocity
 		else :

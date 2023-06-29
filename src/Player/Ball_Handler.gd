@@ -33,7 +33,7 @@ func get_throw_position():
 	else :
 		return P.global_position + Vector2(4.0,-6.0)
 
-func set_has_ball_position():
+func set_has_ball_position(): #TODO set ball sprite position and not ball position.
 	if P.flip_h :
 		S.active_ball.transform.origin.x = - $HasBallPosition.position.x
 		S.active_ball.transform.origin.y = + $HasBallPosition.position.y
@@ -123,7 +123,7 @@ func deselect_ball(ball : Ball): # called by ball.deselect(P)
 	var ui = P.get_node("UI/MarginContainer/HBoxContainer/MarginContainer/TextureRect/RichTextLabel")
 	ui.clear()
 
-func _physics_process(delta):#TODO use set_physics_process in pickup
+func _physics_process(delta):#TODO use set_physics_process in pickup ?
 	if S.has_ball and S.active_ball != null :
 		set_has_ball_position()
 

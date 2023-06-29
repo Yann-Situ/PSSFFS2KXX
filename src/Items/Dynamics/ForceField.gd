@@ -19,7 +19,7 @@ func set_extents(e : Vector2):
 	$Area2D/CollisionShape2D.shape.size = rectangle_extents
 	$Sprite2D.texture.width = e.x
 	$Sprite2D.texture.height = e.y
-	
+
 func _ready():
 	tween_force.set_trans(Tween.TRANS_SINE)
 	tween_force.set_parallel(false)
@@ -35,8 +35,7 @@ func _on_Area2D_body_entered(body):
 			tween_force.play()
 
 func _on_Area2D_body_exited(body):
-	if body.has_method("remove_force"): # temprarily we use only players TODO
-	#if body is Player:dd
+	if body.has_method("remove_force"): 
 		body.remove_force(force_alterer)
 		if $Area2D.get_overlapping_bodies().is_empty():
 			tween_force.pause()

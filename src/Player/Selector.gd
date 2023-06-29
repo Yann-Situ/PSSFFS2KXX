@@ -1,6 +1,6 @@
 extends Node2D
 
-@onready var Player = get_parent().get_parent() # BAD TODO: change this for Global.get_player()
+@onready var Player = get_parent().get_parent() # TODO: change this for Global.get_player()
 @onready var S = Player.get_node("State")
 
 var names = ["Shoot", "Dash", "Jump"]

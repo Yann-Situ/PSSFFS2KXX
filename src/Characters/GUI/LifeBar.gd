@@ -1,9 +1,8 @@
 extends HBoxContainer
 
 @onready var progress_bar = self.get_node("LifeBar")
-@export_node_path("RichTextLabel") var label_path 
+@export_node_path("RichTextLabel") var label_path
 @onready var label = self.get_node(label_path)
-# TODO : change that
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
