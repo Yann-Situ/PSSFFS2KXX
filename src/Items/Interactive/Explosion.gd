@@ -4,6 +4,7 @@ class_name Explosion#, "res://assets/art/icons/targeted.png"
 # Handle a single explosion from a source point
 signal body_explode(body, direction)
 
+#TODO: make a ExplosionResource with all thos parameters, and also collision masks.
 @export var simple_explosion : bool = true # whether or not use the Explosion.explode_body function when body explode
 @export var breakable_momentum : float = 0.0 #kg.pix/s
 @export var electric_momentum : float = 0.0 #kg.pix/s
@@ -42,7 +43,7 @@ func set_collision_shape(s : Shape2D):
 func _ready():
 	var collision_node = CollisionShape2D.new()
 	collision_node.shape = collision_shape
-	
+
 	# TODO: error here
 	add_child(collision_node)
 	#	E 0:01:47:0254   Explosion.gd:45 @ _ready(): Can't change this state while flushing queries. Use call_deferred() or set_deferred() to change monitoring state instead.
@@ -82,6 +83,8 @@ func explode():
 				var d = (body.global_position-global_position)
 				if d.length_squared() <= criteria:
 					body_explode.emit(body, scale_factor*d.normalized())
+					#TODO : we actually need to checkthe nearest point of the body and not its center.
+					# A workaround would be to use explosion_steps collision_shapes (or Area2D).
 					#explode_body(body, scale_factor*d.normalized())
 					exploded_bodies.push_back(body)
 	print("BOUM queue_free")

@@ -30,3 +30,5 @@ func to_gradient(sampling_size : int = 0) -> Gradient:
 		var t = float(i)/sampling_size
 		g.add_point(t, color(t))
 	return g
+
+# skin1 : [[1.100 0.450 0.110] [0.740 0.470 0.650] [0.590 0.500 0.320] [1.925 0.880 -0.022]]

@@ -132,6 +132,7 @@ Pull request to master when **ball physics** and **player animations** will be c
 * [ ] Pressing **jump** at a precise moment during **dunk** animation results in ungrabing the basket without any jump. [TODO handle correctly the dunk-hang-ungrab loop]
 * [ ] **Walljump** by pressing jump before touching wall can result in jump that can't be **mount-cancelled** (by releasing jump button).
 * [ ] **Sliding** is not canceled if the button down is released. This results in interesting yet annoying *moonwalks* and weird behaviours. [TODO prioritize rolling over sliding and handle their connection]
+* [ ] **Crouching** under a 32pix bloc and then standing results in high speed.
 
 ### Environment and Items
 * [x] Weird behaviour on leaving a **zipline** to a **rail** (there is a moment when the character is on both of them)
@@ -144,6 +145,7 @@ Pull request to master when **ball physics** and **player animations** will be c
 * [ ] Get out from **zipline** just after passing over a **Jumper** results in sliding (like on ice) because **can_go_timer** was changed. [TODO REWORK **Zipline** and **Rails**]
 * [ ] Stuck colliding on a **rail** can result in building speed. [TODO TEST]
 * [ ] Entering **Pipe** at perfect frame when disabling the **Pipe** can result in a disabled ball floating in the air. -> don't stop the tween to enter the pipe when disabling the pipe. [hard to reproduce, it happened once]
+* [ ] **Explosion** hitbox seems to be broken for squared boxes.
 
 ### Physics
 * [x] TileMap hitboxes (bounce on corners of each tile + balls pass through 2 adjacent tiles). **size up the hitboxes smartly**
@@ -190,6 +192,8 @@ Pull request to master when **ball physics** and **player animations** will be c
 * :pushpin: Need to implement Tilemap interactive objects rotation and flips. [TODO Wait4Godot]
 * [ ] **BulletTime** (pause scene) can eat input, currently resulting in dunking after a dunkjump even if the dunk button is not pressed.
 * [ ] Releasing ball and changing room can result in the player not able to catch another ball.
+* [ ] Code mystery in **PlayerState**: velocity is set to (0,0) each frame when the **AnimationTree** is activated.
+#push_warning(str(v))
 
 ### Potential Glitches
 * [ ] **Jumping** (from ground) just before entering a **rail** can result in a boost grind.

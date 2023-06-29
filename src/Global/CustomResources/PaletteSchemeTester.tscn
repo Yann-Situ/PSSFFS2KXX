@@ -1,7 +1,7 @@
 [gd_scene load_steps=5 format=3 uid="uid://bgye6alyyon70"]
 
 [ext_resource type="Script" path="res://src/Global/CustomResources/PaletteSchemeTester.gd" id="1_pwk1h"]
-[ext_resource type="Resource" uid="uid://bm1xsllovgmkc" path="res://src/Characters/NPC/PaletteSamplerExample.tres" id="2_g5btw"]
+[ext_resource type="Resource" uid="uid://b1sqjl338o38w" path="res://src/Characters/NPC/PaletteSamplerDocks.tres" id="2_e1hit"]
 
 [sub_resource type="Gradient" id="Gradient_7p66x"]
 colors = PackedColorArray(0, 0, 0, 1, 0, 0, 0, 1)
@@ -11,7 +11,7 @@ gradient = SubResource("Gradient_7p66x")
 
 [node name="Node2D" type="Node2D"]
 script = ExtResource("1_pwk1h")
-palette_scheme_sampler = ExtResource("2_g5btw")
+palette_scheme_sampler = ExtResource("2_e1hit")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 position = Vector2(448, 256)

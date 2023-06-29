@@ -27,8 +27,8 @@ weight = 1.0
 
 [sub_resource type="Curve" id="20"]
 bake_resolution = 1000
-_data = [Vector2(0, 0.5), 0.0, 0.0, 0, 0, Vector2(0.152174, 0), 0.0, 0.0, 0, 0, Vector2(0.594203, 0), 0.0, 0.0, 0, 0, Vector2(0.804348, 0.836364), 0.0, 0.0, 0, 0, Vector2(1, 0.354545), 0.0, 0.0, 0, 0]
-point_count = 5
+_data = [Vector2(0, 0), 0.0, 0.0, 0, 0, Vector2(0.0960699, 0.536364), 0.0, 0.0, 0, 0, Vector2(0.174672, 0), 0.0, 0.0, 0, 0, Vector2(0.469432, 0), 0.0, 0.0, 0, 0, Vector2(0.740175, 0.909091), 0.0, 0.0, 0, 0, Vector2(0.89738, 0), 0.0, 0.0, 0, 0]
+point_count = 6
 
 [sub_resource type="Curve" id="37"]
 bake_resolution = 516
@@ -37,7 +37,7 @@ point_count = 6
 
 [sub_resource type="Curve" id="21"]
 bake_resolution = 516
-_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(0.449275, 0), 0.0, 0.0, 0, 0, Vector2(0.601449, 0.0636363), 0.0, 0.0, 0, 0, Vector2(0.724638, 0), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+_data = [Vector2(0, 0.545455), 0.0, 0.0, 0, 0, Vector2(0.449275, 0), 0.0, 0.0, 0, 0, Vector2(0.534935, 0.318182), 0.0, 0.0, 0, 0, Vector2(0.707424, 0), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
 point_count = 5
 
 [sub_resource type="Resource" id="23"]
@@ -49,17 +49,17 @@ weight = 1.0
 
 [sub_resource type="Curve" id="28"]
 bake_resolution = 1000
-_data = [Vector2(0, 0), 0.0, 0.0, 0, 0, Vector2(0.0797102, 0.118182), 0.0, 0.0, 0, 0, Vector2(0.166667, 0), 0.0, 0.0, 0, 0, Vector2(0.442029, 0), 0.0, 0.0, 0, 0, Vector2(0.637681, 1), 0.0, 0.0, 0, 0, Vector2(0.862319, 0), 0.0, 0.0, 0, 0]
+_data = [Vector2(0, 0), 0.0, 0.0, 0, 0, Vector2(0.0797102, 0.118182), 0.0, 0.0, 0, 0, Vector2(0.166667, 0), 0.0, 0.0, 0, 0, Vector2(0.442029, 0), 0.0, 0.0, 0, 0, Vector2(0.637681, 1), 0.0, 0.0, 0, 0, Vector2(0.825328, 0), 0.0, 0.0, 0, 0]
 point_count = 6
 
 [sub_resource type="Curve" id="38"]
 bake_resolution = 1000
-_data = [Vector2(0, 0.627273), 0.0, 6.59504, 0, 0, Vector2(0.057971, 1), 0.0, 0.0, 0, 0, Vector2(0.297101, 0), 0.0, 0.0, 0, 0]
+_data = [Vector2(0, 0), 0.0, 6.59504, 0, 0, Vector2(0.122271, 1), 0.0, 0.0, 0, 0, Vector2(0.423581, 0), 0.0, 0.0, 0, 0]
 point_count = 3
 
 [sub_resource type="Curve" id="29"]
 bake_resolution = 1000
-_data = [Vector2(0, 0), 0.0, 0.0, 0, 0, Vector2(0.362319, 1), 0.0, 0.0, 0, 0, Vector2(0.804348, 0), 0.0, 0.0, 0, 0]
+_data = [Vector2(0, 0), 0.0, 0.0, 0, 0, Vector2(0.700873, 1), 0.0, 0.0, 0, 0, Vector2(0.893013, 0), 0.0, 0.0, 0, 0]
 point_count = 3
 
 [sub_resource type="Resource" id="31"]
