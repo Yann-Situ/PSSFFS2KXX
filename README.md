@@ -37,7 +37,7 @@ List of things to do
 - :pushpin: dunk player position
 - :pushpin: hang player position
 - [ ] double dash make the player stuck
-- [ ] state machines have memory now... (we need to restart the state machine when reentering it)
+- [x] state machines have memory now... (we need to restart the state machine when reentering it) [Fixed in Godot 4.1]
 - :pushpin: S.velocity is set to Vec2(0.0) every frame when animation_tree is active (really weird bug) [currently a temporary solution]
 - [x] ball rework (currently a rigidbody implementation but there are physics annoying bugs https://github.com/godotengine/godot/issues/76610) (Solved using [GodotTilemapBaker](https://github.com/popcar2/GodotTilemapBaker/tree/main))
 - [x] player_friction and forces using Alterable
@@ -45,7 +45,7 @@ List of things to do
 - :pushpin: tileset/map rework
 - [ ] Improve TileMapBaker to take into account different physical layer, for example ballwall and playerwall
 
-Pull request to master when **ball physics** and **player animations** will be correctly handled.
+Pull request to master when :pushpin:**ball physics** and [x]**player animations** will be correctly handled.
 
 ## Work to do
 * Graphism :
@@ -189,10 +189,10 @@ Pull request to master when **ball physics** and **player animations** will be c
 * [x] If multiple explosion breaks the same bloc, it can spawn copies.
 * [x] Lag if too much balls : make a spawner limit and link the dispawn of a ball to the spawner to increase the spawn count.
 * [x] I need to adapt the boum delay: i.e apply_impulse instantly on colliding object and a bit after on far objects. need a method call_after_a_delay(apply_impulse) -> see Explosion node implementation
+* [x] Code mystery in **PlayerState**: velocity is set to (0,0) each frame when the **AnimationTree** is activated. [Fixed in Godot 4.1]
 * :pushpin: Need to implement Tilemap interactive objects rotation and flips. [TODO Wait4Godot]
 * [ ] **BulletTime** (pause scene) can eat input, currently resulting in dunking after a dunkjump even if the dunk button is not pressed.
 * [ ] Releasing ball and changing room can result in the player not able to catch another ball.
-* [ ] Code mystery in **PlayerState**: velocity is set to (0,0) each frame when the **AnimationTree** is activated.
 #push_warning(str(v))
 
 ### Potential Glitches

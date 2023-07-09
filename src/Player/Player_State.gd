@@ -112,8 +112,9 @@ func set_velocity(v : Vector2):
 	if player._zero_velocity_workaround :
 		velocity = v
 	else:
-		# TODO here is some weird behaviour: velocity is set to (0,0) each frame when the animationTree is activated
-		#push_warning(str(v))
+		# Here there was some weird behaviour: velocity is set to (0,0) each frame when the animationTree is activated
+		# It seemed to be fixed by Godot 4.1
+		push_warning("unauthorized access to state.velocity : "+str(v))
 		pass
 func set_velocity_safe(v : Vector2):
 	player._zero_velocity_workaround = true

@@ -1,4 +1,4 @@
-[gd_scene load_steps=114 format=3 uid="uid://djjfl0v3y2pw5"]
+[gd_scene load_steps=106 format=3 uid="uid://djjfl0v3y2pw5"]
 
 [ext_resource type="Script" path="res://src/Player/Player.gd" id="1"]
 [ext_resource type="Texture2D" uid="uid://dcp7p8c6ldxqc" path="res://assets/art/characters/Player.png" id="2"]
@@ -452,20 +452,6 @@ tracks/3/keys = {
 "transitions": PackedFloat32Array(1),
 "update": 1,
 "values": [false]
-}
-tracks/4/type = "method"
-tracks/4/imported = false
-tracks/4/enabled = true
-tracks/4/path = NodePath("../Actions/Dunkjump")
-tracks/4/interp = 1
-tracks/4/loop_wrap = true
-tracks/4/keys = {
-"times": PackedFloat32Array(0.056),
-"transitions": PackedFloat32Array(1),
-"values": [{
-"args": [],
-"method": &"stop_time"
-}]
 }
 
 [sub_resource type="Animation" id="12"]
@@ -1433,27 +1419,11 @@ transitions = ["Start", "action", SubResource("AnimationNodeStateMachineTransiti
 graph_offset = Vector2(0, -33.389)
 
 [sub_resource type="AnimationNodeBlendTree" id="39"]
-graph_offset = Vector2(-76.1234, 97.094)
+graph_offset = Vector2(1086.45, 274.369)
 nodes/cancelable/node = SubResource("38")
 nodes/cancelable/position = Vector2(980, 320)
 nodes/output/position = Vector2(1240, 340)
 node_connections = [&"output", 0, &"cancelable"]
-
-[sub_resource type="AnimationNodeStateMachinePlayback" id="40"]
-
-[sub_resource type="AnimationNodeStateMachinePlayback" id="41"]
-
-[sub_resource type="AnimationNodeStateMachinePlayback" id="42"]
-
-[sub_resource type="AnimationNodeStateMachinePlayback" id="43"]
-
-[sub_resource type="AnimationNodeStateMachinePlayback" id="AnimationNodeStateMachinePlayback_crd7q"]
-
-[sub_resource type="AnimationNodeStateMachinePlayback" id="AnimationNodeStateMachinePlayback_skx5s"]
-
-[sub_resource type="AnimationNodeStateMachinePlayback" id="AnimationNodeStateMachinePlayback_gbodl"]
-
-[sub_resource type="AnimationNodeStateMachinePlayback" id="AnimationNodeStateMachinePlayback_4diek"]
 
 [sub_resource type="CanvasItemMaterial" id="48"]
 particles_animation = true
@@ -1493,7 +1463,7 @@ color_ramp = SubResource("53")
 
 [sub_resource type="CompressedTexture2D" id="55"]
 
-[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_pk136"]
+[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_waxax"]
 resource_local_to_scene = true
 particles_animation = true
 particles_anim_h_frames = 6
@@ -1736,15 +1706,7 @@ tree_root = SubResource("39")
 anim_player = NodePath("../Player_Animation")
 advance_expression_base_node = NodePath("../../State")
 active = true
-parameters/cancelable/playback = SubResource("40")
-parameters/cancelable/action/playback = SubResource("41")
-parameters/cancelable/action/dunkjump/playback = SubResource("42")
-parameters/cancelable/action/shoot/playback = SubResource("43")
-parameters/cancelable/stance/air/playback = SubResource("AnimationNodeStateMachinePlayback_crd7q")
-parameters/cancelable/stance/air/fall/playback = SubResource("AnimationNodeStateMachinePlayback_skx5s")
 parameters/cancelable/stance/grind/blend_position = 0
-parameters/cancelable/stance/ground/playback = SubResource("AnimationNodeStateMachinePlayback_gbodl")
-parameters/cancelable/stance/ground/stand_idle/playback = SubResource("AnimationNodeStateMachinePlayback_4diek")
 parameters/cancelable/stance/stancetransition/current_state = ""
 parameters/cancelable/stance/stancetransition/transition_request = "air"
 parameters/cancelable/stance/stancetransition/current_index = -1
@@ -1785,7 +1747,7 @@ lifetime = 0.65
 explosiveness = 0.9
 
 [node name="GrindParticles" parent="PlayerEffects" instance=ExtResource("27")]
-material = SubResource("CanvasItemMaterial_pk136")
+material = SubResource("CanvasItemMaterial_waxax")
 position = Vector2(0, 16)
 
 [node name="BallHandler" type="Area2D" parent="."]

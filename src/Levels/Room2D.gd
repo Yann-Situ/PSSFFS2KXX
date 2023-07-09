@@ -55,7 +55,7 @@ func _enter_tree():
 		meta_player = player.get_path()
 		#print("---> new METAPLAYER : " + str(meta_player))
 		if self.has_node("PlayerPosition"):
-			player.global_position = get_node_or_null("PlayerPosition").global_position
+			player.global_position = get_node_or_null("PlayerPosition").position
 	P = get_player()
 
 func _ready():

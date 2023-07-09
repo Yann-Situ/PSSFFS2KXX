@@ -13,6 +13,7 @@ animation = &"dunkjump"
 animation = &"dunkjump_halfturn"
 
 [sub_resource type="AnimationNodeStateMachineTransition" id="5"]
+reset = false
 switch_mode = 1
 advance_mode = 2
 advance_expression = "is_dunkjumphalfturning"

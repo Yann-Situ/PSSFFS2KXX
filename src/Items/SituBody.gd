@@ -47,6 +47,7 @@ func disable_physics():
 	collision_layer = 0
 	collision_mask = 0
 	set_linear_velocity(Vector2.ZERO)
+	_override_impulse_bool = false
 
 func enable_physics():
 	physics_enabled = true
@@ -71,6 +72,7 @@ func _integrate_forces(state):
 	constant_force = force_alterable.get_value()
 	constant_force += mass*accel_alterable.get_value()
 	if _override_impulse_bool:
+		print("integrate_override")
 		var d = _override_impulse_value.normalized()
 		add_impulse(-mass*linear_velocity.dot(d)*d + _override_impulse_value)
 		_override_impulse_bool = false
@@ -108,8 +110,10 @@ func add_impulse(impulse : Vector2):
 ## physics frame at maximum.
 ## The last call of this function in the same frame will be aplied.
 func override_impulse(impulse : Vector2):
-	_override_impulse_bool = true
-	_override_impulse_value = impulse
+	if physics_enabled:
+		print("impulse_override")
+		_override_impulse_bool = true
+		_override_impulse_value = impulse
 
 func get_force():
 	force_alterable.get_value()
