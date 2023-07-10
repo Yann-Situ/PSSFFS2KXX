@@ -111,7 +111,7 @@ func add_impulse(impulse : Vector2):
 ## The last call of this function in the same frame will be aplied.
 func override_impulse(impulse : Vector2):
 	if physics_enabled:
-		print("impulse_override")
+		#print("impulse_override")
 		_override_impulse_bool = true
 		_override_impulse_value = impulse
 

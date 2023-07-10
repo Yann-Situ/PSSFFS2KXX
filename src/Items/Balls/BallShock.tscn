@@ -1,9 +1,10 @@
-[gd_scene load_steps=25 format=3 uid="uid://27jkgoi43hoq"]
+[gd_scene load_steps=26 format=3 uid="uid://27jkgoi43hoq"]
 
 [ext_resource type="PackedScene" uid="uid://cxn2m3havcmil" path="res://src/Items/Balls/Ball.tscn" id="1"]
 [ext_resource type="Texture2D" uid="uid://p5r1v3wuny5y" path="res://assets/art/ball/ball_shock.png" id="2"]
 [ext_resource type="Script" path="res://src/Effects/Resources/DistortionResource.gd" id="3_wuggy"]
 [ext_resource type="Texture2D" uid="uid://fu2767ly07pr" path="res://assets/art/effects/shockwave_0.png" id="4"]
+[ext_resource type="Resource" uid="uid://b1j23x2kvb01e" path="res://src/Items/Balls/data/BallShockExplosionData.tres" id="4_md6hr"]
 [ext_resource type="Script" path="res://src/Items/Balls/BallShock.gd" id="5"]
 [ext_resource type="Shader" path="res://assets/shader/contour.gdshader" id="6"]
 
@@ -240,13 +241,11 @@ anim_speed_max = 1.0
 mass = 1.5
 physics_material_override = SubResource("PhysicsMaterial_wloox")
 script = ExtResource("5")
-shock_min = 401.0
-shock_max = 401.0
 shock_jump = 1850.0
 shock_fall = 5000.0
-distance_max = 64.0
 shock_timer = 0.25
 distortion_resource = SubResource("Resource_naugh")
+explosion_data = ExtResource("4_md6hr")
 impact_effect = 6
 dust_threshold = 15.0
 impact_threshold = 35.0

@@ -45,24 +45,28 @@ func make_impact(global_position : Vector2, impact_type : IMPACT_TYPE = IMPACT_T
 	impact.global_position = global_position
 	impact.start(normal)
 
+func make_explosion(global_position : Vector2, explosion_data : ExplosionData):
+	var explosion = Explosion.new()
+	explosion.explosion_data = explosion_data
+	explosion.global_position = global_position
+	Global.get_current_room().add_child(explosion)
+
 func make_simple_explosion(global_position : Vector2, radius : float,
 duration : float = 0.5, explosion_steps = 3,
 momentums : Array = [0.0,0.0,0.0],
 damage : float = 0.0, damage_duration : float = 0.0,
-body_exceptions : Array = []):
-	var explosion = Explosion.new()
-	#explosion.simple_explosion = true
+body_exceptions : Array[Node2D] = []):
+	var explosion_data = ExplosionData.new()
 	var shape = CircleShape2D.new()
 	shape.radius = radius
-	explosion.set_collision_shape(shape)
-	explosion.duration = duration
-	explosion.breakable_momentum = momentums[0]
-	explosion.electric_momentum = momentums[1]
-	explosion.physicbody_momentum = momentums[2]
-	explosion.damage = damage
-	explosion.damage_duration = damage_duration
-	explosion.duration = duration
-	explosion.explosion_steps = explosion_steps
-	explosion.body_exceptions = body_exceptions
-	explosion.global_position = global_position
-	Global.get_current_room().add_child(explosion)
+	explosion_data.set_collision_shape(shape)
+	explosion_data.use_default_explosion = true
+	explosion_data.explosion_duration = duration
+	explosion_data.explosion_steps = explosion_steps
+	explosion_data.momentum_breakable = momentums[0]
+	explosion_data.momentum_electric = momentums[1]
+	explosion_data.momentum_physicbody = momentums[2]
+	explosion_data.damage_value = damage
+	explosion_data.damage_duration = damage_duration
+	explosion_data.body_exceptions = body_exceptions
+	make_explosion(global_position, explosion_data)

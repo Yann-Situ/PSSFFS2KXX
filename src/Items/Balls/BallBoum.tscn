@@ -1,8 +1,10 @@
-[gd_scene load_steps=32 format=3 uid="uid://yco4prlcetlu"]
+[gd_scene load_steps=33 format=3 uid="uid://yco4prlcetlu"]
 
 [ext_resource type="Texture2D" uid="uid://dsoyoe3ww8hjd" path="res://assets/art/effects/shockwave_1.png" id="2"]
+[ext_resource type="Resource" uid="uid://dsw2scc7dw804" path="res://src/Items/Balls/data/BallBoumMaxExplosionData.tres" id="2_hixem"]
 [ext_resource type="Script" path="res://src/Items/Balls/BallBoum.gd" id="3"]
 [ext_resource type="Shader" path="res://assets/shader/contour.gdshader" id="3_emvrs"]
+[ext_resource type="Resource" uid="uid://b1lhq0ays8vtg" path="res://src/Items/Balls/data/BallBoumMinExplosionData.tres" id="3_gci2p"]
 [ext_resource type="Texture2D" uid="uid://d022k3w806eqv" path="res://assets/art/ball/ball_boum.png" id="4"]
 [ext_resource type="Texture2D" uid="uid://dhu7eccs5egsg" path="res://assets/art/ball/ball_selection.png" id="4_gcg44"]
 [ext_resource type="Script" path="res://src/Items/Balls/Highlighter.gd" id="5_0u0m5"]
@@ -187,9 +189,6 @@ point_count = 2
 offsets = PackedFloat32Array(0.020979, 0.27972, 0.75, 1)
 colors = PackedColorArray(1, 0.954956, 0.859375, 0, 0.820312, 0.799805, 0.78186, 1, 0.538086, 0.369934, 0.475029, 0.34, 0.129412, 0.0705882, 0.172549, 0)
 
-[sub_resource type="CircleShape2D" id="CircleShape2D_m8w4v"]
-radius = 64.0
-
 [sub_resource type="Curve" id="Curve_x7wi1"]
 _data = [Vector2(0, 0.763636), 0.0, 3.55714, 0, 0, Vector2(1, 0.209091), 0.0, 0.0, 0, 0]
 point_count = 2
@@ -232,6 +231,8 @@ physics_material_override = SubResource("PhysicsMaterial_88whb")
 gravity_scale = 0.0
 lock_rotation = true
 script = ExtResource("3")
+max_explosion_data = ExtResource("2_hixem")
+min_explosion_data = ExtResource("3_gci2p")
 impact_effect = 4
 dust_threshold = 30.0
 impact_threshold = 60.0
@@ -337,15 +338,6 @@ color_ramp = SubResource("13")
 [node name="DustParticle" parent="Effects" instance=ExtResource("8_0baep")]
 z_index = -1
 amount = 10
-
-[node name="BoumZone" type="Area2D" parent="."]
-collision_layer = 16
-collision_mask = 325
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="BoumZone"]
-visible = false
-modulate = Color(1, 0.784314, 0.278431, 1)
-shape = SubResource("CircleShape2D_m8w4v")
 
 [node name="BoumParticles" type="CPUParticles2D" parent="."]
 position = Vector2(0, -3.8147e-06)

@@ -6,8 +6,8 @@ signal is_destroyed
 signal is_picked_up
 signal is_thrown
 
-@export var impact_effect : GlobalEffect.IMPACT_TYPE = GlobalEffect.IMPACT_TYPE.ZERO
-@export var dust_threshold : float = 100.0#pix/(s kg) (impulse)
+@export var impact_effect : GlobalEffect.IMPACT_TYPE = GlobalEffect.IMPACT_TYPE.ZERO ## impact visual
+@export var dust_threshold : float = 100.0 ## threshold after which a collision makes dust (in pix/(s kg) (impulse))
 @export var impact_threshold : float = 200.0#
 @export var damage_destruction_threshold : float = 2.0
 @export var attract_force : float = 1000.0
