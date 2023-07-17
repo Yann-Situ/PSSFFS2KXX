@@ -52,7 +52,7 @@ func move(delta):
 	if not S.is_grinding:
 		P.get_out(P.global_position, dash_velocity)
 	else :
-		S.velocity = dash_velocity
+		S.set_velocity_safe(dash_velocity)
 
 func move_end():
 	print("enddash")
@@ -65,12 +65,12 @@ func move_end():
 			vel_dir = S.velocity/temp_vel_l # vel_dir is not always equals to dash_dir (e.g if there is an obstacle on the dash path)
 		var temp_dot = velocity_save.dot(vel_dir)
 		if 0.5*temp_vel_l > temp_dot :
-			S.velocity *= 0.5
+			S.set_velocity_safe(S.velocity * 0.5)
 		else :
-			S.velocity = temp_dot * vel_dir
+			S.set_velocity_safe(temp_dot * vel_dir)
 
 		if S.direction_p * S.move_direction < 0:
-			S.velocity.x *= 0.5 # again
+			S.set_velocity_safe(S.velocity * 0.5) # again
 	#P.get_node("Sprite2D").modulate = Color.WHITE
 
 	if S.has_ball: # WARNING the ball can change during the dash!

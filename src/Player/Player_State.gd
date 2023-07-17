@@ -117,9 +117,10 @@ func set_velocity(v : Vector2):
 		push_warning("unauthorized access to state.velocity : "+str(v))
 		pass
 func set_velocity_safe(v : Vector2):
+	var save = player._zero_velocity_workaround
 	player._zero_velocity_workaround = true
 	set_velocity(v)
-	player._zero_velocity_workaround = false
+	player._zero_velocity_workaround = save
 
 
 func _ready():
