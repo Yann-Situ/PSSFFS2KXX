@@ -73,7 +73,7 @@ var _zero_velocity_workaround = false
 @onready var speed_alterable = Alterable.new(Vector2.ZERO)
 @onready var accel_alterable = Alterable.new(Vector2.ZERO)
 
-var character_holder = null
+var character_holder : Node = null
 var flip_h : bool = false
 var shoot = Vector2.ZERO
 var snap_vector = Vector2.ZERO
@@ -108,6 +108,11 @@ func _ready():
 		Global.toggle_playing()
 	accel_alterable.add_alterer(Global.gravity_alterer)
 	Global.camera = Camera
+
+	set_up_direction(Vector2.UP)
+	set_floor_stop_on_slope_enabled(true)
+	set_max_slides(4)
+	set_floor_max_angle(0.785398)
 
 func set_flip_h(b):
 	flip_h  = b
@@ -299,32 +304,33 @@ func _physics_process(delta):
 	_zero_velocity_workaround = true
 
 	get_input(delta)
-	if physics_enabled:
+	if character_holder != null:
+		if character_holder.has_method("move_character"):
+			apply_forces_accel(delta)
+			#set_velocity(S.velocity+speed_alterable.get_value())
+			S.velocity = character_holder.move_character(self, S.velocity+speed_alterable.get_value(), delta)
+			S.velocity -= speed_alterable.get_value()
+	elif physics_enabled:
 		apply_forces_accel(delta)
 		set_velocity(S.velocity+speed_alterable.get_value())
-		# Converter4.0 looks that snap in Godot 4.0 is float, not vector like in Godot 3 - previous value `snap_vector`
-		set_up_direction(Vector2.UP)
-		set_floor_stop_on_slope_enabled(true)
-		set_max_slides(4)
-		set_floor_max_angle(0.785398)
-		# Converter4.0 infinite_inertia were removed in Godot 4.0 - previous value `false`
 		move_and_slide()
 		S.velocity = get_real_velocity()-speed_alterable.get_value()
 
 	_zero_velocity_workaround = false
 
 func disable_physics():
+	# note that Adherence, Side.move and jump cancel are unavailable when physics disabled
 	physics_enabled = false
-	collision_layer_save = collision_layer
-	collision_layer = 0
-	collision_mask_save = collision_mask
-	collision_mask = 0
-	S.velocity *= 0.0
+#	collision_layer_save = collision_layer
+#	collision_layer = 0
+#	collision_mask_save = collision_mask
+#	collision_mask = 0
+	#S.set_velocity_safe(Vector2.ZERO)
 
 func enable_physics():
 	physics_enabled = true
-	collision_layer = collision_layer_save
-	collision_mask = collision_mask_save
+#	collision_layer = collision_layer_save
+#	collision_mask = collision_mask_save
 
 func set_start_position(_position):
 	start_position = _position

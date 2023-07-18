@@ -24,7 +24,7 @@ end_cap_mode = 2
 [node name="PathFollow2D" type="PathFollow2D" parent="."]
 loop = false
 
-[node name="Area3D" type="Area2D" parent="."]
+[node name="Area2D" type="Area2D" parent="."]
 collision_layer = 8
 
-[connection signal="body_entered" from="Area3D" to="." method="_on_Area_body_entered"]
+[connection signal="body_entered" from="Area2D" to="." method="_on_Area_body_entered"]
