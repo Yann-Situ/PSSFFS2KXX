@@ -6,8 +6,8 @@ var trail_scene = preload("res://src/Effects/Trail.tscn")
 func _ready():
 	super()
 	remove_accel(Global.gravity_alterer)
-	#$Sprite2D.set_material(preload("res://assets/shader/material/hologram_shadermaterial.tres"))
-	#$Sprite2D.set_material($Sprite2D.get_material().duplicate())
+	#$Visuals.set_material(preload("res://assets/shader/material/hologram_shadermaterial.tres"))
+	#$Visuals.set_material($Visuals.get_material().duplicate())
 
 func make_electric_trail():
 	var trail_instance = trail_scene.instantiate()
@@ -22,7 +22,7 @@ func make_electric_trail():
 	trail_instance.autostart = true
 	trail_instance.node_to_trail = self
 	Global.get_current_room().add_child(trail_instance)
-	# Warning: We're not calling $Sprite2D.add_child(trail_instance) because
+	# Warning: We're not calling $Visuals.add_child(trail_instance) because
 	# the ball can be reparented during the tween of the trail, which
 	# results in canceling the tween. (see https://www.reddit.com/r/godot/comments/vjkaun/reparenting_node_without_removing_it_from_tree/)
 	

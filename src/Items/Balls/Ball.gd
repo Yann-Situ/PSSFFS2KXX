@@ -34,11 +34,11 @@ func is_reparenting():
 	return _is_reparenting
 
 func get_main_color() -> Color:
-	return $Effects.col2
+	return $Visuals.col2
 func get_main_gradient() -> Gradient:
-	return $Effects.gradient_main.duplicate()
+	return $Visuals.gradient_main.duplicate()
 func get_dash_gradient() -> Gradient:
-	return $Effects.gradient_dash.duplicate()
+	return $Visuals.gradient_dash.duplicate()
 #func _draw():
 #	# draw collision normal
 #	draw_line(Vector2(0.0,0.0), Vector2(0.0,0.0)+50.0*normal_colision, color_colision)
@@ -48,7 +48,7 @@ func get_dash_gradient() -> Gradient:
 func collision_effect(collider, collider_velocity, collision_point, collision_normal):
 	var speed = (linear_velocity-collider_velocity).dot(collision_normal)
 	if speed >= dust_threshold:
-		$Effects/DustParticle.restart()
+		$Visuals/DustParticle.restart()
 		if speed >= impact_threshold:
 			GlobalEffect.make_impact(collision_point, impact_effect, collision_normal)
 
@@ -103,10 +103,11 @@ func pickup(holder_node):
 	assert(holder_node != null)
 	change_holder(holder_node)
 	self.disable_physics()
+	self.transform.origin = Vector2.ZERO
 	self.z_index = holder_node.z_index+1
 	on_pickup(holder_node)
 	is_picked_up.emit()
-	$Effects/Reconstruction.restart()
+	$Visuals/Reconstruction.restart()
 
 func throw(_position, velo):
 	#$TrailHandler.set_node_to_trail(self)

@@ -19,11 +19,21 @@ animation_name = "fast"
 size = Vector2(120, 120)
 z_index = 250
 
-[sub_resource type="ShaderMaterial" id="11"]
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_fa8v6"]
 resource_local_to_scene = true
 shader = ExtResource("6")
 shader_parameter/activated = false
 shader_parameter/contour_color = Color(1, 1, 0.9, 0.9)
+
+[sub_resource type="Gradient" id="Gradient_u2con"]
+resource_local_to_scene = true
+offsets = PackedFloat32Array(0, 0.00699301, 0.244755, 0.468531, 0.839161, 1)
+colors = PackedColorArray(1, 0, 0.580392, 0, 0, 0, 0, 0.258741, 0.535156, 0.535156, 0.535156, 0.705882, 0.839844, 0.839844, 0.839844, 1, 1, 1, 1, 1, 1, 1, 1, 0)
+
+[sub_resource type="Gradient" id="Gradient_ajg3n"]
+resource_local_to_scene = true
+offsets = PackedFloat32Array(0, 0.020202, 0.131313, 0.50505, 0.808081, 1)
+colors = PackedColorArray(1, 0, 0.580392, 0, 1, 1, 1, 0, 1, 1, 1, 1, 0.839844, 0.839844, 0.839844, 1, 0.533333, 0.533333, 0.533333, 0.705882, 0, 0, 0, 0.258824)
 
 [sub_resource type="CircleShape2D" id="1"]
 resource_local_to_scene = true
@@ -31,15 +41,15 @@ radius = 6.0
 
 [sub_resource type="Animation" id="3"]
 resource_name = "destruction"
-length = 0.9
+length = 1.8
 tracks/0/type = "method"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("Effects/Destruction")
+tracks/0/path = NodePath("Visuals/Destruction")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
-"times": PackedFloat32Array(0),
+"times": PackedFloat32Array(0.2),
 "transitions": PackedFloat32Array(1),
 "values": [{
 "args": [],
@@ -49,11 +59,11 @@ tracks/0/keys = {
 tracks/1/type = "value"
 tracks/1/imported = false
 tracks/1/enabled = true
-tracks/1/path = NodePath("Effects/Destruction:emitting")
+tracks/1/path = NodePath("Visuals/Destruction:emitting")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
-"times": PackedFloat32Array(0),
+"times": PackedFloat32Array(0.2),
 "transitions": PackedFloat32Array(1),
 "update": 1,
 "values": [true]
@@ -61,14 +71,14 @@ tracks/1/keys = {
 tracks/2/type = "value"
 tracks/2/imported = false
 tracks/2/enabled = true
-tracks/2/path = NodePath("Sprite2D:modulate")
+tracks/2/path = NodePath("Visuals:modulate")
 tracks/2/interp = 1
 tracks/2/loop_wrap = true
 tracks/2/keys = {
-"times": PackedFloat32Array(0, 0.2),
-"transitions": PackedFloat32Array(1, 1),
+"times": PackedFloat32Array(0, 0.175, 1.325),
+"transitions": PackedFloat32Array(1, 1, 1),
 "update": 0,
-"values": [Color(1, 1, 1, 1), Color(1, 1, 1, 0)]
+"values": [Color(1.5, 1.5, 1.5, 1), Color(1, 1, 1, 1), Color(1, 1, 1, 0)]
 }
 tracks/3/type = "method"
 tracks/3/imported = false
@@ -77,25 +87,88 @@ tracks/3/path = NodePath(".")
 tracks/3/interp = 1
 tracks/3/loop_wrap = true
 tracks/3/keys = {
-"times": PackedFloat32Array(0.9),
+"times": PackedFloat32Array(1.775),
 "transitions": PackedFloat32Array(1),
 "values": [{
 "args": [],
 "method": &"_queue_free"
 }]
 }
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("Visuals:scale")
+tracks/4/interp = 2
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0, 0.125, 1.325),
+"transitions": PackedFloat32Array(-2, -2, 1),
+"update": 0,
+"values": [Vector2(1, 1), Vector2(1.6, 1.6), Vector2(0, 0)]
+}
+tracks/5/type = "value"
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/path = NodePath("Visuals/Reconstruction:scale")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/keys = {
+"times": PackedFloat32Array(0, 0.075, 1.325),
+"transitions": PackedFloat32Array(-2, 2, 1),
+"update": 0,
+"values": [Vector2(1, 1), Vector2(1.6, 1.6), Vector2(0, 0)]
+}
+tracks/6/type = "value"
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/path = NodePath("Visuals/Reconstruction:emitting")
+tracks/6/interp = 1
+tracks/6/loop_wrap = true
+tracks/6/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+tracks/7/type = "method"
+tracks/7/imported = false
+tracks/7/enabled = true
+tracks/7/path = NodePath("Visuals/Reconstruction")
+tracks/7/interp = 1
+tracks/7/loop_wrap = true
+tracks/7/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [],
+"method": &"restart"
+}]
+}
+tracks/8/type = "value"
+tracks/8/imported = false
+tracks/8/enabled = true
+tracks/8/path = NodePath("Visuals/Reconstruction:modulate")
+tracks/8/interp = 1
+tracks/8/loop_wrap = true
+tracks/8/keys = {
+"times": PackedFloat32Array(0, 1.325),
+"transitions": PackedFloat32Array(1, 2),
+"update": 0,
+"values": [Color(1, 1, 1, 1), Color(1, 1, 1, 0)]
+}
 
 [sub_resource type="Animation" id="4"]
+resource_name = "dunk"
 length = 1.5
 step = 0.05
 tracks/0/type = "method"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("Effects/Reconstruction")
+tracks/0/path = NodePath("Visuals/Reconstruction")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
-"times": PackedFloat32Array(0.8),
+"times": PackedFloat32Array(0.4),
 "transitions": PackedFloat32Array(1),
 "values": [{
 "args": [],
@@ -105,11 +178,11 @@ tracks/0/keys = {
 tracks/1/type = "value"
 tracks/1/imported = false
 tracks/1/enabled = true
-tracks/1/path = NodePath("Effects/Reconstruction:emitting")
+tracks/1/path = NodePath("Visuals/Reconstruction:emitting")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
-"times": PackedFloat32Array(0.8),
+"times": PackedFloat32Array(0.4),
 "transitions": PackedFloat32Array(1),
 "update": 1,
 "values": [true]
@@ -117,7 +190,7 @@ tracks/1/keys = {
 tracks/2/type = "method"
 tracks/2/imported = false
 tracks/2/enabled = true
-tracks/2/path = NodePath("Effects/DunkParticles")
+tracks/2/path = NodePath("Visuals/DunkParticles")
 tracks/2/interp = 1
 tracks/2/loop_wrap = true
 tracks/2/keys = {
@@ -131,7 +204,7 @@ tracks/2/keys = {
 tracks/3/type = "value"
 tracks/3/imported = false
 tracks/3/enabled = true
-tracks/3/path = NodePath("Effects/DunkParticles:emitting")
+tracks/3/path = NodePath("Visuals/DunkParticles:emitting")
 tracks/3/interp = 1
 tracks/3/loop_wrap = true
 tracks/3/keys = {
@@ -142,8 +215,8 @@ tracks/3/keys = {
 }
 tracks/4/type = "value"
 tracks/4/imported = false
-tracks/4/enabled = true
-tracks/4/path = NodePath("Sprite2D:modulate")
+tracks/4/enabled = false
+tracks/4/path = NodePath("Visuals:modulate")
 tracks/4/interp = 1
 tracks/4/loop_wrap = true
 tracks/4/keys = {
@@ -159,16 +232,6 @@ _data = {
 "dunk": SubResource("4")
 }
 
-[sub_resource type="Gradient" id="2"]
-resource_local_to_scene = true
-offsets = PackedFloat32Array(0, 0.00699301, 0.244755, 0.468531, 0.839161, 1)
-colors = PackedColorArray(1, 0, 0.580392, 0, 0, 0, 0, 0.258741, 0.535156, 0.535156, 0.535156, 0.705882, 0.839844, 0.839844, 0.839844, 1, 1, 1, 1, 1, 1, 1, 1, 0)
-
-[sub_resource type="Gradient" id="Gradient_u1jw4"]
-resource_local_to_scene = true
-offsets = PackedFloat32Array(0, 0.020202, 0.131313, 0.50505, 0.808081, 1)
-colors = PackedColorArray(1, 0, 0.580392, 0, 1, 1, 1, 0, 1, 1, 1, 1, 0.839844, 0.839844, 0.839844, 1, 0.535156, 0.535156, 0.535156, 0.705882, 0, 0, 0, 0.258741)
-
 [sub_resource type="CircleShape2D" id="CircleShape2D_gwi7s"]
 radius = 64.0
 
@@ -182,7 +245,7 @@ step = 0.15
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/path = NodePath("Visuals:frame")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
@@ -250,10 +313,21 @@ impact_effect = 6
 dust_threshold = 15.0
 impact_threshold = 35.0
 
-[node name="Sprite2D" parent="." index="0"]
-material = SubResource("11")
+[node name="Visuals" parent="." index="0"]
+modulate = Color(1.5, 1.5, 1.5, 1)
+material = SubResource("ShaderMaterial_fa8v6")
 texture = ExtResource("2")
 hframes = 4
+frame = 1
+col1 = Color(0.980392, 1, 0.756863, 1)
+col2 = Color(0.364706, 0.796078, 0.839216, 1)
+col3 = Color(0.160784, 0.203922, 0.431373, 1)
+
+[node name="Reconstruction" parent="Visuals" index="1"]
+color_ramp = SubResource("Gradient_u2con")
+
+[node name="Destruction" parent="Visuals" index="2"]
+color_ramp = SubResource("Gradient_ajg3n")
 
 [node name="collision" parent="." index="1"]
 shape = SubResource("1")
@@ -263,18 +337,7 @@ libraries = {
 "": SubResource("AnimationLibrary_mtq5y")
 }
 
-[node name="Effects" parent="." index="4"]
-col1 = Color(1, 0.976471, 0.796078, 1)
-col2 = Color(0.392157, 0.929412, 1, 1)
-col3 = Color(0.121569, 0.14902, 0.25098, 1)
-
-[node name="Reconstruction" parent="Effects" index="0"]
-color_ramp = SubResource("2")
-
-[node name="Destruction" parent="Effects" index="1"]
-color_ramp = SubResource("Gradient_u1jw4")
-
-[node name="ShockZone" type="Area2D" parent="." index="5"]
+[node name="ShockZone" type="Area2D" parent="." index="4"]
 collision_layer = 0
 collision_mask = 197
 
@@ -282,16 +345,16 @@ collision_mask = 197
 visible = false
 shape = SubResource("CircleShape2D_gwi7s")
 
-[node name="AnimationPlayer" type="AnimationPlayer" parent="." index="6"]
+[node name="AnimationPlayer" type="AnimationPlayer" parent="." index="5"]
 autoplay = "idle"
 libraries = {
 "": SubResource("AnimationLibrary_lctft")
 }
 
-[node name="Timer" type="Timer" parent="." index="7"]
+[node name="Timer" type="Timer" parent="." index="6"]
 one_shot = true
 
-[node name="ShockWaveAnim" type="GPUParticles2D" parent="." index="8"]
+[node name="ShockWaveAnim" type="GPUParticles2D" parent="." index="7"]
 material = SubResource("7")
 emitting = false
 amount = 1

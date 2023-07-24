@@ -34,11 +34,15 @@ func get_throw_position():
 		return P.global_position + Vector2(4.0,-6.0)
 
 func set_has_ball_position(): #TODO set ball sprite position and not ball position.
+	var sprite = S.active_ball.get_node("Visuals")
 	if P.flip_h :
-		S.active_ball.transform.origin.x = - $HasBallPosition.position.x
-		S.active_ball.transform.origin.y = + $HasBallPosition.position.y
+		sprite.position.x = - $HasBallPosition.position.x
+		sprite.position.y = + $HasBallPosition.position.y
+		#S.active_ball.transform.origin.x = - $HasBallPosition.position.x
+		#S.active_ball.transform.origin.y = + $HasBallPosition.position.y
 	else :
-		S.active_ball.transform.origin = + $HasBallPosition.position
+		sprite.position = + $HasBallPosition.position
+		#S.active_ball.transform.origin = + $HasBallPosition.position
 
 #####################
 
@@ -89,6 +93,7 @@ func throw_ball(throw_global_position, speed):
 	if S.has_ball and S.active_ball != null :
 		print("throw "+S.active_ball.name)
 		S.released_ball = S.active_ball
+		S.active_ball.get_node("Visuals").position = Vector2.ZERO
 		S.active_ball.throw(throw_global_position, speed) # will call free_ball
 		# WARNING: Ugly but it works :
 		await get_tree().create_timer(released_ball_delay).timeout

@@ -18,15 +18,15 @@ func collision_effect(collider, collider_velocity, collision_point, collision_no
 	if speed >= speed_threshold:
 		boum(true, collision_point)
 	if speed >= dust_threshold:
-		$Effects/DustParticle.restart()
+		$Visuals/DustParticle.restart()
 		if speed >= impact_threshold:
 			GlobalEffect.make_impact(collision_point, impact_effect)
 
 func boum(use_min_explosion : bool, boum_global_position : Vector2):
-	if not $Timer.is_stopped():
+	if not $BoumTimer.is_stopped():
 		print(self.name + " is not yet ready for a new boum")
 		return false
-	$Timer.start(boum_timer)
+	$BoumTimer.start(boum_timer)
 	$BoumParticles.global_position = boum_global_position
 	$ShockWaveAnim.global_position = boum_global_position
 	$BoumParticles.restart()

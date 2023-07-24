@@ -7,8 +7,8 @@ var sprite_selection
 var sprite_material
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	sprite_selection = ball.get_node("Sprite2D/Sprite_Selection")
-	sprite_material = ball.get_node("Sprite2D").material
+	sprite_selection = ball.get_node("Visuals/Sprite_Selection")
+	sprite_material = ball.get_node("Visuals").material
 	#mouse_entered.connect(self._on_Selector_mouse_entered)
 	#mouse_exited.connect(self._on_Selector_mouse_exited)
 	#input_pickable = true

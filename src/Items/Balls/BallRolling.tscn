@@ -9,25 +9,25 @@
 friction = 0.0
 absorbent = true
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_gdj7h"]
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_63wu4"]
 resource_local_to_scene = true
 shader = ExtResource("3_uqgkx")
 shader_parameter/activated = false
 shader_parameter/contour_color = Color(1, 1, 0.9, 0.9)
 
-[sub_resource type="CircleShape2D" id="1"]
-resource_local_to_scene = true
-radius = 6.0
-
-[sub_resource type="Gradient" id="2"]
+[sub_resource type="Gradient" id="Gradient_kwojt"]
 resource_local_to_scene = true
 offsets = PackedFloat32Array(0, 0.00699301, 0.244755, 0.468531, 0.839161, 1)
 colors = PackedColorArray(1, 0, 0.580392, 0, 0, 0, 0, 0.258741, 0.535156, 0.535156, 0.535156, 0.705882, 0.839844, 0.839844, 0.839844, 1, 1, 1, 1, 1, 1, 1, 1, 0)
 
-[sub_resource type="Gradient" id="3"]
+[sub_resource type="Gradient" id="Gradient_x2hjf"]
 resource_local_to_scene = true
 offsets = PackedFloat32Array(0, 0.020202, 0.131313, 0.50505, 0.808081, 1)
-colors = PackedColorArray(1, 0, 0.580392, 0, 1, 1, 1, 0, 1, 1, 1, 1, 0.839844, 0.839844, 0.839844, 1, 0.535156, 0.535156, 0.535156, 0.705882, 0, 0, 0, 0.258741)
+colors = PackedColorArray(1, 0, 0.580392, 0, 1, 1, 1, 0, 1, 1, 1, 1, 0.839844, 0.839844, 0.839844, 1, 0.533333, 0.533333, 0.533333, 0.705882, 0, 0, 0, 0.258824)
+
+[sub_resource type="CircleShape2D" id="1"]
+resource_local_to_scene = true
+radius = 6.0
 
 [node name="BallRolling" instance=ExtResource("1")]
 mass = 2.5
@@ -37,19 +37,18 @@ impact_effect = 6
 dust_threshold = 10.0
 impact_threshold = 15.0
 
-[node name="Sprite2D" parent="." index="0"]
-material = SubResource("ShaderMaterial_gdj7h")
+[node name="Visuals" parent="." index="0"]
+material = SubResource("ShaderMaterial_63wu4")
 texture = ExtResource("3")
+col1 = Color(0.847059, 0.54902, 0.639216, 1)
+col2 = Color(0.619608, 0.317647, 0.317647, 1)
+col3 = Color(0.341176, 0.164706, 0, 1)
+
+[node name="Reconstruction" parent="Visuals" index="1"]
+color_ramp = SubResource("Gradient_kwojt")
+
+[node name="Destruction" parent="Visuals" index="2"]
+color_ramp = SubResource("Gradient_x2hjf")
 
 [node name="collision" parent="." index="1"]
 shape = SubResource("1")
-
-[node name="Effects" parent="." index="4"]
-col2 = Color(0.541176, 0.333333, 0.333333, 1)
-col3 = Color(0.227451, 0.192157, 0.192157, 1)
-
-[node name="Reconstruction" parent="Effects" index="0"]
-color_ramp = SubResource("2")
-
-[node name="Destruction" parent="Effects" index="1"]
-color_ramp = SubResource("3")

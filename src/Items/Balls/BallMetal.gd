@@ -26,7 +26,7 @@ func collision_effect(collider, collider_velocity, collision_point, collision_no
 	var speed = (linear_velocity-collider_velocity).dot(collision_normal)
 	if $ImpactTimer.is_stopped() and speed >= dust_threshold:
 		$ImpactTimer.start()
-		$Effects/DustParticle.restart()
+		$Visuals/DustParticle.restart()
 		if speed >= impact_threshold:
 			GlobalEffect.make_impact(collision_point, impact_effect)
 	if speed > destruction_speed_thresh:
@@ -54,4 +54,4 @@ func power_jr(player,delta):
 
 
 func on_pickup(holder):
-	$SpeedParticles.emitting = false
+	$Visuals/SpeedParticles.emitting = false

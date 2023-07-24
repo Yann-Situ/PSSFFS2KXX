@@ -14,7 +14,7 @@ func set_local_gravity(angle : float):#radians
 func collision_effect(collider, collider_velocity, collision_point, collision_normal):
 	var speed = (linear_velocity-collider_velocity).dot(collision_normal)
 	if speed >= dust_threshold:
-		$Effects/DustParticle.restart()
+		$Visuals/DustParticle.restart()
 		if speed >= impact_threshold:
 			GlobalEffect.make_impact(collision_point, impact_effect)
 	set_local_gravity(Vector2.DOWN.angle_to(-collision_normal))
