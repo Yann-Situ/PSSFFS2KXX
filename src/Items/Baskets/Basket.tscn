@@ -174,6 +174,7 @@ is_dash_selectable = false
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="basket_area"]
 modulate = Color(0, 1, 0.0392157, 1)
+position = Vector2(0, 2)
 shape = SubResource("7")
 
 [node name="CPUParticles2D" type="CPUParticles2D" parent="."]
@@ -204,7 +205,6 @@ libraries = {
 z_as_relative = false
 position = Vector2(-3.8147e-06, 7.62939e-06)
 scale = Vector2(1.11855, 1.11855)
-color = Color(1, 0.858824, 0.709804, 1)
 energy = 0.0
 range_z_max = 160
 range_item_cull_mask = 3
@@ -215,12 +215,12 @@ collision_layer = 4
 collision_mask = 4
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D"]
-position = Vector2(16, 0)
+position = Vector2(-15, 0)
 shape = SubResource("13")
 one_way_collision = true
 
 [node name="CollisionShape2D2" type="CollisionShape2D" parent="StaticBody2D"]
-position = Vector2(-16, 0)
+position = Vector2(15, 0)
 shape = SubResource("14")
 one_way_collision = true
 

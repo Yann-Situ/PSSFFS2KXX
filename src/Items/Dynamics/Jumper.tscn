@@ -1,8 +1,11 @@
-[gd_scene load_steps=12 format=3 uid="uid://bcnnkalot4kb0"]
+[gd_scene load_steps=13 format=3 uid="uid://bcnnkalot4kb0"]
 
 [ext_resource type="Texture2D" uid="uid://bcddludfh8obw" path="res://assets/art/environment/environment-interactive.png" id="1"]
 [ext_resource type="Script" path="res://src/Items/Dynamics/Jumper.gd" id="2"]
 [ext_resource type="PackedScene" path="res://src/Effects/LineParticle.tscn" id="3"]
+
+[sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_qgnjc"]
+polygon = PackedVector2Array(-16, 16, -16, 0, 16, 0, 16, 16)
 
 [sub_resource type="CanvasItemMaterial" id="7"]
 particles_animation = true
@@ -68,6 +71,9 @@ _data = {
 z_index = 160
 z_as_relative = false
 script = ExtResource("2")
+
+[node name="LightOccluder2D" type="LightOccluder2D" parent="."]
+occluder = SubResource("OccluderPolygon2D_qgnjc")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 z_index = 150

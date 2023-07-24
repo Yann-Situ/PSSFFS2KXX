@@ -49,7 +49,7 @@ func explode(momentum : Vector2):
 		$DebrisParticle.initial_velocity_min = 0.5*inv_mass * momentum.length()
 		$DebrisParticle.initial_velocity_min = 1.5*inv_mass * momentum.length()
 		$DebrisParticle.restart()
-		$OccluderInstance3D.visible = false
+		$Occluder.visible = false
 		$Breakable.collision_layer = 0
 		$Breakable.collision_mask = 0
 

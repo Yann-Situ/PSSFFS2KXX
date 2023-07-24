@@ -1,16 +1,16 @@
 [gd_scene load_steps=17 format=3 uid="uid://2ymclvw0kbbm"]
 
 [ext_resource type="Texture2D" uid="uid://0q8qxsby5sw5" path="res://assets/art/effects/light2.png" id="1"]
-[ext_resource type="PackedScene" path="res://src/Items/Balls/Ball.tscn" id="2"]
-[ext_resource type="PackedScene" path="res://src/Items/Dynamics/RailLine.tscn" id="3"]
+[ext_resource type="PackedScene" uid="uid://cxn2m3havcmil" path="res://src/Items/Balls/Ball.tscn" id="2"]
+[ext_resource type="PackedScene" uid="uid://cjv8hfeex2clu" path="res://src/Items/Dynamics/RailLine.tscn" id="3"]
 [ext_resource type="PackedScene" path="res://src/Items/Interactive/DashTarget.tscn" id="4"]
-[ext_resource type="PackedScene" path="res://src/Levels/Portal.tscn" id="5"]
+[ext_resource type="PackedScene" uid="uid://b45hldwkibtqb" path="res://src/Levels/Portal.tscn" id="5"]
 [ext_resource type="Texture2D" uid="uid://b4ydi56jhjt5p" path="res://assets/art/background/ShopBackground2.png" id="6"]
-[ext_resource type="PackedScene" path="res://src/Items/Balls/BallShock.tscn" id="7"]
+[ext_resource type="PackedScene" uid="uid://27jkgoi43hoq" path="res://src/Items/Balls/BallShock.tscn" id="7"]
 [ext_resource type="PackedScene" uid="uid://b5emf4je4tnag" path="res://src/Levels/Room2D.tscn" id="8"]
-[ext_resource type="PackedScene" path="res://src/Items/Dynamics/ZipLine.tscn" id="9"]
+[ext_resource type="PackedScene" uid="uid://0oao7gw1q1bh" path="res://src/Items/Dynamics/ZipLine.tscn" id="9"]
 [ext_resource type="Shader" path="res://assets/shader/cloudsky.gdshader" id="10"]
-[ext_resource type="PackedScene" path="res://src/Items/Interactive/GraffSpray.tscn" id="11"]
+[ext_resource type="PackedScene" uid="uid://c6cdyqr51vbxh" path="res://src/Items/Interactive/GraffSpray.tscn" id="11"]
 
 [sub_resource type="ShaderMaterial" id="6"]
 shader = ExtResource("10")
@@ -35,7 +35,7 @@ resource_local_to_scene = true
 gradient = SubResource("1")
 width = 516
 
-[sub_resource type="Curve2D" id="Curve2D_60xku"]
+[sub_resource type="Curve2D" id="Curve2D_4wnuu"]
 resource_local_to_scene = true
 _data = {
 "points": PackedVector2Array(0, 0, 0, 0, 0, -1, 0, 0, 0, 0, 160, 159, 0, 0, 0, 0, 352, 159)
@@ -123,7 +123,7 @@ final_point = Vector2(700, 120)
 
 [node name="RailLine" parent="Environment/Dynamics" index="1" instance=ExtResource("3")]
 position = Vector2(256, 1)
-curve = SubResource("Curve2D_60xku")
+curve = SubResource("Curve2D_4wnuu")
 
 [node name="DashTarget" parent="Environment/Interactive" index="0" instance=ExtResource("4")]
 position = Vector2(2176, -64)

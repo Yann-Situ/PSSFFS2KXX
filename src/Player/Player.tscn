@@ -49,7 +49,7 @@
 [ext_resource type="AnimationNodeBlendTree" uid="uid://cmsxpc5f28w5c" path="res://src/Player/AnimationTreeHandler/Stance.tres" id="46"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_0vsxb"]
-size = Vector2(8.5, 57)
+size = Vector2(17, 57)
 
 [sub_resource type="CircleShape2D" id="2"]
 resource_local_to_scene = true
@@ -1463,7 +1463,7 @@ color_ramp = SubResource("53")
 
 [sub_resource type="CompressedTexture2D" id="55"]
 
-[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_waxax"]
+[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_46syv"]
 resource_local_to_scene = true
 particles_animation = true
 particles_anim_h_frames = 6
@@ -1747,7 +1747,7 @@ lifetime = 0.65
 explosiveness = 0.9
 
 [node name="GrindParticles" parent="PlayerEffects" instance=ExtResource("27")]
-material = SubResource("CanvasItemMaterial_waxax")
+material = SubResource("CanvasItemMaterial_46syv")
 position = Vector2(0, 16)
 
 [node name="BallHandler" type="Area2D" parent="."]
@@ -1862,7 +1862,6 @@ texture = ExtResource("44_a1agg")
 [node name="Combos" type="Node" parent="."]
 
 [node name="LifeHandler" type="Node2D" parent="."]
-visible = false
 script = ExtResource("30")
 
 [node name="HitBox" type="Area2D" parent="LifeHandler"]

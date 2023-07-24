@@ -1,4 +1,4 @@
-[gd_scene load_steps=59 format=3 uid="uid://dgjpons7cu2id"]
+[gd_scene load_steps=60 format=3 uid="uid://dgjpons7cu2id"]
 
 [ext_resource type="PackedScene" uid="uid://b5emf4je4tnag" path="res://src/Levels/Room2D.tscn" id="1"]
 [ext_resource type="PackedScene" uid="uid://b45hldwkibtqb" path="res://src/Levels/Portal.tscn" id="2"]
@@ -26,6 +26,7 @@
 [ext_resource type="PackedScene" uid="uid://babjtotux2mv3" path="res://src/Map/MovingPlatform.tscn" id="24_w6usv"]
 [ext_resource type="PackedScene" uid="uid://cjrs0hleolbs1" path="res://src/Map/HiddenPlace.tscn" id="26_c0fxs"]
 [ext_resource type="PackedScene" uid="uid://dfka4lp6t6tym" path="res://src/Effects/Mirror.tscn" id="26_ghqss"]
+[ext_resource type="Texture2D" uid="uid://0q8qxsby5sw5" path="res://assets/art/effects/light2.png" id="27_tjpql"]
 
 [sub_resource type="Gradient" id="1"]
 resource_local_to_scene = true
@@ -56,14 +57,14 @@ shader_parameter/velocity = Vector2(0.4, 0)
 shader_parameter/fog_color = Color(0.454902, 0.384314, 0.231373, 0.513726)
 shader_parameter/noise = SubResource("10")
 
-[sub_resource type="Curve2D" id="Curve2D_8m7bn"]
+[sub_resource type="Curve2D" id="Curve2D_epwho"]
 resource_local_to_scene = true
 _data = {
 "points": PackedVector2Array(0, 0, 0, 0, 512, -16, 0, 0, 0, 0, -192, 24)
 }
 point_count = 2
 
-[sub_resource type="Curve2D" id="Curve2D_6j1gy"]
+[sub_resource type="Curve2D" id="Curve2D_ixxq3"]
 resource_local_to_scene = true
 _data = {
 "points": PackedVector2Array(0, 0, 0, 0, 584, -80, 0, 0, 0, 0, -120, 16)
@@ -118,21 +119,21 @@ size = Vector2(64, 352)
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_vfrlb"]
 size = Vector2(144, 16)
 
-[sub_resource type="Curve2D" id="Curve2D_pxa4u"]
+[sub_resource type="Curve2D" id="Curve2D_acp45"]
 resource_local_to_scene = true
 _data = {
 "points": PackedVector2Array(0, 0, 0, 0, 264, 288, 0, 0, 0, 0, -240, 16)
 }
 point_count = 2
 
-[sub_resource type="Curve2D" id="Curve2D_auv5y"]
+[sub_resource type="Curve2D" id="Curve2D_xnlg4"]
 resource_local_to_scene = true
 _data = {
 "points": PackedVector2Array(0, 0, 0, 0, 264, 288, 0, 0, 0, 0, -240, 16)
 }
 point_count = 2
 
-[sub_resource type="Curve2D" id="Curve2D_fhasx"]
+[sub_resource type="Curve2D" id="Curve2D_08icc"]
 resource_local_to_scene = true
 _data = {
 "points": PackedVector2Array(0, 0, 0, 0, 264, 288, 0, 0, 0, 0, -240, 16)
@@ -285,6 +286,7 @@ metadata/_edit_group_ = true
 metadata/_edit_lock_ = true
 
 [node name="Fog" type="ColorRect" parent="ParallaxForeground/ParallaxLayer5" index="0"]
+visible = false
 material = SubResource("5")
 offset_left = -784.0
 offset_top = -952.0
@@ -295,12 +297,12 @@ mouse_filter = 2
 
 [node name="CanvasModulate" parent="Map" index="0"]
 visible = true
-color = Color(0.921569, 0.760784, 0.580392, 1)
+color = Color(0.486275, 0.403922, 0.27451, 1)
 
 [node name="ParabolaCatenary" parent="Map" index="1" instance=ExtResource("9")]
 z_index = 300
 position = Vector2(32, -384)
-curve = SubResource("Curve2D_8m7bn")
+curve = SubResource("Curve2D_epwho")
 p0_slope = 0.597
 line_width = 7.438
 line_modulate = Color(0.329412, 0.329412, 0.329412, 1)
@@ -309,7 +311,7 @@ line_texture = ExtResource("8")
 [node name="ParabolaCatenary2" parent="Map" index="2" instance=ExtResource("9")]
 z_index = 300
 position = Vector2(-40, -384)
-curve = SubResource("Curve2D_6j1gy")
+curve = SubResource("Curve2D_ixxq3")
 p0_slope = 0.969
 line_width = 7.0
 line_modulate = Color(0.196078, 0.196078, 0.196078, 1)
@@ -383,7 +385,7 @@ shape = SubResource("RectangleShape2D_i6knb")
 
 [node name="TileMap16" parent="Map" index="5"]
 layer_0/tile_data = PackedInt32Array(-786444, 196608, 0, -786443, 196608, 0, -786442, 131072, 1, -786441, 131072, 1, -786440, 196608, 1, -786439, 131072, 0, -786438, 131072, 1, -786437, 196608, 1, -786436, 262144, 0)
-layer_1/tile_data = PackedInt32Array(-1179611, 262144, 3, -1114075, 327680, 3, -1048539, 327680, 3, -983003, 327680, 3, -917467, 327680, 3, -851931, 327680, 3, -786395, 327680, 3, -720859, 327680, 3, -524252, 327680, 2, -524253, 458752, 2, -458717, 327680, 3, -393181, 393216, 3, -393182, 262144, 2, -524251, 327680, 2, -524250, 327680, 2, -524249, 327680, 2, -524248, 327680, 2, -589783, 327680, 3, -655319, 327680, 3, -720855, 327680, 3, -786391, 327680, 3, -851927, 327680, 3, -917463, 327680, 3, -982999, 327680, 3, -1048535, 327680, 3, -1114071, 327680, 3, -1179607, 262144, 3, -524247, 393216, 3, -655323, 327680, 3, -589787, 524288, 3, -458715, 262144, 3, -393179, 327680, 3, -327643, 327680, 3, -262107, 327680, 3, -196571, 327680, 3, -131035, 327680, 3, -65499, 458752, 3, -65498, 327680, 2, -65497, 524288, 2, 40, 262144, 3, 65576, 327680, 3, 131112, 327680, 3, 196648, 327680, 3, 262184, 327680, 3, 327720, 327680, 3, 393256, 327680, 3, 458792, 524288, 3, -1179604, 262144, 3, -1114068, 393216, 3, -1114069, 327680, 2, -1114070, 262144, 2, -1245140, 524288, 3, -1310676, 327680, 3, -1376212, 327680, 3, -1441748, 327680, 3, -1507284, 327680, 3, -1572820, 327680, 3, -1638356, 327680, 3, -1703892, 262144, 3, -458765, 262144, 3, -393229, 327680, 3, -327693, 327680, 3, -262157, 327680, 3, -196621, 327680, 3, -131085, 327680, 3, -65549, 327680, 3, -13, 393216, 6, -524264, 786432, 0, -589800, 786432, 0, -655336, 786432, 0, -720872, 786432, 0, -786408, 851968, 1, -786409, 786432, 1, -786407, 917504, 0, -786406, 917504, 1, -851944, 851968, 0, -458728, 786432, 0, 65521, 851968, 0, -65533, 983040, 0, -4, 589824, 0, -3, 655360, 0, -2, 589824, 0, -1, 458752, 0, -65536, 720896, 0, -917515, 393216, 8, -917512, 655360, 8, -917509, 393216, 8, -917506, 262144, 8, -983039, 393216, 8, -1310731, 262144, 8, -1310728, 0, 8, -1310725, 0, 8, -1310722, 393216, 8, -1376255, 0, 8, -1834926, 917504, 6, -1834924, 1114112, 6, -1834923, 1114112, 6, -1834922, 1179648, 6, -1834920, 1310720, 6, -1834919, 1114112, 6, -1834918, 1114112, 6, -1834917, 1441792, 6, -1834906, 917504, 4, -720908, 327680, 0)
+layer_1/tile_data = PackedInt32Array(-1179611, 262144, 3, -1114075, 327680, 3, -1048539, 327680, 3, -983003, 327680, 3, -917467, 327680, 3, -851931, 327680, 3, -786395, 327680, 3, -720859, 327680, 3, -524252, 327680, 2, -524253, 458752, 2, -458717, 327680, 3, -393181, 393216, 3, -393182, 262144, 2, -524251, 327680, 2, -524250, 327680, 2, -524249, 327680, 2, -524248, 327680, 2, -589783, 327680, 3, -655319, 327680, 3, -720855, 327680, 3, -786391, 327680, 3, -851927, 327680, 3, -917463, 327680, 3, -982999, 327680, 3, -1048535, 327680, 3, -1114071, 327680, 3, -1179607, 262144, 3, -524247, 393216, 3, -655323, 327680, 3, -589787, 524288, 3, -458715, 262144, 3, -393179, 327680, 3, -327643, 327680, 3, -262107, 327680, 3, -196571, 327680, 3, -131035, 327680, 3, -65499, 458752, 3, -65498, 327680, 2, -65497, 524288, 2, 40, 262144, 3, 65576, 327680, 3, 131112, 327680, 3, 196648, 327680, 3, 262184, 327680, 3, 327720, 327680, 3, 393256, 327680, 3, 458792, 524288, 3, -1179604, 262144, 3, -1114068, 393216, 3, -1114069, 327680, 2, -1114070, 262144, 2, -1245140, 524288, 3, -1310676, 327680, 3, -1376212, 327680, 3, -1441748, 327680, 3, -1507284, 327680, 3, -1572820, 327680, 3, -1638356, 327680, 3, -1703892, 262144, 3, -458765, 262144, 3, -393229, 327680, 3, -327693, 327680, 3, -262157, 327680, 3, -196621, 327680, 3, -131085, 327680, 3, -65549, 327680, 3, -13, 393216, 6, -524264, 786432, 0, -589800, 786432, 0, -655336, 786432, 0, -720872, 786432, 0, -786408, 851968, 1, -786409, 786432, 1, -786407, 917504, 0, -786406, 917504, 1, -851944, 851968, 0, -458728, 786432, 0, 65521, 851968, 0, -65533, 983040, 0, -4, 589824, 0, -3, 655360, 0, -2, 589824, 0, -1, 458752, 0, -65536, 720896, 0, -917515, 393216, 8, -917512, 655360, 8, -917509, 393216, 8, -917506, 262144, 8, -983039, 393216, 8, -1310731, 262144, 8, -1310728, 0, 8, -1310725, 0, 8, -1310722, 393216, 8, -1376255, 0, 8, -1834926, 917504, 6, -1834924, 1114112, 6, -1834923, 1114112, 6, -1834922, 1179648, 6, -1834920, 1310720, 6, -1834919, 1114112, 6, -1834918, 1114112, 6, -1834917, 1441792, 6, -1834906, 917504, 4, -720908, 327680, 0, -20, 655360, 4, 83, 655360, 4)
 layer_2/tile_data = PackedInt32Array(-458772, 786432, 0, -393236, 786432, 0, -327700, 786432, 0, -262164, 786432, 0, -196628, 786432, 0, -131092, 786432, 0, -65556, 786432, 0, -20, 786432, 0, -524308, 131072, 1, -524306, 131072, 1, -458770, 786432, 0, -393234, 786432, 0, -327698, 786432, 0, -262162, 786432, 0, -196626, 786432, 0, -131090, 786432, 0, -65554, 786432, 0, -18, 786432, 0, -524304, 131072, 1, -458768, 786432, 0, -393232, 786432, 0, -327696, 786432, 0, -262160, 786432, 0, -196624, 786432, 0, -131088, 786432, 0, -65552, 786432, 0, -16, 786432, 0, -524302, 131072, 1, -458766, 786432, 0, -393230, 786432, 0, -327694, 786432, 0, -262158, 786432, 0, -196622, 786432, 0, -131086, 786432, 0, -65550, 786432, 0, -14, 786432, 0, -524310, 196608, 3, -458774, 786432, 0, -393238, 786432, 0, -327702, 786432, 0, -262166, 786432, 0, -196630, 786432, 0, -131094, 786432, 0, -65558, 786432, 0, -22, 786432, 0, -524312, 196608, 2, -458776, 786432, 0, -393240, 786432, 0, -327704, 786432, 0, -262168, 786432, 0, -196632, 786432, 0, -131096, 786432, 0, -65560, 786432, 0, -24, 786432, 0, -524314, 131072, 3, -524313, 196608, 2, -524311, 196608, 2, -524309, 131072, 3, -524307, 131072, 1, -524305, 131072, 1, -524303, 131072, 1, -524301, 131072, 1, -458778, 786432, 0, -393242, 786432, 0, -327706, 786432, 0, -262170, 786432, 0, -196634, 786432, 0, -131098, 786432, 0, -65562, 786432, 0, -26, 786432, 0, -8, 720896, 0, -5, 393216, 5, -9, 589824, 0, -10, 655360, 0, -11, 458752, 0, -12, 720896, 0, -13, 720896, 0, -65533, 589824, 0, -65532, 720896, 0, -65531, 983040, 0)
 
 [node name="TileMap16Body" parent="Map" index="6"]
@@ -510,17 +512,17 @@ rectangle_extents = Vector2(256, 480)
 
 [node name="ParabolaCatenary" parent="Environment" index="10" instance=ExtResource("9")]
 position = Vector2(1688, -464)
-curve = SubResource("Curve2D_pxa4u")
+curve = SubResource("Curve2D_acp45")
 p0_slope = 1.553
 
 [node name="ParabolaCatenary2" parent="Environment" index="11" instance=ExtResource("9")]
 position = Vector2(1688, -464)
-curve = SubResource("Curve2D_auv5y")
+curve = SubResource("Curve2D_xnlg4")
 p0_slope = 1.312
 
 [node name="ParabolaCatenary3" parent="Environment" index="12" instance=ExtResource("9")]
 position = Vector2(1688, -464)
-curve = SubResource("Curve2D_fhasx")
+curve = SubResource("Curve2D_08icc")
 p0_slope = 1.473
 line_width = 4.28
 line_texture = ExtResource("8")
@@ -642,3 +644,16 @@ position = Vector2(1744, -112)
 
 [node name="BallBubble" parent="." index="12" instance=ExtResource("16_kdw4g")]
 position = Vector2(1496, -120)
+
+[node name="LightFront" type="PointLight2D" parent="." index="13"]
+z_index = 300
+z_as_relative = false
+position = Vector2(1824, 0)
+scale = Vector2(2, 2)
+color = Color(1, 0.929412, 0.886275, 1)
+energy = 1.34
+blend_mode = 2
+range_layer_max = 1
+range_item_cull_mask = 31
+texture = ExtResource("27_tjpql")
+texture_scale = 2.56

@@ -7,6 +7,7 @@ extends Action
 var velocity_save = Vector2.ZERO
 var dash_dir = Vector2.ZERO
 var nb_quadrant = 8
+var accel_alterer = AltererMultiplicative.new(0.0)
 
 func move(delta):
 	print("begindash")
@@ -19,7 +20,7 @@ func move(delta):
 	S.set_action(S.ActionType.DUNKDASH)
 
 	#P.gravity = Vector2.ZERO
-	P.remove_accel(Global.gravity_alterer)
+	P.add_accel(accel_alterer)
 
 	P.PlayerEffects.cloud_start()
 	P.PlayerEffects.jump_start()
@@ -56,9 +57,9 @@ func move(delta):
 
 func move_end():
 	print("enddash")
-	P.add_accel(Global.gravity_alterer) # TODO check if it is in an antigravity zone ? or set a 0-multiplicative alterer
+	P.remove_accel(accel_alterer)
 
-	if not S.is_grinding:
+	if not S.is_grinding and not S.is_hanging :
 		var temp_vel_l = S.velocity.length()
 		var vel_dir = Vector2.ZERO
 		if temp_vel_l != 0.0: #avoid zero division
@@ -70,8 +71,7 @@ func move_end():
 			S.set_velocity_safe(temp_dot * vel_dir)
 
 		if S.direction_p * S.move_direction < 0:
-			S.set_velocity_safe(S.velocity * 0.5) # again
-	#P.get_node("Sprite2D").modulate = Color.WHITE
+			S.set_velocity_safe(Vector2(S.velocity.x * 0.5, S.velocity.y)) # again, so *0.25 when also match the first case
 
 	if S.has_ball: # WARNING the ball can change during the dash!
 		S.active_ball.on_dunkdash_end(P)

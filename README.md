@@ -38,14 +38,14 @@ List of things to do
 - :pushpin: hang player position
 - [ ] double dash make the player stuck
 - [x] state machines have memory now... (we need to restart the state machine when reentering it) [Fixed in Godot 4.1]
-- :pushpin: S.velocity is set to Vec2(0.0) every frame when animation_tree is active (really weird bug) [currently a temporary solution]
+- [x] S.velocity is set to Vec2(0.0) every frame when animation_tree is active (really weird bug) [Fixed with a temporary solution] [seems to be fixed in Godot 4.1]
 - [x] ball rework (currently a rigidbody implementation but there are physics annoying bugs https://github.com/godotengine/godot/issues/76610) (Solved using [GodotTilemapBaker](https://github.com/popcar2/GodotTilemapBaker/tree/main))
 - [x] player_friction and forces using Alterable
 - [ ] catch and ball release
 - :pushpin: tileset/map rework
 - [ ] Improve TileMapBaker to take into account different physical layer, for example ballwall and playerwall
 
-Pull request to master when :pushpin:**ball physics** and [x]**player animations** will be correctly handled.
+Pull request to master when [x]**ball physics**, :pushpin:**ziplin and rails** and [x]**player animations** will be correctly handled.
 
 ## Work to do
 * Graphism :
@@ -125,7 +125,7 @@ Pull request to master when :pushpin:**ball physics** and [x]**player animations
 * [ ] **Dunkjumping** while only moving with floor adherence a bit far from basket results in missing the basket.
 * [ ] **Dunkjumping** while only moving with floor adherence a bit far from basket results in missing the basket.
 * [ ] **Release** ball when **aiming** results in error.
-* [ ] It is possible to **dunk** through walls. It can result in *ghost* emmiting (dont know why). [TODO TEST]
+* [ ] It is possible to **Dunk** through walls. It can result in *ghost* emmiting (dont know why). [TODO TEST]
 * [ ] **One-way platform** make player crouch due to raycast mechanic. This implies weird camera movement.
 * [ ] **One-way platform** make player unable to do small jumps. [TODO handle one-way correctly (raycast and CollisionShapes)]
 * [ ] Pressing **dunkdash** at a precise moment during **dunk** animation results in **dunkdashing** on place.
@@ -140,22 +140,23 @@ Pull request to master when :pushpin:**ball physics** and [x]**player animations
 * [x] Characters can leave **rail** if Player press **crouch** on it.
     - Implement the `riding` and `hanging` states.
 * [x] Balls can perform too big jumps at the junction of multiple **Jumpers**. This is due to `apply_impulse` not changing immediately the velocity value of a RigidBody2D. This implies applying two times the *jump_impulse*, which is designed to compensate the original velocity and apply the *jump_velocity*. [resolved by implementing a smart `override_impulse` that cancel directional velocity and apply impulse, but solely the last call before `integrate_force` will have an effect]
-* [ ] A ball that bounces on the ring of a **basket** can do multiple goals.
-* [ ] **Zipline** drop inside collision places results in stucked player.
+* :pushpin: A ball that bounces on the ring of a **basket** can do multiple goals. [Partially resolve by lowering the basket goal detector]
+* [ ] **ZipLine** or **RailLine** drop inside collision places results in stucked player or high velocity.
 * [ ] Get out from **zipline** just after passing over a **Jumper** results in sliding (like on ice) because **can_go_timer** was changed. [TODO REWORK **Zipline** and **Rails**]
 * [ ] Stuck colliding on a **rail** can result in building speed. [TODO TEST]
 * [ ] Entering **Pipe** at perfect frame when disabling the **Pipe** can result in a disabled ball floating in the air. -> don't stop the tween to enter the pipe when disabling the pipe. [hard to reproduce, it happened once]
-* :pushpin: **Explosion** hitbox seems to be broken for squared boxes.
+* :pushpin: **Explosion** hitbox seems to be broken for squared boxes. [Partially resolved by exploding objects whose center is not in the area in the last frame of Explosion]
+* [ ] **RailLine** going backward vertically switch. This results also in stopping the player and having alternative vertical normal.
 
 ### Physics
 * [x] TileMap hitboxes (bounce on corners of each tile + balls pass through 2 adjacent tiles). **size up the hitboxes smartly**
 * [x] Physic of balls when picked up (stay physically on the ground...). **complicated** see rigidbody functions and how `integrate_force` works.
 * :pushpin: Problems with physics on **slopes** [DAMN IT].
 * [x] **Player** catching ball while inside **BallWall** results in stuck player. [Maybe disable the player catch area while inside ballwall?]
-* [ ] Problems when passing from a block just **16 pixel** over the other block (results in tiny teleportation but visible due to camera instant movement).
-* [ ] Jitter when multiple **balls** are above each other (with rigidbodies, physicbodies and situbodies). [TODO TEST].
-* [ ] **Ball** located just on a **spawner** position results in very high velocity when spawning a ball on it [hard to reproduce].
-* [ ] **Wind** is not affecting Player when **grinding** and **hanging** [TODO implement a smart `move_character(character, velocity)` function for *character_holder* that take the character velocity at each physics process call and move the character according to the holder].
+* [ ] Problems when passing from a block just **16 pixel** over the other block (results in tiny teleportation but visible due to camera instant movement). [TODO TEST]
+* [ ] Jitter when multiple **balls** are above each other (with rigidbodies, physicbodies and situbodies). [TODO TEST]
+* [ ] **Ball** located just on a **spawner** position results in very high velocity when spawning a ball on it [hard to reproduce]. [TODO TEST]
+* :pushpin: **Wind** is not affecting Player when **grinding** and **hanging** [TODO implement a smart `move_character(character, velocity)` function for *character_holder* that take the character velocity at each physics process call and move the character according to the holder].
 * :pushpin: annoying **Tilemap** physics problems. Partially resolved using [TilemapBaker](https://github.com/popcar2/GodotTilemapBaker) but still some problems at the junction between custom blocks (box, jumpers, ...):
     - tunneling ;
     - tile junction bounce problems. See this [issue](https://github.com/godotengine/godot/issues/76610).
@@ -200,12 +201,14 @@ Pull request to master when :pushpin:**ball physics** and [x]**player animations
 * [ ] Pressing **jump** and **dunkdash** just before landing can result in small dunkdash/jump.
 * [ ] **Dunkdashing** just before entering a **rail** can result in a dash boost grind.
 * [ ] Up-**Dunkdash** just after a **Jump** or a **ShockJump** results in high **Dunkdash**.
+* [ ] Tangent velocity kept after **Dunkdash**. This results in interesting vertical **Dunkdash** then fast horizontal run.
 * [ ] **Dunkjump** through a **one way platform** resets the dash.
 * [ ] **Dunkjump** with pressing jump_button while pre-dunkjumping can result in high or low dunkjump.
 * [ ] At the connection between a **rail** and a solid block, if the character is falling such that they will wallslide on the block if there wasn't a rail, and is falling fast enough, the character will normally grind but with 0 initial speed.
     - At the connection between a **rail** and stairs, if the character is falling such that they will go on the slope if there wasn't a rail, and is falling fast enough, the character will normally grind but with 0 speed in the direction down the stairs.
 * [ ] Player changing **Room2D** while in a **BallWall** results in player not able to pickup ball. (If glitch, we need to make sure portals are away from ballwall).
 * [ ] **Mirror** weird effect when trying to mirror something out of camera (happen when the mirror takes half of the camera).
+* [ ] **Hitbox** of **Player** a bit smaller than its collisionbox, resulting in the player being pushed by an explosion but not taking damage. It also results in Player being on the edge of spikes without taking damage (maybe change this later behaviour?).
 
 ### Godot Issues
 * in `Ball.gd` function `change_holder`: issue related to https://github.com/godotengine/godot/issues/14578 and https://github.com/godotengine/godot/issues/34207. See [my workaround](https://www.reddit.com/r/godot/comments/vjkaun/reparenting_node_without_removing_it_from_tree/).
