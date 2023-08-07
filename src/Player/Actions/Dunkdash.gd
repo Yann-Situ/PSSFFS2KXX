@@ -21,23 +21,7 @@ func move(delta):
 
 	#P.gravity = Vector2.ZERO
 	P.add_accel(accel_alterer)
-
-	P.PlayerEffects.cloud_start()
-	P.PlayerEffects.jump_start()
-	if S.has_ball:
-		P.PlayerEffects.ghost_start(0.21,0.05, Color.WHITE,S.active_ball.get_dash_gradient())
-		S.active_ball.on_dunkdash_start(P)
-	else:
-		P.PlayerEffects.ghost_start(0.21,0.05, ghost_modulate)
-	P.PlayerEffects.distortion_start("fast_soft",0.75)
-	Global.camera.screen_shake(0.2,10)
-
-	S.get_node("ToleranceDunkJumpPressTimer").stop()
-	S.get_node("CanJumpTimer").start(S.countdown_jump)
-	S.get_node("CanGoTimer").start(can_go_delay)
-
 	velocity_save = S.velocity
-
 #	var q = (S.dunkdash_basket.position+up_distance_to_basket*Vector2.UP) - P.position
 #	q *= -P.dunkdash_speed/q.length()
 #	q.y = max(q.y, P.jump_speed)
@@ -54,6 +38,20 @@ func move(delta):
 		P.get_out(P.global_position, dash_velocity)
 	else :
 		S.set_velocity_safe(dash_velocity)
+
+	if S.has_ball:
+		S.active_ball.on_dunkdash_start(P)
+		P.PlayerEffects.ghost_start(0.21,0.05, Color.WHITE,S.active_ball.get_dash_gradient())
+	else:
+		P.PlayerEffects.ghost_start(0.21,0.05, ghost_modulate)
+	P.PlayerEffects.cloud_start()
+	P.PlayerEffects.jump_start()
+	P.PlayerEffects.distortion_start("fast_soft",0.75)
+	Global.camera.screen_shake(0.2,10)
+
+	S.get_node("ToleranceDunkJumpPressTimer").stop()
+	S.get_node("CanJumpTimer").start(S.countdown_jump)
+	S.get_node("CanGoTimer").start(can_go_delay)
 
 func move_end():
 	print("enddash")

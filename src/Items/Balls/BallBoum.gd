@@ -4,6 +4,7 @@ extends Ball
 @export var boum_timer : float = 1.0##s : minimum time between two consecutive boums.
 @export var max_explosion_data : ExplosionData
 @export var min_explosion_data : ExplosionData
+@export var impulse_dash_boum : float = 800.0
 
 func _ready():
 	super()
@@ -54,6 +55,7 @@ func power_jr(player,delta):
 func on_dunkdash_start(player: Player):
 	$BoumParticles.global_position = player.global_position
 	$BoumParticles.restart()
+	player.add_impulse(impulse_dash_boum*player.S.velocity.normalized())
 
 func on_destruction(): # call before changing holder, disable_physics and deleting selectors
 	boum(true, self.global_position)
