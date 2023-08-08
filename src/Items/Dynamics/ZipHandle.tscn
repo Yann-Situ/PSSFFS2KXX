@@ -1,0 +1,23 @@
+[gd_scene load_steps=4 format=3 uid="uid://7gc1fqlu8cpd"]
+
+[ext_resource type="Script" path="res://src/Items/Dynamics/ZipHandle.gd" id="1_6b4in"]
+[ext_resource type="Texture2D" uid="uid://bcddludfh8obw" path="res://assets/art/environment/environment-interactive.png" id="1_rlggn"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_4jfmp"]
+
+[node name="ZipHandle" type="PathFollow2D"]
+script = ExtResource("1_6b4in")
+character_offset = Vector2(0, 44)
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("1_rlggn")
+region_enabled = true
+region_rect = Rect2(16, 160, 16, 16)
+
+[node name="Area2D" type="Area2D" parent="."]
+collision_layer = 8
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+shape = SubResource("CircleShape2D_4jfmp")
+
+[connection signal="body_exited" from="Area2D" to="." method="_on_Area_body_exited"]

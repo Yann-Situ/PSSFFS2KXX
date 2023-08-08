@@ -340,10 +340,13 @@ func reset_position():
 
 ################################################################################
 # For `characters` group
+func is_hold() -> bool:
+	return character_holder != null
+	
 func get_in(new_holder : Node):
 	if not new_holder.is_in_group("characterholders"):
 		printerr("error["+name+"], new_holder is not in group `characterholders`.")
-	if character_holder != null:
+	if is_hold():
 		character_holder.free_character(self)
 	self.disable_physics()
 	character_holder = new_holder
@@ -352,7 +355,7 @@ func get_out(out_global_position : Vector2, _velocity : Vector2):
 	self.enable_physics()
 	global_position = out_global_position
 	S.set_velocity_safe(_velocity)
-	if character_holder != null:
+	if is_hold():
 		character_holder.free_character(self)
 	character_holder = null
 
