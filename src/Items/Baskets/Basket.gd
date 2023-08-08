@@ -1,31 +1,33 @@
 extends Node2D
-class_name Basket, "res://assets/art/icons/basket.png"
+class_name Basket
+# @icon("res://assets/art/icons/basket.png")
 
 signal is_dunked
 signal is_goaled
 
-export var speed_ball_threshold = 380 #velocity value
-export var dunk_position_offset = 16 * Vector2.DOWN
-export var dunk_position_radius = 24
-export var hang_position_offset_y = 16
-export var can_receive_dunk = true
-export var can_receive_dunkjump = true
-export var can_receive_goal = true
-export var can_receive_hang = true
+@export var speed_ball_threshold = 380 #velocity value
+@export var dunk_position_offset = 16 * Vector2.DOWN
+@export var dunk_position_radius = 24
+@export var hang_position_offset_y = 16
+@export var can_receive_dunk = true
+@export var can_receive_dunkjump = true
+@export var can_receive_goal = true
+@export var can_receive_hang = true
 
-export var dunk_cooldown = 0.75#s
-export var dunk_free_character_cooldown = 0.4#s
+@export var dunk_cooldown = 0.75#s
+@export var dunk_free_character_cooldown = 0.4#s
 
 var inside_bodies = []
 var bodies_positions = []
 var distortion_scene = preload("res://src/Effects/Distortion.tscn")
+var tween_light : Tween
 
-onready var start_position = global_position
+@onready var start_position = global_position
 
 # Should be in any items that can be picked/placed :
-func set_start_position(position):
-	start_position = position
-	global_position = position
+func set_start_position(_position):
+	start_position = _position
+	global_position = _position
 
 func _ready():
 	self.z_index = Global.z_indices["foreground_1"]
@@ -37,7 +39,7 @@ func _draw():
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 #func _process(delta):
-#	update()
+#	queue_redraw()
 func _physics_process(delta):
 	var j = 0 # int because we're deleting nodes in a list we're browsing
 	for i in range(inside_bodies.size()):
@@ -77,7 +79,7 @@ func dunk(dunker : Node2D, ball : Ball = null):
 	$DunkCooldown.stop()
 	can_receive_dunk = false
 	$DunkCooldown.start(dunk_cooldown)
-	emit_signal("is_dunked")
+	is_dunked.emit()
 
 
 func get_hanged(character : Node):
@@ -95,11 +97,13 @@ func goal(ball : Ball, score):
 		goal_effects(ball, 2)
 	else :
 		goal_effects(ball, 1)
-	emit_signal("is_goaled")
+	is_goaled.emit()
+	ball.on_goal()
 
 func goal_effects(ball : Ball, force : int = 0):
 	$Effects/LineParticle.amount = force * 16
-	$Effects/LineParticle.process_material.initial_velocity = -40 + force * 80
+	$Effects/LineParticle.process_material.initial_velocity_min = -60.0 + force * 80.0
+	$Effects/LineParticle.process_material.initial_velocity_max = -20.0 + force * 80.0
 	$Effects/LineParticle.process_material.color_ramp.gradient = ball.get_main_gradient()
 	$Effects/LineParticle.restart()
 	if force > 1:
@@ -126,9 +130,9 @@ func pickup_character(character : Node):
 	inside_bodies.push_back(character)
 	bodies_positions.push_back(Vector2(character.global_position.x, \
 		self.global_position.y+hang_position_offset_y))
-	
+
 	character.get_node("Actions/Hang").move(0.01)
-	
+
 	$DunkCooldown.stop()
 	can_receive_dunk = false
 
@@ -153,8 +157,8 @@ func _on_DunkCooldown_timeout():
 
 func remove_body(i : int):
 	assert(i < inside_bodies.size())
-	inside_bodies.remove(i)
-	bodies_positions.remove(i)
+	inside_bodies.remove_at(i)
+	bodies_positions.remove_at(i)
 
 ################################################################################
 
@@ -166,16 +170,15 @@ func set_selection(type : int, value : bool):
 
 func enable_contour():
 	var light = $LightSmall
-	var tween = $LightSmall/Tween
-	if tween.is_active():
-		tween.remove_all()
-	tween.interpolate_property(light, "energy", light.energy, 0.8, 0.15, 0, Tween.EASE_OUT)
-	tween.start()
+	if tween_light:
+		tween_light.kill()
+	tween_light = self.create_tween()
+	tween_light.tween_property(light, "energy", 0.8, 0.15).set_ease(Tween.EASE_OUT)
+
 
 func disable_contour():
 	var light = $LightSmall
-	var tween = $LightSmall/Tween
-	if tween.is_active():
-		tween.remove_all()
-	tween.interpolate_property(light, "energy", light.energy, 0.0, 0.15, 0, Tween.EASE_OUT)
-	tween.start()
+	if tween_light:
+		tween_light.kill()
+	tween_light = self.create_tween()
+	tween_light.tween_property(light, "energy", 0.0, 0.15).set_ease(Tween.EASE_OUT)

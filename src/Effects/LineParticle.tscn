@@ -1,6 +1,6 @@
 [gd_scene load_steps=6 format=2]
 
-[ext_resource path="res://assets/art/effects/line_particule.png" type="Texture" id=1]
+[ext_resource path="res://assets/art/effects/line_particule.png" type="Texture2D" id=1]
 
 [sub_resource type="CanvasItemMaterial" id=18]
 particles_animation = true
@@ -16,7 +16,7 @@ _data = [ Vector2( 0, 1.02727 ), 0.0, 2.46857, 0, 0, Vector2( 1, 0 ), 0.0, 0.0, 
 width = 100
 curve = SubResource( 16 )
 
-[sub_resource type="ParticlesMaterial" id=19]
+[sub_resource type="ParticleProcessMaterial" id=19]
 lifetime_randomness = 0.33
 emission_shape = 2
 emission_box_extents = Vector3( 16, 1, 1 )
@@ -31,7 +31,7 @@ color = Color( 1, 1, 1, 0.839216 )
 anim_speed = 1.0
 anim_speed_curve = SubResource( 17 )
 
-[node name="LineParticle" type="Particles2D"]
+[node name="LineParticle" type="GPUParticles2D"]
 material = SubResource( 18 )
 amount = 4
 lifetime = 1.2

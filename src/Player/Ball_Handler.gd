@@ -1,8 +1,8 @@
 extends Area2D
-# Ball pickup
+# Ball pickup, thrower, shooter, selector, ballwaller
 
-onready var P = get_parent()
-onready var S = P.get_node("State")
+@onready var P = get_parent()
+@onready var S = P.get_node("State")
 
 const collision_mask_balls = 4
 const released_ball_delay = 0.3
@@ -33,12 +33,16 @@ func get_throw_position():
 	else :
 		return P.global_position + Vector2(4.0,-6.0)
 
-func set_has_ball_position():
+func set_has_ball_position(): #TODO set ball sprite position and not ball position.
+	var sprite = S.active_ball.get_node("Visuals")
 	if P.flip_h :
-		S.active_ball.transform.origin.x = - $HasBallPosition.position.x
-		S.active_ball.transform.origin.y = + $HasBallPosition.position.y
+		sprite.position.x = - $HasBallPosition.position.x
+		sprite.position.y = + $HasBallPosition.position.y
+		#S.active_ball.transform.origin.x = - $HasBallPosition.position.x
+		#S.active_ball.transform.origin.y = + $HasBallPosition.position.y
 	else :
-		S.active_ball.transform.origin = + $HasBallPosition.position
+		sprite.position = + $HasBallPosition.position
+		#S.active_ball.transform.origin = + $HasBallPosition.position
 
 #####################
 
@@ -63,8 +67,8 @@ func pickup_ball(ball : Ball):
 	S.has_ball = true
 	S.active_ball = ball
 	if P.physics_enabled:
-		P.set_collision_mask_bit(10, true) #ball_wall collision layer
-	P.collision_mask_save |= 1<<10 # same as set_collision_mask_bit(10,true)
+		P.set_collision_mask_value(10, true) #ball_wall collision layer
+	P.collision_mask_save |= 1<<10 # same as set_collision_mask_value(10,true)
 	ball.pickup(P)
 	ball.select(P)
 
@@ -74,8 +78,8 @@ func free_ball(ball : Ball): # set out  active_ball and has_ball
 		S.active_ball = null
 		S.has_ball = false
 		if P.physics_enabled:
-			P.set_collision_mask_bit(10, false) #ball_wall collision layer
-		P.collision_mask_save &= ~(1<<10) # same as set_collision_mask_bit(10, false)
+			P.set_collision_mask_value(10, false) #ball_wall collision layer
+		P.collision_mask_save &= ~(1<<10) # same as set_collision_mask_value(10, false)
 
 		#print(str(P.collision_layer)+" "+str(P.collision_layer_save))
 		print(P.name+" free_ball")
@@ -89,13 +93,14 @@ func throw_ball(throw_global_position, speed):
 	if S.has_ball and S.active_ball != null :
 		print("throw "+S.active_ball.name)
 		S.released_ball = S.active_ball
+		S.active_ball.get_node("Visuals").position = Vector2.ZERO
 		S.active_ball.throw(throw_global_position, speed) # will call free_ball
 		# WARNING: Ugly but it works :
-		yield(get_tree().create_timer(released_ball_delay), "timeout")
+		await get_tree().create_timer(released_ball_delay).timeout
 		S.released_ball = null
 
 func shoot_ball(): # called by animation
-	throw_ball(get_throw_position(), P.ShootPredictor.shoot_vector_save + 0.5*S.velocity)
+	throw_ball(get_throw_position(), P.ShootPredictor.shoot_vector_save)
 
 func select_ball(ball : Ball): # called by ball.select(P)
 	if S.selected_ball != null and S.selected_ball != ball:
@@ -117,13 +122,13 @@ func select_ball(ball : Ball): # called by ball.select(P)
 func deselect_ball(ball : Ball): # called by ball.deselect(P)
 	assert(S.selected_ball != null)
 	if S.power_p:
-		S.selected_ball.power_jr(self,0.0)
+		S.selected_ball.power_jr(P,0.0)
 	S.selected_ball = null
 	#TEMPORARY CONTROL NODE
 	var ui = P.get_node("UI/MarginContainer/HBoxContainer/MarginContainer/TextureRect/RichTextLabel")
 	ui.clear()
 
-func _physics_process(delta):
+func _physics_process(delta):#TODO use set_physics_process in pickup ?
 	if S.has_ball and S.active_ball != null :
 		set_has_ball_position()
 
@@ -131,5 +136,5 @@ func _on_BallWallDetector_body_entered(body):
 	collision_mask = 0
 
 func _on_BallWallDetector_body_exited(body):
-	if $BallWallDetector.get_overlapping_bodies().empty():
+	if $BallWallDetector.get_overlapping_bodies().is_empty():
 		collision_mask = collision_mask_balls

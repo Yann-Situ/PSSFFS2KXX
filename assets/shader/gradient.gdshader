@@ -1,7 +1,7 @@
 shader_type canvas_item;
 //render_mode unshaded;
 
-uniform sampler2D gradient: hint_black;
+uniform sampler2D gradient: hint_default_black;
 uniform float mix_amount = 1.0;
 
 void fragment(){

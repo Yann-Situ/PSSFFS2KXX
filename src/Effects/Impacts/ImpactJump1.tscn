@@ -1,0 +1,40 @@
+[gd_scene load_steps=7 format=3 uid="uid://ccumhjla47fuk"]
+
+[ext_resource type="Texture2D" uid="uid://baikgm8nq4xli" path="res://assets/art/effects/jumpcloud1.png" id="1_ylmvd"]
+[ext_resource type="Script" path="res://src/Effects/OneShotParticle.gd" id="2_8oucv"]
+
+[sub_resource type="CanvasItemMaterial" id="1"]
+resource_local_to_scene = true
+particles_animation = true
+particles_anim_h_frames = 6
+particles_anim_v_frames = 1
+particles_anim_loop = true
+
+[sub_resource type="Gradient" id="Gradient_em15t"]
+offsets = PackedFloat32Array(0, 0.470588, 1)
+colors = PackedColorArray(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_ifb3j"]
+gradient = SubResource("Gradient_em15t")
+width = 64
+
+[sub_resource type="ParticleProcessMaterial" id="4"]
+direction = Vector3(0, 1, 0)
+spread = 180.0
+gravity = Vector3(0, -10, 0)
+color_ramp = SubResource("GradientTexture1D_ifb3j")
+anim_speed_min = 1.0
+anim_speed_max = 1.0
+
+[node name="ImpactParticles" type="GPUParticles2D"]
+z_index = 110
+material = SubResource("1")
+emitting = false
+amount = 1
+process_material = SubResource("4")
+texture = ExtResource("1_ylmvd")
+lifetime = 0.35
+one_shot = true
+visibility_rect = Rect2(-50, -50, 100, 100)
+script = ExtResource("2_8oucv")
+offset = Vector2(0, -14)

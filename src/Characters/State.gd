@@ -1,19 +1,19 @@
 extends Node
 
-onready var Character = get_parent()
+@onready var Character = get_parent()
 
 const frame_time_ms = 1.0/60.0 #s
 var time = 0.0#s
 
 # Countdowns and delays between actions
-export (float) var tolerance_jump_floor = 9*frame_time_ms #s
-export (float) var tolerance_jump_press = 9*frame_time_ms #s
-export (float) var tolerance_wall_jump = 9*frame_time_ms #s
-export (float) var tolerance_land_lag = 3*frame_time_ms #s
-export (float) var walljump_move_countdown = 22*frame_time_ms #s
-export (float) var jump_countdown = 10*frame_time_ms #s
-export (float) var dunk_countdown = 100*frame_time_ms #s
-export (float) var shoot_countdown = 30*frame_time_ms #s
+@export var tolerance_jump_floor : float = 9*frame_time_ms #s
+@export var tolerance_jump_press : float = 9*frame_time_ms #s
+@export var tolerance_wall_jump : float = 9*frame_time_ms #s
+@export var tolerance_land_lag : float = 3*frame_time_ms #s
+@export var countdown_walljump_move : float = 22*frame_time_ms #s
+@export var countdown_jump : float = 10*frame_time_ms #s
+@export var countdown_dunk : float = 100*frame_time_ms #s
+@export var countdown_shoot : float = 30*frame_time_ms #s
 
 # Bool for inputs ('p' is for 'pressed', 'jp' 'just_pressed', 'jr' 'just_released')
 var right_p = false
@@ -56,7 +56,7 @@ var is_idle = false
 #var is_speeding = false
 
 # Utilities
-export var move_direction = 0
+@export var move_direction = 0
 var direction_p = 0
 #var aim_direction = 0
 var velocity = Vector2()
@@ -73,19 +73,19 @@ var last_onair_velocity_y = 0
 #var last_aim_jp = 0 # still used for shoot vector
 
 # Bool for actions
-export var is_jumping = false # handle also by Character.gd
-export var is_walljumping = false # handle also by Character.gd
-export var is_landing = false # handle also by animations (for stop)
-export var is_landing_roll = false # handle also by animations (for stop)
-export var is_dunkjumping = false # handle also by Character.gd
-export var is_dunking = false # handle also by Character.gd
-export var is_halfturning = false # handle also by Character.gd
-export var is_crouching = false # handle also by Character.gd
+@export var is_jumping = false # handle also by Character.gd
+@export var is_walljumping = false # handle also by Character.gd
+@export var is_landing = false # handle also by animations (for stop)
+@export var is_landing_roll = false # handle also by animations (for stop)
+@export var is_dunkjumping = false # handle also by Character.gd
+@export var is_dunking = false # handle also by Character.gd
+@export var is_halfturning = false # handle also by Character.gd
+@export var is_crouching = false # handle also by Character.gd
 #export var is_aiming = false # handle by Character.gd
-export var is_shooting = false # handle by Character.gd (for start) and animations (for stop)
+@export var is_shooting = false # handle by Character.gd (for start) and animations (for stop)
 
 # Bool var
-export var has_ball = false
+@export var has_ball = false
 var held_ball = null#pointer to a ball
 var released_ball = null # useful because when the ball is released (or thrown)
 # it is immediatly detected by area_body_enter...
@@ -132,7 +132,7 @@ func update_vars(delta):
 
 	is_onfloor = Character.ActionHandler.is_on_floor()
 	is_onwall = Character.ActionHandler.is_on_wall()
-	is_moving_fast = (abs(velocity.x) > Character.run_speed_thresh)
+	is_moving_fast = (abs(velocity.x) > Character.walk_speed_moving_fast_thresh)
 	is_falling =  (not is_onfloor) and velocity.y > 0
 	is_mounting = (not is_onfloor) and velocity.y < 0
 	is_moving = (abs(velocity.x) > 5.0) or (abs(velocity.y) > 5.0)

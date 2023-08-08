@@ -1,18 +1,17 @@
-[gd_scene load_steps=4 format=2]
+[gd_scene load_steps=4 format=3 uid="uid://cjbsx2kbm5qhk"]
 
-[ext_resource path="res://assets/art/characters/Player.png" type="Texture" id=1]
-[ext_resource path="res://assets/shader/contour.gdshader" type="Shader" id=2]
+[ext_resource type="Texture2D" uid="uid://dcp7p8c6ldxqc" path="res://assets/art/characters/Player.png" id="1"]
+[ext_resource type="Shader" path="res://assets/shader/contour.gdshader" id="2"]
 
-[sub_resource type="ShaderMaterial" id=1]
-shader = ExtResource( 2 )
-shader_param/activated = true
-shader_param/contour_color = Color( 1, 1, 1, 0.713726 )
-shader_param/light_thresh = 0.0
+[sub_resource type="ShaderMaterial" id="1"]
+shader = ExtResource("2")
+shader_parameter/activated = true
+shader_parameter/contour_color = Color(1, 1, 1, 0.713726)
 
-[node name="PlayerPosition" type="Sprite"]
-material = SubResource( 1 )
+[node name="PlayerPosition" type="Sprite2D"]
 z_index = 110
 z_as_relative = false
-texture = ExtResource( 1 )
+material = SubResource("1")
+texture = ExtResource("1")
 region_enabled = true
-region_rect = Rect2( 0, 288, 64, 96 )
+region_rect = Rect2(0, 288, 64, 96)

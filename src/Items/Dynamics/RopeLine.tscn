@@ -1,0 +1,32 @@
+[gd_scene load_steps=4 format=3 uid="uid://du335bhnqqgix"]
+
+[ext_resource type="Script" path="res://src/Items/Dynamics/RopeLine.gd" id="1_w6vuv"]
+[ext_resource type="Texture2D" uid="uid://bj52wrjij7odv" path="res://assets/art/environment/zipline.png" id="2_kosn8"]
+
+[sub_resource type="Curve2D" id="Curve2D_dsmyg"]
+resource_local_to_scene = true
+_data = {
+"points": PackedVector2Array(0, 0, 0, 0, 8, -48)
+}
+point_count = 1
+
+[node name="RopeLine" type="Path2D"]
+z_index = 160
+z_as_relative = false
+position = Vector2(72, 96)
+curve = SubResource("Curve2D_dsmyg")
+script = ExtResource("1_w6vuv")
+character_offset = Vector2(0, 36)
+
+[node name="Line2D" type="Line2D" parent="."]
+width = 4.0
+texture = ExtResource("2_kosn8")
+texture_mode = 1
+joint_mode = 2
+begin_cap_mode = 2
+end_cap_mode = 2
+
+[node name="Area2D" type="Area2D" parent="."]
+collision_layer = 8
+
+[connection signal="body_exited" from="Area2D" to="." method="_on_Area_body_exited"]

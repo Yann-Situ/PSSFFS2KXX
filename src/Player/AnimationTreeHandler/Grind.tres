@@ -1,50 +1,50 @@
-[gd_resource type="AnimationNodeBlendSpace1D" load_steps=10 format=2]
+[gd_resource type="AnimationNodeBlendSpace1D" load_steps=10 format=3 uid="uid://ce5frftffl5k"]
 
-[sub_resource type="AnimationNodeAnimation" id=1]
-animation = "grind0"
+[sub_resource type="AnimationNodeAnimation" id="1"]
+animation = &"grind0"
 
-[sub_resource type="AnimationNodeAnimation" id=2]
-animation = "grind-45"
+[sub_resource type="AnimationNodeAnimation" id="2"]
+animation = &"grind-45"
 
-[sub_resource type="AnimationNodeAnimation" id=3]
-animation = "grind+45"
+[sub_resource type="AnimationNodeAnimation" id="3"]
+animation = &"grind+45"
 
-[sub_resource type="AnimationNodeAnimation" id=4]
-animation = "grind-15"
+[sub_resource type="AnimationNodeAnimation" id="4"]
+animation = &"grind-15"
 
-[sub_resource type="AnimationNodeAnimation" id=5]
-animation = "grind-30"
+[sub_resource type="AnimationNodeAnimation" id="5"]
+animation = &"grind-30"
 
-[sub_resource type="AnimationNodeAnimation" id=6]
-animation = "grind+15"
+[sub_resource type="AnimationNodeAnimation" id="6"]
+animation = &"grind+15"
 
-[sub_resource type="AnimationNodeAnimation" id=7]
-animation = "grind+30"
+[sub_resource type="AnimationNodeAnimation" id="7"]
+animation = &"grind+30"
 
-[sub_resource type="AnimationNodeAnimation" id=8]
-animation = "fall_loop"
+[sub_resource type="AnimationNodeAnimation" id="8"]
+animation = &"fall_loop"
 
-[sub_resource type="AnimationNodeAnimation" id=9]
-animation = "fall_loop"
+[sub_resource type="AnimationNodeAnimation" id="9"]
+animation = &"fall_loop"
 
 [resource]
-blend_point_0/node = SubResource( 1 )
+blend_point_0/node = SubResource("1")
 blend_point_0/pos = 0.0
-blend_point_1/node = SubResource( 2 )
+blend_point_1/node = SubResource("2")
 blend_point_1/pos = -0.6
-blend_point_2/node = SubResource( 3 )
+blend_point_2/node = SubResource("3")
 blend_point_2/pos = 0.6
-blend_point_3/node = SubResource( 4 )
+blend_point_3/node = SubResource("4")
 blend_point_3/pos = -0.2
-blend_point_4/node = SubResource( 5 )
+blend_point_4/node = SubResource("5")
 blend_point_4/pos = -0.4
-blend_point_5/node = SubResource( 6 )
+blend_point_5/node = SubResource("6")
 blend_point_5/pos = 0.2
-blend_point_6/node = SubResource( 7 )
+blend_point_6/node = SubResource("7")
 blend_point_6/pos = 0.4
-blend_point_7/node = SubResource( 8 )
+blend_point_7/node = SubResource("8")
 blend_point_7/pos = 0.8
-blend_point_8/node = SubResource( 9 )
+blend_point_8/node = SubResource("9")
 blend_point_8/pos = -0.8
 snap = 0.2
 value_label = "angle"

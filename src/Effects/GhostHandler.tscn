@@ -1,10 +1,10 @@
-[gd_scene load_steps=2 format=2]
+[gd_scene load_steps=2 format=3 uid="uid://bs8ju42cns0vf"]
 
-[ext_resource path="res://src/Effects/GhostHandler.gd" type="Script" id=1]
+[ext_resource type="Script" path="res://src/Effects/GhostHandler.gd" id="1"]
 
 [node name="GhostHandler" type="Node2D"]
-self_modulate = Color( 1.2, 1.8, 2.2, 0.39 )
-script = ExtResource( 1 )
+self_modulate = Color(1.2, 1.8, 2.2, 0.39)
+script = ExtResource("1")
 
 [node name="Ghost_Tick_Timer" type="Timer" parent="."]
 wait_time = 0.2

@@ -1,6 +1,6 @@
 extends AnimationTree
 
-onready var Character = get_parent().get_parent()
+@onready var Character = get_parent().get_parent()
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	pass # Replace with function body.
@@ -10,7 +10,7 @@ enum Stance { GROUND, AIR, GRIND, HANG }
 const S_Cancelable = "parameters/cancelable/conditions/"
 var IsCancelable = S_Cancelable + "is_cancelable"
 var IsNotCancelable = S_Cancelable + "is_not_cancelable"
-var CurrentStance = "parameters/cancelable/stance/stancetransition/current"
+var CurrentStance = "parameters/cancelable/stance/stancetransition/transition_request"
 
 const S_Air = "parameters/cancelable/stance/air/conditions/"
 var IsJumping = S_Air + "is_jumping"
@@ -43,7 +43,6 @@ var IsDunkjumpHalfturning = "parameters/cancelable/action/dunkjump/conditions/is
 var GrindBlend = "parameters/cancelable/stance/grind/blend_position"
 
 func animate_from_state(S):
-
 	# in order of priority:
 	self[IsCancelable] = !S.is_non_cancelable
 	self[IsNotCancelable] = S.is_non_cancelable
@@ -59,21 +58,21 @@ func animate_from_state(S):
 
 	# in order of priority:
 	if S.is_hanging:
-		self[CurrentStance] = Stance.HANG
+		self[CurrentStance] = "hang"#Stance.HANG
 	elif S.is_grinding:
-		self[CurrentStance] = Stance.GRIND
+		self[CurrentStance] = "grind"#Stance.GRIND
 		var dir = S.velocity
 		if dir.x < 0:
 			dir.x = -dir.x
 		self[GrindBlend] = 0.2*round(-dir.angle() * (12.0/PI))
 	elif not S.is_onfloor:
-		self[CurrentStance] = Stance.AIR
+		self[CurrentStance] = "air"#Stance.AIR
 
 		self[IsJumping] = S.is_jumping
 		self[IsOnWall] = S.is_onwall
 		self[IsNotOnWall] = !S.is_onwall
 	else : # S.is_onfloor
-		self[CurrentStance] = Stance.GROUND
+		self[CurrentStance] = "ground"#Stance.GROUND
 
 		self[IsCrouching] = S.is_crouching
 		self[IsHalfturning] = S.is_halfturning

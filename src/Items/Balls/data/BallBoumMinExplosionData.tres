@@ -1,0 +1,20 @@
+[gd_resource type="Resource" script_class="ExplosionData" load_steps=3 format=3 uid="uid://b1lhq0ays8vtg"]
+
+[ext_resource type="Script" path="res://src/Global/CustomResources/ExplosionData.gd" id="1_uo1l5"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_606rb"]
+radius = 64.0
+
+[resource]
+script = ExtResource("1_uo1l5")
+use_default_explosion = true
+initial_scale_factor = 1.0
+explosion_duration = 0.12
+explosion_steps = 5
+collision_shape = SubResource("CircleShape2D_606rb")
+body_exceptions = Array[Node2D]([])
+momentum_breakable = 400.0
+momentum_electric = 0.0
+momentum_physicbody = 500.0
+damage_value = 1.0
+damage_duration = 1.0

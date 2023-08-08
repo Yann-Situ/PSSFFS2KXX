@@ -1,0 +1,97 @@
+[gd_resource type="Resource" script_class="PaletteSchemeSampler" load_steps=19 format=3 uid="uid://b1sqjl338o38w"]
+
+[ext_resource type="Script" path="res://src/Global/CustomResources/ColorDistribution.gd" id="1_qftfe"]
+[ext_resource type="Script" path="res://src/Global/CustomResources/PaletteSchemeSampler.gd" id="2_rrue4"]
+
+[sub_resource type="Curve" id="16"]
+bake_resolution = 1000
+_data = [Vector2(0, 0), 4.35537, -0.0568181, 0, 0, Vector2(0.0335196, 1), 0.0, 0.0, 0, 0, Vector2(0.0614525, 1), 0.0, 0.0, 0, 0, Vector2(0.100559, 0), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+point_count = 5
+
+[sub_resource type="Curve" id="36"]
+bake_resolution = 1000
+_data = [Vector2(0, 0), 0.0, 0.0, 0, 0, Vector2(0.134078, 1), 0.0, 0.0, 0, 0, Vector2(0.299754, 1), 0.0, 0.0, 0, 0, Vector2(0.459459, 0.436364), 0.0, 0.0, 0, 0, Vector2(0.625698, 0.552273), 0.0, 0.0, 0, 0, Vector2(0.670391, 0), 0.0, 0.0, 0, 0]
+point_count = 6
+
+[sub_resource type="Curve" id="17"]
+bake_resolution = 1000
+_data = [Vector2(0.581006, 0), 0.0, 1.71463, 0, 0, Vector2(0.687151, 1), 0.0, 0.0, 0, 0, Vector2(0.769042, 0), 0.0, 0.0, 0, 0]
+point_count = 3
+
+[sub_resource type="Resource" id="19"]
+script = ExtResource("1_qftfe")
+hue_distribution = SubResource("16")
+saturation_distribution = SubResource("17")
+lightness_distribution = SubResource("36")
+weight = 1.0
+
+[sub_resource type="Curve" id="20"]
+bake_resolution = 1000
+_data = [Vector2(0, 0), 0.0, 0.0, 0, 0, Vector2(0.0960699, 0.536364), 0.0, 0.0, 0, 0, Vector2(0.174672, 0), 0.0, 0.0, 0, 0, Vector2(0.469432, 0), 0.0, 0.0, 0, 0, Vector2(0.740175, 0.909091), 0.0, 0.0, 0, 0, Vector2(0.89738, 0), 0.0, 0.0, 0, 0]
+point_count = 6
+
+[sub_resource type="Curve" id="37"]
+bake_resolution = 516
+_data = [Vector2(0, 0.263636), 0.0, 0.0, 0, 0, Vector2(0.0797102, 0), 0.0, 0.0, 0, 0, Vector2(0.304348, 0), 0.0, 0.0, 0, 0, Vector2(0.478261, 0), 0.0, 0.0, 0, 0, Vector2(0.76087, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), -6.93749, 0.0, 0, 0]
+point_count = 6
+
+[sub_resource type="Curve" id="21"]
+bake_resolution = 516
+_data = [Vector2(0, 0.545455), 0.0, 0.0, 0, 0, Vector2(0.449275, 0), 0.0, 0.0, 0, 0, Vector2(0.534935, 0.318182), 0.0, 0.0, 0, 0, Vector2(0.707424, 0), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+point_count = 5
+
+[sub_resource type="Resource" id="23"]
+script = ExtResource("1_qftfe")
+hue_distribution = SubResource("20")
+saturation_distribution = SubResource("21")
+lightness_distribution = SubResource("37")
+weight = 1.0
+
+[sub_resource type="Curve" id="28"]
+bake_resolution = 1000
+_data = [Vector2(0, 0), 0.0, 0.0, 0, 0, Vector2(0.0797102, 0.118182), 0.0, 0.0, 0, 0, Vector2(0.166667, 0), 0.0, 0.0, 0, 0, Vector2(0.442029, 0), 0.0, 0.0, 0, 0, Vector2(0.637681, 1), 0.0, 0.0, 0, 0, Vector2(0.825328, 0), 0.0, 0.0, 0, 0]
+point_count = 6
+
+[sub_resource type="Curve" id="38"]
+bake_resolution = 1000
+_data = [Vector2(0, 0), 0.0, 6.59504, 0, 0, Vector2(0.122271, 1), 0.0, 0.0, 0, 0, Vector2(0.423581, 0), 0.0, 0.0, 0, 0]
+point_count = 3
+
+[sub_resource type="Curve" id="29"]
+bake_resolution = 1000
+_data = [Vector2(0, 0), 0.0, 0.0, 0, 0, Vector2(0.700873, 1), 0.0, 0.0, 0, 0, Vector2(0.893013, 0), 0.0, 0.0, 0, 0]
+point_count = 3
+
+[sub_resource type="Resource" id="31"]
+script = ExtResource("1_qftfe")
+hue_distribution = SubResource("28")
+saturation_distribution = SubResource("29")
+lightness_distribution = SubResource("38")
+weight = 1.0
+
+[sub_resource type="Curve" id="32"]
+bake_resolution = 1000
+_data = [Vector2(0, 0), 0.0, 2.92727, 0, 1, Vector2(0.0652174, 0.190909), 0.0, 0.0, 0, 0, Vector2(0.115942, 1), 0.0, 0.0, 0, 0, Vector2(0.224638, 0), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 1, 0]
+point_count = 5
+
+[sub_resource type="Curve" id="39"]
+_data = [Vector2(0.528256, 0.936364), 0.0, 0.0, 0, 0]
+point_count = 1
+
+[sub_resource type="Curve" id="33"]
+_data = [Vector2(0, 1), 0.0, -0.100886, 0, 0, Vector2(0.804348, 0), 0.00703578, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="Resource" id="35"]
+script = ExtResource("1_qftfe")
+hue_distribution = SubResource("32")
+saturation_distribution = SubResource("33")
+lightness_distribution = SubResource("39")
+weight = 1.0
+
+[resource]
+resource_local_to_scene = true
+script = ExtResource("2_rrue4")
+color_samplers = Array[Resource("res://src/Global/CustomResources/ColorSampler.gd")]([SubResource("19"), SubResource("23"), SubResource("31"), SubResource("35")])
+black = Color(0, 0, 0, 1)
+white = Color(1, 1, 1, 1)

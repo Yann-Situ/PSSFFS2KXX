@@ -1,0 +1,43 @@
+[gd_scene load_steps=8 format=3 uid="uid://dalyby7b6ctua"]
+
+[ext_resource type="PackedScene" uid="uid://cxn2m3havcmil" path="res://src/Items/Balls/Ball.tscn" id="1_ysam6"]
+[ext_resource type="Script" path="res://src/Items/Balls/BallGravity.gd" id="2_ju1rt"]
+[ext_resource type="Shader" path="res://assets/shader/contour.gdshader" id="3_3etx4"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_uhqfn"]
+resource_local_to_scene = true
+shader = ExtResource("3_3etx4")
+shader_parameter/activated = false
+shader_parameter/contour_color = Color(1, 1, 0.9, 0.9)
+
+[sub_resource type="Gradient" id="Gradient_dhi5s"]
+resource_local_to_scene = true
+offsets = PackedFloat32Array(0, 0.00699301, 0.244755, 0.468531, 0.839161, 1)
+colors = PackedColorArray(1, 0, 0.580392, 0, 0, 0, 0, 0.258741, 0.535156, 0.535156, 0.535156, 0.705882, 0.839844, 0.839844, 0.839844, 1, 1, 1, 1, 1, 1, 1, 1, 0)
+
+[sub_resource type="Gradient" id="Gradient_34wg7"]
+resource_local_to_scene = true
+offsets = PackedFloat32Array(0, 0.020202, 0.131313, 0.50505, 0.808081, 1)
+colors = PackedColorArray(1, 0, 0.580392, 0, 1, 1, 1, 0, 1, 1, 1, 1, 0.839844, 0.839844, 0.839844, 1, 0.533333, 0.533333, 0.533333, 0.705882, 0, 0, 0, 0.258824)
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_6puav"]
+resource_local_to_scene = true
+radius = 6.0
+
+[node name="BallGravity" instance=ExtResource("1_ysam6")]
+script = ExtResource("2_ju1rt")
+
+[node name="Visuals" parent="." index="0"]
+material = SubResource("ShaderMaterial_uhqfn")
+col1 = Color(0.596078, 1, 0.329412, 1)
+col2 = Color(0.290196, 0.760784, 0.423529, 1)
+col3 = Color(0.113725, 0.309804, 0.180392, 1)
+
+[node name="Reconstruction" parent="Visuals" index="1"]
+color_ramp = SubResource("Gradient_dhi5s")
+
+[node name="Destruction" parent="Visuals" index="2"]
+color_ramp = SubResource("Gradient_34wg7")
+
+[node name="collision" parent="." index="1"]
+shape = SubResource("CircleShape2D_6puav")

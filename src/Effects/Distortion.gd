@@ -1,6 +1,12 @@
 extends BackBufferCopy
 
-export (float) var animation_delay = 1.0#s
+@export var animation_delay : float = 1.0#s
+@export var size : Vector2 = Vector2(128,128) : set = set_size#s
+
+func set_size(v : Vector2):
+	size = v
+	$Shader.texture.width = size.x
+	$Shader.texture.height = size.y
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -13,5 +19,5 @@ func start(animation_name : String = "subtle"):
 	else :
 		printerr("Distortion doesn't have animation "+animation_name)
 		$Animation.play("subtle")
-	yield($Animation, "animation_finished")
+	await $Animation.animation_finished
 	queue_free()

@@ -1,7 +1,7 @@
-[gd_scene load_steps=2 format=2]
+[gd_scene load_steps=2 format=3 uid="uid://c5obj8t23xydv"]
 
-[ext_resource path="res://src/Levels/Level.tscn" type="PackedScene" id=1]
+[ext_resource type="PackedScene" uid="uid://bvb221orx6gub" path="res://src/Levels/Level.tscn" id="1"]
 
-[node name="LevelExample" instance=ExtResource( 1 )]
-first_room = "res://src/Levels/LevelExample/RoomExample1.tscn"
+[node name="LevelExample" instance=ExtResource("1")]
+first_room = "/home/yann-situ/Documents/GAME/PSSFFS2KXX/src/Levels/LevelExample/RoomExample1.tscn"
 first_room_portal = "Portal1"

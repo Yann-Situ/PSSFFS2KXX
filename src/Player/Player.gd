@@ -1,69 +1,80 @@
-extends KinematicBody2D
-class_name Player, "res://assets/art/icons/popol.png"
+@icon("res://assets/art/icons/popol.png")
+extends CharacterBody2D
+class_name Player
 
-export (bool) var physics_enabled = true
+var _zero_velocity_workaround = false
 
-# Environment features (should be given by the map)
-export (float) var floor_unfriction = 0.18 # s
-export (float) var air_unfriction = 0.32 # s
-export (float) var attract_force = 800.0 # m.pix/s² # don't know for what know (?)
-export (Vector2) var gravity # pix/s²
+@export var physics_enabled : bool = true
 
-# Crouch features
-export (float) var crouch_speed_max = 300.0 # pix/s
-export (float) var crouch_instant_speed = 60.0 # pix/s
-export (float) var crouch_return_thresh_instant_speed = 100.0 # pix/s
-export (float) var crouch_accel = 200.0 # pix/s²
-export (float) var landing_velocity_thresh = 400.0 # pix/s
+@export var mass : float = 4.0 # kg
+## Environment features (should be given by the map)
+@export var floor_unfriction : float = 0.18 # s
+@export var air_unfriction : float = 0.32 # s
+@export var attract_force : float = 800.0 # m.pix/s² # don't know for what know (?)
 
-# Aerial features
-export (float) var sideaerial_speed_max = 400.0 # pix/s
-export (float) var air_instant_speed = 45.0 # pix/s
-export (float) var air_return_thresh_instant_speed = 50.0 # pix/s
-export (float) var sideaerial_accel = 220.0 # pix/s²
-export (float) var jump_speed = -425.0 # pix/s
-export (float) var dunkjump_speed = -500.0 # pix/s
-export (float) var dunkdash_speed = 600.0 # pix/s
-export (float) var max_dunkdash_distance2 = 180*180.0 # pix^2
-export (float) var max_speed_fall = 800.0 # pix/s
-export (float) var max_speed_fall_onwall = 200.0 # pix/s
-export (Vector2) var vec_walljump = Vector2(0.65, -1)
+@export_group("Ground features")
+@export_subgroup("Crouch properties", "crouch_")
+@export var crouch_speed_max : float = 300.0 # pix/s
+@export var crouch_instant_speed : float = 60.0 # pix/s
+@export var crouch_return_instant_speed_thresh : float = 100.0 # pix/s
+@export var crouch_accel : float = 200.0 # pix/s²
 
-# Walk and run features
-export (float) var run_speed_thresh = 350.0 # pix/s
-export (float) var run_speed_max = 400.0 # pix/s
-export (float) var walk_instant_speed = 150.0 # pix/s
-export (float) var walk_return_thresh_instant_speed = 300.0 # pix/s
-export (float) var walk_accel = 220.0 # pix/s²
+@export_subgroup("Walk properties", "walk_")
+@export var walk_speed_max : float = 400.0 # pix/s
+@export var walk_speed_moving_fast_thresh : float = 350.0 # pix/s
+@export var walk_instant_speed : float = 150.0 # pix/s
+@export var walk_return_instant_speed_thresh : float = 300.0 # pix/s
+@export var walk_accel : float = 220.0 # pix/s²
 
-# Other features
-export (float) var throw_impulse = 600.0 # kg.pix/s
+@export_group("Aerial features")
+@export_subgroup("Air horizontal motion", "air_")
+@export var air_side_speed_max : float = 400.0 # pix/s
+@export var air_instant_speed : float = 45.0 # pix/s
+@export var air_return_instant_speed_thresh : float = 50.0 # pix/s
+@export var air_side_accel : float = 220.0 # pix/s²
 
-export (bool) var flip_h = false
+@export_subgroup("Air vertical motion")
+@export var jump_speed : float = -425.0 # pix/s
+@export var fall_speed_max : float = 800.0 # pix/s
+@export var fall_speed_max_onwall : float = 200.0 # pix/s
+@export var walljump_direction : Vector2 = Vector2(0.65, -1)
+@export var landing_velocity_thresh : float = 400.0 # pix/s
+
+@export_group("Special features")
+@export var dunkjump_speed : float = -500.0 # pix/s
+@export var dunkdash_speed : float = 600.0 # pix/s
+@export var dunkdash_dist2_max : float = 180*180.0 # pix^2
+@export var throw_impulse : float = 600.0 # kg.pix/s
+@export var time_scale : float = 1.0 # kg.pix/s
+
 
 ################################################################################
 
-onready var S = get_node("State")
-onready var SpecialActionHandler = get_node("Actions/SpecialActionHandler")
-onready var ShootPredictor = get_node("Actions/ShootPredictor")
-onready var Shooter = get_node("Shooter")
-onready var PlayerEffects = get_node("PlayerEffects")
-onready var BallHandler = get_node("BallHandler")
-onready var Camera = get_node("Camera")
-onready var LifeHandler = get_node("LifeHandler")
+@onready var S = get_node("State")
+@onready var SpecialActionHandler = get_node("Actions/SpecialActionHandler")
+@onready var ShootPredictor = get_node("Shooter/ShootPredictor")
+@onready var Shooter = get_node("Shooter")
+@onready var PlayerEffects = get_node("PlayerEffects")
+@onready var BallHandler = get_node("BallHandler")
+@onready var Camera = get_node("Camera")
+@onready var LifeHandler = get_node("LifeHandler")
+@onready var LifeBar = get_node("UI/MarginContainer/HBoxContainer/VBoxContainer/Bar")
+@onready var animation_tree = get_node("Sprite2D/AnimationTree")
 
-onready var start_position = global_position
-onready var foot_vector = Vector2(0,32)
-onready var based_gravity = Vector2(0.0,ProjectSettings.get_setting("physics/2d/default_gravity")) # pix/s²
-onready var invmass = 1.0/4.0
-onready var collision_layer_save = 1
-onready var collision_mask_save = 514
-onready var floor_friction = GlobalMaths.unfriction_to_friction(floor_unfriction) # ratio/s
-onready var air_friction = GlobalMaths.unfriction_to_friction(air_unfriction) # ratio/s
-var applied_forces = {} #"force_name : value in kg*pix/s^2"
+@onready var start_position = global_position
+@onready var foot_vector = Vector2(0,32)
+@onready var invmass = 1.0/mass
+@onready var collision_layer_save = 1
+@onready var collision_mask_save = 514
+@onready var floor_friction = GlobalMaths.unfriction_to_friction(floor_unfriction) # ratio/s
+@onready var air_friction = GlobalMaths.unfriction_to_friction(air_unfriction) # ratio/s
 
-var character_holder = null
+@onready var force_alterable = Alterable.new(Vector2.ZERO)
+@onready var speed_alterable = Alterable.new(Vector2.ZERO)
+@onready var accel_alterable = Alterable.new(Vector2.ZERO)
 
+var character_holder : Node = null
+var flip_h : bool = false
 var shoot = Vector2.ZERO
 var snap_vector = Vector2.ZERO
 
@@ -75,7 +86,11 @@ func reset_holder():
 func reset_move():
 	reset_holder()
 	S.reset_state()
-	#LifeHandler.reset_life()
+	LifeHandler.reset_life()
+	force_alterable.clear_alterers()
+	speed_alterable.clear_alterers()
+	accel_alterable.clear_alterers()
+	accel_alterable.add_alterer(Global.gravity_alterer)
 	set_flip_h(false)
 	reset_position()
 
@@ -85,19 +100,23 @@ func _ready():
 	Global.list_of_physical_nodes.append(self)
 	self.z_as_relative = false
 	self.z_index = Global.z_indices["player_0"]
-	$Sprite.z_as_relative = false
-	$Sprite.z_index = Global.z_indices["player_0"]
+	$Sprite2D.z_as_relative = false
+	$Sprite2D.z_index = Global.z_indices["player_0"]
 	add_to_group("holders")
 	add_to_group("characters")
 	if !Global.playing:
 		Global.toggle_playing()
+	accel_alterable.add_alterer(Global.gravity_alterer)
 	Global.camera = Camera
 
-	gravity = based_gravity
+	set_up_direction(Vector2.UP)
+	set_floor_stop_on_slope_enabled(true)
+	set_max_slides(4)
+	set_floor_max_angle(0.785398)
 
 func set_flip_h(b):
 	flip_h  = b
-	$Sprite.set_flip_h(b)
+	$Sprite2D.set_flip_h(b)
 	ShootPredictor.set_flip_h(b)
 	SpecialActionHandler.set_flip_h(b)
 
@@ -110,8 +129,8 @@ func get_input(delta): #delta in s
 		S.last_onair_velocity_y = S.velocity.y
 	if S.is_onwall :
 		S.get_node("ToleranceWallJumpTimer").start(S.tolerance_wall_jump)
-		S.last_wall_normal_direction = -1#sign(get_slide_collision(get_slide_count()-1).normal.x)
-		if $Sprite.flip_h:
+		S.last_wall_normal_direction = -1#sign(get_slide_collision(get_slide_collision_count()-1).normal.x)
+		if $Sprite2D.flip_h:
 			S.last_wall_normal_direction = 1
 
 	############### Move from input
@@ -174,15 +193,14 @@ func get_input(delta): #delta in s
 	# GRAVITY:
 
 	# SHADER:
-	#$Sprite.material.set("shader_param/speed",S.velocity)
 
 	# HITBOX:
 	if S.is_crouching or S.is_landing or not S.can_stand:
-		$Collision.shape.set_extents(Vector2(8,22))
-		$Collision.position.y = 10
+		$Collision.shape.set_size(Vector2(17,31))
+		$Collision.position.y = 16.5
 	else :
-		$Collision.shape.set_extents(Vector2(8,26))
-		$Collision.position.y = 6
+		$Collision.shape.set_size(Vector2(17,57))
+		$Collision.position.y = 3.5
 
 	# CAMERA:
 	if S.is_aiming:
@@ -195,15 +213,9 @@ func get_input(delta): #delta in s
 		else :
 			Shooter.update_effective_cant_shoot(0.0,0)
 			shoot = Shooter.effective_v
-#			shoot = ShootPredictor.shoot_vector()
-#			if S.power_p and S.selected_ball == S.active_ball :
-#				ShootPredictor.draw_attract(BallHandler.get_throw_position()-self.position, shoot+0.5*S.velocity,
-#					S.active_ball.get_gravity_scale()*gravity, attract_force/S.active_ball.mass)
-#			else :
-#				ShootPredictor.draw(BallHandler.get_throw_position()-self.position, shoot+0.5*S.velocity,
-#					S.active_ball.get_gravity_scale()*gravity)
-		ShootPredictor.draw(Vector2.ZERO, shoot,
-			S.active_ball.gravity*Vector2.DOWN)
+
+		ShootPredictor.draw_prediction(Vector2.ZERO, shoot,
+			(Shooter.global_gravity_scale_TODO*Global.default_gravity.y)*Vector2.DOWN)
 		Camera.set_offset_from_type("aim",target)
 		if shoot.x > 0 :
 			S.aim_direction = 1
@@ -226,7 +238,13 @@ func get_input(delta): #delta in s
 		Camera.set_offset_from_type("normal")
 
 	# ANIMATION:
-	$Sprite/AnimationTree.animate_from_state(S)
+	#$Sprite2D/AnimationTree.animate_from_state(S)
+	if S.direction_sprite == -1:
+		self.set_flip_h(true)
+	elif S.direction_sprite == 1:
+		self.set_flip_h(false)
+
+	LifeBar.set_life(LifeHandler.get_life())
 
 	if S.is_aiming:
 		Shooter.update_screen_viewer_position()
@@ -246,75 +264,98 @@ func get_input(delta): #delta in s
 
 ################################################################################
 # For physicbody
-func apply_impulse(impulse):
-	S.velocity += invmass * impulse
+func add_impulse(impulse : Vector2):
+	S.set_velocity_safe(S.velocity + invmass * impulse)
 
-func apply_forces(delta):
-	for force in applied_forces.values() :
-		S.velocity += invmass * force * delta
-	if S.is_onwall and S.velocity.y > 0: #fall on a wall
-		S.velocity += gravity/2.0 * delta
-		S.velocity.y = min(S.velocity.y,max_speed_fall_onwall)
+func apply_forces_accel(delta):
+	var force = force_alterable.get_value()
+	S.velocity += invmass * delta * force
+	var accel = accel_alterable.get_value()
+	S.velocity += delta * accel
+	if S.is_onwall and S.velocity.y > 0.0: #fall on a wall
+		S.velocity.y = min(S.velocity.y,fall_speed_max_onwall)
 	else :
-		S.velocity += gravity * delta
-		if S.velocity.y > max_speed_fall:
-			S.velocity.y = max_speed_fall
+		S.velocity.y = min(S.velocity.y,fall_speed_max)
 
-func has_force(name : String):
-	return applied_forces.has(name)
+func has_force(force_alterer : Alterer):
+	return force_alterable.has_alterer(force_alterer)
+func add_force(force_alterer : Alterer):
+	force_alterable.add_alterer(force_alterer)
+func remove_force(force_alterer : Alterer):
+	force_alterable.remove_alterer(force_alterer)
 
-func add_force(name : String, force : Vector2):
-	applied_forces[name] = force
+func has_accel(accel_alterer : Alterer):
+	return accel_alterable.has_alterer(accel_alterer)
+func add_accel(accel_alterer : Alterer):
+	accel_alterable.add_alterer(accel_alterer)
+func remove_accel(accel_alterer : Alterer):
+	accel_alterable.remove_alterer(accel_alterer)
 
-func remove_force(name : String):
-	applied_forces.erase(name)
+func has_speed(speed_alterer : Alterer):
+	return speed_alterable.has_alterer(speed_alterer)
+func add_speed(speed_alterer : Alterer):
+	speed_alterable.add_alterer(speed_alterer)
+func remove_speed(speed_alterer : Alterer):
+	speed_alterable.remove_alterer(speed_alterer)
 
 func _physics_process(delta):
+	#print("0: "+str(S.velocity)) # always (0.0,0.0) for some reason...
+	delta *= time_scale
+	_zero_velocity_workaround = true
+
 	get_input(delta)
-#	if S.velocity == Vector2.ZERO and !S.is_onfloor:
-#		print("ZERO")
-	if physics_enabled:
-		apply_forces(delta)
-		if SpecialActionHandler.is_on_slope() and S.velocity.y > - abs(S.velocity.x) :
-			S.velocity.y = 0.5*sqrt(2) * move_and_slide_with_snap(S.velocity, 33*Vector2.DOWN, Vector2.UP, true, 4, 0.785398, false).y
-		else :
-			S.velocity = move_and_slide_with_snap(S.velocity, snap_vector, Vector2.UP, true, 4, 0.785398, false)
+	if character_holder != null:
+		if character_holder.has_method("move_character"):
+			apply_forces_accel(delta)
+			#set_velocity(S.velocity+speed_alterable.get_value())
+			S.velocity = character_holder.move_character(self, S.velocity+speed_alterable.get_value(), delta)
+			S.velocity -= speed_alterable.get_value()
+	elif physics_enabled:
+		apply_forces_accel(delta)
+		set_velocity(S.velocity+speed_alterable.get_value())
+		move_and_slide()
+		S.velocity = get_real_velocity()-speed_alterable.get_value()
+
+	_zero_velocity_workaround = false
 
 func disable_physics():
+	# note that Adherence, Side.move and jump cancel are unavailable when physics disabled
 	physics_enabled = false
-	collision_layer_save = collision_layer
-	collision_layer = 0
-	collision_mask_save = collision_mask
-	collision_mask = 0
-	S.velocity *= 0
-	applied_forces.clear()
+#	collision_layer_save = collision_layer
+#	collision_layer = 0
+#	collision_mask_save = collision_mask
+#	collision_mask = 0
+	#S.set_velocity_safe(Vector2.ZERO)
 
 func enable_physics():
 	physics_enabled = true
-	collision_layer = collision_layer_save
-	collision_mask = collision_mask_save
+#	collision_layer = collision_layer_save
+#	collision_mask = collision_mask_save
 
-func set_start_position(position):
-	start_position = position
+func set_start_position(_position):
+	start_position = _position
 
 func reset_position():
 	global_position = start_position
 
 ################################################################################
 # For `characters` group
+func is_hold() -> bool:
+	return character_holder != null
+	
 func get_in(new_holder : Node):
 	if not new_holder.is_in_group("characterholders"):
 		printerr("error["+name+"], new_holder is not in group `characterholders`.")
-	if character_holder != null:
+	if is_hold():
 		character_holder.free_character(self)
 	self.disable_physics()
 	character_holder = new_holder
 
-func get_out(out_global_position : Vector2, velo : Vector2):
+func get_out(out_global_position : Vector2, _velocity : Vector2):
 	self.enable_physics()
 	global_position = out_global_position
-	S.velocity = velo
-	if character_holder != null:
+	S.set_velocity_safe(_velocity)
+	if is_hold():
 		character_holder.free_character(self)
 	character_holder = null
 

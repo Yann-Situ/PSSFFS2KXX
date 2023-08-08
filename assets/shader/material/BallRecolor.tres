@@ -1,14 +1,14 @@
-[gd_resource type="ShaderMaterial" load_steps=4 format=2]
+[gd_resource type="ShaderMaterial" load_steps=4 format=3 uid="uid://c4s8oq8n7qd6q"]
 
-[ext_resource path="res://assets/shader/recolor.gdshader" type="Shader" id=1]
+[ext_resource type="Shader" path="res://assets/shader/recolor.gdshader" id="1"]
 
-[sub_resource type="Gradient" id=3]
-colors = PoolColorArray( 0.222656, 0.222656, 0.222656, 1, 0.765625, 0.765625, 0.765625, 1 )
+[sub_resource type="Gradient" id="3"]
+colors = PackedColorArray(0.222656, 0.222656, 0.222656, 1, 0.765625, 0.765625, 0.765625, 1)
 
-[sub_resource type="GradientTexture" id=4]
-gradient = SubResource( 3 )
+[sub_resource type="GradientTexture2D" id="4"]
+gradient = SubResource("3")
 width = 3
 
 [resource]
-shader = ExtResource( 1 )
-shader_param/grad_1 = SubResource( 4 )
+shader = ExtResource("1")
+shader_parameter/grad_1 = SubResource("4")

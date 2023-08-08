@@ -1,68 +1,68 @@
-tool
+@tool
 extends Activable
 
 signal activated_change_signal(b)
 
 enum BUTTON0_TYPE {PERMANENT, TIMER, PHYSICAL}
 
-export (BUTTON0_TYPE) var button_type setget set_button_type
-export (float) var wait_time = 1#s
+@export var button_type : BUTTON0_TYPE : set = set_button_type
+@export var wait_time : float = 1#s
 var timer = null
 
 func set_button_type(t):
 	button_type = t
-	if Engine.editor_hint:
+	if Engine.is_editor_hint():
 		if button_type == BUTTON0_TYPE.PERMANENT :
-			$Sprite.set_region_rect(Rect2(0,80,64,16))
+			$Sprite2D.set_region_rect(Rect2(0,80,64,16))
 			
 		elif button_type == BUTTON0_TYPE.TIMER :
-			$Sprite.set_region_rect(Rect2(64,80,64,16))
+			$Sprite2D.set_region_rect(Rect2(64,80,64,16))
 			
 		elif button_type == BUTTON0_TYPE.PHYSICAL :
-			$Sprite.set_region_rect(Rect2(128,80,64,16))
+			$Sprite2D.set_region_rect(Rect2(128,80,64,16))
 		
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	self.z_index = Global.z_indices["background_4"]
 	
 	if button_type == BUTTON0_TYPE.PERMANENT :
-		$Sprite.set_region_rect(Rect2(0,80,64,16))
+		$Sprite2D.set_region_rect(Rect2(0,80,64,16))
 		pass
 		
 	elif button_type == BUTTON0_TYPE.TIMER :
-		$Sprite.set_region_rect(Rect2(64,80,64,16))
+		$Sprite2D.set_region_rect(Rect2(64,80,64,16))
 		timer = Timer.new()
 		timer.one_shot = true
 		timer.autostart = false
 		timer.wait_time = wait_time
-		timer.connect("timeout", self, "_on_Timer_timeout")
+		timer.timeout.connect(self._on_Timer_timeout)
 		self.add_child(timer)
 		
 	elif button_type == BUTTON0_TYPE.PHYSICAL :
-		$Sprite.set_region_rect(Rect2(128,80,64,16))
-		$Area2D.connect("body_exited", self, "_on_Area2D_body_exited")
+		$Sprite2D.set_region_rect(Rect2(128,80,64,16))
+		$Area2D.body_exited.connect(self._on_Area2D_body_exited)
 		_on_Area2D_body_exited(null)
 	update_Sprite(activated)
 		
 func update_Sprite(b):
 	if is_inside_tree():
 		if b:
-			$Sprite.set_frame(1)
+			$Sprite2D.set_frame(1)
 		else:
-			$Sprite.set_frame(0)
+			$Sprite2D.set_frame(0)
 
 
 #########################ACTIVABLE#############################################
 
 func on_enable():
 	update_Sprite(activated)
-	if not Engine.editor_hint:
-		emit_signal("activated_change_signal",activated)
+	if not Engine.is_editor_hint():
+		activated_change_signal.emit(activated)
 
 func on_disable():
 	update_Sprite(activated)
-	if not Engine.editor_hint:
-		emit_signal("activated_change_signal",activated)
+	if not Engine.is_editor_hint():
+		activated_change_signal.emit(activated)
 
 # only if PHYSICAL button :
 func _on_Area2D_body_exited(_body):

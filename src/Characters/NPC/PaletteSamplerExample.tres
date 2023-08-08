@@ -1,0 +1,57 @@
+[gd_resource type="Resource" script_class="PaletteSchemeSampler" load_steps=14 format=3 uid="uid://bm1xsllovgmkc"]
+
+[ext_resource type="Script" path="res://src/Global/CustomResources/SamplerGradient.gd" id="1_blqu2"]
+[ext_resource type="Script" path="res://src/Global/CustomResources/CosineGradient.gd" id="2_hg8bd"]
+[ext_resource type="Script" path="res://src/Global/CustomResources/ColorSamplerUnion.gd" id="3_yg1h1"]
+[ext_resource type="Script" path="res://src/Global/CustomResources/ColorDistribution.gd" id="4_qi7wf"]
+[ext_resource type="Script" path="res://src/Global/CustomResources/PaletteSchemeSampler.gd" id="5_6vrjv"]
+
+[sub_resource type="Gradient" id="Gradient_2hhr2"]
+offsets = PackedFloat32Array(0, 0.51831, 1)
+colors = PackedColorArray(0.452449, 0.0121692, 0.461162, 1, 0.819608, 0.396078, 0.956863, 1, 1, 0.567958, 0.808569, 1)
+
+[sub_resource type="Resource" id="Resource_cuscw"]
+script = ExtResource("1_blqu2")
+gradient = SubResource("Gradient_2hhr2")
+weight = 1.0
+
+[sub_resource type="Resource" id="Resource_vphh8"]
+script = ExtResource("2_hg8bd")
+offset = Vector3(0.892, 0.725, 0)
+amplitude = Vector3(0.878, 0.278, 0.725)
+frequence = Vector3(0.332, 0.518, 0.545)
+phase = Vector3(2.44, 5.043, 0.732)
+weight = 5.0
+
+[sub_resource type="Resource" id="Resource_63eed"]
+script = ExtResource("3_yg1h1")
+color_samplers = Array[Resource("res://src/Global/CustomResources/ColorSampler.gd")]([SubResource("Resource_cuscw"), SubResource("Resource_vphh8")])
+weight = 1.0
+
+[sub_resource type="Curve" id="Curve_sqfy8"]
+bake_resolution = 516
+_data = [Vector2(0.585837, 0), 0.0, 0.0, 0, 0, Vector2(0.766094, 1), 0.0, 0.0, 0, 0, Vector2(0.950644, 0), 0.0, 0.0, 0, 0]
+point_count = 3
+
+[sub_resource type="Curve" id="Curve_uhvi2"]
+bake_resolution = 516
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(0.251073, 0), 0.0, 0.0, 0, 0, Vector2(0.729258, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+point_count = 4
+
+[sub_resource type="Curve" id="Curve_21ury"]
+bake_resolution = 516
+_data = [Vector2(0, 0), 0.0, 0.0, 0, 0, Vector2(0.334764, 0.290909), 0.0, 0.0, 0, 0, Vector2(0.405579, 0), 0.0, 0.0, 0, 0, Vector2(0.706009, 0), 0.0, 0.0, 0, 0, Vector2(1, 1), 0.0, 0.0, 0, 0]
+point_count = 5
+
+[sub_resource type="Resource" id="Resource_jaq00"]
+script = ExtResource("4_qi7wf")
+hue_distribution = SubResource("Curve_sqfy8")
+saturation_distribution = SubResource("Curve_21ury")
+lightness_distribution = SubResource("Curve_uhvi2")
+weight = 1.0
+
+[resource]
+script = ExtResource("5_6vrjv")
+color_samplers = Array[Resource("res://src/Global/CustomResources/ColorSampler.gd")]([SubResource("Resource_63eed"), SubResource("Resource_jaq00")])
+black = Color(0, 0, 0, 1)
+white = Color(1, 1, 1, 1)

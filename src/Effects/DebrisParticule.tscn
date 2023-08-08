@@ -1,22 +1,21 @@
-[gd_scene load_steps=4 format=2]
+[gd_scene load_steps=4 format=3 uid="uid://6uemq1bkxgpn"]
 
-[sub_resource type="CanvasItemMaterial" id=1]
+[ext_resource type="Texture2D" uid="uid://b7t6do8nu1247" path="res://assets/art/effects/debris_0_8x4.png" id="1_hswuh"]
+
+[sub_resource type="CanvasItemMaterial" id="1"]
 resource_local_to_scene = true
 particles_animation = true
-particles_anim_h_frames = 5
+particles_anim_h_frames = 8
 particles_anim_v_frames = 1
 particles_anim_loop = false
 
-[sub_resource type="StreamTexture" id=2]
-load_path = "res://.import/debris_4x4.png-2bc39207aab215b4ef9451d3c9ec4627.stex"
-
-[sub_resource type="Gradient" id=3]
+[sub_resource type="Gradient" id="3"]
 resource_local_to_scene = true
-offsets = PoolRealArray( 0.0375587, 0.516432, 0.995305, 1 )
-colors = PoolColorArray( 0.226562, 0.17672, 0.156647, 1, 0.429688, 0.280094, 0.12085, 1, 0.163086, 0.111312, 0.0904617, 0.0328639, 1, 1, 1, 0 )
+offsets = PackedFloat32Array(0.0375587, 0.516432, 0.995305, 1)
+colors = PackedColorArray(0.226562, 0.17672, 0.156647, 1, 0.429688, 0.280094, 0.12085, 1, 0.163086, 0.111312, 0.0904617, 0.0328639, 1, 1, 1, 0)
 
 [node name="DebrisParticle" type="CPUParticles2D"]
-material = SubResource( 1 )
+material = SubResource("1")
 emitting = false
 amount = 30
 lifetime = 1.8
@@ -24,26 +23,19 @@ one_shot = true
 explosiveness = 0.86
 randomness = 0.66
 lifetime_randomness = 0.3
-local_coords = false
-texture = SubResource( 2 )
+texture = ExtResource("1_hswuh")
 emission_shape = 2
-emission_rect_extents = Vector2( 32, 32 )
-direction = Vector2( 0, 0 )
+emission_sphere_radius = 8.0
+direction = Vector2(0, 0)
 spread = 180.0
-gravity = Vector2( 0, 80 )
-initial_velocity = 70.0
-initial_velocity_random = 1.0
-angular_velocity = 34.56
-angular_velocity_random = 1.0
-linear_accel = -5.0
-damping = 10.84
-scale_amount = 4.0
-scale_amount_random = 1.0
-color_ramp = SubResource( 3 )
-hue_variation = -0.03
-hue_variation_random = 1.0
-anim_offset = 1.0
-anim_offset_random = 1.0
-__meta__ = {
-"_editor_description_": ""
-}
+gravity = Vector2(0, 200)
+initial_velocity_min = 16.04
+initial_velocity_max = 53.48
+angular_velocity_min = -220.0
+angular_velocity_max = 220.0
+damping_min = 17.11
+damping_max = 26.74
+angle_min = -720.0
+angle_max = 720.0
+color_ramp = SubResource("3")
+anim_offset_max = 1.0

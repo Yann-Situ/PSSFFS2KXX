@@ -5,7 +5,7 @@
 
 [sub_resource type="RectangleShape2D" id=1]
 resource_local_to_scene = true
-extents = Vector2( 256, 128 )
+size = Vector2( 256, 128 )
 
 [sub_resource type="OpenSimplexNoise" id=5]
 
@@ -16,17 +16,17 @@ noise = SubResource( 5 )
 [sub_resource type="ShaderMaterial" id=9]
 resource_local_to_scene = true
 shader = ExtResource( 2 )
-shader_param/octaves = 5
-shader_param/starting_amplitude = 0.407
-shader_param/starting_frequency = 0.381
-shader_param/shift = -0.204
-shader_param/velocity = Vector2( 3, 0 )
-shader_param/fog_color = Color( 1, 1, 1, 0.537255 )
-shader_param/noise = SubResource( 4 )
+shader_parameter/octaves = 5
+shader_parameter/starting_amplitude = 0.407
+shader_parameter/starting_frequency = 0.381
+shader_parameter/shift = -0.204
+shader_parameter/velocity = Vector2( 3, 0 )
+shader_parameter/fog_color = Color( 1, 1, 1, 0.537255 )
+shader_parameter/noise = SubResource( 4 )
 
 [sub_resource type="Gradient" id=7]
 
-[sub_resource type="GradientTexture" id=8]
+[sub_resource type="GradientTexture2D" id=8]
 gradient = SubResource( 7 )
 width = 1
 
@@ -43,7 +43,7 @@ collision_mask = 5
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
 shape = SubResource( 1 )
 
-[node name="Sprite" type="Sprite" parent="."]
+[node name="Sprite2D" type="Sprite2D" parent="."]
 material = SubResource( 9 )
 position = Vector2( 256, 128 )
 scale = Vector2( 512, 256 )

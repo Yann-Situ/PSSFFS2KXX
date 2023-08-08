@@ -1,12 +1,15 @@
-extends Sprite
-class_name SelectorTarget, "res://assets/art/icons/target.png"
+extends Sprite2D
+class_name SelectorTarget
+# @icon("res://assets/art/icons/target.png")
 
-export (float) var tween_speed = 0.3#s
+@export var tween_duration : float = 0.3#s
 var selection_node = null
+var tween_self_modulate : Tween
+var tween_position : Tween
 
 func _ready():
 	set_process(false)
-	self.self_modulate = Color.transparent
+	self.self_modulate = Color.TRANSPARENT
 
 func update_selection(selection : Selectable):
 	if selection != selection_node:
@@ -19,25 +22,36 @@ func update_selection(selection : Selectable):
 
 func select():
 	set_process(false)
-	$TweenPosition.stop_all()
-	$TweenPosition.follow_property(self, "global_position",global_position,\
-		selection_node, "global_position", tween_speed, \
-		Tween.TRANS_CUBIC, Tween.EASE_OUT)
-	$TweenPosition.start()
+	if tween_position:
+		tween_position.kill()
+	tween_position = self.create_tween()
+	tween_position.tween_method(self.tween_position_follow_property.bind(global_position, selection_node),\
+	0.0, 1.0, tween_duration)\
+	.set_trans(Tween.TRANS_CUBIC).set_ease(Tween.EASE_OUT)
+	tween_position.tween_callback(self._on_tween_position_completed)
+	# tween_position.start()
 
-	$TweenSelfModulate.stop_all()
-	$TweenSelfModulate.interpolate_property(self, "self_modulate", \
-		self.self_modulate, Color.white, tween_speed, \
-		Tween.TRANS_LINEAR, Tween.EASE_IN)
-	$TweenSelfModulate.start()
+	if tween_self_modulate:
+
+		tween_self_modulate.kill()
+	tween_self_modulate = self.create_tween()
+	tween_self_modulate.tween_property(self, "self_modulate", \
+		Color.WHITE, tween_duration)\
+		.set_trans(Tween.TRANS_LINEAR).set_ease(Tween.EASE_OUT_IN)
+	# tween_self_modulate.start()
 
 func deselect():
-	$TweenSelfModulate.stop_all()
-	$TweenSelfModulate.interpolate_property(self, "self_modulate", \
-		self.self_modulate, Color.transparent, tween_speed, \
-		Tween.TRANS_LINEAR, Tween.EASE_OUT_IN)
-	$TweenSelfModulate.start()
+	if tween_self_modulate:
+		tween_self_modulate.kill()
+	tween_self_modulate = self.create_tween()
+	tween_self_modulate.tween_property(self, "self_modulate", \
+		Color.TRANSPARENT, tween_duration)\
+		.set_trans(Tween.TRANS_LINEAR).set_ease(Tween.EASE_OUT_IN)
+	# tween_self_modulate.start()
 	set_process(false)
+
+func tween_position_follow_property(t : float, src_pos : Vector2, trg : Node2D) -> void:
+	self.global_position = src_pos.lerp(trg.global_position,t)
 
 #func _draw():
 #	if selection_node != null :
@@ -47,6 +61,6 @@ func _process(delta):
 	assert(selection_node != null) # WARNING it seems to work but beware!
 	global_position = selection_node.global_position
 
-func _on_TweenPosition_tween_completed(object, key):
+func _on_tween_position_completed():
 	if selection_node != null:
 		set_process(true)

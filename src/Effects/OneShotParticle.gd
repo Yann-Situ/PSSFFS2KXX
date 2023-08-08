@@ -1,13 +1,17 @@
-extends Particles2D
+extends GPUParticles2D
 
 signal emission_finished
+@export var offset : Vector2 = Vector2.ZERO
 
-func start():
+func start(normal : Vector2 = Vector2.UP):
 	if not emitting:
+		var angle = Vector2.UP.angle_to(normal)
+		self.global_position += offset.rotated(angle)
+		self.rotation = angle
 		emitting = true
-		get_tree().create_timer(lifetime * (2 - explosiveness), false)\
-			.connect("timeout", self, "_queue_free")
-			
+		await get_tree().create_timer(lifetime * (2 - explosiveness), false).timeout
+		_queue_free()
+
 func _queue_free():
-	emit_signal("emission_finished")
+	emission_finished.emit()
 	queue_free()

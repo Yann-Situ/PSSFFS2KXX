@@ -1,259 +1,272 @@
-[gd_scene load_steps=14 format=2]
+[gd_scene load_steps=15 format=3 uid="uid://c6cdyqr51vbxh"]
 
-[ext_resource path="res://assets/art/environment/graff-spray.png" type="Texture" id=1]
-[ext_resource path="res://assets/shader/graff-spray.gdshader" type="Shader" id=2]
-[ext_resource path="res://src/Items/Interactive/GraffSpray.gd" type="Script" id=3]
-[ext_resource path="res://assets/art/effects/light2.png" type="Texture" id=4]
-[ext_resource path="res://assets/art/effects/round.png" type="Texture" id=5]
+[ext_resource type="Texture2D" uid="uid://nhnvnke1kret" path="res://assets/art/environment/graff-spray.png" id="1"]
+[ext_resource type="Shader" path="res://assets/shader/graff-spray.gdshader" id="2"]
+[ext_resource type="Script" path="res://src/Items/Interactive/GraffSpray.gd" id="3"]
+[ext_resource type="Texture2D" uid="uid://0q8qxsby5sw5" path="res://assets/art/effects/light2.png" id="4"]
+[ext_resource type="Texture2D" uid="uid://dynhxnnpu4wgg" path="res://assets/art/effects/round.png" id="5"]
 
-[sub_resource type="CanvasItemMaterial" id=24]
+[sub_resource type="CanvasItemMaterial" id="24"]
 
-[sub_resource type="Curve" id=25]
-_data = [ Vector2( 0, 1 ), 0.0, 1.22899, 0, 0, Vector2( 1, 0.0545454 ), -0.658523, 0.0, 0, 0 ]
+[sub_resource type="Curve" id="25"]
+_data = [Vector2(0, 1), 0.0, 1.22899, 0, 0, Vector2(1, 0.0545454), -0.658523, 0.0, 0, 0]
+point_count = 2
 
-[sub_resource type="Gradient" id=28]
-offsets = PoolRealArray( 0, 0.5, 0.8, 1 )
-colors = PoolColorArray( 1, 1, 1, 1, 1, 1, 1, 1, 0.0235294, 0.52549, 0.588235, 1, 0.0235294, 0.52549, 0.588235, 1 )
+[sub_resource type="Gradient" id="Gradient_ggvhg"]
+offsets = PackedFloat32Array(0, 0.5, 0.8, 1)
+colors = PackedColorArray(1, 1, 1, 1, 1, 1, 1, 1, 0.0235294, 0.52549, 0.588235, 1, 0.0235294, 0.52549, 0.588235, 1)
 
-[sub_resource type="ShaderMaterial" id=1]
+[sub_resource type="ShaderMaterial" id="1"]
 resource_local_to_scene = true
-shader = ExtResource( 2 )
-shader_param/color_light = Color( 0.0235294, 0.52549, 0.588235, 1 )
-shader_param/color_dark = Color( 0.0192941, 0.430902, 0.482353, 1 )
+shader = ExtResource("2")
+shader_parameter/color_light = Color(0.0235294, 0.52549, 0.588235, 1)
+shader_parameter/color_dark = Color(0.0192941, 0.430902, 0.482353, 1)
 
-[sub_resource type="Animation" id=2]
+[sub_resource type="Animation" id="2"]
 length = 0.001
 tracks/0/type = "value"
-tracks/0/path = NodePath("Sprite:frame")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
 tracks/0/imported = false
 tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
 tracks/0/keys = {
-"times": PoolRealArray( 0 ),
-"transitions": PoolRealArray( 1 ),
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
 "update": 0,
-"values": [ 0 ]
+"values": [0]
 }
 tracks/1/type = "value"
-tracks/1/path = NodePath("Sprite:position")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
 tracks/1/imported = false
 tracks/1/enabled = true
+tracks/1/path = NodePath("Sprite2D:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
 tracks/1/keys = {
-"times": PoolRealArray( 0 ),
-"transitions": PoolRealArray( 1 ),
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
 "update": 0,
-"values": [ Vector2( 0, -8 ) ]
+"values": [Vector2(0, 0)]
 }
 tracks/2/type = "value"
-tracks/2/path = NodePath("Sprite:rotation_degrees")
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Sprite2D:rotation_degrees")
 tracks/2/interp = 1
 tracks/2/loop_wrap = true
-tracks/2/imported = false
-tracks/2/enabled = true
 tracks/2/keys = {
-"times": PoolRealArray( 0 ),
-"transitions": PoolRealArray( 1 ),
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
 "update": 0,
-"values": [ 0.0 ]
+"values": [0.0]
 }
 tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
 tracks/3/path = NodePath("CloudParticles:emitting")
 tracks/3/interp = 1
 tracks/3/loop_wrap = true
-tracks/3/imported = false
-tracks/3/enabled = true
 tracks/3/keys = {
-"times": PoolRealArray( 0 ),
-"transitions": PoolRealArray( 1 ),
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
 "update": 0,
-"values": [ false ]
+"values": [true]
 }
 tracks/4/type = "value"
-tracks/4/path = NodePath("Sprite:scale")
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("Sprite2D:scale")
 tracks/4/interp = 1
 tracks/4/loop_wrap = true
-tracks/4/imported = false
-tracks/4/enabled = true
 tracks/4/keys = {
-"times": PoolRealArray( 0 ),
-"transitions": PoolRealArray( 1 ),
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
 "update": 0,
-"values": [ Vector2( 1e-05, 1e-05 ) ]
+"values": [Vector2(1, 1)]
 }
 tracks/5/type = "value"
-tracks/5/path = NodePath("Sprite/LightSmall:energy")
-tracks/5/interp = 1
-tracks/5/loop_wrap = true
 tracks/5/imported = false
 tracks/5/enabled = true
+tracks/5/path = NodePath("Sprite2D/LightSmall:energy")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
 tracks/5/keys = {
-"times": PoolRealArray( 0 ),
-"transitions": PoolRealArray( 1 ),
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
 "update": 0,
-"values": [ 1.08 ]
+"values": [1.08]
 }
 
-[sub_resource type="Animation" id=27]
+[sub_resource type="Animation" id="27"]
 resource_name = "collect"
 tracks/0/type = "value"
-tracks/0/path = NodePath("Sprite:frame")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
 tracks/0/imported = false
 tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
 tracks/0/keys = {
-"times": PoolRealArray( 0 ),
-"transitions": PoolRealArray( 1 ),
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
 "update": 1,
-"values": [ 0 ]
+"values": [0]
 }
 tracks/1/type = "value"
-tracks/1/path = NodePath("Sprite:position")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
 tracks/1/imported = false
 tracks/1/enabled = true
+tracks/1/path = NodePath("Sprite2D:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
 tracks/1/keys = {
-"times": PoolRealArray( 0 ),
-"transitions": PoolRealArray( 1 ),
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
 "update": 0,
-"values": [ Vector2( 0, 0 ) ]
+"values": [Vector2(0, 0)]
 }
 tracks/2/type = "value"
-tracks/2/path = NodePath("Sprite:rotation_degrees")
-tracks/2/interp = 2
-tracks/2/loop_wrap = true
 tracks/2/imported = false
 tracks/2/enabled = true
+tracks/2/path = NodePath("Sprite2D:rotation_degrees")
+tracks/2/interp = 2
+tracks/2/loop_wrap = true
 tracks/2/keys = {
-"times": PoolRealArray( 0, 0.5 ),
-"transitions": PoolRealArray( 1, 1 ),
+"times": PackedFloat32Array(0, 0.5),
+"transitions": PackedFloat32Array(1, 1),
 "update": 0,
-"values": [ 0.0, 360.0 ]
+"values": [0.0, 360.0]
 }
 tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
 tracks/3/path = NodePath("CloudParticles:emitting")
 tracks/3/interp = 1
 tracks/3/loop_wrap = true
-tracks/3/imported = false
-tracks/3/enabled = true
 tracks/3/keys = {
-"times": PoolRealArray( 0 ),
-"transitions": PoolRealArray( 1 ),
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
 "update": 1,
-"values": [ false ]
+"values": [false]
 }
 tracks/4/type = "value"
-tracks/4/path = NodePath("Sprite:scale")
-tracks/4/interp = 2
-tracks/4/loop_wrap = true
 tracks/4/imported = false
 tracks/4/enabled = true
+tracks/4/path = NodePath("Sprite2D:scale")
+tracks/4/interp = 2
+tracks/4/loop_wrap = true
 tracks/4/keys = {
-"times": PoolRealArray( 0, 0.1, 0.7, 0.9 ),
-"transitions": PoolRealArray( 1, 1, 1, 1 ),
+"times": PackedFloat32Array(0, 0.1, 0.7, 0.9),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
 "update": 0,
-"values": [ Vector2( 1, 1 ), Vector2( 1.35, 1.35 ), Vector2( 1, 1 ), Vector2( 1e-05, 1e-05 ) ]
+"values": [Vector2(1, 1), Vector2(1.35, 1.35), Vector2(1, 1), Vector2(1e-05, 1e-05)]
+}
+tracks/5/type = "value"
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/path = NodePath("Sprite2D/LightSmall:energy")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/keys = {
+"times": PackedFloat32Array(0, 0.5, 1),
+"transitions": PackedFloat32Array(4, 4, 1.27456),
+"update": 0,
+"values": [1.08, 1.16, 0.0]
 }
 
-[sub_resource type="Animation" id=3]
+[sub_resource type="Animation" id="3"]
 resource_name = "idle"
 length = 3.0
-loop = true
+loop_mode = 1
 step = 0.125
 tracks/0/type = "value"
-tracks/0/path = NodePath("Sprite:frame")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
 tracks/0/imported = false
 tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
 tracks/0/keys = {
-"times": PoolRealArray( 0, 0.125, 0.25, 0.375, 0.5, 0.625, 0.75, 0.875, 1, 1.125, 1.25, 1.375, 1.5, 1.625, 1.75, 1.875, 2, 2.125, 2.25, 2.375, 2.5, 2.625, 2.75, 2.875 ),
-"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1 ),
+"times": PackedFloat32Array(0, 0.125, 0.25, 0.375, 0.5, 0.625, 0.75, 0.875, 1, 1.125, 1.25, 1.375, 1.5, 1.625, 1.75, 1.875, 2, 2.125, 2.25, 2.375, 2.5, 2.625, 2.75, 2.875),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
 "update": 1,
-"values": [ 0, 1, 2, 3, 4, 5, 6, 7, 0, 1, 2, 3, 4, 5, 6, 7, 0, 1, 2, 3, 4, 5, 6, 7 ]
+"values": [0, 1, 2, 3, 4, 5, 6, 7, 0, 1, 2, 3, 4, 5, 6, 7, 0, 1, 2, 3, 4, 5, 6, 7]
 }
 tracks/1/type = "value"
-tracks/1/path = NodePath("Sprite:position")
-tracks/1/interp = 2
-tracks/1/loop_wrap = true
 tracks/1/imported = false
 tracks/1/enabled = true
+tracks/1/path = NodePath("Sprite2D:position")
+tracks/1/interp = 2
+tracks/1/loop_wrap = true
 tracks/1/keys = {
-"times": PoolRealArray( 1, 2.5 ),
-"transitions": PoolRealArray( 1, 1 ),
+"times": PackedFloat32Array(1, 2.5),
+"transitions": PackedFloat32Array(1, 1),
 "update": 0,
-"values": [ Vector2( 0, -2 ), Vector2( 0, 2 ) ]
+"values": [Vector2(0, -2), Vector2(0, 2)]
 }
 
-[sub_resource type="CircleShape2D" id=21]
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_fj5sp"]
+_data = {
+"RESET": SubResource("2"),
+"collect": SubResource("27"),
+"idle": SubResource("3")
+}
+
+[sub_resource type="CircleShape2D" id="21"]
 radius = 20.0
 
 [node name="GraffSpray" type="Node2D"]
 light_mask = 4
 z_index = 120
 z_as_relative = false
-script = ExtResource( 3 )
-color = Color( 0.0235294, 0.52549, 0.588235, 1 )
+script = ExtResource("3")
+color = Color(0.0235294, 0.52549, 0.588235, 1)
+metadata/_edit_group_ = true
 
 [node name="CloudParticles" type="CPUParticles2D" parent="."]
 light_mask = 4
-material = SubResource( 24 )
-position = Vector2( 0, 0.597961 )
+material = SubResource("24")
+position = Vector2(0, -2)
 amount = 24
-local_coords = false
-texture = ExtResource( 5 )
+texture = ExtResource("5")
 emission_shape = 1
 emission_sphere_radius = 8.0
-direction = Vector2( 0, 1 )
-spread = 30.0
-gravity = Vector2( 0, -125 )
-initial_velocity = 30.0
-initial_velocity_random = 1.0
-scale_amount = 0.1
-scale_amount_curve = SubResource( 25 )
-color_ramp = SubResource( 28 )
-__meta__ = {
-"_editor_description_": ""
-}
+direction = Vector2(0, 1)
+gravity = Vector2(0, -110)
+initial_velocity_max = 50.0
+scale_amount_min = 0.16
+scale_amount_max = 0.21
+scale_amount_curve = SubResource("25")
+color_ramp = SubResource("Gradient_ggvhg")
 
-[node name="Sprite" type="Sprite" parent="."]
+[node name="Sprite2D" type="Sprite2D" parent="."]
 light_mask = 4
-material = SubResource( 1 )
 z_index = 1
-texture = ExtResource( 1 )
+material = SubResource("1")
+texture = ExtResource("1")
 hframes = 4
 vframes = 2
 
-[node name="LightSmall" type="Light2D" parent="Sprite"]
-position = Vector2( 0, -4.96296 )
-scale = Vector2( 1.11855, 1.11855 )
+[node name="LightSmall" type="PointLight2D" parent="Sprite2D"]
 z_as_relative = false
-texture = ExtResource( 4 )
-color = Color( 0.902353, 0.952549, 0.958824, 1 )
+position = Vector2(0, -4)
+scale = Vector2(1.5, 1.5)
+color = Color(0.901961, 0.952941, 0.960784, 1)
 energy = 1.08
-mode = 2
+blend_mode = 2
 range_z_max = 160
 range_item_cull_mask = 7
-__meta__ = {
-"_edit_lock_": true
-}
+texture = ExtResource("4")
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 autoplay = "idle"
 reset_on_save = false
-anims/RESET = SubResource( 2 )
-anims/collect = SubResource( 27 )
-anims/idle = SubResource( 3 )
+libraries = {
+"": SubResource("AnimationLibrary_fj5sp")
+}
 
 [node name="Area2D" type="Area2D" parent="."]
 collision_layer = 0
 collision_mask = 5
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
-shape = SubResource( 21 )
+shape = SubResource("21")
 
 [connection signal="body_entered" from="Area2D" to="." method="_on_Area2D_body_entered"]

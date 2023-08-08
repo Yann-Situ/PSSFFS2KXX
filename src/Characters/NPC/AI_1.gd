@@ -1,10 +1,10 @@
 extends Node
 
-onready var Character = get_parent()
-onready var S = Character.get_node("State")
+@onready var Character = get_parent()
+@onready var S = Character.get_node("State")
 
-export (float) var ai_timer_min = 0.3 #s
-export (float) var ai_timer_max = 2.0 #s
+@export var ai_timer_min : float = 0.3 #s
+@export var ai_timer_max : float = 2.0 #s
 var rng = RandomNumberGenerator.new()
 
 func _ready():
@@ -41,7 +41,7 @@ func _on_Action_timeout():
 			disp(Character.name+" jump")
 			S.jump_jp = true
 			S.jump_p = true
-			yield(get_tree().create_timer(rng.randf_range(0.0,0.8)), "timeout")
+			await get_tree().create_timer(rng.randf_range(0.0,0.8)).timeout
 			S.jump_p = false
 			S.jump_jr = true
 			done = true
@@ -50,14 +50,14 @@ func _on_Action_timeout():
 				disp(Character.name+" dunkjump")
 				S.dunk_jp = true
 				S.dunk_p = true
-				yield(get_tree().create_timer(rng.randf_range(1.0,2.5)), "timeout")
+				await get_tree().create_timer(rng.randf_range(1.0,2.5)).timeout
 				S.dunk_p = false
 				S.dunk_jr = true
 			if S.can_dunk :
 				disp(Character.name+" dunk")
 				S.dunk_jp = true
 				S.dunk_p = true
-				yield(get_tree().create_timer(0.1), "timeout")
+				await get_tree().create_timer(0.1).timeout
 				S.dunk_p = false
 				S.dunk_jr = true
 			if S.can_shoot :

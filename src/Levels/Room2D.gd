@@ -1,18 +1,18 @@
 extends Node2D
 class_name Room2D
 
-signal exit_room
-signal exit_level
+signal is_exiting_room
+signal is_exiting_level
 
-export (int) var limit_left = -10000000
-export (int) var limit_top = -10000000
-export (int) var limit_right = 10000000
-export (int) var limit_bottom = 10000000
+@export var limit_left : int = -10000000
+@export var limit_top : int = -10000000
+@export var limit_right : int = 10000000
+@export var limit_bottom : int = 10000000
 
 var P = null
-var portals = {} setget , get_portals
+var portals : Dictionary = {} : get = get_portals
 
-export (NodePath) var meta_player # sould be set by the level
+@export var meta_player : NodePath # sould be set by the level
 
 func update_camera_limit():
 	P.Camera.limit_left = limit_left
@@ -42,47 +42,47 @@ func unlock_portals(): # necessary because of issue : https://github.com/godoten
 ################################################################################
 
 func _enter_tree():
-	# check if it has a Player node as a child. If not, create a Player node 
+	# check if it has a Player node as a child. If not, create a Player node
 	# and assign it to meta_player
 	print(name + " enter_tree")
 	#print("METAPLAYER : " + str(meta_player))
-	if get_node(meta_player) == null: # when room is run alone from the editor for tests
+	if not has_node(meta_player): # when room is run alone from the editor for tests
 		#print("No meta player : create one and assign meta_player")
 		Global.set_current_room(self)
 		var player_scene = load("res://src/Player/Player.tscn")
-		var player = player_scene.instance()
+		var player = player_scene.instantiate()
 		self.add_child(player) #move it to the appropriate position
 		meta_player = player.get_path()
 		#print("---> new METAPLAYER : " + str(meta_player))
 		if self.has_node("PlayerPosition"):
-			player.global_position = get_node_or_null("PlayerPosition").global_position
+			player.global_position = get_node_or_null("PlayerPosition").position
 	P = get_player()
-	
+
 func _ready():
 	print(name + " ready")
 	var portal_list = get_node("Portals").get_children()
 	for portal in portal_list:
 		add_portal(portal)
 		# note that if room isn't a child of level (like when it is opened from
-		# the editor as child of root), enter_room is never called so 
+		# the editor as child of root), enter_room is never called so
 		# enter_portal_finished is never emited and all the portals are locked.
-	
+
 	if self.has_node("PlayerPosition"):
 		get_node_or_null("PlayerPosition").visible = false
 	lock_portals()
-	
+
 	if get_parent() == get_tree().root:
 		update_camera_limit()
 
 func add_portal(portal : Portal2D):
 	portals[portal.name] = portal
-	portal.connect("enter_portal_finished", self, "unlock_portals")
-	portal.connect("exit_portal_finished", self, "lock_portals")
-		
+	portal.enter_portal_finished.connect(self.unlock_portals)
+	portal.exit_portal_finished.connect(self.lock_portals)
+
 
 func _unhandled_input(event):
 	if event is InputEventKey:
-		if event.pressed and event.scancode == KEY_R:
+		if event.pressed and event.keycode == KEY_R:
 			P.reset_move()
 
 ################################################################################
@@ -91,12 +91,12 @@ func exit_room(next_room : String, next_room_portal : String):
 	if next_room == self.name:
 		enter_room(next_room_portal)
 	else:
-		emit_signal("exit_room", next_room, next_room_portal)
-	#get_tree().change_scene(next_room)
+		is_exiting_room.emit(next_room, next_room_portal)
+	#get_tree().change_scene_to_file(next_room)
 	#get_tree().reload_current_scene()
 
 func exit_level(exit_portal : String):
-	emit_signal("exit_level", self.name, exit_portal)
+	is_exiting_level.emit(self.name, exit_portal)
 
 func enter_room(entrance_portal : String):
 	update_camera_limit()

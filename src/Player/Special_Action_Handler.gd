@@ -1,20 +1,20 @@
 extends Node2D
 
-onready var P = get_parent().get_parent()
-onready var S = P.get_node("State")
-onready var Selector = get_parent().get_node("Selector")
+@onready var P : Player = get_parent().get_parent() 
+@onready var S = P.get_node("State")
+@onready var Selector = get_parent().get_node("Selector")
 
-export var distaction = Vector2(8.1,0)
-export var color = Color(1.0,0.3,0.1)
-export (bool) var flip_h = false
+@export var distaction = Vector2(8.1,0)
+@export var color : Color = Color(1.0,0.3,0.1)
+@export var flip_h : bool = false
 var rays = []
 var rays_flip = []
 var rays_not_flip = []
 var rays_res = []
-var space_state
+var space_state : PhysicsDirectSpaceState2D
 
-onready var dunkjump_criteria_bests = []
-onready var dunkdash_criteria_bests = []
+@onready var dunkjump_criteria_bests = []
+@onready var dunkdash_criteria_bests = []
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -31,9 +31,10 @@ func update_space_state():
 
 func cast(r): #we must have updated the space_state before
 	if not r.updated:
-		r.result = space_state.intersect_ray(P.position+r.position, \
-			P.position+r.position+r.cast_to, \
-			[P], P.collision_mask, true, false)
+		var query = PhysicsRayQueryParameters2D.create(P.position+r.position, \
+			P.position+r.position+r.target_position, P.collision_mask, [P])
+		r.intersection_info = space_state.intersect_ray(query)
+		r.result = r.intersection_info != {}
 		r.updated = true
 
 ################################################################################
@@ -42,7 +43,7 @@ func dunkjump_criteria_init():
 	dunkjump_criteria_bests.clear()
 	dunkjump_criteria_bests.push_back(0.0) # best_y
 	dunkjump_criteria_bests.push_back(-2) # best_direction
-	
+
 # criteria to select the dunkjump target
 func dunkjump_criteria(q : Vector2, target_direction : int) -> bool:
 	# q is basket_position - player_position
@@ -56,7 +57,7 @@ func dunkjump_criteria(q : Vector2, target_direction : int) -> bool:
 		dir = -1
 	var Delta = P.dunkjump_speed*q.x/q.y
 	Delta = Delta*Delta
-	Delta += 2*P.gravity.y * q.x*q.x/q.y
+	Delta += 2*Global.default_gravity.y * q.x*q.x/q.y
 
 	if Delta <= 0.0 or target_direction*dir < dunkjump_criteria_bests[1]:
 		return false
@@ -69,9 +70,9 @@ func dunkjump_criteria(q : Vector2, target_direction : int) -> bool:
 
 func dunkdash_criteria_init():
 	dunkdash_criteria_bests.clear()
-	dunkdash_criteria_bests.push_back(P.max_dunkdash_distance2) # best_dist2
+	dunkdash_criteria_bests.push_back(P.dunkdash_dist2_max) # best_dist2
 	dunkdash_criteria_bests.push_back(-2) # best_direction
-	
+
 # criteria to select the dunkdash target
 func dunkdash_criteria(q : Vector2, target_direction : int) -> bool:
 	var dir = target_direction # not 0 in order to make direction*d=1 if q.x=0
@@ -82,7 +83,7 @@ func dunkdash_criteria(q : Vector2, target_direction : int) -> bool:
 	if target_direction*dir < dunkdash_criteria_bests[1]:
 		return false
 	var lq2 = q.length_squared()
-	if lq2 > P.max_dunkdash_distance2:
+	if lq2 > P.dunkdash_dist2_max:
 		return false
 	if target_direction*dir == dunkdash_criteria_bests[1] and lq2 > dunkdash_criteria_bests[0]:
 		return false
@@ -96,7 +97,7 @@ func update_basket_selectors():
 	var selectable_dash = null
 
 	var selectables = $dunkjump_area.get_overlapping_areas()
-	if !selectables.empty():
+	if !selectables.is_empty():
 		# choose by priority selectables that are in direction_p, closest above player
 		var could_dunkjump = not S.get_node("ToleranceJumpFloorTimer").is_stopped() and \
 			not S.is_non_cancelable and S.get_node("CanDunkjumpTimer").is_stopped()
@@ -170,7 +171,7 @@ func can_dunkdash():
 
 func can_dunk():
 	var selectables = $dunk_area.get_overlapping_areas()
-	if !selectables.empty():
+	if !selectables.is_empty():
 		var b = null
 		S.dunk_basket = b
 		var r = $dunk_area/CollisionShape2D.shape.radius
@@ -191,11 +192,11 @@ func can_dunk():
 # 	for r in rays:
 # 		if r.result:#r.is_colliding():
 # 			draw_circle(r.result.position-P.position, 2, color)
-# 			draw_line(r.position, r.position+r.cast_to, color)
+# 			draw_line(r.position, r.position+r.target_position, color)
 #
 # # Called every frame. 'delta' is the elapsed time since the previous frame.
 # func _process(delta):
-# 	update()
+# 	queue_redraw()
 
 #############################
 func set_flip_h(b):

@@ -2,17 +2,18 @@ extends Node
 
 signal direction_changed(dir)
 
-export (int) var initial_direction = 0 setget set_initial_direction # 0 makes an idle pedestrian
-export (float) var ai_timer_min = 1.0 #s
-export (float) var ai_timer_max = 4.0 #s
-export (float) var proba_idle = 0.2 #
-export (float) var proba_stay_idle = 0.4 #
-export (float) var proba_change_direction = 0.4 #
+@export var initial_direction : int = 0 :
+	set = set_initial_direction # 0 makes an idle pedestrian
+@export var ai_timer_min : float = 1.0 #s
+@export var ai_timer_max : float = 4.0 #s
+@export var proba_idle : float = 0.2 #
+@export var proba_stay_idle : float = 0.4 #
+@export var proba_change_direction : float = 0.4 #
 
 var rng = RandomNumberGenerator.new()
 var timer
-onready var direction = initial_direction
-onready var last_direction = initial_direction
+@onready var direction = initial_direction
+@onready var last_direction = initial_direction
 
 func set_initial_direction(val : int):
 	initial_direction = val
@@ -24,7 +25,7 @@ func _ready():
 	timer = Timer.new()
 	timer.set_one_shot(true)
 	self.add_child(timer)
-	timer.connect("timeout", self, "_on_Timer_timeout")
+	timer.timeout.connect(self._on_Timer_timeout)
 	timer.start(rng.randf_range(ai_timer_min, ai_timer_max))
 
 func _on_Timer_timeout():
@@ -47,4 +48,4 @@ func change_direction(new_direction : int):
 	if direction != new_direction:
 		last_direction = direction
 		direction = new_direction
-		emit_signal("direction_changed", direction)
+		direction_changed.emit(direction)

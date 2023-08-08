@@ -1,10 +1,10 @@
-[gd_resource type="ShaderMaterial" load_steps=2 format=2]
+[gd_resource type="ShaderMaterial" load_steps=2 format=3 uid="uid://bh78qepcpe58"]
 
-[ext_resource path="res://assets/shader/speed.gdshader" type="Shader" id=1]
+[ext_resource type="Shader" path="res://assets/shader/speed.gdshader" id="1"]
 
 [resource]
-shader = ExtResource( 1 )
-shader_param/speed = Vector2( 100, 100 )
-shader_param/max_speed = 400.0
-shader_param/thresh_speed_coeff = 0.6
-shader_param/glow_coeff = 1.2
+shader = ExtResource("1")
+shader_parameter/speed = Vector2(100, 100)
+shader_parameter/speed_max = 400.0
+shader_parameter/thresh_speed_coeff = 0.6
+shader_parameter/glow_coeff = 1.2

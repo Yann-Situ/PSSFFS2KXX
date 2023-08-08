@@ -1,7 +1,7 @@
 shader_type canvas_item;
 render_mode unshaded;
 
-uniform vec4 color : hint_color = vec4(0.5, 0.5, 0.5, 1.0);
+uniform vec4 color : source_color = vec4(0.5, 0.5, 0.5, 1.0);
 uniform float mix_value : hint_range(-0.5, 1.5) = 1.0;
 
 float lightness(vec4 x)

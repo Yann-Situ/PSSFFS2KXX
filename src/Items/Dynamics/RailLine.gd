@@ -1,33 +1,24 @@
 #tool
 extends Path2D
-class_name RailLine, "res://assets/art/icons/railline.png"
+class_name RailLine
+# @icon("res://assets/art/icons/railline.png")
 
-export (bool) var invert_line_direction = false
-export (float) var character_position_offset = -32.0
-export (float) var character_position_entrance_tolerance = -16.0
-export (float) var character_collision_offset = -52.0
-export (float) var cant_get_in_again_timer = 0.2#s
+@export var invert_line_direction : bool = false
+@onready var segment_collision_offset = Vector2(0.0,0.0)
+@export_group("Character parameters", "character_")
+@export var character_offset : Vector2 = Vector2(0.0, -32.0)
+@export var character_cant_get_in_again_delay : float = 0.2#s
 
-onready var gravity = ProjectSettings.get_setting("physics/2d/default_gravity") # pix/s²
-onready var character_offset = Vector2(0.0,character_position_offset)
-onready var collision_offset = Vector2(0.0,0.0)
 const tolerance_annoying_case = 4.0
-
-var _particle = preload("res://src/Effects/RideParticles.tscn")
 
 var init_point = Vector2.ZERO
 var final_point = Vector2.ZERO
 
 var collision_segments = []
 
-var inside_bodies = []
-var path_follows = []
-var linear_velocities = []
-var position_offsets = []
-
-var real_character_offset = Vector2.ZERO
-
 var paths_to_free = {}
+var path_follows = {}
+var position_offsets = {}
 var released_bodies = {}
 
 func _update_points():
@@ -48,11 +39,11 @@ func _update_points():
 
 		var new_segment = CollisionShape2D.new()
 		new_segment.shape = SegmentShape2D.new()
-		new_segment.shape.set_a(p0+collision_offset)
-		new_segment.shape.set_b(p1+collision_offset)
-		#print("segment : "+str(p0+collision_offset)+" - "+str(p1+collision_offset))
+		new_segment.shape.set_a(p0+segment_collision_offset)
+		new_segment.shape.set_b(p1+segment_collision_offset)
+		#print("segment : "+str(p0+segment_collision_offset)+" - "+str(p1+segment_collision_offset))
 		collision_segments.push_back(new_segment)
-		$Area.add_child(new_segment)
+		$Area2D.add_child(new_segment)
 
 ###############################################################################
 
@@ -60,144 +51,96 @@ func _ready():
 	self.z_index = Global.z_indices["foreground_1"]
 	add_to_group("characterholders")
 	if curve.get_point_count() >= 2:
-		#print(self.name + " setcurve")
 		final_point = curve.get_point_position(curve.get_point_count()-1)
-		#print(final_point)
 	else :
-		print(self.name+" Error: not enough points in the curve!")
+		push_error("Not enough points in the curve!")
 	_update_points()
-
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-func _physics_process(delta):
-
-	var j = 0 # int because we're deleting nodes in a list we're browsing
-	for i in range(inside_bodies.size()):
-		var body = inside_bodies[i-j]
-		var path_follow = path_follows[i-j]
-		var velocity = linear_velocities[i-j]
-		var position_offset = position_offsets[i-j]
-		var rail_dir = path_follow.transform.x
-		# transform.x is the direction (vec2D) of the pathfollow
-		velocity = body.S.velocity
-		velocity.y += gravity * delta
-		velocity = velocity.dot(rail_dir) * rail_dir
-		position_offset = lerp(position_offset, character_offset, 0.5)
-
-		path_follow.offset += velocity.dot(rail_dir) * delta
-		body.global_position = path_follow.global_position + position_offset
-		body.S.velocity = velocity
-
-		linear_velocities[i-j] = velocity
-		position_offsets[i-j]  = position_offset
-		if path_follow.get_unit_offset() == 1.0 or \
-		   path_follow.get_unit_offset() == 0.0 or \
-		   !body.S.is_grinding :
-
-			body.get_out(body.global_position, velocity)
-			j += 1 # because we deleted a node in the list we're browsing
-
-			# the following code can result in wrong j and i values if there are
-			# multiple character on trail...
-			# A workaround would be to queue_free and stop emitting after the
-			# for loop.
-#			temp_particles.emitting = false
-#			yield(get_tree().create_timer(temp_particles.lifetime), "timeout")
-#			temp_path_follow.call_deferred("queue_free")
-
-	# Ugly but it works :
-	for p in paths_to_free.keys():
-		paths_to_free[p] -= delta
-		if paths_to_free[p] < 0.0:
-			p.call_deferred("queue_free")
-			paths_to_free.erase(p)
-
-	for body in released_bodies.keys():
-		released_bodies[body] -= delta
-		if released_bodies[body] < 0.0:
-			released_bodies.erase(body)
 
 func is_in(a, b, c, tolerance = 0.0):
 	return a >= b+tolerance and a < c-tolerance
 
-func _on_Area_body_entered(body):
+func _on_Area_body_entered(body : Node2D):
 	if !body.is_in_group("characters") :
 		return 1
-	if !body.has_node("Actions/Grind"):
-		printerr(body.name + " doesn't have a node called Actions/Grind")
+	if body.is_hold(): # already hold by a character_holder
 		return 1
-	if !body.S.can_grind :
-		print_debug(body.name+" cannot grind on "+self.name)
+	if body.has_node("Actions/Grind") and !body.S.can_grind:
+		print_debug(body.name + "have a node Actions/Grind but cannot grind")
 		return 1
-	for b in inside_bodies:
-		if b == body:
-			print_debug(body.name+" already in "+self.name)
-			return 1
-	for b in released_bodies.keys():
-		if b == body:
-			print_debug(body.name+" just got out from "+self.name)
-			return 1
+	if path_follows.has(body):
+		push_warning(body.name+" already in "+self.name)
+		return 1
+	if released_bodies.has(body):
+		print_debug(body.name+" just got out from "+self.name)
+		return 1
 
 	var bi = body.global_position-global_position-init_point
-	var closest_offset = curve.get_closest_offset(bi)
-#	if not is_in(closest_offset, 0.0, curve.get_baked_length(),5.0):
-#		print("annoying case")
-	var closest_point = curve.interpolate_baked(closest_offset-0.001)
-	var rail_dir = curve.interpolate_baked(closest_offset+0.001)-closest_point
-	if rail_dir.x < 0.0:
+	# here we compute the local point and the rail local tangent direction
+	var closest_progress = curve.get_closest_offset(bi)
+	if not is_in(closest_progress, 0.0, curve.get_baked_length(),0.5*curve.bake_interval):
+			push_warning("rail limit edge case")# not a problem in practice
+	var closest_point = curve.sample_baked(closest_progress-0.5*curve.bake_interval)
+	var rail_dir = curve.sample_baked(closest_progress+0.5*curve.bake_interval)-closest_point
+	if invert_line_direction:
 		rail_dir = -rail_dir
 
-	if (bi-closest_point).y <= character_position_entrance_tolerance or \
-	   (rail_dir.cross(body.S.velocity) >= 0.0 and \
-		is_in(closest_offset, 0.0, curve.get_baked_length(),tolerance_annoying_case)) :
-
+	if rail_dir.cross(body.S.velocity) >= 0.0 :
+		# add it to the rail
 		var new_path_follow : PathFollow2D = PathFollow2D.new()
 		new_path_follow.loop = false
-		var ride_particle : Particles2D = _particle.instance()
-		ride_particle.name = "Particles"
-		if invert_line_direction:
-			ride_particle.process_material.direction.y = 1
-		new_path_follow.add_child(ride_particle)
 		self.add_child(new_path_follow)
 
-		new_path_follow.offset = closest_offset # approximate where the player is
+		new_path_follow.progress = closest_progress # approximate where the player is
 		rail_dir = new_path_follow.transform.x
 
-		inside_bodies.push_back(body)
-		path_follows.push_back(new_path_follow)
-		body.S.velocity = body.S.velocity.dot(rail_dir) * rail_dir
-		linear_velocities.push_back(body.S.velocity)
-		position_offsets.push_back(body.global_position-new_path_follow.global_position)
-		#body.disable_physics()
+		path_follows[body] = new_path_follow
+		position_offsets[body] = body.global_position-new_path_follow.global_position
 		pickup_character(body)
-		body.S.velocity = linear_velocities[-1]
 
 ################################################################################
 # For `characterholders` group
-func pickup_character(character : Node):
+func pickup_character(character : Node2D):
 	character.get_in(self)
 	print(character.name+" on "+self.name)
-	character.get_node("Actions/Grind").move(0.01)
+	if character.has_node("Actions/Grind"):
+		character.get_node("Actions/Grind").move(0.01)
 
-func free_character(character : Node):
+func free_character(character : Node2D):
 	# called by character when getting out
-	var i = 0
-	for body in inside_bodies:
-		if body == character:
-			print(name+" free_character("+character.name+")")
-			if character.has_node("Actions/Grind"):
-				character.get_node("Actions/Grind").move_stop()
-			else :
-				push_warning(body.name + " doesn't have a node called Actions/Grind")
-			remove_body(i)
-		i += 1
+	print(name+" free_character("+character.name+")")
+	if character.has_node("Actions/Grind"):
+		character.get_node("Actions/Grind").move_stop()
+	remove_body(character)
 
-func remove_body(i : int):
-	assert(i < inside_bodies.size())
-	released_bodies[inside_bodies[i]] = cant_get_in_again_timer
-	inside_bodies.remove(i)
-	linear_velocities.remove(i)
-	position_offsets.remove(i)
+func remove_body(body : Node2D):
+	released_bodies[body] = character_cant_get_in_again_delay
+	path_follows[body].call_deferred("queue_free")
+	path_follows.erase(body)
+	position_offsets.erase(body)
 
-	path_follows[i].get_node("Particles").emitting = false
-	paths_to_free[path_follows[i]] = path_follows[i].get_node("Particles").lifetime
-	path_follows.remove(i)
+func move_character(character : Node2D, linear_velocity : Vector2, \
+	delta : float) -> Vector2:
+	assert(path_follows.has(character))
+	var path_follow = path_follows[character]
+	var position_offset = position_offsets[character]
+	var rail_dir = path_follow.transform.x
+	var new_velocity_length = linear_velocity.dot(rail_dir)
+
+	path_follow.progress += new_velocity_length * delta
+	position_offset = lerp(position_offset, character_offset, 0.1)
+	character.global_position = path_follow.global_position + position_offset
+	position_offsets[character] = position_offset
+
+	if path_follow.get_progress_ratio() >= 1.0 or \
+		path_follow.get_progress_ratio() <= 0.0 or \
+		(character.has_node("Actions/Grind") and !character.S.is_grinding) :
+		character.get_out(character.global_position, new_velocity_length * rail_dir)
+	return new_velocity_length * rail_dir
+
+############################################################################
+# Called every frame. 'delta' is the elapsed time since the previous frame.
+func _process(delta):
+	for body in released_bodies.keys():
+		released_bodies[body] -= delta
+		if released_bodies[body] < 0.0:
+			released_bodies.erase(body)

@@ -6,12 +6,17 @@
 
 shader_type canvas_item;
 
+/* In Godot4, SCREEN_TEXTURE has been removed in favor of using
+ * hint_screen_texture with a uniform. As a result the following line is needed
+ * for the code to work:*/
+uniform sampler2D Screen_Texture : hint_screen_texture, filter_linear_mipmap;
+
 uniform float aspect = 1.0;
 uniform float distortion = 1.0;
 uniform float radius = 1.0;
 uniform float alpha = 1.0;
 uniform float crop = 1.0;
-uniform vec4 crop_color : hint_color = vec4(0,0,0,1);
+uniform vec4 crop_color : source_color = vec4(0,0,0,1);
 
 vec2 distort(vec2 p)
 {
@@ -35,7 +40,7 @@ void fragment()
 	if (d < radius)
 	{
 		xy = distort(xy);
-		tex = texture(SCREEN_TEXTURE, xy);
+		tex = texture(Screen_Texture, xy);
 		COLOR = tex;
 		COLOR.a = alpha;
 	}

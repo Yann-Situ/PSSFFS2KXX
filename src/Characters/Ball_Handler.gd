@@ -1,16 +1,16 @@
 extends Area2D
 # Ball pickup
 
-onready var Character = get_parent()
-onready var S = Character.get_node("State")
+@onready var Character = get_parent()
+@onready var S = Character.get_node("State")
 
-export (float) var shoot_max_speed = 1000.0 # kg*pix/s
-var shoot_vector_save = Vector2() setget set_shoot_vector, get_shoot_vector
+@export var shoot_speed_max : float = 1000.0 # kg*pix/s
+var shoot_vector_save = Vector2() : get = get_shoot_vector, set = set_shoot_vector
 
 ################## Shoot features
 
 func set_shoot_vector(v):
-	shoot_vector_save = clamp(v.length(), 0.0, shoot_max_speed)*v.normalized()
+	shoot_vector_save = clamp(v.length(), 0.0, shoot_speed_max)*v.normalized()
 func get_shoot_vector():
 	return shoot_vector_save
 
@@ -69,7 +69,7 @@ func throw_ball(throw_global_position, momentum):
 		print(Character.name+" throw "+S.held_ball.name)
 		S.released_ball = S.held_ball
 		S.held_ball.throw(throw_global_position, 1.0/S.held_ball.mass * momentum)
-		yield(get_tree().create_timer(0.1), "timeout")
+		await get_tree().create_timer(0.1).timeout
 		S.released_ball = null
 
 func shoot_ball(): # called by animation

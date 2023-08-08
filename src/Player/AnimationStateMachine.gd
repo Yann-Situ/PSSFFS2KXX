@@ -2,9 +2,9 @@ extends AnimationTree
 
 # Declare member variables here :
 var state_machine
-onready var Player = get_parent().get_parent()
+@onready var Player = get_parent().get_parent()
 var conds = ["on_wall_cond","not_on_floor_cond","on_floor_cond","idle_cond",\
-  	"falling_cond","walking_cond","jumping_cond","walljumping_cond",\
+	"falling_cond","walking_cond","jumping_cond","walljumping_cond",\
 	"dunkjumping_cond","not_dunkjumping_cond", "dunking_cond", "not_dunking_cond", \
 	"halfturning_cond"\
   #"not_halfturning_cond","crouching_cond","aiming_cond","shooting_cond"\#"landing_cond"\"not_landing_cond",
@@ -77,55 +77,55 @@ func _ready():
 
 	#DUNKJUMP
 	add_state("dunkjump",\
-	  ["fall", "fall_loop", "jump1", "walljump1"],["fall", "idle"],\
-	  ["dunkjumping_cond","dunkjumping_cond","dunkjumping_cond","dunkjumping_cond"],["not_dunkjumping_cond","on_floor_cond"],\
-	  [],[]) # is same as all SWITCH_MODE_IMMEDIATE
+	["fall", "fall_loop", "jump1", "walljump1"],["fall", "idle"],\
+	["dunkjumping_cond","dunkjumping_cond","dunkjumping_cond","dunkjumping_cond"],["not_dunkjumping_cond","on_floor_cond"],\
+	[],[]) # is same as all SWITCH_MODE_IMMEDIATE
 	air_states.append("dunkjump")
 	
 	#DUNK
 	add_state("dunk",\
-	  ["dunkjump","fall", "fall_loop", "jump1", "walljump1"],["fall"],\
-	  ["dunking_cond","dunking_cond","dunking_cond","dunking_cond","dunking_cond"],["not_dunking_cond"],\
-	  [0,0,0,0,0],[2])
+	["dunkjump","fall", "fall_loop", "jump1", "walljump1"],["fall"],\
+	["dunking_cond","dunking_cond","dunking_cond","dunking_cond","dunking_cond"],["not_dunking_cond"],\
+	[0,0,0,0,0],[2])
 	air_states.append("dunk")
 
 	#HALFTURN
 	add_state("halfturn",\
-	  ["walk", "idle"],["walk","idle", "floor_wall"], \
-	  ["halfturning_cond","halfturning_cond"],["","not_halfturning_cond", "on_wall_cond"],\
-	  [0,0],[2, 0, 0])
+	["walk", "idle"],["walk","idle", "floor_wall"], \
+	["halfturning_cond","halfturning_cond"],["","not_halfturning_cond", "on_wall_cond"],\
+	[0,0],[2, 0, 0])
 	floor_states.append("halfturn")
 	
 	#CROUCH
 	add_state("crouch_idle",\
-	  ["walk", "idle"],["idle"], \
-	  ["crouching_cond", "crouching_cond"],["not_crouching_cond"],\
-	  [0,0],[0])
+	["walk", "idle"],["idle"], \
+	["crouching_cond", "crouching_cond"],["not_crouching_cond"],\
+	[0,0],[0])
 	floor_states.append("crouch_idle")
 	
 	add_state("crouch_idle_copy",\
-	  [],["crouch_idle", "idle"], \
-	  [],["", "not_crouching_cond"],\
-	  [],[2,0],\
-	  "crouch_idle")
+	[],["crouch_idle", "idle"], \
+	[],["", "not_crouching_cond"],\
+	[],[2,0],\
+	"crouch_idle")
 	floor_states.append("crouch_idle_copy")
 	
 	add_state("crouch",\
-	  ["crouch_idle","crouch_idle"],["idle", "crouch_idle"], \
-	  ["walking_cond","walking_cond"],["not_crouching_cond", "idle_cond"],\
-	  [0,0],[0,0])
+	["crouch_idle","crouch_idle"],["idle", "crouch_idle"], \
+	["walking_cond","walking_cond"],["not_crouching_cond", "idle_cond"],\
+	[0,0],[0,0])
 	floor_states.append("crouch")
 	
 	#LAND
 	add_state("land",\
-	  ["idle", "crouch"],["crouch_idle_copy", "crouch_idle", "floor_wall"], \
-	  ["landing_idle_cond","landing_idle_cond"],["", "not_landing_cond", "on_wall_cond"],\
-	  [0],[2, 0, 0])
+	["idle", "crouch"],["crouch_idle_copy", "crouch_idle", "floor_wall"], \
+	["landing_idle_cond","landing_idle_cond"],["", "not_landing_cond", "on_wall_cond"],\
+	[0],[2, 0, 0])
 	floor_states.append("land")
 	add_state("land_roll",\
-	  ["idle", "crouch"],["crouch", "crouch_idle", "floor_wall"], \
-	  ["landing_roll_cond","landing_roll_cond"],["", "not_landing_cond", "on_wall_cond"],\
-	  [0],[2, 0, 0])
+	["idle", "crouch"],["crouch", "crouch_idle", "floor_wall"], \
+	["landing_roll_cond","landing_roll_cond"],["", "not_landing_cond", "on_wall_cond"],\
+	[0],[2, 0, 0])
 	floor_states.append("land_roll")
 	
 	#AIMING
@@ -149,15 +149,15 @@ func _ready():
 	for i in range(max(len(air_states), len(floor_states))) :
 		shoot_conds.append("shooting_cond")
 	add_state("air_shoot",\
-	  air_states,["fall", "fall_copy"], \
-	  shoot_conds,["","not_shooting_cond"],\
-	  [],[2,0])
+	air_states,["fall", "fall_copy"], \
+	shoot_conds,["","not_shooting_cond"],\
+	[],[2,0])
 	air_states.append("air_shoot")
 
 	add_state("floor_shoot",\
-	  floor_states,["idle", "idle_copy"], \
-	  shoot_conds,["", "not_shooting_cond"],\
-	  [],[2, 0, 0])
+	floor_states,["idle", "idle_copy"], \
+	shoot_conds,["", "not_shooting_cond"],\
+	[],[2, 0, 0])
 	floor_states.append("floor_shoot")
 
 	# var dunk_node = AnimationNodeAnimation.new();

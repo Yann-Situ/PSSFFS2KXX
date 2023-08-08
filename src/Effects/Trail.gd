@@ -1,24 +1,23 @@
 extends Line2D
 
-export (float) var min_point_spawn_distance := 5.0#pix
-export (float) var wildness_amplitude := 200.0#pix/s
-export (float, 0.001, 1.0) var wildness_tick := 0.02#s
+@export var min_point_spawn_distance : float = 5.0#pix
+@export var wildness_amplitude : float = 200.0#pix/s
+@export_range(0.001,1.0) var wildness_tick : float = 0.02#s
+@export_range(0.001,1.0) var point_lifetime_tick : float = 0.05#s
+@export_range(0.001,1.0) var addpoint_tick : float = 0.04#s
 
-export (float) var trail_fade_time := 5.0#s
-export (float) var point_lifetime := 0.7#s
-export (float, 0.001, 1.0) var point_lifetime_tick := 0.04#s
+@export var trail_fade_time : float = 5.0#s
+@export var point_lifetime : float = 0.7#s
+@export var lifetime : float = 0.0#s (if <= 0.0s, then the trail stays until stop is called)
+@export var autostart : bool = true : set = set_autostart
 
-export (float, 0.001, 1.0) var addpoint_tick := 0.04#s
-export (float) var lifetime := 0.0#s (if <= 0.0s, then the trail stays until stop is called)
-export (bool) var autostart = true setget set_autostart
-
-var node_to_trail = null setget set_node_to_trail
+var node_to_trail = null : set = set_node_to_trail
 
 var wildness_tick_current := 0.0
 var point_lifetime_tick_current := 0.0
 var addpoint_tick_current := 0.0
 var point_age := [0.0]
-onready var wildness_amplitude_per_tick = wildness_amplitude*wildness_tick#pix
+@onready var wildness_amplitude_per_tick = wildness_amplitude*wildness_tick#pix
 
 var stopped := false
 
@@ -34,7 +33,7 @@ func set_node_to_trail(node : Node2D):
 	self.z_index = node_to_trail.z_index - 1
 
 func _ready():
-	set_as_toplevel(true)
+	set_as_top_level(true)
 
 func start():
 	if lifetime > 0.0:
@@ -43,10 +42,10 @@ func start():
 
 func stop():
 	stopped = true
-	$Decay.interpolate_property(self, "modulate:a", 1.0, 0.0, trail_fade_time)
-	$Decay.start()
-	#get_tree().create_timer(trail_fade_time)
-	#call_deferred("queue_free")
+	var tween_decay = self.create_tween()
+	tween_decay.tween_property(self, "modulate:a", 0.0, trail_fade_time).from(1.0)
+	tween_decay.tween_callback(self._on_tween_decay_completed)
+	#tween_decay.start()
 
 func _process(delta):
 	if point_lifetime_tick_current > point_lifetime_tick:
@@ -65,7 +64,7 @@ func _process(delta):
 		wildness_tick_current = fmod(wildness_tick_current, wildness_tick)
 		for i in range(n):
 			for p in range(get_point_count()):
-				var rand_vector := Vector2(rand_range(-1.0, 1.0), rand_range(-1.0, 1.0))
+				var rand_vector := Vector2(randf_range(-1.0, 1.0), randf_range(-1.0, 1.0))
 				points[p] += (rand_vector * wildness_amplitude_per_tick)
 	else:
 		wildness_tick_current += delta
@@ -92,13 +91,13 @@ func _add_point(point_position:Vector2, at_position := -1) -> bool:
 	if !Global.can_add_trail_point():
 		return false
 	point_age.append(0.0)
-	.add_point(point_position, at_position)
+	self.add_point(point_position, at_position)
 	Global.add_trail_point()
 	return true
 
 # Warning : if the trail node has been reparented during the decay tween, this
 # function might never be called because Tween._exit_tree calls stop_all().
-func _on_Decay_tween_all_completed():
+func _on_tween_decay_completed():
 	queue_free()
 
 func _on_Timer_timeout():

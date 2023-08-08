@@ -2,12 +2,12 @@ extends Node2D
 class_name Level
 
 #export (String) var dir_path = "res://src/Levels/LevelExample/"
-#export(Array, PackedScene) var rooms
-export (String, FILE, "*.tscn") var first_room
-export (String) var first_room_portal
+#export var rooms # (Array, PackedScene)
+@export_global_file("*.tscn") var first_room
+@export var first_room_portal : String
 
 var rooms = {}
-var current_room_instance = null setget set_current_room_instance#
+var current_room_instance = null : set = set_current_room_instance
 var player_scene = preload("res://src/Player/Player.tscn")
 var meta_player = null
 var player_save = null
@@ -30,12 +30,12 @@ func browse_rooms(room_name : String):
 			printerr("can't preload "+room_name+" because it doesn't exist.")
 			return
 
-		var room: Room2D = packed_room.instance()
+		var room: Room2D = packed_room.instantiate()
 		rooms[room_name] = room
 		print_debug("created room : "+room_name)
 		room.meta_player = $Player.get_path() # instantiate meta_player for each room
-		room.connect("exit_room", self, "change_room")
-		room.connect("exit_level", self, "exit_level")
+		room.is_exiting_room.connect(self.change_room)
+		room.is_exiting_level.connect(self.exit_level)
 
 		# TODO ugly but we need to call _ready on room in order to get the portals...
 		# Maybe find a system with resources ? Or store a meta room as resource, with its information
@@ -46,7 +46,10 @@ func browse_rooms(room_name : String):
 		self.remove_child(room)
 
 		for portal in portal_nodes:
-			browse_rooms(portal.get_next_room())
+			if portal.get_next_room():
+				browse_rooms(portal.get_next_room())
+			else :
+				push_warning(portal.name+" doesn't have any value for next_room.")
 
 ################################################################################
 
@@ -56,13 +59,13 @@ func enter_level():
 func exit_level(exit_room : String, exit_room_portal : String):
 	pass
 	# not yet implemented
-	# TODO
+	# TODO: link with the menu hierarchy and all those not yet implemented stuff
 	print_debug("exit_level called on "+name+" on room "+exit_room+" at portal "+exit_room_portal)
 
 func change_room(next_room : String, next_room_portal : String):
 	print_debug("entering "+next_room+" at the portal "+next_room_portal)
 	# TODO: pause or unpause the room when changing ?
-	if self.is_a_parent_of(current_room_instance):
+	if self.is_ancestor_of(current_room_instance):
 		self.remove_child(current_room_instance)
 	if rooms.has(next_room):
 		set_current_room_instance(rooms[next_room])

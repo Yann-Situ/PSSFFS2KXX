@@ -1,14 +1,14 @@
-tool
+@tool
 extends Activable
 
-export (float, EXP, 20, 2000) var speed_at_exit
-export (float, EXP, 20, 2000) var speed_inside
+@export_range(20, 2000) var speed_at_exit : float
+@export_range(20, 2000) var speed_inside : float
 
 enum PIPE_TYPE {TO_EXIT, TO_ENTRANCE, BOTH_SIDES}
-export (PIPE_TYPE) var pipe_type = PIPE_TYPE.TO_EXIT
+@export var pipe_type : PIPE_TYPE = PIPE_TYPE.TO_EXIT
 
 enum PIPE_Z {BACK, FRONT}
-export (PIPE_Z) var pipe_z = PIPE_Z.BACK
+@export var pipe_z : PIPE_Z = PIPE_Z.BACK
 
 var inside_bodies = []
 var path_follows = []
@@ -32,9 +32,9 @@ func _process(delta):
 	for i in range(inside_bodies.size()):
 		var body = inside_bodies[i-j]
 		var path_follow = path_follows[i-j]
-		path_follow.offset += speed_inside * delta
+		path_follow.progress += speed_inside * delta
 		body.global_position = path_follow.global_position
-		if path_follow.get_unit_offset() == 1.0:
+		if path_follow.get_progress_ratio() == 1.0:
 			body.throw(path_follow.global_position,
 						path_follow.transform.x * speed_at_exit)
 			# note that throw also call self.free_ball and remove it from the
@@ -45,10 +45,10 @@ func _process(delta):
 
 func update_entrance_sprite():
 	if self.activated :
-		$Entrance/Sprite.set_animation("active")
+		$Entrance/Sprite2D.set_animation("active")
 		$Entrance/Particles.emitting = true
 	else :
-		$Entrance/Sprite.set_animation("not_active")
+		$Entrance/Sprite2D.set_animation("not_active")
 		$Entrance/Particles.emitting = false
 
 func update_entrance_rotation():
@@ -72,7 +72,7 @@ func _on_Area_body_entered(ball):
 				return
 
 		var new_path_follow : PathFollow2D = PathFollow2D.new()
-		new_path_follow.offset = 0
+		new_path_follow.progress = 0
 		new_path_follow.loop = false
 		self.add_child(new_path_follow)
 		# WARNING : due to the issue in Ball.gd func change_holder, this part can freeze/crash.
@@ -99,9 +99,9 @@ func free_ball(ball): # set out  active_ball and has_ball
 func remove_ball(i : int):
 	assert(i < inside_bodies.size())
 	inside_bodies[i].z_index = Global.z_indices["ball_0"]
-	inside_bodies.remove(i)
+	inside_bodies.remove_at(i)
 	path_follows[i].queue_free()
-	path_follows.remove(i)
+	path_follows.remove_at(i)
 
 ################################################################################
 
@@ -110,7 +110,7 @@ func on_enable():
 	#[https://github.com/godotengine/godot-proposals/issues/325]
 	if is_inside_tree():
 		update_entrance_sprite()
-		for ball in $Entrance/Area.get_overlapping_bodies():
+		for ball in $Entrance/Area3D.get_overlapping_bodies():
 			_on_Area_body_entered(ball)
 
 func on_disable():
