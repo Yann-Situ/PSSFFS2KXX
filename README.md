@@ -25,15 +25,15 @@ Copyright (c) 2023 Yann-Situ
 * [x] Implement Explosion nodes.
 * [ ] Rework Aiming system (better physics + time stop + 2 steps shoot).
 * [ ] Rework Dunkdash target graphism.
-* [ ] Rework Rails
-* [ ] Rework Ziplines.
+* [x] Rework Rails
+* [x] Rework Ziplines.
 * [x] Implement Pedestrian generator (pnj shader, gradient sampler, ...).
 * [ ] GUI Graphism
 
 ### Godot4 migration
 
 List of things to do
-- [ ] physics problem with grind
+- [x] physics problem with grind
 - :pushpin: dunk player position
 - :pushpin: hang player position
 - [ ] double dash make the player stuck
@@ -45,7 +45,7 @@ List of things to do
 - :pushpin: tileset/map rework
 - [ ] Improve TileMapBaker to take into account different physical layer, for example ballwall and playerwall
 
-Pull request to master when [x]**ball physics**, :pushpin:**ziplin and rails** and [x]**player animations** will be correctly handled.
+Pull request to master when [x]**ball physics**, [x]**zipline and rails** and [x]**player animations** will be correctly handled.
 
 ## Work to do
 * Graphism :
@@ -140,26 +140,26 @@ Pull request to master when [x]**ball physics**, :pushpin:**ziplin and rails** a
 * [x] Characters can leave **rail** if Player press **crouch** on it.
     - Implement the `riding` and `hanging` states.
 * [x] Balls can perform too big jumps at the junction of multiple **Jumpers**. This is due to `apply_impulse` not changing immediately the velocity value of a RigidBody2D. This implies applying two times the *jump_impulse*, which is designed to compensate the original velocity and apply the *jump_velocity*. [resolved by implementing a smart `override_impulse` that cancel directional velocity and apply impulse, but solely the last call before `integrate_force` will have an effect]
+* [x] Get out from **zipline** just after passing over a **Jumper** results in sliding (like on ice) because **can_go_timer** was changed. [TODO REWORK **Zipline** and **Rails**]
 * :pushpin: A ball that bounces on the ring of a **basket** can do multiple goals. [Partially resolve by lowering the basket goal detector]
+* :pushpin: **Explosion** hitbox seems to be broken for squared boxes. [Partially resolved by exploding objects whose center is not in the area in the last frame of Explosion]
 * [ ] **ZipLine** or **RailLine** drop inside collision places results in stucked player or high velocity.
-* [ ] Get out from **zipline** just after passing over a **Jumper** results in sliding (like on ice) because **can_go_timer** was changed. [TODO REWORK **Zipline** and **Rails**]
 * [ ] Stuck colliding on a **rail** can result in building speed. [TODO TEST]
 * [ ] Entering **Pipe** at perfect frame when disabling the **Pipe** can result in a disabled ball floating in the air. -> don't stop the tween to enter the pipe when disabling the pipe. [hard to reproduce, it happened once]
-* :pushpin: **Explosion** hitbox seems to be broken for squared boxes. [Partially resolved by exploding objects whose center is not in the area in the last frame of Explosion]
 * [ ] **RailLine** going backward vertically switch. This results also in stopping the player and having alternative vertical normal.
 
 ### Physics
 * [x] TileMap hitboxes (bounce on corners of each tile + balls pass through 2 adjacent tiles). **size up the hitboxes smartly**
 * [x] Physic of balls when picked up (stay physically on the ground...). **complicated** see rigidbody functions and how `integrate_force` works.
-* :pushpin: Problems with physics on **slopes** [DAMN IT].
 * [x] **Player** catching ball while inside **BallWall** results in stuck player. [Maybe disable the player catch area while inside ballwall?]
-* [ ] Problems when passing from a block just **16 pixel** over the other block (results in tiny teleportation but visible due to camera instant movement). [TODO TEST]
-* [ ] Jitter when multiple **balls** are above each other (with rigidbodies, physicbodies and situbodies). [TODO TEST]
-* [ ] **Ball** located just on a **spawner** position results in very high velocity when spawning a ball on it [hard to reproduce]. [TODO TEST]
-* :pushpin: **Wind** is not affecting Player when **grinding** and **hanging** [TODO implement a smart `move_character(character, velocity)` function for *character_holder* that take the character velocity at each physics process call and move the character according to the holder].
+* [x] Problems when passing from a block just **16 pixel** over the other block (results in tiny teleportation but visible due to camera instant movement).
+* [x] **Wind** is not affecting Player when **grinding** and **hanging** [TODO implement a smart `move_character(character, velocity)` function for *character_holder* that take the character velocity at each physics process call and move the character according to the holder].
+* :pushpin: Problems with physics on **slopes** [DAMN IT].
 * :pushpin: annoying **Tilemap** physics problems. Partially resolved using [TilemapBaker](https://github.com/popcar2/GodotTilemapBaker) but still some problems at the junction between custom blocks (box, jumpers, ...):
     - tunneling ;
     - tile junction bounce problems. See this [issue](https://github.com/godotengine/godot/issues/76610).
+* [ ] Jitter when multiple **balls** are above each other (with rigidbodies, physicbodies and situbodies). [TODO TEST]
+* [ ] **Ball** located just on a **spawner** position results in very high velocity when spawning a ball on it [hard to reproduce]. [TODO TEST]
 * [ ] **Ballwall** and **PlayerWall** seems broken since Godot4.
 
 ### Visual and Animation
@@ -171,12 +171,12 @@ Pull request to master when [x]**ball physics**, :pushpin:**ziplin and rails** a
 * [x] **Trails** _on_Decay_tween_all_completed never called when **Ball** get reparented during the decay. Workaround by adding child to current_room instead of ball.
 * [x] **Bubble/Zap ball teleportation** trailhandler can act very weirdly if used quickly repeatly.
 * [x] The `shoot_previewer` shows a trajectory slightly above the real one.
-* [ ] **Particles** that are displayed outside the window are displayed after when they re-enter the camera (I probably need to investigate the [`visibility_rect` property](https://docs.godotengine.org/it/stable/classes/class_particles2d.html#class-particles2d-property-visibility-rect)).
-* [ ] **Shooting** just before **landing** results in `floor_shoot` just after `aim_shoot` animation
-* [ ] There is some *jitter animation*:
+* [x] There is some *jitter animation*:
     - when passing from a **dunkjump** state to a **grind** state.
     - when passing from a **dunk** state to a **hang** state.
     - when passing from a **dunk** state to a **falling** state (by pressing down during dunk). [TODO REWORK **AnimationTree**]
+* [ ] **Particles** that are displayed outside the window are displayed after when they re-enter the camera (I probably need to investigate the [`visibility_rect` property](https://docs.godotengine.org/it/stable/classes/class_particles2d.html#class-particles2d-property-visibility-rect)).
+* [ ] **Shooting** just before **landing** results in `floor_shoot` just after `aim_shoot` animation
 * [ ] **Trail** lifetime and point_lifetime not set correctly when trail for **bubble_ball**.
 * [ ] **Player** doesn't stop walking when on floor walls. ([ ] Infinite **walking** animation on 16px block) stairs.
 
@@ -194,7 +194,6 @@ Pull request to master when [x]**ball physics**, :pushpin:**ziplin and rails** a
 * :pushpin: Need to implement Tilemap interactive objects rotation and flips. [TODO Wait4Godot]
 * [ ] **BulletTime** (pause scene) can eat input, currently resulting in dunking after a dunkjump even if the dunk button is not pressed.
 * [ ] Releasing ball and changing room can result in the player not able to catch another ball.
-#push_warning(str(v))
 
 ### Potential Glitches
 * [ ] **Jumping** (from ground) just before entering a **rail** can result in a boost grind.
