@@ -1,0 +1,116 @@
+[gd_scene load_steps=14 format=3 uid="uid://dgbgpc7dyrp8r"]
+
+[ext_resource type="Script" path="res://src/Items/Dynamics/PipeCharacter.gd" id="1_xdw77"]
+[ext_resource type="Texture2D" uid="uid://bcddludfh8obw" path="res://assets/art/environment/environment-interactive.png" id="2_6p66f"]
+
+[sub_resource type="Curve2D" id="Curve2D_qr2ti"]
+resource_local_to_scene = true
+
+[sub_resource type="AtlasTexture" id="2"]
+atlas = ExtResource("2_6p66f")
+region = Rect2(128, 96, 32, 32)
+
+[sub_resource type="AtlasTexture" id="3"]
+atlas = ExtResource("2_6p66f")
+region = Rect2(160, 96, 32, 32)
+
+[sub_resource type="AtlasTexture" id="4"]
+atlas = ExtResource("2_6p66f")
+region = Rect2(192, 96, 32, 32)
+
+[sub_resource type="AtlasTexture" id="5"]
+atlas = ExtResource("2_6p66f")
+region = Rect2(224, 96, 32, 32)
+
+[sub_resource type="AtlasTexture" id="6"]
+atlas = ExtResource("2_6p66f")
+region = Rect2(96, 96, 32, 32)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_njgjr"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("2")
+}, {
+"duration": 1.0,
+"texture": SubResource("3")
+}, {
+"duration": 1.0,
+"texture": SubResource("4")
+}, {
+"duration": 1.0,
+"texture": SubResource("5")
+}],
+"loop": true,
+"name": &"active",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("6")
+}],
+"loop": true,
+"name": &"not_active",
+"speed": 5.0
+}]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_xlxb1"]
+radius = 16.0
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_qmh6x"]
+size = Vector2(32, 16)
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_lxuwj"]
+radius = 16.0
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_gtgqt"]
+size = Vector2(32, 16)
+
+[node name="PipeCharacter" type="Path2D"]
+z_index = 150
+z_as_relative = false
+curve = SubResource("Curve2D_qr2ti")
+script = ExtResource("1_xdw77")
+speed_at_exit = 600.0
+speed_inside = 200.0
+
+[node name="Entrance" type="StaticBody2D" parent="."]
+collision_layer = 2
+collision_mask = 7
+
+[node name="Sprite2D" type="AnimatedSprite2D" parent="Entrance"]
+sprite_frames = SubResource("SpriteFrames_njgjr")
+animation = &"active"
+frame_progress = 0.188687
+
+[node name="Area2D" type="Area2D" parent="Entrance"]
+collision_layer = 0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Entrance/Area2D"]
+shape = SubResource("CircleShape2D_xlxb1")
+debug_color = Color(1, 0.54902, 0.356863, 0.419608)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Entrance"]
+position = Vector2(0, 8)
+shape = SubResource("RectangleShape2D_qmh6x")
+
+[node name="Exit" type="StaticBody2D" parent="."]
+collision_layer = 2
+collision_mask = 7
+
+[node name="Sprite2D" type="AnimatedSprite2D" parent="Exit"]
+sprite_frames = SubResource("SpriteFrames_njgjr")
+animation = &"active"
+
+[node name="Area2D" type="Area2D" parent="Exit"]
+collision_layer = 0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Exit/Area2D"]
+shape = SubResource("CircleShape2D_lxuwj")
+debug_color = Color(1, 0.54902, 0.356863, 0.419608)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Exit"]
+position = Vector2(0, 8)
+shape = SubResource("RectangleShape2D_gtgqt")
+
+[connection signal="body_entered" from="Entrance/Area2D" to="." method="_on_Entrance_body_entered"]

@@ -26,11 +26,12 @@ func _update_points():
 	$Line2D.clear_points()
 	var p0
 	var p1
+	var n = curve.get_point_count()
 	var w = Vector2(0.0, 0.5 * $Line2D.width)
-	for i in range(curve.get_point_count()-1):
+	for i in range(n-1):
 		if invert_line_direction:
-			p0 = curve.get_point_position(curve.get_point_count()-i-1)
-			p1 = curve.get_point_position(curve.get_point_count()-i-2)
+			p0 = curve.get_point_position(n-i-1)
+			p1 = curve.get_point_position(n-i-2)
 		else :
 			p0 = curve.get_point_position(i)
 			p1 = curve.get_point_position(i+1)

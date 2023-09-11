@@ -98,6 +98,7 @@ shape = SubResource("8")
 [node name="Particles" type="CPUParticles2D" parent="Entrance"]
 z_index = -1
 position = Vector2(0, -25)
+emitting = false
 amount = 18
 lifetime = 1.5
 preprocess = 1.5

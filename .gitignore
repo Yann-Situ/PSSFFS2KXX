@@ -5,3 +5,4 @@
 *.psd
 addons/*
 .godot/*
+private/*
