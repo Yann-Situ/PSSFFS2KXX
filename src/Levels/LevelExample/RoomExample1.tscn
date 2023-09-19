@@ -11,7 +11,7 @@
 [ext_resource type="PackedScene" uid="uid://c6cdyqr51vbxh" path="res://src/Items/Interactive/GraffSpray.tscn" id="10"]
 [ext_resource type="PackedScene" path="res://src/Characters/NPC/PedestrianGenerator.tscn" id="11"]
 [ext_resource type="PackedScene" uid="uid://c8wbmpidigot6" path="res://src/Map/BallWall.tscn" id="12_0llc8"]
-[ext_resource type="PackedScene" uid="uid://yco4prlcetlu" path="res://src/Items/Balls/BallBoum.tscn" id="13"]
+[ext_resource type="PackedScene" uid="uid://bdhkn6l5lcxe0" path="res://src/Items/Balls/BallBoum.tscn" id="13"]
 [ext_resource type="PackedScene" uid="uid://bola66fqnywdi" path="res://src/Items/Baskets/Basket.tscn" id="13_42q2t"]
 [ext_resource type="PackedScene" uid="uid://ceqtyb2ekket" path="res://src/Items/Dynamics/ForceField.tscn" id="14_o3800"]
 [ext_resource type="PackedScene" uid="uid://imtw5v2qrplf" path="res://src/Items/Balls/BallBouncy.tscn" id="15_n0460"]
@@ -57,14 +57,14 @@ shader_parameter/velocity = Vector2(0.4, 0)
 shader_parameter/fog_color = Color(0.454902, 0.384314, 0.231373, 0.513726)
 shader_parameter/noise = SubResource("10")
 
-[sub_resource type="Curve2D" id="Curve2D_epwho"]
+[sub_resource type="Curve2D" id="Curve2D_ew62v"]
 resource_local_to_scene = true
 _data = {
 "points": PackedVector2Array(0, 0, 0, 0, 512, -16, 0, 0, 0, 0, -192, 24)
 }
 point_count = 2
 
-[sub_resource type="Curve2D" id="Curve2D_ixxq3"]
+[sub_resource type="Curve2D" id="Curve2D_cav5p"]
 resource_local_to_scene = true
 _data = {
 "points": PackedVector2Array(0, 0, 0, 0, 584, -80, 0, 0, 0, 0, -120, 16)
@@ -119,21 +119,21 @@ size = Vector2(64, 352)
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_vfrlb"]
 size = Vector2(144, 16)
 
-[sub_resource type="Curve2D" id="Curve2D_acp45"]
+[sub_resource type="Curve2D" id="Curve2D_db022"]
 resource_local_to_scene = true
 _data = {
 "points": PackedVector2Array(0, 0, 0, 0, 264, 288, 0, 0, 0, 0, -240, 16)
 }
 point_count = 2
 
-[sub_resource type="Curve2D" id="Curve2D_xnlg4"]
+[sub_resource type="Curve2D" id="Curve2D_ufdyw"]
 resource_local_to_scene = true
 _data = {
 "points": PackedVector2Array(0, 0, 0, 0, 264, 288, 0, 0, 0, 0, -240, 16)
 }
 point_count = 2
 
-[sub_resource type="Curve2D" id="Curve2D_08icc"]
+[sub_resource type="Curve2D" id="Curve2D_l2j6a"]
 resource_local_to_scene = true
 _data = {
 "points": PackedVector2Array(0, 0, 0, 0, 264, 288, 0, 0, 0, 0, -240, 16)
@@ -297,12 +297,12 @@ mouse_filter = 2
 
 [node name="CanvasModulate" parent="Map" index="0"]
 visible = true
-color = Color(0.486275, 0.403922, 0.27451, 1)
+color = Color(0.826269, 0.725282, 0.583096, 1)
 
 [node name="ParabolaCatenary" parent="Map" index="1" instance=ExtResource("9")]
 z_index = 300
 position = Vector2(32, -384)
-curve = SubResource("Curve2D_epwho")
+curve = SubResource("Curve2D_ew62v")
 p0_slope = 0.597
 line_width = 7.438
 line_modulate = Color(0.329412, 0.329412, 0.329412, 1)
@@ -311,7 +311,7 @@ line_texture = ExtResource("8")
 [node name="ParabolaCatenary2" parent="Map" index="2" instance=ExtResource("9")]
 z_index = 300
 position = Vector2(-40, -384)
-curve = SubResource("Curve2D_ixxq3")
+curve = SubResource("Curve2D_cav5p")
 p0_slope = 0.969
 line_width = 7.0
 line_modulate = Color(0.196078, 0.196078, 0.196078, 1)
@@ -512,17 +512,17 @@ rectangle_extents = Vector2(256, 480)
 
 [node name="ParabolaCatenary" parent="Environment" index="10" instance=ExtResource("9")]
 position = Vector2(1688, -464)
-curve = SubResource("Curve2D_acp45")
+curve = SubResource("Curve2D_db022")
 p0_slope = 1.553
 
 [node name="ParabolaCatenary2" parent="Environment" index="11" instance=ExtResource("9")]
 position = Vector2(1688, -464)
-curve = SubResource("Curve2D_xnlg4")
+curve = SubResource("Curve2D_ufdyw")
 p0_slope = 1.312
 
 [node name="ParabolaCatenary3" parent="Environment" index="12" instance=ExtResource("9")]
 position = Vector2(1688, -464)
-curve = SubResource("Curve2D_08icc")
+curve = SubResource("Curve2D_l2j6a")
 p0_slope = 1.473
 line_width = 4.28
 line_texture = ExtResource("8")
@@ -532,6 +532,7 @@ position = Vector2(336, -152)
 
 [node name="BallBoum" parent="Environment" index="14" instance=ExtResource("13")]
 position = Vector2(792, -128)
+impulse_dash_boum = 800.0
 
 [node name="BallBouncy" parent="Environment" index="15" instance=ExtResource("15_n0460")]
 position = Vector2(1536, -296)

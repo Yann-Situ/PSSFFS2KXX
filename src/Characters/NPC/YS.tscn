@@ -1,0 +1,63 @@
+[gd_scene load_steps=7 format=3 uid="uid://co2grsk6s5crx"]
+
+[ext_resource type="Texture2D" uid="uid://bnxhma2t708sq" path="res://assets/art/characters/Situ-idle.png" id="1_twqpa"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_8a5fu"]
+atlas = ExtResource("1_twqpa")
+region = Rect2(0, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_31o8r"]
+atlas = ExtResource("1_twqpa")
+region = Rect2(64, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_070im"]
+atlas = ExtResource("1_twqpa")
+region = Rect2(128, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_aw1eq"]
+atlas = ExtResource("1_twqpa")
+region = Rect2(192, 0, 64, 64)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_k4tfe"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_8a5fu")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_8a5fu")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_8a5fu")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_31o8r")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_070im")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_070im")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_070im")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_aw1eq")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}, {
+"frames": [],
+"loop": true,
+"name": &"new_animation",
+"speed": 5.0
+}]
+
+[node name="YS" type="Node2D"]
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+position = Vector2(18, 1)
+sprite_frames = SubResource("SpriteFrames_k4tfe")
+frame_progress = 0.852057

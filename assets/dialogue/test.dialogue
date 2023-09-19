@@ -1,0 +1,32 @@
+~ YS_start
+
+YS: [[Hi|Yoo]] bro! Do you need some help?
+- Where should I go?
+	YS: Probably at the dock, there are some stuff going on there.
+- Did you notice something strange lately?
+	YS: Not really... Maybe I heard someone saw a ball floating in the air haha.
+- No, tutto bene fofo.
+	YS: Okay, [[see you soon.|take care.|Have a nice day.]]
+	=> END
+Popol: Thanks fofo, see you soon!
+YS: Take care!
+=> END
+
+~ YS_new_sprays
+YS: [[Hi|Yoo]] lil'bro!
+if State.new_rare_sprays:
+	if State.rare_sprays == 1:
+		YS: Whouaah you got a special spray! [wait=1.0] Those are super rare! Where did you get this? Good job bro.
+		YS: If you find any other such spray, give it to me, I'll use them to pimp your graffiti!
+	elif State.rare_sprays == 10:
+		YS: Nooo waaaay!!![wait=1.0] you got every existing special sprays. I can't believe it, you're so strong. I'm proud of you lil'bro!
+	else:
+		YS: Wow, thank you for the special spray!
+	set State.new_rare_sprays = false
+if State.new_sprays:
+	% Ooh, you got me new sprays! Nice, thank you for the {{State.new_sprays_count}} new sprays.
+	% Did you bring some new sprays to me? [wait=1.0] Oh nice! {{State.new_sprays_count}} new sprays for me, thanks.
+	% Did you find some sprays? [wait=1.0] Great, that's {{State.new_sprays_count}} new sprays for your graffiti.
+	YS: I'll paint some missing parts with these new colors.
+	set State.new_sprays = true
+=> END
