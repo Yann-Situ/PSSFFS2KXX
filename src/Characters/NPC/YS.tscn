@@ -1,6 +1,8 @@
-[gd_scene load_steps=7 format=3 uid="uid://co2grsk6s5crx"]
+[gd_scene load_steps=10 format=3 uid="uid://co2grsk6s5crx"]
 
-[ext_resource type="Texture2D" uid="uid://bnxhma2t708sq" path="res://assets/art/characters/Situ-idle.png" id="1_twqpa"]
+[ext_resource type="Script" path="res://src/Characters/NPC/YS.gd" id="1_j37mf"]
+[ext_resource type="Texture2D" uid="uid://bwudojjbm2t0o" path="res://assets/art/characters/Situ-idle.png" id="1_twqpa"]
+[ext_resource type="Script" path="res://src/Items/Activables/InteractionArea.gd" id="2_ldb0k"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_8a5fu"]
 atlas = ExtResource("1_twqpa")
@@ -55,9 +57,23 @@ animations = [{
 "speed": 5.0
 }]
 
+[sub_resource type="CircleShape2D" id="CircleShape2D_rp7wc"]
+
 [node name="YS" type="Node2D"]
+script = ExtResource("1_j37mf")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 position = Vector2(18, 1)
 sprite_frames = SubResource("SpriteFrames_k4tfe")
-frame_progress = 0.852057
+autoplay = "default"
+frame_progress = 0.706499
+
+[node name="InteractionArea" type="Area2D" parent="."]
+collision_layer = 2048
+collision_mask = 0
+monitoring = false
+script = ExtResource("2_ldb0k")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="InteractionArea"]
+shape = SubResource("CircleShape2D_rp7wc")
+debug_color = Color(1, 1, 0.466667, 0.419608)

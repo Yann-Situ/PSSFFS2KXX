@@ -1,14 +1,14 @@
-[gd_scene load_steps=106 format=3 uid="uid://djjfl0v3y2pw5"]
+[gd_scene load_steps=108 format=3 uid="uid://djjfl0v3y2pw5"]
 
 [ext_resource type="Script" path="res://src/Player/Player.gd" id="1"]
-[ext_resource type="Texture2D" uid="uid://dcp7p8c6ldxqc" path="res://assets/art/characters/Player.png" id="2"]
+[ext_resource type="Texture2D" uid="uid://fu53nbwvypbd" path="res://assets/art/characters/Player.png" id="2"]
 [ext_resource type="Script" path="res://src/Player/Shoot_predictor.gd" id="3"]
-[ext_resource type="Texture2D" uid="uid://cd7mx6yijog8j" path="res://assets/art/ball/ball_test.png" id="4"]
+[ext_resource type="Texture2D" uid="uid://cuuns5ibc34gj" path="res://assets/art/ball/ball_test.png" id="4"]
 [ext_resource type="PackedScene" uid="uid://b6mk7ytgxiui" path="res://src/Player/Player_State.tscn" id="5"]
 [ext_resource type="Script" path="res://src/Player/Ball_Handler.gd" id="6"]
 [ext_resource type="Script" path="res://src/Player/Special_Action_Handler.gd" id="9"]
 [ext_resource type="Script" path="res://src/Player/Ray.gd" id="10"]
-[ext_resource type="Texture2D" uid="uid://c0dqkuofm25or" path="res://assets/art/ball/dust.png" id="11"]
+[ext_resource type="Texture2D" uid="uid://b4ujrsln765de" path="res://assets/art/ball/dust.png" id="11"]
 [ext_resource type="PackedScene" path="res://src/Effects/DustParticle.tscn" id="12"]
 [ext_resource type="Script" path="res://src/Player/Player_Effects.gd" id="13"]
 [ext_resource type="PackedScene" uid="uid://bs8ju42cns0vf" path="res://src/Effects/GhostHandler.tscn" id="14"]
@@ -23,16 +23,16 @@
 [ext_resource type="Script" path="res://src/Player/Actions/Adherence.gd" id="23"]
 [ext_resource type="Script" path="res://src/Player/Actions/Crouch.gd" id="24"]
 [ext_resource type="PackedScene" path="res://src/Effects/TrailHandler.tscn" id="25"]
-[ext_resource type="Texture2D" uid="uid://bnkguf1n8jesq" path="res://assets/art/effects/trail.png" id="26"]
+[ext_resource type="Texture2D" uid="uid://c0e3bm1u8mxw8" path="res://assets/art/effects/trail.png" id="26"]
 [ext_resource type="PackedScene" uid="uid://br3tr8mssgqev" path="res://src/Effects/GrindParticles.tscn" id="27"]
 [ext_resource type="Shader" path="res://assets/shader/contour.gdshader" id="28"]
 [ext_resource type="Script" path="res://src/Player/Actions/Release.gd" id="29"]
 [ext_resource type="Script" path="res://src/Characters/LifeHandler.gd" id="30"]
 [ext_resource type="PackedScene" path="res://src/Items/Interactive/SelectorTarget.tscn" id="31"]
 [ext_resource type="Script" path="res://src/Player/Actions/Grind.gd" id="32"]
-[ext_resource type="Texture2D" uid="uid://re0pw15qy3cg" path="res://assets/art/gui/life_bar_fill.png" id="33"]
-[ext_resource type="Texture2D" uid="uid://cimpw4na3r51s" path="res://assets/art/gui/ball_info_bg.png" id="34"]
-[ext_resource type="Texture2D" uid="uid://45680n1ihqi0" path="res://assets/art/gui/life_bar_bg.png" id="35"]
+[ext_resource type="Texture2D" uid="uid://scghoxayo4du" path="res://assets/art/gui/life_bar_fill.png" id="33"]
+[ext_resource type="Texture2D" uid="uid://c40av4lxtnfbo" path="res://assets/art/gui/ball_info_bg.png" id="34"]
+[ext_resource type="Texture2D" uid="uid://0bfw4lu2js4b" path="res://assets/art/gui/life_bar_bg.png" id="35"]
 [ext_resource type="Script" path="res://src/Characters/GUI/LifeBar.gd" id="36"]
 [ext_resource type="Script" path="res://src/Items/Interactive/Damageable.gd" id="37"]
 [ext_resource type="Script" path="res://src/Player/Actions/Dunkdash.gd" id="38"]
@@ -43,10 +43,11 @@
 [ext_resource type="Shader" path="res://assets/shader/shoot_viewer.gdshader" id="42"]
 [ext_resource type="PackedScene" path="res://src/Effects/DustParticle1.tscn" id="43"]
 [ext_resource type="Script" path="res://src/Player/Actions/Slide.gd" id="44"]
-[ext_resource type="Texture2D" uid="uid://dn0iv75mj2dca" path="res://assets/art/icons/character.png" id="44_a1agg"]
+[ext_resource type="Texture2D" uid="uid://dhyhbly78c7qp" path="res://assets/art/icons/character.png" id="44_a1agg"]
 [ext_resource type="Script" path="res://src/Player/DebugGUI.gd" id="44_d6hbp"]
 [ext_resource type="AnimationNodeStateMachine" uid="uid://dcviqtnkvq3ry" path="res://src/Player/AnimationTreeHandler/Action.tres" id="45"]
 [ext_resource type="AnimationNodeBlendTree" uid="uid://cmsxpc5f28w5c" path="res://src/Player/AnimationTreeHandler/Stance.tres" id="46"]
+[ext_resource type="PackedScene" uid="uid://ct37vs5ra10bs" path="res://src/Items/Activables/InteractionHandler.tscn" id="48_1sx5e"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_0vsxb"]
 size = Vector2(17, 57)
@@ -1463,7 +1464,7 @@ color_ramp = SubResource("53")
 
 [sub_resource type="CompressedTexture2D" id="55"]
 
-[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_5rb8m"]
+[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_m7nx7"]
 resource_local_to_scene = true
 particles_animation = true
 particles_anim_h_frames = 6
@@ -1480,6 +1481,9 @@ size = Vector2(17, 57)
 [sub_resource type="CapsuleShape2D" id="58"]
 radius = 5.0
 height = 42.0
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_e1jg0"]
+radius = 32.0
 
 [node name="Player" type="CharacterBody2D"]
 light_mask = 4
@@ -1747,7 +1751,7 @@ lifetime = 0.65
 explosiveness = 0.9
 
 [node name="GrindParticles" parent="PlayerEffects" instance=ExtResource("27")]
-material = SubResource("CanvasItemMaterial_5rb8m")
+material = SubResource("CanvasItemMaterial_m7nx7")
 position = Vector2(0, 16)
 
 [node name="BallHandler" type="Area2D" parent="."]
@@ -1873,6 +1877,11 @@ script = ExtResource("37")
 modulate = Color(1, 0, 0, 1)
 position = Vector2(0, 6)
 shape = SubResource("58")
+
+[node name="InteractionHandler" parent="." instance=ExtResource("48_1sx5e")]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="InteractionHandler"]
+shape = SubResource("CircleShape2D_e1jg0")
 
 [connection signal="body_entered" from="BallHandler" to="BallHandler" method="_on_Ball_Handler_body_entered"]
 [connection signal="body_entered" from="BallHandler/BallWallDetector" to="BallHandler" method="_on_BallWallDetector_body_entered"]

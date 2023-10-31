@@ -1,0 +1,57 @@
+# Interaction handler, that choose the nearest interaction area in it.
+extends Area2D
+class_name InteractionHandler
+# @icon("res://assets/art/icons/interaction.png")
+signal nearest_interaction_changed(new_nearest)
+signal interacted(interaction_area)
+
+@export var enabled : bool = true : set = set_enabled
+var has_interaction : bool = false : set = set_has_interaction
+var nearest_interaction: InteractionArea = null # this can be null
+
+func set_enabled(b):
+	enabled = b
+	set_process(enabled && has_interaction)
+func set_has_interaction(b):
+	has_interaction = b
+	set_process(enabled && has_interaction)
+	if !has_interaction:
+		if nearest_interaction != null:
+			nearest_interaction = null
+			nearest_interaction_changed.emit(nearest_interaction)
+
+func update_nearest_interaction() -> void:
+	var areas: Array[Area2D] = get_overlapping_areas()
+	var min_dist2: float = INF
+	var new_nearest_interaction = null
+	for area in areas:
+		var dist2 = area.global_position.distance_squared_to(self.global_position)
+		if dist2 < min_dist2 and area is InteractionArea:
+			min_dist2 = dist2
+			new_nearest_interaction = area
+	if new_nearest_interaction != nearest_interaction:
+		nearest_interaction = new_nearest_interaction
+		nearest_interaction_changed.emit(nearest_interaction)
+
+func _process(delta):
+	if has_overlapping_areas():
+		update_nearest_interaction()
+
+func _on_area_entered(area : Area2D):
+	set_has_interaction(true)
+	if area is InteractionArea:
+		area.enter.call()
+
+func _on_area_exited(area : Area2D):
+	if area is InteractionArea:
+		area.exit.call()
+	if !has_overlapping_areas():
+		set_has_interaction(false)
+
+func _input(event):
+	if enabled and event.is_action_pressed("ui_interact"):
+		if nearest_interaction is InteractionArea:
+			set_enabled(false)
+			nearest_interaction.interact.call()
+			interacted.emit(nearest_interaction)
+			set_enabled(true)

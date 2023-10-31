@@ -1,4 +1,4 @@
-[gd_scene load_steps=60 format=3 uid="uid://dgjpons7cu2id"]
+[gd_scene load_steps=61 format=3 uid="uid://dgjpons7cu2id"]
 
 [ext_resource type="PackedScene" uid="uid://b5emf4je4tnag" path="res://src/Levels/Room2D.tscn" id="1"]
 [ext_resource type="PackedScene" uid="uid://b45hldwkibtqb" path="res://src/Levels/Portal.tscn" id="2"]
@@ -6,7 +6,7 @@
 [ext_resource type="PackedScene" uid="uid://27jkgoi43hoq" path="res://src/Items/Balls/BallShock.tscn" id="4"]
 [ext_resource type="PackedScene" path="res://src/Items/Interactive/DashTarget.tscn" id="5"]
 [ext_resource type="Shader" path="res://assets/shader/fog.gdshader" id="6"]
-[ext_resource type="Texture2D" uid="uid://boi3pgcflmp6r" path="res://assets/art/environment/chain0.png" id="8"]
+[ext_resource type="Texture2D" uid="uid://b6xy57w6vd0mf" path="res://assets/art/environment/chain0.png" id="8"]
 [ext_resource type="PackedScene" uid="uid://bdepe4j1x2ie8" path="res://src/Items/Environment/ParabolaCatenary.tscn" id="9"]
 [ext_resource type="PackedScene" uid="uid://c6cdyqr51vbxh" path="res://src/Items/Interactive/GraffSpray.tscn" id="10"]
 [ext_resource type="PackedScene" path="res://src/Characters/NPC/PedestrianGenerator.tscn" id="11"]
@@ -26,7 +26,8 @@
 [ext_resource type="PackedScene" uid="uid://babjtotux2mv3" path="res://src/Map/MovingPlatform.tscn" id="24_w6usv"]
 [ext_resource type="PackedScene" uid="uid://cjrs0hleolbs1" path="res://src/Map/HiddenPlace.tscn" id="26_c0fxs"]
 [ext_resource type="PackedScene" uid="uid://dfka4lp6t6tym" path="res://src/Effects/Mirror.tscn" id="26_ghqss"]
-[ext_resource type="Texture2D" uid="uid://0q8qxsby5sw5" path="res://assets/art/effects/light2.png" id="27_tjpql"]
+[ext_resource type="Texture2D" uid="uid://ctiuc3lmtrgkb" path="res://assets/art/effects/light2.png" id="27_tjpql"]
+[ext_resource type="PackedScene" uid="uid://co2grsk6s5crx" path="res://src/Characters/NPC/YS.tscn" id="28_5sjrw"]
 
 [sub_resource type="Gradient" id="1"]
 resource_local_to_scene = true
@@ -57,14 +58,14 @@ shader_parameter/velocity = Vector2(0.4, 0)
 shader_parameter/fog_color = Color(0.454902, 0.384314, 0.231373, 0.513726)
 shader_parameter/noise = SubResource("10")
 
-[sub_resource type="Curve2D" id="Curve2D_ew62v"]
+[sub_resource type="Curve2D" id="Curve2D_qcgxm"]
 resource_local_to_scene = true
 _data = {
 "points": PackedVector2Array(0, 0, 0, 0, 512, -16, 0, 0, 0, 0, -192, 24)
 }
 point_count = 2
 
-[sub_resource type="Curve2D" id="Curve2D_cav5p"]
+[sub_resource type="Curve2D" id="Curve2D_mmf52"]
 resource_local_to_scene = true
 _data = {
 "points": PackedVector2Array(0, 0, 0, 0, 584, -80, 0, 0, 0, 0, -120, 16)
@@ -119,21 +120,21 @@ size = Vector2(64, 352)
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_vfrlb"]
 size = Vector2(144, 16)
 
-[sub_resource type="Curve2D" id="Curve2D_db022"]
+[sub_resource type="Curve2D" id="Curve2D_ks1dm"]
 resource_local_to_scene = true
 _data = {
 "points": PackedVector2Array(0, 0, 0, 0, 264, 288, 0, 0, 0, 0, -240, 16)
 }
 point_count = 2
 
-[sub_resource type="Curve2D" id="Curve2D_ufdyw"]
+[sub_resource type="Curve2D" id="Curve2D_3bgfh"]
 resource_local_to_scene = true
 _data = {
 "points": PackedVector2Array(0, 0, 0, 0, 264, 288, 0, 0, 0, 0, -240, 16)
 }
 point_count = 2
 
-[sub_resource type="Curve2D" id="Curve2D_l2j6a"]
+[sub_resource type="Curve2D" id="Curve2D_3lghi"]
 resource_local_to_scene = true
 _data = {
 "points": PackedVector2Array(0, 0, 0, 0, 264, 288, 0, 0, 0, 0, -240, 16)
@@ -296,13 +297,12 @@ pivot_offset = Vector2(696, 272)
 mouse_filter = 2
 
 [node name="CanvasModulate" parent="Map" index="0"]
-visible = true
 color = Color(0.826269, 0.725282, 0.583096, 1)
 
 [node name="ParabolaCatenary" parent="Map" index="1" instance=ExtResource("9")]
 z_index = 300
 position = Vector2(32, -384)
-curve = SubResource("Curve2D_ew62v")
+curve = SubResource("Curve2D_qcgxm")
 p0_slope = 0.597
 line_width = 7.438
 line_modulate = Color(0.329412, 0.329412, 0.329412, 1)
@@ -311,7 +311,7 @@ line_texture = ExtResource("8")
 [node name="ParabolaCatenary2" parent="Map" index="2" instance=ExtResource("9")]
 z_index = 300
 position = Vector2(-40, -384)
-curve = SubResource("Curve2D_cav5p")
+curve = SubResource("Curve2D_mmf52")
 p0_slope = 0.969
 line_width = 7.0
 line_modulate = Color(0.196078, 0.196078, 0.196078, 1)
@@ -512,17 +512,17 @@ rectangle_extents = Vector2(256, 480)
 
 [node name="ParabolaCatenary" parent="Environment" index="10" instance=ExtResource("9")]
 position = Vector2(1688, -464)
-curve = SubResource("Curve2D_db022")
+curve = SubResource("Curve2D_ks1dm")
 p0_slope = 1.553
 
 [node name="ParabolaCatenary2" parent="Environment" index="11" instance=ExtResource("9")]
 position = Vector2(1688, -464)
-curve = SubResource("Curve2D_ufdyw")
+curve = SubResource("Curve2D_3bgfh")
 p0_slope = 1.312
 
 [node name="ParabolaCatenary3" parent="Environment" index="12" instance=ExtResource("9")]
 position = Vector2(1688, -464)
-curve = SubResource("Curve2D_l2j6a")
+curve = SubResource("Curve2D_3lghi")
 p0_slope = 1.473
 line_width = 4.28
 line_texture = ExtResource("8")
@@ -658,3 +658,6 @@ range_layer_max = 1
 range_item_cull_mask = 31
 texture = ExtResource("27_tjpql")
 texture_scale = 2.56
+
+[node name="YS" parent="." index="14" instance=ExtResource("28_5sjrw")]
+position = Vector2(1521, 1)
