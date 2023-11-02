@@ -1,3 +1,4 @@
+@icon("res://assets/art/icons/palette.png")
 extends Resource
 class_name PaletteSchemeSampler
 

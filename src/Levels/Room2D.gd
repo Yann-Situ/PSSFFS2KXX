@@ -1,3 +1,4 @@
+@icon("res://assets/art/icons/house.png")
 extends Node2D
 class_name Room2D
 

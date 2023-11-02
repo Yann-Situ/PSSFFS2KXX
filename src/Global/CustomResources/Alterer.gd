@@ -1,3 +1,4 @@
+@icon("res://assets/art/icons/alterer.png")
 extends Resource
 ## Abstract class for alterers
 class_name Alterer

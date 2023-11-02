@@ -1,7 +1,7 @@
 #tool
+# @icon("res://assets/art/icons/ropeline.png")
 extends Path2D
 class_name RopeLine
-# @icon("res://assets/art/icons/ropelineline.png")
 
 @export var invert_line_direction : bool = false
 @onready var segment_collision_offset = Vector2(0.0,0.0)

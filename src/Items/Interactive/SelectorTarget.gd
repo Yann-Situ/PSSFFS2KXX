@@ -1,6 +1,6 @@
+@icon("res://assets/art/icons/target.png")
 extends Sprite2D
 class_name SelectorTarget
-# @icon("res://assets/art/icons/target.png")
 
 @export var tween_duration : float = 0.3#s
 var selection_node = null

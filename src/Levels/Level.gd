@@ -1,3 +1,4 @@
+@icon("res://assets/art/icons/level.png")
 extends Node2D
 class_name Level
 

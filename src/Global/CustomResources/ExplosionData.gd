@@ -1,3 +1,4 @@
+@icon("res://assets/art/icons/explosion.png")
 extends Resource
 class_name ExplosionData
 

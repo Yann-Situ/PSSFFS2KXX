@@ -1,4 +1,4 @@
-@icon("res://assets/art/ball/ball_test.png")
+@icon("res://assets/art/icons/ball.png")
 extends SituBody
 class_name Ball
 

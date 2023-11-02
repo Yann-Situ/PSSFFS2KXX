@@ -1,3 +1,4 @@
+@icon("res://assets/art/icons/alterer-multiply.png")
 extends Alterer
 class_name AltererMultiplicative
 

@@ -1,3 +1,4 @@
+@icon("res://assets/art/icons/palette-gradient.png")
 extends Resource
 class_name PaletteScheme
 ## Just contain a list of gradients. Often dark-to-light gradients to colorize

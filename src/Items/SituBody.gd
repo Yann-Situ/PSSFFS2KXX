@@ -72,7 +72,7 @@ func _integrate_forces(state):
 	constant_force = force_alterable.get_value()
 	constant_force += mass*accel_alterable.get_value()
 	if _override_impulse_bool:
-		print("integrate_override")
+		print(self.name+" integrate_override")
 		var d = _override_impulse_value.normalized()
 		add_impulse(-mass*linear_velocity.dot(d)*d + _override_impulse_value)
 		_override_impulse_bool = false

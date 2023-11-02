@@ -1,7 +1,7 @@
 #tool
+@icon("res://assets/art/icons/zipline.png")
 extends PathFollow2D
 class_name ZipHandle
-# @icon("res://assets/art/icons/ziplineline.png")
 
 @export_group("Character parameters", "character_")
 @export var character_offset : Vector2 = Vector2(0.0, 0.0)

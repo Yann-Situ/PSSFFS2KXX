@@ -1,3 +1,4 @@
+@icon("res://assets/art/icons/color-circle.png")
 extends Resource
 class_name ColorSampler
 

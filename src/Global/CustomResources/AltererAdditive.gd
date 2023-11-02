@@ -1,3 +1,4 @@
+@icon("res://assets/art/icons/alterer-plus.png")
 extends Alterer
 class_name AltererAdditive
 

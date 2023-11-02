@@ -1,4 +1,6 @@
+@icon("res://assets/art/icons/heart.png")
 extends Node2D
+class_name LifeHandler
 
 signal took_damage
 signal is_dead
@@ -10,8 +12,8 @@ signal is_dead
 @export var strength = 0.0#hp
 # the damage of an attack is : damage = trg.weakness * src.strength - trg.defense
 
-@onready var Character = get_parent()
-@onready var S = Character.get_node("State")
+# @onready var Character = get_parent()
+# @onready var S = Character.get_node("State")
 
 @onready var life_alterable = Alterable.new(max_life)
 
@@ -20,7 +22,7 @@ func get_life():
 	if life <= 0.0:
 		self.is_dead.emit()
 	return clamp(life, 0.0, max_life)
-	
+
 func add_life(lifepoint : float):
 	var life = life_alterable.get_value()
 	apply_life(clamp(lifepoint, -life, max_life-life), 0.0)
@@ -36,7 +38,7 @@ func apply_damage(damage : float, duration : float = 0.0):
 	var d = weakness * damage - defense
 	apply_life(- max(0.0, d), duration)
 	took_damage.emit(damage)
-	
+
 func apply_life(lifepoint : float, duration : float = 1.0):
 	var alterer = AltererAdditive.new(0.0)
 	life_alterable.add_alterer(alterer)

@@ -1,6 +1,6 @@
+@icon("res://assets/art/icons/targeted.png")
 extends CollisionObject2D
 class_name Selectable
-# @icon("res://assets/art/icons/targeted.png")
 # Selectable.gd
 
 @export var is_shoot_selectable = true : set = set_is_shoot_selectable

@@ -1,5 +1,7 @@
 @tool
+@icon("res://assets/art/icons/crowd.png")
 extends Node2D
+class_name PedestrianGenerator
 
 @export var initial_sample_number : int = 0
 @export var x_radius : float = INF

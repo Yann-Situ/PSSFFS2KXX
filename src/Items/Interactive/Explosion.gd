@@ -1,5 +1,6 @@
+@icon("res://assets/art/icons/explosion.png")
 extends Area2D
-class_name Explosion#, "res://assets/art/icons/targeted.png"
+class_name Explosion
 # Explosion.gd :
 # Handle a single explosion from a source point
 

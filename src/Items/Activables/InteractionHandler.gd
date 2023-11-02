@@ -1,4 +1,5 @@
 # Interaction handler, that choose the nearest interaction area in it.
+@icon("res://assets/art/icons/info.png")
 extends Area2D
 class_name InteractionHandler
 # @icon("res://assets/art/icons/interaction.png")

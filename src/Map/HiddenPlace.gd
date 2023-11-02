@@ -1,4 +1,6 @@
+@icon("res://assets/art/icons/star-location.png")
 extends TileMap
+class_name HiddenPlace
 
 @export var transition_duration : float = 0.5#s
 @export var connect_area2D : bool = false : set = set_connect_area2D
@@ -29,18 +31,18 @@ func _ready():
 	for node in get_children():
 		if node is CollisionShape2D:
 			node.reparent($Area2D, true)
-	
+
 func _on_body_entered(body):
 	reveal_behind()
 func _on_body_exited(body):
-	# WARNING: weird behaviour: when a ball exit but is reparenting, it can appear in the list 
+	# WARNING: weird behaviour: when a ball exit but is reparenting, it can appear in the list
 	# returned by get_overlapping_bodies .
 	# This is probably because of the complicated reparenting implementation (see Ball.gd)
 	# to avoid that easily we check also if the list is not [body]
 	var l = $Area2D.get_overlapping_bodies()
 	if l.is_empty() or l == [body]:
 		hide_behind()
-	
+
 func hide_behind():
 	if tween_modulate:
 		tween_modulate.kill()
@@ -53,4 +55,3 @@ func reveal_behind():
 	tween_modulate = self.create_tween().set_trans(Tween.TRANS_CUBIC).set_ease(Tween.EASE_IN_OUT)
 	tween_modulate.tween_property(self, "modulate", Color.TRANSPARENT, transition_duration)
 	# twee_modulate.start() start automatically
-	

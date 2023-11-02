@@ -252,19 +252,18 @@ func update_cancelables():
 	is_walljumping = is_walljumping and is_jumping
 	is_crouching = (is_onfloor and is_crouching) or not can_stand# handle by player actions (start)
 
+	is_sliding = is_sliding and is_crouching and crouch_p and not is_idle
 	is_hanging = is_hanging and !crouch_p
 	is_grinding = is_grinding and !is_hanging and !crouch_p
 
 	is_landing = is_onfloor and not is_onwall and (is_landing or \
 		(last_frame_onair and last_onair_velocity_y > player.landing_velocity_thresh)) and \
-		not is_non_cancelable# stop also handled by animation
+		not is_non_cancelable and not is_sliding# stop also handled by animation
 	is_landing_roll = is_landing and (abs(velocity.x) > 100.0)
 	is_halfturning = (is_halfturning or actual_direction_sprite*direction_p == -1) and \
 		is_onfloor and !(is_idle or direction_p == 0 or is_crouching or is_landing or \
 			is_onwall or is_non_cancelable) # handle by player actions
 	is_aiming = is_aiming and has_ball and active_ball != null and not is_non_cancelable
-
-	is_sliding = is_sliding and is_crouching and crouch_p and not is_idle
 
 func update_vars(delta):
 	#

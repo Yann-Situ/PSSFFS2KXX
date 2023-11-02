@@ -6,6 +6,9 @@ No open-source license provided yet (see [this link](https://choosealicense.com/
 This repository is for private use only. An open-source license will probably be released in the future.
 Copyright (c) 2023 Yann-Situ
 
+## Dependencies
+Need the [dialogue_manager](https://github.com/nathanhoad/godot_dialogue_manager), [singleton_bundle](https://github.com/GodotParadise/SingletonBundle#frame_freezetime_scale-float-duration-float) and [achievements](https://github.com/GodotParadise/Achievements) addons.
+
 ## Specific big parts
 * graphism
 * animations
@@ -19,6 +22,14 @@ Copyright (c) 2023 Yann-Situ
 * GUI for menus
 * HUD
 * story
+
+### Big Motivation
+* Slopes
+* Moving platform
+* Pedestrian animation
+* World map system
+* Saving system
+* Popol rework graphism
 
 ### Code structure to (re)implement
 * [ ] `Selector` is currently a child of `Player/Actions` and is reparent by code to be a child of `Room`. Maybe it should be a child of the room or the level, and accessed in `SpecialActionHandler` via a NodePath or through signals.
@@ -44,8 +55,6 @@ List of things to do
 - [ ] catch and ball release
 - :pushpin: tileset/map rework
 - [ ] Improve TileMapBaker to take into account different physical layer, for example ballwall and playerwall
-
-Pull request to master when [x]**ball physics**, [x]**zipline and rails** and [x]**player animations** will be correctly handled.
 
 ## Work to do
 * Graphism :

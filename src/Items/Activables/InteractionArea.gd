@@ -1,7 +1,7 @@
 # A generic interaction area that can be child of any 2D node.
+@icon("res://assets/art/icons/warning.png")
 extends Area2D
 class_name InteractionArea
-# @icon("res://assets/art/icons/interaction.png")
 
 @export var enter: Callable = func():
 	pass

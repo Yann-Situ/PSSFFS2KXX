@@ -1,3 +1,4 @@
+@icon("res://assets/art/icons/alterable.png")
 extends Resource
 class_name Alterable
 
@@ -31,12 +32,12 @@ func get_value():
 func set_is_up_to_date(b : bool):
 	is_up_to_date = b
 	# self.value_changed.emit()# useless for the moment
-	
+
 ####################################################################################################
 
 func has_alterer(alterer : Alterer):
 	return alterers.has(alterer.get_instance_id())
-	
+
 func add_alterer(alterer : Alterer):
 	if has_alterer(alterer):
 		push_warning("alterer "+str(alterer.get_instance_id())+" already added.")

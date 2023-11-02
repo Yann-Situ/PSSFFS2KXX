@@ -8,6 +8,10 @@
 
 config_version=5
 
+[PSSFFS2KXX]
+
+config/godotenv/root_directory="res://"
+
 [application]
 
 config/name="PSSFFS2KXX"
@@ -21,6 +25,11 @@ Global="*res://src/Global/Global.gd"
 GlobalEffect="*res://src/Global/GlobalEffect.gd"
 GlobalMaths="*res://src/Global/GlobalMaths.gd"
 DialogueManager="*res://addons/dialogue_manager/dialogue_manager.gd"
+GodotParadiseAudioManager="*res://addons/singleton_bundle/audio/audio.gd"
+GodotParadiseEnvironment="*res://addons/singleton_bundle/dotenv/godotenv.gd"
+GodotParadiseGeneralUtilities="*res://addons/singleton_bundle/utils/general_utilities.gd"
+GodotParadiseVectorWizard="*res://addons/singleton_bundle/utils/vector_wizard.gd"
+GodotParadiseSceneTransitioner="*res://addons/singleton_bundle/scene_transition/scene_transitioner.gd"
 
 [debug]
 
@@ -46,7 +55,7 @@ window/stretch/mode="viewport"
 
 [editor_plugins]
 
-enabled=PackedStringArray("res://addons/dialogue_manager/plugin.cfg")
+enabled=PackedStringArray("res://addons/dialogue_manager/plugin.cfg", "res://addons/singleton_bundle/plugin.cfg")
 
 [importer_defaults]
 

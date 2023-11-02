@@ -1,3 +1,4 @@
+@icon("res://assets/art/icons/exit.png")
 extends Node2D
 class_name Portal2D
 
