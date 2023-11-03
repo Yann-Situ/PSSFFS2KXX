@@ -1,6 +1,6 @@
 [gd_scene load_steps=10 format=3 uid="uid://b3b7vve7s4lu4"]
 
-[ext_resource type="Texture2D" uid="uid://djlbei4tckwd5" path="res://assets/art/characters/Pedestrian_2.png" id="1"]
+[ext_resource type="Texture2D" uid="uid://ys51lldiwr5x" path="res://assets/art/characters/Pedestrian_2.png" id="1"]
 [ext_resource type="Shader" path="res://assets/shader/pedestrian.gdshader" id="2"]
 [ext_resource type="Script" path="res://src/Characters/NPC/Pedestrian.gd" id="3"]
 [ext_resource type="Script" path="res://src/Characters/NPC/PedestrianAI.gd" id="4"]

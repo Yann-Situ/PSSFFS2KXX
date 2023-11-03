@@ -1,107 +1,113 @@
-[gd_scene load_steps=9 format=2]
+[gd_scene load_steps=10 format=3 uid="uid://rmukvjwyiahu"]
 
-[ext_resource path="res://src/Items/Interactive/Selectable.gd" type="Script" id=1]
-[ext_resource path="res://assets/art/environment/environment-interactive.png" type="Texture2D" id=2]
-[ext_resource path="res://assets/art/effects/light2.png" type="Texture2D" id=3]
-[ext_resource path="res://assets/shader/material/BallRecolor.tres" type="Material" id=4]
+[ext_resource type="Script" path="res://src/Items/Interactive/Selectable.gd" id="1"]
+[ext_resource type="Texture2D" uid="uid://bx70alc2tdq28" path="res://assets/art/environment/environment-interactive.png" id="2"]
+[ext_resource type="Texture2D" uid="uid://ctiuc3lmtrgkb" path="res://assets/art/effects/light2.png" id="3"]
+[ext_resource type="Material" uid="uid://c4s8oq8n7qd6q" path="res://assets/shader/material/BallRecolor.tres" id="4"]
 
-[sub_resource type="CircleShape2D" id=2]
+[sub_resource type="CircleShape2D" id="2"]
 radius = 0.01
 
-[sub_resource type="Animation" id=5]
+[sub_resource type="Animation" id="5"]
 length = 0.001
 tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
 tracks/0/path = NodePath("Sprite2D:frame")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
-tracks/0/imported = false
-tracks/0/enabled = true
 tracks/0/keys = {
-"times": PackedFloat32Array( 0 ),
-"transitions": PackedFloat32Array( 1 ),
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
 "update": 0,
-"values": [ 5 ]
+"values": [5]
 }
 
-[sub_resource type="Animation" id=7]
+[sub_resource type="Animation" id="7"]
 resource_name = "idle_expluse"
 length = 1.2
-loop = true
+loop_mode = 1
 step = 0.12
 tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
 tracks/0/path = NodePath("Sprite2D:frame")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
-tracks/0/imported = false
-tracks/0/enabled = true
 tracks/0/keys = {
-"times": PackedFloat32Array( 0, 0.12, 0.6, 0.72 ),
-"transitions": PackedFloat32Array( 1, 1, 1, 1 ),
+"times": PackedFloat32Array(0, 0.12, 0.6, 0.72),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
 "update": 1,
-"values": [ 0, 1, 2, 3 ]
+"values": [0, 1, 2, 3]
 }
 
-[sub_resource type="Animation" id=6]
+[sub_resource type="Animation" id="6"]
 resource_name = "idle_impulse"
 length = 1.2
-loop = true
+loop_mode = 1
 step = 0.12
 tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
 tracks/0/path = NodePath("Sprite2D:frame")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
-tracks/0/imported = false
-tracks/0/enabled = true
 tracks/0/keys = {
-"times": PackedFloat32Array( 0, 0.12, 0.6, 0.72 ),
-"transitions": PackedFloat32Array( 1, 1, 1, 1 ),
+"times": PackedFloat32Array(0, 0.12, 0.6, 0.72),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
 "update": 1,
-"values": [ 4, 5, 6, 7 ]
+"values": [4, 5, 6, 7]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_leti4"]
+_data = {
+"RESET": SubResource("5"),
+"idle_expluse": SubResource("7"),
+"idle_impulse": SubResource("6")
 }
 
 [node name="DashTarget" type="Node2D"]
-modulate = Color( 1, 1.2, 1.2, 1 )
+modulate = Color(1, 1.2, 1.2, 1)
 light_mask = 16
 z_index = 150
 z_as_relative = false
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 light_mask = 16
-material = ExtResource( 4 )
-texture = ExtResource( 2 )
+material = ExtResource("4")
+texture = ExtResource("2")
 hframes = 4
 vframes = 2
 frame = 5
 region_enabled = true
-region_rect = Rect2( 160, 128, 128, 64 )
+region_rect = Rect2(160, 128, 128, 64)
 
 [node name="Sprite2D" type="Sprite2D" parent="Sprite2D"]
-modulate = Color( 1, 1, 0.96, 0.25 )
-scale = Vector2( 0.75, 0.75 )
+modulate = Color(1, 1, 0.96, 0.25)
 z_index = -1
-texture = ExtResource( 3 )
+scale = Vector2(0.75, 0.75)
+texture = ExtResource("3")
 
 [node name="Area2D" type="Area2D" parent="."]
 collision_layer = 40
 collision_mask = 0
-script = ExtResource( 1 )
+script = ExtResource("1")
 is_shoot_selectable = false
 is_jump_selectable = false
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
-shape = SubResource( 2 )
+shape = SubResource("2")
 
 [node name="LightMix" type="PointLight2D" parent="."]
-position = Vector2( 0.00012207, -7.62939e-06 )
-scale = Vector2( 0.412822, 0.412822 )
 z_as_relative = false
-texture = ExtResource( 3 )
-texture_scale = 2.56
-mode = 2
+position = Vector2(0.00012207, -7.62939e-06)
+scale = Vector2(0.412822, 0.412822)
 range_z_max = 350
 range_item_cull_mask = 17
+texture = ExtResource("3")
+texture_scale = 2.56
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
-anims/RESET = SubResource( 5 )
-anims/idle_expluse = SubResource( 7 )
-anims/idle_impulse = SubResource( 6 )
+libraries = {
+"": SubResource("AnimationLibrary_leti4")
+}

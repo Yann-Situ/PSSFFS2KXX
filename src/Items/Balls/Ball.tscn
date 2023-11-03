@@ -1,12 +1,12 @@
 [gd_scene load_steps=22 format=3 uid="uid://cxn2m3havcmil"]
 
-[ext_resource type="Texture2D" uid="uid://dhu7eccs5egsg" path="res://assets/art/ball/ball_selection.png" id="1"]
+[ext_resource type="Texture2D" uid="uid://fviv8r8636v7" path="res://assets/art/ball/ball_selection.png" id="1"]
 [ext_resource type="Script" path="res://src/Items/Balls/Ball.gd" id="2"]
-[ext_resource type="Texture2D" uid="uid://cd7mx6yijog8j" path="res://assets/art/ball/ball_test.png" id="3"]
+[ext_resource type="Texture2D" uid="uid://cuuns5ibc34gj" path="res://assets/art/ball/ball_test.png" id="3"]
 [ext_resource type="Material" uid="uid://dk0f4vjr0y0q3" path="res://assets/shader/material/contour_shadermaterial.tres" id="4"]
 [ext_resource type="Script" path="res://src/Items/Balls/BallVisuals.gd" id="4_eyx0n"]
-[ext_resource type="PackedScene" path="res://src/Effects/DustParticle.tscn" id="5"]
-[ext_resource type="Texture2D" uid="uid://dynhxnnpu4wgg" path="res://assets/art/effects/round.png" id="7_fisxc"]
+[ext_resource type="PackedScene" uid="uid://26l3hifm7i6c" path="res://src/Effects/DustParticle.tscn" id="5"]
+[ext_resource type="Texture2D" uid="uid://d33u8f6bfhj4m" path="res://assets/art/effects/round.png" id="7_fisxc"]
 [ext_resource type="Script" path="res://src/Items/Balls/Highlighter.gd" id="8"]
 
 [sub_resource type="PhysicsMaterial" id="PhysicsMaterial_j8ut1"]

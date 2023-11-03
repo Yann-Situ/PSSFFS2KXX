@@ -1,7 +1,7 @@
 [gd_scene load_steps=14 format=3 uid="uid://brtk1bqnx8q3v"]
 
 [ext_resource type="Script" path="res://src/Effects/Distortion.gd" id="1"]
-[ext_resource type="Texture2D" uid="uid://dbdwtry6gxl6d" path="res://assets/art/environment/TileMap.png" id="2"]
+[ext_resource type="Texture2D" uid="uid://dvipof75ggcdx" path="res://assets/art/environment/TileMap.png" id="2"]
 [ext_resource type="Shader" path="res://assets/shader/shockwave.gdshader" id="3"]
 
 [sub_resource type="ShaderMaterial" id="1"]

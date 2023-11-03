@@ -1,6 +1,6 @@
 [gd_scene load_steps=8 format=3 uid="uid://babjtotux2mv3"]
 
-[ext_resource type="Texture2D" uid="uid://bj52wrjij7odv" path="res://assets/art/environment/zipline.png" id="1_rabtp"]
+[ext_resource type="Texture2D" uid="uid://b57mxnmbc7bm0" path="res://assets/art/environment/zipline.png" id="1_rabtp"]
 
 [sub_resource type="Curve2D" id="Curve2D_0pkvq"]
 

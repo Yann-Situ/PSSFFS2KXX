@@ -1,7 +1,7 @@
 [gd_scene load_steps=6 format=3 uid="uid://bwcm4fvuhe2xt"]
 
 [ext_resource type="PackedScene" uid="uid://b5emf4je4tnag" path="res://src/Levels/Room2D.tscn" id="1"]
-[ext_resource type="PackedScene" path="res://src/Levels/Portal.tscn" id="2"]
+[ext_resource type="PackedScene" uid="uid://b45hldwkibtqb" path="res://src/Levels/Portal.tscn" id="2"]
 
 [sub_resource type="Gradient" id="1"]
 resource_local_to_scene = true

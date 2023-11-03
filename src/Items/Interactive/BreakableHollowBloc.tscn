@@ -1,58 +1,51 @@
-[gd_scene load_steps=8 format=2]
+[gd_scene load_steps=7 format=3 uid="uid://ckq6vus2gm508"]
 
-[ext_resource path="res://src/Items/Interactive/BreakableBloc.tscn" type="PackedScene" id=1]
+[ext_resource type="PackedScene" uid="uid://d1iceb4hkwose" path="res://src/Items/Interactive/BreakableBloc.tscn" id="1"]
 
-[sub_resource type="OccluderPolygon2D" id=1]
+[sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_oc7r5"]
 resource_local_to_scene = true
-polygon = PackedVector2Array( -16, -16, 16, -16, 16, 16, -16, 16 )
+polygon = PackedVector2Array(-16, -16, 16, -16, 16, 16, -16, 16)
 
-[sub_resource type="CircleShape2D" id=2]
-radius = 0.0
+[sub_resource type="SegmentShape2D" id="3"]
+b = Vector2(0, 32)
 
-[sub_resource type="SegmentShape2D" id=3]
-b = Vector2( 0, 32 )
-
-[sub_resource type="SegmentShape2D" id=4]
+[sub_resource type="SegmentShape2D" id="4"]
 resource_local_to_scene = true
-b = Vector2( 32, 0 )
+b = Vector2(32, 0)
 
-[sub_resource type="CanvasItemMaterial" id=5]
+[sub_resource type="CanvasItemMaterial" id="5"]
 resource_local_to_scene = true
 particles_animation = true
 particles_anim_h_frames = 5
 particles_anim_v_frames = 1
 particles_anim_loop = false
 
-[sub_resource type="Gradient" id=6]
+[sub_resource type="Gradient" id="6"]
 resource_local_to_scene = true
-offsets = PackedFloat32Array( 0.0375587, 0.516432, 0.995305, 1 )
-colors = PackedColorArray( 0.435547, 0.248763, 0.173538, 1, 0.429688, 0.280094, 0.12085, 1, 0.163086, 0.111312, 0.0904617, 0.0328639, 1, 1, 1, 0 )
+offsets = PackedFloat32Array(0.0375587, 0.516432, 0.995305, 1)
+colors = PackedColorArray(0.435547, 0.248763, 0.173538, 1, 0.429688, 0.280094, 0.12085, 1, 0.163086, 0.111312, 0.0904617, 0.0328639, 1, 1, 1, 0)
 
-[node name="BreakableHollowBloc" instance=ExtResource( 1 )]
+[node name="BreakableHollowBloc" instance=ExtResource("1")]
 
-[node name="LightOccluder2D" parent="." index="1"]
-occluder = SubResource( 1 )
-
-[node name="Collision" parent="." index="2"]
-shape = SubResource( 2 )
-disabled = true
+[node name="Occluder" parent="." index="0"]
+occluder = SubResource("OccluderPolygon2D_oc7r5")
 
 [node name="CollisionShapeV0" type="CollisionShape2D" parent="." index="3"]
-position = Vector2( 16, -16 )
-shape = SubResource( 3 )
+position = Vector2(16, -16)
+shape = SubResource("3")
 
 [node name="CollisionShapeV1" type="CollisionShape2D" parent="." index="4"]
-position = Vector2( -16, -16 )
-shape = SubResource( 3 )
+position = Vector2(-16, -16)
+shape = SubResource("3")
 
 [node name="CollisionShapeH0" type="CollisionShape2D" parent="." index="5"]
-position = Vector2( -16, 16 )
-shape = SubResource( 4 )
+position = Vector2(-16, 16)
+shape = SubResource("4")
 
 [node name="CollisionShapeH1" type="CollisionShape2D" parent="." index="6"]
-position = Vector2( -16, -16 )
-shape = SubResource( 4 )
+position = Vector2(-16, -16)
+shape = SubResource("4")
 
 [node name="DebrisParticle" parent="." index="7"]
-material = SubResource( 5 )
-color_ramp = SubResource( 6 )
+material = SubResource("5")
+color_ramp = SubResource("6")

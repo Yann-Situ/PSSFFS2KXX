@@ -1,38 +1,25 @@
-[gd_scene load_steps=5 format=2]
+[gd_scene load_steps=5 format=3 uid="uid://dcqurpkp4ianj"]
 
-[sub_resource type="Gradient" id=1]
-offsets = PackedFloat32Array( 0.217617, 0.367876, 0.518135, 1 )
-colors = PackedColorArray( 1.2, 0.85, 0.3, 1, 1.2, 1.2, 1.2, 1, 0.550781, 0.193634, 0, 1, 0.21875, 0, 0, 0 )
+[sub_resource type="Gradient" id="1"]
+offsets = PackedFloat32Array(0.217617, 0.367876, 0.518135, 1)
+colors = PackedColorArray(1.2, 0.85, 0.3, 1, 1.2, 1.2, 1.2, 1, 0.550781, 0.193634, 0, 1, 0.21875, 0, 0, 0)
 
-[sub_resource type="GradientTexture2D" id=2]
-gradient = SubResource( 1 )
+[sub_resource type="GradientTexture2D" id="2"]
+gradient = SubResource("1")
 
-[sub_resource type="ParticleProcessMaterial" id=3]
+[sub_resource type="ParticleProcessMaterial" id="3"]
 resource_local_to_scene = true
-flag_disable_z = true
-direction = Vector3( 0, -1, 0 )
+direction = Vector3(0, -1, 0)
 spread = 44.13
-gravity = Vector3( 0, 80, 0 )
-initial_velocity = 98.52
-orbit_velocity = 0.0
-orbit_velocity_random = 0.0
-damping = 37.29
-damping_random = 0.29
-scale = 3.0
-scale_random = 0.5
-color_ramp = SubResource( 2 )
-hue_variation = -1.0
-hue_variation_random = 0.05
+gravity = Vector3(0, 80, 0)
+color_ramp = SubResource("2")
 
-[sub_resource type="CompressedTexture2D" id=4]
-flags = 4
-load_path = "res://.import/pixel.png-8e4e6cd3613230bba87e395c4cf3f3d7.stex"
+[sub_resource type="CompressedTexture2D" id="4"]
 
 [node name="RideParticles" type="GPUParticles2D"]
 amount = 14
+process_material = SubResource("3")
+texture = SubResource("4")
 lifetime = 0.7
 explosiveness = 0.11
 fract_delta = false
-local_coords = false
-process_material = SubResource( 3 )
-texture = SubResource( 4 )

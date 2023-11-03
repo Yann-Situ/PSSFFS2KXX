@@ -3,12 +3,12 @@
 [ext_resource type="PackedScene" uid="uid://cjbsx2kbm5qhk" path="res://src/Player/PlayerPosition.tscn" id="1"]
 [ext_resource type="Script" path="res://src/Levels/RoomAnimations.gd" id="3"]
 [ext_resource type="TileSet" uid="uid://berkn1bildrf3" path="res://src/Map/TileSet.tres" id="5_q68b4"]
-[ext_resource type="Texture2D" uid="uid://cqif3quqscgjl" path="res://assets/art/background/pixelBackground7.png" id="6"]
-[ext_resource type="Texture2D" uid="uid://b8cfr623fwqvh" path="res://assets/art/background/pixelBackground3.png" id="7"]
-[ext_resource type="Texture2D" uid="uid://bb754ianhph1u" path="res://assets/art/background/pixelBackground6.png" id="8"]
+[ext_resource type="Texture2D" uid="uid://dndn6ajrce5h1" path="res://assets/art/background/pixelBackground7.png" id="6"]
+[ext_resource type="Texture2D" uid="uid://dcc4ug032gw0y" path="res://assets/art/background/pixelBackground3.png" id="7"]
+[ext_resource type="Texture2D" uid="uid://dyshcen77dpmo" path="res://assets/art/background/pixelBackground6.png" id="8"]
 [ext_resource type="Script" path="res://src/Map/TilemapCollisionBaker.gd" id="10_kq0sn"]
 [ext_resource type="Script" path="res://src/Levels/Room2D.gd" id="15"]
-[ext_resource type="Texture2D" uid="uid://b6o0rn7ik57dj" path="res://assets/art/tileset/tileset-16px.png" id="19_jcdbt"]
+[ext_resource type="Texture2D" uid="uid://cyl2qo1dkxfen" path="res://assets/art/tileset/tileset-16px.png" id="19_jcdbt"]
 
 [sub_resource type="Gradient" id="1"]
 resource_local_to_scene = true

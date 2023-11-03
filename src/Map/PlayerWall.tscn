@@ -1,18 +1,18 @@
-[gd_scene load_steps=3 format=2]
+[gd_scene load_steps=3 format=3 uid="uid://dyv7p4100l20b"]
 
-[ext_resource path="res://assets/art/environment/environment-interactive.png" type="Texture2D" id=1]
+[ext_resource type="Texture2D" uid="uid://bx70alc2tdq28" path="res://assets/art/environment/environment-interactive.png" id="1"]
 
-[sub_resource type="RectangleShape2D" id=1]
-size = Vector2( 8, 8 )
+[sub_resource type="RectangleShape2D" id="1"]
+size = Vector2(8, 8)
 
 [node name="PlayerWall" type="StaticBody2D"]
 collision_layer = 512
 collision_mask = 513
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-shape = SubResource( 1 )
+shape = SubResource("1")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
-texture = ExtResource( 1 )
+texture = ExtResource("1")
 region_enabled = true
-region_rect = Rect2( 48, 336, 16, 16 )
+region_rect = Rect2(48, 336, 16, 16)

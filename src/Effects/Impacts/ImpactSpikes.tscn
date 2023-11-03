@@ -1,6 +1,6 @@
 [gd_scene load_steps=7 format=3 uid="uid://cfm38odq6p746"]
 
-[ext_resource type="Texture2D" uid="uid://lmc135vum4h0" path="res://assets/art/effects/impact/impact_spike.png" id="1_gqc7u"]
+[ext_resource type="Texture2D" uid="uid://cqe78mft72phl" path="res://assets/art/effects/impact/impact_spike.png" id="1_gqc7u"]
 [ext_resource type="Script" path="res://src/Effects/OneShotParticle.gd" id="2_0js8n"]
 
 [sub_resource type="CanvasItemMaterial" id="1"]

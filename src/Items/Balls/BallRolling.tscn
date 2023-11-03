@@ -2,7 +2,7 @@
 
 [ext_resource type="PackedScene" uid="uid://cxn2m3havcmil" path="res://src/Items/Balls/Ball.tscn" id="1"]
 [ext_resource type="Script" path="res://src/Items/Balls/BallRolling.gd" id="2"]
-[ext_resource type="Texture2D" uid="uid://c0pccbcwiaia5" path="res://assets/art/ball/ball_rolling.png" id="3"]
+[ext_resource type="Texture2D" uid="uid://dtt0hwo0gw1mc" path="res://assets/art/ball/ball_rolling.png" id="3"]
 [ext_resource type="Shader" path="res://assets/shader/contour.gdshader" id="3_uqgkx"]
 
 [sub_resource type="PhysicsMaterial" id="PhysicsMaterial_f05u8"]

@@ -1,6 +1,6 @@
 [gd_scene load_steps=7 format=3 uid="uid://d24tkbf25vxbr"]
 
-[ext_resource type="Texture2D" uid="uid://b8kogdlg4nsj5" path="res://assets/art/effects/impact/impact_sparks.png" id="1_vtrhf"]
+[ext_resource type="Texture2D" uid="uid://h1gn0olgdphr" path="res://assets/art/effects/impact/impact_sparks.png" id="1_vtrhf"]
 [ext_resource type="Script" path="res://src/Effects/OneShotParticle.gd" id="2_qa1d1"]
 
 [sub_resource type="CanvasItemMaterial" id="1"]

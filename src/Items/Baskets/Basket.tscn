@@ -1,15 +1,15 @@
 [gd_scene load_steps=29 format=3 uid="uid://bola66fqnywdi"]
 
-[ext_resource type="Texture2D" uid="uid://bcddludfh8obw" path="res://assets/art/environment/environment-interactive.png" id="1"]
+[ext_resource type="Texture2D" uid="uid://bx70alc2tdq28" path="res://assets/art/environment/environment-interactive.png" id="1"]
 [ext_resource type="Script" path="res://src/Items/Baskets/Basket.gd" id="2"]
 [ext_resource type="Texture2D" uid="uid://cntdvutmbk0dn" path="res://assets/art/ball/ball_particle.png" id="3"]
-[ext_resource type="Texture2D" uid="uid://dph4cpsym7lcb" path="res://assets/art/effects/light5_5.png" id="4"]
-[ext_resource type="Texture2D" uid="uid://dlxo8jxb21u55" path="res://assets/art/effects/light5_4.png" id="5"]
-[ext_resource type="Texture2D" uid="uid://bcxflf7dbeb4w" path="res://assets/art/effects/light5_1.png" id="6"]
-[ext_resource type="Texture2D" uid="uid://b41scft6p0qto" path="res://assets/art/effects/light5_3.png" id="7"]
-[ext_resource type="Texture2D" uid="uid://pcstif3roi0k" path="res://assets/art/effects/light5_2.png" id="8"]
+[ext_resource type="Texture2D" uid="uid://dfut2gplenar" path="res://assets/art/effects/light5_5.png" id="4"]
+[ext_resource type="Texture2D" uid="uid://bo1cx5blctfm5" path="res://assets/art/effects/light5_4.png" id="5"]
+[ext_resource type="Texture2D" uid="uid://df3tf1mx1ga2y" path="res://assets/art/effects/light5_1.png" id="6"]
+[ext_resource type="Texture2D" uid="uid://kuyoddmpp4nh" path="res://assets/art/effects/light5_3.png" id="7"]
+[ext_resource type="Texture2D" uid="uid://icukigpgr52w" path="res://assets/art/effects/light5_2.png" id="8"]
 [ext_resource type="Script" path="res://src/Items/Interactive/Selectable.gd" id="9"]
-[ext_resource type="PackedScene" path="res://src/Effects/LineParticle.tscn" id="10"]
+[ext_resource type="PackedScene" uid="uid://d4icnmnguyjv3" path="res://src/Effects/LineParticle.tscn" id="10"]
 
 [sub_resource type="AtlasTexture" id="1"]
 atlas = ExtResource("1")

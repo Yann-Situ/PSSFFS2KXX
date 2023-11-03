@@ -1,10 +1,10 @@
 [gd_scene load_steps=15 format=3 uid="uid://c6cdyqr51vbxh"]
 
-[ext_resource type="Texture2D" uid="uid://nhnvnke1kret" path="res://assets/art/environment/graff-spray.png" id="1"]
+[ext_resource type="Texture2D" uid="uid://cmdquuanqily4" path="res://assets/art/environment/graff-spray.png" id="1"]
 [ext_resource type="Shader" path="res://assets/shader/graff-spray.gdshader" id="2"]
 [ext_resource type="Script" path="res://src/Items/Interactive/GraffSpray.gd" id="3"]
-[ext_resource type="Texture2D" uid="uid://0q8qxsby5sw5" path="res://assets/art/effects/light2.png" id="4"]
-[ext_resource type="Texture2D" uid="uid://dynhxnnpu4wgg" path="res://assets/art/effects/round.png" id="5"]
+[ext_resource type="Texture2D" uid="uid://ctiuc3lmtrgkb" path="res://assets/art/effects/light2.png" id="4"]
+[ext_resource type="Texture2D" uid="uid://d33u8f6bfhj4m" path="res://assets/art/effects/round.png" id="5"]
 
 [sub_resource type="CanvasItemMaterial" id="24"]
 

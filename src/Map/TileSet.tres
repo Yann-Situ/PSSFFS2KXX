@@ -6,7 +6,7 @@
 [ext_resource type="Texture2D" uid="uid://32pcdn5yoyyo" path="res://assets/art/tileset/tileset6.png" id="4_hdskw"]
 [ext_resource type="Texture2D" uid="uid://o82880c5sluv" path="res://assets/art/tileset/tileset7.png" id="5_dw7gh"]
 [ext_resource type="PackedScene" uid="uid://d1iceb4hkwose" path="res://src/Items/Interactive/BreakableBloc.tscn" id="6_xhx5m"]
-[ext_resource type="PackedScene" path="res://src/Items/Interactive/DashTarget.tscn" id="7_uthr4"]
+[ext_resource type="PackedScene" uid="uid://rmukvjwyiahu" path="res://src/Items/Interactive/DashTarget.tscn" id="7_uthr4"]
 [ext_resource type="PackedScene" uid="uid://dshbchrglyje0" path="res://src/Items/Interactive/Door.tscn" id="8_ggvp7"]
 [ext_resource type="PackedScene" uid="uid://c6cdyqr51vbxh" path="res://src/Items/Interactive/GraffSpray.tscn" id="9_jtj4e"]
 [ext_resource type="PackedScene" uid="uid://bbnppjd77snlx" path="res://src/Items/Interactive/Spikes.tscn" id="10_vd7sn"]

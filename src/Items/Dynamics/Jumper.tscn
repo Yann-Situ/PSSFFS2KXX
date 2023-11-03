@@ -1,8 +1,8 @@
 [gd_scene load_steps=13 format=3 uid="uid://bcnnkalot4kb0"]
 
-[ext_resource type="Texture2D" uid="uid://bcddludfh8obw" path="res://assets/art/environment/environment-interactive.png" id="1"]
+[ext_resource type="Texture2D" uid="uid://bx70alc2tdq28" path="res://assets/art/environment/environment-interactive.png" id="1"]
 [ext_resource type="Script" path="res://src/Items/Dynamics/Jumper.gd" id="2"]
-[ext_resource type="PackedScene" path="res://src/Effects/LineParticle.tscn" id="3"]
+[ext_resource type="PackedScene" uid="uid://d4icnmnguyjv3" path="res://src/Effects/LineParticle.tscn" id="3"]
 
 [sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_qgnjc"]
 polygon = PackedVector2Array(-16, 16, -16, 0, 16, 0, 16, 16)

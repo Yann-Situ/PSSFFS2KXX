@@ -1,13 +1,13 @@
 [gd_scene load_steps=20 format=3 uid="uid://bdhkn6l5lcxe0"]
 
 [ext_resource type="PackedScene" uid="uid://cxn2m3havcmil" path="res://src/Items/Balls/Ball.tscn" id="1_gb5k2"]
-[ext_resource type="Texture2D" uid="uid://dsoyoe3ww8hjd" path="res://assets/art/effects/shockwave_1.png" id="2"]
+[ext_resource type="Texture2D" uid="uid://c7eow3lih24tb" path="res://assets/art/effects/shockwave_1.png" id="2"]
 [ext_resource type="Resource" uid="uid://dsw2scc7dw804" path="res://src/Items/Balls/data/BallBoumMaxExplosionData.tres" id="2_hixem"]
 [ext_resource type="Script" path="res://src/Items/Balls/BallBoum.gd" id="3"]
 [ext_resource type="Shader" path="res://assets/shader/contour.gdshader" id="3_emvrs"]
 [ext_resource type="Resource" uid="uid://b1lhq0ays8vtg" path="res://src/Items/Balls/data/BallBoumMinExplosionData.tres" id="3_gci2p"]
-[ext_resource type="Texture2D" uid="uid://d022k3w806eqv" path="res://assets/art/ball/ball_boum.png" id="4"]
-[ext_resource type="Texture2D" uid="uid://dynhxnnpu4wgg" path="res://assets/art/effects/round.png" id="6"]
+[ext_resource type="Texture2D" uid="uid://dhv4dm7cpuay1" path="res://assets/art/ball/ball_boum.png" id="4"]
+[ext_resource type="Texture2D" uid="uid://d33u8f6bfhj4m" path="res://assets/art/effects/round.png" id="6"]
 
 [sub_resource type="PhysicsMaterial" id="PhysicsMaterial_pchl4"]
 friction = 0.5
@@ -71,6 +71,7 @@ speed_threshold = 70.0
 boum_timer = 1.0
 max_explosion_data = ExtResource("2_hixem")
 min_explosion_data = ExtResource("3_gci2p")
+impulse_dash_boum = 800.0
 impact_effect = 4
 dust_threshold = 100.0
 impact_threshold = 200.0

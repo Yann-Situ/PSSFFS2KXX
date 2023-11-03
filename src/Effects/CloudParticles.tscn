@@ -1,6 +1,6 @@
 [gd_scene load_steps=4 format=3 uid="uid://qpsvndxia81u"]
 
-[ext_resource type="Texture2D" uid="uid://dynhxnnpu4wgg" path="res://assets/art/effects/round.png" id="1"]
+[ext_resource type="Texture2D" uid="uid://d33u8f6bfhj4m" path="res://assets/art/effects/round.png" id="1"]
 
 [sub_resource type="CanvasItemMaterial" id="24"]
 

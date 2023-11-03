@@ -1,10 +1,10 @@
 [gd_scene load_steps=14 format=3 uid="uid://c4ein3aak14an"]
 
 [ext_resource type="PackedScene" uid="uid://cxn2m3havcmil" path="res://src/Items/Balls/Ball.tscn" id="1_1c2j8"]
-[ext_resource type="Texture2D" uid="uid://ca2tpae4h50bj" path="res://assets/art/ball/ball_fire.png" id="2"]
+[ext_resource type="Texture2D" uid="uid://ddnsbue8eq8bd" path="res://assets/art/ball/ball_fire.png" id="2"]
 [ext_resource type="Shader" path="res://assets/shader/contour.gdshader" id="3"]
-[ext_resource type="Texture2D" uid="uid://dfs74r3ta3oc7" path="res://assets/art/effects/light4.png" id="4"]
-[ext_resource type="Texture2D" uid="uid://dynhxnnpu4wgg" path="res://assets/art/effects/round.png" id="5"]
+[ext_resource type="Texture2D" uid="uid://ddv6iralrmjtq" path="res://assets/art/effects/light4.png" id="4"]
+[ext_resource type="Texture2D" uid="uid://d33u8f6bfhj4m" path="res://assets/art/effects/round.png" id="5"]
 [ext_resource type="Script" path="res://src/Items/Balls/BallFire.gd" id="6"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_svm5m"]

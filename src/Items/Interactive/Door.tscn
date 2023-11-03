@@ -1,7 +1,7 @@
 [gd_scene load_steps=10 format=3 uid="uid://dshbchrglyje0"]
 
 [ext_resource type="Script" path="res://src/Items/Interactive/Door.gd" id="1"]
-[ext_resource type="Texture2D" uid="uid://bcddludfh8obw" path="res://assets/art/environment/environment-interactive.png" id="2"]
+[ext_resource type="Texture2D" uid="uid://bx70alc2tdq28" path="res://assets/art/environment/environment-interactive.png" id="2"]
 [ext_resource type="PackedScene" uid="uid://6uemq1bkxgpn" path="res://src/Effects/DebrisParticule.tscn" id="3"]
 [ext_resource type="Script" path="res://src/Items/Interactive/Breakable.gd" id="4"]
 
@@ -12,7 +12,7 @@ polygon = PackedVector2Array(0, -32, 8, -32, 8, 32, 0, 32)
 [sub_resource type="RectangleShape2D" id="2"]
 size = Vector2(8, 64)
 
-[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_c0xwb"]
+[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_236hn"]
 resource_local_to_scene = true
 particles_animation = true
 particles_anim_h_frames = 8
@@ -25,7 +25,7 @@ max_value = 200.0
 _data = [Vector2(0, 7.10226), 0.0, 0.0, 0, 0, Vector2(1, -51.0796), 0.0, 0.0, 0, 0]
 point_count = 2
 
-[sub_resource type="Gradient" id="Gradient_2i4ta"]
+[sub_resource type="Gradient" id="Gradient_y612e"]
 resource_local_to_scene = true
 offsets = PackedFloat32Array(0.0375587, 0.636364, 0.995305, 1)
 colors = PackedColorArray(0.672221, 0.507361, 0.359743, 1, 0.508158, 0.374147, 0.275914, 1, 0.149963, 0.171976, 0.203125, 0.0328639, 0.271484, 0.350037, 0.5, 0)
@@ -56,10 +56,10 @@ position = Vector2(1, 0)
 shape = SubResource("2")
 
 [node name="DebrisParticle" parent="." instance=ExtResource("3")]
-material = SubResource("CanvasItemMaterial_c0xwb")
+material = SubResource("CanvasItemMaterial_236hn")
 position = Vector2(4, 0)
 explosiveness = 0.92
 emission_sphere_radius = 1.0
 spread = 60.48
 linear_accel_curve = SubResource("4")
-color_ramp = SubResource("Gradient_2i4ta")
+color_ramp = SubResource("Gradient_y612e")

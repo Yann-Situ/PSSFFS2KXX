@@ -1,38 +1,38 @@
-[gd_scene load_steps=9 format=2]
+[gd_scene load_steps=9 format=3 uid="uid://dqh3hjimrqhgl"]
 
-[ext_resource path="res://src/Items/Interactive/Wind.gd" type="Script" id=1]
-[ext_resource path="res://assets/shader/fog.gdshader" type="Shader" id=2]
+[ext_resource type="Script" path="res://src/Items/Interactive/Wind.gd" id="1"]
+[ext_resource type="Shader" path="res://assets/shader/fog.gdshader" id="2"]
 
-[sub_resource type="RectangleShape2D" id=1]
+[sub_resource type="RectangleShape2D" id="1"]
 resource_local_to_scene = true
-size = Vector2( 256, 128 )
+size = Vector2(256, 128)
 
-[sub_resource type="OpenSimplexNoise" id=5]
+[sub_resource type="FastNoiseLite" id="5"]
 
-[sub_resource type="NoiseTexture" id=4]
+[sub_resource type="NoiseTexture2D" id="4"]
 seamless = true
-noise = SubResource( 5 )
+noise = SubResource("5")
 
-[sub_resource type="ShaderMaterial" id=9]
+[sub_resource type="ShaderMaterial" id="9"]
 resource_local_to_scene = true
-shader = ExtResource( 2 )
+shader = ExtResource("2")
 shader_parameter/octaves = 5
 shader_parameter/starting_amplitude = 0.407
 shader_parameter/starting_frequency = 0.381
 shader_parameter/shift = -0.204
-shader_parameter/velocity = Vector2( 3, 0 )
-shader_parameter/fog_color = Color( 1, 1, 1, 0.537255 )
-shader_parameter/noise = SubResource( 4 )
+shader_parameter/velocity = Vector2(3, 0)
+shader_parameter/fog_color = Color(1, 1, 1, 0.537255)
+shader_parameter/noise = SubResource("4")
 
-[sub_resource type="Gradient" id=7]
+[sub_resource type="Gradient" id="7"]
 
-[sub_resource type="GradientTexture2D" id=8]
-gradient = SubResource( 7 )
+[sub_resource type="GradientTexture2D" id="8"]
+gradient = SubResource("7")
 width = 1
 
 [node name="Wind" type="Node2D"]
-script = ExtResource( 1 )
-speed = Vector2( 150, 0 )
+script = ExtResource("1")
+speed = Vector2(150, 0)
 amplitude = null
 frequence = null
 
@@ -41,13 +41,13 @@ collision_layer = 0
 collision_mask = 5
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
-shape = SubResource( 1 )
+shape = SubResource("1")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
-material = SubResource( 9 )
-position = Vector2( 256, 128 )
-scale = Vector2( 512, 256 )
-texture = SubResource( 8 )
+material = SubResource("9")
+position = Vector2(256, 128)
+scale = Vector2(512, 256)
+texture = SubResource("8")
 
 [connection signal="body_entered" from="Area2D" to="." method="_on_Area2D_body_entered"]
 [connection signal="body_exited" from="Area2D" to="." method="_on_Area2D_body_exited"]

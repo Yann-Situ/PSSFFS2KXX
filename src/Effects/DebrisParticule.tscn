@@ -1,6 +1,6 @@
 [gd_scene load_steps=4 format=3 uid="uid://6uemq1bkxgpn"]
 
-[ext_resource type="Texture2D" uid="uid://b7t6do8nu1247" path="res://assets/art/effects/debris_0_8x4.png" id="1_hswuh"]
+[ext_resource type="Texture2D" uid="uid://cisru6skxtl5c" path="res://assets/art/effects/debris_0_8x4.png" id="1_hswuh"]
 
 [sub_resource type="CanvasItemMaterial" id="1"]
 resource_local_to_scene = true

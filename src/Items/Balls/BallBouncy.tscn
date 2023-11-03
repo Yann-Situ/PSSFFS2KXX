@@ -2,7 +2,7 @@
 
 [ext_resource type="PackedScene" uid="uid://cxn2m3havcmil" path="res://src/Items/Balls/Ball.tscn" id="1"]
 [ext_resource type="Script" path="res://src/Items/Balls/BallBouncy.gd" id="2"]
-[ext_resource type="Texture2D" uid="uid://hmvnx1crbexx" path="res://assets/art/ball/ball_bouncy.png" id="3"]
+[ext_resource type="Texture2D" uid="uid://cf65am6mqst0m" path="res://assets/art/ball/ball_bouncy.png" id="3"]
 [ext_resource type="Shader" path="res://assets/shader/contour.gdshader" id="4"]
 
 [sub_resource type="PhysicsMaterial" id="PhysicsMaterial_ucddd"]
