@@ -1,12 +1,23 @@
 # A generic interaction area that can be child of any 2D node.
+@tool
 @icon("res://assets/art/icons/warning.png")
 extends Area2D
 class_name InteractionArea
 
-@export var enter: Callable = func():
-	pass
-@export var exit: Callable = func():
-	pass
-@export var interact: Callable = func():
-	print(name+" interact!")
-	pass
+signal handler_entered
+signal handler_exited
+signal handler_interacted(handler : InteractionHandler)
+
+@export var enter: Callable = func(handler):
+	handler_entered.emit(handler)
+@export var exit: Callable = func(handler):
+	handler_exited.emit(handler)
+@export var interact: Callable = func(handler):
+	print_debug(name+" interact!")
+	handler_interacted.emit(handler)
+	
+func _init():
+	monitoring = false
+	collision_layer = 2048 # interaction layer
+	collision_mask = 0 
+	modulate = Color(0.176, 0.922, 0.51, 0.804)

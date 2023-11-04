@@ -77,3 +77,5 @@ script = ExtResource("2_ldb0k")
 [node name="CollisionShape2D" type="CollisionShape2D" parent="InteractionArea"]
 shape = SubResource("CircleShape2D_rp7wc")
 debug_color = Color(1, 1, 0.466667, 0.419608)
+
+[connection signal="handler_interacted" from="InteractionArea" to="." method="interaction"]

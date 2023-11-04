@@ -28,7 +28,7 @@
 [ext_resource type="Shader" path="res://assets/shader/contour.gdshader" id="28"]
 [ext_resource type="Script" path="res://src/Player/Actions/Release.gd" id="29"]
 [ext_resource type="Script" path="res://src/Characters/LifeHandler.gd" id="30"]
-[ext_resource type="PackedScene" path="res://src/Items/Interactive/SelectorTarget.tscn" id="31"]
+[ext_resource type="PackedScene" uid="uid://dnxamlpvh6e70" path="res://src/Items/Interactive/SelectorTarget.tscn" id="31"]
 [ext_resource type="Script" path="res://src/Player/Actions/Grind.gd" id="32"]
 [ext_resource type="Texture2D" uid="uid://scghoxayo4du" path="res://assets/art/gui/life_bar_fill.png" id="33"]
 [ext_resource type="Texture2D" uid="uid://c40av4lxtnfbo" path="res://assets/art/gui/ball_info_bg.png" id="34"]
@@ -47,7 +47,7 @@
 [ext_resource type="Script" path="res://src/Player/DebugGUI.gd" id="44_d6hbp"]
 [ext_resource type="AnimationNodeStateMachine" uid="uid://dcviqtnkvq3ry" path="res://src/Player/AnimationTreeHandler/Action.tres" id="45"]
 [ext_resource type="AnimationNodeBlendTree" uid="uid://cmsxpc5f28w5c" path="res://src/Player/AnimationTreeHandler/Stance.tres" id="46"]
-[ext_resource type="PackedScene" uid="uid://ct37vs5ra10bs" path="res://src/Items/Activables/InteractionHandler.tscn" id="48_1sx5e"]
+[ext_resource type="Script" path="res://src/Items/Activables/InteractionHandler.gd" id="48_8n6it"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_0vsxb"]
 size = Vector2(17, 57)
@@ -88,7 +88,7 @@ tracks/0/keys = {
 tracks/1/type = "value"
 tracks/1/imported = false
 tracks/1/enabled = true
-tracks/1/path = NodePath("../BallHandler/HasBallPosition:position")
+tracks/1/path = NodePath("../HorizontalFlipper/BallHandler/HasBallPosition:position")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
@@ -116,7 +116,7 @@ tracks/0/keys = {
 tracks/1/type = "value"
 tracks/1/imported = false
 tracks/1/enabled = true
-tracks/1/path = NodePath("../BallHandler/HasBallPosition:position")
+tracks/1/path = NodePath("../HorizontalFlipper/BallHandler/HasBallPosition:position")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
@@ -128,7 +128,7 @@ tracks/1/keys = {
 tracks/2/type = "method"
 tracks/2/imported = false
 tracks/2/enabled = true
-tracks/2/path = NodePath("../BallHandler")
+tracks/2/path = NodePath("../HorizontalFlipper/BallHandler")
 tracks/2/interp = 1
 tracks/2/loop_wrap = true
 tracks/2/keys = {
@@ -169,7 +169,7 @@ tracks/0/keys = {
 tracks/1/type = "value"
 tracks/1/imported = false
 tracks/1/enabled = true
-tracks/1/path = NodePath("../BallHandler/HasBallPosition:position")
+tracks/1/path = NodePath("../HorizontalFlipper/BallHandler/HasBallPosition:position")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
@@ -197,7 +197,7 @@ tracks/0/keys = {
 tracks/1/type = "value"
 tracks/1/imported = false
 tracks/1/enabled = true
-tracks/1/path = NodePath("../BallHandler/HasBallPosition:position")
+tracks/1/path = NodePath("../HorizontalFlipper/BallHandler/HasBallPosition:position")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
@@ -225,7 +225,7 @@ tracks/0/keys = {
 tracks/1/type = "value"
 tracks/1/imported = false
 tracks/1/enabled = true
-tracks/1/path = NodePath("../BallHandler/HasBallPosition:position")
+tracks/1/path = NodePath("../HorizontalFlipper/BallHandler/HasBallPosition:position")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
@@ -253,7 +253,7 @@ tracks/0/keys = {
 tracks/1/type = "value"
 tracks/1/imported = false
 tracks/1/enabled = true
-tracks/1/path = NodePath("../BallHandler/HasBallPosition:position")
+tracks/1/path = NodePath("../HorizontalFlipper/BallHandler/HasBallPosition:position")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
@@ -339,7 +339,7 @@ tracks/0/keys = {
 tracks/1/type = "value"
 tracks/1/imported = false
 tracks/1/enabled = true
-tracks/1/path = NodePath("../BallHandler/HasBallPosition:position")
+tracks/1/path = NodePath("../HorizontalFlipper/BallHandler/HasBallPosition:position")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
@@ -380,7 +380,7 @@ tracks/0/keys = {
 tracks/1/type = "value"
 tracks/1/imported = false
 tracks/1/enabled = true
-tracks/1/path = NodePath("../BallHandler/HasBallPosition:position")
+tracks/1/path = NodePath("../HorizontalFlipper/BallHandler/HasBallPosition:position")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
@@ -419,7 +419,7 @@ tracks/0/keys = {
 tracks/1/type = "value"
 tracks/1/imported = false
 tracks/1/enabled = true
-tracks/1/path = NodePath("../BallHandler/HasBallPosition:position")
+tracks/1/path = NodePath("../HorizontalFlipper/BallHandler/HasBallPosition:position")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
@@ -472,7 +472,7 @@ tracks/0/keys = {
 tracks/1/type = "value"
 tracks/1/imported = false
 tracks/1/enabled = true
-tracks/1/path = NodePath("../BallHandler/HasBallPosition:position")
+tracks/1/path = NodePath("../HorizontalFlipper/BallHandler/HasBallPosition:position")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
@@ -526,7 +526,7 @@ tracks/0/keys = {
 tracks/1/type = "value"
 tracks/1/imported = false
 tracks/1/enabled = true
-tracks/1/path = NodePath("../BallHandler/HasBallPosition:position")
+tracks/1/path = NodePath("../HorizontalFlipper/BallHandler/HasBallPosition:position")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
@@ -555,7 +555,7 @@ tracks/0/keys = {
 tracks/1/type = "value"
 tracks/1/imported = false
 tracks/1/enabled = true
-tracks/1/path = NodePath("../BallHandler/HasBallPosition:position")
+tracks/1/path = NodePath("../HorizontalFlipper/BallHandler/HasBallPosition:position")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
@@ -583,7 +583,7 @@ tracks/0/keys = {
 tracks/1/type = "value"
 tracks/1/imported = false
 tracks/1/enabled = true
-tracks/1/path = NodePath("../BallHandler/HasBallPosition:position")
+tracks/1/path = NodePath("../HorizontalFlipper/BallHandler/HasBallPosition:position")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
@@ -623,7 +623,7 @@ tracks/1/keys = {
 tracks/2/type = "method"
 tracks/2/imported = false
 tracks/2/enabled = true
-tracks/2/path = NodePath("../BallHandler")
+tracks/2/path = NodePath("../HorizontalFlipper/BallHandler")
 tracks/2/interp = 1
 tracks/2/loop_wrap = true
 tracks/2/keys = {
@@ -637,7 +637,7 @@ tracks/2/keys = {
 tracks/3/type = "value"
 tracks/3/imported = false
 tracks/3/enabled = true
-tracks/3/path = NodePath("../BallHandler/HasBallPosition:position")
+tracks/3/path = NodePath("../HorizontalFlipper/BallHandler/HasBallPosition:position")
 tracks/3/interp = 1
 tracks/3/loop_wrap = true
 tracks/3/keys = {
@@ -664,7 +664,7 @@ tracks/0/keys = {
 tracks/1/type = "value"
 tracks/1/imported = false
 tracks/1/enabled = true
-tracks/1/path = NodePath("../BallHandler/HasBallPosition:position")
+tracks/1/path = NodePath("../HorizontalFlipper/BallHandler/HasBallPosition:position")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
@@ -691,7 +691,7 @@ tracks/0/keys = {
 tracks/1/type = "value"
 tracks/1/imported = false
 tracks/1/enabled = true
-tracks/1/path = NodePath("../BallHandler/HasBallPosition:position")
+tracks/1/path = NodePath("../HorizontalFlipper/BallHandler/HasBallPosition:position")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
@@ -718,7 +718,7 @@ tracks/0/keys = {
 tracks/1/type = "value"
 tracks/1/imported = false
 tracks/1/enabled = true
-tracks/1/path = NodePath("../BallHandler/HasBallPosition:position")
+tracks/1/path = NodePath("../HorizontalFlipper/BallHandler/HasBallPosition:position")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
@@ -745,7 +745,7 @@ tracks/0/keys = {
 tracks/1/type = "value"
 tracks/1/imported = false
 tracks/1/enabled = true
-tracks/1/path = NodePath("../BallHandler/HasBallPosition:position")
+tracks/1/path = NodePath("../HorizontalFlipper/BallHandler/HasBallPosition:position")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
@@ -772,7 +772,7 @@ tracks/0/keys = {
 tracks/1/type = "value"
 tracks/1/imported = false
 tracks/1/enabled = true
-tracks/1/path = NodePath("../BallHandler/HasBallPosition:position")
+tracks/1/path = NodePath("../HorizontalFlipper/BallHandler/HasBallPosition:position")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
@@ -799,7 +799,7 @@ tracks/0/keys = {
 tracks/1/type = "value"
 tracks/1/imported = false
 tracks/1/enabled = true
-tracks/1/path = NodePath("../BallHandler/HasBallPosition:position")
+tracks/1/path = NodePath("../HorizontalFlipper/BallHandler/HasBallPosition:position")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
@@ -826,7 +826,7 @@ tracks/0/keys = {
 tracks/1/type = "value"
 tracks/1/imported = false
 tracks/1/enabled = true
-tracks/1/path = NodePath("../BallHandler/HasBallPosition:position")
+tracks/1/path = NodePath("../HorizontalFlipper/BallHandler/HasBallPosition:position")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
@@ -853,7 +853,7 @@ tracks/0/keys = {
 tracks/1/type = "value"
 tracks/1/imported = false
 tracks/1/enabled = true
-tracks/1/path = NodePath("../BallHandler/HasBallPosition:position")
+tracks/1/path = NodePath("../HorizontalFlipper/BallHandler/HasBallPosition:position")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
@@ -881,7 +881,7 @@ tracks/0/keys = {
 tracks/1/type = "value"
 tracks/1/imported = false
 tracks/1/enabled = true
-tracks/1/path = NodePath("../BallHandler/HasBallPosition:position")
+tracks/1/path = NodePath("../HorizontalFlipper/BallHandler/HasBallPosition:position")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
@@ -935,7 +935,7 @@ tracks/0/keys = {
 tracks/1/type = "value"
 tracks/1/imported = false
 tracks/1/enabled = true
-tracks/1/path = NodePath("../BallHandler/HasBallPosition:position")
+tracks/1/path = NodePath("../HorizontalFlipper/BallHandler/HasBallPosition:position")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
@@ -976,7 +976,7 @@ tracks/0/keys = {
 tracks/1/type = "value"
 tracks/1/imported = false
 tracks/1/enabled = true
-tracks/1/path = NodePath("../BallHandler/HasBallPosition:position")
+tracks/1/path = NodePath("../HorizontalFlipper/BallHandler/HasBallPosition:position")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
@@ -1003,7 +1003,7 @@ tracks/0/keys = {
 tracks/1/type = "value"
 tracks/1/imported = false
 tracks/1/enabled = true
-tracks/1/path = NodePath("../BallHandler/HasBallPosition:position")
+tracks/1/path = NodePath("../HorizontalFlipper/BallHandler/HasBallPosition:position")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
@@ -1043,7 +1043,7 @@ tracks/1/keys = {
 tracks/2/type = "value"
 tracks/2/imported = false
 tracks/2/enabled = true
-tracks/2/path = NodePath("../BallHandler/HasBallPosition:position")
+tracks/2/path = NodePath("../HorizontalFlipper/BallHandler/HasBallPosition:position")
 tracks/2/interp = 1
 tracks/2/loop_wrap = true
 tracks/2/keys = {
@@ -1071,7 +1071,7 @@ tracks/0/keys = {
 tracks/1/type = "value"
 tracks/1/imported = false
 tracks/1/enabled = true
-tracks/1/path = NodePath("../BallHandler/HasBallPosition:position")
+tracks/1/path = NodePath("../HorizontalFlipper/BallHandler/HasBallPosition:position")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
@@ -1111,7 +1111,7 @@ tracks/0/keys = {
 tracks/1/type = "value"
 tracks/1/imported = false
 tracks/1/enabled = true
-tracks/1/path = NodePath("../BallHandler/HasBallPosition:position")
+tracks/1/path = NodePath("../HorizontalFlipper/BallHandler/HasBallPosition:position")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
@@ -1182,7 +1182,7 @@ tracks/0/keys = {
 tracks/1/type = "value"
 tracks/1/imported = false
 tracks/1/enabled = true
-tracks/1/path = NodePath("../BallHandler/HasBallPosition:position")
+tracks/1/path = NodePath("../HorizontalFlipper/BallHandler/HasBallPosition:position")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
@@ -1225,7 +1225,7 @@ tracks/0/keys = {
 tracks/1/type = "value"
 tracks/1/imported = false
 tracks/1/enabled = true
-tracks/1/path = NodePath("../BallHandler/HasBallPosition:position")
+tracks/1/path = NodePath("../HorizontalFlipper/BallHandler/HasBallPosition:position")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
@@ -1255,7 +1255,7 @@ tracks/0/keys = {
 tracks/1/type = "value"
 tracks/1/imported = false
 tracks/1/enabled = true
-tracks/1/path = NodePath("../BallHandler/HasBallPosition:position")
+tracks/1/path = NodePath("../HorizontalFlipper/BallHandler/HasBallPosition:position")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
@@ -1297,7 +1297,7 @@ tracks/0/keys = {
 tracks/1/type = "value"
 tracks/1/imported = false
 tracks/1/enabled = true
-tracks/1/path = NodePath("../BallHandler/HasBallPosition:position")
+tracks/1/path = NodePath("../HorizontalFlipper/BallHandler/HasBallPosition:position")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
@@ -1337,7 +1337,7 @@ tracks/1/keys = {
 tracks/2/type = "value"
 tracks/2/imported = false
 tracks/2/enabled = true
-tracks/2/path = NodePath("../BallHandler/HasBallPosition:position")
+tracks/2/path = NodePath("../HorizontalFlipper/BallHandler/HasBallPosition:position")
 tracks/2/interp = 1
 tracks/2/loop_wrap = true
 tracks/2/keys = {
@@ -1464,12 +1464,16 @@ color_ramp = SubResource("53")
 
 [sub_resource type="CompressedTexture2D" id="55"]
 
-[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_gdo6d"]
+[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_kl3oy"]
 resource_local_to_scene = true
 particles_animation = true
 particles_anim_h_frames = 6
 particles_anim_v_frames = 1
 particles_anim_loop = true
+
+[sub_resource type="CapsuleShape2D" id="58"]
+radius = 5.0
+height = 42.0
 
 [sub_resource type="CapsuleShape2D" id="57"]
 radius = 28.0
@@ -1478,11 +1482,7 @@ height = 56.0
 [sub_resource type="RectangleShape2D" id="1"]
 size = Vector2(17, 57)
 
-[sub_resource type="CapsuleShape2D" id="58"]
-radius = 5.0
-height = 42.0
-
-[sub_resource type="CircleShape2D" id="CircleShape2D_e1jg0"]
+[sub_resource type="CircleShape2D" id="CircleShape2D_s7vxl"]
 radius = 32.0
 
 [node name="Player" type="CharacterBody2D"]
@@ -1751,33 +1751,8 @@ lifetime = 0.65
 explosiveness = 0.9
 
 [node name="GrindParticles" parent="PlayerEffects" instance=ExtResource("27")]
-material = SubResource("CanvasItemMaterial_gdo6d")
+material = SubResource("CanvasItemMaterial_kl3oy")
 position = Vector2(0, 16)
-
-[node name="BallHandler" type="Area2D" parent="."]
-collision_layer = 0
-collision_mask = 4
-script = ExtResource("6")
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="BallHandler"]
-position = Vector2(0, 5)
-shape = SubResource("57")
-
-[node name="HasBallPosition" type="Node2D" parent="BallHandler"]
-position = Vector2(9, 12)
-
-[node name="Sprite2D" type="Sprite2D" parent="BallHandler/HasBallPosition"]
-visible = false
-texture = ExtResource("4")
-
-[node name="BallWallDetector" type="Area2D" parent="BallHandler"]
-collision_layer = 0
-collision_mask = 1024
-
-[node name="Collision" type="CollisionShape2D" parent="BallHandler/BallWallDetector"]
-visible = false
-position = Vector2(0, 6)
-shape = SubResource("1")
 
 [node name="Camera" type="Camera2D" parent="."]
 z_index = 100
@@ -1878,11 +1853,45 @@ modulate = Color(1, 0, 0, 1)
 position = Vector2(0, 6)
 shape = SubResource("58")
 
-[node name="InteractionHandler" parent="." instance=ExtResource("48_1sx5e")]
+[node name="HorizontalFlipper" type="Marker2D" parent="."]
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="InteractionHandler"]
-shape = SubResource("CircleShape2D_e1jg0")
+[node name="BallHandler" type="Area2D" parent="HorizontalFlipper" node_paths=PackedStringArray("P")]
+collision_layer = 0
+collision_mask = 4
+script = ExtResource("6")
+P = NodePath("../..")
 
-[connection signal="body_entered" from="BallHandler" to="BallHandler" method="_on_Ball_Handler_body_entered"]
-[connection signal="body_entered" from="BallHandler/BallWallDetector" to="BallHandler" method="_on_BallWallDetector_body_entered"]
-[connection signal="body_exited" from="BallHandler/BallWallDetector" to="BallHandler" method="_on_BallWallDetector_body_exited"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="HorizontalFlipper/BallHandler"]
+position = Vector2(0, 5)
+shape = SubResource("57")
+
+[node name="ThrowPosition" type="Marker2D" parent="HorizontalFlipper/BallHandler"]
+position = Vector2(4, -6)
+
+[node name="HasBallPosition" type="Sprite2D" parent="HorizontalFlipper/BallHandler"]
+visible = false
+position = Vector2(9, 12)
+texture = ExtResource("4")
+
+[node name="BallWallDetector" type="Area2D" parent="HorizontalFlipper/BallHandler"]
+collision_layer = 0
+collision_mask = 1024
+
+[node name="Collision" type="CollisionShape2D" parent="HorizontalFlipper/BallHandler/BallWallDetector"]
+visible = false
+position = Vector2(0, 6)
+shape = SubResource("1")
+
+[node name="InteractionHandler" type="Area2D" parent="HorizontalFlipper"]
+modulate = Color(0.176, 0.922, 0.51, 0.804)
+position = Vector2(16, 0)
+collision_layer = 0
+collision_mask = 2048
+script = ExtResource("48_8n6it")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="HorizontalFlipper/InteractionHandler"]
+shape = SubResource("CircleShape2D_s7vxl")
+
+[connection signal="body_entered" from="HorizontalFlipper/BallHandler" to="HorizontalFlipper/BallHandler" method="_on_Ball_Handler_body_entered"]
+[connection signal="body_entered" from="HorizontalFlipper/BallHandler/BallWallDetector" to="HorizontalFlipper/BallHandler" method="_on_BallWallDetector_body_entered"]
+[connection signal="body_exited" from="HorizontalFlipper/BallHandler/BallWallDetector" to="HorizontalFlipper/BallHandler" method="_on_BallWallDetector_body_exited"]

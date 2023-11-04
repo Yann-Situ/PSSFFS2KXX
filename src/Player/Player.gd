@@ -55,7 +55,7 @@ var _zero_velocity_workaround = false
 @onready var ShootPredictor = get_node("Shooter/ShootPredictor")
 @onready var Shooter = get_node("Shooter")
 @onready var PlayerEffects = get_node("PlayerEffects")
-@onready var BallHandler = get_node("BallHandler")
+@onready var BallHandler = get_node("HorizontalFlipper/BallHandler")
 @onready var Camera = get_node("Camera")
 @onready var LifeHandler = get_node("LifeHandler")
 @onready var LifeBar = get_node("UI/MarginContainer/HBoxContainer/VBoxContainer/Bar")
@@ -241,8 +241,10 @@ func get_input(delta): #delta in s
 	#$Sprite2D/AnimationTree.animate_from_state(S)
 	if S.direction_sprite == -1:
 		self.set_flip_h(true)
+		$HorizontalFlipper.scale.x = -1
 	elif S.direction_sprite == 1:
 		self.set_flip_h(false)
+		$HorizontalFlipper.scale.x = 1
 
 	LifeBar.set_life(LifeHandler.get_life())
 

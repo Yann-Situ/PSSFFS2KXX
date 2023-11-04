@@ -1,14 +1,23 @@
 # Interaction handler, that choose the nearest interaction area in it.
+@tool
 @icon("res://assets/art/icons/info.png")
 extends Area2D
 class_name InteractionHandler
 # @icon("res://assets/art/icons/interaction.png")
-signal nearest_interaction_changed(new_nearest)
-signal interacted(interaction_area)
+signal nearest_interaction_changed(new_nearest : InteractionArea)
+signal interacted(interaction_area : InteractionArea)
 
 @export var enabled : bool = true : set = set_enabled
 var has_interaction : bool = false : set = set_has_interaction
 var nearest_interaction: InteractionArea = null # this can be null
+
+func _init():
+	monitorable = false
+	collision_layer = 0
+	collision_mask = 2048 # interaction layer
+	modulate = Color(0.176, 0.922, 0.51, 0.804)
+	area_entered.connect(_on_area_entered)
+	area_exited.connect(_on_area_exited)
 
 func set_enabled(b):
 	enabled = b
@@ -53,6 +62,6 @@ func _input(event):
 	if enabled and event.is_action_pressed("ui_interact"):
 		if nearest_interaction is InteractionArea:
 			set_enabled(false)
-			nearest_interaction.interact.call()
+			nearest_interaction.interact.call(self)
 			interacted.emit(nearest_interaction)
 			set_enabled(true)

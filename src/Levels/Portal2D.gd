@@ -6,22 +6,23 @@ signal enter_portal_finished
 signal exit_portal_finished
 
 @export var activated : bool = true
+@export var room: Room2D ## Room which contains this portal node.
 
 enum PortalType {ENTRANCE, EXIT, BOTH, EXIT_LEVEL}
 @export var portal_type : PortalType = PortalType.BOTH : set = set_portal_type
 
-enum TriggerType {ON_BODY_ENTER, ON_KEY_E}
+enum TriggerType {ON_BODY_ENTER, ON_INTERACTION, NO_TRIGGER}
 @export var trigger_type : TriggerType = TriggerType.ON_BODY_ENTER : set = set_trigger_type
 
 @export_global_file("*.tscn") var next_room : get = get_next_room, set = set_next_room
 @export var next_room_portal : String : get = get_next_room_portal, set = set_next_room_portal
 
+@export_group("Transition", "transition_")
 @export var transition_color : Color = Color.BLACK : set = set_transition_color
 @export_range(0.1, 10.0) var transition_speed : float = 1.0 : set = set_transition_speed
 
-var room = null
 @onready var is_locked = false
-var P = null
+var P = null # set in enter tree
 
 func set_portal_type(new_type):
 	portal_type = new_type
@@ -31,10 +32,21 @@ func set_portal_type(new_type):
 		portal_type == PortalType.BOTH or \
 		portal_type == PortalType.EXIT_LEVEL :
 		if trigger_type == TriggerType.ON_BODY_ENTER:
-			if not $Area2D.body_entered.is_connected(self._on_Area2D_body_entered):
-				$Area2D.body_entered.connect(self._on_Area2D_body_entered)
-		elif trigger_type == TriggerType.ON_KEY_E :
-			pass # TO IMPLEMENT [TODO]
+			if $InteractionArea.handler_interacted.is_connected(self.interaction_exit_portal):
+				$InteractionArea.handler_interacted.disconnect(self.interaction_exit_portal)
+			if not $Area2D.body_entered.is_connected(self.area_body_exit_portal):
+				$Area2D.body_entered.connect(self.area_body_exit_portal)
+		elif trigger_type == TriggerType.ON_INTERACTION :
+			if $Area2D.body_entered.is_connected(self.area_body_exit_portal):
+				$Area2D.body_entered.disconnect(self.area_body_exit_portal)
+			if not $InteractionArea.handler_interacted.is_connected(self.interaction_exit_portal):
+				$InteractionArea.handler_interacted.connect(self.interaction_exit_portal)
+		elif trigger_type == TriggerType.NO_TRIGGER :
+			if $Area2D.body_entered.is_connected(self.area_body_exit_portal):
+				$Area2D.body_entered.disconnect(self.area_body_exit_portal)
+			if $InteractionArea.handler_interacted.is_connected(self.interaction_exit_portal):
+				$InteractionArea.handler_interacted.disconnect(self.interaction_exit_portal)
+			
 
 func set_trigger_type(new_type):
 	trigger_type = new_type
@@ -70,11 +82,13 @@ func disp(s:String):
 #	room = self.get_parent().get_parent()
 #	room.add_portal(self)
 
+# to change
 func _enter_tree():
-	room = get_parent().get_parent()
 	P = room.get_player()
 
 func _ready():
+	assert(is_instance_valid(room))
+	assert(is_instance_valid(P))
 	set_trigger_type(trigger_type)
 
 ################################################################################
@@ -112,6 +126,7 @@ func exit_portal():
 	else :
 		room.exit_level(self.name)
 
+# called when 
 func enter_portal():
 	P.set_start_position(self.global_position)
 	P.reset_move()
@@ -122,8 +137,14 @@ func enter_portal():
 
 ################################################################################
 
-func _on_Area2D_body_entered(body):
+func area_body_exit_portal(body):
 	# print_debug("enter portal "+name) # this function is called too many time due \
 	# to the following issue : https://github.com/godotengine/godot/issues/14578
 	if activated and !is_locked and body == P:
+		exit_portal()
+
+func interaction_exit_portal(interaction_handler):
+	# print_debug("enter portal "+name) # this function is called too many time due \
+	# to the following issue : https://github.com/godotengine/godot/issues/14578
+	if activated and !is_locked :
 		exit_portal()

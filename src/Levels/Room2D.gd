@@ -10,10 +10,10 @@ signal is_exiting_level
 @export var limit_right : int = 10000000
 @export var limit_bottom : int = 10000000
 
-var P = null
+var P = null # Player, set in enter_tree
 var portals : Dictionary = {} : get = get_portals
 
-@export var meta_player : NodePath # sould be set by the level
+@export var meta_player : NodePath ## sould be set by the upper level
 
 func update_camera_limit():
 	P.Camera.limit_left = limit_left

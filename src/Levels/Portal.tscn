@@ -1,8 +1,9 @@
-[gd_scene load_steps=10 format=3 uid="uid://b45hldwkibtqb"]
+[gd_scene load_steps=12 format=3 uid="uid://b45hldwkibtqb"]
 
 [ext_resource type="Script" path="res://src/Levels/Portal2D.gd" id="1"]
 [ext_resource type="Shader" path="res://assets/shader/transition_circle.gdshader" id="2"]
 [ext_resource type="Texture2D" uid="uid://cg0uvgbn33p2h" path="res://assets/art/icons/popol.png" id="3"]
+[ext_resource type="Script" path="res://src/Items/Activables/InteractionArea.gd" id="4_4jpwu"]
 
 [sub_resource type="Animation" id="1"]
 resource_name = "transition_in"
@@ -82,9 +83,13 @@ shader_parameter/center_offset = null
 [sub_resource type="RectangleShape2D" id="5"]
 size = Vector2(10, 32)
 
+[sub_resource type="CircleShape2D" id="CircleShape2D_u16rl"]
+radius = 4.0
+
 [node name="Portal" type="Node2D"]
 z_index = 300
 script = ExtResource("1")
+next_room = "<null>"
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 method_call_mode = 1
@@ -111,6 +116,7 @@ anchor_bottom = 1.0
 color = Color(0, 0, 0, 1)
 
 [node name="Area2D" type="Area2D" parent="."]
+collision_layer = 0
 input_pickable = false
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
@@ -120,3 +126,16 @@ shape = SubResource("5")
 [node name="Sprite2D" type="Sprite2D" parent="."]
 self_modulate = Color(0.266667, 0.827451, 1, 0.470588)
 texture = ExtResource("3")
+
+[node name="InteractionArea" type="Area2D" parent="."]
+modulate = Color(0.176, 0.922, 0.51, 0.804)
+collision_layer = 2048
+collision_mask = 0
+monitoring = false
+script = ExtResource("4_4jpwu")
+enter = Callable()
+exit = Callable()
+interact = Callable()
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="InteractionArea"]
+shape = SubResource("CircleShape2D_u16rl")

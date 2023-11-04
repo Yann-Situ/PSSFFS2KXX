@@ -1,14 +1,14 @@
 extends Area2D
 # Ball pickup, thrower, shooter, selector, ballwaller
 
-@onready var P = get_parent()
+@export var P: Player
 @onready var S = P.get_node("State")
 
 const collision_mask_balls = 4
 const released_ball_delay = 0.3
 
 func _ready():
-	pass
+	assert(is_instance_valid(P))
 
 func _on_Ball_Handler_body_entered(body):
 	#print(body.name+" entering "+Player.name+" ballhandler area")
@@ -28,21 +28,12 @@ func _on_Ball_Handler_body_entered(body):
 func get_throw_position():
 	# return the global position of the beginning of the throw, depending on the
 	# position of the player and the flip value :
-	if P.flip_h :
-		return P.global_position + Vector2(-4.0,-6.0)
-	else :
-		return P.global_position + Vector2(4.0,-6.0)
+	return $ThrowPosition.global_position
 
 func set_has_ball_position(): #TODO set ball sprite position and not ball position.
 	var sprite = S.active_ball.get_node("Visuals")
-	if P.flip_h :
-		sprite.position.x = - $HasBallPosition.position.x
-		sprite.position.y = + $HasBallPosition.position.y
-		#S.active_ball.transform.origin.x = - $HasBallPosition.position.x
-		#S.active_ball.transform.origin.y = + $HasBallPosition.position.y
-	else :
-		sprite.position = + $HasBallPosition.position
-		#S.active_ball.transform.origin = + $HasBallPosition.position
+	sprite.global_position = $HasBallPosition.global_position
+	#S.active_ball.transform.origin = + $HasBallPosition.position
 
 #####################
 
