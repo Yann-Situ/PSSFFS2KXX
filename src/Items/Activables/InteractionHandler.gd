@@ -36,7 +36,7 @@ func update_nearest_interaction() -> void:
 	var new_nearest_interaction = null
 	for area in areas:
 		var dist2 = area.global_position.distance_squared_to(self.global_position)
-		if dist2 < min_dist2 and area is InteractionArea:
+		if dist2 < min_dist2 and area is InteractionArea and area.enabled:
 			min_dist2 = dist2
 			new_nearest_interaction = area
 	if new_nearest_interaction != nearest_interaction:
@@ -48,19 +48,19 @@ func _process(delta):
 		update_nearest_interaction()
 
 func _on_area_entered(area : Area2D):
-	set_has_interaction(true)
-	if area is InteractionArea:
+	set_has_interaction(true) # potential interaction
+	if area is InteractionArea and area.enabled:
 		area.enter.call()
 
 func _on_area_exited(area : Area2D):
-	if area is InteractionArea:
+	if area is InteractionArea and area.enabled:
 		area.exit.call()
 	if !has_overlapping_areas():
 		set_has_interaction(false)
 
 func _input(event):
 	if enabled and event.is_action_pressed("ui_interact"):
-		if nearest_interaction is InteractionArea:
+		if nearest_interaction is InteractionArea :
 			set_enabled(false)
 			nearest_interaction.interact.call(self)
 			interacted.emit(nearest_interaction)

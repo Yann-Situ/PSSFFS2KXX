@@ -108,6 +108,10 @@ var direction_p : int = 0
 var direction_sprite : int = 0
 var aim_direction : int = 0
 var velocity = Vector2() : set = set_velocity
+var enable_input_update : bool = true
+
+###############################################################################
+
 func set_velocity(v : Vector2):
 	if player._zero_velocity_workaround :
 		velocity = v
@@ -121,7 +125,6 @@ func set_velocity_safe(v : Vector2):
 	player._zero_velocity_workaround = true
 	set_velocity(v)
 	player._zero_velocity_workaround = save
-
 
 func _ready():
 	reset_state()
@@ -143,6 +146,8 @@ func update_animationtree_stance():
 		player.animation_tree[CurrentStance] = "ground"#Stance.GROUND
 
 func _input(event):
+	if !enable_input_update:
+		return
 	right_p = Input.is_action_pressed('ui_right')
 	left_p = Input.is_action_pressed('ui_left')
 	jump_jp = Input.is_action_just_pressed('ui_up')
@@ -309,7 +314,7 @@ func update_vars(delta):
 
 ###############################################################################
 func disable_input():
-	set_process_input(false)
+	enable_input_update = false # instead of set_process_input(false)
 	right_p = false
 	left_p = false
 	jump_jp = false
@@ -328,7 +333,7 @@ func disable_input():
 	release_jp = false
 
 func enable_input():
-	set_process_input(true)
+	enable_input_update = true # instead of set_process_input(true)
 
 func reset_state():
 	can_jump = false
@@ -356,7 +361,7 @@ func reset_state():
 	direction_p = 0
 	direction_sprite = 0
 	aim_direction = 0
-	velocity = Vector2.ZERO
+	set_velocity_safe(Vector2.ZERO)
 
 	last_frame_onair = false
 	last_wall_normal_direction = 0

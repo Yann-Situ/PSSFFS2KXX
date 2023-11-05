@@ -30,9 +30,9 @@ func get_throw_position():
 	# position of the player and the flip value :
 	return $ThrowPosition.global_position
 
-func set_has_ball_position(): #TODO set ball sprite position and not ball position.
+func set_has_ball_position():
 	var sprite = S.active_ball.get_node("Visuals")
-	sprite.global_position = $HasBallPosition.global_position
+	sprite.position = $HasBallPosition.global_position - P.global_position # maybe should be optimize TODO
 	#S.active_ball.transform.origin = + $HasBallPosition.position
 
 #####################

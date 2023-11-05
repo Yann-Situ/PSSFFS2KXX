@@ -3,5 +3,5 @@
 [ext_resource type="PackedScene" uid="uid://bvb221orx6gub" path="res://src/Levels/Level.tscn" id="1"]
 
 [node name="LevelExample" instance=ExtResource("1")]
-first_room = "/home/yann-situ/Documents/GAME/PSSFFS2KXX/src/Levels/LevelExample/RoomExample1.tscn"
+first_room = "/home/yann-situ/Documents/Games/PSSFFS2KXX/src/Levels/LevelExample/RoomExample1.tscn"
 first_room_portal = "Portal1"

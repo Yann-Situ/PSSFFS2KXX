@@ -156,7 +156,8 @@ List of things to do
 * [ ] Stuck colliding on a **rail** can result in building speed. [TODO TEST]
 * [ ] Entering **Pipe** at perfect frame when disabling the **Pipe** can result in a disabled ball floating in the air. -> don't stop the tween to enter the pipe when disabling the pipe. [hard to reproduce, it happened once]
 * [ ] **RailLine** going backward vertically switch. This results also in stopping the player and having alternative vertical normal.
-- [ ] Getting out of **CharacterPipe** is biaised by the collision problem of character colliding with exit, resultgin in weird velocity vectors.
+- [ ] Getting out of **CharacterPipe** is biaised by the collision problem of character colliding with exit, results in in weird velocity vectors.
+- [ ] It is possible to use the power of a **Ball** that is located in another **Room2D**, which is undefined behaviour because the ball is not in the scene_tree.
 
 ### Physics
 * [x] TileMap hitboxes (bounce on corners of each tile + balls pass through 2 adjacent tiles). **size up the hitboxes smartly**

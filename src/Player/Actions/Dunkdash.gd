@@ -10,7 +10,7 @@ var nb_quadrant = 8
 var accel_alterer = AltererMultiplicative.new(0.0)
 
 func move(delta):
-	print("begindash")
+	#print("begindash")
 	# Change hitbox + other animation things like sliding etc.
 	#	var anim = get_parent().get_parent().get_node("Sprite2D/AnimationTree3")
 	S.is_aiming = false # cancel aiming for the moment
@@ -54,7 +54,7 @@ func move(delta):
 	S.get_node("CanGoTimer").start(can_go_delay)
 
 func move_end():
-	print("enddash")
+	#print("enddash")
 	P.remove_accel(accel_alterer)
 
 	if not S.is_grinding and not S.is_hanging :

@@ -5,7 +5,7 @@ class_name Portal2D
 signal enter_portal_finished
 signal exit_portal_finished
 
-@export var activated : bool = true
+@export var activated : bool = true : set = set_activated
 @export var room: Room2D ## Room which contains this portal node.
 
 enum PortalType {ENTRANCE, EXIT, BOTH, EXIT_LEVEL}
@@ -19,10 +19,14 @@ enum TriggerType {ON_BODY_ENTER, ON_INTERACTION, NO_TRIGGER}
 
 @export_group("Transition", "transition_")
 @export var transition_color : Color = Color.BLACK : set = set_transition_color
-@export_range(0.1, 10.0) var transition_speed : float = 1.0 : set = set_transition_speed
+@export_range(0.1, 3.0) var transition_speed : float = 1.0 : set = set_transition_speed
 
 @onready var is_locked = false
 var P = null # set in enter tree
+
+func set_activated(b):
+	activated = b
+	$InteractionArea.enabled = activated
 
 func set_portal_type(new_type):
 	portal_type = new_type
@@ -84,11 +88,14 @@ func disp(s:String):
 
 # to change
 func _enter_tree():
-	P = room.get_player()
+	if !is_instance_valid(room):
+		push_error("no room provided")
+		activated = false
+	else:
+		P = room.get_player()
+		assert(is_instance_valid(P))
 
 func _ready():
-	assert(is_instance_valid(room))
-	assert(is_instance_valid(P))
 	set_trigger_type(trigger_type)
 
 ################################################################################
@@ -118,10 +125,11 @@ func transition_out():
 func exit_portal():
 	transition_out()
 	P.S.disable_input()
+	P.S.reset_state()
 	await get_node("AnimationPlayer").animation_finished
 	exit_portal_finished.emit()
 
-	if portal_type != PortalType.EXIT_LEVEL:
+	if portal_type != PortalType.EXIT_LEVEL:# TODO bad habit by calling parent room
 		room.exit_room(next_room, next_room_portal)
 	else :
 		room.exit_level(self.name)
@@ -133,18 +141,24 @@ func enter_portal():
 	P.S.enable_input()
 	transition_in()
 	await get_node("AnimationPlayer").animation_finished
-	exit_portal_finished.emit()
+	enter_portal_finished.emit()
 
 ################################################################################
 
 func area_body_exit_portal(body):
-	# print_debug("enter portal "+name) # this function is called too many time due \
+	# print_debug("exit portal "+name) # this function is called too many time due \
 	# to the following issue : https://github.com/godotengine/godot/issues/14578
-	if activated and !is_locked and body == P:
+	if is_locked:
+		push_warning(name+" is locked!")
+		return
+	if activated and body == P:
 		exit_portal()
 
 func interaction_exit_portal(interaction_handler):
-	# print_debug("enter portal "+name) # this function is called too many time due \
+	# print_debug("exit portal "+name) # this function is called too many time due \
 	# to the following issue : https://github.com/godotengine/godot/issues/14578
-	if activated and !is_locked :
+	if is_locked:
+		push_warning(name+" is locked!")
+		return
+	if activated :
 		exit_portal()

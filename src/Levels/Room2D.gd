@@ -58,10 +58,11 @@ func _enter_tree():
 		if self.has_node("PlayerPosition"):
 			player.global_position = get_node_or_null("PlayerPosition").position
 	P = get_player()
+	assert(is_instance_valid(P))
 
 func _ready():
 	print(name + " ready")
-	var portal_list = get_node("Portals").get_children()
+	var portal_list = get_node("Portals").get_children() #TODO look for a better way to look for Portals
 	for portal in portal_list:
 		add_portal(portal)
 		# note that if room isn't a child of level (like when it is opened from
@@ -79,7 +80,6 @@ func add_portal(portal : Portal2D):
 	portals[portal.name] = portal
 	portal.enter_portal_finished.connect(self.unlock_portals)
 	portal.exit_portal_finished.connect(self.lock_portals)
-
 
 func _unhandled_input(event):
 	if event is InputEventKey:

@@ -1420,7 +1420,6 @@ transitions = ["Start", "action", SubResource("AnimationNodeStateMachineTransiti
 graph_offset = Vector2(0, -33.389)
 
 [sub_resource type="AnimationNodeBlendTree" id="39"]
-graph_offset = Vector2(834.273, 97.3708)
 nodes/cancelable/node = SubResource("38")
 nodes/cancelable/position = Vector2(980, 320)
 nodes/output/position = Vector2(1240, 340)
@@ -1464,7 +1463,7 @@ color_ramp = SubResource("53")
 
 [sub_resource type="CompressedTexture2D" id="55"]
 
-[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_kl3oy"]
+[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_86s5r"]
 resource_local_to_scene = true
 particles_animation = true
 particles_anim_h_frames = 6
@@ -1483,7 +1482,7 @@ height = 56.0
 size = Vector2(17, 57)
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_s7vxl"]
-radius = 32.0
+radius = 24.0
 
 [node name="Player" type="CharacterBody2D"]
 light_mask = 4
@@ -1751,7 +1750,7 @@ lifetime = 0.65
 explosiveness = 0.9
 
 [node name="GrindParticles" parent="PlayerEffects" instance=ExtResource("27")]
-material = SubResource("CanvasItemMaterial_kl3oy")
+material = SubResource("CanvasItemMaterial_86s5r")
 position = Vector2(0, 16)
 
 [node name="Camera" type="Camera2D" parent="."]
@@ -1884,9 +1883,10 @@ shape = SubResource("1")
 
 [node name="InteractionHandler" type="Area2D" parent="HorizontalFlipper"]
 modulate = Color(0.176, 0.922, 0.51, 0.804)
-position = Vector2(16, 0)
+position = Vector2(9, 0)
 collision_layer = 0
 collision_mask = 2048
+monitorable = false
 script = ExtResource("48_8n6it")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="HorizontalFlipper/InteractionHandler"]
