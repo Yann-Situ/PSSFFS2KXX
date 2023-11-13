@@ -15,7 +15,7 @@ config/godotenv/root_directory="res://"
 [application]
 
 config/name="PSSFFS2KXX"
-run/main_scene="res://src/Levels/LevelExample/RoomExample1.tscn"
+run/main_scene="res://src/Levels/LevelExample/LevelExample.tscn"
 config/features=PackedStringArray("4.1")
 config/icon="res://assets/art/icons/popol.png"
 
@@ -52,6 +52,7 @@ window/size/viewport_height=500
 window/size/window_width_override=1440
 window/size/window_height_override=800
 window/stretch/mode="viewport"
+window/ios/allow_high_refresh_rate=false
 
 [editor_plugins]
 
@@ -173,3 +174,10 @@ textures/canvas_textures/default_texture_filter=0
 environment/defaults/default_environment="res://default_env.tres"
 2d/snapping/use_gpu_pixel_snap=true
 quality/2d/use_pixel_snap=true
+
+[shader_globals]
+
+WIND={
+"type": "vec2",
+"value": Vector2(1, 0.2)
+}

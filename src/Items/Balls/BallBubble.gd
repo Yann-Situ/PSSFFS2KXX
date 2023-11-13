@@ -11,6 +11,7 @@ func _ready():
 
 func make_electric_trail():
 	var trail_instance = trail_scene.instantiate()
+	# TODO trail resource ?
 	trail_instance.lifetime = 0.1
 	trail_instance.wildness_amplitude = 250.0
 	trail_instance.wildness_tick = 0.02
@@ -33,7 +34,7 @@ func power_p(player,delta):
 func power_jp(player,delta):
 	if holder != player :
 		disable_physics()
-		var tween = self.create_tween()
+		var tween = self.create_tween() # problems when the ball is not in scenetree
 		tween.tween_method(self.tween_follow_property.bind(global_position,player),\
 		0.0, 1.0, 0.16)
 		tween.tween_callback(self._on_tween_completed)

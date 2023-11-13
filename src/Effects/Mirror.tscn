@@ -29,6 +29,7 @@ rect = Rect2(-64, -64, 128, 128)
 script = ExtResource("1_qwf2l")
 
 [node name="ColorRect" type="ColorRect" parent="."]
+visible = false
 material = SubResource("ShaderMaterial_0w2m7")
 offset_left = -64.0
 offset_top = -64.0

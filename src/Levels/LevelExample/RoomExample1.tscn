@@ -9,7 +9,7 @@
 [ext_resource type="Texture2D" uid="uid://b6xy57w6vd0mf" path="res://assets/art/environment/chain0.png" id="8"]
 [ext_resource type="PackedScene" uid="uid://bdepe4j1x2ie8" path="res://src/Items/Environment/ParabolaCatenary.tscn" id="9"]
 [ext_resource type="PackedScene" uid="uid://c6cdyqr51vbxh" path="res://src/Items/Interactive/GraffSpray.tscn" id="10"]
-[ext_resource type="PackedScene" path="res://src/Characters/NPC/PedestrianGenerator.tscn" id="11"]
+[ext_resource type="PackedScene" uid="uid://bibx4tlfcbuxm" path="res://src/Characters/NPC/PedestrianGenerator.tscn" id="11"]
 [ext_resource type="PackedScene" uid="uid://c8wbmpidigot6" path="res://src/Map/BallWall.tscn" id="12_0llc8"]
 [ext_resource type="PackedScene" uid="uid://bdhkn6l5lcxe0" path="res://src/Items/Balls/BallBoum.tscn" id="13"]
 [ext_resource type="PackedScene" uid="uid://bola66fqnywdi" path="res://src/Items/Baskets/Basket.tscn" id="13_42q2t"]
@@ -58,14 +58,14 @@ shader_parameter/velocity = Vector2(0.4, 0)
 shader_parameter/fog_color = Color(0.454902, 0.384314, 0.231373, 0.513726)
 shader_parameter/noise = SubResource("10")
 
-[sub_resource type="Curve2D" id="Curve2D_vl05e"]
+[sub_resource type="Curve2D" id="Curve2D_rm24u"]
 resource_local_to_scene = true
 _data = {
 "points": PackedVector2Array(0, 0, 0, 0, 512, -16, 0, 0, 0, 0, -192, 24)
 }
 point_count = 2
 
-[sub_resource type="Curve2D" id="Curve2D_fp8ik"]
+[sub_resource type="Curve2D" id="Curve2D_odptb"]
 resource_local_to_scene = true
 _data = {
 "points": PackedVector2Array(0, 0, 0, 0, 584, -80, 0, 0, 0, 0, -120, 16)
@@ -120,21 +120,21 @@ size = Vector2(64, 352)
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_vfrlb"]
 size = Vector2(144, 16)
 
-[sub_resource type="Curve2D" id="Curve2D_w5bgf"]
+[sub_resource type="Curve2D" id="Curve2D_5xx8k"]
 resource_local_to_scene = true
 _data = {
 "points": PackedVector2Array(0, 0, 0, 0, 264, 288, 0, 0, 0, 0, -240, 16)
 }
 point_count = 2
 
-[sub_resource type="Curve2D" id="Curve2D_iqtwl"]
+[sub_resource type="Curve2D" id="Curve2D_0hdn6"]
 resource_local_to_scene = true
 _data = {
 "points": PackedVector2Array(0, 0, 0, 0, 264, 288, 0, 0, 0, 0, -240, 16)
 }
 point_count = 2
 
-[sub_resource type="Curve2D" id="Curve2D_kys8n"]
+[sub_resource type="Curve2D" id="Curve2D_pd3w4"]
 resource_local_to_scene = true
 _data = {
 "points": PackedVector2Array(0, 0, 0, 0, 264, 288, 0, 0, 0, 0, -240, 16)
@@ -277,7 +277,7 @@ size_flags_vertical = 3
 texture = SubResource("2")
 
 [node name="ParallaxLayer3" parent="ParallaxBackground" index="2"]
-modulate = Color(0.67451, 0.631373, 0.478431, 1)
+modulate = Color(0.67451, 0.65098, 0.552941, 1)
 
 [node name="ColorRect" parent="ParallaxBackground/ParallaxLayer3" index="1"]
 offset_left = 0.0
@@ -286,7 +286,7 @@ offset_right = 1547.0
 offset_bottom = 665.0
 
 [node name="ParallaxLayer4" parent="ParallaxBackground" index="3"]
-modulate = Color(0.568627, 0.545098, 0.443137, 1)
+modulate = Color(0.529412, 0.505882, 0.443137, 1)
 
 [node name="ParallaxLayer5" parent="ParallaxForeground" index="0"]
 metadata/_edit_group_ = true
@@ -308,7 +308,7 @@ color = Color(0.826269, 0.725282, 0.583096, 1)
 [node name="ParabolaCatenary" parent="Map" index="1" instance=ExtResource("9")]
 z_index = 300
 position = Vector2(32, -384)
-curve = SubResource("Curve2D_vl05e")
+curve = SubResource("Curve2D_rm24u")
 p0_slope = 0.597
 line_width = 7.438
 line_modulate = Color(0.329412, 0.329412, 0.329412, 1)
@@ -317,7 +317,7 @@ line_texture = ExtResource("8")
 [node name="ParabolaCatenary2" parent="Map" index="2" instance=ExtResource("9")]
 z_index = 300
 position = Vector2(-40, -384)
-curve = SubResource("Curve2D_fp8ik")
+curve = SubResource("Curve2D_odptb")
 p0_slope = 0.969
 line_width = 7.0
 line_modulate = Color(0.196078, 0.196078, 0.196078, 1)
@@ -518,17 +518,17 @@ rectangle_extents = Vector2(256, 480)
 
 [node name="ParabolaCatenary" parent="Environment" index="10" instance=ExtResource("9")]
 position = Vector2(1688, -464)
-curve = SubResource("Curve2D_w5bgf")
+curve = SubResource("Curve2D_5xx8k")
 p0_slope = 1.553
 
 [node name="ParabolaCatenary2" parent="Environment" index="11" instance=ExtResource("9")]
 position = Vector2(1688, -464)
-curve = SubResource("Curve2D_iqtwl")
+curve = SubResource("Curve2D_0hdn6")
 p0_slope = 1.312
 
 [node name="ParabolaCatenary3" parent="Environment" index="12" instance=ExtResource("9")]
 position = Vector2(1688, -464)
-curve = SubResource("Curve2D_kys8n")
+curve = SubResource("Curve2D_pd3w4")
 p0_slope = 1.473
 line_width = 4.28
 line_texture = ExtResource("8")
@@ -550,7 +550,7 @@ continuous_cd = 0
 max_contacts_reported = 0
 
 [node name="BallFire" parent="Environment" index="17" instance=ExtResource("18_ccy33")]
-position = Vector2(1048, -128)
+position = Vector2(1032, -312)
 
 [node name="BallLight" parent="Environment" index="18" instance=ExtResource("19_7m03s")]
 position = Vector2(1608, -112)
@@ -607,8 +607,8 @@ position = Vector2(1664, 0)
 [node name="PedestrianGenerator" parent="." index="7" instance=ExtResource("11")]
 position = Vector2(1248, 0)
 x_radius = 700.0
-walk_speed_min = 35.0
 palette_scheme_sampler = ExtResource("24_82bh3")
+walk_speed_min = 35.0
 
 [node name="RoomAnimations" parent="." index="8"]
 libraries = {

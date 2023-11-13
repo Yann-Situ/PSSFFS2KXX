@@ -18,26 +18,23 @@ func move(delta):
 	S.get_node("CanDunkTimer").start(S.countdown_dunk)
 	S.get_node("ToleranceDunkJumpPressTimer").stop() # no dunkjump just after
 	#S.get_node("CanGoTimer").start(0.32)
-	dunking_basket = S.dunk_basket
+	dunking_basket = S.dunk_basket # this should not be null because of can_dunk
 	var dunk_position = dunking_basket.get_dunk_position(P.global_position)
 	var xx = (dunk_position - P.global_position).x
 	S.direction_sprite = 1 if (xx > 0) else ( -1 if (xx < 0) else 0)
 
 	if pos_tween:
-
 		pos_tween.kill()
 	pos_tween = get_tree().create_tween()
 	pos_tween.set_parallel(false)
 	pos_tween.tween_property(P, "global_position",\
 		dunk_position,0.32)\
 		.set_trans(Tween.TRANS_LINEAR).set_ease(Tween.EASE_IN_OUT)
-	pos_tween.tween_property(P, "global_position",\
-		dunk_position,0.32)\
-		.set_trans(Tween.TRANS_LINEAR)
 	#pos_tween.start()
 	if S.active_ball != null:
 		S.active_ball.on_dunk(dunking_basket)
 	#await get_tree().create_timer(0.32).timeout
+	GodotParadiseGeneralUtilities.frame_freeze(0.2, 0.2)
 
 # should be called by the animation
 func move_dunk():

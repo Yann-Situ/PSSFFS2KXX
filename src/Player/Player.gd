@@ -67,7 +67,7 @@ var _zero_velocity_workaround = false
 @onready var collision_layer_save = 1
 @onready var collision_mask_save = 514
 @onready var floor_friction = GlobalMaths.unfriction_to_friction(floor_unfriction) # ratio/s
-@onready var air_friction = GlobalMaths.unfriction_to_friction(air_unfriction) # ratio/s
+@onready var air_friction = GlobalMaths.unfriction_to_friction(air_unfriction) # ratio/s # TODO : alterable for frictions?
 
 @onready var force_alterable = Alterable.new(Vector2.ZERO)
 @onready var speed_alterable = Alterable.new(Vector2.ZERO)

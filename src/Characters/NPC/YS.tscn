@@ -66,7 +66,7 @@ script = ExtResource("1_j37mf")
 position = Vector2(18, 1)
 sprite_frames = SubResource("SpriteFrames_k4tfe")
 autoplay = "default"
-frame_progress = 0.706499
+frame_progress = 0.825803
 
 [node name="InteractionArea" type="Area2D" parent="."]
 modulate = Color(0.176, 0.922, 0.51, 0.804)
@@ -74,7 +74,6 @@ collision_layer = 2048
 collision_mask = 0
 monitoring = false
 script = ExtResource("2_ldb0k")
-enabled = null
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="InteractionArea"]
 shape = SubResource("CircleShape2D_rp7wc")
