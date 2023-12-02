@@ -1,8 +1,8 @@
 extends Node2D
 
-@onready var P : Player = get_parent().get_parent() 
-@onready var S = P.get_node("State")
-@onready var Selector = get_parent().get_node("Selector")
+@export var selectors : Selectors
+@export var P: Player
+@onready var S = P.get_state_node()
 
 @export var distaction = Vector2(8.1,0)
 @export var color : Color = Color(1.0,0.3,0.1)
@@ -124,8 +124,8 @@ func update_basket_selectors():
 				dunkdash_criteria(q, target_direction):
 				selectable_dash = body
 
-	Selector.update_selection(Selectable.SelectionType.JUMP,selectable_jump)
-	Selector.update_selection(Selectable.SelectionType.DASH,selectable_dash)
+	selectors.update_selection(Selectable.SelectionType.JUMP,selectable_jump)
+	selectors.update_selection(Selectable.SelectionType.DASH,selectable_dash)
 
 #############################
 func is_on_wall():
@@ -164,10 +164,10 @@ func can_stand():
 
 func can_dunkjump():
 	# update_basket()
-	return S.dunkjump_basket != null # S.dunkjump_basket is set by the Selector
+	return S.dunkjump_basket != null # S.dunkjump_basket is set by the selectors
 
 func can_dunkdash():
-	return S.dunkdash_basket != null  # S.dunkdash_basket is set by the Selector
+	return S.dunkdash_basket != null  # S.dunkdash_basket is set by the selectors
 
 func can_dunk():
 	var selectables = $dunk_area.get_overlapping_areas()

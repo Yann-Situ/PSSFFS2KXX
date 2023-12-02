@@ -119,6 +119,9 @@ func set_flip_h(b):
 	$Sprite2D.set_flip_h(b)
 	ShootPredictor.set_flip_h(b)
 	SpecialActionHandler.set_flip_h(b)
+	
+func get_state_node()->Node:
+	return get_node("State") # not S because S is instantiated in ready, so after every children's _ready
 
 func get_input(delta): #delta in s
 	############### Change variables of Player_state.gd
@@ -134,9 +137,11 @@ func get_input(delta): #delta in s
 			S.last_wall_normal_direction = 1
 
 	############### Move from input
+	# Side:
 	if physics_enabled and (S.direction_p != 0) and S.can_go :
 		$Actions/Side.move(delta,S.direction_p)
-
+	
+	# Jump and Walljump:
 	if not S.get_node("ToleranceJumpPressTimer").is_stopped() :
 		if S.can_jump :
 			$Actions/Jump.move(delta)
@@ -149,6 +154,7 @@ func get_input(delta): #delta in s
 	if physics_enabled and S.jump_jr and S.is_jumping and not S.is_dunkjumping:
 		S.velocity.y = S.velocity.y/3.5
 
+	# Crouch:
 	if S.crouch_p and S.can_crouch :
 		if not S.is_crouching:
 			if not S.is_sliding and S.is_moving_fast:
@@ -157,25 +163,31 @@ func get_input(delta): #delta in s
 				$Actions/Crouch.move(delta)
 	elif S.can_stand:
 		S.is_crouching = false
-
+	
+	# Dunk:
 	if S.can_dunk :
 		$Actions/Dunk.move(delta)
-
+	
+	# DunkJump DunkDash:
 	if not S.get_node("ToleranceDunkJumpPressTimer").is_stopped() :
 		if S.crouch_p and S.can_dunkjump :
 			$Actions/Dunkjump.move(delta)
 		elif S.can_dunkdash :
 			$Actions/Dunkdash.move(delta)
-
+	
+	# Shoot:
 	if S.shoot_jr and S.can_shoot :
 		$Actions/Shoot.move(delta)
 
+	# Aim:
 	if S.aim_jp and S.can_aim :
 		$Actions/Aim.move(delta)
 
+	# Adherence:
 	if physics_enabled and S.can_go :
 		$Actions/Adherence.move(delta)
 
+	# Power:
 	if S.selected_ball != null:
 		if S.power_p :
 			S.selected_ball.power_p(self,delta)
@@ -184,12 +196,18 @@ func get_input(delta): #delta in s
 		elif S.power_jr :
 			S.selected_ball.power_jr(self,delta)
 
+	# Select Ball:
 	if S.select_jp and Global.mouse_ball != null :
 		$Actions/SelectBall.move(delta)
 
+	# Realease:
 	if S.release_jp :
 		$Actions/Release.move(delta)
 
+	# Interact:
+	if S.can_interact and S.interact_jp:
+		$Actions/Interact.move(delta)
+	
 	# GRAVITY:
 
 	# SHADER:
@@ -202,7 +220,36 @@ func get_input(delta): #delta in s
 		$Collision.shape.set_size(Vector2(17,57))
 		$Collision.position.y = 3.5
 
+	LifeBar.set_life(LifeHandler.get_life())
+
+	if S.is_aiming:
+		Shooter.update_screen_viewer_position()
+	else :
+		Shooter.disable_screen_viewer()
+
+	S.jump_jp = false
+	S.jump_jr = false
+	S.aim_jp = false
+	S.shoot_jr = false
+	S.dunk_jr = false
+	S.dunk_jp = false
+	S.select_jp = false
+	S.power_jp = false
+	S.power_jr = false
+	S.release_jp = false
+
+func _process(delta):
+	# ANIMATION:
+	if S.direction_sprite == -1:
+		self.set_flip_h(true)
+		$HorizontalFlipper.scale.x = -1
+	elif S.direction_sprite == 1:
+		self.set_flip_h(false)
+		$HorizontalFlipper.scale.x = 1
+	
 	# CAMERA:
+	if Global.is_cinematic_playing():
+		return
 	if S.is_aiming:
 		#var shoot = Vector2.ZERO
 		var target = (Camera.get_global_mouse_position() - global_position)
@@ -236,33 +283,6 @@ func get_input(delta): #delta in s
 		Camera.set_offset_from_type("move", Vector2(tx,ty), 0.4)
 	else :
 		Camera.set_offset_from_type("normal")
-
-	# ANIMATION:
-	#$Sprite2D/AnimationTree.animate_from_state(S)
-	if S.direction_sprite == -1:
-		self.set_flip_h(true)
-		$HorizontalFlipper.scale.x = -1
-	elif S.direction_sprite == 1:
-		self.set_flip_h(false)
-		$HorizontalFlipper.scale.x = 1
-
-	LifeBar.set_life(LifeHandler.get_life())
-
-	if S.is_aiming:
-		Shooter.update_screen_viewer_position()
-	else :
-		Shooter.disable_screen_viewer()
-
-	S.jump_jp = false
-	S.jump_jr = false
-	S.aim_jp = false
-	S.shoot_jr = false
-	S.dunk_jr = false
-	S.dunk_jp = false
-	S.select_jp = false
-	S.power_jp = false
-	S.power_jr = false
-	S.release_jp = false
 
 ################################################################################
 # For physicbody

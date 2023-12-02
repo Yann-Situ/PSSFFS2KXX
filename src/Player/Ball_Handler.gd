@@ -2,7 +2,7 @@ extends Area2D
 # Ball pickup, thrower, shooter, selector, ballwaller
 
 @export var P: Player
-@onready var S = P.get_node("State")
+@onready var S = P.get_state_node()
 
 const collision_mask_balls = 4
 const released_ball_delay = 0.3

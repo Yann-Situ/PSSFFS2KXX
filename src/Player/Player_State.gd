@@ -38,6 +38,7 @@ var power_p = false
 var power_jp = false
 var power_jr = false
 var release_jp = false
+var interact_jp = false
 
 # Bool for action permission
 var can_jump = false
@@ -52,6 +53,7 @@ var can_dunk = false
 var can_stand = false
 var can_grind = false
 var can_hang = false
+var can_interact = false
 
 # Bool for physical states
 var is_onfloor = false # from values of player.gd
@@ -93,7 +95,7 @@ enum ActionType { NONE, SHOOT, DUNK, DUNKDASH, DUNKJUMP }
 var action_type = ActionType.NONE
 
 # Bool var
-@export var has_ball = false
+var has_ball = false
 var active_ball : Ball = null#pointer to a ball
 var released_ball : Ball  = null # useful because when the ball is released (or thrown), it is immediatly detected by area_body_enter...
 var selected_ball : Ball  = null#pointer to the selected ball
@@ -146,7 +148,7 @@ func update_animationtree_stance():
 		player.animation_tree[CurrentStance] = "ground"#Stance.GROUND
 
 func _input(event):
-	if !enable_input_update:
+	if !enable_input_update or Global.is_cinematic_playing():
 		return
 	right_p = Input.is_action_pressed('ui_right')
 	left_p = Input.is_action_pressed('ui_left')
@@ -164,6 +166,7 @@ func _input(event):
 	power_jp =  Input.is_action_just_pressed("ui_power")
 	power_jr =  Input.is_action_just_released("ui_power")
 	release_jp =  Input.is_action_just_pressed("ui_release")
+	interact_jp =  Input.is_action_just_pressed("ui_interact")
 	if jump_jp:
 		$ToleranceJumpPressTimer.start(tolerance_jump_press)
 	if dunk_jp:
@@ -237,6 +240,7 @@ func update_action_permissions():
 	can_stand = player.SpecialActionHandler.can_stand()
 	can_grind = !is_hanging and !is_dunking
 	can_hang = true
+	can_interact = not is_non_cancelable
 
 	player.SpecialActionHandler.update_basket_selectors()
 	can_aim = $CanShootTimer.is_stopped() and has_ball and active_ball != null and not is_dunking
@@ -331,6 +335,7 @@ func disable_input():
 	power_jp = false
 	power_jr = false
 	release_jp = false
+	interact_jp = false
 
 func enable_input():
 	enable_input_update = true # instead of set_process_input(true)
@@ -348,6 +353,7 @@ func reset_state():
 	can_stand = false
 	can_grind = false
 	can_hang = false
+	can_interact = false
 
 	is_onfloor = false
 	is_onwall = false

@@ -1,4 +1,4 @@
-[gd_scene load_steps=108 format=3 uid="uid://djjfl0v3y2pw5"]
+[gd_scene load_steps=109 format=3 uid="uid://djjfl0v3y2pw5"]
 
 [ext_resource type="Script" path="res://src/Player/Player.gd" id="1"]
 [ext_resource type="Texture2D" uid="uid://fu53nbwvypbd" path="res://assets/art/characters/Player.png" id="2"]
@@ -20,6 +20,7 @@
 [ext_resource type="Script" path="res://src/Player/Actions/Shoot.gd" id="20"]
 [ext_resource type="Script" path="res://src/Player/Actions/Dunkjump.gd" id="21"]
 [ext_resource type="Script" path="res://src/Player/Actions/SelectBall.gd" id="22"]
+[ext_resource type="Script" path="res://src/Player/Actions/Interact.gd" id="22_qbwmr"]
 [ext_resource type="Script" path="res://src/Player/Actions/Adherence.gd" id="23"]
 [ext_resource type="Script" path="res://src/Player/Actions/Crouch.gd" id="24"]
 [ext_resource type="PackedScene" uid="uid://cq1tfkkoni136" path="res://src/Effects/TrailHandler.tscn" id="25"]
@@ -1463,7 +1464,7 @@ color_ramp = SubResource("53")
 
 [sub_resource type="CompressedTexture2D" id="55"]
 
-[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_qg6jy"]
+[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_6c0fr"]
 resource_local_to_scene = true
 particles_animation = true
 particles_anim_h_frames = 6
@@ -1517,9 +1518,11 @@ shape = SubResource("RectangleShape2D_0vsxb")
 
 [node name="Actions" type="Node2D" parent="."]
 
-[node name="SpecialActionHandler" type="Node2D" parent="Actions"]
+[node name="SpecialActionHandler" type="Node2D" parent="Actions" node_paths=PackedStringArray("selectors", "P")]
 visible = false
 script = ExtResource("9")
+selectors = NodePath("../Selectors")
+P = NodePath("../..")
 
 [node name="Ray_fwd_up" type="RayCast2D" parent="Actions/SpecialActionHandler"]
 position = Vector2(0, -16)
@@ -1609,70 +1612,91 @@ modulate = Color(1, 0.490196, 0.870588, 1)
 position = Vector2(0, 16)
 shape = SubResource("3")
 
-[node name="Selector" type="Node2D" parent="Actions"]
+[node name="Selectors" type="Node2D" parent="Actions" node_paths=PackedStringArray("P")]
 visible = false
 script = ExtResource("40")
+P = NodePath("../..")
 
-[node name="ShootTarget" parent="Actions/Selector" instance=ExtResource("31")]
+[node name="ShootTarget" parent="Actions/Selectors" instance=ExtResource("31")]
 modulate = Color(0.45098, 0.921569, 1, 1)
 rotation = 1.5708
 scale = Vector2(0.5, 0.5)
 
-[node name="DashTarget" parent="Actions/Selector" instance=ExtResource("31")]
+[node name="DashTarget" parent="Actions/Selectors" instance=ExtResource("31")]
 modulate = Color(1, 0.572549, 0.121569, 1)
 rotation = 0.785398
 scale = Vector2(0.75, 0.75)
 
-[node name="JumpTarget" parent="Actions/Selector" instance=ExtResource("31")]
+[node name="JumpTarget" parent="Actions/Selectors" instance=ExtResource("31")]
 modulate = Color(1.1, 0.3, 0.7, 1)
 
-[node name="Side" type="Node" parent="Actions"]
+[node name="Side" type="Node" parent="Actions" node_paths=PackedStringArray("P")]
 script = ExtResource("15")
+P = NodePath("../..")
 
-[node name="Jump" type="Node" parent="Actions"]
+[node name="Jump" type="Node" parent="Actions" node_paths=PackedStringArray("P")]
 script = ExtResource("16")
+P = NodePath("../..")
 
-[node name="Walljump" type="Node" parent="Actions"]
+[node name="Walljump" type="Node" parent="Actions" node_paths=PackedStringArray("P")]
 script = ExtResource("17")
+P = NodePath("../..")
 
-[node name="Slide" type="Node" parent="Actions"]
+[node name="Slide" type="Node" parent="Actions" node_paths=PackedStringArray("P")]
 script = ExtResource("44")
+P = NodePath("../..")
 
-[node name="Crouch" type="Node" parent="Actions"]
+[node name="Crouch" type="Node" parent="Actions" node_paths=PackedStringArray("P")]
 script = ExtResource("24")
+P = NodePath("../..")
 
-[node name="Dunk" type="Node" parent="Actions"]
+[node name="Dunk" type="Node" parent="Actions" node_paths=PackedStringArray("P")]
 script = ExtResource("19")
+P = NodePath("../..")
 
-[node name="Dunkjump" type="Node" parent="Actions"]
+[node name="Dunkjump" type="Node" parent="Actions" node_paths=PackedStringArray("P")]
 script = ExtResource("21")
 ghost_modulate = Color(1, 0.317647, 0.509804, 0.545098)
 dunkjumphalfturn_threshold = -48.0
+P = NodePath("../..")
 
-[node name="Dunkdash" type="Node" parent="Actions"]
+[node name="Dunkdash" type="Node" parent="Actions" node_paths=PackedStringArray("P")]
 script = ExtResource("38")
 ghost_modulate = Color(1, 0.803922, 0.435294, 0.52549)
+P = NodePath("../..")
 
-[node name="Aim" type="Node" parent="Actions"]
+[node name="Aim" type="Node" parent="Actions" node_paths=PackedStringArray("P")]
 script = ExtResource("18")
+P = NodePath("../..")
 
-[node name="Shoot" type="Node" parent="Actions"]
+[node name="Shoot" type="Node" parent="Actions" node_paths=PackedStringArray("P")]
 script = ExtResource("20")
+P = NodePath("../..")
 
-[node name="Adherence" type="Node" parent="Actions"]
+[node name="Adherence" type="Node" parent="Actions" node_paths=PackedStringArray("P")]
 script = ExtResource("23")
+P = NodePath("../..")
 
-[node name="SelectBall" type="Node" parent="Actions"]
+[node name="SelectBall" type="Node" parent="Actions" node_paths=PackedStringArray("P")]
 script = ExtResource("22")
+P = NodePath("../..")
 
-[node name="Release" type="Node" parent="Actions"]
+[node name="Release" type="Node" parent="Actions" node_paths=PackedStringArray("P")]
 script = ExtResource("29")
+P = NodePath("../..")
 
-[node name="Grind" type="Node" parent="Actions"]
+[node name="Grind" type="Node" parent="Actions" node_paths=PackedStringArray("P")]
 script = ExtResource("32")
+P = NodePath("../..")
 
-[node name="Hang" type="Node" parent="Actions"]
+[node name="Hang" type="Node" parent="Actions" node_paths=PackedStringArray("P")]
 script = ExtResource("39")
+P = NodePath("../..")
+
+[node name="Interact" type="Node" parent="Actions" node_paths=PackedStringArray("interaction_handler", "P")]
+script = ExtResource("22_qbwmr")
+interaction_handler = NodePath("../../HorizontalFlipper/InteractionHandler")
+P = NodePath("../..")
 
 [node name="Shooter" type="Node2D" parent="."]
 script = ExtResource("41")
@@ -1697,7 +1721,7 @@ texture = ExtResource("2")
 offset = Vector2(0.5, 0)
 hframes = 16
 vframes = 20
-frame = 224
+frame = 140
 
 [node name="Player_Animation" type="AnimationPlayer" parent="Sprite2D"]
 libraries = {
@@ -1750,7 +1774,7 @@ lifetime = 0.65
 explosiveness = 0.9
 
 [node name="GrindParticles" parent="PlayerEffects" instance=ExtResource("27")]
-material = SubResource("CanvasItemMaterial_qg6jy")
+material = SubResource("CanvasItemMaterial_6c0fr")
 position = Vector2(0, 16)
 
 [node name="Camera" type="Camera2D" parent="."]
@@ -1869,7 +1893,7 @@ position = Vector2(4, -6)
 
 [node name="HasBallPosition" type="Sprite2D" parent="HorizontalFlipper/BallHandler"]
 visible = false
-position = Vector2(-14, 2)
+position = Vector2(9, 12)
 texture = ExtResource("4")
 
 [node name="BallWallDetector" type="Area2D" parent="HorizontalFlipper/BallHandler"]
