@@ -1,0 +1,147 @@
+[gd_scene load_steps=9 format=3 uid="uid://35w4ymx61dbi"]
+
+[ext_resource type="Script" path="res://assets/dialogue/PopBalloon.gd" id="1_qa1sy"]
+[ext_resource type="Theme" uid="uid://b8qe788vvlgia" path="res://assets/art/gui/theme-1.tres" id="2_3yhot"]
+[ext_resource type="PackedScene" uid="uid://ckvgyvclnwggo" path="res://addons/dialogue_manager/dialogue_label.tscn" id="3_d81mh"]
+[ext_resource type="Script" path="res://addons/dialogue_manager/dialogue_reponses_menu.gd" id="4_w8t0g"]
+
+[sub_resource type="Animation" id="Animation_352l8"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("..:scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(1, 1)]
+}
+
+[sub_resource type="Animation" id="Animation_bby0t"]
+resource_name = "appear"
+length = 0.5
+step = 0.05
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("..:scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.25, 0.35),
+"transitions": PackedFloat32Array(0.164939, 0.517633, 1),
+"update": 0,
+"values": [Vector2(0, 0), Vector2(1.1, 1.1), Vector2(1, 1)]
+}
+
+[sub_resource type="Animation" id="Animation_7sugg"]
+resource_name = "disappear"
+length = 0.5
+step = 0.05
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("..:scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.25),
+"transitions": PackedFloat32Array(1, 0.164939),
+"update": 0,
+"values": [Vector2(1, 1), Vector2(0, 0)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_8amah"]
+_data = {
+"RESET": SubResource("Animation_352l8"),
+"appear": SubResource("Animation_bby0t"),
+"disappear": SubResource("Animation_7sugg")
+}
+
+[node name="PopBalloon" type="Node2D"]
+z_index = 200
+z_as_relative = false
+script = ExtResource("1_qa1sy")
+
+[node name="CanvasLayer" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 0
+
+[node name="Balloon" type="Panel" parent="CanvasLayer"]
+unique_name_in_owner = true
+layout_mode = 1
+anchors_preset = 12
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 8.0
+offset_top = -104.0
+offset_right = 200.0
+offset_bottom = -8.0
+grow_horizontal = 2
+grow_vertical = 0
+theme = ExtResource("2_3yhot")
+
+[node name="Dialogue" type="MarginContainer" parent="CanvasLayer/Balloon"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="CanvasLayer/Balloon/Dialogue"]
+layout_mode = 2
+
+[node name="CharacterLabel" type="RichTextLabel" parent="CanvasLayer/Balloon/Dialogue/VBoxContainer"]
+unique_name_in_owner = true
+modulate = Color(1, 1, 1, 0.501961)
+layout_mode = 2
+mouse_filter = 1
+bbcode_enabled = true
+text = "Character"
+fit_content = true
+scroll_active = false
+
+[node name="DialogueLabel" parent="CanvasLayer/Balloon/Dialogue/VBoxContainer" instance=ExtResource("3_d81mh")]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_vertical = 3
+text = "Dialogue..."
+
+[node name="Responses" type="MarginContainer" parent="CanvasLayer/Balloon"]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 1.0
+anchor_right = 2.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="ResponsesMenu" type="VBoxContainer" parent="CanvasLayer/Balloon/Responses" node_paths=PackedStringArray("response_template")]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_vertical = 4
+theme_override_constants/separation = 6
+script = ExtResource("4_w8t0g")
+response_template = NodePath("ResponseExample")
+
+[node name="ResponseExample2" type="Button" parent="CanvasLayer/Balloon/Responses/ResponsesMenu"]
+layout_mode = 2
+text = "Response example"
+
+[node name="ResponseExample" type="Button" parent="CanvasLayer/Balloon/Responses/ResponsesMenu"]
+layout_mode = 2
+text = "Response example"
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="CanvasLayer"]
+unique_name_in_owner = true
+libraries = {
+"": SubResource("AnimationLibrary_8amah")
+}
+
+[connection signal="gui_input" from="CanvasLayer/Balloon" to="." method="_on_balloon_gui_input"]
+[connection signal="response_selected" from="CanvasLayer/Balloon/Responses/ResponsesMenu" to="." method="_on_responses_menu_response_selected"]

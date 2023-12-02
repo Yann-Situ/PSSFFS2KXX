@@ -1,8 +1,16 @@
-[gd_scene load_steps=10 format=3 uid="uid://co2grsk6s5crx"]
+[gd_scene load_steps=14 format=3 uid="uid://co2grsk6s5crx"]
 
 [ext_resource type="Script" path="res://src/Characters/NPC/YS.gd" id="1_j37mf"]
 [ext_resource type="Texture2D" uid="uid://bwudojjbm2t0o" path="res://assets/art/characters/Situ-idle.png" id="1_twqpa"]
 [ext_resource type="Script" path="res://src/Items/Activables/InteractionArea.gd" id="2_ldb0k"]
+[ext_resource type="Resource" uid="uid://07srq6mragiy" path="res://assets/dialogue/test.dialogue" id="2_olrot"]
+[ext_resource type="Shader" path="res://assets/shader/contour.gdshader" id="2_w7f2n"]
+[ext_resource type="PackedScene" uid="uid://35w4ymx61dbi" path="res://assets/dialogue/PopBalloon.tscn" id="5_6vray"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_esq8w"]
+shader = ExtResource("2_w7f2n")
+shader_parameter/activated = true
+shader_parameter/contour_color = Color(1.2, 1, 0.9, 0.65)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_8a5fu"]
 atlas = ExtResource("1_twqpa")
@@ -51,7 +59,10 @@ animations = [{
 "name": &"default",
 "speed": 5.0
 }, {
-"frames": [],
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_8a5fu")
+}],
 "loop": true,
 "name": &"new_animation",
 "speed": 5.0
@@ -61,12 +72,15 @@ animations = [{
 
 [node name="YS" type="Node2D"]
 script = ExtResource("1_j37mf")
+dialogue_resource = ExtResource("2_olrot")
+dialogue_title = "YS_start"
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+material = SubResource("ShaderMaterial_esq8w")
 position = Vector2(18, 1)
 sprite_frames = SubResource("SpriteFrames_k4tfe")
 autoplay = "default"
-frame_progress = 0.825803
+frame_progress = 0.170886
 
 [node name="InteractionArea" type="Area2D" parent="."]
 modulate = Color(0.176, 0.922, 0.51, 0.804)
@@ -78,5 +92,8 @@ script = ExtResource("2_ldb0k")
 [node name="CollisionShape2D" type="CollisionShape2D" parent="InteractionArea"]
 shape = SubResource("CircleShape2D_rp7wc")
 debug_color = Color(1, 1, 0.466667, 0.419608)
+
+[node name="PopBalloon" parent="." instance=ExtResource("5_6vray")]
+position = Vector2(-8, -33)
 
 [connection signal="handler_interacted" from="InteractionArea" to="." method="interaction"]

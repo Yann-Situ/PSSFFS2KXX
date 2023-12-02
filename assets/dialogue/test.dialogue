@@ -1,5 +1,5 @@
 ~ YS_start
-
+do Global.start_cinematic()
 YS: [[Hi|Yoo]] bro! Do you need some help?
 - Where should I go?
 	YS: Probably at the dock, there are some stuff going on there.
@@ -7,9 +7,13 @@ YS: [[Hi|Yoo]] bro! Do you need some help?
 	YS: Not really... Maybe I heard someone saw a ball floating in the air haha.
 - No, tutto bene fofo.
 	YS: Okay, [[see you soon.|take care.|Have a nice day.]]
-	=> END
+	=> END_YS_start
 Popol: Thanks fofo, see you soon!
-YS: Take care!
+YS: [[See you soon!|Take care!|Have a nice day!]]
+=> END_YS_start
+
+~ END_YS_start
+do Global.stop_cinematic()
 => END
 
 ~ YS_new_sprays

@@ -5,12 +5,14 @@ extends Node
 
 var default_gravity = Vector2(0.0,ProjectSettings.get_setting("physics/2d/default_gravity")) # pix/s²
 var gravity_alterer = AltererAdditive.new(default_gravity)
+var cinematic_playing = false: set=set_cinematic_state, get=is_cinematic_playing
+var camera : Camera2D = null : set = set_current_camera, get = get_current_camera
+var current_room : Room2D = null : set = set_current_room, get = get_current_room
+var current_player : Player = null : set = set_current_player, get = get_current_player
+
 var playing = true
 var list_of_physical_nodes = []
 var mouse_ball = null #pointer to the last selectable item that called mouse_entered
-var camera = null
-
-var current_room = null : get = get_current_room, set = set_current_room
 var _nb_trail_points = 0
 
 func can_add_trail_point() -> bool:
@@ -20,12 +22,76 @@ func add_trail_point() -> void:
 func remove_trail_point() -> void:
 		_nb_trail_points -= 1
 
+func set_cinematic_state(state : bool)->void:
+	if state and !cinematic_playing:
+		# start cinmeatic
+		cinematic_playing = state
+		# start cinematic shader
+		current_player.get_state_node().disable_input()
+		print("cinematic starting")
+
+	if !state and cinematic_playing:
+		# stop cinematic
+		cinematic_playing = state
+		# stop cinematic shader
+		current_player.get_state_node().enable_input()
+		print("cinematic stopping")
+
+func is_cinematic_playing()-> bool:
+	return cinematic_playing
+## start a cinematic: stop players input, use cinematic shader on camera and stop updating camera 
+# in player's process.
+func start_cinematic() -> void:
+	if is_cinematic_playing():
+		push_warning("cannot start because cinematic already playing")
+		return
+	set_cinematic_state(true)
+## stop a cinematic: restore players input, unuse cinematic shader on camera and start reupdating camera 
+# in player's process.
+func stop_cinematic() -> void:
+	if !is_cinematic_playing():
+		push_warning("cannot stop because cinematic is not playing")
+		return
+	set_cinematic_state(false)
+
+func set_current_camera(_camera : Camera2D):
+	if _camera == null:
+		push_error("camera is null")
+	camera = _camera
+func get_current_camera():
+	if camera == null:
+		push_error("camera is null")
+	return camera
+	
 func set_current_room(room : Room2D):
 	current_room = room
 func get_current_room():
 	if current_room == null:
-		printerr("current_room is null")
+		push_error("current_room is null")
 	return current_room
+	
+func set_current_player(player : Player):
+	current_player = player
+func get_current_player():
+	if current_player == null:
+		push_error("current_player is null")
+	return current_player
+
+# Called when the node enters the scene tree for the first time.
+func _ready():
+	pass
+
+func toggle_playing():
+	playing = !playing
+	if playing :
+		for n in list_of_physical_nodes:
+			n.reset_position()
+			n.enable_physics()
+	else :
+		for n in list_of_physical_nodes:
+			n.disable_physics()
+			n.reset_position()
+	print("Toggle playing : "+str(playing))
 
 var z_indices = {\
 	"parallax_0" : 00, \
@@ -52,19 +118,3 @@ var z_indices = {\
 	"foreparallax_1" : 210, \
 	"foreparallax_2" : 220 \
 }
-
-# Called when the node enters the scene tree for the first time.
-func _ready():
-	pass
-
-func toggle_playing():
-	playing = !playing
-	if playing :
-		for n in list_of_physical_nodes:
-			n.reset_position()
-			n.enable_physics()
-	else :
-		for n in list_of_physical_nodes:
-			n.disable_physics()
-			n.reset_position()
-	print("Toggle playing : "+str(playing))

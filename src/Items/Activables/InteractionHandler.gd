@@ -58,10 +58,9 @@ func _on_area_exited(area : Area2D):
 	if !has_overlapping_areas():
 		set_has_interaction(false)
 
-func _input(event):
-	if enabled and event.is_action_pressed("ui_interact"):
-		if nearest_interaction is InteractionArea :
-			set_enabled(false)
-			nearest_interaction.interact.call(self)
-			interacted.emit(nearest_interaction)
-			set_enabled(true)
+func interact():
+	if enabled and nearest_interaction is InteractionArea :
+		set_enabled(false)
+		nearest_interaction.interact.call(self)
+		interacted.emit(nearest_interaction)
+		set_enabled(true)
