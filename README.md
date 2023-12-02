@@ -209,6 +209,7 @@ List of things to do
 ### Potential Glitches
 * [ ] **Jumping** (from ground) just before entering a **rail** can result in a boost grind.
 * [ ] Pressing **jump** and **dunkdash** just before landing can result in small dunkdash/jump.
+* [ ] Pressing **jump** and just before entering a **Jumper** results in small jump (jump cancel).
 * [ ] **Dunkdashing** just before entering a **rail** can result in a dash boost grind.
 * [ ] Up-**Dunkdash** just after a **Jump** or a **ShockJump** results in high **Dunkdash**.
 * [ ] Tangent velocity kept after **Dunkdash**. This results in interesting vertical **Dunkdash** then fast horizontal run.

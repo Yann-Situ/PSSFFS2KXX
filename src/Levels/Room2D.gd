@@ -54,6 +54,7 @@ func _enter_tree():
 		var player = player_scene.instantiate()
 		self.add_child(player) #move it to the appropriate position
 		meta_player = player.get_path()
+		Global.set_current_player(player)
 		#print("---> new METAPLAYER : " + str(meta_player))
 		if self.has_node("PlayerPosition"):
 			player.global_position = get_node_or_null("PlayerPosition").position

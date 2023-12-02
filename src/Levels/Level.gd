@@ -55,12 +55,14 @@ func browse_rooms(room_name : String):
 ################################################################################
 
 func enter_level():
+	Global.set_current_player($Player)
 	change_room(first_room, first_room_portal)
 
 func exit_level(exit_room : String, exit_room_portal : String):
 	pass
 	# not yet implemented
 	# TODO: link with the menu hierarchy and all those not yet implemented stuff
+	# don't forget to update current player
 	print_debug("exit_level called on "+name+" on room "+exit_room+" at portal "+exit_room_portal)
 
 func change_room(next_room : String, next_room_portal : String):
