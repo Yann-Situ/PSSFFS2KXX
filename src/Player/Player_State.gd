@@ -168,7 +168,7 @@ func _input(event):
 	release_jp =  Input.is_action_just_pressed("ui_release")
 	interact_jp =  Input.is_action_just_pressed("ui_interact")
 	# TODO : there is a weird bug: interact_jp stay in just-pressed status for up to 30 frames instead of one (?).
-	#print("INPUT :" +str(interact_jp)+ " : "+str(Engine.get_physics_frames()))#weird behaviour: multiple interact 
+	#print("INPUT :" +str(interact_jp)+ " : "+str(Engine.get_physics_frames()))#weird behaviour: multiple interact
 	if jump_jp:
 		$ToleranceJumpPressTimer.start(tolerance_jump_press)
 	if dunk_jp:
@@ -320,7 +320,7 @@ func update_vars(delta):
 
 ###############################################################################
 func disable_input():
-	# TODO rework diable input system because it leads to undefined behaviour:
+	# TODO rework disable input system because it leads to undefined behaviour:
 	# for instance, diable input when pressing power can lead to force affecting balls forever
 	# Maybe disabling input is not a good idea, it might be better to disable actions instead and
 	# end the onging actions.

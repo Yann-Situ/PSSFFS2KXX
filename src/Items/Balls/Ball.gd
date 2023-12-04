@@ -75,7 +75,7 @@ func change_holder(new_holder : Node):
 	# assert(get_parent() != null) # this assertion can fail if reparenting multiple times quickly. Workaround:
 	if get_parent() == null:
 		push_error(name+".get_parent() return null because last reparenting is not yet done.")
-		return
+		return # TODO Fix this. For BallBubble, it can make the ball disappear (hard to reproduce)
 
 	if new_holder == holder:
 		print_debug(self.name+" reparent from "+holder.name+" to "+new_holder.name+" is ignored")

@@ -50,7 +50,7 @@ func set_portal_type(new_type):
 				$Area2D.body_entered.disconnect(self.area_body_exit_portal)
 			if $InteractionArea.handler_interacted.is_connected(self.interaction_exit_portal):
 				$InteractionArea.handler_interacted.disconnect(self.interaction_exit_portal)
-			
+
 
 func set_trigger_type(new_type):
 	trigger_type = new_type
@@ -129,12 +129,12 @@ func exit_portal():
 	await get_node("AnimationPlayer").animation_finished
 	exit_portal_finished.emit()
 
-	if portal_type != PortalType.EXIT_LEVEL:# TODO bad habit by calling parent room
+	if portal_type != PortalType.EXIT_LEVEL:
 		room.exit_room(next_room, next_room_portal)
 	else :
 		room.exit_level(self.name)
 
-# called when 
+# called when
 func enter_portal():
 	P.set_start_position(self.global_position)
 	P.reset_move()

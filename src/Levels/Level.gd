@@ -7,7 +7,7 @@ class_name Level
 @export_global_file("*.tscn") var first_room
 @export var first_room_portal : String
 
-var rooms = {}
+var rooms = {} # map : name -> Room2D
 var current_room_instance = null : set = set_current_room_instance
 var player_scene = preload("res://src/Player/Player.tscn")
 var meta_player = null

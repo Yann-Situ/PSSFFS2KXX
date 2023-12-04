@@ -142,6 +142,7 @@ List of things to do
 * [ ] **Walljump** by pressing jump before touching wall can result in jump that can't be **mount-cancelled** (by releasing jump button).
 * [ ] **Sliding** is not canceled if the button down is released. This results in interesting yet annoying *moonwalks* and weird behaviours. [TODO prioritize rolling over sliding and handle their connection]
 * [ ] **Crouching** under a 32pix bloc and then standing results in high speed.
+* [ ] **Interacting** fires multiple times when `ui_interact` is pressed (`interact_jp` is true for up to 30 frames instead of just one).
 
 ### Environment and Items
 * [x] Weird behaviour on leaving a **zipline** to a **rail** (there is a moment when the character is on both of them)
@@ -210,6 +211,7 @@ List of things to do
 * [ ] **Jumping** (from ground) just before entering a **rail** can result in a boost grind.
 * [ ] Pressing **jump** and **dunkdash** just before landing can result in small dunkdash/jump.
 * [ ] Pressing **jump** and just before entering a **Jumper** results in small jump (jump cancel).
+* [ ] **Falling** at the pixel perfect junction of a tile results in fall state but on the floor (pixel perfect).
 * [ ] **Dunkdashing** just before entering a **rail** can result in a dash boost grind.
 * [ ] Up-**Dunkdash** just after a **Jump** or a **ShockJump** results in high **Dunkdash**.
 * [ ] Tangent velocity kept after **Dunkdash**. This results in interesting vertical **Dunkdash** then fast horizontal run.

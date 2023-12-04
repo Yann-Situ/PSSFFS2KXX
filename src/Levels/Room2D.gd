@@ -63,7 +63,7 @@ func _enter_tree():
 
 func _ready():
 	print(name + " ready")
-	var portal_list = get_node("Portals").get_children() #TODO look for a better way to look for Portals
+	var portal_list = get_node("Portals").get_children() #TODO look for a better way to list Portals
 	for portal in portal_list:
 		add_portal(portal)
 		# note that if room isn't a child of level (like when it is opened from
@@ -79,7 +79,7 @@ func _ready():
 
 func add_portal(portal : Portal2D):
 	portals[portal.name] = portal
-	portal.enter_portal_finished.connect(self.unlock_portals)
+	portal.enter_portal_finished.connect(self.unlock_portals) # TODO maybe use groups instead of having the room managing the locking of portals.
 	portal.exit_portal_finished.connect(self.lock_portals)
 
 func _unhandled_input(event):
