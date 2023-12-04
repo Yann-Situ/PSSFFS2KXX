@@ -207,6 +207,8 @@ func get_input(delta): #delta in s
 	# Interact:
 	if S.can_interact and S.interact_jp:
 		$Actions/Interact.move(delta)
+	#if S.interact_jp: # TODO solve this issue...
+	#	print("interact : "+str(Engine.get_physics_frames()))# weird behaviour: multiple interact 
 	
 	# GRAVITY:
 

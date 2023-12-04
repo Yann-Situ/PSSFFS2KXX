@@ -1,7 +1,8 @@
-[gd_scene load_steps=20 format=3 uid="uid://b5emf4je4tnag"]
+[gd_scene load_steps=26 format=3 uid="uid://b5emf4je4tnag"]
 
 [ext_resource type="PackedScene" uid="uid://cjbsx2kbm5qhk" path="res://src/Player/PlayerPosition.tscn" id="1"]
 [ext_resource type="Script" path="res://src/Levels/RoomAnimations.gd" id="3"]
+[ext_resource type="Shader" path="res://assets/shader/cinematic.gdshader" id="5_ct7gl"]
 [ext_resource type="TileSet" uid="uid://berkn1bildrf3" path="res://src/Map/TileSet.tres" id="5_q68b4"]
 [ext_resource type="Texture2D" uid="uid://dndn6ajrce5h1" path="res://assets/art/background/pixelBackground7.png" id="6"]
 [ext_resource type="Texture2D" uid="uid://dcc4ug032gw0y" path="res://assets/art/background/pixelBackground3.png" id="7"]
@@ -18,6 +19,82 @@ colors = PackedColorArray(0.971008, 1, 0.851562, 1, 0.238892, 0.751644, 0.804688
 resource_local_to_scene = true
 gradient = SubResource("1")
 width = 500
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_3571c"]
+shader = ExtResource("5_ct7gl")
+shader_parameter/ratio = 0.0
+shader_parameter/margin_size = 0.2
+shader_parameter/center_offset = null
+
+[sub_resource type="Animation" id="Animation_wblad"]
+resource_name = "start_cinematic"
+length = 0.4
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("GUI/CinematicRect:material:shader_parameter/ratio")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.4),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [0.0, 1.0]
+}
+
+[sub_resource type="Animation" id="Animation_uw7sm"]
+resource_name = "RESET"
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("GUI/CinematicRect:material:shader_parameter/ratio")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.0]
+}
+
+[sub_resource type="Animation" id="Animation_qjkja"]
+resource_name = "stop_cinematic"
+length = 0.4
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("GUI/CinematicRect:material:shader_parameter/ratio")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.4),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [1.0, 0.0]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_lscg3"]
+_data = {
+"RESET": SubResource("Animation_uw7sm"),
+"start_cinematic": SubResource("Animation_wblad"),
+"stop_cinematic": SubResource("Animation_qjkja")
+}
+
+[sub_resource type="Environment" id="3"]
+resource_local_to_scene = true
+background_mode = 4
+glow_enabled = true
+glow_intensity = 0.96
+glow_strength = 1.01
+glow_bloom = 0.01
+glow_blend_mode = 1
+glow_hdr_threshold = 0.95
+glow_hdr_scale = 0.98
+glow_hdr_luminance_cap = 1.0
+adjustment_enabled = true
+adjustment_contrast = 1.08
+adjustment_saturation = 1.01
 
 [sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_km6yw"]
 polygon = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
@@ -1085,21 +1162,6 @@ terrain_set_0/terrain_5/name = "hiddenwood 5"
 terrain_set_0/terrain_5/color = Color(0.709804, 0.647059, 0.231373, 1)
 sources/0 = SubResource("TileSetAtlasSource_2ke6x")
 
-[sub_resource type="Environment" id="3"]
-resource_local_to_scene = true
-background_mode = 4
-glow_enabled = true
-glow_intensity = 0.96
-glow_strength = 1.01
-glow_bloom = 0.01
-glow_blend_mode = 1
-glow_hdr_threshold = 0.95
-glow_hdr_scale = 0.98
-glow_hdr_luminance_cap = 1.0
-adjustment_enabled = true
-adjustment_contrast = 1.08
-adjustment_saturation = 1.01
-
 [node name="Room2D" type="Node2D"]
 script = ExtResource("15")
 
@@ -1192,6 +1254,31 @@ light_mask = -2147483647
 z_index = 21
 z_as_relative = false
 motion_scale = Vector2(1.2, 1.2)
+
+[node name="GUI" type="CanvasLayer" parent="."]
+
+[node name="CinematicRect" type="ColorRect" parent="GUI"]
+material = SubResource("ShaderMaterial_3571c")
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 4
+color = Color(0, 0, 0, 1)
+metadata/_edit_use_anchors_ = true
+
+[node name="RoomAnimations" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_lscg3")
+}
+script = ExtResource("3")
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("3")
+
+[node name="PlayerPosition" parent="." instance=ExtResource("1")]
+position = Vector2(0, -32)
 
 [node name="Map" type="Node2D" parent="."]
 z_as_relative = false
@@ -1301,12 +1388,3 @@ position = Vector2(0, -2)
 z_index = 2
 
 [node name="Interactive" type="Node2D" parent="Environment"]
-
-[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
-environment = SubResource("3")
-
-[node name="PlayerPosition" parent="." instance=ExtResource("1")]
-position = Vector2(0, -32)
-
-[node name="RoomAnimations" type="AnimationPlayer" parent="."]
-script = ExtResource("3")

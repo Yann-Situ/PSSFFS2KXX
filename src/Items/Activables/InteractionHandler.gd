@@ -60,6 +60,7 @@ func _on_area_exited(area : Area2D):
 
 func interact():
 	if enabled and nearest_interaction is InteractionArea :
+		print("interact with: "+str(nearest_interaction.get_parent().name))
 		set_enabled(false)
 		nearest_interaction.interact.call(self)
 		interacted.emit(nearest_interaction)

@@ -148,7 +148,7 @@ func update_animationtree_stance():
 		player.animation_tree[CurrentStance] = "ground"#Stance.GROUND
 
 func _input(event):
-	if !enable_input_update or Global.is_cinematic_playing():
+	if !enable_input_update:
 		return
 	right_p = Input.is_action_pressed('ui_right')
 	left_p = Input.is_action_pressed('ui_left')
@@ -167,6 +167,8 @@ func _input(event):
 	power_jr =  Input.is_action_just_released("ui_power")
 	release_jp =  Input.is_action_just_pressed("ui_release")
 	interact_jp =  Input.is_action_just_pressed("ui_interact")
+	# TODO : there is a weird bug: interact_jp stay in just-pressed status for up to 30 frames instead of one (?).
+	#print("INPUT :" +str(interact_jp)+ " : "+str(Engine.get_physics_frames()))#weird behaviour: multiple interact 
 	if jump_jp:
 		$ToleranceJumpPressTimer.start(tolerance_jump_press)
 	if dunk_jp:
@@ -318,6 +320,10 @@ func update_vars(delta):
 
 ###############################################################################
 func disable_input():
+	# TODO rework diable input system because it leads to undefined behaviour:
+	# for instance, diable input when pressing power can lead to force affecting balls forever
+	# Maybe disabling input is not a good idea, it might be better to disable actions instead and
+	# end the onging actions.
 	enable_input_update = false # instead of set_process_input(false)
 	right_p = false
 	left_p = false

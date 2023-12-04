@@ -1,4 +1,4 @@
-[gd_scene load_steps=61 format=3 uid="uid://dgjpons7cu2id"]
+[gd_scene load_steps=64 format=3 uid="uid://dgjpons7cu2id"]
 
 [ext_resource type="PackedScene" uid="uid://b5emf4je4tnag" path="res://src/Levels/Room2D.tscn" id="1"]
 [ext_resource type="PackedScene" uid="uid://b45hldwkibtqb" path="res://src/Levels/Portal.tscn" id="2"]
@@ -57,119 +57,6 @@ shader_parameter/shift = -0.226
 shader_parameter/velocity = Vector2(0.4, 0)
 shader_parameter/fog_color = Color(0.454902, 0.384314, 0.231373, 0.513726)
 shader_parameter/noise = SubResource("10")
-
-[sub_resource type="Curve2D" id="Curve2D_rm24u"]
-resource_local_to_scene = true
-_data = {
-"points": PackedVector2Array(0, 0, 0, 0, 512, -16, 0, 0, 0, 0, -192, 24)
-}
-point_count = 2
-
-[sub_resource type="Curve2D" id="Curve2D_odptb"]
-resource_local_to_scene = true
-_data = {
-"points": PackedVector2Array(0, 0, 0, 0, 584, -80, 0, 0, 0, 0, -120, 16)
-}
-point_count = 2
-
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_s3067"]
-size = Vector2(64, 448)
-
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_jngrn"]
-size = Vector2(128, 256)
-
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_4ocw5"]
-size = Vector2(1024, 32)
-
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_ns2xq"]
-size = Vector2(1120, 96)
-
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_du6f7"]
-size = Vector2(64, 64)
-
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_f1ic2"]
-size = Vector2(160, 32)
-
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_2oc30"]
-size = Vector2(224, 32)
-
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_1d3at"]
-size = Vector2(2496, 224)
-
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_iw8gj"]
-size = Vector2(672, 32)
-
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_jfnnd"]
-size = Vector2(1344, 32)
-
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_dk42r"]
-size = Vector2(1056, 64)
-
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_4dbg0"]
-size = Vector2(960, 32)
-
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_8rgn1"]
-size = Vector2(352, 32)
-
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_flju7"]
-size = Vector2(64, 448)
-
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_i6knb"]
-size = Vector2(64, 352)
-
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_vfrlb"]
-size = Vector2(144, 16)
-
-[sub_resource type="Curve2D" id="Curve2D_5xx8k"]
-resource_local_to_scene = true
-_data = {
-"points": PackedVector2Array(0, 0, 0, 0, 264, 288, 0, 0, 0, 0, -240, 16)
-}
-point_count = 2
-
-[sub_resource type="Curve2D" id="Curve2D_0hdn6"]
-resource_local_to_scene = true
-_data = {
-"points": PackedVector2Array(0, 0, 0, 0, 264, 288, 0, 0, 0, 0, -240, 16)
-}
-point_count = 2
-
-[sub_resource type="Curve2D" id="Curve2D_pd3w4"]
-resource_local_to_scene = true
-_data = {
-"points": PackedVector2Array(0, 0, 0, 0, 264, 288, 0, 0, 0, 0, -240, 16)
-}
-point_count = 2
-
-[sub_resource type="Curve2D" id="Curve2D_hjlht"]
-_data = {
-"points": PackedVector2Array(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 448, 0)
-}
-point_count = 2
-
-[sub_resource type="Curve2D" id="Curve2D_g7x84"]
-_data = {
-"points": PackedVector2Array(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, -248)
-}
-point_count = 2
-
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_nyewa"]
-size = Vector2(224, 96)
-
-[sub_resource type="Environment" id="6"]
-resource_local_to_scene = true
-background_mode = 4
-glow_enabled = true
-glow_intensity = 0.96
-glow_strength = 1.01
-glow_bloom = 0.01
-glow_blend_mode = 1
-glow_hdr_threshold = 0.95
-glow_hdr_scale = 0.98
-glow_hdr_luminance_cap = 1.0
-adjustment_enabled = true
-adjustment_contrast = 1.08
-adjustment_saturation = 1.01
 
 [sub_resource type="Animation" id="9"]
 resource_name = "calm"
@@ -235,10 +122,174 @@ tracks/4/keys = {
 "values": [0.01, 0.02]
 }
 
+[sub_resource type="Animation" id="Animation_adokn"]
+resource_name = "start_cinematic"
+length = 0.4
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("GUI/CinematicRect:material:shader_parameter/ratio")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.4),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [0.0, 1.0]
+}
+
+[sub_resource type="Animation" id="Animation_ecsde"]
+resource_name = "start_cinematic"
+length = 0.4
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("GUI/CinematicRect:material:shader_parameter/ratio")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.4),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [1.0, 0.0]
+}
+
+[sub_resource type="Animation" id="Animation_vmc0s"]
+resource_name = "RESET"
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("GUI/CinematicRect:material:shader_parameter/ratio")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.0]
+}
+
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_m5lmj"]
 _data = {
-"calm": SubResource("9")
+"RESET": SubResource("Animation_vmc0s"),
+"calm": SubResource("9"),
+"start_cinematic": SubResource("Animation_adokn"),
+"stop_cinematic": SubResource("Animation_ecsde")
 }
+
+[sub_resource type="Environment" id="6"]
+resource_local_to_scene = true
+background_mode = 4
+glow_enabled = true
+glow_intensity = 0.96
+glow_strength = 1.01
+glow_bloom = 0.01
+glow_blend_mode = 1
+glow_hdr_threshold = 0.95
+glow_hdr_scale = 0.98
+glow_hdr_luminance_cap = 1.0
+adjustment_enabled = true
+adjustment_contrast = 1.08
+adjustment_saturation = 1.01
+
+[sub_resource type="Curve2D" id="Curve2D_ouxxf"]
+resource_local_to_scene = true
+_data = {
+"points": PackedVector2Array(0, 0, 0, 0, 512, -16, 0, 0, 0, 0, -192, 24)
+}
+point_count = 2
+
+[sub_resource type="Curve2D" id="Curve2D_by4cc"]
+resource_local_to_scene = true
+_data = {
+"points": PackedVector2Array(0, 0, 0, 0, 584, -80, 0, 0, 0, 0, -120, 16)
+}
+point_count = 2
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_s3067"]
+size = Vector2(64, 448)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_jngrn"]
+size = Vector2(128, 256)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_4ocw5"]
+size = Vector2(1024, 32)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_ns2xq"]
+size = Vector2(1120, 96)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_du6f7"]
+size = Vector2(64, 64)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_f1ic2"]
+size = Vector2(160, 32)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_2oc30"]
+size = Vector2(224, 32)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_1d3at"]
+size = Vector2(2496, 224)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_iw8gj"]
+size = Vector2(672, 32)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_jfnnd"]
+size = Vector2(1344, 32)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_dk42r"]
+size = Vector2(1056, 64)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_4dbg0"]
+size = Vector2(960, 32)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_8rgn1"]
+size = Vector2(352, 32)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_flju7"]
+size = Vector2(64, 448)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_i6knb"]
+size = Vector2(64, 352)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_vfrlb"]
+size = Vector2(144, 16)
+
+[sub_resource type="Curve2D" id="Curve2D_afw21"]
+resource_local_to_scene = true
+_data = {
+"points": PackedVector2Array(0, 0, 0, 0, 264, 288, 0, 0, 0, 0, -240, 16)
+}
+point_count = 2
+
+[sub_resource type="Curve2D" id="Curve2D_mca1w"]
+resource_local_to_scene = true
+_data = {
+"points": PackedVector2Array(0, 0, 0, 0, 264, 288, 0, 0, 0, 0, -240, 16)
+}
+point_count = 2
+
+[sub_resource type="Curve2D" id="Curve2D_n45q2"]
+resource_local_to_scene = true
+_data = {
+"points": PackedVector2Array(0, 0, 0, 0, 264, 288, 0, 0, 0, 0, -240, 16)
+}
+point_count = 2
+
+[sub_resource type="Curve2D" id="Curve2D_hjlht"]
+_data = {
+"points": PackedVector2Array(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 448, 0)
+}
+point_count = 2
+
+[sub_resource type="Curve2D" id="Curve2D_g7x84"]
+_data = {
+"points": PackedVector2Array(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, -248)
+}
+point_count = 2
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_nyewa"]
+size = Vector2(224, 96)
 
 [node name="RoomExample1" instance=ExtResource("1")]
 limit_left = -480
@@ -302,13 +353,30 @@ offset_bottom = 424.0
 pivot_offset = Vector2(696, 272)
 mouse_filter = 2
 
+[node name="RoomAnimations" parent="." index="4"]
+libraries = {
+"": SubResource("AnimationLibrary_m5lmj")
+}
+
+[node name="WorldEnvironment" parent="." index="5"]
+environment = SubResource("6")
+
+[node name="PlayerPosition" parent="." index="6"]
+position = Vector2(1664, 0)
+
+[node name="PedestrianGenerator" parent="." index="7" instance=ExtResource("11")]
+position = Vector2(1248, 0)
+x_radius = 700.0
+palette_scheme_sampler = ExtResource("24_82bh3")
+walk_speed_min = 35.0
+
 [node name="CanvasModulate" parent="Map" index="0"]
 color = Color(0.826269, 0.725282, 0.583096, 1)
 
 [node name="ParabolaCatenary" parent="Map" index="1" instance=ExtResource("9")]
 z_index = 300
 position = Vector2(32, -384)
-curve = SubResource("Curve2D_rm24u")
+curve = SubResource("Curve2D_ouxxf")
 p0_slope = 0.597
 line_width = 7.438
 line_modulate = Color(0.329412, 0.329412, 0.329412, 1)
@@ -317,7 +385,7 @@ line_texture = ExtResource("8")
 [node name="ParabolaCatenary2" parent="Map" index="2" instance=ExtResource("9")]
 z_index = 300
 position = Vector2(-40, -384)
-curve = SubResource("Curve2D_odptb")
+curve = SubResource("Curve2D_by4cc")
 p0_slope = 0.969
 line_width = 7.0
 line_modulate = Color(0.196078, 0.196078, 0.196078, 1)
@@ -400,6 +468,58 @@ modulate = Color(0.968627, 0.905882, 0.976471, 1)
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Map/TileMap16Body" index="0"]
 position = Vector2(-120, -200)
 shape = SubResource("RectangleShape2D_vfrlb")
+
+[node name="Mirror" parent="." index="9" instance=ExtResource("26_ghqss")]
+z_index = 200
+z_as_relative = false
+position = Vector2(1296, 42)
+scale = Vector2(1.28125, 1)
+rect = Rect2(-512, -300, 1024, 600)
+extents = Vector2(1024, 600)
+water_albedo = Color(0.427451, 0.764706, 0.847059, 1)
+water_opacity = 0.3
+water_speed = 0.15
+wave_distortion = 0.015
+wave_harmonics = 8
+blur = 0.3
+metadata/_edit_lock_ = true
+
+[node name="Mirror2" parent="." index="10" instance=ExtResource("26_ghqss")]
+z_index = 180
+z_as_relative = false
+position = Vector2(-160, 1)
+scale = Vector2(4, 1)
+rect = Rect2(-64, -350, 128, 700)
+extents = Vector2(128, 700)
+water_albedo = Color(0.54902, 0.439216, 0.152941, 0.568627)
+water_opacity = 0.396
+water_speed = 0.0
+wave_distortion = 0.0
+wave_harmonics = 0
+blur = 1.5
+metadata/_edit_lock_ = true
+
+[node name="BallShock" parent="." index="11" instance=ExtResource("4")]
+position = Vector2(1744, -112)
+
+[node name="BallBubble" parent="." index="12" instance=ExtResource("16_kdw4g")]
+position = Vector2(1496, -120)
+
+[node name="LightFront" type="PointLight2D" parent="." index="13"]
+z_index = 300
+z_as_relative = false
+position = Vector2(1824, 0)
+scale = Vector2(2, 2)
+color = Color(1, 0.929412, 0.886275, 1)
+energy = 1.34
+blend_mode = 2
+range_layer_max = 1
+range_item_cull_mask = 31
+texture = ExtResource("27_tjpql")
+texture_scale = 2.56
+
+[node name="YS" parent="." index="14" instance=ExtResource("28_5sjrw")]
+position = Vector2(1488, 0)
 
 [node name="DashTarget2" parent="Environment/Dynamics" index="0" instance=ExtResource("5")]
 position = Vector2(16, -32)
@@ -518,17 +638,17 @@ rectangle_extents = Vector2(256, 480)
 
 [node name="ParabolaCatenary" parent="Environment" index="10" instance=ExtResource("9")]
 position = Vector2(1688, -464)
-curve = SubResource("Curve2D_5xx8k")
+curve = SubResource("Curve2D_afw21")
 p0_slope = 1.553
 
 [node name="ParabolaCatenary2" parent="Environment" index="11" instance=ExtResource("9")]
 position = Vector2(1688, -464)
-curve = SubResource("Curve2D_0hdn6")
+curve = SubResource("Curve2D_mca1w")
 p0_slope = 1.312
 
 [node name="ParabolaCatenary3" parent="Environment" index="12" instance=ExtResource("9")]
 position = Vector2(1688, -464)
-curve = SubResource("Curve2D_pd3w4")
+curve = SubResource("Curve2D_n45q2")
 p0_slope = 1.473
 line_width = 4.28
 line_texture = ExtResource("8")
@@ -597,72 +717,3 @@ z_as_relative = false
 position = Vector2(-16, -48)
 shape = SubResource("RectangleShape2D_nyewa")
 debug_color = Color(0.560784, 0.780392, 1, 0.247059)
-
-[node name="WorldEnvironment" parent="." index="5"]
-environment = SubResource("6")
-
-[node name="PlayerPosition" parent="." index="6"]
-position = Vector2(1664, 0)
-
-[node name="PedestrianGenerator" parent="." index="7" instance=ExtResource("11")]
-position = Vector2(1248, 0)
-x_radius = 700.0
-palette_scheme_sampler = ExtResource("24_82bh3")
-walk_speed_min = 35.0
-
-[node name="RoomAnimations" parent="." index="8"]
-libraries = {
-"": SubResource("AnimationLibrary_m5lmj")
-}
-
-[node name="Mirror" parent="." index="9" instance=ExtResource("26_ghqss")]
-z_index = 200
-z_as_relative = false
-position = Vector2(1296, 42)
-scale = Vector2(1.28125, 1)
-rect = Rect2(-512, -300, 1024, 600)
-extents = Vector2(1024, 600)
-water_albedo = Color(0.427451, 0.764706, 0.847059, 1)
-water_opacity = 0.3
-water_speed = 0.15
-wave_distortion = 0.015
-wave_harmonics = 8
-blur = 0.3
-metadata/_edit_lock_ = true
-
-[node name="Mirror2" parent="." index="10" instance=ExtResource("26_ghqss")]
-z_index = 180
-z_as_relative = false
-position = Vector2(-160, 1)
-scale = Vector2(4, 1)
-rect = Rect2(-64, -350, 128, 700)
-extents = Vector2(128, 700)
-water_albedo = Color(0.54902, 0.439216, 0.152941, 0.568627)
-water_opacity = 0.396
-water_speed = 0.0
-wave_distortion = 0.0
-wave_harmonics = 0
-blur = 1.5
-metadata/_edit_lock_ = true
-
-[node name="BallShock" parent="." index="11" instance=ExtResource("4")]
-position = Vector2(1744, -112)
-
-[node name="BallBubble" parent="." index="12" instance=ExtResource("16_kdw4g")]
-position = Vector2(1496, -120)
-
-[node name="LightFront" type="PointLight2D" parent="." index="13"]
-z_index = 300
-z_as_relative = false
-position = Vector2(1824, 0)
-scale = Vector2(2, 2)
-color = Color(1, 0.929412, 0.886275, 1)
-energy = 1.34
-blend_mode = 2
-range_layer_max = 1
-range_item_cull_mask = 31
-texture = ExtResource("27_tjpql")
-texture_scale = 2.56
-
-[node name="YS" parent="." index="14" instance=ExtResource("28_5sjrw")]
-position = Vector2(1521, 1)

@@ -7,6 +7,7 @@ YS: [[Hi|Yoo]] bro! Do you need some help?
 	YS: Not really... Maybe I heard someone saw a ball floating in the air haha.
 - No, tutto bene fofo.
 	YS: Okay, [[see you soon.|take care.|Have a nice day.]]
+	do set_dialogue_title("YS_alternative")
 	=> END_YS_start
 Popol: Thanks fofo, see you soon!
 YS: [[See you soon!|Take care!|Have a nice day!]]
@@ -15,6 +16,12 @@ YS: [[See you soon!|Take care!|Have a nice day!]]
 ~ END_YS_start
 do Global.stop_cinematic()
 => END
+
+~ YS_alternative
+YS: [next=auto]Go fetch som sprays lil bro'!
+	Come on hurry up!
+Popol: [next=auto]Ok ok ok...
+=> END 
 
 ~ YS_new_sprays
 YS: [[Hi|Yoo]] lil'bro!

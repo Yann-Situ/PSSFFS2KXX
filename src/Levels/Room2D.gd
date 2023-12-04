@@ -106,3 +106,10 @@ func enter_room(entrance_portal : String):
 		portals[entrance_portal].enter_portal()
 	else :
 		printerr(entrance_portal+" not found in room "+self.name)
+
+################################################################################
+
+func start_cinematic():
+	$RoomAnimations.play("start_cinematic")
+func stop_cinematic():
+	$RoomAnimations.play("stop_cinematic")

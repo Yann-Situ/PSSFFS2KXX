@@ -26,15 +26,20 @@ func set_cinematic_state(state : bool)->void:
 	if state and !cinematic_playing:
 		# start cinmeatic
 		cinematic_playing = state
-		# start cinematic shader
-		current_player.get_state_node().disable_input()
+		if get_current_room():
+			current_room.start_cinematic()
+		if get_current_player():
+			current_player.get_state_node().disable_input()
 		print("cinematic starting")
 
 	if !state and cinematic_playing:
 		# stop cinematic
 		cinematic_playing = state
 		# stop cinematic shader
-		current_player.get_state_node().enable_input()
+		if get_current_room():
+			current_room.stop_cinematic()
+		if get_current_player():
+			current_player.get_state_node().enable_input()
 		print("cinematic stopping")
 
 func is_cinematic_playing()-> bool:
@@ -58,21 +63,21 @@ func set_current_camera(_camera : Camera2D):
 	if _camera == null:
 		push_error("camera is null")
 	camera = _camera
-func get_current_camera():
+func get_current_camera() -> Camera2D:
 	if camera == null:
 		push_error("camera is null")
 	return camera
 	
 func set_current_room(room : Room2D):
 	current_room = room
-func get_current_room():
+func get_current_room() -> Room2D:
 	if current_room == null:
 		push_error("current_room is null")
 	return current_room
 	
 func set_current_player(player : Player):
 	current_player = player
-func get_current_player():
+func get_current_player() -> Player:
 	if current_player == null:
 		push_error("current_player is null")
 	return current_player
