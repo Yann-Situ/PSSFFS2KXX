@@ -1464,7 +1464,7 @@ color_ramp = SubResource("53")
 
 [sub_resource type="CompressedTexture2D" id="55"]
 
-[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_5ul2h"]
+[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_4k3qo"]
 resource_local_to_scene = true
 particles_animation = true
 particles_anim_h_frames = 6
@@ -1508,8 +1508,9 @@ landing_velocity_thresh = 310.0
 dunkjump_speed = -510.0
 dunkdash_speed = 700.0
 
-[node name="State" parent="." instance=ExtResource("5")]
+[node name="State" parent="." node_paths=PackedStringArray("player") instance=ExtResource("5")]
 visible = false
+player = NodePath("..")
 is_jumping = true
 
 [node name="Collision" type="CollisionShape2D" parent="."]
@@ -1698,8 +1699,9 @@ script = ExtResource("22_qbwmr")
 interaction_handler = NodePath("../../HorizontalFlipper/InteractionHandler")
 P = NodePath("../..")
 
-[node name="Shooter" type="Node2D" parent="."]
+[node name="Shooter" type="Node2D" parent="." node_paths=PackedStringArray("P")]
 script = ExtResource("41")
+P = NodePath("..")
 
 [node name="ShootScreen" type="CanvasLayer" parent="Shooter"]
 
@@ -1711,8 +1713,9 @@ anchor_bottom = 1.0
 mouse_filter = 2
 color = Color(1, 1, 1, 0)
 
-[node name="ShootPredictor" type="Node2D" parent="Shooter"]
+[node name="ShootPredictor" type="Node2D" parent="Shooter" node_paths=PackedStringArray("P")]
 script = ExtResource("3")
+P = NodePath("../..")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 light_mask = 4
@@ -1738,8 +1741,9 @@ parameters/cancelable/stance/stancetransition/current_state = ""
 parameters/cancelable/stance/stancetransition/transition_request = "air"
 parameters/cancelable/stance/stancetransition/current_index = -1
 
-[node name="PlayerEffects" type="Node2D" parent="."]
+[node name="PlayerEffects" type="Node2D" parent="." node_paths=PackedStringArray("P")]
 script = ExtResource("13")
+P = NodePath("..")
 metadata/_edit_lock_ = true
 metadata/_edit_group_ = true
 
@@ -1774,7 +1778,7 @@ lifetime = 0.65
 explosiveness = 0.9
 
 [node name="GrindParticles" parent="PlayerEffects" instance=ExtResource("27")]
-material = SubResource("CanvasItemMaterial_5ul2h")
+material = SubResource("CanvasItemMaterial_4k3qo")
 position = Vector2(0, 16)
 
 [node name="Camera" type="Camera2D" parent="."]
@@ -1830,6 +1834,7 @@ offset_bottom = 25.0
 fit_content = true
 
 [node name="DebugGUI" type="Control" parent="UI"]
+visible = false
 layout_mode = 3
 anchors_preset = 5
 anchor_left = 0.5
@@ -1841,21 +1846,23 @@ offset_bottom = 47.0
 grow_horizontal = 2
 size_flags_horizontal = 4
 script = ExtResource("44_d6hbp")
-activated = true
 
 [node name="SpriteVelocity" type="Sprite2D" parent="UI/DebugGUI"]
+visible = false
 modulate = Color(0.403922, 0.811765, 0.886275, 1)
 position = Vector2(-150, 52)
 scale = Vector2(0.5, 1)
 texture = ExtResource("44_a1agg")
 
 [node name="SpriteSVelocity" type="Sprite2D" parent="UI/DebugGUI"]
+visible = false
 modulate = Color(1, 0.54902, 0.580392, 1)
 position = Vector2(150, 52)
 scale = Vector2(0.5, 1)
 texture = ExtResource("44_a1agg")
 
 [node name="SpriteDeviation" type="Sprite2D" parent="UI/DebugGUI"]
+visible = false
 modulate = Color(0.65098, 0.941176, 0.219608, 1)
 position = Vector2(0, 52)
 scale = Vector2(0.5, 1)

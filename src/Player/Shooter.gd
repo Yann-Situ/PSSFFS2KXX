@@ -1,6 +1,10 @@
 extends Node2D
 
-@export_range(0.0,500) var aim_tau_radius : float = 100
+@export_range(0.0,500) var aim_tau_radius : float = 100 ## I don't remember what is it for...
+
+@export var P: Player
+@onready var S = P.get_state_node()
+@onready var shader = $ShootScreen/ShootScreenShader.material
 
 var viewer_parameter = INF
 var vmax = INF
@@ -11,10 +15,6 @@ var target_vmin_2 = 0.0 # (pix/s)^2
 
 var effective_v = Vector2.ZERO# pix/s
 var effective_v_2 = 0.0# (pix/s)^2
-
-@onready var P = get_parent()
-@onready var S = P.get_node("State")
-@onready var shader = $ShootScreen/ShootScreenShader.material
 
 var global_gravity_scale_TODO = 1.0 # TODO implement extended shooter, with arbitrary forces/accel.
 ################################################################################

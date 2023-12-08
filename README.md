@@ -191,6 +191,7 @@ List of things to do
 * [ ] **Shooting** just before **landing** results in `floor_shoot` just after `aim_shoot` animation
 * [ ] **Trail** lifetime and point_lifetime not set correctly when trail for **bubble_ball**.
 * [ ] **Player** doesn't stop walking when on floor walls. ([ ] Infinite **walking** animation on 16px block) stairs.
+* [ ] Jitter when **Entering a Room2D** (using a portal) this might be due to the 'reset' functions called in Player.
 
 ### Other
 * [x] Spawner rotation position is weird.
@@ -220,6 +221,7 @@ List of things to do
 * [ ] At the connection between a **rail** and a solid block, if the character is falling such that they will wallslide on the block if there wasn't a rail, and is falling fast enough, the character will normally grind but with 0 initial speed.
     - At the connection between a **rail** and stairs, if the character is falling such that they will go on the slope if there wasn't a rail, and is falling fast enough, the character will normally grind but with 0 speed in the direction down the stairs.
 * [ ] Player changing **Room2D** while in a **BallWall** results in player not able to pickup ball. (If glitch, we need to make sure portals are away from ballwall).
+* [ ] Down **DunkDash** on mounting platform results in bouncing on the platform.
 * [ ] **Mirror** weird effect when trying to mirror something out of camera (happen when the mirror takes half of the camera).
 * [ ] **Hitbox** of **Player** a bit smaller than its collisionbox, resulting in the player being pushed by an explosion but not taking damage. It also results in Player being on the edge of spikes without taking damage (maybe change this later behaviour?).
 

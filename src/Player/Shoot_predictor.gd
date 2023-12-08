@@ -1,7 +1,7 @@
 extends Node2D
 
-@onready var Player = get_parent().get_parent()
-@onready var S = Player.get_node("State")
+@export var P: Player
+@onready var S = P.get_state_node()
 
 var points = Array()
 @export var nb_points_display : int = 50

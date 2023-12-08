@@ -1,10 +1,10 @@
 extends Node2D
 
 var ghost_anim = preload("res://src/Effects/GhostAnim.tscn")
-var ghost_sprite
-var environment_node
-var use_gradient = false
-var gradient : Gradient
+@export var ghost_sprite : Sprite2D
+@export var environment_node : Room2D
+@export var use_gradient : bool = false
+@export var gradient : Gradient
 
 func set_ghost_sprite(sprite_node):
 	ghost_sprite = sprite_node

@@ -2,7 +2,7 @@
 extends Resource
 class_name Alterable
 
-# signal value_changed # useless for the moment
+signal value_changed # useless for the moment
 
 var base_value : Variant : set = set_base_value
 var alterers : Dictionary = {} # key: RID, value: Alterer
@@ -31,7 +31,8 @@ func get_value():
 
 func set_is_up_to_date(b : bool):
 	is_up_to_date = b
-	# self.value_changed.emit()# useless for the moment
+	if !is_up_to_date:
+		self.value_changed.emit()
 
 ####################################################################################################
 

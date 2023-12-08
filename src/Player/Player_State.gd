@@ -1,6 +1,6 @@
 extends Node
 
-@onready var player = get_parent()
+@export var player: Player
 @onready var actions = player.get_node("Actions")
 
 var frame_time_ms = 1.0/60.0 #s
