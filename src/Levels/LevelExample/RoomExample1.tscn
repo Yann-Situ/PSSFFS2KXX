@@ -193,14 +193,14 @@ adjustment_enabled = true
 adjustment_contrast = 1.08
 adjustment_saturation = 1.01
 
-[sub_resource type="Curve2D" id="Curve2D_k8jjw"]
+[sub_resource type="Curve2D" id="Curve2D_hn71b"]
 resource_local_to_scene = true
 _data = {
 "points": PackedVector2Array(0, 0, 0, 0, 512, -16, 0, 0, 0, 0, -192, 24)
 }
 point_count = 2
 
-[sub_resource type="Curve2D" id="Curve2D_ikuxx"]
+[sub_resource type="Curve2D" id="Curve2D_b2ntx"]
 resource_local_to_scene = true
 _data = {
 "points": PackedVector2Array(0, 0, 0, 0, 584, -80, 0, 0, 0, 0, -120, 16)
@@ -255,21 +255,21 @@ size = Vector2(64, 352)
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_vfrlb"]
 size = Vector2(144, 16)
 
-[sub_resource type="Curve2D" id="Curve2D_828sf"]
+[sub_resource type="Curve2D" id="Curve2D_rpoye"]
 resource_local_to_scene = true
 _data = {
 "points": PackedVector2Array(0, 0, 0, 0, 264, 288, 0, 0, 0, 0, -240, 16)
 }
 point_count = 2
 
-[sub_resource type="Curve2D" id="Curve2D_f2kkb"]
+[sub_resource type="Curve2D" id="Curve2D_4on5f"]
 resource_local_to_scene = true
 _data = {
 "points": PackedVector2Array(0, 0, 0, 0, 264, 288, 0, 0, 0, 0, -240, 16)
 }
 point_count = 2
 
-[sub_resource type="Curve2D" id="Curve2D_q7mm2"]
+[sub_resource type="Curve2D" id="Curve2D_rrjud"]
 resource_local_to_scene = true
 _data = {
 "points": PackedVector2Array(0, 0, 0, 0, 264, 288, 0, 0, 0, 0, -240, 16)
@@ -376,7 +376,7 @@ color = Color(0.826269, 0.725282, 0.583096, 1)
 [node name="ParabolaCatenary" parent="Map" index="1" instance=ExtResource("9")]
 z_index = 300
 position = Vector2(32, -384)
-curve = SubResource("Curve2D_k8jjw")
+curve = SubResource("Curve2D_hn71b")
 p0_slope = 0.597
 line_width = 7.438
 line_modulate = Color(0.329412, 0.329412, 0.329412, 1)
@@ -385,7 +385,7 @@ line_texture = ExtResource("8")
 [node name="ParabolaCatenary2" parent="Map" index="2" instance=ExtResource("9")]
 z_index = 300
 position = Vector2(-40, -384)
-curve = SubResource("Curve2D_ikuxx")
+curve = SubResource("Curve2D_b2ntx")
 p0_slope = 0.969
 line_width = 7.0
 line_modulate = Color(0.196078, 0.196078, 0.196078, 1)
@@ -638,17 +638,17 @@ rectangle_extents = Vector2(256, 480)
 
 [node name="ParabolaCatenary" parent="Environment" index="10" instance=ExtResource("9")]
 position = Vector2(1688, -464)
-curve = SubResource("Curve2D_828sf")
+curve = SubResource("Curve2D_rpoye")
 p0_slope = 1.553
 
 [node name="ParabolaCatenary2" parent="Environment" index="11" instance=ExtResource("9")]
 position = Vector2(1688, -464)
-curve = SubResource("Curve2D_f2kkb")
+curve = SubResource("Curve2D_4on5f")
 p0_slope = 1.312
 
 [node name="ParabolaCatenary3" parent="Environment" index="12" instance=ExtResource("9")]
 position = Vector2(1688, -464)
-curve = SubResource("Curve2D_q7mm2")
+curve = SubResource("Curve2D_rrjud")
 p0_slope = 1.473
 line_width = 4.28
 line_texture = ExtResource("8")

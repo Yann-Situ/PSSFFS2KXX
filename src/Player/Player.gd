@@ -207,9 +207,7 @@ func get_input(delta): #delta in s
 	# Interact:
 	if S.can_interact and S.interact_jp:
 		$Actions/Interact.move(delta)
-	#if S.interact_jp: # TODO solve this issue...
-	#	print("interact : "+str(Engine.get_physics_frames()))# weird behaviour: multiple interact 
-	
+
 	# GRAVITY:
 
 	# SHADER:
@@ -222,23 +220,14 @@ func get_input(delta): #delta in s
 		$Collision.shape.set_size(Vector2(17,57))
 		$Collision.position.y = 3.5
 
-	LifeBar.set_life(LifeHandler.get_life())
+	LifeBar.set_life(LifeHandler.get_life()) # TODO : Maybe handle that with signals
 
 	if S.is_aiming:
 		Shooter.update_screen_viewer_position()
 	else :
 		Shooter.disable_screen_viewer()
 
-	S.jump_jp = false
-	S.jump_jr = false
-	S.aim_jp = false
-	S.shoot_jr = false
-	S.dunk_jr = false
-	S.dunk_jp = false
-	S.select_jp = false
-	S.power_jp = false
-	S.power_jr = false
-	S.release_jp = false
+	S.set_one_shot_inputs_false()
 
 func _process(delta):
 	# ANIMATION:
@@ -250,6 +239,7 @@ func _process(delta):
 		$HorizontalFlipper.scale.x = 1
 	
 	# CAMERA:
+	# TODO : change this whole part because it's messy
 	if Global.is_cinematic_playing():
 		return
 	if S.is_aiming:
@@ -369,7 +359,7 @@ func is_hold() -> bool:
 	
 func get_in(new_holder : Node):
 	if not new_holder.is_in_group("characterholders"):
-		printerr("error["+name+"], new_holder is not in group `characterholders`.")
+		printerr("new_holder ("+new_holder.name+") is not in group `characterholders`.")
 	if is_hold():
 		character_holder.free_character(self)
 	self.disable_physics()

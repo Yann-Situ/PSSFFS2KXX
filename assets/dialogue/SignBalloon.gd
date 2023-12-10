@@ -7,7 +7,6 @@ signal pop_finished
 @onready var balloon: Panel = %Balloon
 @onready var character_label: RichTextLabel = %CharacterLabel
 @onready var dialogue_label: DialogueLabel = %DialogueLabel
-@onready var responses_menu: DialogueResponsesMenu = %ResponsesMenu
 @onready var animation_player: AnimationPlayer = %AnimationPlayer
 
 ## The dialogue resource
@@ -18,9 +17,6 @@ var temporary_game_states: Array = []
 
 ## See if we are waiting for the player
 var is_waiting_for_input: bool = false
-
-## See if we are running a long mutation and should hide the balloon
-var will_hide_balloon: bool = false
 
 ## The current line
 var dialogue_line: DialogueLine:
@@ -40,12 +36,8 @@ var dialogue_line: DialogueLine:
 		dialogue_label.hide()
 		dialogue_label.dialogue_line = dialogue_line
 
-		responses_menu.hide()
-		responses_menu.set_responses(dialogue_line.responses)
-
 		# Show our balloon
 		balloon.show()
-		will_hide_balloon = false
 
 		dialogue_label.show()
 		if not dialogue_line.text.is_empty():
@@ -70,7 +62,7 @@ func start(dialogue_resource: DialogueResource, title: String, extra_game_states
 	resource = dialogue_resource
 	self.show()
 	animation_player.play("appear")
-	self.dialogue_line = await resource.get_next_dialogue_line(title, temporary_game_states)
+	next(title)
 
 func stop() -> void:
 	is_waiting_for_input = false
@@ -82,8 +74,3 @@ func stop() -> void:
 ## Go to the next line
 func next(next_id: String) -> void:
 	self.dialogue_line = await resource.get_next_dialogue_line(next_id, temporary_game_states)
-
-### Signals
-
-func _on_responses_menu_response_selected(response: DialogueResponse) -> void:
-	next(response.next_id)

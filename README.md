@@ -131,6 +131,7 @@ List of things to do
 * [x] **Dunkjump** on **jumper** can result in `Nan` camera position teleportation. (because to low to mathematically dunkjump => negative value ? division by 0.0 ?) [hard to reproduce] (see video) [solved by reimplementing dunkjump?]
 * [x] High jump when `jump_jp` and `jump_jr` just before landing (because the **mount-cancel** only test `jump_jr`).
 * [x] **ShockJumping** at frame perfect when crouching on **Jumper** (or when jumping or dunkjumping) results in a huge mega jump sa mère.
+* [x] **Interacting** fires multiple times when `ui_interact` is pressed (`interact_jp` is true for up to 30 frames instead of just one).
 * [ ] **Dunkjumping** while only moving with floor adherence a bit far from basket results in missing the basket.
 * [ ] **Dunkjumping** while only moving with floor adherence a bit far from basket results in missing the basket.
 * [ ] **Release** ball when **aiming** results in error.
@@ -142,7 +143,6 @@ List of things to do
 * [ ] **Walljump** by pressing jump before touching wall can result in jump that can't be **mount-cancelled** (by releasing jump button).
 * [ ] **Sliding** is not canceled if the button down is released. This results in interesting yet annoying *moonwalks* and weird behaviours. [TODO prioritize rolling over sliding and handle their connection]
 * [ ] **Crouching** under a 32pix bloc and then standing results in high speed.
-* [ ] **Interacting** fires multiple times when `ui_interact` is pressed (`interact_jp` is true for up to 30 frames instead of just one).
 
 ### Environment and Items
 * [x] Weird behaviour on leaving a **zipline** to a **rail** (there is a moment when the character is on both of them)

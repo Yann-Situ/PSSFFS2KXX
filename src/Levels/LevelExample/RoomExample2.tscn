@@ -1,8 +1,9 @@
-[gd_scene load_steps=16 format=3 uid="uid://bwcm4fvuhe2xt"]
+[gd_scene load_steps=17 format=3 uid="uid://bwcm4fvuhe2xt"]
 
 [ext_resource type="PackedScene" uid="uid://b5emf4je4tnag" path="res://src/Levels/Room2D.tscn" id="1"]
 [ext_resource type="PackedScene" uid="uid://b45hldwkibtqb" path="res://src/Levels/Portal.tscn" id="2"]
-[ext_resource type="PackedScene" uid="uid://brduuwt44ovoh" path="res://src/Items/Environment/Sign.tscn" id="3_n5fn1"]
+[ext_resource type="PackedScene" uid="uid://0jgk1uwov2y0" path="res://src/Items/Environment/TextBubbleArea.tscn" id="3_0bwgq"]
+[ext_resource type="PackedScene" uid="uid://2g6648a4qrng" path="res://src/Items/Environment/TextBubbleInteraction.tscn" id="4_wc2b0"]
 
 [sub_resource type="Gradient" id="1"]
 resource_local_to_scene = true
@@ -142,6 +143,11 @@ shape = SubResource("RectangleShape2D_lyd48")
 position = Vector2(456, -136)
 shape = SubResource("RectangleShape2D_ht1gt")
 
-[node name="Sign" parent="." index="9" instance=ExtResource("3_n5fn1")]
-position = Vector2(384, -160)
-text = "Popol: This looks like a Spray!"
+[node name="TextBubbleArea" parent="." index="9" instance=ExtResource("3_0bwgq")]
+position = Vector2(160, -168)
+text = "YOOOOOOOOOOOO"
+
+[node name="TextBubbleInteraction" parent="." index="10" instance=ExtResource("4_wc2b0")]
+position = Vector2(384, -168)
+text = "Popol: YESAY! Lorem ipsum doloret etc. CECI EST UN TEXTE UN PEU LONG.
+Sign: WTF?"

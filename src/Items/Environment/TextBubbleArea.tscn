@@ -1,0 +1,24 @@
+[gd_scene load_steps=4 format=3 uid="uid://0jgk1uwov2y0"]
+
+[ext_resource type="Script" path="res://src/Items/Environment/TextBubbleArea.gd" id="1_mjgpd"]
+[ext_resource type="PackedScene" uid="uid://bkqmakllertlv" path="res://assets/dialogue/SimpleBalloon.tscn" id="2_fdjrg"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_ta4h8"]
+radius = 16.0
+
+[node name="TextBubbleArea" type="Node2D"]
+z_index = 200
+z_as_relative = false
+script = ExtResource("1_mjgpd")
+
+[node name="SimpleBalloon" parent="." instance=ExtResource("2_fdjrg")]
+z_index = 0
+z_as_relative = true
+
+[node name="Area2D" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+shape = SubResource("CircleShape2D_ta4h8")
+
+[connection signal="dialogue_finished" from="SimpleBalloon" to="." method="_on_simple_balloon_dialogue_finished"]
+[connection signal="body_entered" from="Area2D" to="." method="display" unbinds=1]

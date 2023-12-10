@@ -167,8 +167,7 @@ func _input(event):
 	power_jr =  Input.is_action_just_released("ui_power")
 	release_jp =  Input.is_action_just_pressed("ui_release")
 	interact_jp =  Input.is_action_just_pressed("ui_interact")
-	# TODO : there is a weird bug: interact_jp stay in just-pressed status for up to 30 frames instead of one (?).
-	#print("INPUT :" +str(interact_jp)+ " : "+str(Engine.get_physics_frames()))#weird behaviour: multiple interact
+	
 	if jump_jp:
 		$ToleranceJumpPressTimer.start(tolerance_jump_press)
 	if dunk_jp:
@@ -327,17 +326,22 @@ func disable_input():
 	enable_input_update = false # instead of set_process_input(false)
 	right_p = false
 	left_p = false
-	jump_jp = false
 	jump_p = false
-	jump_jr = false
 	crouch_p = false
+	dunk_p = false
+	power_p = false
+	set_one_shot_inputs_false()
+	
+## Called at the end of process in order to have the just_pressed and just_release
+## inputs used once.
+func set_one_shot_inputs_false():
+	jump_jp = false
+	jump_jr = false
 	aim_jp = false
 	shoot_jr = false
-	dunk_p = false
 	dunk_jr = false
 	dunk_jp = false
 	select_jp = false
-	power_p = false
 	power_jp = false
 	power_jr = false
 	release_jp = false
