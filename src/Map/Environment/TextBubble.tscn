@@ -1,0 +1,14 @@
+[gd_scene load_steps=3 format=3 uid="uid://bxll2aashrkod"]
+
+[ext_resource type="Script" path="res://src/Map/Environment/TextBubble.gd" id="1_fgsx3"]
+[ext_resource type="PackedScene" uid="uid://bkqmakllertlv" path="res://assets/dialogue/SimpleBalloon.tscn" id="2_fdjrg"]
+
+[node name="TextBubble" type="Node2D"]
+z_index = 200
+z_as_relative = false
+script = ExtResource("1_fgsx3")
+
+[node name="SimpleBalloon" parent="." instance=ExtResource("2_fdjrg")]
+visible = false
+z_index = 0
+z_as_relative = true

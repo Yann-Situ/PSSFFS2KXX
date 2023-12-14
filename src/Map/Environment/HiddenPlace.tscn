@@ -1,0 +1,22 @@
+[gd_scene load_steps=3 format=3 uid="uid://cjrs0hleolbs1"]
+
+[ext_resource type="TileSet" uid="uid://berkn1bildrf3" path="res://src/Map/TileSet.tres" id="1_dc0y4"]
+[ext_resource type="Script" path="res://src/Map/Environment/HiddenPlace.gd" id="2_qnhr7"]
+
+[node name="HiddenPlace" type="TileMap"]
+editor_description = "TileMap to hide secrets.
+Use connect area2D to set the hide/reveal on body_entered/exited.
+Add CollisionShape2D as child to this node directly, they will be reparented to Area2D in _ready."
+z_as_relative = false
+tile_set = ExtResource("1_dc0y4")
+format = 2
+layer_0/z_index = 151
+script = ExtResource("2_qnhr7")
+
+[node name="Area2D" type="Area2D" parent="."]
+modulate = Color(1, 0.584314, 0.886275, 0.639216)
+z_index = 152
+z_as_relative = false
+collision_layer = 0
+input_pickable = false
+monitorable = false
