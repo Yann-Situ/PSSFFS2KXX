@@ -118,7 +118,7 @@ List of things to do
    - :pushpin: Add HUD
    - [ ] Add menus
    - [ ] Add WorldMap and level selection
-   - [ ] Add dialogue system
+   - :pushpin: Add dialogue system
 
 ## Issues
 ### Actions and Movement
