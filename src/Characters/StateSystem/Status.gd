@@ -30,10 +30,10 @@ extends Resource
 class_name Status
 
 @export var _name : String = "" #: set = set_name, get = get_name
-var is : bool = false #: set = set_is, get = get_is
-var can : bool = false #: set = set_can, get = get_can
+var _is : bool = false #: set = set_is, get = get_is
+var _can : bool = false #: set = set_can, get = get_can
 
 func _init(s : String, b_is = false, b_can = false):
     _name = s
-    is = b_is
-    can = b_can
+    _is = b_is
+    _can = b_can

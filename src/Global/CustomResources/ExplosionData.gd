@@ -36,15 +36,16 @@ func set_use_default_explosion(b : bool):
 	elif !use_default_explosion and body_explode.is_connected(default_explode_body):
 		body_explode.disconnect(default_explode_body)
 
-func default_explode_body(body : Node2D, direction : Vector2):
-	if body.is_in_group("breakables"):
-		body.apply_explosion(momentum_breakable*direction)
-	if body.is_in_group("electrics"):
-		body.apply_shock(momentum_electric*direction)
-	if body.has_method("add_impulse"):
-		body.add_impulse(momentum_physicbody*direction)
-	if body.is_in_group("damageables"):
-		body.apply_damage(damage_value, damage_duration)
+func default_explode_body(explosive : CollisionObject2D, direction : Vector2):
+	if explosive.is_in_group("breakables"):
+		explosive.apply_explosion(momentum_breakable*direction)
+	if explosive.is_in_group("electrics"):
+		explosive.apply_shock(momentum_electric*direction)
+	if explosive.has_method("add_impulse"):
+		explosive.add_impulse(momentum_physicbody*direction)
+	if explosive.is_in_group("damageables"):
+		explosive.apply_damage(damage_value, damage_duration)
+	# TODO change for the new Eplosive implementation: just call explosive.explode(parameters)
 
 func set_collision_shape(s : Shape2D):
 	collision_shape = s

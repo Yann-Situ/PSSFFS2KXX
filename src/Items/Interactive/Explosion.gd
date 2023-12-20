@@ -1,8 +1,8 @@
+## Explosion.gd :
+## Handle a single explosion from a source point
 @icon("res://assets/art/icons/explosion.png")
 extends Area2D
 class_name Explosion
-# Explosion.gd :
-# Handle a single explosion from a source point
 
 @export var explosion_data : ExplosionData
 var exploded_bodies = [] # [body]
