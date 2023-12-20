@@ -59,4 +59,4 @@ func explode():
 					# The actual workaround is to add the i == explosion_data.explosion_steps-1
 					# condition to not miss the last objects
 	#print("BOUM queue_free")
-	call_deferred("queue_free")
+	queue_free()

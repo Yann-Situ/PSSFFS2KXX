@@ -115,7 +115,7 @@ func free_character(character : Node2D):
 
 func remove_body(body : Node2D):
 	released_bodies[body] = character_cant_get_in_again_delay
-	path_follows[body].call_deferred("queue_free")
+	path_follows[body].queue_free()
 	path_follows.erase(body)
 	position_offsets.erase(body)
 

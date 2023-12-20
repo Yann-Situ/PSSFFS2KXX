@@ -131,7 +131,7 @@ func destruction(delay : float = 0.0):
 	self.disable_physics()
 	for selector in selectors.keys():
 		deselect(selector) # will also call selectors.erase(selector)
-	$Animation.play("destruction") # will call _queue_free
+	$Animation.play("destruction") # will call _queue_free # TODO change this behaviour and use await animation_finished.
 
 func _queue_free():
 	print(self.name+" is DESTROYED")

@@ -108,7 +108,8 @@ func add_impulse(impulse : Vector2):
 ## The necessity of such a function is due to the fact that apply_impulse does
 ## not modify immediatly the velocity, so we need to reset the velocity once per
 ## physics frame at maximum.
-## The last call of this function in the same frame will be aplied.
+## If this function is called mutliple times during the same frame, only the
+## last call will be aplied.
 func override_impulse(impulse : Vector2):
 	if physics_enabled:
 		#print("impulse_override")
@@ -118,6 +119,7 @@ func override_impulse(impulse : Vector2):
 func get_force():
 	force_alterable.get_value()
 
+## function to override to add effects on impulse
 func _on_impulse(impulse : Vector2):
 	pass
 ###########################################################

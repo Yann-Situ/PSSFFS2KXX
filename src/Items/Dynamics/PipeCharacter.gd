@@ -91,7 +91,7 @@ func pickup_character(character : Node2D):
 func free_character(character : Node2D):
 	# called by character when getting out
 	print(name+" free_character("+character.name+")")
-	path_follows[character].call_deferred("queue_free")
+	path_follows[character].queue_free()
 	path_follows.erase(character)
 	position_offsets.erase(character)
 
@@ -100,7 +100,7 @@ func move_character(character : Node2D, linear_velocity : Vector2, \
 	assert(path_follows.has(character))
 	var path_follow = path_follows[character]
 	var position_offset = position_offsets[character]
-	
+
 	path_follow.progress += speed_inside * delta
 	position_offset = lerp(position_offset, Vector2.ZERO, 0.08)
 	character.global_position = path_follow.global_position + position_offset
