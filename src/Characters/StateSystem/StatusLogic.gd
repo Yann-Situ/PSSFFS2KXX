@@ -31,15 +31,55 @@ class_name StatusLogic
 
 @export var input_controller : InputController #: set = set_input_controller, get = get_input_controller ##
 
+var status_dict : Dictionary = {} : get = get_status_dict
+var trigger_dict : Dictionary = {} : get = get_trigger_dict
+
+func get_status_dict():
+	return status_dict
+func get_trigger_dict():
+	return trigger_dict
+
+func _init():
+	var properties = get_property_list()
+	# properties is an array of dictionaries with:
+	# 'name' is the property's name, as a String;
+	# 'class_name' is an empty StringName, unless the property is @GlobalScope.TYPE_OBJECT and it inherits from a class;
+	# 'type' is the property's type, as an int (see Variant.Type);
+	# 'hint' is how the property is meant to be edited (see PropertyHint);
+	# 'hint_string' depends on the hint (see PropertyHint);
+	# 'usage' is a combination of PropertyUsageFlags.
+	for property in properties:
+		# TODO Wait for Godot 4.3 and get_global_name, or a rework of is_class:
+		# https://github.com/godotengine/godot/pull/80487
+		# https://github.com/godotengine/godot/issues/21789
+		## Workaround that only works for variables with predefined values:
+		var v = self.get(property["name"])
+		if v is Status:
+			status_dict[v._name] = v
+		elif v is Trigger:
+			trigger_dict[v._name] = v
+
 ## function that takes a State node and link its required status to this StatusLogic
 ## Status resources. This function is called by the StateMachine at the initialization.
 func link_status_to_state(state : State):
-	pass
+	var requirements = state.get_status_requirements()
+	for status_variable_name in requirements:
+		var variable = state.get(status_variable_name)
+		if status_dict.has(variable._name):
+			state.set(status_variable_name, status_dict[variable._name])
+		else :
+			push_warning(variable._name+" is not the _name of a Status")
 
 ## function that takes a State node and link its required trigger to the input_controller
 ## Trigger resources. This function is called by the StateMachine at the initialization.
 func link_trigger_to_state(state : State):
-	pass
+	var requirements = state.get_trigger_requirements()
+	for trigger_variable_name in requirements:
+		var variable = state.get(trigger_variable_name)
+		if trigger_dict.has(variable._name):
+			state.set(trigger_variable_name, trigger_dict[variable._name])
+		else :
+			push_warning(variable._name+" is not the _name of a Trigger")
 
 ## Called by the parent StateMachine during the _physics_process call, before
 ## the State nodes physics_process calls.

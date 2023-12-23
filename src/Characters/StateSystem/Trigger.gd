@@ -34,7 +34,7 @@ var pressed : bool = false : set = set_pressed#, get = get_pressed
 var just_pressed : bool = false : set = set_just_pressed#, get = get_just_pressed
 var just_released : bool = false : set = set_just_released#, get = get_just_released
 
-var locked : bool = false
+var _locked : bool = false
 
 func _init(s : String, _pressed = false, _just_pressed = false, _just_released = false):
 	_name = s
@@ -43,20 +43,20 @@ func _init(s : String, _pressed = false, _just_pressed = false, _just_released =
 	just_released =_just_released
 
 func set_pressed(b : bool):
-	if locked:
-		push_warning("unable to set Trigger because it is disabled")
+	if _locked:
+		push_warning("pressed not modified because the Status is locked")
 		return
 	pressed = b
 
 func set_just_pressed(b : bool):
-	if locked:
-		push_warning("unable to set Trigger because it is disabled")
+	if _locked:
+		push_warning("just_pressed not modified because the Status is locked")
 		return
 	just_pressed = b
 
 func set_just_released(b : bool):
-	if locked:
-		push_warning("unable to set Trigger because it is disabled")
+	if _locked:
+		push_warning("just_released not modified because the Status is locked")
 		return
 	just_released = b
 
@@ -68,8 +68,8 @@ func set_from_input_action(action_name : String):
 	just_pressed = Input.is_action_just_pressed(action_name)
 	just_released = Input.is_action_just_released(action_name)
 
-func unlock():
-	locked = false
-
 func lock():
-	locked = true
+	_locked = true
+
+func unlock():
+	_locked = false

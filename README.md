@@ -9,27 +9,28 @@ Copyright (c) 2023 Yann-Situ
 ## Dependencies
 Need the [dialogue_manager](https://github.com/nathanhoad/godot_dialogue_manager), [singleton_bundle](https://github.com/GodotParadise/SingletonBundle#frame_freezetime_scale-float-duration-float) and [achievements](https://github.com/GodotParadise/Achievements) addons.
 
-## Specific big parts
-* graphism
-* animations
-* visual effects
-* music
-* sound design
-* AI for NPC
-* level design
-* level system
-* saving system
-* GUI for menus
-* HUD
-* story
-
 ### Big Motivation
-* Slopes
-* Moving platform
-* Pedestrian animation
-* World map system
-* Saving system
-* Popol rework graphism
+* Code:
+  * Slopes
+  * Moving platform, ball walls and one way platform
+  * Menus and World map system
+  * Saving system, profile, story and achievement system
+  * Sound system
+  * Shoot system
+  * AI NPC and Boss implementation
+* Graphism:
+  * Popol rework graphism
+  * NPC, pedestrian animations
+  * backgrounds
+  * graffitis and adinkra
+  * tilesets and moods
+  * GUI and menus
+  * Effects, paint explosion
+* Other:
+  * Musics
+  * Soundeffects
+  * Story and characters
+  * Level design
 
 ### Code structure to (re)implement
 * [ ] `Selector` is currently a child of `Player/Actions` and is reparent by code to be a child of `Room`. Maybe it should be a child of the room or the level, and accessed in `SpecialActionHandler` via a NodePath or through signals.

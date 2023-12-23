@@ -30,10 +30,30 @@ extends Resource
 class_name Status
 
 @export var _name : String = "" #: set = set_name, get = get_name
-var _is : bool = false #: set = set_is, get = get_is
-var _can : bool = false #: set = set_can, get = get_can
+var ing : bool = false : set = set_ing#, get = get_ing
+var can : bool = false : set = set_can#, get = get_can
 
-func _init(s : String, b_is = false, b_can = false):
+var _locked : bool = false
+
+func _init(s : String, _ing = false, _can = false):
     _name = s
-    _is = b_is
-    _can = b_can
+    ing = _ing
+    can = _can
+
+func set_ing(v : bool):
+    if _locked:
+        push_warning("ing not modified because the Status is locked")
+        return
+    ing = v
+
+func set_can(v : bool):
+    if _locked:
+        push_warning("can not modified because the Status is locked")
+        return
+    can = v
+
+func lock():
+    _locked = true
+
+func unlock():
+    _locked = false
