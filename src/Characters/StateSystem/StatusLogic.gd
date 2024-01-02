@@ -17,7 +17,7 @@
 ##         it calls the StatusLogic process functions and handles the connexions between
 ##         different State nodes and contains a "current_state" variable to call
 ##         the appropriate process functions.
-##     StatusLogic (Resource):
+##     StatusLogic (Node):
 ##         StatusLogic handles and updates multiple Status resources and perform the logic
 ##         between them depending on the inputs from an InputController Resource.
 ##         StatusLogic also manages the link between the Status and Trigger Resources
@@ -26,7 +26,7 @@
 ##         Manages the inputs. For a NPC, this can be done with code logic or
 ##         behaviour tree. For a playable character, use the Input.event to handle it.
 @icon("res://assets/art/icons/settings-beige.png")
-extends Resource
+extends Node
 class_name StatusLogic
 
 @export var input_controller : InputController #: set = set_input_controller, get = get_input_controller ##
@@ -39,7 +39,7 @@ func get_status_dict():
 func get_trigger_dict():
 	return trigger_dict
 
-func _init():
+func _ready():
 	var properties = get_property_list()
 	# properties is an array of dictionaries with:
 	# 'name' is the property's name, as a String;
@@ -54,6 +54,7 @@ func _init():
 		# https://github.com/godotengine/godot/issues/21789
 		## Workaround that only works for variables with predefined values:
 		var v = self.get(property["name"])
+		print(property["name"]+": "+str(v))
 		if v is Status:
 			status_dict[v._name] = v
 		elif v is Trigger:
@@ -67,6 +68,7 @@ func link_status_to_state(state : State):
 		var variable = state.get(status_variable_name)
 		if status_dict.has(variable._name):
 			state.set(status_variable_name, status_dict[variable._name])
+			#print("status:    "+state.name+" set "+status_variable_name+" as "+variable._name)
 		else :
 			push_warning(variable._name+" is not the _name of a Status")
 
@@ -78,6 +80,7 @@ func link_trigger_to_state(state : State):
 		var variable = state.get(trigger_variable_name)
 		if trigger_dict.has(variable._name):
 			state.set(trigger_variable_name, trigger_dict[variable._name])
+			#print("trigger:   "+state.name+" set "+trigger_variable_name+" as "+variable._name)
 		else :
 			push_warning(variable._name+" is not the _name of a Trigger")
 

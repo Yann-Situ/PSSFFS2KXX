@@ -34,7 +34,10 @@ class_name StateMachine
 var current_state : State : set=change_state
 const MAX_STATE_TRANSITIONS : int = 20
 
-func _init():
+func set_init_state(s : State):
+	init_state = s
+
+func _ready():
 	assert(status_logic != null)
 	for child in get_children():
 		if child is State:
@@ -42,11 +45,6 @@ func _init():
 			status_logic.link_trigger_to_state(child)
 		#else:
 		#	push_warning(child.name+" is not a State node.") # no problem if it is not a State
-
-func set_init_state(s : State):
-	init_state = s
-
-func _ready():
 	reset_state()
 
 func _process(delta):
@@ -70,7 +68,7 @@ func _physics_process(delta):
 func change_state(new_state : State):
 	var i = 0
 	while (new_state and new_state != current_state and i < MAX_STATE_TRANSITIONS):
-		if !current_state:
+		if current_state:
 			current_state.exit()
 		var tmp = current_state
 		current_state = new_state

@@ -1,0 +1,41 @@
+[gd_scene load_steps=7 format=3 uid="uid://cm1lhhup6mwrw"]
+
+[ext_resource type="Texture2D" uid="uid://b7j6v3qs2dqkf" path="res://assets/art/icons/heart.png" id="1_go825"]
+[ext_resource type="Script" path="res://src/Characters/StateSystem/StateMachine.gd" id="2_iueq0"]
+[ext_resource type="Script" path="res://src/Characters/StateSystem/Test/StateTestColor1.gd" id="3_eaq75"]
+[ext_resource type="Script" path="res://src/Characters/StateSystem/Test/StateTestColor2.gd" id="4_y1wxg"]
+[ext_resource type="Script" path="res://src/Characters/StateSystem/Test/InputControllerTest.gd" id="5_uk5xo"]
+[ext_resource type="Script" path="res://src/Characters/StateSystem/Test/StatusLogicTest.gd" id="6_drev0"]
+
+[node name="Node2D" type="Node2D"]
+modulate = Color(0.423529, 0.290196, 0, 1)
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("1_go825")
+
+[node name="StateMachine" type="Node" parent="." node_paths=PackedStringArray("status_logic", "init_state")]
+script = ExtResource("2_iueq0")
+status_logic = NodePath("StatusLogic")
+init_state = NodePath("StateTestColor1")
+
+[node name="StatusLogic" type="Node" parent="StateMachine" node_paths=PackedStringArray("entity", "input_controller")]
+script = ExtResource("6_drev0")
+entity = NodePath("../..")
+rect = Rect2(50, 20, 400, 300)
+input_controller = NodePath("../InputController")
+
+[node name="StateTestColor1" type="Node" parent="StateMachine" node_paths=PackedStringArray("out_state", "sprite")]
+script = ExtResource("3_eaq75")
+out_state = NodePath("../StateTestColor2")
+speed = 160.0
+sprite = NodePath("../..")
+color = Color(1, 0, 0, 1)
+
+[node name="StateTestColor2" type="Node" parent="StateMachine" node_paths=PackedStringArray("out_state", "sprite")]
+script = ExtResource("4_y1wxg")
+out_state = NodePath("../StateTestColor1")
+sprite = NodePath("../..")
+color = Color(1, 1, 0, 1)
+
+[node name="InputController" type="Node" parent="StateMachine"]
+script = ExtResource("5_uk5xo")
