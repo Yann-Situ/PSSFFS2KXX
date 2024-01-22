@@ -67,6 +67,9 @@ func _physics_process(delta):
 ## if new_state is null or is equal to current_state, do nothing.
 func change_state(new_state : State):
 	var i = 0
+	# var string = "  | "
+	# if current_state:
+	# 	string += current_state.name
 	while (new_state and new_state != current_state and i < MAX_STATE_TRANSITIONS):
 		if current_state:
 			current_state.exit()
@@ -74,8 +77,12 @@ func change_state(new_state : State):
 		current_state = new_state
 		new_state = current_state.enter(tmp)
 		i = i+1
+		# if current_state:
+		# 	string += " -> " + current_state.name
 	if i >= MAX_STATE_TRANSITIONS:
 		push_error("change states more than MAX_STATE_TRANSITIONS in a change")
+	# if i > 0:
+	# 	print(string)
 
 ## Reset the current_state to the init_state
 func reset_state():

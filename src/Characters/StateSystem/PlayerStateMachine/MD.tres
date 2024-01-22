@@ -1,0 +1,14 @@
+[gd_resource type="Resource" script_class="MovementData" load_steps=2 format=3 uid="uid://syr8dljufw4f"]
+
+[ext_resource type="Script" path="res://src/Characters/StateSystem/PlayerStateMachine/MovementData.gd" id="1_jj4dk"]
+
+[resource]
+script = ExtResource("1_jj4dk")
+mass = 1.0
+velocity = Vector2(0, 0)
+friction = Vector2(0.25, 0.025)
+time_scale = 1.0
+side_speed_max = 450.0
+side_instant_speed = 100.0
+side_instant_speed_return_thresh = 50.0
+side_accel = 100.0
