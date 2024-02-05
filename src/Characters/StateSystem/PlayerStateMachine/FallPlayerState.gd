@@ -10,6 +10,9 @@ extends PlayerMovementState
 # var floor : Status = Status.new("floor") # appropriate declaration
 # var wall : Status = Status.new("wall") # appropriate declaration
 
+func _ready():
+	animation_names = ["fall", "fall_loop"]
+
 func branch() -> State:
 	if logic.belong.ing:
 		return belong_state

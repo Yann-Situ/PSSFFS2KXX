@@ -22,6 +22,9 @@ extends PlayerMovementState
 # var left : Trigger = Trigger.new("left") # appropriate declaration
 # var right : Trigger = Trigger.new("right") # appropriate declaration
 
+func _ready():
+	animation_names = ["idle", "walk", "standstop", "turn"]
+
 func branch() -> State:
 	if logic.belong.ing:
 		return belong_state
@@ -34,15 +37,23 @@ func branch() -> State:
 	if !logic.floor.ing:
 		return fall_state
 
+	set_variation(0) # "idle"
 	if logic.run.ing :
 		if (logic.crouch.can and logic.down.pressed):
 			return slide_state
 		if (logic.direction_pressed.x == 0):
-			return standstop_state
+			#return standstop_state
+			set_variation(2) # "standstop"
+			return self
+		set_variation(1) # "walk"
+
 	if logic.crouch.ing or (logic.crouch.can and logic.down.pressed):
 		return crouch_state
-	if logic.direction_sprite*logic.direction_pressed.x < 0:
-		return turn_state
+	if logic.direction_sprite_changed:
+		#return turn_state
+		set_variation(3) # "turn"
+		return self
+
 	return self
 
 ## Called by the parent StateMachine during the _physics_process call, after

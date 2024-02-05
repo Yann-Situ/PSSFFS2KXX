@@ -2,7 +2,7 @@ extends PlayerMovementState
 
 @export var jump_speed : float = -425.0 # pix/s
 ## ratio applied to the vertical velocity after releasing up button
-@export var jump_speed_up_cancelled_ratio : float = 0.4
+@export var jump_speed_up_cancelled_ratio : float = 0.5
 @export var jump_speed_down_cancelled_ratio : float = 0.1
 
 @export var belong_state : State
@@ -42,7 +42,7 @@ func enter(previous_state : State = null) -> State:
 	if next_state != self:
 		return next_state
 	play_animation()
-	logic.jump.ing = true
+	# logic.jump.ing = true # actually not used (?)
 	up_cancelled = false
 	cancelled = false
 	movement.velocity.y += jump_speed
@@ -53,7 +53,7 @@ func enter(previous_state : State = null) -> State:
 
 	#player.PlayerEffects.dust_start()
 	#player.PlayerEffects.jump_start()
-	
+
 	print("JUMP")
 	return next_state
 

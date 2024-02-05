@@ -60,29 +60,31 @@ func _ready():
 		elif v is Trigger:
 			trigger_dict[v._name] = v
 
-## function that takes a State node and link its required status to this StatusLogic
-## Status resources. This function is called by the StateMachine at the initialization.
-func link_status_to_state(state : State):
-	var requirements = state.get_status_requirements()
-	for status_variable_name in requirements:
-		var variable = state.get(status_variable_name)
-		if status_dict.has(variable._name):
-			state.set(status_variable_name, status_dict[variable._name])
-			#print("status:    "+state.name+" set "+status_variable_name+" as "+variable._name)
-		else :
-			push_warning(variable._name+" is not the _name of a Status")
-
-## function that takes a State node and link its required trigger to the input_controller
-## Trigger resources. This function is called by the StateMachine at the initialization.
-func link_trigger_to_state(state : State):
-	var requirements = state.get_trigger_requirements()
-	for trigger_variable_name in requirements:
-		var variable = state.get(trigger_variable_name)
-		if trigger_dict.has(variable._name):
-			state.set(trigger_variable_name, trigger_dict[variable._name])
-			#print("trigger:   "+state.name+" set "+trigger_variable_name+" as "+variable._name)
-		else :
-			push_warning(variable._name+" is not the _name of a Trigger")
+## OUTDATED: just pass the logic to the nodes for simplicity, this allows to
+## handle also nodes that are not children of the StateMachine
+# ## function that takes a State node and link its required status to this StatusLogic
+# ## Status resources. This function is called by the StateMachine at the initialization.
+# func link_status_to_state(state : State):
+# 	var requirements = state.get_status_requirements()
+# 	for status_variable_name in requirements:
+# 		var variable = state.get(status_variable_name)
+# 		if status_dict.has(variable._name):
+# 			state.set(status_variable_name, status_dict[variable._name])
+# 			#print("status:    "+state.name+" set "+status_variable_name+" as "+variable._name)
+# 		else :
+# 			push_warning(variable._name+" is not the _name of a Status")
+#
+# ## function that takes a State node and link its required trigger to the input_controller
+# ## Trigger resources. This function is called by the StateMachine at the initialization.
+# func link_trigger_to_state(state : State):
+# 	var requirements = state.get_trigger_requirements()
+# 	for trigger_variable_name in requirements:
+# 		var variable = state.get(trigger_variable_name)
+# 		if trigger_dict.has(variable._name):
+# 			state.set(trigger_variable_name, trigger_dict[variable._name])
+# 			#print("trigger:   "+state.name+" set "+trigger_variable_name+" as "+variable._name)
+# 		else :
+# 			push_warning(variable._name+" is not the _name of a Trigger")
 
 ## Called by the parent StateMachine during the _physics_process call, before
 ## the State nodes physics_process calls.

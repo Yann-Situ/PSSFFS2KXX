@@ -4,20 +4,20 @@ class_name PlayerState
 @export var player : FakePlayer
 @export var logic : StatusLogic
 
-@export var animation_player : AnimationPlayer #: set = set_animation_player, get = get_animation_player ##
-@export var animation_names : Array[String] = [] #: set = set_animation_names, get = get_animation_names ##
+@export var animation_player : AnimationPlayer # @onready var animation_player : AnimationPlayer = player.animation_player
+var animation_names : Array[String] = []
 ## variation can be set by another State node, in order to perform an appropriate animation
 @export var variation : int = 0 : set = set_variation #, get = get_animation_player
 
 func set_variation(v : int):
-	variation = variation % animation_names.size()
+	variation = v % animation_names.size()
 
 func play_animation():
 	if !animation_player or animation_names.is_empty():
 		return
 	var animation_name = animation_names[variation]
 	if animation_player.has_animation(animation_name):
-		animation_player.play("animation_name")
+		animation_player.play(animation_name)
 	else:
 		push_error("animation "+animation_name+" doesn't exists in "+animation_player.name)
 

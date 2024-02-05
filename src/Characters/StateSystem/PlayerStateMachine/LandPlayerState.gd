@@ -1,16 +1,17 @@
 extends PlayerMovementState
 
-@export var speed_ratio : float = 0.3 ## ratio applied to speed_max, instant_speed and instant_speed_thresh.
-@export var accel_ratio : float = 0.3 ## ratio applied to accel
 #need to handle hit/collision box resizing + crouch parameters + jump
 
 @export var belong_state : State
 @export var action_state : State
 @export var fall_state : State
 @export var stand_state : State
+@export var crouch_state : State
+
+var land_finished = false # set true at the end of the animation, set false at enter
 
 func _ready():
-	animation_names = ["crouch"]
+	animation_names = ["land", "land_roll"]
 
 func branch() -> State:
 	if logic.belong.ing:
@@ -20,32 +21,28 @@ func branch() -> State:
 	if !logic.floor.ing:
 		return fall_state
 
-	if logic.stand.can and !logic.down.pressed:
-		return stand_state
+	if land_finished:
+		return crouch_state
 	return self
 
 func enter(previous_state : State = null) -> State:
+	land_finished = false
 	var next_state = branch()
 	if next_state != self:
 		return next_state
 	play_animation()
 	logic.crouch.ing = true
 	# change hitbox
-	print("CROUCH")
+	print("LAND")
+
+	var timer = get_tree().create_timer(0.5) # TODO remove for animation handling
+	timer.timeout.connect(self.on_land_finished)
+
 	return next_state
 
-func side_crouch_physics_process(delta, m : MovementData = movement):
-	if logic.direction_pressed.x == 0.0:
-		return
-	if -m.side_instant_speed_return_thresh*speed_ratio < m.velocity.x*logic.direction_pressed.x \
-		and m.velocity.x*logic.direction_pressed.x < m.side_instant_speed*speed_ratio :
-		m.velocity.x = logic.direction_pressed.x*m.side_instant_speed*speed_ratio
-	if (m.velocity.x*logic.direction_pressed.x >= m.side_speed_max*speed_ratio) :
-		pass # in the same logic.direction_pressed.x as velocity and faster than max
-	else :
-		m.velocity.x += logic.direction_pressed.x*m.side_accel*accel_ratio*delta
-		if (m.velocity.x*logic.direction_pressed.x > m.side_speed_max*speed_ratio) :
-			m.velocity.x = logic.direction_pressed.x*m.side_speed_max*speed_ratio
+func on_land_finished():
+	print("--- land finished")
+	land_finished = true
 
 ## Called by the parent StateMachine during the _physics_process call, after
 ## the StatusLogic physics_process call.
@@ -55,7 +52,7 @@ func physics_process(delta) -> State:
 		return next_state
 
 	# handle run and walls ?
-	side_crouch_physics_process(delta)
+	side_move_physics_process(delta)
 
 	# update player position
 	if player.physics_enabled:
@@ -66,4 +63,5 @@ func physics_process(delta) -> State:
 ## Called just before entering the next State. Should not contain await or time
 ## stopping functions
 func exit():
+	# crouch set to false as the exit, but if next state is crouch, it will be reset to true at crouch.enter()
 	logic.crouch.ing = false

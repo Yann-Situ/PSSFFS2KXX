@@ -2,22 +2,23 @@ extends StatusLogic
 
 @export var player : FakePlayer
 
-var belong : Status = Status.new("belong") # appropriate declaration
-var action : Status = Status.new("action") # appropriate declaration
-var jump : Status = Status.new("jump") # appropriate declaration
-var floor : Status = Status.new("floor") # appropriate declaration
-var wall : Status = Status.new("wall") # appropriate declaration
-var run : Status = Status.new("run") # appropriate declaration
-var crouch : Status = Status.new("crouch") # appropriate declaration
-var stand : Status = Status.new("stand") # appropriate declaration
+var belong : Status = Status.new("belong") #
+var action : Status = Status.new("action") #
+var jump : Status = Status.new("jump") # is set by state, can set by timers
+var floor : Status = Status.new("floor") # physical
+var wall : Status = Status.new("wall") # physical
+var run : Status = Status.new("run") #
+var crouch : Status = Status.new("crouch") # partly physical, partly set by state
+var stand : Status = Status.new("stand") # can set physicaly
 
-var up : Trigger = Trigger.new("up") # appropriate declaration
-var down : Trigger = Trigger.new("down") # appropriate declaration
-var left : Trigger = Trigger.new("left") # appropriate declaration
-var right : Trigger = Trigger.new("right") # appropriate declaration
+var up : Trigger = Trigger.new("up") #
+var down : Trigger = Trigger.new("down") #
+var left : Trigger = Trigger.new("left") #
+var right : Trigger = Trigger.new("right") #
 
 var direction_pressed = Vector2.ZERO
 var direction_sprite = 1
+var direction_sprite_changed = false
 
 func _ready():
 	up = input_controller.up
@@ -27,6 +28,11 @@ func _ready():
 
 	stand.can = true
 	run.can = true
+
+	if player.flip_h:
+		direction_sprite = -1
+	else:
+		direction_sprite = 1
 
 	super._ready()
 
@@ -57,10 +63,13 @@ func update_triggers():
 
 ## update the status using logic.
 func update_status():
-	if player.flip_h:
-		direction_sprite = -1
-	else:
-		direction_sprite = 1
+
+	# direction_sprite is 1 or -1 but direction_pressed.x can also be 0:
+	direction_sprite_changed = (direction_sprite*direction_pressed.x < 0)
+	if direction_sprite_changed:
+		# we need to change sprite direction
+		player.set_flip_h(direction_pressed.x >= 0)
+		direction_sprite *= -1
 
 	floor.ing = player.is_on_floor()
 	jump.can = floor.ing # TODO, more complex

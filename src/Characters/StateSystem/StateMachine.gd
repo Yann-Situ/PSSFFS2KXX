@@ -39,12 +39,14 @@ func set_init_state(s : State):
 
 func _ready():
 	assert(status_logic != null)
-	for child in get_children():
-		if child is State:
-			status_logic.link_status_to_state(child)
-			status_logic.link_trigger_to_state(child)
-		#else:
-		#	push_warning(child.name+" is not a State node.") # no problem if it is not a State
+	## OUTDATED: just pass the logic to the nodes for simplicity, this allows to
+	## handle also nodes that are not children of the StateMachine
+	# for child in get_children():
+	# 	if child is State:
+	# 		status_logic.link_status_to_state(child)
+	# 		status_logic.link_trigger_to_state(child)
+	# 	#else:
+	# 	#	push_warning(child.name+" is not a State node.") # no problem if it is not a State
 	reset_state()
 
 func _process(delta):
