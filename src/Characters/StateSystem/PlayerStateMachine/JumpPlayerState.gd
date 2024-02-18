@@ -22,6 +22,9 @@ var first_frame = false # true if we just enter the jump state
 var up_cancelled = false # true if this jump was cancelled by releasing up_button
 var cancelled = false # true if this jump was cancelled by pressing down_button or releasing up_button
 
+func _ready():
+	animation_names = ["jump", "turn_jump", "frontflip"]
+
 func branch() -> State:
 	if logic.belong.ing:
 		return belong_state

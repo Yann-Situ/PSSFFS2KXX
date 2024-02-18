@@ -20,6 +20,10 @@ func branch() -> State:
 		return action_state
 
 	if logic.floor.ing:
+		if abs(movement.velocity.x) > 50.0:
+			land_state.set_variation(1)
+		else:
+			land_state.set_variation(0)
 		return land_state
 	if logic.wall.ing:
 		return fallwall_state

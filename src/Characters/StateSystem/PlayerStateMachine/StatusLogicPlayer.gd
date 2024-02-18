@@ -10,6 +10,7 @@ var wall : Status = Status.new("wall") # physical
 var run : Status = Status.new("run") #
 var crouch : Status = Status.new("crouch") # partly physical, partly set by state
 var stand : Status = Status.new("stand") # can set physicaly
+var slide : Status = Status.new("slide") #
 
 var up : Trigger = Trigger.new("up") #
 var down : Trigger = Trigger.new("down") #
@@ -68,7 +69,7 @@ func update_status():
 	direction_sprite_changed = (direction_sprite*direction_pressed.x < 0)
 	if direction_sprite_changed:
 		# we need to change sprite direction
-		player.set_flip_h(direction_pressed.x >= 0)
+		player.set_flip_h(direction_pressed.x < 0)
 		direction_sprite *= -1
 
 	floor.ing = player.is_on_floor()

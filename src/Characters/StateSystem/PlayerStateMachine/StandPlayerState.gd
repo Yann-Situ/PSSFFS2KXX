@@ -44,14 +44,17 @@ func branch() -> State:
 		if (logic.direction_pressed.x == 0):
 			#return standstop_state
 			set_variation(2) # "standstop"
+			play_animation()
 			return self
 		set_variation(1) # "walk"
+		play_animation()
 
 	if logic.crouch.ing or (logic.crouch.can and logic.down.pressed):
 		return crouch_state
 	if logic.direction_sprite_changed:
 		#return turn_state
 		set_variation(3) # "turn"
+		play_animation()
 		return self
 
 	return self

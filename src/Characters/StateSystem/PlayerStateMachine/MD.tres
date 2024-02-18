@@ -6,7 +6,7 @@
 script = ExtResource("1_jj4dk")
 mass = 1.0
 velocity = Vector2(0, 0)
-friction = Vector2(0.25, 0.025)
+friction = Vector2(0.2, 0.025)
 time_scale = 1.0
 side_speed_max = 450.0
 side_instant_speed = 100.0

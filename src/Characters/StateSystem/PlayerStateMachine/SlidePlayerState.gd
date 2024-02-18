@@ -1,16 +1,17 @@
 extends PlayerMovementState
 
-@export var movement_modifier : MovementDataModifier ## Player movement modifier
+@onready var movement_modifier : MovementDataModifer
 #need to handle hit/collision box resizing + crouch parameters + jump
 
 @export var belong_state : State
 @export var action_state : State
 @export var fall_state : State
-@export var stand_state : State
+@export var crouch_state : State
+
+var end_slide = false # set to true at the end of animation # TODO
 
 func _ready():
-	animation_names = ["crouch_idle", "crouch_walk"]
-	assert(movement_modifier != null)
+	animation_names = ["slide", "end_slide"]
 
 func branch() -> State:
 	if logic.belong.ing:
@@ -20,18 +21,20 @@ func branch() -> State:
 	if !logic.floor.ing:
 		return fall_state
 
-	if logic.stand.can and !logic.down.pressed:
-		return stand_state
+	if end_slide:
+		return crouch_state
+	if !logic.down.pressed:
+		set_variation(1)
 	return self
 
 func enter(previous_state : State = null) -> State:
+	end_slide = false
 	var next_state = branch()
 	if next_state != self:
 		return next_state
 	play_animation()
-	logic.crouch.ing = true
+	logic.slide.ing = true
 	# change hitbox
-	print("CROUCH")
 	return next_state
 
 # func side_crouch_physics_process(delta, m : MovementData = movement):
@@ -62,13 +65,10 @@ func physics_process(delta) -> State:
 	# update player position
 	if player.physics_enabled:
 		movement_physics_process(delta, m)
-		
-	# TODO : weird handling of velocity due to being inside movementdata:
-	movement.velocity = m.velocity
 	return self
 
 
 ## Called just before entering the next State. Should not contain await or time
 ## stopping functions
 func exit():
-	logic.crouch.ing = false
+	logic.slide.ing = false
