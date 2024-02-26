@@ -5,6 +5,7 @@ extends PlayerMovementState
 @export var belong_state : State
 @export var action_state : State
 @export var fall_state : State
+@export var jump_state : State
 @export var stand_state : State
 @export var crouch_state : State
 
@@ -18,6 +19,10 @@ func branch() -> State:
 		return belong_state
 	if logic.action.can:
 		return action_state
+		
+	if logic.jump.can and logic.up.just_pressed: # TODO handle tolerance
+		#logic.floor.ing = false # TEMPORARY solution to avoid infinite recursion
+		return jump_state
 	if !logic.floor.ing:
 		return fall_state
 

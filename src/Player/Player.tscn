@@ -1464,7 +1464,7 @@ color_ramp = SubResource("53")
 
 [sub_resource type="CompressedTexture2D" id="55"]
 
-[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_m1710"]
+[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_j6nfb"]
 resource_local_to_scene = true
 particles_animation = true
 particles_anim_h_frames = 6
@@ -1778,7 +1778,7 @@ lifetime = 0.65
 explosiveness = 0.9
 
 [node name="GrindParticles" parent="PlayerEffects" instance=ExtResource("27")]
-material = SubResource("CanvasItemMaterial_m1710")
+material = SubResource("CanvasItemMaterial_j6nfb")
 position = Vector2(0, 16)
 
 [node name="Camera" type="Camera2D" parent="."]
