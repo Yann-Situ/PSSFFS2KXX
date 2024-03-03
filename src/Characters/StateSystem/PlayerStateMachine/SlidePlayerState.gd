@@ -1,6 +1,7 @@
 extends PlayerMovementState
 
-@onready var movement_modifier : MovementDataModifer
+@export var movement_modifier : MovementDataModifier
+@export var duration : float = 1.2 ## max time of the slide in seconds
 #need to handle hit/collision box resizing + crouch parameters + jump
 
 @export var belong_state : State
@@ -8,10 +9,16 @@ extends PlayerMovementState
 @export var fall_state : State
 @export var crouch_state : State
 
-var end_slide = false # set to true at the end of animation # TODO
+var end_slide = false # set to true after timer and if not pressed down # TODO
+@export var end_slide_finished = false # set to true at the end of animation ["end_slide"] # TODO
+@onready var timer : Timer
 
 func _ready():
-	animation_names = ["slide", "end_slide"]
+	animation_variations = [["begin_slide", "slide_loop"], ["end_slide"]]
+	timer = Timer.new()
+	timer.wait_time = duration
+	timer.timeout.connect(end_timer)
+	self.add_child(timer)
 
 func branch() -> State:
 	if logic.belong.ing:
@@ -21,21 +28,36 @@ func branch() -> State:
 	if !logic.floor.ing:
 		return fall_state
 
-	if end_slide:
-		return crouch_state
 	if !logic.down.pressed:
+		end_slide = true
+		timer.stop()
+	if end_slide and end_slide_finished:
+		return crouch_state
+	if end_slide:
 		set_variation(1)
+		play_animation()
 	return self
 
 func enter(previous_state : State = null) -> State:
 	end_slide = false
+	end_slide_finished = false 
+	
 	var next_state = branch()
 	if next_state != self:
 		return next_state
+	
+	set_variation(0)
 	play_animation()
+	print(self.name)
+	
 	logic.slide.ing = true
+	# timer = self.get_tree().create_timer(2.0)
+	timer.start()
 	# change hitbox
 	return next_state
+
+func end_timer():
+	end_slide = true
 
 # func side_crouch_physics_process(delta, m : MovementData = movement):
 # 	if logic.direction_pressed.x == 0.0:
@@ -71,4 +93,7 @@ func physics_process(delta) -> State:
 ## Called just before entering the next State. Should not contain await or time
 ## stopping functions
 func exit():
+	super()
+	if timer:
+		timer.stop()
 	logic.slide.ing = false

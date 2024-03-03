@@ -75,7 +75,7 @@ func update_status():
 	floor.ing = player.is_on_floor()
 	jump.can = floor.ing # TODO, more complex
 	# jump.ing controled by jump state
-	run.ing = abs(player.movement.velocity.x) > 10.0
+	run.ing = abs(player.movement.velocity.x) > 30.0
 
 	# update stand
 	crouch.can = floor.ing

@@ -22,7 +22,7 @@ func movement_physics_process(delta, m : MovementData = movement):
 
 	# charcter held is not treated here
 	# if character_holder != null:
-	# 	if character_holder.has_method("move_character"):
+	# 	if character_holder.has_method(["move_character"]):
 	# 		apply_forces_accel(delta)
 	# 		#set_velocity(S.velocity+speed_alterable.get_value())
 	# 		S.velocity = character_holder.move_character(self, S.velocity+speed_alterable.get_value(), delta)

@@ -12,14 +12,14 @@ extends PlayerMovementState
 var land_finished = false # set true at the end of the animation, set false at enter
 
 func _ready():
-	animation_names = ["land", "land_roll"]
+	animation_variations = [["land"], ["land_roll"]]
 
 func branch() -> State:
 	if logic.belong.ing:
 		return belong_state
 	if logic.action.can:
 		return action_state
-		
+
 	if logic.jump.can and logic.up.just_pressed: # TODO handle tolerance
 		#logic.floor.ing = false # TEMPORARY solution to avoid infinite recursion
 		return jump_state
@@ -38,7 +38,7 @@ func enter(previous_state : State = null) -> State:
 	play_animation()
 	logic.crouch.ing = true
 	# change hitbox
-	print("LAND")
+	print("land")
 
 	var timer = get_tree().create_timer(0.5) # TODO remove for animation handling
 	timer.timeout.connect(self.on_land_finished)
@@ -69,4 +69,5 @@ func physics_process(delta) -> State:
 ## stopping functions
 func exit():
 	# crouch set to false as the exit, but if next state is crouch, it will be reset to true at crouch.enter()
+	super()
 	logic.crouch.ing = false

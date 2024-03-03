@@ -9,7 +9,7 @@ extends PlayerMovementState
 @export var stand_state : State
 
 func _ready():
-	animation_names = ["crouch_idle", "crouch_walk"]
+	animation_variations = [["crouch_idle"], ["crouch_walk"]]
 	assert(movement_modifier != null)
 
 func branch() -> State:
@@ -31,7 +31,7 @@ func enter(previous_state : State = null) -> State:
 	play_animation()
 	logic.crouch.ing = true
 	# change hitbox
-	print("CROUCH")
+	print("crouch_idle")
 	return next_state
 
 # func side_crouch_physics_process(delta, m : MovementData = movement):
@@ -62,7 +62,7 @@ func physics_process(delta) -> State:
 	# update player position
 	if player.physics_enabled:
 		movement_physics_process(delta, m)
-		
+
 	# TODO : weird handling of velocity due to being inside movementdata:
 	movement.velocity = m.velocity
 	return self
@@ -71,4 +71,5 @@ func physics_process(delta) -> State:
 ## Called just before entering the next State. Should not contain await or time
 ## stopping functions
 func exit():
+	super()
 	logic.crouch.ing = false

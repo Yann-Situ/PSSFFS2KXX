@@ -1,9 +1,10 @@
-[gd_scene load_steps=32 format=3 uid="uid://7we1xpq4ltji"]
+[gd_scene load_steps=36 format=3 uid="uid://7we1xpq4ltji"]
 
 [ext_resource type="Script" path="res://src/Characters/StateSystem/PlayerStateMachine/FakePlayer.gd" id="1_hbiir"]
 [ext_resource type="Resource" uid="uid://syr8dljufw4f" path="res://src/Characters/StateSystem/PlayerStateMachine/MD.tres" id="2_g2sr2"]
 [ext_resource type="Script" path="res://src/Characters/StateSystem/StateMachine.gd" id="2_s0q2f"]
 [ext_resource type="Script" path="res://src/Characters/StateSystem/PlayerStateMachine/StatusLogicPlayer.gd" id="3_3ecvj"]
+[ext_resource type="Script" path="res://src/Characters/StateSystem/PlayerStateMachine/FakePlayerPolygon.gd" id="3_g6yp4"]
 [ext_resource type="Script" path="res://src/Characters/StateSystem/Test/InputControllerTest.gd" id="4_x6n7e"]
 [ext_resource type="Script" path="res://src/Characters/StateSystem/PlayerStateMachine/StandPlayerState.gd" id="5_vmqdh"]
 [ext_resource type="Script" path="res://src/Characters/StateSystem/PlayerStateMachine/JumpPlayerState.gd" id="6_r1y0j"]
@@ -12,6 +13,7 @@
 [ext_resource type="Texture2D" uid="uid://cuuns5ibc34gj" path="res://assets/art/ball/ball_test.png" id="9_cuwwp"]
 [ext_resource type="Script" path="res://src/Characters/StateSystem/PlayerStateMachine/MovementDataModifier.gd" id="11_15mqv"]
 [ext_resource type="Script" path="res://src/Characters/StateSystem/PlayerStateMachine/LandPlayerState.gd" id="11_v8vfk"]
+[ext_resource type="Script" path="res://src/Characters/StateSystem/PlayerStateMachine/SlidePlayerState.gd" id="14_e58dp"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_elcga"]
 size = Vector2(32, 32)
@@ -45,62 +47,102 @@ tracks/1/keys = {
 tracks/2/type = "value"
 tracks/2/imported = false
 tracks/2/enabled = true
-tracks/2/path = NodePath("Flipper/Polygon2D:scale")
+tracks/2/path = NodePath("Flipper/Polygon2D:rotation")
 tracks/2/interp = 1
 tracks/2/loop_wrap = true
 tracks/2/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 0,
-"values": [Vector2(1, 1)]
+"values": [0.0]
 }
 tracks/3/type = "value"
 tracks/3/imported = false
 tracks/3/enabled = true
-tracks/3/path = NodePath("Flipper/Polygon2D:rotation")
+tracks/3/path = NodePath("Flipper/Sprite2D:position")
 tracks/3/interp = 1
 tracks/3/loop_wrap = true
 tracks/3/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 0,
-"values": [0.0]
+"values": [Vector2(16, -5)]
 }
 tracks/4/type = "value"
 tracks/4/imported = false
 tracks/4/enabled = true
-tracks/4/path = NodePath("Flipper/Sprite2D:position")
+tracks/4/path = NodePath("Flipper:rotation")
 tracks/4/interp = 1
 tracks/4/loop_wrap = true
 tracks/4/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 0,
-"values": [Vector2(16, -5)]
+"values": [0.0]
 }
 tracks/5/type = "value"
 tracks/5/imported = false
 tracks/5/enabled = true
-tracks/5/path = NodePath("Flipper:rotation")
+tracks/5/path = NodePath("Flipper/Sprite2D:scale")
 tracks/5/interp = 1
 tracks/5/loop_wrap = true
 tracks/5/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 0,
-"values": [0.0]
+"values": [Vector2(1, 1)]
 }
-tracks/6/type = "value"
-tracks/6/imported = false
-tracks/6/enabled = true
-tracks/6/path = NodePath("Flipper/Sprite2D:scale")
-tracks/6/interp = 1
-tracks/6/loop_wrap = true
-tracks/6/keys = {
-"times": PackedFloat32Array(0),
+
+[sub_resource type="Animation" id="Animation_fkq1w"]
+resource_name = "begin_slide"
+length = 0.5
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Flipper/Polygon2D:offset")
+tracks/0/interp = 2
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.3, 0.4),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Vector2(0, 0), Vector2(0, 16), Vector2(0, 18)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Flipper/Polygon2D:follow_scale:value")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.2, 0.4),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Vector2(1, 1), Vector2(1, 0.5), Vector2(1, 0.46)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Flipper/Polygon2D:rotation")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0.2),
 "transitions": PackedFloat32Array(1),
 "update": 0,
-"values": [Vector2(1, 1)]
+"values": [0.0]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("Flipper/Sprite2D:position")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0, 0.2),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(16, -5), Vector2(16, 8)]
 }
 
 [sub_resource type="Animation" id="Animation_wse1u"]
@@ -122,7 +164,7 @@ tracks/0/keys = {
 tracks/1/type = "value"
 tracks/1/imported = false
 tracks/1/enabled = true
-tracks/1/path = NodePath("Flipper/Polygon2D:scale")
+tracks/1/path = NodePath("Flipper/Polygon2D:follow_scale:value")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
@@ -175,7 +217,7 @@ tracks/0/keys = {
 tracks/1/type = "value"
 tracks/1/imported = false
 tracks/1/enabled = true
-tracks/1/path = NodePath("Flipper/Polygon2D:scale")
+tracks/1/path = NodePath("Flipper/Polygon2D:follow_scale:value")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
@@ -227,11 +269,11 @@ tracks/0/keys = {
 tracks/1/type = "value"
 tracks/1/imported = false
 tracks/1/enabled = true
-tracks/1/path = NodePath("Flipper/Polygon2D:scale")
+tracks/1/path = NodePath("Flipper/Polygon2D:follow_scale:value")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
-"times": PackedFloat32Array(0, 0.3),
+"times": PackedFloat32Array(0, 0.2),
 "transitions": PackedFloat32Array(1.7411, 1),
 "update": 0,
 "values": [Vector2(1, 0.46), Vector2(1, 1)]
@@ -260,6 +302,18 @@ tracks/3/keys = {
 "update": 0,
 "values": [Vector2(16, 8), Vector2(16, -5)]
 }
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("StateMachine/Slide:end_slide_finished")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0.3),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
 
 [sub_resource type="Animation" id="Animation_k1qjm"]
 resource_name = "fall"
@@ -279,14 +333,14 @@ tracks/0/keys = {
 tracks/1/type = "value"
 tracks/1/imported = false
 tracks/1/enabled = true
-tracks/1/path = NodePath("Flipper/Polygon2D:scale")
+tracks/1/path = NodePath("Flipper/Polygon2D:follow_scale:value")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
-"times": PackedFloat32Array(0, 0.3, 0.7),
-"transitions": PackedFloat32Array(1, 2.46229, 0.732043),
+"times": PackedFloat32Array(0, 0.5),
+"transitions": PackedFloat32Array(2.46229, 0.732043),
 "update": 0,
-"values": [Vector2(1, 0.92), Vector2(1, 0.92), Vector2(0.84, 1.1)]
+"values": [Vector2(1, 0.92), Vector2(0.84, 1.1)]
 }
 tracks/2/type = "value"
 tracks/2/imported = false
@@ -332,7 +386,7 @@ tracks/0/keys = {
 tracks/1/type = "value"
 tracks/1/imported = false
 tracks/1/enabled = true
-tracks/1/path = NodePath("Flipper/Polygon2D:scale")
+tracks/1/path = NodePath("Flipper/Polygon2D:follow_scale:value")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
@@ -384,7 +438,7 @@ tracks/0/keys = {
 tracks/1/type = "value"
 tracks/1/imported = false
 tracks/1/enabled = true
-tracks/1/path = NodePath("Flipper/Polygon2D:scale")
+tracks/1/path = NodePath("Flipper/Polygon2D:follow_scale:value")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
@@ -461,7 +515,7 @@ tracks/1/keys = {
 tracks/2/type = "value"
 tracks/2/imported = false
 tracks/2/enabled = true
-tracks/2/path = NodePath("Flipper/Polygon2D:scale")
+tracks/2/path = NodePath("Flipper/Polygon2D:follow_scale:value")
 tracks/2/interp = 1
 tracks/2/loop_wrap = true
 tracks/2/keys = {
@@ -513,11 +567,11 @@ tracks/0/keys = {
 tracks/1/type = "value"
 tracks/1/imported = false
 tracks/1/enabled = true
-tracks/1/path = NodePath("Flipper/Polygon2D:scale")
+tracks/1/path = NodePath("Flipper/Polygon2D:follow_scale:value")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
-"times": PackedFloat32Array(0, 0.4, 0.6, 0.7),
+"times": PackedFloat32Array(0, 0.3, 0.5, 0.7),
 "transitions": PackedFloat32Array(0.732043, 1.86607, 1, 1),
 "update": 0,
 "values": [Vector2(0.84, 1.1), Vector2(0.84, 1), Vector2(1, 0.92), Vector2(1, 0.92)]
@@ -565,14 +619,14 @@ tracks/0/keys = {
 tracks/1/type = "value"
 tracks/1/imported = false
 tracks/1/enabled = true
-tracks/1/path = NodePath("Flipper/Polygon2D:scale")
+tracks/1/path = NodePath("Flipper/Polygon2D:follow_scale:value")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
-"times": PackedFloat32Array(0, 0.2),
-"transitions": PackedFloat32Array(1, 1.46409),
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1.46409),
 "update": 0,
-"values": [Vector2(1, 1), Vector2(1, 0.5)]
+"values": [Vector2(1, 0.5)]
 }
 tracks/2/type = "value"
 tracks/2/imported = false
@@ -617,7 +671,7 @@ tracks/0/keys = {
 tracks/1/type = "value"
 tracks/1/imported = false
 tracks/1/enabled = true
-tracks/1/path = NodePath("Flipper/Polygon2D:scale")
+tracks/1/path = NodePath("Flipper/Polygon2D:follow_scale:value")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
@@ -664,8 +718,8 @@ tracks/4/keys = {
 }
 
 [sub_resource type="Animation" id="Animation_sg2ls"]
-resource_name = "slide"
-length = 1.2
+resource_name = "slide_loop"
+length = 0.8
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
@@ -673,22 +727,22 @@ tracks/0/path = NodePath("Flipper/Polygon2D:offset")
 tracks/0/interp = 2
 tracks/0/loop_wrap = true
 tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.3, 0.4, 0.7),
-"transitions": PackedFloat32Array(1, 1, 1, 1),
+"times": PackedFloat32Array(0, 0.3),
+"transitions": PackedFloat32Array(1, 1),
 "update": 0,
-"values": [Vector2(0, 0), Vector2(0, 16), Vector2(0, 18), Vector2(0, 18)]
+"values": [Vector2(0, 18), Vector2(0, 18)]
 }
 tracks/1/type = "value"
 tracks/1/imported = false
 tracks/1/enabled = true
-tracks/1/path = NodePath("Flipper/Polygon2D:scale")
+tracks/1/path = NodePath("Flipper/Polygon2D:follow_scale:value")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
-"times": PackedFloat32Array(0, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9, 1, 1.1),
-"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1),
 "update": 0,
-"values": [Vector2(1, 1), Vector2(1, 0.5), Vector2(1, 0.46), Vector2(1, 0.48), Vector2(1, 0.46), Vector2(1, 0.46), Vector2(1, 0.48), Vector2(1, 0.47), Vector2(1, 0.46), Vector2(1, 0.46)]
+"values": [Vector2(1, 0.46), Vector2(1, 0.48), Vector2(1, 0.46), Vector2(1, 0.46), Vector2(1, 0.48), Vector2(1, 0.47), Vector2(1, 0.46), Vector2(1, 0.46)]
 }
 tracks/2/type = "value"
 tracks/2/imported = false
@@ -697,7 +751,7 @@ tracks/2/path = NodePath("Flipper/Polygon2D:rotation")
 tracks/2/interp = 1
 tracks/2/loop_wrap = true
 tracks/2/keys = {
-"times": PackedFloat32Array(0.2),
+"times": PackedFloat32Array(0.1),
 "transitions": PackedFloat32Array(1),
 "update": 0,
 "values": [0.0]
@@ -709,10 +763,10 @@ tracks/3/path = NodePath("Flipper/Sprite2D:position")
 tracks/3/interp = 1
 tracks/3/loop_wrap = true
 tracks/3/keys = {
-"times": PackedFloat32Array(0, 0.2, 0.5, 0.7, 0.9, 1.1),
-"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1),
+"times": PackedFloat32Array(0.1, 0.3, 0.5, 0.7),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
 "update": 0,
-"values": [Vector2(16, -5), Vector2(16, 8), Vector2(16, 7), Vector2(16, 8), Vector2(16, 7), Vector2(16, 8)]
+"values": [Vector2(16, 7), Vector2(16, 8), Vector2(16, 7), Vector2(16, 8)]
 }
 
 [sub_resource type="Animation" id="Animation_b7rib"]
@@ -733,14 +787,14 @@ tracks/0/keys = {
 tracks/1/type = "value"
 tracks/1/imported = false
 tracks/1/enabled = true
-tracks/1/path = NodePath("Flipper/Polygon2D:scale")
+tracks/1/path = NodePath("Flipper/Polygon2D:follow_scale:value")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
-"times": PackedFloat32Array(0, 0.1, 0.4, 0.5),
-"transitions": PackedFloat32Array(0.287175, 1, 1, 1),
+"times": PackedFloat32Array(0, 0.1, 0.4),
+"transitions": PackedFloat32Array(0.287175, 1, 1),
 "update": 0,
-"values": [Vector2(1, 0.9), Vector2(1, 0.9), Vector2(1, 0.9), Vector2(1, 1)]
+"values": [Vector2(1, 0.9), Vector2(1, 0.9), Vector2(1, 1)]
 }
 tracks/2/type = "value"
 tracks/2/imported = false
@@ -785,7 +839,7 @@ tracks/0/keys = {
 tracks/1/type = "value"
 tracks/1/imported = false
 tracks/1/enabled = true
-tracks/1/path = NodePath("Flipper/Polygon2D:scale")
+tracks/1/path = NodePath("Flipper/Polygon2D:follow_scale:value")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
@@ -838,7 +892,7 @@ tracks/0/keys = {
 tracks/1/type = "value"
 tracks/1/imported = false
 tracks/1/enabled = true
-tracks/1/path = NodePath("Flipper/Polygon2D:scale")
+tracks/1/path = NodePath("Flipper/Polygon2D:follow_scale:value")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
@@ -887,6 +941,7 @@ tracks/4/keys = {
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_f8044"]
 _data = {
 "RESET": SubResource("Animation_upwdd"),
+"begin_slide": SubResource("Animation_fkq1w"),
 "crouch_idle": SubResource("Animation_wse1u"),
 "crouch_walk": SubResource("Animation_7qhrd"),
 "end_slide": SubResource("Animation_k3s2o"),
@@ -897,7 +952,7 @@ _data = {
 "jump": SubResource("Animation_ah2ul"),
 "land": SubResource("Animation_dk0i6"),
 "land_roll": SubResource("Animation_ej5ur"),
-"slide": SubResource("Animation_sg2ls"),
+"slide_loop": SubResource("Animation_sg2ls"),
 "standstop": SubResource("Animation_b7rib"),
 "turn": SubResource("Animation_xea1r"),
 "walk": SubResource("Animation_oce65")
@@ -912,6 +967,16 @@ side_speed_max = 0.7
 side_instant_speed = 0.5
 side_instant_speed_return_thresh = 0.7
 side_accel = 0.8
+
+[sub_resource type="Resource" id="Resource_80gcw"]
+script = ExtResource("11_15mqv")
+mass = 1.0
+friction = 0.0
+time_scale = 1.0
+side_speed_max = 1.0
+side_instant_speed = 1.0
+side_instant_speed_return_thresh = 1.0
+side_accel = 0.0
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_wdegp"]
 size = Vector2(2986, 20)
@@ -936,6 +1001,7 @@ libraries = {
 
 [node name="Polygon2D" type="Polygon2D" parent="FakePlayer/Flipper"]
 polygon = PackedVector2Array(-16, -16, 16, -16, 16, 16, -16, 16)
+script = ExtResource("3_g6yp4")
 
 [node name="Sprite2D" type="Sprite2D" parent="FakePlayer/Flipper"]
 position = Vector2(16, -5)
@@ -971,7 +1037,7 @@ script = ExtResource("4_x6n7e")
 script = ExtResource("5_vmqdh")
 jump_state = NodePath("../Jump")
 fall_state = NodePath("../Fall")
-slide_state = NodePath("../Crouch")
+slide_state = NodePath("../Slide")
 standstop_state = NodePath(".")
 crouch_state = NodePath("../Crouch")
 turn_state = NodePath(".")
@@ -981,10 +1047,13 @@ logic = NodePath("../StatusLogic")
 [node name="Jump" type="Node" parent="FakePlayer/StateMachine" node_paths=PackedStringArray("land_state", "fall_state", "player", "logic")]
 script = ExtResource("6_r1y0j")
 jump_speed = -430.0
+jump_speed_up_cancelled_ratio = null
+jump_speed_down_cancelled_ratio = null
 land_state = NodePath("../Land")
 fall_state = NodePath("../Fall")
 player = NodePath("../..")
 logic = NodePath("../StatusLogic")
+variation = null
 
 [node name="Fall" type="Node" parent="FakePlayer/StateMachine" node_paths=PackedStringArray("land_state", "player", "logic")]
 script = ExtResource("7_0nlqc")
@@ -1005,6 +1074,14 @@ script = ExtResource("11_v8vfk")
 fall_state = NodePath("../Fall")
 jump_state = NodePath("../Jump")
 stand_state = NodePath("../Stand")
+crouch_state = NodePath("../Crouch")
+player = NodePath("../..")
+logic = NodePath("../StatusLogic")
+
+[node name="Slide" type="Node" parent="FakePlayer/StateMachine" node_paths=PackedStringArray("fall_state", "crouch_state", "player", "logic")]
+script = ExtResource("14_e58dp")
+movement_modifier = SubResource("Resource_80gcw")
+fall_state = NodePath("../Fall")
 crouch_state = NodePath("../Crouch")
 player = NodePath("../..")
 logic = NodePath("../StatusLogic")

@@ -54,7 +54,7 @@ func _ready():
 		# https://github.com/godotengine/godot/issues/21789
 		## Workaround that only works for variables with predefined values:
 		var v = self.get(property["name"])
-		print(property["name"]+": "+str(v))
+		# print(property["name"]+": "+str(v))
 		if v is Status:
 			status_dict[v._name] = v
 		elif v is Trigger:

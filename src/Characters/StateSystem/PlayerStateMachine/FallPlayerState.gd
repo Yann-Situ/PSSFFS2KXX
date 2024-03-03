@@ -5,13 +5,13 @@ extends PlayerMovementState
 @export var land_state : State
 @export var fallwall_state : State
 
-# var belong : Status = Status.new("belong") # appropriate declaration
-# var action : Status = Status.new("action") # appropriate declaration
-# var floor : Status = Status.new("floor") # appropriate declaration
-# var wall : Status = Status.new("wall") # appropriate declaration
+# var belong : Status = Status.new(["belong"]) # appropriate declaration
+# var action : Status = Status.new(["belong"]) # appropriate declaration
+# var floor : Status = Status.new(["belong"]) # appropriate declaration
+# var wall : Status = Status.new(["belong"]) # appropriate declaration
 
 func _ready():
-	animation_names = ["fall", "fall_loop"]
+	animation_variations = [["fall"], ["fall_loop"]]
 
 func branch() -> State:
 	if logic.belong.ing:

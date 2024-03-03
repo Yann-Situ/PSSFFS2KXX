@@ -11,19 +11,19 @@ extends PlayerMovementState
 @export var fallwall_state : State
 @export var fall_state : State
 
-# var jump : Status = Status.new("jump") # appropriate declaration
-# var belong : Status = Status.new("belong") # appropriate declaration
-# var action : Status = Status.new("action") # appropriate declaration
-# var floor : Status = Status.new("floor") # appropriate declaration
-# var wall : Status = Status.new("wall") # appropriate declaration
+# var jump : Status = Status.new(["jump"]) # appropriate declaration
+# var belong : Status = Status.new(["jump"]) # appropriate declaration
+# var action : Status = Status.new(["jump"]) # appropriate declaration
+# var floor : Status = Status.new(["jump"]) # appropriate declaration
+# var wall : Status = Status.new(["jump"]) # appropriate declaration
 #
-# var up : Trigger = Trigger.new("up") # appropriate declaration
+# var up : Trigger = Trigger.new(["jump"]) # appropriate declaration
 var first_frame = false # true if we just enter the jump state
 var up_cancelled = false # true if this jump was cancelled by releasing up_button
 var cancelled = false # true if this jump was cancelled by pressing down_button or releasing up_button
 
 func _ready():
-	animation_names = ["jump", "turn_jump", "frontflip"]
+	animation_variations = [["jump"], ["turn_jump"], ["frontflip"]]
 
 func branch() -> State:
 	if logic.belong.ing:
@@ -51,13 +51,13 @@ func enter(previous_state : State = null) -> State:
 	movement.velocity.y += jump_speed
 	if !logic.up.pressed:
 		movement.velocity.y *= jump_speed_up_cancelled_ratio
-	# S.get_node("ToleranceJumpPressTimer").stop() # TODO handle timers
-	# S.get_node("CanJumpTimer").start(S.countdown_jump)
+	# S.get_node(["jump"]).stop() # TODO handle timers
+	# S.get_node(["jump"]).start(S.countdown_jump)
 
 	#player.PlayerEffects.dust_start()
 	#player.PlayerEffects.jump_start()
 
-	print("JUMP")
+	print("jump")
 	return next_state
 
 ## Called by the parent StateMachine during the _physics_process call, after
