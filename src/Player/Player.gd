@@ -255,26 +255,19 @@ func _process(delta):
 
 		ShootPredictor.draw_prediction(Vector2.ZERO, shoot,
 			(Shooter.global_gravity_scale_TODO*Global.default_gravity.y)*Vector2.DOWN)
-		Camera.set_offset_from_type("aim",target)
+		Camera.set_offset_from_aim(target)
 		if shoot.x > 0 :
 			S.aim_direction = 1
 		else :
 			S.aim_direction = -1
 	elif S.is_crouching :
-		var tx = Camera.move_max_offset.x * smoothstep(0.0, \
-			Camera.move_speed_threshold.x, abs(S.velocity.x)) \
-			* sign(S.velocity.x)
-		Camera.set_offset_from_type("move", Vector2(tx,Camera.crouch_offset), 0.2)
+		Camera.set_offset_x_from_velocity(S.velocity.x, 0.4)
+		Camera.set_offset_y_from_crouch(0.2)
 	elif S.is_moving :
-		var tx = Camera.move_max_offset.x * smoothstep(0.0, \
-			Camera.move_speed_threshold.x, abs(S.velocity.x)) \
-			* sign(S.velocity.x)
-		var ty = Camera.move_max_offset.y * smoothstep(0.0, \
-			Camera.move_speed_threshold.y, abs(S.velocity.y)) \
-			* sign(S.velocity.y)
-		Camera.set_offset_from_type("move", Vector2(tx,ty), 0.4)
+		Camera.set_offset_x_from_velocity(S.velocity.x, 0.4)
+		Camera.set_offset_y_from_velocity(S.velocity.y, 0.4)
 	else :
-		Camera.set_offset_from_type("normal")
+		Camera.set_offset_zero()
 
 ################################################################################
 # For physicbody
