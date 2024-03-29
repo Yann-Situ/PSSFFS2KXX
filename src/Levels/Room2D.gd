@@ -1,3 +1,4 @@
+@tool
 @icon("res://assets/art/icons/house.png")
 extends Node2D
 class_name Room2D
@@ -5,15 +6,39 @@ class_name Room2D
 signal is_exiting_room
 signal is_exiting_level
 
-@export var limit_left : int = -10000000
-@export var limit_top : int = -10000000
-@export var limit_right : int = 10000000
-@export var limit_bottom : int = 10000000
+@export var limit_left : int = -10000000 # : set = set_limit_left
+@export var limit_top : int = -10000000 # : set = set_limit_top
+@export var limit_right : int = 10000000 # : set = set_limit_right
+@export var limit_bottom : int = 10000000 # : set = set_limit_bottom
+
+#func set_limit_left(v):
+#	limit_left = v
+#	print("OKLEFT")
+#	if Engine.is_editor_hint():
+#		print("OKLEFT2")
+#		queue_redraw()
+#func set_limit_top(v):
+#	limit_top = v
+#	if Engine.is_editor_hint():
+#		queue_redraw()
+#func set_limit_right(v):
+#	limit_right = v
+#	if Engine.is_editor_hint():
+#		queue_redraw()
+#func set_limit_bottom(v):
+#	limit_bottom = v
+#	if Engine.is_editor_hint():
+#		queue_redraw()
 
 var P = null # Player, set in enter_tree
 var portals : Dictionary = {} : get = get_portals
 
 @export var meta_player : NodePath ## sould be set by the upper level
+
+func _draw():
+	draw_rect(Rect2(limit_left,limit_top,limit_right-limit_left,limit_bottom-limit_top),Color.DEEP_PINK, false, 4.0)
+func _process(_delta : float)->void: # set_process(false) is called when not in editor
+	queue_redraw()
 
 func update_camera_limit():
 	P.Camera.limit_left = limit_left
@@ -43,6 +68,8 @@ func unlock_portals(): # necessary because of issue : https://github.com/godoten
 ################################################################################
 
 func _enter_tree():
+	if Engine.is_editor_hint():
+		return
 	# check if it has a Player node as a child. If not, create a Player node
 	# and assign it to meta_player
 	print(name + " enter_tree")
@@ -62,6 +89,10 @@ func _enter_tree():
 	assert(is_instance_valid(P))
 
 func _ready():
+	if Engine.is_editor_hint():
+		set_process(true) # to enable draw
+		return
+	set_process(false)
 	print(name + " ready")
 	var portal_list = get_node("Portals").get_children() #TODO look for a better way to list Portals
 	for portal in portal_list:
