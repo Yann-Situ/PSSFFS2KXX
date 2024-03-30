@@ -98,6 +98,7 @@ texture_scale = 2.56
 metadata/_edit_lock_ = true
 
 [node name="LightAdd" type="PointLight2D" parent="." index="5"]
+visible = false
 z_as_relative = false
 position = Vector2(-3.8147e-06, 7.62939e-06)
 scale = Vector2(1.11855, 1.11855)

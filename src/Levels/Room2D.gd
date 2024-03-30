@@ -36,6 +36,8 @@ var portals : Dictionary = {} : get = get_portals
 @export var meta_player : NodePath ## sould be set by the upper level
 
 func _draw():
+	if not Engine.is_editor_hint():
+		return
 	draw_rect(Rect2(limit_left,limit_top,limit_right-limit_left,limit_bottom-limit_top),Color.DEEP_PINK, false, 4.0)
 func _process(_delta : float)->void: # set_process(false) is called when not in editor
 	queue_redraw()
