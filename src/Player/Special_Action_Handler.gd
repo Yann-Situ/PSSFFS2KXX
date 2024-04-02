@@ -162,6 +162,7 @@ func can_stand():
 	cast(rays[3])#up bwd
 	return !(rays[2].result or rays[3].result)
 
+# TODO weird call to S, it should be the other way aroud
 func can_dunkjump():
 	# update_basket()
 	return S.dunkjump_basket != null # S.dunkjump_basket is set by the selectors

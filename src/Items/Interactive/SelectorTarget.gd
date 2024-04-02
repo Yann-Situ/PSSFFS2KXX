@@ -3,7 +3,7 @@ extends Sprite2D
 class_name SelectorTarget
 
 @export var tween_duration : float = 0.3#s
-var selection_node = null
+var target_selectable : Selectable = null
 var tween_self_modulate : Tween
 var tween_position : Tween
 
@@ -11,13 +11,14 @@ func _ready():
 	set_process(false)
 	self.self_modulate = Color.TRANSPARENT
 
+## function that is called by Selector or TargetHandler
 func update_selection(selection : Selectable):
-	if selection != selection_node:
+	if selection != target_selectable:
 		if selection == null :
-			selection_node = null
+			target_selectable = null
 			deselect()
 		else :
-			selection_node = selection
+			target_selectable = selection
 			select()
 
 func select():
@@ -25,7 +26,7 @@ func select():
 	if tween_position:
 		tween_position.kill()
 	tween_position = self.create_tween()
-	tween_position.tween_method(self.tween_position_follow_property.bind(global_position, selection_node),\
+	tween_position.tween_method(self.tween_position_follow_property.bind(global_position, target_selectable),\
 	0.0, 1.0, tween_duration)\
 	.set_trans(Tween.TRANS_CUBIC).set_ease(Tween.EASE_OUT)
 	tween_position.tween_callback(self._on_tween_position_completed)
@@ -54,13 +55,13 @@ func tween_position_follow_property(t : float, src_pos : Vector2, trg : Node2D) 
 	self.global_position = src_pos.lerp(trg.global_position,t)
 
 #func _draw():
-#	if selection_node != null :
+#	if target_selectable != null :
 #		draw_circle(Vector2.ZERO, 16, Color(1.0,0.8,0.6,1.0))
 #
 func _process(delta):
-	assert(selection_node != null) # WARNING it seems to work but beware!
-	global_position = selection_node.global_position
+	assert(target_selectable != null) # WARNING it seems to work but beware!
+	global_position = target_selectable.global_position
 
 func _on_tween_position_completed():
-	if selection_node != null:
+	if target_selectable != null:
 		set_process(true)

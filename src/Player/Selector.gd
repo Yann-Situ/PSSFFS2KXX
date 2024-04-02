@@ -1,5 +1,6 @@
 extends Node2D
 class_name Selectors
+
 @export var P: Player
 @onready var S = P.get_state_node()
 
@@ -19,23 +20,23 @@ func _ready():
 
 ## this function seems to be called by the special action handler. I need to rework all this to make
 # it understandable and easy. Maybe decorelate rays and selectors. TODO
-func update_selection(type : int, selection_node : Selectable):
-	var pre_selection_node = selector_targets[type].selection_node
-	if pre_selection_node != selection_node:
-		if pre_selection_node != null:
-			pre_selection_node.set_selection(type, false)
-		if selection_node != null:
-			selection_node.set_selection(type, true)
+func update_selection(type : int, target : Selectable):
+	var pre_target = selector_targets[type].target_selectable
+	if pre_target != target:
+		if pre_target != null:
+			pre_target.set_selection(type, false)
+		if target != null:
+			target.set_selection(type, true)
 
 		var new_target = null
-		if selection_node != null :
-			new_target = selection_node.get_parent() # Warning: a call to get_parent(), maybe rework Selectables to add a get_interesting_parent()
+		if target != null :
+			new_target = target.parent_node
 		match type :
 			Selectable.SelectionType.SHOOT :
 				S.shoot_basket = new_target
 			Selectable.SelectionType.DASH :
 				S.dunkdash_basket = new_target
 			Selectable.SelectionType.JUMP :
-					S.dunkjump_basket = new_target
+				S.dunkjump_basket = new_target
 
-	selector_targets[type].update_selection(selection_node)
+	selector_targets[type].update_selection(target)

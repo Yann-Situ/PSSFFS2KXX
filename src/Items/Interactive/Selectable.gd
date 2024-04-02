@@ -3,6 +3,8 @@ extends CollisionObject2D
 class_name Selectable
 # Selectable.gd
 
+@export var parent_node : Node = get_parent() ## the node that is associated to this selectable, for example the basket node
+
 @export var is_shoot_selectable = true : set = set_is_shoot_selectable
 @export var is_dash_selectable = true : set = set_is_dash_selectable
 @export var is_jump_selectable = true : set = set_is_jump_selectable
@@ -50,6 +52,6 @@ func set_selection(type : int, value : bool):
 			printerr("set_select(value, type) with a non existent type.")
 	selected = shoot_selected or dash_selected or jump_selected
 
-	if changed :
-		if get_parent().has_method("set_selection"):
-			get_parent().set_selection(type, value)
+	if changed and parent_node != null:
+		if parent_node.has_method("set_selection"):
+			parent_node.set_selection(type, value)

@@ -2,6 +2,7 @@
 extends Node
 
 @export var max_trail_points : int = 5000
+@export var DEBUG : bool = true
 
 var default_gravity = Vector2(0.0,ProjectSettings.get_setting("physics/2d/default_gravity")) # pix/s²
 var gravity_alterer = AltererAdditive.new(default_gravity)
