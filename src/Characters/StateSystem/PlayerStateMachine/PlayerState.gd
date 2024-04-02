@@ -44,4 +44,5 @@ func enter(previous_state : State = null) -> State:
 	return next_state
 
 func exit():
+	variation = 0
 	variation_playing = -1
