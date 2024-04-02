@@ -55,38 +55,39 @@ func process(delta) -> State:
 func physics_process(delta) -> State:
 	return self
 
-## return the an array[string] of Status variable names that are required by this
-## State node.
-func get_status_requirements() -> Array[String]:
-	var properties = get_property_list()
-	# properties is an array of dictionaries with:
-	# 'name' is the property's name, as a String;
-	# 'class_name' is an empty StringName, unless the property is @GlobalScope.TYPE_OBJECT and it inherits from a class;
-	# 'type' is the property's type, as an int (see Variant.Type);
-	# 'hint' is how the property is meant to be edited (see PropertyHint);
-	# 'hint_string' depends on the hint (see PropertyHint);
-	# 'usage' is a combination of PropertyUsageFlags.
-	var requirements : Array[String] = []
-	for property in properties:
-		# if property["class_name"] == "Status": # doesn't work for some reason
-		# 	requirements.push_back(property["name"])
-		# TODO Wait for Godot 4.3 and get_global_name, or a rework of is_class:
-		# https://github.com/godotengine/godot/pull/80487
-		# https://github.com/godotengine/godot/issues/21789
-		## Workaround that only works for exported variables:
-		# if property["hint_string"] == "Trigger":
-		# 	requirements.push_back(property["name"])
-		## Workaround that only works for variables with predefined values:
-		if self.get(property["name"]) is Status:
-			requirements.push_back(property["name"])
-	return requirements
-
-## return the an Array[string] of Trigger variable names that are required by this
-## State node. See get_status_requirements() code for some current issues on this implementation
-func get_trigger_requirements():
-	var properties = get_property_list()
-	var requirements : Array[String] = []
-	for property in properties:
-		if self.get(property["name"]) is Trigger:
-			requirements.push_back(property["name"])
-	return requirements
+# OUTDATED:
+# ## return the an array[string] of Status variable names that are required by this
+# ## State node.
+# func get_status_requirements() -> Array[String]:
+# 	var properties = get_property_list()
+# 	# properties is an array of dictionaries with:
+# 	# 'name' is the property's name, as a String;
+# 	# 'class_name' is an empty StringName, unless the property is @GlobalScope.TYPE_OBJECT and it inherits from a class;
+# 	# 'type' is the property's type, as an int (see Variant.Type);
+# 	# 'hint' is how the property is meant to be edited (see PropertyHint);
+# 	# 'hint_string' depends on the hint (see PropertyHint);
+# 	# 'usage' is a combination of PropertyUsageFlags.
+# 	var requirements : Array[String] = []
+# 	for property in properties:
+# 		# if property["class_name"] == "Status": # doesn't work for some reason
+# 		# 	requirements.push_back(property["name"])
+# 		# TODO Wait for Godot 4.3 and get_global_name, or a rework of is_class:
+# 		# https://github.com/godotengine/godot/pull/80487
+# 		# https://github.com/godotengine/godot/issues/21789
+# 		## Workaround that only works for exported variables:
+# 		# if property["hint_string"] == "Trigger":
+# 		# 	requirements.push_back(property["name"])
+# 		## Workaround that only works for variables with predefined values:
+# 		if self.get(property["name"]) is Status:
+# 			requirements.push_back(property["name"])
+# 	return requirements
+#
+# ## return the an Array[string] of Trigger variable names that are required by this
+# ## State node. See get_status_requirements() code for some current issues on this implementation
+# func get_trigger_requirements():
+# 	var properties = get_property_list()
+# 	var requirements : Array[String] = []
+# 	for property in properties:
+# 		if self.get(property["name"]) is Trigger:
+# 			requirements.push_back(property["name"])
+# 	return requirements
