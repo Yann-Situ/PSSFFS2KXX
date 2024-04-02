@@ -195,7 +195,6 @@ func power_p(player,delta):
 	if holder == Global.get_current_room() :
 		attract_alterer.set_value(attract_force*(player.global_position - global_position).normalized())
 
-
 func power_jp(player,delta):
 	if holder == Global.get_current_room() :
 		add_force(attract_alterer)

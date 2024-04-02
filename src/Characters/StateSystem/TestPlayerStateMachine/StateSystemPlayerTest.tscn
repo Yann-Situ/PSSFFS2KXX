@@ -1,19 +1,19 @@
 [gd_scene load_steps=36 format=3 uid="uid://7we1xpq4ltji"]
 
-[ext_resource type="Script" path="res://src/Characters/StateSystem/PlayerStateMachine/FakePlayer.gd" id="1_hbiir"]
-[ext_resource type="Resource" uid="uid://syr8dljufw4f" path="res://src/Characters/StateSystem/PlayerStateMachine/MD.tres" id="2_g2sr2"]
-[ext_resource type="Script" path="res://src/Characters/StateSystem/StateMachine.gd" id="2_s0q2f"]
-[ext_resource type="Script" path="res://src/Characters/StateSystem/PlayerStateMachine/StatusLogicPlayer.gd" id="3_3ecvj"]
-[ext_resource type="Script" path="res://src/Characters/StateSystem/PlayerStateMachine/FakePlayerPolygon.gd" id="3_g6yp4"]
-[ext_resource type="Script" path="res://src/Characters/StateSystem/Test/InputControllerTest.gd" id="4_x6n7e"]
-[ext_resource type="Script" path="res://src/Characters/StateSystem/PlayerStateMachine/StandPlayerState.gd" id="5_vmqdh"]
-[ext_resource type="Script" path="res://src/Characters/StateSystem/PlayerStateMachine/JumpPlayerState.gd" id="6_r1y0j"]
-[ext_resource type="Script" path="res://src/Characters/StateSystem/PlayerStateMachine/FallPlayerState.gd" id="7_0nlqc"]
-[ext_resource type="Script" path="res://src/Characters/StateSystem/PlayerStateMachine/CrouchPlayerState.gd" id="8_757vv"]
-[ext_resource type="Texture2D" uid="uid://cuuns5ibc34gj" path="res://assets/art/ball/ball_test.png" id="9_cuwwp"]
-[ext_resource type="Script" path="res://src/Characters/StateSystem/PlayerStateMachine/MovementDataModifier.gd" id="11_15mqv"]
-[ext_resource type="Script" path="res://src/Characters/StateSystem/PlayerStateMachine/LandPlayerState.gd" id="11_v8vfk"]
-[ext_resource type="Script" path="res://src/Characters/StateSystem/PlayerStateMachine/SlidePlayerState.gd" id="14_e58dp"]
+[ext_resource type="Script" path="res://src/Characters/StateSystem/TestPlayerStateMachine/FakePlayer.gd" id="1_jpwa8"]
+[ext_resource type="Resource" uid="uid://syr8dljufw4f" path="res://src/Characters/StateSystem/TestPlayerStateMachine/MD.tres" id="2_h73fj"]
+[ext_resource type="Script" path="res://src/Characters/StateSystem/TestPlayerStateMachine/FakePlayerPolygon.gd" id="3_iko4c"]
+[ext_resource type="Texture2D" uid="uid://cuuns5ibc34gj" path="res://assets/art/ball/ball_test.png" id="4_evkw0"]
+[ext_resource type="Script" path="res://src/Characters/StateSystem/StateMachine.gd" id="5_xwlcx"]
+[ext_resource type="Script" path="res://src/Characters/StateSystem/TestPlayerStateMachine/StatusLogicPlayer.gd" id="6_wkcug"]
+[ext_resource type="Script" path="res://src/Characters/StateSystem/Test/InputControllerTest.gd" id="7_07fpl"]
+[ext_resource type="Script" path="res://src/Characters/StateSystem/TestPlayerStateMachine/StandPlayerState.gd" id="8_b4u4i"]
+[ext_resource type="Script" path="res://src/Characters/StateSystem/TestPlayerStateMachine/JumpPlayerState.gd" id="9_ee502"]
+[ext_resource type="Script" path="res://src/Characters/StateSystem/TestPlayerStateMachine/FallPlayerState.gd" id="10_5cdyi"]
+[ext_resource type="Script" path="res://src/Characters/StateSystem/TestPlayerStateMachine/CrouchPlayerState.gd" id="11_7lnpk"]
+[ext_resource type="Script" path="res://src/Characters/StateSystem/TestPlayerStateMachine/MovementDataModifier.gd" id="12_ln2rm"]
+[ext_resource type="Script" path="res://src/Characters/StateSystem/TestPlayerStateMachine/LandPlayerState.gd" id="13_wfw28"]
+[ext_resource type="Script" path="res://src/Characters/StateSystem/TestPlayerStateMachine/SlidePlayerState.gd" id="14_i3xj1"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_elcga"]
 size = Vector2(32, 32)
@@ -959,7 +959,7 @@ _data = {
 }
 
 [sub_resource type="Resource" id="Resource_kwrvl"]
-script = ExtResource("11_15mqv")
+script = ExtResource("12_ln2rm")
 mass = 1.0
 friction = 1.0
 time_scale = 1.0
@@ -969,7 +969,7 @@ side_instant_speed_return_thresh = 0.7
 side_accel = 0.8
 
 [sub_resource type="Resource" id="Resource_80gcw"]
-script = ExtResource("11_15mqv")
+script = ExtResource("12_ln2rm")
 mass = 1.0
 friction = 0.0
 time_scale = 1.0
@@ -985,8 +985,8 @@ size = Vector2(2986, 20)
 
 [node name="FakePlayer" type="CharacterBody2D" parent="." node_paths=PackedStringArray("animation_player")]
 position = Vector2(320, 0)
-script = ExtResource("1_hbiir")
-movement = ExtResource("2_g2sr2")
+script = ExtResource("1_jpwa8")
+movement = ExtResource("2_h73fj")
 animation_player = NodePath("AnimationPlayer")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="FakePlayer"]
@@ -1001,11 +1001,11 @@ libraries = {
 
 [node name="Polygon2D" type="Polygon2D" parent="FakePlayer/Flipper"]
 polygon = PackedVector2Array(-16, -16, 16, -16, 16, 16, -16, 16)
-script = ExtResource("3_g6yp4")
+script = ExtResource("3_iko4c")
 
 [node name="Sprite2D" type="Sprite2D" parent="FakePlayer/Flipper"]
 position = Vector2(16, -5)
-texture = ExtResource("9_cuwwp")
+texture = ExtResource("4_evkw0")
 
 [node name="LabelState" type="Label" parent="FakePlayer"]
 offset_top = -78.0
@@ -1021,20 +1021,20 @@ offset_bottom = -13.0
 text = "velocity"
 
 [node name="StateMachine" type="Node" parent="FakePlayer" node_paths=PackedStringArray("status_logic", "init_state")]
-script = ExtResource("2_s0q2f")
+script = ExtResource("5_xwlcx")
 status_logic = NodePath("StatusLogic")
 init_state = NodePath("Stand")
 
 [node name="StatusLogic" type="Node" parent="FakePlayer/StateMachine" node_paths=PackedStringArray("player", "input_controller")]
-script = ExtResource("3_3ecvj")
+script = ExtResource("6_wkcug")
 player = NodePath("../..")
 input_controller = NodePath("../InputController")
 
 [node name="InputController" type="Node" parent="FakePlayer/StateMachine"]
-script = ExtResource("4_x6n7e")
+script = ExtResource("7_07fpl")
 
 [node name="Stand" type="Node" parent="FakePlayer/StateMachine" node_paths=PackedStringArray("jump_state", "fall_state", "slide_state", "standstop_state", "crouch_state", "turn_state", "player", "logic")]
-script = ExtResource("5_vmqdh")
+script = ExtResource("8_b4u4i")
 jump_state = NodePath("../Jump")
 fall_state = NodePath("../Fall")
 slide_state = NodePath("../Slide")
@@ -1045,24 +1045,21 @@ player = NodePath("../..")
 logic = NodePath("../StatusLogic")
 
 [node name="Jump" type="Node" parent="FakePlayer/StateMachine" node_paths=PackedStringArray("land_state", "fall_state", "player", "logic")]
-script = ExtResource("6_r1y0j")
+script = ExtResource("9_ee502")
 jump_speed = -430.0
-jump_speed_up_cancelled_ratio = null
-jump_speed_down_cancelled_ratio = null
 land_state = NodePath("../Land")
 fall_state = NodePath("../Fall")
 player = NodePath("../..")
 logic = NodePath("../StatusLogic")
-variation = null
 
 [node name="Fall" type="Node" parent="FakePlayer/StateMachine" node_paths=PackedStringArray("land_state", "player", "logic")]
-script = ExtResource("7_0nlqc")
+script = ExtResource("10_5cdyi")
 land_state = NodePath("../Land")
 player = NodePath("../..")
 logic = NodePath("../StatusLogic")
 
 [node name="Crouch" type="Node" parent="FakePlayer/StateMachine" node_paths=PackedStringArray("fall_state", "stand_state", "player", "logic")]
-script = ExtResource("8_757vv")
+script = ExtResource("11_7lnpk")
 movement_modifier = SubResource("Resource_kwrvl")
 fall_state = NodePath("../Fall")
 stand_state = NodePath("../Stand")
@@ -1070,7 +1067,7 @@ player = NodePath("../..")
 logic = NodePath("../StatusLogic")
 
 [node name="Land" type="Node" parent="FakePlayer/StateMachine" node_paths=PackedStringArray("fall_state", "jump_state", "stand_state", "crouch_state", "player", "logic")]
-script = ExtResource("11_v8vfk")
+script = ExtResource("13_wfw28")
 fall_state = NodePath("../Fall")
 jump_state = NodePath("../Jump")
 stand_state = NodePath("../Stand")
@@ -1079,7 +1076,7 @@ player = NodePath("../..")
 logic = NodePath("../StatusLogic")
 
 [node name="Slide" type="Node" parent="FakePlayer/StateMachine" node_paths=PackedStringArray("fall_state", "crouch_state", "player", "logic")]
-script = ExtResource("14_e58dp")
+script = ExtResource("14_i3xj1")
 movement_modifier = SubResource("Resource_80gcw")
 fall_state = NodePath("../Fall")
 crouch_state = NodePath("../Crouch")
@@ -1090,5 +1087,5 @@ logic = NodePath("../StatusLogic")
 position = Vector2(450, 400)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D"]
-position = Vector2(0, 24)
+position = Vector2(0, -72)
 shape = SubResource("RectangleShape2D_wdegp")

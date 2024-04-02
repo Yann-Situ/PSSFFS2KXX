@@ -1,4 +1,4 @@
-extends PlayerMovementState
+extends TestPlayerMovementState
 
 #need to handle hit/collision box resizing + crouch parameters + jump
 

@@ -1464,7 +1464,7 @@ color_ramp = SubResource("53")
 
 [sub_resource type="CompressedTexture2D" id="55"]
 
-[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_epwv5"]
+[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_7vw2j"]
 resource_local_to_scene = true
 particles_animation = true
 particles_anim_h_frames = 6
@@ -1777,7 +1777,7 @@ lifetime = 0.65
 explosiveness = 0.9
 
 [node name="GrindParticles" parent="PlayerEffects" instance=ExtResource("27")]
-material = SubResource("CanvasItemMaterial_epwv5")
+material = SubResource("CanvasItemMaterial_7vw2j")
 position = Vector2(0, 16)
 
 [node name="Camera" type="Camera2D" parent="."]
@@ -1886,11 +1886,12 @@ shape = SubResource("58")
 
 [node name="HorizontalFlipper" type="Marker2D" parent="."]
 
-[node name="BallHandler" type="Area2D" parent="HorizontalFlipper" node_paths=PackedStringArray("P")]
+[node name="BallHandler" type="Area2D" parent="HorizontalFlipper" node_paths=PackedStringArray("P", "ball_label")]
 collision_layer = 0
 collision_mask = 4
 script = ExtResource("6")
 P = NodePath("../..")
+ball_label = NodePath("../../UI/MarginContainer/HBoxContainer/MarginContainer/TextureRect/RichTextLabel")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="HorizontalFlipper/BallHandler"]
 position = Vector2(0, 5)

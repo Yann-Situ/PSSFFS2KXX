@@ -1,5 +1,5 @@
-extends PlayerState
-class_name PlayerMovementState
+extends TestPlayerState
+class_name TestPlayerMovementState
 
 @onready var movement : MovementData = player.movement ## Player movement Resource, or node
 

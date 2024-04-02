@@ -1,7 +1,9 @@
 extends Area2D
 # Ball pickup, thrower, shooter, selector, ballwaller
+## TODO: rework to put the ball in this class
 
 @export var P: Player
+@export var ball_label: RichTextLabel
 @onready var S = P.get_state_node()
 
 const collision_mask_balls = 4
@@ -35,7 +37,7 @@ func set_has_ball_position():
 	sprite.position = $HasBallPosition.global_position - P.global_position # maybe should be optimize TODO
 	#S.active_ball.transform.origin = + $HasBallPosition.position
 
-#####################
+####################################################################################################
 
 # Ball Holder call order:
 # Pickup:
@@ -93,31 +95,37 @@ func throw_ball(throw_global_position, speed):
 func shoot_ball(): # called by animation
 	throw_ball(get_throw_position(), P.ShootPredictor.shoot_vector_save)
 
+####################################################################################################
+
 func select_ball(ball : Ball): # called by ball.select(P)
 	if S.selected_ball != null and S.selected_ball != ball:
 			S.selected_ball.deselect(P)
 	S.selected_ball = ball
+	
 	#TEMPORARY CONTROL NODE
-	var ui = P.get_node("UI/MarginContainer/HBoxContainer/MarginContainer/TextureRect/RichTextLabel")
-	ui.clear()
-	ui.add_text(ball.name)
-	# ui.newline()
-	# ui.add_text("Ball mass  : "+str(ball.mass))
-	# ui.newline()
-	# ui.add_text("Ball frict : "+str(ball.friction))
-	# ui.newline()
-	# ui.add_text("Ball bounc : "+str(ball.bounce))
-	# ui.newline()
-	# ui.add_text("Ball posit : "+str(ball.position - P.position))
+	if ball_label:
+		ball_label.clear()
+		ball_label.add_text(ball.name)
+		# ball_label.newline()
+		# ball_label.add_text("Ball mass  : "+str(ball.mass))
+		# ball_label.newline()
+		# ball_label.add_text("Ball frict : "+str(ball.friction))
+		# ball_label.newline()
+		# ball_label.add_text("Ball bounc : "+str(ball.bounce))
+		# ball_label.newline()
+		# ball_label.add_text("Ball posit : "+str(ball.position - P.position))
 
 func deselect_ball(ball : Ball): # called by ball.deselect(P)
 	assert(S.selected_ball != null)
 	if S.power_p:
 		S.selected_ball.power_jr(P,0.0)
 	S.selected_ball = null
+	
 	#TEMPORARY CONTROL NODE
-	var ui = P.get_node("UI/MarginContainer/HBoxContainer/MarginContainer/TextureRect/RichTextLabel")
-	ui.clear()
+	if ball_label:
+		ball_label.clear()
+
+####################################################################################################
 
 func _physics_process(delta):#TODO use set_physics_process in pickup ?
 	if S.has_ball and S.active_ball != null :

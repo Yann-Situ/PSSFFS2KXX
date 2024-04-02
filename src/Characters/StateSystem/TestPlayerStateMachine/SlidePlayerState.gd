@@ -1,4 +1,4 @@
-extends PlayerMovementState
+extends TestPlayerMovementState
 
 @export var movement_modifier : MovementDataModifier
 @export var duration : float = 1.2 ## max time of the slide in seconds

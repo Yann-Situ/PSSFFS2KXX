@@ -1,4 +1,4 @@
-extends PlayerMovementState
+extends TestPlayerMovementState
 
 @export var slide_speed_thresh : float = 200.0
 

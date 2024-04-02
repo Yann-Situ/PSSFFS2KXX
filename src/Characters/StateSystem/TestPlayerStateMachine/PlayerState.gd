@@ -1,5 +1,5 @@
 extends State
-class_name PlayerState
+class_name TestPlayerState
 
 @export var player : FakePlayer
 @export var logic : StatusLogic

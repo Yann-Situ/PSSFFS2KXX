@@ -1,4 +1,4 @@
-extends PlayerMovementState
+extends TestPlayerMovementState
 
 @export var movement_modifier : MovementDataModifier ## Player movement modifier
 #need to handle hit/collision box resizing + crouch parameters + jump

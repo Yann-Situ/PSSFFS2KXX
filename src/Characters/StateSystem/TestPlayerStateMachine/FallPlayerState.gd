@@ -1,4 +1,4 @@
-extends PlayerMovementState
+extends TestPlayerMovementState
 
 @export var belong_state : State
 @export var action_state : State

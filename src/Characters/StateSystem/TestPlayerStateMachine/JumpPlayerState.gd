@@ -1,4 +1,4 @@
-extends PlayerMovementState
+extends TestPlayerMovementState
 
 @export var jump_speed : float = -425.0 # pix/s
 ## ratio applied to the vertical velocity after releasing up button
