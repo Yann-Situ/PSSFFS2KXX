@@ -5,9 +5,9 @@ class_name PlayerStatusLogic
 
 @export var ball_handler : BallHandler
 @export var shoot_handler : ShootHandler
-@export var basket_handler : BasketHandler
+@export var selectable_handler : SelectableHandler
 @export var ray_handler : RayHandler
-@export var held_handler : HeldHandler
+#@export var held_handler : HeldHandler
 
 var belong : Status = Status.new("belong") #
 var action : Status = Status.new("action") #
@@ -40,6 +40,7 @@ var up : Trigger = Trigger.new("up") #
 var down : Trigger = Trigger.new("down") #
 var left : Trigger = Trigger.new("left") #
 var right : Trigger = Trigger.new("right") #
+var accept : Trigger = Trigger.new("accept") #
 
 var direction_pressed = Vector2.ZERO
 var direction_sprite = 1
@@ -76,7 +77,7 @@ func process(delta):
 	update_triggers()
 	update_status()
 	# TODO add power, release, interact here? (targethandler?)
-	# collision, life, camera and shooter are handled by player (targethandler?)
+	# collision(?), life, camera and shooter are handled by player (targethandler?)
 	# the choice is a bit arbitrary, I would handle non-state stuff in player._process
 
 ## update the triggers from the input_controller Node.
@@ -111,8 +112,8 @@ func update_status():
 	action.ing = dunk.ing or dunkjump.ing or dunkdash.ing or shoot.ing
 
 	# held_handler
-	belong.can = held_handler.can_be_held
-	belong.ing = held_handler.has_holder()
+#	belong.can = held_handler.can_be_held
+#	belong.ing = held_handler.has_holder()
 
 	# ball_handler
 	pickball.can = ball_handler.can_pick
@@ -128,12 +129,12 @@ func update_status():
 	crouch.can = floor.ing
 	crouch.ing = crouch.ing or (!stand.can and floor.ing)
 
-	# basket_handler
-	dunk.can = basket_handler.can_dunk() and not floor.ing and\
+	# selectable_handler
+	dunk.can = selectable_handler.has_selectable_dunk() and not floor.ing and\
 	 	$NoDunkTimer.is_stopped() and\
 		(not action.ing or dunkjump.ing or dunkdash.ing)
-	dunkdash.can = basket_handler.can_dunkdash()
-	dunkjump.can = basket_handler.can_dunkjump()
+	dunkdash.can = selectable_handler.has_selectable_dunkdash() # and TODO remaining_dash > 0
+	dunkjump.can = selectable_handler.has_selectable_dunkjump() and floor.ing
 
 	# shoot_handler
 	shoot.can = shoot_handler.can_shoot_to_target() and\

@@ -15,8 +15,14 @@ class_name NewPlayer
 @onready var shoot_predictor = get_node("Shooter/ShootPredictor")
 @onready var shooter = get_node("Shooter")
 @onready var player_effects = get_node("PlayerEffects")
-@onready var ball_handler = get_node("Flipper/BallHandler")
 @onready var camera = get_node("Camera")
+
+@onready var ball_handler = get_node("Flipper/BallHandler")
+@onready var shoot_handler = get_node("Flipper/ShootHandler")
+@onready var selectable_handler = get_node("Flipper/SelectableHandler")
+@onready var ray_handler = get_node("Flipper/RayHandler")
+@onready var held_handler = get_node("Flipper/HeldHandler")
+@onready var target_handler = get_node("Flipper/TargetHandler")
 
 @onready var life_handler = get_node("LifeHandler")
 @onready var life_bar = get_node("UI/MarginContainer/HBoxContainer/VBoxContainer/Bar")
@@ -81,8 +87,9 @@ func reset_position():
 	global_position = start_position
 
 ################################################################################
-# updates of sub nodes, depending on S (should those functions be in S?)
+# updates of some sub nodes (mostly, handlers) whose behavior depends on S or each other
 
+## TODO maybe this should be handled by State nodes
 func update_collision() -> void:
 	# HITBOX:
 	if S.crouch.ing or S.land.ing or not S.stand.can:
@@ -133,6 +140,20 @@ func update_camera() -> void:
 		camera.set_offset_y_from_velocity(S.velocity.y, 0.4)
 	else :
 		camera.set_offset_zero()
+
+## update the SelectorTargets depending on S and using the selectables from selectable_handler
+func update_targethandler() -> void:
+	if S.dunkjump.can:
+		target_handler.update_selection(Selectable.SelectionType.JUMP, selectable_handler.selectable_dunkjump)
+	else:
+		target_handler.update_selection(Selectable.SelectionType.JUMP, null)
+
+	if S.dunkdash.can:
+		target_handler.update_selection(Selectable.SelectionType.DASH, selectable_handler.selectable_dunkdash)
+	else:
+		target_handler.update_selection(Selectable.SelectionType.DASH, null)
+	# target_handler.update_selection(Selectable.SelectionType.SHOOT, selectable_handler.selectable_shoot)
+
 
 ################################################################################
 # For physicbody

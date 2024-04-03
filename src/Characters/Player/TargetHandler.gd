@@ -22,23 +22,10 @@ func _ready():
 ## this function seems to be called by the special action handler. I need to rework all this to make
 # it understandable and easy. Maybe decorelate rays and selectors. TODO
 func update_selection(type : int, selectable : Selectable):
-	var pre_selectable = selector_targets[type].target_selectable
-	if pre_selectable != selectable:
-		if pre_selectable != null:
-			pre_selectable.set_selection(type, false)
+	var old_selectable = selector_targets[type].target_selectable
+	if old_selectable != selectable:
+		if old_selectable != null:
+			old_selectable.set_selection(type, false)
 		if selectable != null:
 			selectable.set_selection(type, true)
-
-		# TODO : maybe this part should be in Basket Handler
-		var new_target = null
-		if selectable != null :
-			new_target = selectable.parent_node
-		match type :
-			Selectable.SelectionType.SHOOT :
-				S.shoot_basket = new_target
-			Selectable.SelectionType.DASH :
-				S.dunkdash_basket = new_target
-			Selectable.SelectionType.JUMP :
-				S.dunkjump_basket = new_target
-
 	selector_targets[type].update_selection(selectable)

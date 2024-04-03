@@ -1,10 +1,10 @@
-[gd_scene load_steps=89 format=3 uid="uid://dlfptvxh6yjwm"]
+[gd_scene load_steps=88 format=3 uid="uid://dlfptvxh6yjwm"]
 
 [ext_resource type="Script" path="res://src/Characters/Player/NewPlayer.gd" id="1_b7wqc"]
 [ext_resource type="Script" path="res://src/Player/Ray.gd" id="4_6j0ho"]
 [ext_resource type="Script" path="res://src/Characters/Player/BallHandler.gd" id="5_w4h74"]
 [ext_resource type="PackedScene" uid="uid://dnxamlpvh6e70" path="res://src/Items/Interactive/SelectorTarget.tscn" id="6_g08i7"]
-[ext_resource type="Script" path="res://src/Characters/Player/BasketHandler.gd" id="8_ruuug"]
+[ext_resource type="Script" path="res://src/Characters/Player/SelectableHandler.gd" id="8_ms0lc"]
 [ext_resource type="Script" path="res://src/Characters/StateSystem/StateMachine.gd" id="8_sco1u"]
 [ext_resource type="Script" path="res://src/Characters/Player/RayHandler.gd" id="9_ltm6u"]
 [ext_resource type="Script" path="res://src/Characters/StateSystem/Test/InputControllerTest.gd" id="10_ytx1q"]
@@ -1199,10 +1199,6 @@ radius = 24.0
 resource_local_to_scene = true
 radius = 224.0
 
-[sub_resource type="CircleShape2D" id="3"]
-resource_local_to_scene = true
-radius = 56.0
-
 [sub_resource type="ShaderMaterial" id="4"]
 shader = ExtResource("24_3m0tt")
 shader_parameter/parameter = 300.0
@@ -1247,7 +1243,7 @@ color_ramp = SubResource("53")
 
 [sub_resource type="CompressedTexture2D" id="55"]
 
-[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_hj60t"]
+[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_ox036"]
 resource_local_to_scene = true
 particles_animation = true
 particles_anim_h_frames = 6
@@ -1308,6 +1304,7 @@ collision_mask = 4
 script = ExtResource("5_w4h74")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Flipper/BallHandler"]
+visible = false
 position = Vector2(0, 5)
 shape = SubResource("57")
 
@@ -1329,6 +1326,7 @@ position = Vector2(0, 6)
 shape = SubResource("1")
 
 [node name="InteractionHandler" type="Area2D" parent="Flipper"]
+visible = false
 modulate = Color(0.176, 0.922, 0.51, 0.804)
 position = Vector2(9, 0)
 collision_layer = 0
@@ -1339,28 +1337,22 @@ script = ExtResource("49_ks5k2")
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Flipper/InteractionHandler"]
 shape = SubResource("CircleShape2D_s7vxl")
 
-[node name="BasketHandler" type="Node2D" parent="Flipper"]
-script = ExtResource("8_ruuug")
+[node name="SelectableHandler" type="Node2D" parent="Flipper" node_paths=PackedStringArray("selectable_area")]
+script = ExtResource("8_ms0lc")
+selectable_area = NodePath("SelectableArea")
 
-[node name="DunkjumpArea" type="Area2D" parent="Flipper/BasketHandler"]
+[node name="SelectableArea" type="Area2D" parent="Flipper/SelectableHandler"]
 visible = false
+modulate = Color(1, 1, 1, 0.32549)
 collision_layer = 0
 collision_mask = 32
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Flipper/BasketHandler/DunkjumpArea"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Flipper/SelectableHandler/SelectableArea"]
 modulate = Color(0.945098, 1, 0, 1)
 shape = SubResource("2")
 
-[node name="DunkArea" type="Area2D" parent="Flipper/BasketHandler"]
-collision_layer = 0
-collision_mask = 32
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Flipper/BasketHandler/DunkArea"]
-modulate = Color(1, 0.490196, 0.870588, 1)
-position = Vector2(0, 16)
-shape = SubResource("3")
-
 [node name="RayHandler" type="Node2D" parent="Flipper"]
+visible = false
 script = ExtResource("9_ltm6u")
 
 [node name="Ray_fwd_up" type="RayCast2D" parent="Flipper/RayHandler"]
@@ -1572,7 +1564,7 @@ lifetime = 0.65
 explosiveness = 0.9
 
 [node name="GrindParticles" parent="PlayerEffects" instance=ExtResource("37_3xxkx")]
-material = SubResource("CanvasItemMaterial_hj60t")
+material = SubResource("CanvasItemMaterial_ox036")
 position = Vector2(0, 16)
 
 [node name="UI" type="CanvasLayer" parent="."]

@@ -42,7 +42,7 @@ func enter(previous_state : State = null) -> State:
 
 ## Called just before entering the next State. Should not contain await or time
 ## stopping functions
-func exit():
+func exit() -> void:
 	pass
 
 ## Called by the parent StateMachine during the _process call, after
