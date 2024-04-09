@@ -42,7 +42,7 @@ var left : Trigger = Trigger.new("left") #
 var right : Trigger = Trigger.new("right") #
 var accept : Trigger = Trigger.new("accept") #
 
-var direction_pressed = Vector2.ZERO
+var direction_pressed : Vector2 = Vector2.ZERO
 var direction_sprite = 1
 var direction_sprite_changed = false
 
@@ -99,6 +99,7 @@ func update_triggers():
 		direction_pressed += Vector2.LEFT
 	if right.pressed:
 		direction_pressed += Vector2.RIGHT
+	player.movement.direction_pressed = direction_pressed
 
 	if up.just_pressed:
 		$JumpPressTimer.start()

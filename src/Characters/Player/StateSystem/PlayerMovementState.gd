@@ -4,57 +4,57 @@ class_name PlayerMovementState
 @onready var movement : MovementData = player.movement ## Player movement Resource, or node
 
 func side_move_physics_process(delta, m : MovementData = movement):
-	if logic.direction_pressed.x == 0.0:
+	if m.direction_pressed.x == 0.0:
 		return
-	if -m.side_instant_speed_return_thresh < m.velocity.x*logic.direction_pressed.x \
-		and m.velocity.x*logic.direction_pressed.x < m.side_instant_speed :
-		m.velocity.x = logic.direction_pressed.x*m.side_instant_speed
-	if (m.velocity.x*logic.direction_pressed.x >= m.side_speed_max) :
-		pass # in the same logic.direction_pressed.x as velocity and faster than max
+	if -m.ambient.side_instant_speed_return_thresh < m.velocity.x*m.direction_pressed.x \
+		and m.velocity.x*m.direction_pressed.x < m.ambient.side_instant_speed :
+		m.velocity.x = m.direction_pressed.x*m.ambient.side_instant_speed
+	if (m.velocity.x*m.direction_pressed.x >= m.ambient.side_speed_max) :
+		pass # in the same m.direction_pressed.x as velocity and faster than max
 	else :
-		m.velocity.x += logic.direction_pressed.x*m.side_accel*delta
-		if (m.velocity.x*logic.direction_pressed.x > m.side_speed_max) :
-			m.velocity.x = logic.direction_pressed.x*m.side_speed_max
+		m.velocity.x += m.direction_pressed.x * m.ambient.side_accel * \
+			delta * m.ambient.time_scale
+		if (m.velocity.x*m.direction_pressed.x > m.ambient.side_speed_max) :
+			m.velocity.x = m.direction_pressed.x*m.ambient.side_speed_max
 
+## call player.move_and_slide() and update m.velocity
 func movement_physics_process(delta, m : MovementData = movement):
-	# TODO player movement:
-	delta *= m.time_scale
+	delta *= m.ambient.time_scale
 
-	# charcter held is not treated here
-	# if character_holder != null:
-	# 	if character_holder.has_method(["move_character"]):
-	# 		apply_forces_accel(delta)
-	# 		#set_velocity(S.velocity+speed_alterable.get_value())
-	# 		S.velocity = character_holder.move_character(self, S.velocity+speed_alterable.get_value(), delta)
-	# 		S.velocity -= speed_alterable.get_value()
+	# apply alterables
+	apply_force_alterable(delta, m)
+	apply_accel_alterable(delta, m)
 
-	var force = m.force_alterable.get_value()
-	m.velocity += m.invmass * delta * force
-	var accel = m.accel_alterable.get_value()
-	m.velocity += delta * accel
-	# if S.is_onwall and S.velocity.y > 0.0: #fall on a wall
-	# 	S.velocity.y = min(S.velocity.y,fall_speed_max_onwall)
-	# else :
-	# 	S.velocity.y = min(S.velocity.y,fall_speed_max)
-	# m.velocity.y = min(m.velocity.y, m.fall_speed_max)
-	# # TODO do I clamp this value, or let the friction do this effect?
-	# maybe just clamp the velocity norm instead of the y direction only
+	# friction
+	if sign(m.velocity.x) != sign(m.direction_pressed.x): # if not moving in the same dir as input # TODO handle m.direction_pressed.x
+		m.velocity.x = GlobalMaths.apply_friction(m.velocity.x, m.ambient.friction.x, delta)
+	if sign(m.velocity.y) != sign(m.direction_pressed.y): # if not moving in the same dir as input # TODO handle m.direction_pressed.x
+		m.velocity.y = GlobalMaths.apply_friction(m.velocity.y, m.ambient.friction.y, delta)
 
-	# handle friction
-	if sign(m.velocity.x) != sign(logic.direction_pressed.x): # if not moving in the same dir as input # TODO handle logic.direction_pressed.x
-		m.velocity.x = GlobalMaths.apply_friction(m.velocity.x, m.friction.x, delta)
-	if sign(m.velocity.y) != sign(logic.direction_pressed.y): # if not moving in the same dir as input # TODO handle logic.direction_pressed.x
-		m.velocity.y = GlobalMaths.apply_friction(m.velocity.y, m.friction.y, delta)
-
-	player.set_velocity(m.velocity+m.speed_alterable.get_value())
+	# move and slide
+	apply_speed_alterable(delta, m)
+	player.set_velocity(m.velocity)
 	player.move_and_slide()
 	m.velocity = player.get_real_velocity()-m.speed_alterable.get_value()
 
+## WARNING this function doesn't multiply delta by time_scale, as it is meant to be used in movement_physics_process
+func apply_force_alterable(scaled_delta, m : MovementData = movement):
+	m.velocity += m.invmass * scaled_delta * m.force_alterable.get_value()
+
+## WARNING this function doesn't multiply delta by time_scale, as it is meant to be used in movement_physics_process
+func apply_accel_alterable(scaled_delta, m : MovementData = movement):
+	m.velocity += scaled_delta * m.accel_alterable.get_value()
+
+func apply_speed_alterable(scaled_delta, m : MovementData = movement):
+	m.velocity += m.speed_alterable.get_value()
+
+################################################################################
+	
 func physics_process(delta) -> State:
 	var next_state = branch()
 	if next_state != self:
 		return next_state
 
 	if player.physics_enabled:
-		movement_physics_process(delta)
+		movement_physics_process(delta, movement)
 	return self

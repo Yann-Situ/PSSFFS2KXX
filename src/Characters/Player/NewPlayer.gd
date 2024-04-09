@@ -3,6 +3,12 @@ extends CharacterBody2D
 class_name NewPlayer
 
 @export var movement : MovementData
+## movement is modified by several nodes:
+## statuslogic modify the direction_pressed variable
+## movement.ambient_data is mofidied by AmbientHandler (TODO, work in progress)
+## velocity is modified by the State nodes
+@export var ambient_data_floor : AmbientData ## TODO should be in the AmbientHandler
+@export var ambient_data_air : AmbientData ## TODO should be in the AmbientHandler
 @export var physics_enabled : bool = true
 @export var animation_player : AnimationPlayer
 
@@ -23,6 +29,7 @@ class_name NewPlayer
 @onready var ray_handler = get_node("Flipper/RayHandler")
 @onready var held_handler = get_node("Flipper/HeldHandler")
 @onready var target_handler = get_node("Flipper/TargetHandler")
+# @onready var ambient_handler = get_node("Flipper/AmbientHandler")
 
 @onready var life_handler = get_node("LifeHandler")
 @onready var life_bar = get_node("UI/MarginContainer/HBoxContainer/VBoxContainer/Bar")
@@ -31,11 +38,13 @@ class_name NewPlayer
 @onready var flipper = get_node("Flipper")
 
 ################################################################################
+
 @onready var start_position = global_position
 @onready var foot_vector = Vector2(0,32)
 @onready var collision_layer_save = 1
 @onready var collision_mask_save = 514
 
+################################################################################
 var flip_h : bool = false : set = set_flip_h
 
 func _ready():
@@ -89,7 +98,7 @@ func reset_position():
 ################################################################################
 # updates of some sub nodes (mostly, handlers) whose behavior depends on S or each other
 
-## TODO maybe this should be handled by State nodes
+## TODO maybe this should be handled by State nodes. should be called in _physics_process()
 func update_collision() -> void:
 	# HITBOX:
 	if S.crouch.ing or S.land.ing or not S.stand.can:
@@ -99,16 +108,18 @@ func update_collision() -> void:
 		collision.shape.set_size(Vector2(17,57))
 		collision.position.y = 3.5
 
+## should be called in _process()
 func update_life() -> void:
 	life_bar.set_life(life_handler.get_life()) # TODO : Maybe handle that with signals
 
+## should be called in _process()
 func update_shooter() -> void:
 	if S.aim.ing:
 		shooter.update_screen_viewer_position()
 	else :
 		shooter.disable_screen_viewer()
 
-## previously called in _process()
+## should be called in _process()
 func update_camera() -> void:
 	# CAMERA:
 	# TODO : change this whole part because it's messy
@@ -141,7 +152,7 @@ func update_camera() -> void:
 	else :
 		camera.set_offset_zero()
 
-## update the SelectorTargets depending on S and using the selectables from selectable_handler
+## update the SelectorTargets depending on S and using the selectables from selectable_handler. should be called in _process()
 func update_targethandler() -> void:
 	if S.dunkjump.can:
 		target_handler.update_selection(Selectable.SelectionType.JUMP, selectable_handler.selectable_dunkjump)
@@ -154,23 +165,23 @@ func update_targethandler() -> void:
 		target_handler.update_selection(Selectable.SelectionType.DASH, null)
 	# target_handler.update_selection(Selectable.SelectionType.SHOOT, selectable_handler.selectable_shoot)
 
+## update movement.ambient_data depending on logic and AmbientHandler. This should be called in physics_process.
+# func update_ambient_data() -> void:
+# 	if ambient_handler.has_ambient():
+# 		movement.ambient = ambient_handler.ambient_data
+# 	else:
+# 		if S.floor.ing:
+# 			movement.ambient = ambient_handler.ambient_data_floor
+# 		elif S.wall.ing:
+# 			movement.ambient = ambient_handler.ambient_data_wall
+# 		else:
+# 			movement.ambient = ambient_handler.ambient_data_air
 
 ################################################################################
 # For physicbody
 
 func add_impulse(impulse : Vector2):
 	movement.velocity += movement.invmass * impulse
-
-## not sure it is useful for the new implementation
-# func apply_forces_accel(delta):
-# 	var force = movement.force_alterable.get_value()
-# 	S.velocity += invmass * delta * force
-# 	var accel = movement.accel_alterable.get_value()
-# 	S.velocity += delta * accel
-# 	if S.onw.all and S.velocity.y > 0.0: #fall on a wall
-# 		S.velocity.y = min(S.velocity.y,fall_speed_max_onwall)
-# 	else :
-# 		S.velocity.y = min(S.velocity.y,fall_speed_max)
 
 func has_force(force_alterer : Alterer):
 	return movement.force_alterable.has_alterer(force_alterer)
