@@ -1,9 +1,9 @@
 extends TestPlayerState
 class_name TestPlayerMovementState
 
-@onready var movement : MovementData = player.movement ## Player movement Resource, or node
+@onready var movement : TestMovementData = player.movement ## Player movement Resource, or node
 
-func side_move_physics_process(delta, m : MovementData = movement):
+func side_move_physics_process(delta, m : TestMovementData = movement):
 	if logic.direction_pressed.x == 0.0:
 		return
 	if -m.side_instant_speed_return_thresh < m.velocity.x*logic.direction_pressed.x \
@@ -16,7 +16,7 @@ func side_move_physics_process(delta, m : MovementData = movement):
 		if (m.velocity.x*logic.direction_pressed.x > m.side_speed_max) :
 			m.velocity.x = logic.direction_pressed.x*m.side_speed_max
 
-func movement_physics_process(delta, m : MovementData = movement):
+func movement_physics_process(delta, m : TestMovementData = movement):
 	# TODO player movement:
 	delta *= m.time_scale
 

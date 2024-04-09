@@ -1,4 +1,4 @@
-## MovementDataModifer:
+## TestMovementDataModifer:
 # should store float for:
 #	mass
 #   time_scale
@@ -9,7 +9,7 @@
 # 	friction
 
 extends Resource
-class_name MovementDataModifier
+class_name TestMovementDataModifier
 
 @export var mass : float = 1.0
 @export var friction : float = 1.0
@@ -21,7 +21,7 @@ class_name MovementDataModifier
 @export var side_instant_speed_return_thresh : float = 1.0
 @export var side_accel : float = 1.0
 
-func apply(m : MovementData) -> MovementData:
+func apply(m : TestMovementData) -> TestMovementData:
 	# nested subresources will be shared:
 	var mr = m.duplicate(false)
 	mr.mass *= mass

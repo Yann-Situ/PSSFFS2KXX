@@ -1,6 +1,6 @@
 extends TestPlayerMovementState
 
-@export var movement_modifier : MovementDataModifier
+@export var movement_modifier : TestMovementDataModifier
 @export var duration : float = 1.2 ## max time of the slide in seconds
 #need to handle hit/collision box resizing + crouch parameters + jump
 
@@ -59,7 +59,7 @@ func enter(previous_state : State = null) -> State:
 func end_timer():
 	end_slide = true
 
-# func side_crouch_physics_process(delta, m : MovementData = movement):
+# func side_crouch_physics_process(delta, m : TestMovementData = movement):
 # 	if logic.direction_pressed.x == 0.0:
 # 		return
 # 	if -m.side_instant_speed_return_thresh*speed_ratio < m.velocity.x*logic.direction_pressed.x \

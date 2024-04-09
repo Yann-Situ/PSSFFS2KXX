@@ -1,6 +1,6 @@
 extends TestPlayerMovementState
 
-@export var movement_modifier : MovementDataModifier ## Player movement modifier
+@export var movement_modifier : TestMovementDataModifier ## Player movement modifier
 #need to handle hit/collision box resizing + crouch parameters + jump
 
 @export var belong_state : State
@@ -34,7 +34,7 @@ func enter(previous_state : State = null) -> State:
 	print("crouch_idle")
 	return next_state
 
-# func side_crouch_physics_process(delta, m : MovementData = movement):
+# func side_crouch_physics_process(delta, m : TestMovementData = movement):
 # 	if logic.direction_pressed.x == 0.0:
 # 		return
 # 	if -m.side_instant_speed_return_thresh*speed_ratio < m.velocity.x*logic.direction_pressed.x \

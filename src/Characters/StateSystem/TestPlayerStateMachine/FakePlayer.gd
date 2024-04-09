@@ -1,7 +1,7 @@
 extends CharacterBody2D
 class_name FakePlayer
 
-@export var movement : MovementData
+@export var movement : TestMovementData
 @export var physics_enabled : bool = true
 @export var animation_player : AnimationPlayer
 var flip_h : bool = false : set = set_flip_h

@@ -1,4 +1,4 @@
-## MovementData:
+## TestMovementData:
 # should store:
 #	velocity
 #
@@ -18,7 +18,7 @@
 
 #@icon("res://assets/art/icons/hexagon-beige.png")
 extends Resource
-class_name MovementData
+class_name TestMovementData
 
 @export var mass : float = 1.0 # kg
 var invmass : float
@@ -43,5 +43,5 @@ func _init():
 	accel_alterable.add_alterer(Global.gravity_alterer)
 
 # WARNING: infinite recursion
-# func modification(modifier : MovementDataModifer) -> MovementData:
+# func modification(modifier : TestMovementDataModifer) -> TestMovementData:
 # 	return modifier.apply(self)

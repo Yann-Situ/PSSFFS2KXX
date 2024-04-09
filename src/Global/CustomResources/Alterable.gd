@@ -12,7 +12,9 @@ var is_up_to_date : bool = true : set = set_is_up_to_date
 func _init(_base_value = 0.0):
 	base_value = _base_value
 
-func set_base_value(_base_value):
+func set_base_value(_base_value : Variant):
+	if base_value == _base_value:
+		return
 	base_value = _base_value
 	set_is_up_to_date(false)
 	emit_changed()
@@ -62,7 +64,9 @@ func remove_alterer(alterer : Alterer):
 	else:
 		push_warning("alterer "+str(alterer.get_instance_id())+" not found.")
 
-## this method is called by the alterer when it is done
+## this method is called by the alterer when it is done.
+## Note that this modify the base_value. If you don't want to modify the base_value
+## after an alterer, use remove_alterer.
 func _on_alterer_is_done(alterer : Alterer):
 	if has_alterer(alterer):
 		base_value = alterer.alter_done(base_value) # TODO this can induce problems when using also multiplicative
