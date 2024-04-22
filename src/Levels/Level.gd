@@ -4,7 +4,7 @@ class_name Level
 
 #export (String) var dir_path = "res://src/Levels/LevelExample/"
 #export var rooms # (Array, PackedScene)
-@export_global_file("*.tscn") var first_room
+@export_file("*.tscn") var first_room
 @export var first_room_portal : String
 
 var rooms = {} # map : name -> Room2D
@@ -25,7 +25,7 @@ func load_level():
 	browse_rooms(first_room)
 
 func browse_rooms(room_name : String):
-	if !rooms.has(room_name) and room_name != "":
+	if !rooms.has(room_name) and room_name != null and room_name != "":
 		var packed_room = load(room_name)
 		if packed_room == null:
 			printerr("can't preload "+room_name+" because it doesn't exist.")

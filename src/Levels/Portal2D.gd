@@ -14,7 +14,7 @@ enum PortalType {ENTRANCE, EXIT, BOTH, EXIT_LEVEL}
 enum TriggerType {ON_BODY_ENTER, ON_INTERACTION, NO_TRIGGER}
 @export var trigger_type : TriggerType = TriggerType.ON_BODY_ENTER : set = set_trigger_type
 
-@export_global_file("*.tscn") var next_room : get = get_next_room, set = set_next_room
+@export_file("*.tscn") var next_room : get = get_next_room, set = set_next_room
 @export var next_room_portal : String : get = get_next_room_portal, set = set_next_room_portal
 
 @export_group("Transition", "transition_")

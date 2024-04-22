@@ -1464,7 +1464,7 @@ color_ramp = SubResource("53")
 
 [sub_resource type="CompressedTexture2D" id="55"]
 
-[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_7vw2j"]
+[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_h6230"]
 resource_local_to_scene = true
 particles_animation = true
 particles_anim_h_frames = 6
@@ -1694,8 +1694,9 @@ P = NodePath("../..")
 script = ExtResource("39")
 P = NodePath("../..")
 
-[node name="Interact" type="Node" parent="Actions" node_paths=PackedStringArray("P")]
+[node name="Interact" type="Node" parent="Actions" node_paths=PackedStringArray("interaction_handler", "P")]
 script = ExtResource("22_qbwmr")
+interaction_handler = NodePath("../../HorizontalFlipper/InteractionHandler")
 P = NodePath("../..")
 
 [node name="Shooter" type="Node2D" parent="." node_paths=PackedStringArray("P")]
@@ -1777,7 +1778,7 @@ lifetime = 0.65
 explosiveness = 0.9
 
 [node name="GrindParticles" parent="PlayerEffects" instance=ExtResource("27")]
-material = SubResource("CanvasItemMaterial_7vw2j")
+material = SubResource("CanvasItemMaterial_h6230")
 position = Vector2(0, 16)
 
 [node name="Camera" type="Camera2D" parent="."]
