@@ -1,0 +1,56 @@
+extends PlayerMovementState
+
+@export var ambient_modifier : AmbientDataModifier ## ambient modifier, to slow the acceleration during crouch
+#need to handle hit/collision box resizing + crouch parameters + jump
+
+@export var belong_state : State
+@export var action_state : State
+@export var land_state : State
+@export var fall_state : State
+@export var walljump_state : State
+
+# var belong : Status = Status.new(["belong"]) # appropriate declaration
+# var action : Status = Status.new(["belong"]) # appropriate declaration
+# var floor : Status = Status.new(["belong"]) # appropriate declaration
+# var wall : Status = Status.new(["belong"]) # appropriate declaration
+
+func _ready():
+	animation_variations = [["fallwall"], ["fallwall_loop"]]
+
+func branch() -> State:
+	if logic.belong.ing:
+		return belong_state
+	if logic.action.can:
+		return action_state
+
+	if logic.walljump.can and logic.jump_press_timing:
+		#logic.floor.ing = false # TEMPORARY solution to avoid infinite recursion
+		return walljump_state
+	if logic.floor.ing:
+		return land_state
+	if !logic.wall.ing:
+		return fall_state
+	return self
+
+# func animation_process() -> void:
+# 	pass
+
+## Called by the parent StateMachine during the _physics_process call, after
+## the StatusLogic physics_process call.
+func physics_process(delta) -> State:
+	var next_state = branch()
+	if next_state != self:
+		return next_state
+
+	var m : MovementData = movement.duplicate(false)
+	m.set_ambient(ambient_modifier.apply(movement.ambient))
+	# side_crouch_physics_process(delta)
+	side_move_physics_process(delta, m)
+
+	# update player position
+	if player.physics_enabled:
+		movement_physics_process(delta, m)
+
+	# TODO : weird handling of velocity due to being inside movementdata:
+	movement.velocity = m.velocity
+	return self

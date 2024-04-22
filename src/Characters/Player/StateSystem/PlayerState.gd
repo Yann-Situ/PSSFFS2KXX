@@ -31,6 +31,17 @@ func play_animation(priority = false):
 		else:
 			push_error("animation "+animation+" doesn't exists in "+animation_player.name)
 
+## handle the animation modification depending on logic
+## can call play_animation
+func animation_process() -> void:
+	pass
+
+## Called by the parent StateMachine during the _process call, after
+## the StatusLogic process call.
+func process(delta) -> State:
+	animation_process()
+	return self
+
 func branch() -> State:
 	# do some logic
 	return self

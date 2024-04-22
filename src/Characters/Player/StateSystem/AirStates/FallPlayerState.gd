@@ -1,5 +1,7 @@
 extends PlayerMovementState
 
+@export var roll_speed_thresh : float = 50.0
+
 @export var belong_state : State
 @export var action_state : State
 @export var land_state : State
@@ -20,7 +22,7 @@ func branch() -> State:
 		return action_state
 
 	if logic.floor.ing:
-		if abs(movement.velocity.x) > 50.0:
+		if abs(movement.velocity.x) > roll_speed_thresh:
 			land_state.set_variation(1)
 		else:
 			land_state.set_variation(0)
@@ -29,16 +31,5 @@ func branch() -> State:
 		return fallwall_state
 	return self
 
-## Called by the parent StateMachine during the _physics_process call, after
-## the StatusLogic physics_process call.
-func physics_process(delta) -> State:
-	var next_state = branch()
-	if next_state != self:
-		return next_state
-
-	side_move_physics_process(delta)
-
-	# update player position
-	if player.physics_enabled:
-		movement_physics_process(delta)
-	return self
+# func animation_process() -> void:
+# 	pass

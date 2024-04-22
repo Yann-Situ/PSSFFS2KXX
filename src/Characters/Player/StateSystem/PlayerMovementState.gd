@@ -34,7 +34,7 @@ func movement_physics_process(delta, m : MovementData = movement):
 	# move and slide
 	apply_speed_alterable(delta, m)
 	player.set_velocity(m.velocity)
-	player.move_and_slide()
+	player.move_and_slide()	# update player position
 	m.velocity = player.get_real_velocity()-m.speed_alterable.get_value()
 
 ## WARNING this function doesn't multiply delta by time_scale, as it is meant to be used in movement_physics_process
@@ -49,12 +49,12 @@ func apply_speed_alterable(scaled_delta, m : MovementData = movement):
 	m.velocity += m.speed_alterable.get_value()
 
 ################################################################################
-	
+
 func physics_process(delta) -> State:
 	var next_state = branch()
 	if next_state != self:
 		return next_state
-
+	side_move_physics_process(delta)
 	if player.physics_enabled:
 		movement_physics_process(delta, movement)
 	return self

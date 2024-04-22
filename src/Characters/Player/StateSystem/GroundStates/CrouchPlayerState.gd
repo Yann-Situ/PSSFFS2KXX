@@ -1,6 +1,6 @@
 extends PlayerMovementState
 
-@export var movement_modifier : MovementDataModifier ## Player movement modifier
+@export var ambient_modifier : AmbientDataModifier ## ambient modifier, to slow the acceleration during crouch
 #need to handle hit/collision box resizing + crouch parameters + jump
 
 @export var belong_state : State
@@ -10,7 +10,7 @@ extends PlayerMovementState
 
 func _ready():
 	animation_variations = [["crouch_idle"], ["crouch_walk"]]
-	assert(movement_modifier != null)
+	assert(ambient_modifier != null)
 
 func branch() -> State:
 	if logic.belong.ing:
@@ -22,7 +22,16 @@ func branch() -> State:
 
 	if logic.stand.can and !logic.down.pressed:
 		return stand_state
+
 	return self
+
+func animation_process() -> void:
+	if (logic.direction_pressed.x == 0):
+		set_variation(0) # ["idle"]
+		play_animation()
+	else :
+		set_variation(1) # ["walk"]
+		play_animation()
 
 func enter(previous_state : State = null) -> State:
 	var next_state = branch()
@@ -30,8 +39,8 @@ func enter(previous_state : State = null) -> State:
 		return next_state
 	play_animation()
 	logic.crouch.ing = true
-	# change hitbox
-	print("crouch_idle")
+	# change hitbox in player or here? maybe it should be called in physics frame
+	print(self.name)
 	return next_state
 
 # func side_crouch_physics_process(delta, m : MovementData = movement):
@@ -54,8 +63,8 @@ func physics_process(delta) -> State:
 	if next_state != self:
 		return next_state
 
-	# handle run and walls ?
-	var m = movement_modifier.apply(movement)
+	var m : MovementData = movement.duplicate(false)
+	m.set_ambient(ambient_modifier.apply(movement.ambient))
 	# side_crouch_physics_process(delta)
 	side_move_physics_process(delta, m)
 

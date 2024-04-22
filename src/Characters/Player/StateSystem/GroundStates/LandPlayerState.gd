@@ -20,7 +20,7 @@ func branch() -> State:
 	if logic.action.can:
 		return action_state
 
-	if logic.jump.can and logic.up.just_pressed: # TODO handle tolerance
+	if logic.jump.can and logic.jump_press_timing:
 		#logic.floor.ing = false # TEMPORARY solution to avoid infinite recursion
 		return jump_state
 	if !logic.floor.ing:
@@ -38,7 +38,7 @@ func enter(previous_state : State = null) -> State:
 	play_animation()
 	logic.crouch.ing = true
 	# change hitbox
-	print("land")
+	print(self.name)
 
 	var timer = get_tree().create_timer(0.5) # TODO remove for animation handling
 	timer.timeout.connect(self.on_land_finished)
@@ -48,22 +48,6 @@ func enter(previous_state : State = null) -> State:
 func on_land_finished():
 	print("--- land finished")
 	land_finished = true
-
-## Called by the parent StateMachine during the _physics_process call, after
-## the StatusLogic physics_process call.
-func physics_process(delta) -> State:
-	var next_state = branch()
-	if next_state != self:
-		return next_state
-
-	# handle run and walls ?
-	side_move_physics_process(delta)
-
-	# update player position
-	if player.physics_enabled:
-		movement_physics_process(delta)
-	return self
-
 
 ## Called just before entering the next State. Should not contain await or time
 ## stopping functions

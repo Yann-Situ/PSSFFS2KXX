@@ -45,19 +45,20 @@ func enter(previous_state : State = null) -> State:
 	if next_state != self:
 		return next_state
 	play_animation()
-	# logic.jump.ing = true # actually not used (?)
+	logic.jump.ing = true # actually not used (?)
 	up_cancelled = false
 	cancelled = false
 	movement.velocity.y += jump_speed
 	if !logic.up.pressed:
 		movement.velocity.y *= jump_speed_up_cancelled_ratio
-	# S.get_node(["jump"]).stop() # TODO handle timers
-	# S.get_node(["jump"]).start(S.countdown_jump)
+		print("  | enter cancelled jump")
+		up_cancelled = true
 
+	# TODO
 	#player.PlayerEffects.dust_start()
 	#player.PlayerEffects.jump_start()
 
-	print("jump")
+	print(self.name)
 	return next_state
 
 ## Called by the parent StateMachine during the _physics_process call, after
@@ -82,6 +83,12 @@ func physics_process(delta) -> State:
 	# update player position
 	if player.physics_enabled:
 		movement_physics_process(delta)
-	if !logic.floor.ing:
+	if first_frame and !logic.floor.ing :
 		first_frame = false # TEMPORARY Hack to avoid Stand->Jump->Stand transitions
 	return self
+
+	## Called just before entering the next State. Should not contain await or time
+	## stopping functions
+	func exit():
+		super()
+		logic.jump.ing = false

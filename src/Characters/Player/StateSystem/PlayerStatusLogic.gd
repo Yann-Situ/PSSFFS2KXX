@@ -44,7 +44,21 @@ var accept : Trigger = Trigger.new("accept") #
 
 var direction_pressed : Vector2 = Vector2.ZERO
 var direction_sprite = 1
-var direction_sprite_changed = false
+var direction_sprite_changed : bool = false
+
+## linked to a Timer, is set to true during a small time after pressing the button
+var jump_press_timing : bool = false
+var dunkjump_press_timing : bool = false
+
+## linked to a Timer, is set to true if shoot is disable for a while
+var no_shoot : bool = false
+var no_dunk : bool = false
+var no_jump : bool = false
+var no_side : bool = false
+
+## linked to a Timer, is set to true for a while after being on a wall or on floor (for coyote)
+var floor_timing : bool = false
+var wall_timing : bool = false
 
 #Some action are for the moment not handled by states as they are somehow independent.
 #Maybe there will be a parallel StateMachine for balls in the future. Those actions are:
@@ -108,7 +122,6 @@ func update_triggers():
 
 ## update the status using logic.
 func update_status():
-
 	# action.ing
 	action.ing = dunk.ing or dunkjump.ing or dunkdash.ing or shoot.ing
 
@@ -123,29 +136,45 @@ func update_status():
 
 	# ray_handler
 	floor.ing = ray_handler.is_on_floor()
+	if floor.ing:
+		$JumpFloorTimer.start()
 	wall.ing = ray_handler.is_on_wall()
+	if wall.ing:
+		$JumpWallTimer.start()
 	stand.can = ray_handler.can_stand()
 
 	side.ing = abs(player.movement.velocity.x) > 30.0
 	crouch.can = floor.ing
 	crouch.ing = crouch.ing or (!stand.can and floor.ing)
 
+	# timers
+	jump_press_timing = not $JumpPressTimer.is_stopped()
+	dunkjump_press_timing = not $DunkJumpPressTimer.is_stopped()
+	## linked to a Timer, is set to true if shoot is disable for a while
+	no_shoot = not $NoShootTimer.is_stopped()
+	no_dunk = not $NoDunkTimer.is_stopped()
+	no_jump = not $NoJumpTimer.is_stopped()
+	no_side = not $NoSideTimer.is_stopped()
+	## linked to a Timer, is set to true for a while after being on a wall or on floor (for coyote)
+	floor_timing = not $JumpFloorTimer.is_stopped()
+	wall_timing = not $JumpWallTimer.is_stopped()
+
 	# selectable_handler
 	dunk.can = selectable_handler.has_selectable_dunk() and not floor.ing and\
-	 	$NoDunkTimer.is_stopped() and\
+	 	not no_dunk and\
 		(not action.ing or dunkjump.ing or dunkdash.ing)
 	dunkdash.can = selectable_handler.has_selectable_dunkdash() # and TODO remaining_dash > 0
 	dunkjump.can = selectable_handler.has_selectable_dunkjump() and floor.ing
 
 	# shoot_handler
 	shoot.can = shoot_handler.can_shoot_to_target() and\
-		$NoShootTimer.is_stopped() and\
+		not no_shoot and\
 		(not action.ing)
 
 	# timer dependent
-	jump.can = not $JumpFloorTimer.is_stopped() and $NoJumpTimer.is_stopped()
-	walljump.can = not $JumpWallTimer.is_stopped() and $NoJumpTimer.is_stopped()
-	side.can = $NoSideTimer.is_stopped()
+	jump.can = floor_timing and not no_jump
+	walljump.can = wall_timing and not no_jump
+	side.can = not no_side
 
 	# action.can
 	action.can = dunk.can or dunkjump.can or dunkdash.can or shoot.can
