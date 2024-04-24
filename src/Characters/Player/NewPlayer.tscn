@@ -1185,13 +1185,6 @@ _data = {
 "walljump1": SubResource("34")
 }
 
-[sub_resource type="CapsuleShape2D" id="57"]
-radius = 28.0
-height = 56.0
-
-[sub_resource type="RectangleShape2D" id="1"]
-size = Vector2(17, 57)
-
 [sub_resource type="CircleShape2D" id="CircleShape2D_s7vxl"]
 radius = 24.0
 
@@ -1204,6 +1197,13 @@ shader = ExtResource("24_3m0tt")
 shader_parameter/parameter = 300.0
 shader_parameter/throw_position = null
 shader_parameter/tolerance = 15.0
+
+[sub_resource type="CapsuleShape2D" id="57"]
+radius = 28.0
+height = 56.0
+
+[sub_resource type="RectangleShape2D" id="1"]
+size = Vector2(17, 57)
 
 [sub_resource type="CanvasItemMaterial" id="48"]
 particles_animation = true
@@ -1243,7 +1243,7 @@ color_ramp = SubResource("53")
 
 [sub_resource type="CompressedTexture2D" id="55"]
 
-[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_4kw0w"]
+[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_r2dw0"]
 resource_local_to_scene = true
 particles_animation = true
 particles_anim_h_frames = 6
@@ -1298,33 +1298,6 @@ offset_right = 20.0
 offset_bottom = -37.0
 text = "state"
 
-[node name="BallHandler" type="Area2D" parent="Flipper"]
-collision_layer = 0
-collision_mask = 4
-script = ExtResource("5_w4h74")
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Flipper/BallHandler"]
-visible = false
-position = Vector2(0, 5)
-shape = SubResource("57")
-
-[node name="ThrowPosition" type="Marker2D" parent="Flipper/BallHandler"]
-position = Vector2(4, -6)
-
-[node name="HasBallPosition" type="Sprite2D" parent="Flipper/BallHandler"]
-visible = false
-position = Vector2(9, 12)
-texture = ExtResource("48_n7dkg")
-
-[node name="BallWallDetector" type="Area2D" parent="Flipper/BallHandler"]
-collision_layer = 0
-collision_mask = 1024
-
-[node name="Collision" type="CollisionShape2D" parent="Flipper/BallHandler/BallWallDetector"]
-visible = false
-position = Vector2(0, 6)
-shape = SubResource("1")
-
 [node name="InteractionHandler" type="Area2D" parent="Flipper"]
 visible = false
 modulate = Color(0.176, 0.922, 0.51, 0.804)
@@ -1351,9 +1324,55 @@ collision_mask = 32
 modulate = Color(0.945098, 1, 0, 1)
 shape = SubResource("2")
 
-[node name="RayHandler" type="Node2D" parent="Flipper"]
+[node name="ShootHandler" type="Node2D" parent="Flipper"]
+script = ExtResource("24_kckqt")
+
+[node name="ShootScreen" type="CanvasLayer" parent="Flipper/ShootHandler"]
+visible = false
+
+[node name="ShootScreenShader" type="ColorRect" parent="Flipper/ShootHandler/ShootScreen"]
+material = SubResource("4")
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+mouse_filter = 2
+color = Color(1, 1, 1, 0)
+
+[node name="ShootPredictor" type="Node2D" parent="Flipper/ShootHandler"]
+script = ExtResource("25_jxkmq")
+
+[node name="BallHandler" type="Area2D" parent="Flipper" node_paths=PackedStringArray("P")]
+collision_layer = 0
+collision_mask = 4
+script = ExtResource("5_w4h74")
+P = NodePath("../..")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Flipper/BallHandler"]
+visible = false
+position = Vector2(0, 5)
+shape = SubResource("57")
+
+[node name="ThrowPosition" type="Marker2D" parent="Flipper/BallHandler"]
+position = Vector2(4, -6)
+
+[node name="HasBallPosition" type="Sprite2D" parent="Flipper/BallHandler"]
+visible = false
+position = Vector2(9, 12)
+texture = ExtResource("48_n7dkg")
+
+[node name="BallWallDetector" type="Area2D" parent="Flipper/BallHandler"]
+collision_layer = 0
+collision_mask = 1024
+
+[node name="Collision" type="CollisionShape2D" parent="Flipper/BallHandler/BallWallDetector"]
+visible = false
+position = Vector2(0, 6)
+shape = SubResource("1")
+
+[node name="RayHandler" type="Node2D" parent="Flipper" node_paths=PackedStringArray("P")]
 visible = false
 script = ExtResource("9_ltm6u")
+P = NodePath("../..")
 
 [node name="Ray_fwd_up" type="RayCast2D" parent="Flipper/RayHandler"]
 position = Vector2(0, -16)
@@ -1425,25 +1444,10 @@ target_position = Vector2(0, 17)
 collision_mask = 514
 script = ExtResource("4_6j0ho")
 
-[node name="ShootHandler" type="Node2D" parent="Flipper"]
-script = ExtResource("24_kckqt")
-
-[node name="ShootScreen" type="CanvasLayer" parent="Flipper/ShootHandler"]
-
-[node name="ShootScreenShader" type="ColorRect" parent="Flipper/ShootHandler/ShootScreen"]
-material = SubResource("4")
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-mouse_filter = 2
-color = Color(1, 1, 1, 0)
-
-[node name="ShootPredictor" type="Node2D" parent="Flipper/ShootHandler"]
-script = ExtResource("25_jxkmq")
-
-[node name="TargetHandler" type="Node2D" parent="Flipper"]
+[node name="TargetHandler" type="Node2D" parent="Flipper" node_paths=PackedStringArray("P")]
 visible = false
 script = ExtResource("14_7sb52")
+P = NodePath("../..")
 
 [node name="ShootTarget" parent="Flipper/TargetHandler" instance=ExtResource("6_g08i7")]
 modulate = Color(0.45098, 0.921569, 1, 1)
@@ -1461,8 +1465,9 @@ modulate = Color(1.1, 0.3, 0.7, 1)
 [node name="StateMachine" type="Node" parent="."]
 script = ExtResource("8_sco1u")
 
-[node name="StatusLogic" type="Node" parent="StateMachine"]
+[node name="StatusLogic" type="Node" parent="StateMachine" node_paths=PackedStringArray("player")]
 script = ExtResource("17_sct0s")
+player = NodePath("../..")
 
 [node name="JumpFloorTimer" type="Timer" parent="StateMachine/StatusLogic"]
 editor_description = "Delay for coyote time"
@@ -1564,7 +1569,7 @@ lifetime = 0.65
 explosiveness = 0.9
 
 [node name="GrindParticles" parent="PlayerEffects" instance=ExtResource("37_3xxkx")]
-material = SubResource("CanvasItemMaterial_4kw0w")
+material = SubResource("CanvasItemMaterial_r2dw0")
 position = Vector2(0, 16)
 
 [node name="UI" type="CanvasLayer" parent="."]

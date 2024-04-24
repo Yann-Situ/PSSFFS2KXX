@@ -1,5 +1,6 @@
 extends PlayerMovementState
 
+@export_group("States")
 @export var exit_state : State
 
 func _ready():

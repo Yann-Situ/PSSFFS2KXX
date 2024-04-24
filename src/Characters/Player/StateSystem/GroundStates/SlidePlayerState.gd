@@ -1,16 +1,17 @@
 extends PlayerMovementState
 
-@export var ambient_modifier : AmbientDataModifier ## ambient modifier for during slide
+@export var ambient_modifier : AmbientDataScaler ## ambient modifier for during slide
 @export var duration : float = 1.2 ## max time of the slide in seconds
 #need to handle hit/collision box resizing + crouch parameters + jump
 
+@export_group("States")
 @export var belong_state : State
 @export var action_state : State
 @export var fall_state : State
 @export var crouch_state : State
 
 var end_slide = false # set to true after timer and if not pressed down # TODO
-@export var end_slide_finished = false # set to true at the end of animation ["end_slide"] # TODO
+var end_slide_finished = false # set to true at the end of animation ["end_slide"] # TODO
 @onready var timer : Timer # time the duration between the beginning of the slide to the call to "end_slide"
 
 func _ready():

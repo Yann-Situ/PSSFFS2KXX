@@ -1,8 +1,9 @@
 extends PlayerMovementState
 
-@export var ambient_modifier : AmbientDataModifier ## ambient modifier, to slow the acceleration during crouch
+@export var ambient_modifier : AmbientDataScaler ## ambient modifier, to slow the acceleration during crouch
 #need to handle hit/collision box resizing + crouch parameters + jump
 
+@export_group("States")
 @export var belong_state : State
 @export var action_state : State
 @export var fall_state : State

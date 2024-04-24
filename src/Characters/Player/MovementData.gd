@@ -9,7 +9,7 @@
 # 	mass ; invmass
 #
 #   ambient data
-#@icon("res://assets/art/icons/hexagon-beige.png")
+@icon("res://assets/art/icons/movement.png")
 extends Resource
 class_name MovementData
 

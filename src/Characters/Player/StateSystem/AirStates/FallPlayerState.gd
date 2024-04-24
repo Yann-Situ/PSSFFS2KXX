@@ -2,6 +2,7 @@ extends PlayerMovementState
 
 @export var roll_speed_thresh : float = 50.0
 
+@export_group("States")
 @export var belong_state : State
 @export var action_state : State
 @export var land_state : State

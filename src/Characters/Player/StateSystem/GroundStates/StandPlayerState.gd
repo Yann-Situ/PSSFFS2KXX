@@ -2,6 +2,7 @@ extends PlayerMovementState
 
 @export var slide_speed_thresh : float = 200.0
 
+@export_group("States")
 @export var belong_state : State
 @export var action_state : State
 @export var jump_state : State
@@ -33,7 +34,7 @@ func branch() -> State:
 	if logic.action.can:
 		return action_state
 
-	if logic.jump.can and logic.jump_press_timing:
+	if logic.jump.can and logic.jump_press_timer.is_stopped():
 		#logic.floor.ing = false # TEMPORARY solution to avoid infinite recursion
 		return jump_state
 	if !logic.floor.ing:
@@ -51,7 +52,7 @@ func animation_process() -> void:
 	set_variation(0) # ["idle"]
 	if logic.direction_sprite_changed:
 		set_variation(3) # ["turn"]
-	else if logic.side.ing :
+	elif logic.side.ing :
 		if (logic.direction_pressed.x == 0):
 			set_variation(2) # ["standstop"]
 		else :

@@ -3,7 +3,7 @@ class_name BallHandler
 # Ball pickup, thrower, shooter, selector, ballwaller
 ## TODO: rework to put the ball in this class
 
-@export var P: Player
+@export var P: NewPlayer
 @export var ball_label: RichTextLabel
 @export var can_pick: bool = true ## can_pick must be set by S, depending on has_ball and actions like is_shooting
 #@onready var S = P.get_state_node()

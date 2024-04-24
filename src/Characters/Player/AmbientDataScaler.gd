@@ -1,3 +1,5 @@
+## To scale an AmbientData resource
+@icon("res://assets/art/icons/ambient-scaler.png")
 extends Resource
 class_name AmbientDataScaler
 

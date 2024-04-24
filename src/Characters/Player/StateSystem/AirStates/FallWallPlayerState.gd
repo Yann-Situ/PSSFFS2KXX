@@ -1,8 +1,9 @@
 extends PlayerMovementState
 
-@export var ambient_modifier : AmbientDataModifier ## ambient modifier, to slow the acceleration during crouch
+@export var ambient_modifier : AmbientDataScaler ## ambient modifier, to slow the acceleration during crouch
 #need to handle hit/collision box resizing + crouch parameters + jump
 
+@export_group("States")
 @export var belong_state : State
 @export var action_state : State
 @export var land_state : State
@@ -23,7 +24,7 @@ func branch() -> State:
 	if logic.action.can:
 		return action_state
 
-	if logic.walljump.can and logic.jump_press_timing:
+	if logic.walljump.can and logic.jump_press_timer.is_stopped():
 		#logic.floor.ing = false # TEMPORARY solution to avoid infinite recursion
 		return walljump_state
 	if logic.floor.ing:

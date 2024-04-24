@@ -1,7 +1,7 @@
 extends Node2D
 class_name RayHandler
 
-@export var P: Node2D ## P is only used for position
+@export var P: NewPlayer ## P is only used for position
 @export var color : Color = Color(1.0,0.3,0.1)
 
 var rays = []

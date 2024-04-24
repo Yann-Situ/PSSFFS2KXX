@@ -13,7 +13,7 @@
 #
 # 	friction
 
-#@icon("res://assets/art/icons/hexagon-beige.png")
+@icon("res://assets/art/icons/ambient.png")
 extends Resource
 class_name AmbientData
 

@@ -25,7 +25,7 @@
 ##     InputController (Node):
 ##         Manages the inputs. For a NPC, this can be done with code logic or
 ##         behaviour tree. For a playable character, use the Input.event to handle it.
-@icon("res://assets/art/icons/circle-beige.png") # https://www.iconsdb.com/icon-sets/vintage-paper-icons/circle-outline-icon.html
+@icon("res://assets/art/icons/circle-beige16.png") # https://www.iconsdb.com/icon-sets/vintage-paper-icons/circle-outline-icon.html
 extends Node
 class_name State
 

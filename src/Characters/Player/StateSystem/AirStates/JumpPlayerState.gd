@@ -4,20 +4,15 @@ extends PlayerMovementState
 ## ratio applied to the vertical velocity after releasing up button
 @export var jump_speed_up_cancelled_ratio : float = 0.5
 @export var jump_speed_down_cancelled_ratio : float = 0.1
+@export var no_jump_delay : float = 0.2 ## s
 
+@export_group("States")
 @export var belong_state : State
 @export var action_state : State
 @export var land_state : State
 @export var fallwall_state : State
 @export var fall_state : State
 
-# var jump : Status = Status.new(["jump"]) # appropriate declaration
-# var belong : Status = Status.new(["jump"]) # appropriate declaration
-# var action : Status = Status.new(["jump"]) # appropriate declaration
-# var floor : Status = Status.new(["jump"]) # appropriate declaration
-# var wall : Status = Status.new(["jump"]) # appropriate declaration
-#
-# var up : Trigger = Trigger.new(["jump"]) # appropriate declaration
 var first_frame = false # true if we just enter the jump state
 var up_cancelled = false # true if this jump was cancelled by releasing up_button
 var cancelled = false # true if this jump was cancelled by pressing down_button or releasing up_button
@@ -31,12 +26,13 @@ func branch() -> State:
 	if logic.action.can:
 		return action_state
 
-	if !first_frame and logic.floor.ing:
-		return land_state
-	if logic.wall.ing:
-		return fallwall_state
-	if !first_frame and movement.velocity.y > 0.0:
-		return fall_state
+	if !first_frame:
+		if logic.floor.ing:
+			return land_state
+		if logic.wall.ing:
+			return fallwall_state
+		if movement.velocity.y > 0.0:
+			return fall_state
 	return self
 
 func enter(previous_state : State = null) -> State:
@@ -45,9 +41,11 @@ func enter(previous_state : State = null) -> State:
 	if next_state != self:
 		return next_state
 	play_animation()
+
 	logic.jump.ing = true # actually not used (?)
 	up_cancelled = false
 	cancelled = false
+	logic.no_jump_timer.start(no_jump_delay)
 	movement.velocity.y += jump_speed
 	if !logic.up.pressed:
 		movement.velocity.y *= jump_speed_up_cancelled_ratio
@@ -87,8 +85,8 @@ func physics_process(delta) -> State:
 		first_frame = false # TEMPORARY Hack to avoid Stand->Jump->Stand transitions
 	return self
 
-	## Called just before entering the next State. Should not contain await or time
-	## stopping functions
-	func exit():
-		super()
-		logic.jump.ing = false
+## Called just before entering the next State. Should not contain await or time
+## stopping functions
+func exit():
+	super()
+	logic.jump.ing = false

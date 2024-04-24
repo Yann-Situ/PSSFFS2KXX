@@ -17,7 +17,7 @@ var wall : Status = Status.new("wall") # ray_handler
 var stand : Status = Status.new("stand") # ray_handler for can_stand
 var side : Status = Status.new("side") #
 
-var jump : Status = Status.new("jump") # ing set by state, can set by timers
+var jump : Status = Status.new("jump") # ing set by state, can set by timers # ing is true when jumping or walljumping
 var walljump : Status = Status.new("walljump") # ing set by state, can set by timers
 var crouch : Status = Status.new("crouch") # partly physical, partly set by state
 var slide : Status = Status.new("slide") #
@@ -46,19 +46,30 @@ var direction_pressed : Vector2 = Vector2.ZERO
 var direction_sprite = 1
 var direction_sprite_changed : bool = false
 
-## linked to a Timer, is set to true during a small time after pressing the button
-var jump_press_timing : bool = false
-var dunkjump_press_timing : bool = false
+##timers
+@onready var jump_press_timer : Timer = $JumpPressTimer
+@onready var dunkjump_press_timer : Timer = $DunkJumpPressTimer
+@onready var no_shoot_timer : Timer = $NoShootTimer
+@onready var no_dunk_timer : Timer = $NoDunkTimer
+@onready var no_jump_timer : Timer = $NoJumpTimer
+@onready var no_side_timer : Timer = $NoSideTimer
+@onready var floor_timer : Timer = $JumpFloorTimer
+@onready var wall_timer : Timer = $JumpWallTimer
 
-## linked to a Timer, is set to true if shoot is disable for a while
-var no_shoot : bool = false
-var no_dunk : bool = false
-var no_jump : bool = false
-var no_side : bool = false
 
-## linked to a Timer, is set to true for a while after being on a wall or on floor (for coyote)
-var floor_timing : bool = false
-var wall_timing : bool = false
+# ## linked to a Timer, is set to true during a small time after pressing the button
+# var jump_press_timing : bool = false
+# var dunkjump_press_timing : bool = false
+#
+# ## linked to a Timer, is set to true if shoot is disable for a while
+# var no_shoot : bool = false
+# var no_dunk : bool = false
+# var no_jump : bool = false
+# var no_side : bool = false
+#
+# ## linked to a Timer, is set to true for a while after being on a wall or on floor (for coyote)
+# var floor_timing : bool = false
+# var wall_timing : bool = false
 
 #Some action are for the moment not handled by states as they are somehow independent.
 #Maybe there will be a parallel StateMachine for balls in the future. Those actions are:
@@ -69,6 +80,7 @@ var wall_timing : bool = false
 #	- Power
 #	- Pickball
 
+################################################################################
 func _ready():
 	up = input_controller.up
 	down = input_controller.down
@@ -116,9 +128,9 @@ func update_triggers():
 	player.movement.direction_pressed = direction_pressed
 
 	if up.just_pressed:
-		$JumpPressTimer.start()
+		jump_press_timer.start()
 	if accept.just_pressed:
-		$DunkJumpPressTimer.start()
+		dunkjump_press_timer.start()
 
 ## update the status using logic.
 func update_status():
@@ -147,34 +159,22 @@ func update_status():
 	crouch.can = floor.ing
 	crouch.ing = crouch.ing or (!stand.can and floor.ing)
 
-	# timers
-	jump_press_timing = not $JumpPressTimer.is_stopped()
-	dunkjump_press_timing = not $DunkJumpPressTimer.is_stopped()
-	## linked to a Timer, is set to true if shoot is disable for a while
-	no_shoot = not $NoShootTimer.is_stopped()
-	no_dunk = not $NoDunkTimer.is_stopped()
-	no_jump = not $NoJumpTimer.is_stopped()
-	no_side = not $NoSideTimer.is_stopped()
-	## linked to a Timer, is set to true for a while after being on a wall or on floor (for coyote)
-	floor_timing = not $JumpFloorTimer.is_stopped()
-	wall_timing = not $JumpWallTimer.is_stopped()
-
 	# selectable_handler
 	dunk.can = selectable_handler.has_selectable_dunk() and not floor.ing and\
-	 	not no_dunk and\
+	 	no_dunk_timer.is_stopped() and\
 		(not action.ing or dunkjump.ing or dunkdash.ing)
 	dunkdash.can = selectable_handler.has_selectable_dunkdash() # and TODO remaining_dash > 0
 	dunkjump.can = selectable_handler.has_selectable_dunkjump() and floor.ing
 
 	# shoot_handler
 	shoot.can = shoot_handler.can_shoot_to_target() and\
-		not no_shoot and\
+		no_shoot_timer.is_stopped() and\
 		(not action.ing)
 
 	# timer dependent
-	jump.can = floor_timing and not no_jump
-	walljump.can = wall_timing and not no_jump
-	side.can = not no_side
+	jump.can = not floor_timer.is_stopped() and no_jump_timer.is_stopped()
+	walljump.can = not wall_timer.is_stopped() and no_jump_timer.is_stopped()
+	side.can = no_side_timer.is_stopped()
 
 	# action.can
 	action.can = dunk.can or dunkjump.can or dunkdash.can or shoot.can
