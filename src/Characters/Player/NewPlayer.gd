@@ -7,8 +7,8 @@ class_name NewPlayer
 ## statuslogic modify the direction_pressed variable
 ## movement.ambient_data is mofidied by AmbientHandler (TODO, work in progress)
 ## velocity is modified by the State nodes
-@export var ambient_data_floor : AmbientData ## TODO should be in the AmbientHandler
-@export var ambient_data_air : AmbientData ## TODO should be in the AmbientHandler
+#@export var ambient_data_floor : AmbientData ## TODO should be in the AmbientHandler
+#@export var ambient_data_air : AmbientData ## TODO should be in the AmbientHandler
 @export var physics_enabled : bool = true
 @export var animation_player : AnimationPlayer
 
@@ -17,9 +17,6 @@ class_name NewPlayer
 @onready var S = get_node("StateMachine/StatusLogic")
 @onready var state_machine = get_node("StateMachine")
 @onready var collision = get_node("Collision")
-@onready var special_action_handler = get_node("Actions/SpecialActionHandler")
-@onready var shoot_predictor = get_node("Shooter/ShootPredictor")
-@onready var shooter = get_node("Shooter")
 @onready var player_effects = get_node("PlayerEffects")
 @onready var camera = get_node("Camera")
 
@@ -27,9 +24,9 @@ class_name NewPlayer
 @onready var shoot_handler = get_node("Flipper/ShootHandler")
 @onready var selectable_handler = get_node("Flipper/SelectableHandler")
 @onready var ray_handler = get_node("Flipper/RayHandler")
-@onready var held_handler = get_node("Flipper/HeldHandler")
+#@onready var held_handler = get_node("Flipper/HeldHandler")
 @onready var target_handler = get_node("Flipper/TargetHandler")
-# @onready var ambient_handler = get_node("Flipper/AmbientHandler")
+@onready var ambient_handler = get_node("Flipper/AmbientHandler")
 
 @onready var life_handler = get_node("LifeHandler")
 @onready var life_bar = get_node("UI/MarginContainer/HBoxContainer/VBoxContainer/Bar")
@@ -51,8 +48,8 @@ func _ready():
 	Global.list_of_physical_nodes.append(self)
 	self.z_as_relative = false
 	self.z_index = Global.z_indices["player_0"]
-	$Sprite2D.z_as_relative = false
-	$Sprite2D.z_index = Global.z_indices["player_0"]
+	sprite.z_as_relative = false
+	sprite.z_index = Global.z_indices["player_0"]
 	add_to_group("holders")
 	add_to_group("characters")
 	if !Global.playing:
@@ -67,7 +64,7 @@ func _ready():
 
 func set_flip_h(b : bool):
 	flip_h = b
-	shoot_predictor.set_flip_h(b)
+#	shoot_predictor.set_flip_h(b) # TODO reuse shoot_predictor
 	if b:
 		flipper.scale.x = -1.0
 	else:
@@ -75,13 +72,8 @@ func set_flip_h(b : bool):
 
 ## For retro compatibility
 func get_state_node()->Node:
-	return get_node("StateMachine/StatusLogic") # not S because S is instantiated in ready, so after every children's _ready
-
-
-func _process(delta):
-	if Global.DEBUG:
-		label_state.text = state_machine.current_state.name + "\n" + str(state_machine.current_state.variation)
-
+	return get_node("StateMachine/StatusLogic") 
+	# not S because S is instantiated in ready, so after every children's _ready
 
 func disable_physics():
 	physics_enabled = false
@@ -96,17 +88,20 @@ func reset_position():
 	global_position = start_position
 
 ################################################################################
-# updates of some sub nodes (mostly, handlers) whose behavior depends on S or each other
 
-## TODO maybe this should be handled by State nodes. should be called in _physics_process()
-func update_collision() -> void:
-	# HITBOX:
-	if S.crouch.ing or S.land.ing or not S.stand.can:
-		collision.shape.set_size(Vector2(17,31))
-		collision.position.y = 16.5
-	else :
-		collision.shape.set_size(Vector2(17,57))
-		collision.position.y = 3.5
+func _process(delta):
+	if Global.DEBUG and state_machine.current_state != null:
+		label_state.text = state_machine.current_state.name + "\n" + str(state_machine.current_state.variation)
+	update_life()
+	# update_shooter()
+	update_camera()
+	update_target_handler()
+	
+func _physics_process(delta):
+	update_collision()
+	update_ambient_data()
+################################################################################
+# updates of some sub nodes (mostly, handlers) whose behavior depends on S or each other
 
 ## should be called in _process()
 func update_life() -> void:
@@ -115,9 +110,9 @@ func update_life() -> void:
 ## should be called in _process()
 func update_shooter() -> void:
 	if S.aim.ing:
-		shooter.update_screen_viewer_position()
+		shoot_handler.update_screen_viewer_position()
 	else :
-		shooter.disable_screen_viewer()
+		shoot_handler.disable_screen_viewer()
 
 ## should be called in _process()
 func update_camera() -> void:
@@ -126,23 +121,24 @@ func update_camera() -> void:
 	if Global.is_cinematic_playing():
 		return
 	if S.aim.ing:
-		var shoot = Vector2.ZERO
-		var target = (camera.get_global_mouse_position() - global_position)
-		shooter.update_target(target)
-		if shooter.can_shoot_to_target():
-			shooter.update_effective_can_shoot(0.0,0)
-			shoot = shooter.effective_v
-		else :
-			shooter.update_effective_cant_shoot(0.0,0)
-			shoot = shooter.effective_v
-
-		shoot_predictor.draw_prediction(Vector2.ZERO, shoot,
-			(shooter.global_gravity_scale_TODO*Global.default_gravity.y)*Vector2.DOWN)
-		camera.set_offset_from_aim(target)
-		if shoot.x > 0 :
-			S.aim_direction = 1
-		else :
-			S.aim_direction = -1
+		pass
+#		var shoot = Vector2.ZERO
+#		var target = (camera.get_global_mouse_position() - global_position)
+#		shoot_handler.update_target(target)
+#		if shoot_handler.can_shoot_to_target():
+#			shoot_handler.update_effective_can_shoot(0.0,0)
+#			shoot = shoot_handler.effective_v
+#		else :
+#			shoot_handler.update_effective_cant_shoot(0.0,0)
+#			shoot = shoot_handler.effective_v
+#
+#		shoot_predictor.draw_prediction(Vector2.ZERO, shoot,
+#			(shoot_handler.global_gravity_scale_TODO*Global.default_gravity.y)*Vector2.DOWN)
+#		camera.set_offset_from_aim(target)
+#		if shoot.x > 0 :
+#			S.aim_direction = 1
+#		else :
+#			S.aim_direction = -1
 	elif S.crouch.ing :
 		camera.set_offset_x_from_velocity(S.velocity.x, 0.4)
 		camera.set_offset_y_from_crouch(0.2)
@@ -152,8 +148,9 @@ func update_camera() -> void:
 	else :
 		camera.set_offset_zero()
 
-## update the SelectorTargets depending on S and using the selectables from selectable_handler. should be called in _process()
-func update_targethandler() -> void:
+## update the SelectorTargets depending on S and using the selectables from selectable_handler.
+## should be called in _process()
+func update_target_handler() -> void:
 	if S.dunkjump.can:
 		target_handler.update_selection(Selectable.SelectionType.JUMP, selectable_handler.selectable_dunkjump)
 	else:
@@ -165,17 +162,29 @@ func update_targethandler() -> void:
 		target_handler.update_selection(Selectable.SelectionType.DASH, null)
 	# target_handler.update_selection(Selectable.SelectionType.SHOOT, selectable_handler.selectable_shoot)
 
-## update movement.ambient_data depending on logic and AmbientHandler. This should be called in physics_process.
-# func update_ambient_data() -> void:
-# 	if ambient_handler.has_ambient():
-# 		movement.ambient = ambient_handler.ambient_data
-# 	else:
-# 		if S.floor.ing:
-# 			movement.ambient = ambient_handler.ambient_data_floor
-# 		elif S.wall.ing:
-# 			movement.ambient = ambient_handler.ambient_data_wall
-# 		else:
-# 			movement.ambient = ambient_handler.ambient_data_air
+## TODO maybe this should be handled by State nodes.
+## should be called in _physics_process()
+func update_collision() -> void:
+	# HITBOX:
+	if S.crouch.ing or not S.stand.can:
+		collision.shape.set_size(Vector2(17,31))
+		collision.position.y = 16.5
+	else :
+		collision.shape.set_size(Vector2(17,57))
+		collision.position.y = 3.5
+		
+## update movement.ambient_data depending on logic and AmbientHandler.
+## This should be called in physics_process.
+func update_ambient_data() -> void:
+	if ambient_handler.has_ambient():
+		movement.ambient = ambient_handler.ambient_data
+	else:
+		if S.floor.ing:
+			movement.ambient = ambient_handler.ambient_data_floor
+		elif S.wall.ing:
+			movement.ambient = ambient_handler.ambient_data_wall
+		else:
+			movement.ambient = ambient_handler.ambient_data_air
 
 ################################################################################
 # For physicbody

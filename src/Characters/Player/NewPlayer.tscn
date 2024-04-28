@@ -1,6 +1,7 @@
-[gd_scene load_steps=88 format=3 uid="uid://dlfptvxh6yjwm"]
+[gd_scene load_steps=93 format=3 uid="uid://dlfptvxh6yjwm"]
 
 [ext_resource type="Script" path="res://src/Characters/Player/NewPlayer.gd" id="1_b7wqc"]
+[ext_resource type="Script" path="res://src/Characters/Player/MovementData.gd" id="2_0ukhp"]
 [ext_resource type="Script" path="res://src/Player/Ray.gd" id="4_6j0ho"]
 [ext_resource type="Script" path="res://src/Characters/Player/BallHandler.gd" id="5_w4h74"]
 [ext_resource type="PackedScene" uid="uid://dnxamlpvh6e70" path="res://src/Items/Interactive/SelectorTarget.tscn" id="6_g08i7"]
@@ -9,14 +10,15 @@
 [ext_resource type="Script" path="res://src/Characters/Player/RayHandler.gd" id="9_ltm6u"]
 [ext_resource type="Script" path="res://src/Characters/StateSystem/Test/InputControllerTest.gd" id="10_ytx1q"]
 [ext_resource type="Script" path="res://src/Characters/Player/TargetHandler.gd" id="14_7sb52"]
+[ext_resource type="Script" path="res://src/Characters/Player/AmbientHandler.gd" id="16_tgr41"]
+[ext_resource type="Script" path="res://src/Characters/Player/AmbientData.gd" id="17_iaaq0"]
 [ext_resource type="Script" path="res://src/Characters/Player/StateSystem/PlayerStatusLogic.gd" id="17_sct0s"]
 [ext_resource type="Shader" path="res://assets/shader/shoot_viewer.gdshader" id="24_3m0tt"]
 [ext_resource type="Script" path="res://src/Characters/Player/ShootHandler.gd" id="24_kckqt"]
-[ext_resource type="Script" path="res://src/Player/Shoot_predictor.gd" id="25_jxkmq"]
 [ext_resource type="Shader" path="res://assets/shader/contour.gdshader" id="26_qq73j"]
 [ext_resource type="Texture2D" uid="uid://fu53nbwvypbd" path="res://assets/art/characters/Player.png" id="27_0wgju"]
-[ext_resource type="Script" path="res://src/Player/Player_Effects.gd" id="30_8c4s4"]
 [ext_resource type="PackedScene" uid="uid://26l3hifm7i6c" path="res://src/Effects/DustParticle.tscn" id="31_45wht"]
+[ext_resource type="Script" path="res://src/Characters/Player/DebugInterface.gd" id="31_bwage"]
 [ext_resource type="Texture2D" uid="uid://b4ujrsln765de" path="res://assets/art/ball/dust.png" id="32_qmg4m"]
 [ext_resource type="PackedScene" uid="uid://bs8ju42cns0vf" path="res://src/Effects/GhostHandler.tscn" id="33_v1led"]
 [ext_resource type="PackedScene" uid="uid://cq1tfkkoni136" path="res://src/Effects/TrailHandler.tscn" id="34_qh28p"]
@@ -28,12 +30,15 @@
 [ext_resource type="Texture2D" uid="uid://0bfw4lu2js4b" path="res://assets/art/gui/life_bar_bg.png" id="40_acvag"]
 [ext_resource type="Texture2D" uid="uid://scghoxayo4du" path="res://assets/art/gui/life_bar_fill.png" id="41_1ojdj"]
 [ext_resource type="Texture2D" uid="uid://c40av4lxtnfbo" path="res://assets/art/gui/ball_info_bg.png" id="42_xmomu"]
-[ext_resource type="Script" path="res://src/Player/DebugGUI.gd" id="43_dc1c5"]
 [ext_resource type="Texture2D" uid="uid://dhyhbly78c7qp" path="res://assets/art/icons/character.png" id="44_s6k41"]
 [ext_resource type="Script" path="res://src/Characters/LifeHandler.gd" id="45_031g1"]
 [ext_resource type="Script" path="res://src/Items/Interactive/Damageable.gd" id="46_g44sj"]
 [ext_resource type="Texture2D" uid="uid://cuuns5ibc34gj" path="res://assets/art/ball/ball_test.png" id="48_n7dkg"]
 [ext_resource type="Script" path="res://src/Items/Activables/InteractionHandler.gd" id="49_ks5k2"]
+
+[sub_resource type="Resource" id="Resource_5o1rd"]
+script = ExtResource("2_0ukhp")
+mass = 1.0
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_0vsxb"]
 size = Vector2(17, 57)
@@ -1205,6 +1210,42 @@ height = 56.0
 [sub_resource type="RectangleShape2D" id="1"]
 size = Vector2(17, 57)
 
+[sub_resource type="Resource" id="Resource_cq5vr"]
+script = ExtResource("17_iaaq0")
+friction = Vector2(0.5, 0.9)
+time_scale = 1.0
+side_speed_max = 300.0
+side_instant_speed = 50.0
+side_instant_speed_return_thresh = 20.0
+side_accel = 100.0
+base_force = Vector2(0, 0)
+base_accel = Vector2(0, 0)
+base_speed = Vector2(0, 0)
+
+[sub_resource type="Resource" id="Resource_y4wjx"]
+script = ExtResource("17_iaaq0")
+friction = Vector2(0.1, 0.1)
+time_scale = 1.0
+side_speed_max = 400.0
+side_instant_speed = 25.0
+side_instant_speed_return_thresh = 10.0
+side_accel = 50.0
+base_force = Vector2(0, 0)
+base_accel = Vector2(0, 625)
+base_speed = Vector2(0, 0)
+
+[sub_resource type="Resource" id="Resource_aiv1j"]
+script = ExtResource("17_iaaq0")
+friction = Vector2(0.9, 0.9)
+time_scale = 1.0
+side_speed_max = 300.0
+side_instant_speed = 100.0
+side_instant_speed_return_thresh = 10.0
+side_accel = 50.0
+base_force = Vector2(0, 0)
+base_accel = Vector2(0, 625)
+base_speed = Vector2(0, 0)
+
 [sub_resource type="CanvasItemMaterial" id="48"]
 particles_animation = true
 particles_anim_h_frames = 4
@@ -1243,7 +1284,7 @@ color_ramp = SubResource("53")
 
 [sub_resource type="CompressedTexture2D" id="55"]
 
-[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_r2dw0"]
+[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_yo7f8"]
 resource_local_to_scene = true
 particles_animation = true
 particles_anim_h_frames = 6
@@ -1262,6 +1303,7 @@ collision_mask = 514
 floor_max_angle = 0.886627
 platform_on_leave = 2
 script = ExtResource("1_b7wqc")
+movement = SubResource("Resource_5o1rd")
 
 [node name="Collision" type="CollisionShape2D" parent="."]
 position = Vector2(0, 3.5)
@@ -1337,9 +1379,6 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 mouse_filter = 2
 color = Color(1, 1, 1, 0)
-
-[node name="ShootPredictor" type="Node2D" parent="Flipper/ShootHandler"]
-script = ExtResource("25_jxkmq")
 
 [node name="BallHandler" type="Area2D" parent="Flipper" node_paths=PackedStringArray("P")]
 collision_layer = 0
@@ -1462,12 +1501,24 @@ scale = Vector2(0.75, 0.75)
 [node name="JumpTarget" parent="Flipper/TargetHandler" instance=ExtResource("6_g08i7")]
 modulate = Color(1.1, 0.3, 0.7, 1)
 
-[node name="StateMachine" type="Node" parent="."]
-script = ExtResource("8_sco1u")
+[node name="AmbientHandler" type="Node2D" parent="Flipper"]
+script = ExtResource("16_tgr41")
+ambient_data_floor = SubResource("Resource_cq5vr")
+ambient_data_air = SubResource("Resource_y4wjx")
+ambient_data_wall = SubResource("Resource_aiv1j")
 
-[node name="StatusLogic" type="Node" parent="StateMachine" node_paths=PackedStringArray("player")]
+[node name="StateMachine" type="Node" parent="." node_paths=PackedStringArray("status_logic")]
+script = ExtResource("8_sco1u")
+status_logic = NodePath("StatusLogic")
+
+[node name="StatusLogic" type="Node" parent="StateMachine" node_paths=PackedStringArray("player", "ball_handler", "shoot_handler", "selectable_handler", "ray_handler", "input_controller")]
 script = ExtResource("17_sct0s")
 player = NodePath("../..")
+ball_handler = NodePath("../../Flipper/BallHandler")
+shoot_handler = NodePath("../../Flipper/ShootHandler")
+selectable_handler = NodePath("../../Flipper/SelectableHandler")
+ray_handler = NodePath("../../Flipper/RayHandler")
+input_controller = NodePath("../InputController")
 
 [node name="JumpFloorTimer" type="Timer" parent="StateMachine/StatusLogic"]
 editor_description = "Delay for coyote time"
@@ -1487,14 +1538,14 @@ one_shot = true
 one_shot = true
 
 [node name="NoDunkjumpTimer" type="Timer" parent="StateMachine/StatusLogic"]
-wait_time = 0.012
+wait_time = 0.1
 one_shot = true
 
 [node name="NoDunkTimer" type="Timer" parent="StateMachine/StatusLogic"]
-wait_time = 0.012
+wait_time = 0.1
 one_shot = true
 
-[node name="NoGoTimer" type="Timer" parent="StateMachine/StatusLogic"]
+[node name="NoSideTimer" type="Timer" parent="StateMachine/StatusLogic"]
 one_shot = true
 
 [node name="NoShootTimer" type="Timer" parent="StateMachine/StatusLogic"]
@@ -1534,7 +1585,6 @@ script = ExtResource("10_ytx1q")
 [node name="Held" type="Node" parent="StateMachine"]
 
 [node name="PlayerEffects" type="Node2D" parent="."]
-script = ExtResource("30_8c4s4")
 metadata/_edit_lock_ = true
 metadata/_edit_group_ = true
 
@@ -1569,7 +1619,7 @@ lifetime = 0.65
 explosiveness = 0.9
 
 [node name="GrindParticles" parent="PlayerEffects" instance=ExtResource("37_3xxkx")]
-material = SubResource("CanvasItemMaterial_r2dw0")
+material = SubResource("CanvasItemMaterial_yo7f8")
 position = Vector2(0, 16)
 
 [node name="UI" type="CanvasLayer" parent="."]
@@ -1619,7 +1669,7 @@ offset_right = 194.0
 offset_bottom = 25.0
 fit_content = true
 
-[node name="DebugGUI" type="Control" parent="UI"]
+[node name="DebugInterface" type="Control" parent="UI" node_paths=PackedStringArray("player")]
 layout_mode = 3
 anchors_preset = 5
 anchor_left = 0.5
@@ -1630,23 +1680,24 @@ offset_right = 20.0
 offset_bottom = 47.0
 grow_horizontal = 2
 size_flags_horizontal = 4
-script = ExtResource("43_dc1c5")
+script = ExtResource("31_bwage")
+player = NodePath("../..")
 
-[node name="SpriteVelocity" type="Sprite2D" parent="UI/DebugGUI"]
+[node name="SpriteVelocity" type="Sprite2D" parent="UI/DebugInterface"]
 visible = false
 modulate = Color(0.403922, 0.811765, 0.886275, 1)
 position = Vector2(-150, 52)
 scale = Vector2(0.5, 1)
 texture = ExtResource("44_s6k41")
 
-[node name="SpriteSVelocity" type="Sprite2D" parent="UI/DebugGUI"]
+[node name="SpriteSVelocity" type="Sprite2D" parent="UI/DebugInterface"]
 visible = false
 modulate = Color(1, 0.54902, 0.580392, 1)
 position = Vector2(150, 52)
 scale = Vector2(0.5, 1)
 texture = ExtResource("44_s6k41")
 
-[node name="SpriteDeviation" type="Sprite2D" parent="UI/DebugGUI"]
+[node name="SpriteDeviation" type="Sprite2D" parent="UI/DebugInterface"]
 visible = false
 modulate = Color(0.65098, 0.941176, 0.219608, 1)
 position = Vector2(0, 52)
