@@ -1,3 +1,4 @@
+@icon("res://assets/art/icons/basketball-r-16.png")
 extends Area2D
 class_name BallHandler
 # Ball pickup, thrower, shooter, selector, ballwaller

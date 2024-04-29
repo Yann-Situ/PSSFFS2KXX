@@ -74,7 +74,7 @@ func set_flip_h(b : bool):
 func get_state_node()->Node:
 	return get_node("StateMachine/StatusLogic") 
 	# not S because S is instantiated in ready, so after every children's _ready
-
+	
 func disable_physics():
 	physics_enabled = false
 
@@ -140,11 +140,11 @@ func update_camera() -> void:
 #		else :
 #			S.aim_direction = -1
 	elif S.crouch.ing :
-		camera.set_offset_x_from_velocity(S.velocity.x, 0.4)
+		camera.set_offset_x_from_velocity(movement.velocity.x, 0.4)
 		camera.set_offset_y_from_crouch(0.2)
 	elif S.side.ing :
-		camera.set_offset_x_from_velocity(S.velocity.x, 0.4)
-		camera.set_offset_y_from_velocity(S.velocity.y, 0.4)
+		camera.set_offset_x_from_velocity(movement.velocity.x, 0.4)
+		camera.set_offset_y_from_velocity(movement.velocity.y, 0.4)
 	else :
 		camera.set_offset_zero()
 

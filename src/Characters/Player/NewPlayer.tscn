@@ -1,4 +1,4 @@
-[gd_scene load_steps=93 format=3 uid="uid://dlfptvxh6yjwm"]
+[gd_scene load_steps=105 format=3 uid="uid://dlfptvxh6yjwm"]
 
 [ext_resource type="Script" path="res://src/Characters/Player/NewPlayer.gd" id="1_b7wqc"]
 [ext_resource type="Script" path="res://src/Characters/Player/MovementData.gd" id="2_0ukhp"]
@@ -13,10 +13,19 @@
 [ext_resource type="Script" path="res://src/Characters/Player/AmbientHandler.gd" id="16_tgr41"]
 [ext_resource type="Script" path="res://src/Characters/Player/AmbientData.gd" id="17_iaaq0"]
 [ext_resource type="Script" path="res://src/Characters/Player/StateSystem/PlayerStatusLogic.gd" id="17_sct0s"]
+[ext_resource type="Script" path="res://src/Characters/Player/StateSystem/GroundStates/SlidePlayerState.gd" id="21_fmd78"]
+[ext_resource type="Script" path="res://src/Characters/Player/AmbientDataScaler.gd" id="22_bni2i"]
+[ext_resource type="Script" path="res://src/Characters/Player/StateSystem/GroundStates/LandPlayerState.gd" id="22_bsg40"]
+[ext_resource type="Script" path="res://src/Characters/Player/StateSystem/GroundStates/CrouchPlayerState.gd" id="23_tkksf"]
 [ext_resource type="Shader" path="res://assets/shader/shoot_viewer.gdshader" id="24_3m0tt"]
+[ext_resource type="Script" path="res://src/Characters/Player/StateSystem/GroundStates/StandPlayerState.gd" id="24_f6vqg"]
 [ext_resource type="Script" path="res://src/Characters/Player/ShootHandler.gd" id="24_kckqt"]
+[ext_resource type="Script" path="res://src/Characters/Player/StateSystem/AirStates/FallPlayerState.gd" id="25_uoqxj"]
 [ext_resource type="Shader" path="res://assets/shader/contour.gdshader" id="26_qq73j"]
+[ext_resource type="Script" path="res://src/Characters/Player/StateSystem/AirStates/FallwallPlayerState.gd" id="26_s5g3d"]
 [ext_resource type="Texture2D" uid="uid://fu53nbwvypbd" path="res://assets/art/characters/Player.png" id="27_0wgju"]
+[ext_resource type="Script" path="res://src/Characters/Player/StateSystem/AirStates/JumpPlayerState.gd" id="27_fitg4"]
+[ext_resource type="Script" path="res://src/Characters/Player/StateSystem/AirStates/WalljumpPlayerState.gd" id="28_dt7qh"]
 [ext_resource type="PackedScene" uid="uid://26l3hifm7i6c" path="res://src/Effects/DustParticle.tscn" id="31_45wht"]
 [ext_resource type="Script" path="res://src/Characters/Player/DebugInterface.gd" id="31_bwage"]
 [ext_resource type="Texture2D" uid="uid://b4ujrsln765de" path="res://assets/art/ball/dust.png" id="32_qmg4m"]
@@ -1215,9 +1224,9 @@ script = ExtResource("17_iaaq0")
 friction = Vector2(0.5, 0.9)
 time_scale = 1.0
 side_speed_max = 300.0
-side_instant_speed = 50.0
-side_instant_speed_return_thresh = 20.0
-side_accel = 100.0
+side_instant_speed = 80.0
+side_instant_speed_return_thresh = 50.0
+side_accel = 150.0
 base_force = Vector2(0, 0)
 base_accel = Vector2(0, 0)
 base_speed = Vector2(0, 0)
@@ -1227,9 +1236,9 @@ script = ExtResource("17_iaaq0")
 friction = Vector2(0.1, 0.1)
 time_scale = 1.0
 side_speed_max = 400.0
-side_instant_speed = 25.0
-side_instant_speed_return_thresh = 10.0
-side_accel = 50.0
+side_instant_speed = 50.0
+side_instant_speed_return_thresh = 30.0
+side_accel = 100.0
 base_force = Vector2(0, 0)
 base_accel = Vector2(0, 625)
 base_speed = Vector2(0, 0)
@@ -1245,6 +1254,42 @@ side_accel = 50.0
 base_force = Vector2(0, 0)
 base_accel = Vector2(0, 625)
 base_speed = Vector2(0, 0)
+
+[sub_resource type="Resource" id="Resource_neovj"]
+script = ExtResource("22_bni2i")
+friction = 0.05
+time_scale = 1.0
+side_speed_max = 1.0
+side_instant_speed = 1.0
+side_instant_speed_return_thresh = 1.0
+side_accel = 0.0
+base_force = 1.0
+base_accel = 1.0
+base_speed = 1.0
+
+[sub_resource type="Resource" id="Resource_px66t"]
+script = ExtResource("22_bni2i")
+friction = 1.0
+time_scale = 1.0
+side_speed_max = 0.75
+side_instant_speed = 0.7
+side_instant_speed_return_thresh = 0.5
+side_accel = 0.7
+base_force = 1.0
+base_accel = 1.0
+base_speed = 1.0
+
+[sub_resource type="Resource" id="Resource_mwu0c"]
+script = ExtResource("22_bni2i")
+friction = 1.0
+time_scale = 1.0
+side_speed_max = 1.0
+side_instant_speed = 2.0
+side_instant_speed_return_thresh = 1.0
+side_accel = 1.0
+base_force = 1.0
+base_accel = 1.0
+base_speed = 1.0
 
 [sub_resource type="CanvasItemMaterial" id="48"]
 particles_animation = true
@@ -1284,7 +1329,7 @@ color_ramp = SubResource("53")
 
 [sub_resource type="CompressedTexture2D" id="55"]
 
-[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_yo7f8"]
+[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_e03me"]
 resource_local_to_scene = true
 particles_animation = true
 particles_anim_h_frames = 6
@@ -1507,9 +1552,10 @@ ambient_data_floor = SubResource("Resource_cq5vr")
 ambient_data_air = SubResource("Resource_y4wjx")
 ambient_data_wall = SubResource("Resource_aiv1j")
 
-[node name="StateMachine" type="Node" parent="." node_paths=PackedStringArray("status_logic")]
+[node name="StateMachine" type="Node" parent="." node_paths=PackedStringArray("status_logic", "init_state")]
 script = ExtResource("8_sco1u")
 status_logic = NodePath("StatusLogic")
+init_state = NodePath("GroundStates/Stand")
 
 [node name="StatusLogic" type="Node" parent="StateMachine" node_paths=PackedStringArray("player", "ball_handler", "shoot_handler", "selectable_handler", "ray_handler", "input_controller")]
 script = ExtResource("17_sct0s")
@@ -1556,21 +1602,80 @@ script = ExtResource("10_ytx1q")
 
 [node name="GroundStates" type="Node" parent="StateMachine"]
 
-[node name="Slide" type="Node" parent="StateMachine/GroundStates"]
+[node name="Slide" type="Node" parent="StateMachine/GroundStates" node_paths=PackedStringArray("fall_state", "crouch_state", "player", "logic", "animation_player")]
+script = ExtResource("21_fmd78")
+ambient_modifier = SubResource("Resource_neovj")
+fall_state = NodePath("../../AirStates/Fall")
+crouch_state = NodePath("../Crouch")
+player = NodePath("../../..")
+logic = NodePath("../../StatusLogic")
+animation_player = NodePath("../../../Flipper/Sprite2D/PlayerAnimation")
 
-[node name="Land" type="Node" parent="StateMachine/GroundStates"]
+[node name="Land" type="Node" parent="StateMachine/GroundStates" node_paths=PackedStringArray("fall_state", "jump_state", "stand_state", "crouch_state", "player", "logic", "animation_player")]
+script = ExtResource("22_bsg40")
+fall_state = NodePath("../../AirStates/Fall")
+jump_state = NodePath("../../AirStates/Jump")
+stand_state = NodePath("../Stand")
+crouch_state = NodePath("../Crouch")
+player = NodePath("../../..")
+logic = NodePath("../../StatusLogic")
+animation_player = NodePath("../../../Flipper/Sprite2D/PlayerAnimation")
 
-[node name="Crouch" type="Node" parent="StateMachine/GroundStates"]
+[node name="Crouch" type="Node" parent="StateMachine/GroundStates" node_paths=PackedStringArray("fall_state", "stand_state", "player", "logic", "animation_player")]
+script = ExtResource("23_tkksf")
+ambient_modifier = SubResource("Resource_px66t")
+fall_state = NodePath("../../AirStates/Fall")
+stand_state = NodePath("../Stand")
+player = NodePath("../../..")
+logic = NodePath("../../StatusLogic")
+animation_player = NodePath("../../../Flipper/Sprite2D/PlayerAnimation")
 
-[node name="Stand" type="Node" parent="StateMachine/GroundStates"]
+[node name="Stand" type="Node" parent="StateMachine/GroundStates" node_paths=PackedStringArray("jump_state", "fall_state", "crouch_state", "player", "logic", "animation_player")]
+script = ExtResource("24_f6vqg")
+jump_state = NodePath("../../AirStates/Jump")
+fall_state = NodePath("../../AirStates/Fall")
+crouch_state = NodePath("../Crouch")
+player = NodePath("../../..")
+logic = NodePath("../../StatusLogic")
+animation_player = NodePath("../../../Flipper/Sprite2D/PlayerAnimation")
 
 [node name="AirStates" type="Node" parent="StateMachine"]
 
-[node name="Fall" type="Node" parent="StateMachine/AirStates"]
+[node name="Fall" type="Node" parent="StateMachine/AirStates" node_paths=PackedStringArray("land_state", "fallwall_state", "player", "logic", "animation_player")]
+script = ExtResource("25_uoqxj")
+land_state = NodePath("../../GroundStates/Land")
+fallwall_state = NodePath("../Fallwall")
+player = NodePath("../../..")
+logic = NodePath("../../StatusLogic")
+animation_player = NodePath("../../../Flipper/Sprite2D/PlayerAnimation")
 
-[node name="Jump" type="Node" parent="StateMachine/AirStates"]
+[node name="Fallwall" type="Node" parent="StateMachine/AirStates" node_paths=PackedStringArray("land_state", "fall_state", "walljump_state", "player", "logic", "animation_player")]
+script = ExtResource("26_s5g3d")
+ambient_modifier = SubResource("Resource_mwu0c")
+land_state = NodePath("../../GroundStates/Land")
+fall_state = NodePath("../Fall")
+walljump_state = NodePath("../Walljump")
+player = NodePath("../../..")
+logic = NodePath("../../StatusLogic")
+animation_player = NodePath("../../../Flipper/Sprite2D/PlayerAnimation")
 
-[node name="Walljump" type="Node" parent="StateMachine/AirStates"]
+[node name="Jump" type="Node" parent="StateMachine/AirStates" node_paths=PackedStringArray("land_state", "fallwall_state", "fall_state", "player", "logic", "animation_player")]
+script = ExtResource("27_fitg4")
+land_state = NodePath("../../GroundStates/Land")
+fallwall_state = NodePath("../Fallwall")
+fall_state = NodePath("../Fall")
+player = NodePath("../../..")
+logic = NodePath("../../StatusLogic")
+animation_player = NodePath("../../../Flipper/Sprite2D/PlayerAnimation")
+
+[node name="Walljump" type="Node" parent="StateMachine/AirStates" node_paths=PackedStringArray("land_state", "fallwall_state", "fall_state", "player", "logic", "animation_player")]
+script = ExtResource("28_dt7qh")
+land_state = NodePath("../../GroundStates/Land")
+fallwall_state = NodePath("../Fallwall")
+fall_state = NodePath("../Fall")
+player = NodePath("../../..")
+logic = NodePath("../../StatusLogic")
+animation_player = NodePath("../../../Flipper/Sprite2D/PlayerAnimation")
 
 [node name="ActionStates" type="Node" parent="StateMachine"]
 
@@ -1619,7 +1724,7 @@ lifetime = 0.65
 explosiveness = 0.9
 
 [node name="GrindParticles" parent="PlayerEffects" instance=ExtResource("37_3xxkx")]
-material = SubResource("CanvasItemMaterial_yo7f8")
+material = SubResource("CanvasItemMaterial_e03me")
 position = Vector2(0, 16)
 
 [node name="UI" type="CanvasLayer" parent="."]

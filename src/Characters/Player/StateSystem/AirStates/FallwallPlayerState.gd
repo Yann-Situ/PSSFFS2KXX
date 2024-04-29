@@ -16,7 +16,7 @@ extends PlayerMovementState
 # var wall : Status = Status.new(["belong"]) # appropriate declaration
 
 func _ready():
-	animation_variations = [["fallwall"], ["fallwall_loop"]]
+	animation_variations = [["air_wall"]]
 
 func branch() -> State:
 	if logic.belong.ing:
@@ -24,7 +24,7 @@ func branch() -> State:
 	if logic.action.can:
 		return action_state
 
-	if logic.walljump.can and logic.jump_press_timer.is_stopped():
+	if logic.walljump.can and !logic.jump_press_timer.is_stopped():
 		#logic.floor.ing = false # TEMPORARY solution to avoid infinite recursion
 		return walljump_state
 	if logic.floor.ing:

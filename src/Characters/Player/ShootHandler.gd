@@ -1,3 +1,4 @@
+@icon("res://assets/art/icons/target-bis-r-16.png")
 extends Node2D
 class_name ShootHandler
 

@@ -1,4 +1,4 @@
-@icon("res://assets/art/icons/heart.png")
+@icon("res://assets/art/icons/heart-r-16.png")
 extends Node2D
 class_name LifeHandler
 

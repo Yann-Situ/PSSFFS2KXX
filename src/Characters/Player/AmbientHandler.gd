@@ -1,3 +1,4 @@
+@icon("res://assets/art/icons/ambient-r-16.png")
 extends Node2D
 class_name AmbientHandler
 ## handle the different AmbientData around.

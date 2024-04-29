@@ -10,7 +10,7 @@ extends PlayerMovementState
 @export var stand_state : State
 
 func _ready():
-	animation_variations = [["crouch_idle"], ["crouch_walk"]]
+	animation_variations = [["crouch_idle"], ["crouch"]]
 	assert(ambient_modifier != null)
 
 func branch() -> State:

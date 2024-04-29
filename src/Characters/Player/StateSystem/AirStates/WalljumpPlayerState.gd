@@ -18,7 +18,7 @@ var up_cancelled = false # true if this jump was cancelled by releasing up_butto
 var cancelled = false # true if this jump was cancelled by pressing down_button or releasing up_button
 
 func _ready():
-	animation_variations = [["walljump"]]
+	animation_variations = [["walljump1"]]
 
 func branch() -> State:
 	if logic.belong.ing:
@@ -47,6 +47,7 @@ func enter(previous_state : State = null) -> State:
 	up_cancelled = false
 	cancelled = false
 	logic.no_jump_timer.start(no_jump_delay)
+	logic.jump_press_timer.stop()
 	movement.velocity.y += walljump_velocity.y
 	movement.velocity.x += -logic.direction_sprite * walljump_velocity.x
 	if !logic.up.pressed:

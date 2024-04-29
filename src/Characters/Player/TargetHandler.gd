@@ -1,3 +1,4 @@
+@icon("res://assets/art/icons/target-r-16.png")
 extends Node2D
 class_name TargetHandler
 # TODO: rework to delete the S dependency

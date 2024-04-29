@@ -1,3 +1,4 @@
+@icon("res://assets/art/icons/select-r-16.png")
 extends Node2D
 class_name SelectableHandler
 ## Handle selectables (mainly used for baskets and dunkjump, dunkdash, dunk and shoot)

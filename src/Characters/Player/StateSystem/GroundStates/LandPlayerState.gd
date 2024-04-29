@@ -21,7 +21,7 @@ func branch() -> State:
 	if logic.action.can:
 		return action_state
 
-	if logic.jump.can and logic.jump_press_timer.is_stopped():
+	if logic.jump.can and !logic.jump_press_timer.is_stopped():
 		#logic.floor.ing = false # TEMPORARY solution to avoid infinite recursion
 		return jump_state
 	if !logic.floor.ing:

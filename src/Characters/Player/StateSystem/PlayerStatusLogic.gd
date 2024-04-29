@@ -147,6 +147,7 @@ func update_status():
 	power.can = ball_handler.has_selected_ball()
 
 	# ray_handler
+	ray_handler.update_space_state()
 	floor.ing = ray_handler.is_on_floor()
 	if floor.ing:
 		$JumpFloorTimer.start()
@@ -177,7 +178,8 @@ func update_status():
 	side.can = no_side_timer.is_stopped()
 
 	# action.can
-	action.can = dunk.can or dunkjump.can or dunkdash.can or shoot.can
+	# action.can = dunk.can or dunkjump.can or dunkdash.can or shoot.can
+	action.can = false # TODO
 
 	# direction_sprite is 1 or -1 but direction_pressed.x can also be 0:
 	direction_sprite_changed = (direction_sprite*direction_pressed.x < 0)

@@ -1,3 +1,4 @@
+@icon("res://assets/art/icons/ray-r-16.png")
 extends Node2D
 class_name RayHandler
 
@@ -16,8 +17,9 @@ func _ready():
 		$Ray_down_fwd, $Ray_down_bwd, $Ray_slope_fwd, $Ray_slope_bwd]
 	rays_flip = [$Ray_fwd_down_f, $Ray_fwd_up_f, $Ray_up_bwd, $Ray_up_fwd, \
 		$Ray_down_bwd, $Ray_down_fwd, $Ray_slope_bwd, $Ray_slope_fwd]
+	rays = rays_not_flip
 
-func update_space_state():
+func update_space_state(): # TODO change the following behavior : update_space_state() need to be called before
 	space_state = get_world_2d().direct_space_state
 	for r in rays:
 		r.updated = false

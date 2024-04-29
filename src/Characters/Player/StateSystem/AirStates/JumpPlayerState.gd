@@ -18,7 +18,7 @@ var up_cancelled = false # true if this jump was cancelled by releasing up_butto
 var cancelled = false # true if this jump was cancelled by pressing down_button or releasing up_button
 
 func _ready():
-	animation_variations = [["jump"], ["turn_jump"], ["frontflip"]]
+	animation_variations = [["jump1"], ["turn_jump"], ["frontflip"]]
 
 func branch() -> State:
 	if logic.belong.ing:
@@ -46,6 +46,7 @@ func enter(previous_state : State = null) -> State:
 	up_cancelled = false
 	cancelled = false
 	logic.no_jump_timer.start(no_jump_delay)
+	logic.jump_press_timer.stop()
 	movement.velocity.y += jump_speed
 	if !logic.up.pressed:
 		movement.velocity.y *= jump_speed_up_cancelled_ratio

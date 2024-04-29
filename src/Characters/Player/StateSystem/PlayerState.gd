@@ -4,8 +4,8 @@ class_name PlayerState
 @export var player : NewPlayer
 @export var logic : StatusLogic
 
-# @export var animation_player : AnimationPlayer
-@onready var animation_player : AnimationPlayer = player.animation_player ## player animation player
+@export var animation_player : AnimationPlayer
+# @onready var animation_player : AnimationPlayer = player.animation_player ## player animation player
 var animation_variations : Array = [] # Array[Array[String]]
 ## variation can be set by another State node, in order to perform an appropriate animation
 @export var variation : int = 0 : set = set_variation #, get = get_animation_player
