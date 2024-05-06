@@ -1343,7 +1343,7 @@ color_ramp = SubResource("53")
 
 [sub_resource type="CompressedTexture2D" id="55"]
 
-[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_ocde4"]
+[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_aetrr"]
 resource_local_to_scene = true
 particles_animation = true
 particles_anim_h_frames = 6
@@ -1376,7 +1376,8 @@ position = Vector2(0, -35)
 limit_smoothed = true
 script = ExtResource("38_244q6")
 initial_position = Vector2(0, -32)
-velocity_max_offset_DOWN_RIGHT = Vector2(128, 128)
+velocity_max_offset_DOWN_RIGHT = Vector2(128, 160)
+velocity_speed_threshold = Vector2(600, 500)
 
 [node name="Flipper" type="Marker2D" parent="."]
 
@@ -1684,8 +1685,9 @@ animation_player = NodePath("../../../Flipper/Sprite2D/PlayerAnimation")
 
 [node name="Walljump" type="Node" parent="StateMachine/AirStates" node_paths=PackedStringArray("land_state", "fallwall_state", "fall_state", "player", "logic", "animation_player")]
 script = ExtResource("28_dt7qh")
-walljump_velocity = Vector2(550, -410)
-no_side_delay = 0.3
+walljump_velocity = Vector2(350, -350)
+mountwalljump_velocity = Vector2(350, -425)
+no_side_delay = 0.25
 land_state = NodePath("../../GroundStates/Land")
 fallwall_state = NodePath("../Fallwall")
 fall_state = NodePath("../Fall")
@@ -1740,13 +1742,14 @@ lifetime = 0.65
 explosiveness = 0.9
 
 [node name="GrindParticles" parent="PlayerEffects" instance=ExtResource("37_3xxkx")]
-material = SubResource("CanvasItemMaterial_ocde4")
+material = SubResource("CanvasItemMaterial_aetrr")
 position = Vector2(0, 16)
 
 [node name="UI" type="CanvasLayer" parent="."]
 layer = 10
 
 [node name="MarginContainer" type="MarginContainer" parent="UI"]
+visible = false
 anchors_preset = 10
 anchor_right = 1.0
 offset_bottom = 80.0

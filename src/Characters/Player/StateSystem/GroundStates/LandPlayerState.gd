@@ -25,6 +25,7 @@ func branch() -> State:
 		#logic.floor.ing = false # TEMPORARY solution to avoid infinite recursion
 		return jump_state
 	if !logic.floor.ing:
+		print("XXX")
 		return fall_state
 
 	if land_finished:

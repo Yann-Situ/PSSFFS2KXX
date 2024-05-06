@@ -1,11 +1,13 @@
 extends PlayerMovementState
 
-@export var walljump_velocity : Vector2 = Vector2(250, -350.0) # pix/s, supposed to be toward the right
+@export var walljump_velocity : Vector2 = Vector2(250, -350.0) ## pix/s, supposed to be toward the right
+@export var mountwalljump_velocity : Vector2 = Vector2(250, -350.0) ## pix/s, when mounting and walljump, gets a bit higher (new mechanic)
+@export var mountwalljump_thresh : float = -30.0 ## pix/s, thresh of mountwalljump: if velocity.y is below this value, then perform a mountwalljump
 ## ratio applied to the vertical velocity after releasing up button
-@export var jump_speed_up_cancelled_ratio : float = 0.5
-@export var jump_speed_down_cancelled_ratio : float = 0.1
+@export var jump_speed_up_cancelled_ratio : float = 0.5 ## when up is released, multiply the up velocity by this amount
+@export var jump_speed_down_cancelled_ratio : float = 0.1 ## when down is just pressed, multiply the up velocity by this amount
 @export var no_jump_delay : float = 0.2 ## s
-@export var no_side_delay : float = 0.4 ## s
+@export var no_side_delay : float = 0.2 ## s
 
 @export_group("States")
 @export var belong_state : State
@@ -50,8 +52,15 @@ func enter(previous_state : State = null) -> State:
 	logic.no_jump_timer.start(no_jump_delay)
 	logic.no_side_timer.start(no_side_delay)
 	logic.jump_press_timer.stop()
-	movement.velocity.y += walljump_velocity.y
-	movement.velocity.x += -logic.direction_sprite * walljump_velocity.x
+	if movement.velocity.y < mountwalljump_thresh:
+		print(self.name+" mount*")
+		movement.velocity.y = mountwalljump_velocity.y
+		movement.velocity.x = -logic.direction_sprite * mountwalljump_velocity.x
+	else:
+		print(self.name)
+		movement.velocity.y = walljump_velocity.y
+		movement.velocity.x = -logic.direction_sprite * walljump_velocity.x
+	
 	if !logic.up.pressed:
 		movement.velocity.y *= jump_speed_up_cancelled_ratio
 		print("  | enter cancelled jump")
@@ -60,8 +69,6 @@ func enter(previous_state : State = null) -> State:
 	# TODO
 	#player.PlayerEffects.dust_start()
 	#player.PlayerEffects.jump_start()
-
-	print(self.name)
 	return next_state
 
 ## Called by the parent StateMachine during the _physics_process call, after

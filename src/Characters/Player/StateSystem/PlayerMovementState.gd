@@ -26,7 +26,7 @@ func movement_physics_process(delta, m : MovementData = movement):
 	apply_accel_alterable(delta, m)
 
 	# friction
-	if sign(m.velocity.x) != sign(m.direction_pressed.x): # if not moving in the same dir as input # TODO handle m.direction_pressed.x
+	if logic.side.can and sign(m.velocity.x) != sign(m.direction_pressed.x): # if not moving in the same dir as input # TODO handle m.direction_pressed.x
 		m.velocity.x = GlobalMaths.apply_friction(m.velocity.x, m.ambient.friction.x, delta)
 	if sign(m.velocity.y) != sign(m.direction_pressed.y): # if not moving in the same dir as input # TODO handle m.direction_pressed.x
 		m.velocity.y = GlobalMaths.apply_friction(m.velocity.y, m.ambient.friction.y, delta)

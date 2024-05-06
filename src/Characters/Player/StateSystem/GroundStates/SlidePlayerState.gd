@@ -37,6 +37,7 @@ func branch() -> State:
 	return self
 
 func animation_process() -> void:
+	# TODO handle reverse slide animation (direction_pressed * direction_movement = -1)
 	if end_slide and variation == 0:
 		set_variation(1)
 		play_animation()
