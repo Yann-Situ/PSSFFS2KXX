@@ -4,7 +4,7 @@ class_name PlayerMovementState
 @onready var movement : MovementData = player.movement ## Player movement Resource, or node
 
 func side_move_physics_process(delta, m : MovementData = movement):
-	if m.direction_pressed.x == 0.0:
+	if !logic.side.can or m.direction_pressed.x == 0.0:
 		return
 	if -m.ambient.side_instant_speed_return_thresh < m.velocity.x*m.direction_pressed.x \
 		and m.velocity.x*m.direction_pressed.x < m.ambient.side_instant_speed :

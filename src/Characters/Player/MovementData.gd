@@ -41,3 +41,22 @@ func set_ambient(_ambient : AmbientData):
 	force_alterable.set_base_value(ambient.base_force)
 	speed_alterable.set_base_value(ambient.base_speed)
 	accel_alterable.set_base_value(ambient.base_accel)
+
+func duplicate_with_ambient_scaler(scaler : AmbientDataScaler) -> MovementData:
+	var m = MovementData.new()
+	m.mass = self.mass
+	m.ambient = scaler.apply(self.ambient)
+	m.velocity = self.velocity
+	m.direction_pressed = self.direction_pressed
+	m.force_alterable = self.force_alterable
+	m.speed_alterable = self.speed_alterable
+	m.accel_alterable = self.accel_alterable
+	return m
+
+func _to_string() -> String:
+	var s = "{ "
+	s+= "velocity: "+str(self.velocity)
+	s+= "; mass: "+str(self.mass)
+	s+= "; direction: "+str(self.direction_pressed)
+	s+= "; ambient: "+str(self.ambient)
+	return s+" }"

@@ -8,25 +8,10 @@ extends PlayerMovementState
 @export var jump_state : State
 @export var fall_state : State
 @export var slide_state : State
-@export var standstop_state : State
 @export var crouch_state : State
-@export var turn_state : State
-
-# # We just export the logic
-# var belong : Status = Status.new(["belong"]) # appropriate declaration
-# var action : Status = Status.new(["belong"]) # appropriate declaration
-# var jump : Status = Status.new(["belong"]) # appropriate declaration
-# var floor : Status = Status.new(["belong"]) # appropriate declaration
-# var run : Status = Status.new(["belong"]) # appropriate declaration
-# var crouch : Status = Status.new(["belong"]) # appropriate declaration
-#
-# var up : Trigger = Trigger.new(["belong"]) # appropriate declaration
-# var down : Trigger = Trigger.new(["belong"]) # appropriate declaration
-# var left : Trigger = Trigger.new(["belong"]) # appropriate declaration
-# var right : Trigger = Trigger.new(["belong"]) # appropriate declaration
 
 func _ready():
-	animation_variations = [["idle"], ["walk"], ["standstop"], ["halfturn"]]
+	animation_variations = [["idle"], ["walk"], ["halfturn"], ["halfturn"]] # TODO animation_variations[1] should be ["standstop"]
 
 func branch() -> State:
 	if logic.belong.ing:

@@ -15,7 +15,7 @@ var end_slide_finished = false # set to true at the end of animation ["end_slide
 @onready var timer : Timer # time the duration between the beginning of the slide to the call to "end_slide"
 
 func _ready():
-	animation_variations = [["begin_slide", "slide_loop"], ["end_slide"]]
+	animation_variations = [["slide", "slide_loop"], ["slide_end"]]
 	timer = Timer.new()
 	timer.wait_time = duration
 	timer.timeout.connect(end_timer)
@@ -56,6 +56,8 @@ func enter(previous_state : State = null) -> State:
 	# change hitbox
 	return next_state
 
+func slide_end_finished():
+	end_slide_finished = true
 func end_timer():
 	end_slide = true
 
@@ -66,9 +68,7 @@ func physics_process(delta) -> State:
 	if next_state != self:
 		return next_state
 
-	var m : MovementData = movement.duplicate(false)
-	m.set_ambient(ambient_modifier.apply(movement.ambient))
-	# side_crouch_physics_process(delta)
+	var m : MovementData = movement.duplicate_with_ambient_scaler(ambient_modifier)
 	side_move_physics_process(delta, m)
 
 	# update player position

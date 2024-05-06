@@ -1059,6 +1059,20 @@ tracks/1/keys = {
 "update": 1,
 "values": [Vector2(3, 4), Vector2(11, 0)]
 }
+tracks/2/type = "method"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("../../StateMachine/GroundStates/Slide")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0.14),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [],
+"method": &"slide_end_finished"
+}]
+}
 
 [sub_resource type="Animation" id="62"]
 resource_name = "slide_loop"
@@ -1221,7 +1235,7 @@ size = Vector2(17, 57)
 
 [sub_resource type="Resource" id="Resource_cq5vr"]
 script = ExtResource("17_iaaq0")
-friction = Vector2(0.5, 0.9)
+friction = Vector2(0.4, 0.5)
 time_scale = 1.0
 side_speed_max = 300.0
 side_instant_speed = 80.0
@@ -1233,7 +1247,7 @@ base_speed = Vector2(0, 0)
 
 [sub_resource type="Resource" id="Resource_y4wjx"]
 script = ExtResource("17_iaaq0")
-friction = Vector2(0.1, 0.1)
+friction = Vector2(0.15, 0.02)
 time_scale = 1.0
 side_speed_max = 400.0
 side_instant_speed = 50.0
@@ -1245,7 +1259,7 @@ base_speed = Vector2(0, 0)
 
 [sub_resource type="Resource" id="Resource_aiv1j"]
 script = ExtResource("17_iaaq0")
-friction = Vector2(0.9, 0.9)
+friction = Vector2(0.15, 0.1)
 time_scale = 1.0
 side_speed_max = 300.0
 side_instant_speed = 100.0
@@ -1269,9 +1283,9 @@ base_speed = 1.0
 
 [sub_resource type="Resource" id="Resource_px66t"]
 script = ExtResource("22_bni2i")
-friction = 1.0
+friction = 1.1
 time_scale = 1.0
-side_speed_max = 0.75
+side_speed_max = 0.7
 side_instant_speed = 0.7
 side_instant_speed_return_thresh = 0.5
 side_accel = 0.7
@@ -1329,7 +1343,7 @@ color_ramp = SubResource("53")
 
 [sub_resource type="CompressedTexture2D" id="55"]
 
-[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_e03me"]
+[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_ocde4"]
 resource_local_to_scene = true
 particles_animation = true
 particles_anim_h_frames = 6
@@ -1340,7 +1354,7 @@ particles_anim_loop = true
 radius = 5.0
 height = 42.0
 
-[node name="NewPlayer" type="CharacterBody2D"]
+[node name="NewPlayer" type="CharacterBody2D" node_paths=PackedStringArray("label_state", "label_velocity")]
 light_mask = 4
 z_index = 100
 z_as_relative = false
@@ -1349,6 +1363,8 @@ floor_max_angle = 0.886627
 platform_on_leave = 2
 script = ExtResource("1_b7wqc")
 movement = SubResource("Resource_5o1rd")
+label_state = NodePath("UI/DebugInterface/HBoxContainer/LabelState")
+label_velocity = NodePath("UI/DebugInterface/HBoxContainer/LabelVelocity")
 
 [node name="Collision" type="CollisionShape2D" parent="."]
 position = Vector2(0, 3.5)
@@ -1377,13 +1393,6 @@ frame = 140
 libraries = {
 "": SubResource("AnimationLibrary_y1wwd")
 }
-
-[node name="LabelState" type="Label" parent="Flipper/Sprite2D"]
-offset_left = -20.0
-offset_top = -63.0
-offset_right = 20.0
-offset_bottom = -37.0
-text = "state"
 
 [node name="InteractionHandler" type="Area2D" parent="Flipper"]
 visible = false
@@ -1568,16 +1577,20 @@ input_controller = NodePath("../InputController")
 
 [node name="JumpFloorTimer" type="Timer" parent="StateMachine/StatusLogic"]
 editor_description = "Delay for coyote time"
+wait_time = 0.1
 one_shot = true
 
 [node name="JumpPressTimer" type="Timer" parent="StateMachine/StatusLogic"]
 editor_description = "Max delay between jump_pressed and actual jump"
+wait_time = 0.1
 one_shot = true
 
 [node name="DunkJumpPressTimer" type="Timer" parent="StateMachine/StatusLogic"]
+wait_time = 0.2
 one_shot = true
 
 [node name="JumpWallTimer" type="Timer" parent="StateMachine/StatusLogic"]
+wait_time = 0.1
 one_shot = true
 
 [node name="NoJumpTimer" type="Timer" parent="StateMachine/StatusLogic"]
@@ -1630,10 +1643,11 @@ player = NodePath("../../..")
 logic = NodePath("../../StatusLogic")
 animation_player = NodePath("../../../Flipper/Sprite2D/PlayerAnimation")
 
-[node name="Stand" type="Node" parent="StateMachine/GroundStates" node_paths=PackedStringArray("jump_state", "fall_state", "crouch_state", "player", "logic", "animation_player")]
+[node name="Stand" type="Node" parent="StateMachine/GroundStates" node_paths=PackedStringArray("jump_state", "fall_state", "slide_state", "crouch_state", "player", "logic", "animation_player")]
 script = ExtResource("24_f6vqg")
 jump_state = NodePath("../../AirStates/Jump")
 fall_state = NodePath("../../AirStates/Fall")
+slide_state = NodePath("../Slide")
 crouch_state = NodePath("../Crouch")
 player = NodePath("../../..")
 logic = NodePath("../../StatusLogic")
@@ -1670,6 +1684,8 @@ animation_player = NodePath("../../../Flipper/Sprite2D/PlayerAnimation")
 
 [node name="Walljump" type="Node" parent="StateMachine/AirStates" node_paths=PackedStringArray("land_state", "fallwall_state", "fall_state", "player", "logic", "animation_player")]
 script = ExtResource("28_dt7qh")
+walljump_velocity = Vector2(550, -410)
+no_side_delay = 0.3
 land_state = NodePath("../../GroundStates/Land")
 fallwall_state = NodePath("../Fallwall")
 fall_state = NodePath("../Fall")
@@ -1724,14 +1740,13 @@ lifetime = 0.65
 explosiveness = 0.9
 
 [node name="GrindParticles" parent="PlayerEffects" instance=ExtResource("37_3xxkx")]
-material = SubResource("CanvasItemMaterial_e03me")
+material = SubResource("CanvasItemMaterial_ocde4")
 position = Vector2(0, 16)
 
 [node name="UI" type="CanvasLayer" parent="."]
 layer = 10
 
 [node name="MarginContainer" type="MarginContainer" parent="UI"]
-visible = false
 anchors_preset = 10
 anchor_right = 1.0
 offset_bottom = 80.0
@@ -1774,17 +1789,16 @@ offset_right = 194.0
 offset_bottom = 25.0
 fit_content = true
 
-[node name="DebugInterface" type="Control" parent="UI" node_paths=PackedStringArray("player")]
-layout_mode = 3
-anchors_preset = 5
-anchor_left = 0.5
-anchor_right = 0.5
-offset_left = -20.0
-offset_top = 7.0
-offset_right = 20.0
-offset_bottom = 47.0
+[node name="DebugInterface" type="MarginContainer" parent="UI" node_paths=PackedStringArray("player")]
+anchors_preset = 12
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = -64.0
 grow_horizontal = 2
+grow_vertical = 0
 size_flags_horizontal = 4
+size_flags_vertical = 4
 script = ExtResource("31_bwage")
 player = NodePath("../..")
 
@@ -1808,6 +1822,18 @@ modulate = Color(0.65098, 0.941176, 0.219608, 1)
 position = Vector2(0, 52)
 scale = Vector2(0.5, 1)
 texture = ExtResource("44_s6k41")
+
+[node name="HBoxContainer" type="HBoxContainer" parent="UI/DebugInterface"]
+layout_mode = 2
+
+[node name="LabelState" type="Label" parent="UI/DebugInterface/HBoxContainer"]
+layout_mode = 2
+text = "state"
+
+[node name="LabelVelocity" type="Label" parent="UI/DebugInterface/HBoxContainer"]
+layout_mode = 2
+text = "velocity
+"
 
 [node name="Combos" type="Node" parent="."]
 

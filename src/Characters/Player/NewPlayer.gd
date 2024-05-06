@@ -12,6 +12,9 @@ class_name NewPlayer
 @export var physics_enabled : bool = true
 @export var animation_player : AnimationPlayer
 
+@export_group("DEBUG")
+@export var label_state : Label # only for debug
+@export var label_velocity : Label # only for debug
 ################################################################################
 
 @onready var S = get_node("StateMachine/StatusLogic")
@@ -31,7 +34,6 @@ class_name NewPlayer
 @onready var life_handler = get_node("LifeHandler")
 @onready var life_bar = get_node("UI/MarginContainer/HBoxContainer/VBoxContainer/Bar")
 @onready var sprite = get_node("Flipper/Sprite2D")
-@onready var label_state = get_node("Flipper/Sprite2D/LabelState") # only for debug
 @onready var flipper = get_node("Flipper")
 
 ################################################################################
@@ -98,6 +100,8 @@ func _process(delta):
 	update_target_handler()
 	
 func _physics_process(delta):
+	if Global.DEBUG and state_machine.current_state != null:
+		label_velocity.text = "("+str(movement.velocity.x).pad_decimals(1)+", "+str(movement.velocity.y).pad_decimals(1)+")"
 	update_collision()
 	update_ambient_data()
 ################################################################################
@@ -142,11 +146,9 @@ func update_camera() -> void:
 	elif S.crouch.ing :
 		camera.set_offset_x_from_velocity(movement.velocity.x, 0.4)
 		camera.set_offset_y_from_crouch(0.2)
-	elif S.side.ing :
+	else :
 		camera.set_offset_x_from_velocity(movement.velocity.x, 0.4)
 		camera.set_offset_y_from_velocity(movement.velocity.y, 0.4)
-	else :
-		camera.set_offset_zero()
 
 ## update the SelectorTargets depending on S and using the selectables from selectable_handler.
 ## should be called in _process()

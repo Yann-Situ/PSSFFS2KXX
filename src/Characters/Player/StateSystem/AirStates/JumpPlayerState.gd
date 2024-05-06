@@ -47,7 +47,7 @@ func enter(previous_state : State = null) -> State:
 	cancelled = false
 	logic.no_jump_timer.start(no_jump_delay)
 	logic.jump_press_timer.stop()
-	movement.velocity.y += jump_speed
+	movement.velocity.y = jump_speed
 	if !logic.up.pressed:
 		movement.velocity.y *= jump_speed_up_cancelled_ratio
 		print("  | enter cancelled jump")
@@ -67,11 +67,11 @@ func physics_process(delta) -> State:
 	if next_state != self:
 		return next_state
 
-	if !up_cancelled and logic.up.just_released:
+	if !up_cancelled and !logic.up.pressed:
 		movement.velocity.y *= jump_speed_up_cancelled_ratio
 		print("  | up cancelled jump")
 		up_cancelled = true
-	if !cancelled and logic.down.just_pressed:
+	if !cancelled and logic.down.pressed:
 		movement.velocity.y *= jump_speed_down_cancelled_ratio
 		print("  | down cancelled jump")
 		up_cancelled = true
@@ -82,7 +82,7 @@ func physics_process(delta) -> State:
 	# update player position
 	if player.physics_enabled:
 		movement_physics_process(delta)
-	if first_frame and !logic.floor.ing :
+	if first_frame :
 		first_frame = false # TEMPORARY Hack to avoid Stand->Jump->Stand transitions
 	return self
 

@@ -5,6 +5,7 @@ extends PlayerMovementState
 @export var jump_speed_up_cancelled_ratio : float = 0.5
 @export var jump_speed_down_cancelled_ratio : float = 0.1
 @export var no_jump_delay : float = 0.2 ## s
+@export var no_side_delay : float = 0.4 ## s
 
 @export_group("States")
 @export var belong_state : State
@@ -47,6 +48,7 @@ func enter(previous_state : State = null) -> State:
 	up_cancelled = false
 	cancelled = false
 	logic.no_jump_timer.start(no_jump_delay)
+	logic.no_side_timer.start(no_side_delay)
 	logic.jump_press_timer.stop()
 	movement.velocity.y += walljump_velocity.y
 	movement.velocity.x += -logic.direction_sprite * walljump_velocity.x
@@ -84,7 +86,7 @@ func physics_process(delta) -> State:
 	# update player position
 	if player.physics_enabled:
 		movement_physics_process(delta)
-	if first_frame and !logic.floor.ing :
+	if first_frame :
 		first_frame = false # TEMPORARY Hack to avoid Stand->Jump->Stand transitions
 	return self
 

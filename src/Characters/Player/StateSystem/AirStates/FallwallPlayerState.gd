@@ -43,9 +43,7 @@ func physics_process(delta) -> State:
 	if next_state != self:
 		return next_state
 
-	var m : MovementData = movement.duplicate(false)
-	m.set_ambient(ambient_modifier.apply(movement.ambient))
-	# side_crouch_physics_process(delta)
+	var m : MovementData = movement.duplicate_with_ambient_scaler(ambient_modifier)
 	side_move_physics_process(delta, m)
 
 	# update player position
