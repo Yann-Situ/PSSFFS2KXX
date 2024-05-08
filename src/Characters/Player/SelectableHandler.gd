@@ -24,10 +24,10 @@ class_name SelectableHandler
 @onready var dunk_criteria_bests = []
 @onready var shoot_criteria_bests = []
 
-var selectable_dunkjump : Selectable = null
-var selectable_dunkdash : Selectable = null
-var selectable_dunk : Selectable = null
-var selectable_shoot : Selectable = null
+var selectable_dunkjump : Selectable = null : get = get_selectable_dunkjump
+var selectable_dunkdash : Selectable = null : get = get_selectable_dunkdash
+var selectable_dunk : Selectable = null : get = get_selectable_dunk
+var selectable_shoot : Selectable = null : get = get_selectable_shoot
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -35,9 +35,7 @@ func _ready():
 
 ####################################################################################################
 
-# Those functions should not depend on S
 func has_selectable_dunkjump():
-	# update_selectable()
 	return selectable_dunkjump != null
 
 func has_selectable_dunkdash():
@@ -49,6 +47,17 @@ func has_selectable_dunk():
 func has_selectable_shoot():
 	return selectable_shoot != null
 
+func get_selectable_dunkjump():
+	return selectable_dunkjump
+
+func get_selectable_dunkdash():
+	return selectable_dunkdash
+
+func get_selectable_dunk():
+	return selectable_dunk
+
+func get_selectable_shoot():
+	return selectable_shoot
 ####################################################################################################
 
 # DUNK

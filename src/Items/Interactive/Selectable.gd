@@ -5,7 +5,7 @@ class_name Selectable
 
 signal selection_changed(type, value)
 
-@export var parent_node : Node = get_parent() ## the node that is associated to this selectable, for example the basket node
+@export var parent_node : Node2D = get_parent() ## the node that is associated to this selectable, for example the basket node
 
 @export var is_shoot_selectable = true : set = set_is_shoot_selectable
 @export var is_dash_selectable = true : set = set_is_dash_selectable
