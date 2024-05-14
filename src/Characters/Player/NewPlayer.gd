@@ -17,7 +17,7 @@ class_name NewPlayer
 @export var label_velocity : Label # only for debug
 ################################################################################
 
-@onready var S = get_node("StateMachine/StatusLogic")
+@onready var S : PlayerStatusLogic = get_node("StateMachine/StatusLogic")
 @onready var state_machine = get_node("StateMachine")
 @onready var collision = get_node("Collision")
 @onready var player_effects = get_node("PlayerEffects")
@@ -104,6 +104,7 @@ func _physics_process(delta):
 		label_velocity.text = "("+str(movement.velocity.x).pad_decimals(1)+", "+str(movement.velocity.y).pad_decimals(1)+")"
 	update_collision()
 	update_ambient_data()
+	update_selectable_handler()
 ################################################################################
 # updates of some sub nodes (mostly, handlers) whose behavior depends on S or each other
 
@@ -163,6 +164,14 @@ func update_target_handler() -> void:
 	else:
 		target_handler.update_selection(Selectable.SelectionType.DASH, null)
 	# target_handler.update_selection(Selectable.SelectionType.SHOOT, selectable_handler.selectable_shoot)
+
+## update the Selectables (calling the method from SelectableHandler)
+## should be called in _physics_process()
+func update_selectable_handler() -> void:
+	var dir = sign(S.direction_pressed.x)
+	if dir == 0:
+		dir = S.direction_sprite
+	selectable_handler.update_selectables(dir)
 
 ## TODO maybe this should be handled by State nodes.
 ## should be called in _physics_process()

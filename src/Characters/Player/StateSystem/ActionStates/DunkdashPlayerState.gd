@@ -1,29 +1,39 @@
 extends PlayerMovementState
 
-@export var no_side_delay = 0.2#s
+@export var no_side_delay : float = 0.2#s
+@export var dunkdash_speed : float = 800#pix/s
+@export var selectable_handler : SelectableHandler
 
 @export_group("States")
-@export var exit_state : State
+@export var belong_state : State
+@export var fall_state : State
 
 var velocity_save = Vector2.ZERO
 var dash_dir = Vector2.ZERO
 var accel_alterer = AltererMultiplicative.new(0.0)
 
+var end_dash = false # set to true at the end of animation ["dunkdash"]
+
 func _ready():
-	animation_variations = [["dunkdash"], ["dunkdash_reverse"]] # [["animation_1", "animation_2"]]
+	animation_variations = [["dunkdash"], ["dunkdash_2"]] # [["animation_1", "animation_2"]]
 
 func branch() -> State:
 	if logic.belong.ing:
-	 	return belong_state
+		return belong_state
 	# if logic.action.can:
 	# 	return action_state
-	# TODO handle the end of the dash
+	# handle the end of the dash
+	if end_dash:
+		return fall_state
 	return self
 
 func enter(previous_state : State = null) -> State:
+	end_dash = false
+	
 	var next_state = branch()
 	if next_state != self:
 		return next_state
+	set_variation(randi_range(0,1))
 	play_animation()
 
 	logic.dunkdash.ing = true
@@ -39,7 +49,7 @@ func enter(previous_state : State = null) -> State:
 		printerr("dunkdash but selectable_handler.has_selectable_dunkdash() returned false")
 		return fall_state # or stand_state?
 
-	var dash_velocity = anticipate_dash_velocity(target_node)
+	var dash_velocity = anticipate_dash_velocity(target_node, dunkdash_speed)
 	movement.velocity = dash_velocity
 
 	# TODO
@@ -71,6 +81,9 @@ func physics_process(delta) -> State:
 		movement_physics_process(delta)
 	return self
 
+func dash_end():
+	end_dash = true
+	
 ## Called just before entering the next State. Should not contain await or time
 ## stopping functions
 func exit():

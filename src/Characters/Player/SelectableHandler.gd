@@ -175,6 +175,7 @@ func dunkdash_criteria(q : Vector2, target_direction : int) -> bool:
 ################################################################################
 
 ## target_direction_x should not be 0
+## should be called in physics_process
 func update_selectables(target_direction_x : int):
 	if target_direction_x == 0:
 		target_direction_x = 1

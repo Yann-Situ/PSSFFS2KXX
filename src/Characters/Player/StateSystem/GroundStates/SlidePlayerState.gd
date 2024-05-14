@@ -11,7 +11,7 @@ extends PlayerMovementState
 @export var crouch_state : State
 
 var end_slide = false # set to true after timer and if not pressed down # TODO
-var end_slide_finished = false # set to true at the end of animation ["end_slide"] # TODO
+var end_slide_finished = false # set to true at the end of animation ["end_slide"]
 @onready var timer : Timer # time the duration between the beginning of the slide to the call to "end_slide"
 
 func _ready():

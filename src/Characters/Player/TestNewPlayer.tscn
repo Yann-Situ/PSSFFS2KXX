@@ -1,6 +1,8 @@
-[gd_scene load_steps=3 format=3 uid="uid://dthba6oq5gc2c"]
+[gd_scene load_steps=5 format=3 uid="uid://dthba6oq5gc2c"]
 
 [ext_resource type="PackedScene" uid="uid://dlfptvxh6yjwm" path="res://src/Characters/Player/NewPlayer.tscn" id="1_3s5ex"]
+[ext_resource type="PackedScene" uid="uid://bola66fqnywdi" path="res://src/Items/Baskets/Basket.tscn" id="2_rcppe"]
+[ext_resource type="PackedScene" uid="uid://rmukvjwyiahu" path="res://src/Items/Interactive/DashTarget.tscn" id="4_vquou"]
 
 [sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_sdft1"]
 
@@ -29,3 +31,12 @@ polygon = PackedVector2Array(-320, 0, 320, 0, 320, 64, -320, 64)
 
 [node name="NewPlayer" parent="." instance=ExtResource("1_3s5ex")]
 position = Vector2(320, 184)
+
+[node name="Basket" parent="." instance=ExtResource("2_rcppe")]
+position = Vector2(488, 72)
+
+[node name="DashTarget" parent="." instance=ExtResource("4_vquou")]
+position = Vector2(168, 288)
+
+[node name="DashTarget2" parent="." instance=ExtResource("4_vquou")]
+position = Vector2(-16, 176)

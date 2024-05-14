@@ -12,7 +12,7 @@ var animation_variations : Array = [] # Array[Array[String]]
 var variation_playing = -1
 
 func set_variation(v : int):
-	variation = v % animation_variations.size()
+	variation = v % max(animation_variations.size(),1)
 
 func play_animation(priority = false):
 	if !animation_player or animation_variations.is_empty():

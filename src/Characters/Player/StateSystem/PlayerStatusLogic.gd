@@ -41,6 +41,7 @@ var down : Trigger = Trigger.new("down") #
 var left : Trigger = Trigger.new("left") #
 var right : Trigger = Trigger.new("right") #
 var accept : Trigger = Trigger.new("accept") #
+var key_release : Trigger = Trigger.new("release") #
 
 var direction_pressed : Vector2 = Vector2.ZERO
 var direction_sprite = 1
@@ -86,6 +87,8 @@ func _ready():
 	down = input_controller.down
 	left = input_controller.left
 	right = input_controller.right
+	accept = input_controller.accept
+	key_release = input_controller.release
 
 	stand.can = true
 	side.can = true
@@ -131,7 +134,6 @@ func update_triggers():
 		jump_press_timer.start()
 	if accept.just_pressed:
 		dunkjump_press_timer.start()
-
 ## update the status using logic.
 func update_status():
 	# action.ing
@@ -179,7 +181,7 @@ func update_status():
 
 	# action.can
 	# action.can = dunk.can or dunkjump.can or dunkdash.can or shoot.can
-	action.can = false # TODO
+	action.can = (dunkdash.can and accept.just_pressed) # TODO
 
 	# direction_sprite is 1 or -1 but direction_pressed.x can also be 0:
 	direction_sprite_changed = (direction_sprite*direction_pressed.x < 0)
