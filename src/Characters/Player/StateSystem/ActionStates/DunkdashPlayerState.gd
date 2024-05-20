@@ -1,7 +1,9 @@
 extends PlayerMovementState
 
 @export var no_side_delay : float = 0.2#s
+@export var no_friction_delay : float = 0.3#s
 @export var dunkdash_speed : float = 800#pix/s
+@export var end_speed_ration : float = 0.3 ## velocity will be multiplied by this amount at the end of the dunkdash
 @export var selectable_handler : SelectableHandler
 
 @export_group("States")
@@ -39,6 +41,7 @@ func enter(previous_state : State = null) -> State:
 	logic.dunkdash.ing = true
 	# logic.action.ing is already set in PlayerStatusLogic.gd
 	logic.no_side_timer.start(no_side_delay)
+	logic.no_friction_timer.start(no_friction_delay)
 
 	player.add_accel(accel_alterer)
 
@@ -49,7 +52,8 @@ func enter(previous_state : State = null) -> State:
 		printerr("dunkdash but selectable_handler.has_selectable_dunkdash() returned false")
 		return fall_state # or stand_state?
 
-	var dash_velocity = anticipate_dash_velocity(target_node, dunkdash_speed)
+	velocity_save = movement.velocity
+	var dash_velocity = anticipate_dash_velocity(target_node, dunkdash_speed, movement.velocity)
 	movement.velocity = dash_velocity
 
 	# TODO
@@ -63,7 +67,7 @@ func enter(previous_state : State = null) -> State:
 	# player.PlayerEffects.distortion_start("fast_soft",0.75)
 	# Global.camera.screen_shake(0.2,10)
 
-	print(self.name)
+	print(self.name + " - velocity: " + str(dash_velocity.length()))
 	return next_state
 
 
@@ -78,6 +82,7 @@ func physics_process(delta) -> State:
 
 	# update player position
 	if player.physics_enabled:
+		var save = movement.velocity.length()
 		movement_physics_process(delta)
 	return self
 
@@ -91,32 +96,31 @@ func exit():
 	player.remove_accel(accel_alterer)
 	logic.dunkdash.ing = false
 
-	# TODO, translate this:
-	# if not logic.is_grinding and not logic.is_hanging :
-	# 	var temp_vel_l = logic.velocity.length()
-	# 	var vel_dir = Vector2.ZERO
-	# 	if temp_vel_l != 0.0: #avoid zero division
-	# 		vel_dir = logic.velocity/temp_vel_l # vel_dir is not always equals to dash_dir (e.g if there is an obstacle on the dash path)
-	# 	var temp_dot = velocity_save.dot(vel_dir)
-	# 	if 0.5*temp_vel_l > temp_dot :
-	# 		logic.set_velocity_safe(logic.velocity * 0.5)
-	# 	else :
-	# 		logic.set_velocity_safe(temp_dot * vel_dir)
-	#
-	# 	if logic.direction_p * logic.move_direction < 0:
-	# 		logic.set_velocity_safe(Vector2(logic.velocity.x * 0.5, logic.velocity.y)) # again, so *0.25 when also match the first case
-	#
-	# if logic.has_ball: # WARNING the ball can change during the dash!
-	# 	logic.active_ball.on_dunkdash_end(P)
+	# if not logic.is_grinding and not logic.is_hanging : # TODO, translate this:
+	var temp_vel_l = movement.velocity.length()
+	var vel_dir = Vector2.ZERO
+	if temp_vel_l != 0.0: #avoid zero division
+		vel_dir = movement.velocity/temp_vel_l # vel_dir is not always equals to dash_dir (e.g if there is an obstacle on the dash path)
+	var temp_vel_save_dot = velocity_save.dot(vel_dir)
+	if end_speed_ration*temp_vel_l > temp_vel_save_dot :
+		movement.velocity *= end_speed_ration
+	else :
+		movement.velocity = temp_vel_save_dot * vel_dir
+
+	if logic.direction_pressed.x * movement.velocity.x < 0:
+		movement.velocity.x *= end_speed_ration # again, so *end_speed_ration^2 when also match the first case
+	
+#	if logic.has_ball: # WARNING the ball can change during the dash!
+#		logic.active_ball.on_dunkdash_end(P)
 
 ## return the dash_velocity Vector2, taking into account the target_velocity
-func anticipate_dash_velocity(target : Node2D, dunkdash_speed : float):
+func anticipate_dash_velocity(target : Node2D, dunkdash_speed : float, current_velocity : Vector2 = Vector2.ZERO):
 	var q = (target.global_position - player.global_position)
 	var ql = q.length()
 	var target_dir = Vector2.UP # limit case when the player is exactly on the target
 	if ql != 0.0:
 		target_dir = 1.0/ql * q
-	var dash_speed = max(dunkdash_speed, velocity_save.dot(target_dir))
+	var dash_speed = max(dunkdash_speed, current_velocity.dot(target_dir))
 	var target_velocity = target.get("linear_velocity")
 
 	if target_velocity == null: # if no velocity

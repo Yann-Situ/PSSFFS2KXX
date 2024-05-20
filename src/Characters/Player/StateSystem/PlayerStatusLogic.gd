@@ -21,6 +21,7 @@ var jump : Status = Status.new("jump") # ing set by state, can set by timers # i
 var walljump : Status = Status.new("walljump") # ing set by state, can set by timers
 var crouch : Status = Status.new("crouch") # partly physical, partly set by state
 var slide : Status = Status.new("slide") #
+var friction : Status = Status.new("friction") # set from timer, whether or not the player should undergo friction
 
 var dunk : Status = Status.new("dunk") #
 var dunkdash : Status = Status.new("dunkdash") #
@@ -54,6 +55,7 @@ var direction_sprite_changed : bool = false
 @onready var no_dunk_timer : Timer = $NoDunkTimer
 @onready var no_jump_timer : Timer = $NoJumpTimer
 @onready var no_side_timer : Timer = $NoSideTimer
+@onready var no_friction_timer : Timer = $NoFrictionTimer
 @onready var floor_timer : Timer = $JumpFloorTimer
 @onready var wall_timer : Timer = $JumpWallTimer
 
@@ -102,7 +104,7 @@ func _ready():
 
 ## Called by the parent StateMachine during the _physics_process call, before
 ## the State nodes physics_process calls.
-func process(delta):
+func physics_process(delta):
 	update_triggers()
 	update_status()
 	# TODO add power, release, interact here? (targethandler?)
@@ -178,7 +180,8 @@ func update_status():
 	jump.can = not floor_timer.is_stopped() and no_jump_timer.is_stopped()
 	walljump.can = not wall_timer.is_stopped() and no_jump_timer.is_stopped()
 	side.can = no_side_timer.is_stopped()
-
+	friction.can = no_friction_timer.is_stopped()
+	
 	# action.can
 	# action.can = dunk.can or dunkjump.can or dunkdash.can or shoot.can
 	action.can = (dunkdash.can and accept.just_pressed) # TODO

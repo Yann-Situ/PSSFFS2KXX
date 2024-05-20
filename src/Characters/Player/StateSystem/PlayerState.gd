@@ -2,7 +2,7 @@ extends State
 class_name PlayerState
 
 @export var player : NewPlayer
-@export var logic : StatusLogic
+@export var logic : PlayerStatusLogic
 
 @export var animation_player : AnimationPlayer
 # @onready var animation_player : AnimationPlayer = player.animation_player ## player animation player

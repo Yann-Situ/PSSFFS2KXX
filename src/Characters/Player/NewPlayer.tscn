@@ -257,8 +257,8 @@ tracks/2/keys = {
 }
 
 [sub_resource type="Animation" id="10"]
-length = 0.19
-step = 0.01
+length = 0.36
+step = 0.03
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
@@ -266,10 +266,10 @@ tracks/0/path = NodePath(".:frame")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.01, 0.02, 0.05, 0.08, 0.11, 0.14, 0.16, 0.17, 0.18),
-"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
+"times": PackedFloat32Array(0, 0.01, 0.02, 0.06, 0.09, 0.12, 0.15, 0.18, 0.21, 0.24, 0.27, 0.3, 0.33),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
 "update": 1,
-"values": [48, 50, 51, 52, 53, 54, 55, 50, 49, 48]
+"values": [48, 50, 51, 52, 53, 54, 55, 52, 53, 54, 55, 49, 48]
 }
 tracks/1/type = "value"
 tracks/1/imported = false
@@ -278,7 +278,7 @@ tracks/1/path = NodePath("../BallHandler/HasBallPosition:position")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
-"times": PackedFloat32Array(0, 0.02, 0.03, 0.06, 0.09, 0.12, 0.15, 0.17),
+"times": PackedFloat32Array(0, 0.02, 0.03, 0.06, 0.09, 0.12, 0.15, 0.33),
 "transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1),
 "update": 1,
 "values": [Vector2(8, -9), Vector2(7, -5), Vector2(6, 0), Vector2(-6, 4), Vector2(-13, 0), Vector2(-15, -2), Vector2(-15, -1), Vector2(-14, 0)]
@@ -290,7 +290,7 @@ tracks/2/path = NodePath("../../StateMachine/ActionStates/Dunkdash")
 tracks/2/interp = 1
 tracks/2/loop_wrap = true
 tracks/2/keys = {
-"times": PackedFloat32Array(0.19),
+"times": PackedFloat32Array(0.36),
 "transitions": PackedFloat32Array(1),
 "values": [{
 "args": [],
@@ -959,6 +959,20 @@ tracks/1/keys = {
 "update": 1,
 "values": [Vector2(-12, 15)]
 }
+tracks/2/type = "method"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("../../StateMachine/GroundStates/Land")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0.15),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [],
+"method": &"on_land_finished"
+}]
+}
 
 [sub_resource type="Animation" id="31"]
 length = 0.42
@@ -999,6 +1013,20 @@ tracks/2/keys = {
 "values": [{
 "args": [],
 "method": &"cloud_start"
+}]
+}
+tracks/3/type = "method"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("../../StateMachine/GroundStates/Land")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0.42),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [],
+"method": &"on_land_finished"
 }]
 }
 
@@ -1267,10 +1295,10 @@ size = Vector2(17, 57)
 script = ExtResource("17_iaaq0")
 friction = Vector2(0.4, 0.5)
 time_scale = 1.0
-side_speed_max = 300.0
-side_instant_speed = 80.0
+side_speed_max = 380.0
+side_instant_speed = 100.0
 side_instant_speed_return_thresh = 50.0
-side_accel = 150.0
+side_accel = 190.0
 base_force = Vector2(0, 0)
 base_accel = Vector2(0, 0)
 base_speed = Vector2(0, 0)
@@ -1373,7 +1401,7 @@ color_ramp = SubResource("53")
 
 [sub_resource type="CompressedTexture2D" id="55"]
 
-[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_yp0rw"]
+[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_64bg3"]
 resource_local_to_scene = true
 particles_animation = true
 particles_anim_h_frames = 6
@@ -1637,6 +1665,9 @@ one_shot = true
 [node name="NoSideTimer" type="Timer" parent="StateMachine/StatusLogic"]
 one_shot = true
 
+[node name="NoFrictionTimer" type="Timer" parent="StateMachine/StatusLogic"]
+one_shot = true
+
 [node name="NoShootTimer" type="Timer" parent="StateMachine/StatusLogic"]
 one_shot = true
 
@@ -1722,7 +1753,8 @@ animation_player = NodePath("../../../Flipper/Sprite2D/PlayerAnimation")
 [node name="Walljump" type="Node" parent="StateMachine/AirStates" node_paths=PackedStringArray("action_state", "land_state", "fallwall_state", "fall_state", "player", "logic", "animation_player")]
 script = ExtResource("28_dt7qh")
 walljump_velocity = Vector2(350, -350)
-mountwalljump_velocity = Vector2(350, -425)
+mountwalljump_velocity = Vector2(350, -525)
+mountwalljump_thresh = -100.0
 no_side_delay = 0.25
 action_state = NodePath("../../ActionStates")
 land_state = NodePath("../../GroundStates/Land")
@@ -1791,7 +1823,7 @@ lifetime = 0.65
 explosiveness = 0.9
 
 [node name="GrindParticles" parent="PlayerEffects" instance=ExtResource("37_3xxkx")]
-material = SubResource("CanvasItemMaterial_yp0rw")
+material = SubResource("CanvasItemMaterial_64bg3")
 position = Vector2(0, 16)
 
 [node name="UI" type="CanvasLayer" parent="."]

@@ -25,7 +25,6 @@ func branch() -> State:
 		#logic.floor.ing = false # TEMPORARY solution to avoid infinite recursion
 		return jump_state
 	if !logic.floor.ing:
-		print("XXX")
 		return fall_state
 
 	if land_finished:
@@ -42,8 +41,8 @@ func enter(previous_state : State = null) -> State:
 	# change hitbox
 	print(self.name)
 
-	var timer = get_tree().create_timer(0.5) # TODO remove for animation handling
-	timer.timeout.connect(self.on_land_finished)
+#	var timer = get_tree().create_timer(0.5) # TODO remove for animation handling
+#	timer.timeout.connect(self.on_land_finished)
 
 	return next_state
 
