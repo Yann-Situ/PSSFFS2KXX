@@ -35,7 +35,7 @@ func branch() -> State:
 
 func animation_process() -> void:
 	set_variation(0) # ["idle"]
-	if logic.direction_sprite_changed:
+	if logic.direction_sprite_change.ing:
 		set_variation(3) # ["turn"]
 	elif logic.side.ing :
 		if (logic.direction_pressed.x == 0):

@@ -55,11 +55,11 @@ func enter(previous_state : State = null) -> State:
 	if movement.velocity.y < mountwalljump_thresh:
 		print(self.name+" mount*")
 		movement.velocity.y = mountwalljump_velocity.y
-		movement.velocity.x = -logic.direction_sprite * mountwalljump_velocity.x
+		movement.velocity.x = -logic.direction_wall * mountwalljump_velocity.x
 	else:
 		print(self.name)
 		movement.velocity.y = walljump_velocity.y
-		movement.velocity.x = -logic.direction_sprite * walljump_velocity.x
+		movement.velocity.x = -logic.direction_wall * walljump_velocity.x
 	
 	if !logic.up.pressed:
 		movement.velocity.y *= jump_speed_up_cancelled_ratio

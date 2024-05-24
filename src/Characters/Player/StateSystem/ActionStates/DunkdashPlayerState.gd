@@ -11,7 +11,6 @@ extends PlayerMovementState
 @export var fall_state : State
 
 var velocity_save = Vector2.ZERO
-var dash_dir = Vector2.ZERO
 var accel_alterer = AltererMultiplicative.new(0.0)
 
 var end_dash = false # set to true at the end of animation ["dunkdash"]
@@ -55,6 +54,11 @@ func enter(previous_state : State = null) -> State:
 	velocity_save = movement.velocity
 	var dash_velocity = anticipate_dash_velocity(target_node, dunkdash_speed, movement.velocity)
 	movement.velocity = dash_velocity
+	
+	var dash_dir_x = sign(dash_velocity.x)
+	player.set_flip_h(dash_dir_x <0)
+	logic.direction_sprite = -1 if dash_dir_x <0 else 1
+	logic.direction_sprite_change.can = false
 
 	# TODO
 	# if logic.has_ball:
@@ -95,6 +99,7 @@ func exit():
 	super()
 	player.remove_accel(accel_alterer)
 	logic.dunkdash.ing = false
+	logic.direction_sprite_change.can = true
 
 	# if not logic.is_grinding and not logic.is_hanging : # TODO, translate this:
 	var temp_vel_l = movement.velocity.length()

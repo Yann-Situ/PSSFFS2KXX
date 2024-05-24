@@ -46,7 +46,11 @@ var key_release : Trigger = Trigger.new("release") #
 
 var direction_pressed : Vector2 = Vector2.ZERO
 var direction_sprite = 1
-var direction_sprite_changed : bool = false
+var direction_wall = 0 #last wall direction, 1 for wall at the right of player, -1 at the left
+var direction_sprite_change = Status.new("direction_sprite_change")
+var holder_change = false # if the holder just changed # reset to false by belong_state # TODO
+# ing is when the direction changed in this frame
+# can is if the direction can change in this frame
 
 ##timers
 @onready var jump_press_timer : Timer = $JumpPressTimer
@@ -94,6 +98,7 @@ func _ready():
 
 	stand.can = true
 	side.can = true
+	direction_sprite_change.can = true
 
 	if player.flip_h:
 		direction_sprite = -1
@@ -157,6 +162,7 @@ func update_status():
 		$JumpFloorTimer.start()
 	wall.ing = ray_handler.is_on_wall()
 	if wall.ing:
+		direction_wall = direction_sprite
 		$JumpWallTimer.start()
 	stand.can = ray_handler.can_stand()
 
@@ -181,14 +187,15 @@ func update_status():
 	walljump.can = not wall_timer.is_stopped() and no_jump_timer.is_stopped()
 	side.can = no_side_timer.is_stopped()
 	friction.can = no_friction_timer.is_stopped()
-	
+
 	# action.can
 	# action.can = dunk.can or dunkjump.can or dunkdash.can or shoot.can
 	action.can = (dunkdash.can and accept.just_pressed) # TODO
 
 	# direction_sprite is 1 or -1 but direction_pressed.x can also be 0:
-	direction_sprite_changed = (direction_sprite*direction_pressed.x < 0)
-	if direction_sprite_changed:
+	direction_sprite_change.ing = (direction_sprite*direction_pressed.x < 0) and\
+	 	direction_sprite_change.can
+	if direction_sprite_change.ing:
 		# we need to change sprite direction
 		player.set_flip_h(direction_pressed.x < 0)
 		direction_sprite *= -1
