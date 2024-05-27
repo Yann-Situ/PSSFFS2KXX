@@ -14,7 +14,7 @@ func _ready():
 	animation_variations = [["hang"], ["hang_catch"]]
 
 func branch() -> State:
-	if !belong_handler.is_belonging() or !logic.down.pressed:
+	if !belong_handler.is_belonging() or logic.down.pressed:
 		return fall_state
 	if logic.holder_change:
 		return belong_state
