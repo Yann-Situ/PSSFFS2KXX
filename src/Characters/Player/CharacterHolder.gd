@@ -12,44 +12,44 @@ class_name CharacterHolder
 # 	- To get out, call belonghandler.get_out(), it will call
 # 		holder._get_out(character), which will emit a signal
 
-signal processing_character(character, delta)
-signal physics_processing_character(character, delta)
-signal getting_in(character)
-signal getting_out(character)
+signal processing_character(belong_handler, delta)
+signal physics_processing_character(belong_handler, delta)
+signal getting_in(belong_handler)
+signal getting_out(belong_handler)
 
-enum HOLDER_TYPE {NO_TPYE, GRIND, HANG, FOLLOW, ROLL}
+enum HOLDER_TYPE {NO_TYPE, GRIND, HANG, FOLLOW, ROLL}
 
 @export var can_hold : bool = true ## if the holder can hold
-@export var holder_type : HOLDER_TYPE = HOLDER_TYPE.NO_TPYE ## type for the character actions to trigger
+@export var holder_type : HOLDER_TYPE = HOLDER_TYPE.NO_TYPE ## type for the character actions to trigger
 @export var holder_priority : int = 0 : get = get_holder_priority ## priority between holders
-var characters : Array[Node2D] = [] ## it could be a dictionary but in practice 
-# there are only few characters on board
+var belong_handlers : Array[BelongHandler] = [] ## it could be a dictionary but in practice 
+# there are only few belong_handlers on board
 
 func get_holder_priority()-> int:
 	return holder_priority
 
-## if null or no arguments, then return true iff it's not holding any charac
-## else, return if charac is in chracters
-func is_holding(character : Node2D = null) -> bool:
-	if character == null:
-		return characters != []
-	return character in characters
+## if null or no arguments, then return true iff it's not holding any belong_handler
+## else, return if belong_handler is in belong_handlers
+func is_holding(belong_handler : BelongHandler = null) -> bool:
+	if belong_handler == null:
+		return belong_handlers != []
+	return belong_handler in belong_handlers
 
-func _process_character(character : Node2D, delta : float) -> void:
-	processing_character.emit(character, delta)
-func _physics_process_character(character : Node2D, delta : float) -> void:
-	physics_processing_character.emit(character, delta)
+func _process_character(belong_handler : BelongHandler, delta : float) -> void:
+	processing_character.emit(belong_handler, delta)
+func _physics_process_character(belong_handler : BelongHandler, delta : float) -> void:
+	physics_processing_character.emit(belong_handler, delta)
 
-func _get_in(character : Node2D) -> void:
-	if is_holding(character):
-		printerr("character already in characters")
+func _get_in(belong_handler : BelongHandler) -> void:
+	if is_holding(belong_handler):
+		printerr("belong_handler already in belong_handlers")
 		return
-	characters.append(character)
-	getting_in.emit(character)
+	belong_handlers.append(belong_handler)
+	getting_in.emit(belong_handler)
 	
-func _get_out(character : Node2D) -> void:
-	if !is_holding(character):
-		printerr("character not in characters")
+func _get_out(belong_handler : BelongHandler) -> void:
+	if !is_holding(belong_handler):
+		printerr("belong_handler not in belong_handlers")
 		return
-	characters.erase(character)
-	getting_out.emit(character)
+	belong_handlers.erase(belong_handler)
+	getting_out.emit(belong_handler)

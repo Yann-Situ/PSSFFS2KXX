@@ -15,7 +15,7 @@ class_name BelongHandler
 
 signal holder_changed(new_holder)
 
-@export var character : Node2D ## the character associated to this belonghandler
+@export var character : Node2D = null ## the character associated to this belonghandler
 
 @export var can_belong : bool = true ## if the character can belong
 @export var can_process : bool = true : set = set_can_process ## if the belong_process is called each process frame
@@ -58,18 +58,18 @@ func get_in(new_holder : CharacterHolder)-> bool:
 			return false
 		get_out()
 	current_holder = new_holder
-	current_holder._get_in(character)
+	current_holder._get_in(self)
 	return true
 
 func get_out() -> void:
 	if is_belonging():
+		current_holder._get_out(self)
 		current_holder = null
-		current_holder._get_out(character)
 
 func process_character(delta : float):
 	if is_belonging():
-		current_holder._process_character(character, delta)
+		current_holder._process_character(self, delta)
 
 func physics_process_character(delta : float):
 	if is_belonging():
-		current_holder._physics_process_character(character, delta)
+		current_holder._physics_process_character(self, delta)
