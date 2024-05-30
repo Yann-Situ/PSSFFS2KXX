@@ -95,10 +95,11 @@ func _physics_process(delta):
 ## Eventually change the state:
 ## if new_state is null or is equal to current_state, do nothing.
 func change_state(new_state : State):
+	if new_state == null:
+		push_error("new_state is null")
+		return
+	
 	var i = 0
-	# var string = "  | "
-	# if current_state:
-	# 	string += current_state.name
 	while (new_state and new_state != current_state and i < MAX_STATE_TRANSITIONS):
 		if current_state:
 			current_state.exit()

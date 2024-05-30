@@ -1,4 +1,4 @@
-[gd_scene load_steps=107 format=3 uid="uid://dlfptvxh6yjwm"]
+[gd_scene load_steps=112 format=3 uid="uid://dlfptvxh6yjwm"]
 
 [ext_resource type="Script" path="res://src/Characters/Player/NewPlayer.gd" id="1_b7wqc"]
 [ext_resource type="Script" path="res://src/Characters/Player/MovementData.gd" id="2_0ukhp"]
@@ -13,6 +13,7 @@
 [ext_resource type="Script" path="res://src/Characters/Player/AmbientHandler.gd" id="16_tgr41"]
 [ext_resource type="Script" path="res://src/Characters/Player/AmbientData.gd" id="17_iaaq0"]
 [ext_resource type="Script" path="res://src/Characters/Player/StateSystem/PlayerStatusLogic.gd" id="17_sct0s"]
+[ext_resource type="Script" path="res://src/Characters/Player/BelongHandler.gd" id="18_360yc"]
 [ext_resource type="Script" path="res://src/Characters/Player/StateSystem/GroundStates/SlidePlayerState.gd" id="21_fmd78"]
 [ext_resource type="Script" path="res://src/Characters/Player/AmbientDataScaler.gd" id="22_bni2i"]
 [ext_resource type="Script" path="res://src/Characters/Player/StateSystem/GroundStates/LandPlayerState.gd" id="22_bsg40"]
@@ -31,9 +32,12 @@
 [ext_resource type="PackedScene" uid="uid://26l3hifm7i6c" path="res://src/Effects/DustParticle.tscn" id="31_45wht"]
 [ext_resource type="Script" path="res://src/Characters/Player/DebugInterface.gd" id="31_bwage"]
 [ext_resource type="Texture2D" uid="uid://b4ujrsln765de" path="res://assets/art/ball/dust.png" id="32_qmg4m"]
+[ext_resource type="Script" path="res://src/Characters/Player/StateSystem/HeldStates/BelongPlayerState.gd" id="33_gshb2"]
 [ext_resource type="PackedScene" uid="uid://bs8ju42cns0vf" path="res://src/Effects/GhostHandler.tscn" id="33_v1led"]
+[ext_resource type="Script" path="res://src/Characters/Player/StateSystem/HeldStates/GrindPlayerState.gd" id="34_ft0io"]
 [ext_resource type="PackedScene" uid="uid://cq1tfkkoni136" path="res://src/Effects/TrailHandler.tscn" id="34_qh28p"]
 [ext_resource type="Texture2D" uid="uid://c0e3bm1u8mxw8" path="res://assets/art/effects/trail.png" id="35_uq32a"]
+[ext_resource type="Script" path="res://src/Characters/Player/StateSystem/HeldStates/HangPlayerState.gd" id="35_wqoei"]
 [ext_resource type="PackedScene" uid="uid://bhw3riwbqaxpk" path="res://src/Effects/DustParticle1.tscn" id="36_iawlq"]
 [ext_resource type="PackedScene" uid="uid://br3tr8mssgqev" path="res://src/Effects/GrindParticles.tscn" id="37_3xxkx"]
 [ext_resource type="Script" path="res://src/Player/Camera.gd" id="38_244q6"]
@@ -1327,6 +1331,9 @@ base_force = Vector2(0, 0)
 base_accel = Vector2(0, 625)
 base_speed = Vector2(0, 0)
 
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_qctp2"]
+height = 64.0
+
 [sub_resource type="Resource" id="Resource_neovj"]
 script = ExtResource("22_bni2i")
 friction = 0.05
@@ -1401,7 +1408,7 @@ color_ramp = SubResource("53")
 
 [sub_resource type="CompressedTexture2D" id="55"]
 
-[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_64bg3"]
+[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_imcp3"]
 resource_local_to_scene = true
 particles_animation = true
 particles_anim_h_frames = 6
@@ -1466,6 +1473,7 @@ script = ExtResource("49_ks5k2")
 shape = SubResource("CircleShape2D_s7vxl")
 
 [node name="SelectableHandler" type="Node2D" parent="Flipper" node_paths=PackedStringArray("selectable_area")]
+visible = false
 script = ExtResource("8_ms0lc")
 selectable_area = NodePath("SelectableArea")
 
@@ -1479,6 +1487,7 @@ modulate = Color(0.945098, 1, 0, 1)
 shape = SubResource("2")
 
 [node name="ShootHandler" type="Node2D" parent="Flipper"]
+visible = false
 script = ExtResource("24_kckqt")
 
 [node name="ShootScreen" type="CanvasLayer" parent="Flipper/ShootHandler"]
@@ -1493,6 +1502,7 @@ mouse_filter = 2
 color = Color(1, 1, 1, 0)
 
 [node name="BallHandler" type="Area2D" parent="Flipper" node_paths=PackedStringArray("P")]
+visible = false
 collision_layer = 0
 collision_mask = 4
 script = ExtResource("5_w4h74")
@@ -1619,18 +1629,30 @@ ambient_data_floor = SubResource("Resource_cq5vr")
 ambient_data_air = SubResource("Resource_y4wjx")
 ambient_data_wall = SubResource("Resource_aiv1j")
 
+[node name="BelongHandler" type="Area2D" parent="Flipper" node_paths=PackedStringArray("character")]
+collision_layer = 4096
+collision_mask = 0
+monitoring = false
+script = ExtResource("18_360yc")
+character = NodePath("../..")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Flipper/BelongHandler"]
+shape = SubResource("CapsuleShape2D_qctp2")
+debug_color = Color(0.682353, 0.356863, 1, 0.419608)
+
 [node name="StateMachine" type="Node" parent="." node_paths=PackedStringArray("status_logic", "init_state")]
 script = ExtResource("8_sco1u")
 status_logic = NodePath("StatusLogic")
-init_state = NodePath("GroundStates/Stand")
+init_state = NodePath("AirStates/Fall")
 
-[node name="StatusLogic" type="Node" parent="StateMachine" node_paths=PackedStringArray("player", "ball_handler", "shoot_handler", "selectable_handler", "ray_handler", "input_controller")]
+[node name="StatusLogic" type="Node" parent="StateMachine" node_paths=PackedStringArray("player", "ball_handler", "shoot_handler", "selectable_handler", "ray_handler", "belong_handler", "input_controller")]
 script = ExtResource("17_sct0s")
 player = NodePath("../..")
 ball_handler = NodePath("../../Flipper/BallHandler")
 shoot_handler = NodePath("../../Flipper/ShootHandler")
 selectable_handler = NodePath("../../Flipper/SelectableHandler")
 ray_handler = NodePath("../../Flipper/RayHandler")
+belong_handler = NodePath("../../Flipper/BelongHandler")
 input_controller = NodePath("../InputController")
 
 [node name="JumpFloorTimer" type="Timer" parent="StateMachine/StatusLogic"]
@@ -1676,9 +1698,10 @@ script = ExtResource("10_ytx1q")
 
 [node name="GroundStates" type="Node" parent="StateMachine"]
 
-[node name="Slide" type="Node" parent="StateMachine/GroundStates" node_paths=PackedStringArray("action_state", "fall_state", "crouch_state", "player", "logic", "animation_player")]
+[node name="Slide" type="Node" parent="StateMachine/GroundStates" node_paths=PackedStringArray("belong_state", "action_state", "fall_state", "crouch_state", "player", "logic", "animation_player")]
 script = ExtResource("21_fmd78")
 ambient_modifier = SubResource("Resource_neovj")
+belong_state = NodePath("../../BelongStates")
 action_state = NodePath("../../ActionStates")
 fall_state = NodePath("../../AirStates/Fall")
 crouch_state = NodePath("../Crouch")
@@ -1686,8 +1709,9 @@ player = NodePath("../../..")
 logic = NodePath("../../StatusLogic")
 animation_player = NodePath("../../../Flipper/Sprite2D/PlayerAnimation")
 
-[node name="Land" type="Node" parent="StateMachine/GroundStates" node_paths=PackedStringArray("action_state", "fall_state", "jump_state", "stand_state", "crouch_state", "player", "logic", "animation_player")]
+[node name="Land" type="Node" parent="StateMachine/GroundStates" node_paths=PackedStringArray("belong_state", "action_state", "fall_state", "jump_state", "stand_state", "crouch_state", "player", "logic", "animation_player")]
 script = ExtResource("22_bsg40")
+belong_state = NodePath("../../BelongStates")
 action_state = NodePath("../../ActionStates")
 fall_state = NodePath("../../AirStates/Fall")
 jump_state = NodePath("../../AirStates/Jump")
@@ -1697,9 +1721,10 @@ player = NodePath("../../..")
 logic = NodePath("../../StatusLogic")
 animation_player = NodePath("../../../Flipper/Sprite2D/PlayerAnimation")
 
-[node name="Crouch" type="Node" parent="StateMachine/GroundStates" node_paths=PackedStringArray("action_state", "fall_state", "stand_state", "player", "logic", "animation_player")]
+[node name="Crouch" type="Node" parent="StateMachine/GroundStates" node_paths=PackedStringArray("belong_state", "action_state", "fall_state", "stand_state", "player", "logic", "animation_player")]
 script = ExtResource("23_tkksf")
 ambient_modifier = SubResource("Resource_px66t")
+belong_state = NodePath("../../BelongStates")
 action_state = NodePath("../../ActionStates")
 fall_state = NodePath("../../AirStates/Fall")
 stand_state = NodePath("../Stand")
@@ -1707,8 +1732,9 @@ player = NodePath("../../..")
 logic = NodePath("../../StatusLogic")
 animation_player = NodePath("../../../Flipper/Sprite2D/PlayerAnimation")
 
-[node name="Stand" type="Node" parent="StateMachine/GroundStates" node_paths=PackedStringArray("action_state", "jump_state", "fall_state", "slide_state", "crouch_state", "player", "logic", "animation_player")]
+[node name="Stand" type="Node" parent="StateMachine/GroundStates" node_paths=PackedStringArray("belong_state", "action_state", "jump_state", "fall_state", "slide_state", "crouch_state", "player", "logic", "animation_player")]
 script = ExtResource("24_f6vqg")
+belong_state = NodePath("../../BelongStates")
 action_state = NodePath("../../ActionStates")
 jump_state = NodePath("../../AirStates/Jump")
 fall_state = NodePath("../../AirStates/Fall")
@@ -1720,8 +1746,9 @@ animation_player = NodePath("../../../Flipper/Sprite2D/PlayerAnimation")
 
 [node name="AirStates" type="Node" parent="StateMachine"]
 
-[node name="Fall" type="Node" parent="StateMachine/AirStates" node_paths=PackedStringArray("action_state", "land_state", "fallwall_state", "player", "logic", "animation_player")]
+[node name="Fall" type="Node" parent="StateMachine/AirStates" node_paths=PackedStringArray("belong_state", "action_state", "land_state", "fallwall_state", "player", "logic", "animation_player")]
 script = ExtResource("25_uoqxj")
+belong_state = NodePath("../../BelongStates")
 action_state = NodePath("../../ActionStates")
 land_state = NodePath("../../GroundStates/Land")
 fallwall_state = NodePath("../Fallwall")
@@ -1729,9 +1756,10 @@ player = NodePath("../../..")
 logic = NodePath("../../StatusLogic")
 animation_player = NodePath("../../../Flipper/Sprite2D/PlayerAnimation")
 
-[node name="Fallwall" type="Node" parent="StateMachine/AirStates" node_paths=PackedStringArray("action_state", "land_state", "fall_state", "walljump_state", "player", "logic", "animation_player")]
+[node name="Fallwall" type="Node" parent="StateMachine/AirStates" node_paths=PackedStringArray("belong_state", "action_state", "land_state", "fall_state", "walljump_state", "player", "logic", "animation_player")]
 script = ExtResource("26_s5g3d")
 ambient_modifier = SubResource("Resource_mwu0c")
+belong_state = NodePath("../../BelongStates")
 action_state = NodePath("../../ActionStates")
 land_state = NodePath("../../GroundStates/Land")
 fall_state = NodePath("../Fall")
@@ -1740,8 +1768,9 @@ player = NodePath("../../..")
 logic = NodePath("../../StatusLogic")
 animation_player = NodePath("../../../Flipper/Sprite2D/PlayerAnimation")
 
-[node name="Jump" type="Node" parent="StateMachine/AirStates" node_paths=PackedStringArray("action_state", "land_state", "fallwall_state", "fall_state", "player", "logic", "animation_player")]
+[node name="Jump" type="Node" parent="StateMachine/AirStates" node_paths=PackedStringArray("belong_state", "action_state", "land_state", "fallwall_state", "fall_state", "player", "logic", "animation_player")]
 script = ExtResource("27_fitg4")
+belong_state = NodePath("../../BelongStates")
 action_state = NodePath("../../ActionStates")
 land_state = NodePath("../../GroundStates/Land")
 fallwall_state = NodePath("../Fallwall")
@@ -1750,12 +1779,13 @@ player = NodePath("../../..")
 logic = NodePath("../../StatusLogic")
 animation_player = NodePath("../../../Flipper/Sprite2D/PlayerAnimation")
 
-[node name="Walljump" type="Node" parent="StateMachine/AirStates" node_paths=PackedStringArray("action_state", "land_state", "fallwall_state", "fall_state", "player", "logic", "animation_player")]
+[node name="Walljump" type="Node" parent="StateMachine/AirStates" node_paths=PackedStringArray("belong_state", "action_state", "land_state", "fallwall_state", "fall_state", "player", "logic", "animation_player")]
 script = ExtResource("28_dt7qh")
 walljump_velocity = Vector2(350, -350)
 mountwalljump_velocity = Vector2(350, -525)
 mountwalljump_thresh = -100.0
 no_side_delay = 0.25
+belong_state = NodePath("../../BelongStates")
 action_state = NodePath("../../ActionStates")
 land_state = NodePath("../../GroundStates/Land")
 fallwall_state = NodePath("../Fallwall")
@@ -1776,9 +1806,10 @@ animation_player = NodePath("../../Flipper/Sprite2D/PlayerAnimation")
 
 [node name="Dunk" type="Node" parent="StateMachine/ActionStates"]
 
-[node name="Dunkdash" type="Node" parent="StateMachine/ActionStates" node_paths=PackedStringArray("selectable_handler", "fall_state", "player", "logic", "animation_player")]
+[node name="Dunkdash" type="Node" parent="StateMachine/ActionStates" node_paths=PackedStringArray("selectable_handler", "belong_state", "fall_state", "player", "logic", "animation_player")]
 script = ExtResource("30_p3veg")
 selectable_handler = NodePath("../../../Flipper/SelectableHandler")
+belong_state = NodePath("../../BelongStates")
 fall_state = NodePath("../../AirStates/Fall")
 player = NodePath("../../..")
 logic = NodePath("../../StatusLogic")
@@ -1786,7 +1817,37 @@ animation_player = NodePath("../../../Flipper/Sprite2D/PlayerAnimation")
 
 [node name="Dunkjump" type="Node" parent="StateMachine/ActionStates"]
 
-[node name="Held" type="Node" parent="StateMachine"]
+[node name="BelongStates" type="Node" parent="StateMachine" node_paths=PackedStringArray("belong_handler", "hang_state", "grind_state", "fall_state", "player", "logic", "animation_player")]
+script = ExtResource("33_gshb2")
+belong_handler = NodePath("../../Flipper/BelongHandler")
+hang_state = NodePath("Hang")
+grind_state = NodePath("Grind")
+fall_state = NodePath("../AirStates/Fall")
+player = NodePath("../..")
+logic = NodePath("../StatusLogic")
+animation_player = NodePath("../../Flipper/Sprite2D/PlayerAnimation")
+
+[node name="Grind" type="Node" parent="StateMachine/BelongStates" node_paths=PackedStringArray("belong_handler", "action_state", "belong_state", "fall_state", "jump_state", "player", "logic", "animation_player")]
+script = ExtResource("34_ft0io")
+belong_handler = NodePath("../../../Flipper/BelongHandler")
+action_state = NodePath("../../ActionStates")
+belong_state = NodePath("..")
+fall_state = NodePath("../../AirStates/Fall")
+jump_state = NodePath("../../AirStates/Jump")
+player = NodePath("../../..")
+logic = NodePath("../../StatusLogic")
+animation_player = NodePath("../../../Flipper/Sprite2D/PlayerAnimation")
+
+[node name="Hang" type="Node" parent="StateMachine/BelongStates" node_paths=PackedStringArray("belong_handler", "action_state", "belong_state", "fall_state", "jump_state", "player", "logic", "animation_player")]
+script = ExtResource("35_wqoei")
+belong_handler = NodePath("../../../Flipper/BelongHandler")
+action_state = NodePath("../../ActionStates")
+belong_state = NodePath("..")
+fall_state = NodePath("../../AirStates/Fall")
+jump_state = NodePath("../../AirStates/Jump")
+player = NodePath("../../..")
+logic = NodePath("../../StatusLogic")
+animation_player = NodePath("../../../Flipper/Sprite2D/PlayerAnimation")
 
 [node name="PlayerEffects" type="Node2D" parent="."]
 metadata/_edit_lock_ = true
@@ -1823,7 +1884,7 @@ lifetime = 0.65
 explosiveness = 0.9
 
 [node name="GrindParticles" parent="PlayerEffects" instance=ExtResource("37_3xxkx")]
-material = SubResource("CanvasItemMaterial_64bg3")
+material = SubResource("CanvasItemMaterial_imcp3")
 position = Vector2(0, 16)
 
 [node name="UI" type="CanvasLayer" parent="."]
@@ -1937,3 +1998,4 @@ shape = SubResource("58")
 [connection signal="body_entered" from="Flipper/BallHandler" to="Flipper/BallHandler" method="_on_Ball_Handler_body_entered"]
 [connection signal="body_entered" from="Flipper/BallHandler/BallWallDetector" to="Flipper/BallHandler" method="_on_BallWallDetector_body_entered"]
 [connection signal="body_exited" from="Flipper/BallHandler/BallWallDetector" to="Flipper/BallHandler" method="_on_BallWallDetector_body_exited"]
+[connection signal="holder_changed" from="Flipper/BelongHandler" to="StateMachine/StatusLogic" method="_on_belong_handler_holder_changed"]

@@ -1,10 +1,18 @@
-[gd_scene load_steps=5 format=3 uid="uid://dthba6oq5gc2c"]
+[gd_scene load_steps=7 format=3 uid="uid://dthba6oq5gc2c"]
 
 [ext_resource type="PackedScene" uid="uid://dlfptvxh6yjwm" path="res://src/Characters/Player/NewPlayer.tscn" id="1_3s5ex"]
 [ext_resource type="PackedScene" uid="uid://bola66fqnywdi" path="res://src/Items/Baskets/Basket.tscn" id="2_rcppe"]
+[ext_resource type="PackedScene" uid="uid://kvm1pfg6ben5" path="res://src/Items/Dynamics/NewRopeLine.tscn" id="4_fjfub"]
 [ext_resource type="PackedScene" uid="uid://rmukvjwyiahu" path="res://src/Items/Interactive/DashTarget.tscn" id="4_vquou"]
 
 [sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_sdft1"]
+
+[sub_resource type="Curve2D" id="Curve2D_ly4ow"]
+resource_local_to_scene = true
+_data = {
+"points": PackedVector2Array(0, 0, 0, 0, -232, -96, 0, 0, 0, 0, 152, 16, 0, 0, 0, 0, 376, -64)
+}
+point_count = 3
 
 [node name="TestNewPlayer" type="Node2D"]
 
@@ -40,3 +48,7 @@ position = Vector2(168, 288)
 
 [node name="DashTarget2" parent="." instance=ExtResource("4_vquou")]
 position = Vector2(-16, 176)
+
+[node name="NewRopeLine" parent="." instance=ExtResource("4_fjfub")]
+position = Vector2(232, 200)
+curve = SubResource("Curve2D_ly4ow")

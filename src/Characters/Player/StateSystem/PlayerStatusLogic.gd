@@ -7,7 +7,7 @@ class_name PlayerStatusLogic
 @export var shoot_handler : ShootHandler
 @export var selectable_handler : SelectableHandler
 @export var ray_handler : RayHandler
-#@export var held_handler : HeldHandler
+@export var belong_handler : BelongHandler
 
 var belong : Status = Status.new("belong") #
 var action : Status = Status.new("action") #
@@ -147,8 +147,8 @@ func update_status():
 	action.ing = dunk.ing or dunkjump.ing or dunkdash.ing or shoot.ing
 
 	# held_handler
-#	belong.can = held_handler.can_be_held
-#	belong.ing = held_handler.has_holder()
+	belong.can = belong_handler.can_belong
+	belong.ing = belong_handler.is_belonging()
 
 	# ball_handler
 	pickball.can = ball_handler.can_pick
@@ -199,3 +199,8 @@ func update_status():
 		# we need to change sprite direction
 		player.set_flip_h(direction_pressed.x < 0)
 		direction_sprite *= -1
+		
+################################################################################
+
+func _on_belong_handler_holder_changed(new_holder):
+	holder_change = true

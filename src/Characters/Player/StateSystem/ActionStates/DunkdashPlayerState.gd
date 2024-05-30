@@ -3,7 +3,7 @@ extends PlayerMovementState
 @export var no_side_delay : float = 0.2#s
 @export var no_friction_delay : float = 0.3#s
 @export var dunkdash_speed : float = 800#pix/s
-@export var end_speed_ration : float = 0.3 ## velocity will be multiplied by this amount at the end of the dunkdash
+@export var end_speed_ratio : float = 0.3 ## velocity will be multiplied by this amount at the end of the dunkdash
 @export var selectable_handler : SelectableHandler
 
 @export_group("States")
@@ -24,6 +24,7 @@ func branch() -> State:
 	# if logic.action.can:
 	# 	return action_state
 	# handle the end of the dash
+	# handle dunkdash in dunkdash TODO
 	if end_dash:
 		return fall_state
 	return self
@@ -107,13 +108,13 @@ func exit():
 	if temp_vel_l != 0.0: #avoid zero division
 		vel_dir = movement.velocity/temp_vel_l # vel_dir is not always equals to dash_dir (e.g if there is an obstacle on the dash path)
 	var temp_vel_save_dot = velocity_save.dot(vel_dir)
-	if end_speed_ration*temp_vel_l > temp_vel_save_dot :
-		movement.velocity *= end_speed_ration
+	if end_speed_ratio*temp_vel_l > temp_vel_save_dot :
+		movement.velocity *= end_speed_ratio
 	else :
 		movement.velocity = temp_vel_save_dot * vel_dir
 
 	if logic.direction_pressed.x * movement.velocity.x < 0:
-		movement.velocity.x *= end_speed_ration # again, so *end_speed_ration^2 when also match the first case
+		movement.velocity.x *= end_speed_ratio # again, so *end_speed_ratio^2 when also match the first case
 	
 #	if logic.has_ball: # WARNING the ball can change during the dash!
 #		logic.active_ball.on_dunkdash_end(P)
