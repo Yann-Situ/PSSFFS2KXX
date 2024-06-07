@@ -1408,7 +1408,7 @@ color_ramp = SubResource("53")
 
 [sub_resource type="CompressedTexture2D" id="55"]
 
-[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_imcp3"]
+[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_je7vb"]
 resource_local_to_scene = true
 particles_animation = true
 particles_anim_h_frames = 6
@@ -1827,9 +1827,11 @@ player = NodePath("../..")
 logic = NodePath("../StatusLogic")
 animation_player = NodePath("../../Flipper/Sprite2D/PlayerAnimation")
 
-[node name="Grind" type="Node" parent="StateMachine/BelongStates" node_paths=PackedStringArray("belong_handler", "action_state", "belong_state", "fall_state", "jump_state", "player", "logic", "animation_player")]
+[node name="Grind" type="Node" parent="StateMachine/BelongStates" node_paths=PackedStringArray("belong_handler", "selectable_handler", "action_state", "belong_state", "fall_state", "jump_state", "player", "logic", "animation_player")]
 script = ExtResource("34_ft0io")
 belong_handler = NodePath("../../../Flipper/BelongHandler")
+selectable_handler = NodePath("../../../Flipper/SelectableHandler")
+no_side_delay = 0.1
 action_state = NodePath("../../ActionStates")
 belong_state = NodePath("..")
 fall_state = NodePath("../../AirStates/Fall")
@@ -1884,7 +1886,7 @@ lifetime = 0.65
 explosiveness = 0.9
 
 [node name="GrindParticles" parent="PlayerEffects" instance=ExtResource("37_3xxkx")]
-material = SubResource("CanvasItemMaterial_imcp3")
+material = SubResource("CanvasItemMaterial_je7vb")
 position = Vector2(0, 16)
 
 [node name="UI" type="CanvasLayer" parent="."]

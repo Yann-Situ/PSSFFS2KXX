@@ -1,8 +1,8 @@
 [gd_scene load_steps=5 format=3 uid="uid://kvm1pfg6ben5"]
 
-[ext_resource type="Script" path="res://src/Items/Dynamics/NewRopeLine.gd" id="1_7yfj0"]
-[ext_resource type="Texture2D" uid="uid://b57mxnmbc7bm0" path="res://assets/art/environment/zipline.png" id="2_owkdf"]
-[ext_resource type="Script" path="res://src/Characters/Player/CharacterHolder.gd" id="3_o1yny"]
+[ext_resource type="Script" path="res://src/Items/Dynamics/Lines/HolderLine.gd" id="1_a4cij"]
+[ext_resource type="Texture2D" uid="uid://b57mxnmbc7bm0" path="res://assets/art/environment/zipline.png" id="2_nsrs5"]
+[ext_resource type="Script" path="res://src/Characters/Player/CharacterHolder.gd" id="3_30lw3"]
 
 [sub_resource type="Curve2D" id="Curve2D_dsmyg"]
 resource_local_to_scene = true
@@ -16,11 +16,11 @@ z_index = 160
 z_as_relative = false
 position = Vector2(72, 96)
 curve = SubResource("Curve2D_dsmyg")
-script = ExtResource("1_7yfj0")
+script = ExtResource("1_a4cij")
 
 [node name="Line2D" type="Line2D" parent="."]
 width = 4.0
-texture = ExtResource("2_owkdf")
+texture = ExtResource("2_nsrs5")
 texture_mode = 1
 joint_mode = 2
 begin_cap_mode = 2
@@ -31,10 +31,10 @@ collision_layer = 8
 collision_mask = 4096
 
 [node name="CharacterHolder" type="Node2D" parent="."]
-script = ExtResource("3_o1yny")
+script = ExtResource("3_30lw3")
 holder_type = 2
 
-[connection signal="area_exited" from="Area2D" to="." method="_on_Area_area_exited"]
+[connection signal="area_exited" from="Area2D" to="." method="belong_handler_pickup"]
 [connection signal="getting_in" from="CharacterHolder" to="." method="_on_character_holder_getting_in"]
 [connection signal="getting_out" from="CharacterHolder" to="." method="_on_character_holder_getting_out"]
 [connection signal="physics_processing_character" from="CharacterHolder" to="." method="_on_character_holder_physics_processing_character"]

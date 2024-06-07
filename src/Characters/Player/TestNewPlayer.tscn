@@ -1,18 +1,26 @@
-[gd_scene load_steps=7 format=3 uid="uid://dthba6oq5gc2c"]
+[gd_scene load_steps=9 format=3 uid="uid://dthba6oq5gc2c"]
 
 [ext_resource type="PackedScene" uid="uid://dlfptvxh6yjwm" path="res://src/Characters/Player/NewPlayer.tscn" id="1_3s5ex"]
 [ext_resource type="PackedScene" uid="uid://bola66fqnywdi" path="res://src/Items/Baskets/Basket.tscn" id="2_rcppe"]
-[ext_resource type="PackedScene" uid="uid://kvm1pfg6ben5" path="res://src/Items/Dynamics/NewRopeLine.tscn" id="4_fjfub"]
+[ext_resource type="PackedScene" uid="uid://kvm1pfg6ben5" path="res://src/Items/Dynamics/Lines/NewRopeLine.tscn" id="4_fjfub"]
 [ext_resource type="PackedScene" uid="uid://rmukvjwyiahu" path="res://src/Items/Interactive/DashTarget.tscn" id="4_vquou"]
+[ext_resource type="PackedScene" uid="uid://dxk7u2jsgah5u" path="res://src/Items/Dynamics/Lines/NewRailLine.tscn" id="5_8x7ov"]
 
 [sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_sdft1"]
 
-[sub_resource type="Curve2D" id="Curve2D_ly4ow"]
+[sub_resource type="Curve2D" id="Curve2D_plv5m"]
 resource_local_to_scene = true
 _data = {
 "points": PackedVector2Array(0, 0, 0, 0, -232, -96, 0, 0, 0, 0, 152, 16, 0, 0, 0, 0, 376, -64)
 }
 point_count = 3
+
+[sub_resource type="Curve2D" id="Curve2D_386pu"]
+resource_local_to_scene = true
+_data = {
+"points": PackedVector2Array(0, 0, 0, 0, -328, -72, 0, 0, 0, 0, 0, -40, 0, 0, 0, 0, 208, -40, 0, 0, 0, 0, 544, -256, 0, 0, 0, 0, 760, -256)
+}
+point_count = 5
 
 [node name="TestNewPlayer" type="Node2D"]
 
@@ -51,4 +59,8 @@ position = Vector2(-16, 176)
 
 [node name="NewRopeLine" parent="." instance=ExtResource("4_fjfub")]
 position = Vector2(232, 200)
-curve = SubResource("Curve2D_ly4ow")
+curve = SubResource("Curve2D_plv5m")
+
+[node name="NewRailLine" parent="." instance=ExtResource("5_8x7ov")]
+position = Vector2(-128, 312)
+curve = SubResource("Curve2D_386pu")

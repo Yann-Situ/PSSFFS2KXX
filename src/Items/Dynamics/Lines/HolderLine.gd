@@ -1,7 +1,7 @@
 #tool
 # @icon("res://assets/art/icons/ropeline.png")
 extends Path2D
-class_name NewRopeLine
+class_name HolderLine
 
 @export var invert_line_direction : bool = false
 @onready var segment_collision_offset = Vector2(0.0,0.0)
@@ -61,7 +61,7 @@ func _ready():
 func is_in(a, b, c, tolerance = 0.0):
 	return a >= b+tolerance and a < c-tolerance
 
-func _on_Area_area_exited(belong_handler : Area2D):
+func belong_handler_pickup(belong_handler : Area2D):
 	if !belong_handler is BelongHandler :
 		push_warning(belong_handler.name+" is not BelongHandler")
 		return 1
@@ -75,7 +75,7 @@ func _on_Area_area_exited(belong_handler : Area2D):
 	if character == null:
 		push_warning("belong_handler.character is null")
 		return 1
-		
+
 	var velocity = Vector2.ZERO
 	if "velocity" in character:
 		velocity = character.velocity
@@ -83,7 +83,7 @@ func _on_Area_area_exited(belong_handler : Area2D):
 	# here we compute the local point and the ropeline local tangent direction
 	var closest_progress = curve.get_closest_offset(bi)
 	if not is_in(closest_progress, 0.0, curve.get_baked_length(),0.5*curve.bake_interval):
-		push_warning("ropeline limit edge case")# not a problem in practice
+		push_warning("holderline limit edge case")# not a problem in practice
 	var closest_point = curve.sample_baked(closest_progress-0.5*curve.bake_interval)
 	var ropeline_dir = curve.sample_baked(closest_progress+0.5*curve.bake_interval)-closest_point
 	if invert_line_direction:
@@ -103,7 +103,7 @@ func _on_Area_area_exited(belong_handler : Area2D):
 			position_offsets[belong_handler] = character.global_position-new_path_follow.global_position
 		else:
 			print(belong_handler.name+" did not get in "+self.name)
-			
+
 
 ################################################################################
 # For `characterholders` group
@@ -130,7 +130,7 @@ func _on_character_holder_physics_processing_character(belong_handler : BelongHa
 
 	path_follow.progress += new_velocity_length * delta
 	position_offset = lerp(position_offset, character_offset, 0.1)
-	
+
 	character.global_position = path_follow.global_position + position_offset
 	character.set_velocity(new_velocity_length * ropeline_dir)
 	position_offsets[character] = position_offset
