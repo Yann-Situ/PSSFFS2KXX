@@ -11,7 +11,7 @@ extends PlayerMovementState
 @export var crouch_state : State
 
 func _ready():
-	animation_variations = [["idle"], ["walk"], ["halfturn"], ["halfturn"]] # TODO animation_variations[1] should be ["standstop"]
+	animation_variations = [["idle"], ["walk"], ["grind-30"], ["halfturn"]] # TODO animation_variations[1] should be ["standstop"]
 
 func branch() -> State:
 	if logic.belong.ing:

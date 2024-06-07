@@ -1,10 +1,11 @@
 extends PlayerMovementState
 
+@export var selectable_handler : SelectableHandler
+
 @export var no_side_delay : float = 0.2#s
 @export var no_friction_delay : float = 0.3#s
 @export var dunkdash_speed : float = 800#pix/s
 @export var end_speed_ratio : float = 0.3 ## velocity will be multiplied by this amount at the end of the dunkdash
-@export var selectable_handler : SelectableHandler
 
 @export_group("States")
 @export var belong_state : State

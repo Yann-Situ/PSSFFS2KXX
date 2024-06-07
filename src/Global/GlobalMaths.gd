@@ -34,3 +34,16 @@ func apply_friction(velocity, friction : float, delta : float):
 ## the polar coordinates are given as (radius, theta)
 func polar_to_cartesian(c : Vector2) -> Vector2:
 	return c.x * Vector2(cos(c.y), sin(c.y))
+
+## return the dash_velocity Vector2, taking into account the target_velocity
+func anticipate_dash_velocity(current_position : Vector2, target_position : Vector2,
+	current_velocity : Vector2 = Vector2.ZERO, target_velocity : Vector2 = Vector2.ZERO,
+	dunkdash_speed : float = 0.0) -> Vector2:
+	var q = (target_position - current_position)
+	var ql = q.length()
+	var target_dir = Vector2.UP # limit case when the player is exactly on the target
+	if ql != 0.0:
+		target_dir = 1.0/ql * q
+	var dash_speed = max(dunkdash_speed, current_velocity.dot(target_dir))
+	var anticipated_position = target_position + ql/dash_speed * target_velocity
+	return dash_speed * (anticipated_position - current_position).normalized()
