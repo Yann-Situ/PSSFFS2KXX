@@ -49,7 +49,7 @@ func explode():
 		var bodies = get_overlapping_bodies()+get_overlapping_areas()
 		#print(bodies)
 		for body in bodies:
-			if !body in exploded_bodies and !body in explosion_data.body_exceptions:
+			if !body in exploded_bodies and !body.get_path() in explosion_data.path_exceptions:
 				var d = (body.global_position-global_position)
 				if d.length_squared() <= criteria or i == explosion_data.explosion_steps-1:
 					explosion_data.body_explode.emit(body, scale_factor*d.normalized())

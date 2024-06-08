@@ -55,7 +55,7 @@ func make_simple_explosion(global_position : Vector2, radius : float,
 duration : float = 0.5, explosion_steps = 3,
 momentums : Array = [0.0,0.0,0.0],
 damage : float = 0.0, damage_duration : float = 0.0,
-body_exceptions : Array[Node2D] = []):
+path_exceptions : Array[NodePath] = []):
 	var explosion_data = ExplosionData.new()
 	var shape = CircleShape2D.new()
 	shape.radius = radius
@@ -68,5 +68,5 @@ body_exceptions : Array[Node2D] = []):
 	explosion_data.momentum_physicbody = momentums[2]
 	explosion_data.damage_value = damage
 	explosion_data.damage_duration = damage_duration
-	explosion_data.body_exceptions = body_exceptions
+	explosion_data.path_exceptions = path_exceptions
 	make_explosion(global_position, explosion_data)

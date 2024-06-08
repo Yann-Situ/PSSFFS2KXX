@@ -13,8 +13,8 @@ signal body_explode(body, direction)
 @export var explosion_duration : float = 0.5 ##s
 @export_range(1,10) var explosion_steps : int = 5
 @export var collision_shape : Shape2D : set = set_collision_shape
-@export var body_exceptions : Array[Node2D] = []
-# TODO : to check : maybe that's not a good idea to put body_exceptions in the resource,
+@export var path_exceptions : Array[NodePath] = []
+# TODO : to check : maybe that's not a good idea to put path_exceptions in the resource,
 # because multiple bodies that use the same data can interact with each other... (?)
 # Maybe put it as a parameter of Explosion.gd
 

@@ -120,7 +120,7 @@ tracks/1/keys = {
 tracks/2/type = "method"
 tracks/2/imported = false
 tracks/2/enabled = true
-tracks/2/path = NodePath("../Flipper/BallHandler")
+tracks/2/path = NodePath("../BallHandler")
 tracks/2/interp = 1
 tracks/2/loop_wrap = true
 tracks/2/keys = {
@@ -242,23 +242,6 @@ tracks/1/keys = {
 "update": 0,
 "values": [Vector2(-23, -18), Vector2(-23, -18), Vector2(-19, -35), Vector2(-19, -35), Vector2(6, -34), Vector2(8, 110)]
 }
-tracks/2/type = "method"
-tracks/2/imported = false
-tracks/2/enabled = true
-tracks/2/path = NodePath("../Actions/Dunk")
-tracks/2/interp = 1
-tracks/2/loop_wrap = true
-tracks/2/keys = {
-"times": PackedFloat32Array(0.32, 0.65),
-"transitions": PackedFloat32Array(1, 1),
-"values": [{
-"args": [],
-"method": &"move_dunk"
-}, {
-"args": [],
-"method": &"move_hang"
-}]
-}
 
 [sub_resource type="Animation" id="10"]
 length = 0.36
@@ -371,20 +354,6 @@ tracks/1/keys = {
 "update": 1,
 "values": [Vector2(-6, 11), Vector2(-6, 11), Vector2(-5, 11), Vector2(1, 3), Vector2(8, -9), Vector2(14, 1), Vector2(-1, 5), Vector2(-8, 5), Vector2(-5, 9), Vector2(-9, 5), Vector2(-13, -3), Vector2(-20, -14), Vector2(-20, -22), Vector2(-19, -31), Vector2(-13, -36), Vector2(-6, -40)]
 }
-tracks/2/type = "method"
-tracks/2/imported = false
-tracks/2/enabled = true
-tracks/2/path = NodePath("../Actions/Dunkjump")
-tracks/2/interp = 1
-tracks/2/loop_wrap = true
-tracks/2/keys = {
-"times": PackedFloat32Array(0.224),
-"transitions": PackedFloat32Array(1),
-"values": [{
-"args": [],
-"method": &"move_jump"
-}]
-}
 
 [sub_resource type="Animation" id="12"]
 step = 0.056
@@ -411,20 +380,6 @@ tracks/1/keys = {
 "transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
 "update": 1,
 "values": [Vector2(-6, 11), Vector2(-6, 11), Vector2(-5, 11), Vector2(1, 3), Vector2(8, -9), Vector2(14, 1), Vector2(-1, 5), Vector2(-8, 5), Vector2(-5, 9), Vector2(-9, 5), Vector2(-13, -3), Vector2(-20, -14), Vector2(-20, -22), Vector2(-19, -31), Vector2(-13, -36), Vector2(-6, -40)]
-}
-tracks/2/type = "method"
-tracks/2/imported = false
-tracks/2/enabled = true
-tracks/2/path = NodePath("../Actions/Dunkjump")
-tracks/2/interp = 1
-tracks/2/loop_wrap = true
-tracks/2/keys = {
-"times": PackedFloat32Array(0.224),
-"transitions": PackedFloat32Array(1),
-"values": [{
-"args": [],
-"method": &"move_jump"
-}]
 }
 
 [sub_resource type="Animation" id="13"]
@@ -530,7 +485,7 @@ tracks/0/keys = {
 tracks/1/type = "method"
 tracks/1/imported = false
 tracks/1/enabled = true
-tracks/1/path = NodePath("../Flipper/BallHandler")
+tracks/1/path = NodePath("../BallHandler")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
@@ -800,7 +755,7 @@ tracks/1/keys = {
 tracks/2/type = "method"
 tracks/2/imported = false
 tracks/2/enabled = true
-tracks/2/path = NodePath("../PlayerEffects")
+tracks/2/path = NodePath("../../PlayerEffects")
 tracks/2/interp = 1
 tracks/2/loop_wrap = true
 tracks/2/keys = {
@@ -838,20 +793,6 @@ tracks/1/keys = {
 "transitions": PackedFloat32Array(1),
 "update": 1,
 "values": [Vector2(-8, 20)]
-}
-tracks/2/type = "method"
-tracks/2/imported = false
-tracks/2/enabled = true
-tracks/2/path = NodePath("../Actions/Dunk")
-tracks/2/interp = 1
-tracks/2/loop_wrap = true
-tracks/2/keys = {
-"times": PackedFloat32Array(0.02),
-"transitions": PackedFloat32Array(1),
-"values": [{
-"args": [],
-"method": &"test_print"
-}]
 }
 
 [sub_resource type="Animation" id="27"]
@@ -1008,7 +949,7 @@ tracks/1/keys = {
 tracks/2/type = "method"
 tracks/2/imported = false
 tracks/2/enabled = true
-tracks/2/path = NodePath("../PlayerEffects")
+tracks/2/path = NodePath("../../PlayerEffects")
 tracks/2/interp = 1
 tracks/2/loop_wrap = true
 tracks/2/keys = {
@@ -1080,8 +1021,8 @@ tracks/1/keys = {
 }
 tracks/2/type = "method"
 tracks/2/imported = false
-tracks/2/enabled = true
-tracks/2/path = NodePath("../PlayerEffects")
+tracks/2/enabled = false
+tracks/2/path = NodePath("../../PlayerEffects")
 tracks/2/interp = 1
 tracks/2/loop_wrap = true
 tracks/2/keys = {
@@ -1168,7 +1109,7 @@ tracks/1/keys = {
 tracks/2/type = "method"
 tracks/2/imported = false
 tracks/2/enabled = true
-tracks/2/path = NodePath("../PlayerEffects")
+tracks/2/path = NodePath("../../PlayerEffects")
 tracks/2/interp = 1
 tracks/2/loop_wrap = true
 tracks/2/keys = {

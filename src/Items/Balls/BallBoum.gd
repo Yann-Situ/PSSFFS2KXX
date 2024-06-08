@@ -11,8 +11,8 @@ func _ready():
 	self.mass = 1.2
 	assert(max_explosion_data != null)
 	assert(min_explosion_data != null)
-	max_explosion_data.body_exceptions = [self]
-	min_explosion_data.body_exceptions = [self]
+	max_explosion_data.path_exceptions = [self.get_path()]
+	min_explosion_data.path_exceptions = [self.get_path()]
 
 func collision_effect(collider, collider_velocity, collision_point, collision_normal):
 	var speed = (linear_velocity-collider_velocity).dot(collision_normal)

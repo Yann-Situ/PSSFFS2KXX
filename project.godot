@@ -16,7 +16,7 @@ config/godotenv/root_directory="res://"
 
 config/name="PSSFFS2KXX"
 run/main_scene="res://src/Levels/LevelExample/LevelExample.tscn"
-config/features=PackedStringArray("4.1")
+config/features=PackedStringArray("4.2")
 config/icon="res://assets/art/icons/popol.png"
 
 [autoload]

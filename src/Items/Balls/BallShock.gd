@@ -14,7 +14,7 @@ func _ready():
 	#$ShockZone/CollisionShape2D.shape.radius = distance_max
 	$AnimationPlayer.play("idle")
 	assert(explosion_data != null)
-	explosion_data.body_exceptions = [self]
+	explosion_data.path_exceptions = [self.get_path()]
 	explosion_data.body_explode.connect(self.apply_body_impulse)
 
 #func apply_shock_impulse(shock_force : float, shock_global_position : Vector2, bodies):
