@@ -32,7 +32,7 @@ func branch() -> State:
 
 func enter(previous_state : State = null) -> State:
 	end_dash = false
-	
+
 	var next_state = branch()
 	if next_state != self:
 		return next_state
@@ -56,7 +56,7 @@ func enter(previous_state : State = null) -> State:
 	velocity_save = movement.velocity
 	var dash_velocity = anticipate_dash_velocity(target_node, dunkdash_speed, movement.velocity)
 	movement.velocity = dash_velocity
-	
+
 	var dash_dir_x = sign(dash_velocity.x)
 	player.set_flip_h(dash_dir_x <0)
 	logic.direction_sprite = -1 if dash_dir_x <0 else 1
@@ -92,9 +92,10 @@ func physics_process(delta) -> State:
 		movement_physics_process(delta)
 	return self
 
+## should be called by animation
 func dash_end():
 	end_dash = true
-	
+
 ## Called just before entering the next State. Should not contain await or time
 ## stopping functions
 func exit():
@@ -116,7 +117,7 @@ func exit():
 
 	if logic.direction_pressed.x * movement.velocity.x < 0:
 		movement.velocity.x *= end_speed_ratio # again, so *end_speed_ratio^2 when also match the first case
-	
+
 #	if logic.has_ball: # WARNING the ball can change during the dash!
 #		logic.active_ball.on_dunkdash_end(P)
 

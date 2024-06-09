@@ -1,4 +1,4 @@
-@icon("res://assets/art/icons/round-r-16.png")
+@icon("res://assets/art/icons/change-user-r-16.png")
 extends Area2D
 class_name BelongHandler
 ## handle how a character can belong to another node
@@ -51,6 +51,9 @@ func set_current_holder(holder : CharacterHolder) -> void:
 func get_in(new_holder : CharacterHolder)-> bool:
 	if not new_holder is CharacterHolder:
 		printerr("new_holder ("+new_holder.name+") is not CharacterHolder.")
+		return false
+	if not new_holder.can_hold:
+		push_warning(" - "+new_holder.name+".can_hold is false")
 		return false
 	if is_belonging():
 		# check priority, with priority to current_holder if equal:

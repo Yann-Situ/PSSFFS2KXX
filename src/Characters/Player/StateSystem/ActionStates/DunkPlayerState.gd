@@ -1,14 +1,109 @@
 extends PlayerMovementState
 
+@export var selectable_handler : SelectableHandler
+@export var belong_handler : BelongHandler
+
+
 @export_group("States")
-@export var exit_state : State
+@export var belong_state : State
+@export var fall_state : State
+
+var basket_at_enter : NewBasket = null
+var position_tween : Tween
+var end_dunk : bool = false # set to true at the end of animation ["dunk"]
 
 func _ready():
-	animation_variations = [] # [["animation_1", "animation_2"]]
+	animation_variations = [["dunk"], ["dunk_2"]] # [["animation_1", "animation_2"]]
 
 func branch() -> State:
-	# if logic.belong.ing:
-	# 	return belong_state
+	if logic.belong.ing:
+		return belong_state
 	# if logic.action.can:
 	# 	return action_state
+	# handle the end of the dunk
+	if end_dunk:
+		return fall_state
 	return self
+
+func enter(previous_state : State = null) -> State:
+	end_dunk = false
+	var next_state = branch()
+	if next_state != self:
+		return next_state
+	play_animation()
+
+	logic.dunk.ing = true
+	# logic.action.ing is already set in PlayerStatusLogic.gd
+
+	if !selectable_handler.has_selectable_dunk():
+		printerr("dunk but selectable_handler.has_selectable_dunk() returned false")
+		return fall_state
+
+	basket_at_enter = selectable_handler.get_selectable_dunkdash().parent_node
+	if !basket_at_enter is NewBasket:
+		basket_at_enter = null
+		printerr("dunk but selectable_handler.has_selectable_dunk().parent_node is not NewBasket")
+		return fall_state
+
+	var dunk_position = basket_at_enter.get_dunk_position(player.global_position)
+	var dunk_dir_x = sign(dunk_position.x - player.global_position.x)
+	player.set_flip_h(dunk_dir_x <0)
+	logic.direction_sprite = -1 if dunk_dir_x < 0 else 1
+	logic.direction_sprite_change.can = false
+
+	if position_tween:
+		position_tween.kill()
+	position_tween = get_tree().create_tween()
+	position_tween.set_parallel(false)
+	position_tween.tween_property(player, "global_position",dunk_position,0.32)\
+		.set_trans(Tween.TRANS_LINEAR).set_ease(Tween.EASE_IN_OUT)
+	#position_tween.start()
+
+	# TODO
+	# if logic.has_ball:
+	# 	logic.active_ball.on_dunk_start(P)
+	# 	player.PlayerEffects.ghost_start(0.21,0.05, Color.WHITE,logic.active_ball.get_dash_gradient())
+	# else:
+	# 	player.PlayerEffects.ghost_start(0.21,0.05, ghost_modulate)
+	# player.PlayerEffects.cloud_start()
+	# player.PlayerEffects.jump_start()
+	# player.PlayerEffects.distortion_start("fast_soft",0.75)
+	# Global.camera.screen_shake(0.2,10)
+	# GodotParadiseGeneralUtilities.frame_freeze(0.2, 0.2)
+
+	print(self.name)
+	return next_state
+
+
+## Called by the parent StateMachine during the _physics_process call, after
+## the StatusLogic physics_process call.
+func physics_process(delta) -> State:
+	var next_state = branch()
+	if next_state != self:
+		return next_state
+
+	# side_move_physics_process(delta) # no side during dunk
+
+	# update player position
+	# if player.physics_enabled:
+	# 	movement_physics_process(delta) # no movement during dunk
+	return self
+
+## should be called by animation
+func dunk_end():
+	end_dunk = true
+
+## Called just before entering the next State. Should not contain await or time
+## stopping functions
+func exit():
+	super()
+	logic.dunk.ing = false
+	logic.direction_sprite_change.can = true
+	if position_tween:
+		position_tween.kill()
+	#	if logic.has_ball: # WARNING the ball can change during the dunk!
+	#		logic.active_ball.on_dunk_end(P)
+
+	# handle hanging on the basket
+	if !logic.down.pressed and basket_at_enter is NewBasket:
+		belong_handler.get_in(basket_at_enter.character_holder)
