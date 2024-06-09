@@ -11,12 +11,13 @@ _data = {
 }
 point_count = 1
 
-[node name="NewRailLine" type="Path2D"]
+[node name="NewRailLine" type="Path2D" node_paths=PackedStringArray("character_holder")]
 z_index = 160
 z_as_relative = false
 position = Vector2(72, 96)
 curve = SubResource("Curve2D_dsmyg")
 script = ExtResource("1_65u35")
+character_holder = NodePath("CharacterHolder")
 
 [node name="Line2D" type="Line2D" parent="."]
 width = 4.0
@@ -35,7 +36,3 @@ script = ExtResource("3_5p0ip")
 holder_type = 1
 
 [connection signal="area_entered" from="Area2D" to="." method="belong_handler_pickup"]
-[connection signal="getting_in" from="CharacterHolder" to="." method="_on_character_holder_getting_in"]
-[connection signal="getting_out" from="CharacterHolder" to="." method="_on_character_holder_getting_out"]
-[connection signal="physics_processing_character" from="CharacterHolder" to="." method="_on_character_holder_physics_processing_character"]
-[connection signal="processing_character" from="CharacterHolder" to="." method="_on_character_holder_processing_character"]

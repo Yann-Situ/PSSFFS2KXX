@@ -3,13 +3,12 @@
 extends Path2D
 class_name HolderLine
 
+@export var character_holder : CharacterHolder
 @export var invert_line_direction : bool = false
 @onready var segment_collision_offset = Vector2(0.0,0.0)
 @export_group("Character parameters", "character_")
 @export var character_offset : Vector2 = Vector2(0.0, 0.0)
 @export var character_cant_get_in_again_delay : float = 0.2#s
-
-@onready var character_holder : CharacterHolder = get_node("CharacterHolder")
 
 const tolerance_annoying_case = 4.0
 
@@ -56,6 +55,11 @@ func _ready():
 		final_point = curve.get_point_position(curve.get_point_count()-1)
 	else :
 		push_error("Not enough points in the curve!")
+	assert(character_holder != null)
+	character_holder.getting_in.connect(_on_character_holder_getting_in)
+	character_holder.getting_out.connect(_on_character_holder_getting_out)
+	character_holder.processing_character.connect(_on_character_holder_processing_character)
+	character_holder.physics_processing_character.connect(_on_character_holder_physics_processing_character)
 	_update_points()
 
 func is_in(a, b, c, tolerance = 0.0):
@@ -106,7 +110,8 @@ func belong_handler_pickup(belong_handler : Area2D):
 
 
 ################################################################################
-# For `characterholders` group
+## For `characterholders` group
+## functions are connected to character_holder signals in _ready()
 
 func _on_character_holder_getting_in(belong_handler : BelongHandler):
 	print(belong_handler.character.name+" on "+self.name)
