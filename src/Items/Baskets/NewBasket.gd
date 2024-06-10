@@ -36,10 +36,12 @@ func _ready():
 	character_holder.getting_out.connect(_on_character_holder_getting_out)
 	character_holder.processing_character.connect(_on_character_holder_processing_character)
 	character_holder.physics_processing_character.connect(_on_character_holder_physics_processing_character)
-	
+
 	dunk_cooldown_timer = Timer.new()
+	dunk_cooldown_timer.autostart = false
 	dunk_cooldown_timer.one_shot = true
 	dunk_cooldown_timer.timeout.connect(_on_DunkCooldown_timeout)
+	add_child(dunk_cooldown_timer)
 
 # func _draw():
 # 	pass
@@ -63,6 +65,10 @@ func dunk(dunker : Node2D, ball : Ball = null):
 	print_debug(self.name + "dunk! with dunker "+dunker.name)
 	if ball != null:
 		goal_effects(ball, 3)
+		## WARNING the call to on_dunk has been moved to this script, it is now supposed
+		## to be called at the moment of the dunk impact. It used to be called by the
+		## player Dunk node at the beginning of the player's dunk animation
+		ball.on_dunk(self)
 	else :
 		Global.camera.screen_shake(0.3,8)
 
@@ -81,8 +87,9 @@ func goal(ball : Ball, score):
 		goal_effects(ball, 2)
 	else :
 		goal_effects(ball, 1)
-	is_goaled.emit()
 	ball.on_goal()
+
+	is_goaled.emit()
 
 func goal_effects(ball : Ball, force : int = 0):
 	$Effects/LineParticle.amount = force * 16

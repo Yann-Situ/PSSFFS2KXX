@@ -9,6 +9,7 @@ extends PlayerMovementState
 
 @export_group("States")
 @export var belong_state : State
+@export var dunk_state : State
 @export var fall_state : State
 
 var velocity_save = Vector2.ZERO
@@ -22,8 +23,8 @@ func _ready():
 func branch() -> State:
 	if logic.belong.ing:
 		return belong_state
-	# if logic.action.can:
-	# 	return action_state
+	if logic.dunk.can and logic.accept.pressed:
+		return dunk_state
 	# handle the end of the dash
 	# handle dunkdash in dunkdash TODO
 	if end_dash:

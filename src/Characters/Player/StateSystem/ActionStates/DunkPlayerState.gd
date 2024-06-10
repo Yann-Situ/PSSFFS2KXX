@@ -3,7 +3,6 @@ extends PlayerMovementState
 @export var selectable_handler : SelectableHandler
 @export var belong_handler : BelongHandler
 
-
 @export_group("States")
 @export var belong_state : State
 @export var fall_state : State
@@ -60,20 +59,14 @@ func enter(previous_state : State = null) -> State:
 	#position_tween.start()
 
 	# TODO
-	# if logic.has_ball:
-	# 	logic.active_ball.on_dunk_start(P)
-	# 	player.PlayerEffects.ghost_start(0.21,0.05, Color.WHITE,logic.active_ball.get_dash_gradient())
-	# else:
-	# 	player.PlayerEffects.ghost_start(0.21,0.05, ghost_modulate)
-	# player.PlayerEffects.cloud_start()
-	# player.PlayerEffects.jump_start()
-	# player.PlayerEffects.distortion_start("fast_soft",0.75)
-	# Global.camera.screen_shake(0.2,10)
+	## WARNING the call to on_dunk has been moved to Basket.gd, it is now supposed
+	## to be called at the moment of the dunk impact.
+	# if S.active_ball != null:
+	# 	S.active_ball.on_dunk(dunking_basket)
 	# GodotParadiseGeneralUtilities.frame_freeze(0.2, 0.2)
 
 	print(self.name)
 	return next_state
-
 
 ## Called by the parent StateMachine during the _physics_process call, after
 ## the StatusLogic physics_process call.
