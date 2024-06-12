@@ -3,11 +3,13 @@ extends PlayerMovementState
 @export var selectable_handler : SelectableHandler
 @export var dunkjump_speed : float = 800.0 #: set = set_dunkjump_speed, get = get_dunkjump_speed ##
 @export var dunkjumphalfturn_threshold : float = 32.0 ## minimum distance from the basket at which it is possible to do a dunkjump_halfturn
+@export var min_jump_duration : float = 0.1 ## s # duration between the beginning of the jump to the first frame where land/fallwall/fall is possible
 
 @export_group("States")
 @export var belong_state : State
 @export var dunk_state : State
 @export var fallwall_state : State
+@export var fall_state : State
 @export var land_state : State
 
 var min_duration_timer : Timer # time the duration between the beginning of the
@@ -123,7 +125,7 @@ func dunkprejump_end():
 		push_warning("basket_at_enter is null at the end of dunkprejumping")
 
 	var q = basket_at_enter.get_closest_point(player.global_position) - player.global_position
-	var dunk_dir_x = sign(dunk_position.x - player.global_position.x)
+	var dunk_dir_x = sign(q.x)
 	player.set_flip_h(dunk_dir_x <0)
 	logic.direction_sprite = -1 if dunk_dir_x < 0 else 1
 
@@ -146,7 +148,7 @@ func dunkprejump_end():
 				movement.velocity.x = velocity_x1
 	movement.velocity.y = dunkjump_speed
 
-	is_dunkjumphalfturning = (q.x*direction < dunkjumphalfturn_threshold)
+	is_dunkjumphalfturning = (q.x*logic.direction_sprite < dunkjumphalfturn_threshold)
 	Global.camera.screen_shake(0.2,10)
 
 ## Called just before entering the next State. Should not contain await or time
@@ -159,7 +161,3 @@ func exit():
 		position_tween.kill()
 	#	if logic.has_ball: # WARNING the ball can change during the dunk!
 	#		logic.active_ball.on_dunkjump_end(P)
-
-	# handle hanging on the basket
-	if !logic.down.pressed and basket_at_enter is NewBasket:
-		belong_handler.get_in(basket_at_enter.character_holder)
