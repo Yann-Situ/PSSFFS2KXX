@@ -1,10 +1,10 @@
 [gd_scene load_steps=9 format=3 uid="uid://dthba6oq5gc2c"]
 
 [ext_resource type="PackedScene" uid="uid://dlfptvxh6yjwm" path="res://src/Characters/Player/NewPlayer.tscn" id="1_3s5ex"]
-[ext_resource type="PackedScene" uid="uid://bola66fqnywdi" path="res://src/Items/Baskets/Basket.tscn" id="2_rcppe"]
 [ext_resource type="PackedScene" uid="uid://kvm1pfg6ben5" path="res://src/Items/Dynamics/Lines/NewRopeLine.tscn" id="4_fjfub"]
 [ext_resource type="PackedScene" uid="uid://rmukvjwyiahu" path="res://src/Items/Interactive/DashTarget.tscn" id="4_vquou"]
 [ext_resource type="PackedScene" uid="uid://dxk7u2jsgah5u" path="res://src/Items/Dynamics/Lines/NewRailLine.tscn" id="5_8x7ov"]
+[ext_resource type="PackedScene" uid="uid://cckqoik18dppx" path="res://src/Items/Baskets/NewBasket.tscn" id="5_jehtm"]
 
 [sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_sdft1"]
 
@@ -48,9 +48,6 @@ polygon = PackedVector2Array(-320, 0, 320, 0, 320, 64, -320, 64)
 [node name="NewPlayer" parent="." instance=ExtResource("1_3s5ex")]
 position = Vector2(320, 184)
 
-[node name="Basket" parent="." instance=ExtResource("2_rcppe")]
-position = Vector2(488, 72)
-
 [node name="DashTarget" parent="." instance=ExtResource("4_vquou")]
 position = Vector2(168, 288)
 
@@ -64,3 +61,9 @@ curve = SubResource("Curve2D_plv5m")
 [node name="NewRailLine" parent="." instance=ExtResource("5_8x7ov")]
 position = Vector2(-128, 312)
 curve = SubResource("Curve2D_386pu")
+
+[node name="NewBasket" parent="." instance=ExtResource("5_jehtm")]
+position = Vector2(-168, 184)
+
+[node name="NewBasket2" parent="." instance=ExtResource("5_jehtm")]
+position = Vector2(504, 168)

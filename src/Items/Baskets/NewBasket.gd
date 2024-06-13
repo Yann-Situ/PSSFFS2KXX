@@ -136,7 +136,9 @@ func _on_character_holder_getting_out(belong_handler : BelongHandler):
 
 ## should update position and velocity (like move and slide)
 func _on_character_holder_physics_processing_character(belong_handler : BelongHandler, delta):
-	pass # do nothing (TODO maybe lerp it to the center)
+	assert("velocity" in belong_handler.character)
+	belong_handler.character.set_velocity(Vector2.ZERO)
+	# just zero velocity
 
 func _on_character_holder_processing_character(belong_handler : BelongHandler, delta):
 	pass

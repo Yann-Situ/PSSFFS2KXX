@@ -183,5 +183,6 @@ explosiveness = 0.41
 
 [node name="CharacterHolder" type="Node2D" parent="."]
 script = ExtResource("5_gfmst")
+holder_type = 2
 
 [connection signal="body_entered" from="basket_area" to="." method="_on_basket_area_body_entered"]

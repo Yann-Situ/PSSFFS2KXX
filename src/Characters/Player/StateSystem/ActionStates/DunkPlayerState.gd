@@ -7,7 +7,7 @@ extends PlayerMovementState
 @export var belong_state : State
 @export var fall_state : State
 
-var basket_at_enter : NewBasket = null
+var basket_at_enter : Node2D = null
 var position_tween : Tween
 var end_dunk : bool = false # set to true at the end of animation ["dunk"]
 
@@ -38,7 +38,7 @@ func enter(previous_state : State = null) -> State:
 		printerr("dunk but selectable_handler.has_selectable_dunk() returned false")
 		return fall_state
 
-	basket_at_enter = selectable_handler.get_selectable_dunkdash().parent_node
+	basket_at_enter = selectable_handler.get_selectable_dunk().parent_node
 	if !basket_at_enter is NewBasket:
 		basket_at_enter = null
 		printerr("dunk but selectable_handler.has_selectable_dunk().parent_node is not NewBasket")

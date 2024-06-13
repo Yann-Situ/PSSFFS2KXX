@@ -190,7 +190,8 @@ func update_status():
 
 	# action.can
 	# action.can = dunk.can or dunkjump.can or dunkdash.can or shoot.can
-	action.can = (dunkdash.can and accept.just_pressed) # TODO
+	action.can = (dunkdash.can and accept.just_pressed) or \
+		(dunk.can and accept.pressed)# TODO
 
 	# direction_sprite is 1 or -1 but direction_pressed.x can also be 0:
 	direction_sprite_change.ing = (direction_sprite*direction_pressed.x < 0) and\

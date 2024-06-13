@@ -6,7 +6,7 @@ class_name TargetHandler
 @export var P: NewPlayer
 @onready var S = P.get_state_node()
 
-var names = ["Shoot", "Dash", "Jump"]
+var names = ["Shoot", "Dash", "Jump", "Dunk"]
 var selector_targets = []
 
 func _ready():

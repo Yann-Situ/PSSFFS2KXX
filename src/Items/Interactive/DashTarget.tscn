@@ -95,6 +95,7 @@ script = ExtResource("1")
 parent_node = NodePath("..")
 is_shoot_selectable = false
 is_jump_selectable = false
+is_dunk_selectable = false
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
 shape = SubResource("2")

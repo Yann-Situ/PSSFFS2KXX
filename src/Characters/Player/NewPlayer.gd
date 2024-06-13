@@ -163,6 +163,11 @@ func update_target_handler() -> void:
 		target_handler.update_selection(Selectable.SelectionType.DASH, selectable_handler.selectable_dunkdash)
 	else:
 		target_handler.update_selection(Selectable.SelectionType.DASH, null)
+		
+	if S.dunk.can:
+		target_handler.update_selection(Selectable.SelectionType.DUNK, selectable_handler.selectable_dunk)
+	else:
+		target_handler.update_selection(Selectable.SelectionType.DUNK, null)
 	# target_handler.update_selection(Selectable.SelectionType.SHOOT, selectable_handler.selectable_shoot)
 
 ## update the Selectables (calling the method from SelectableHandler)
