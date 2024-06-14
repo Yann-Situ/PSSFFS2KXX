@@ -127,11 +127,10 @@ color_ramp = SubResource("18")
 anim_speed_min = 1.0
 anim_speed_max = 1.0
 
-[node name="NewBasket" type="Node2D" node_paths=PackedStringArray("character_holder")]
+[node name="NewBasket" type="Node2D"]
 z_index = 16
 z_as_relative = false
 script = ExtResource("1_1qq5r")
-character_holder = NodePath("CharacterHolder")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 use_parent_material = true
@@ -139,14 +138,14 @@ position = Vector2(0, 6)
 sprite_frames = SubResource("6")
 frame = 5
 
-[node name="basket_area" type="Area2D" parent="." node_paths=PackedStringArray("parent_node")]
+[node name="BasketArea" type="Area2D" parent="." node_paths=PackedStringArray("parent_node")]
 collision_layer = 40
 collision_mask = 4
 script = ExtResource("3_562au")
 parent_node = NodePath("..")
 is_dash_selectable = false
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="basket_area"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="BasketArea"]
 modulate = Color(0, 1, 0.0392157, 1)
 position = Vector2(0, 2)
 shape = SubResource("7")
@@ -185,4 +184,4 @@ explosiveness = 0.41
 script = ExtResource("5_gfmst")
 holder_type = 2
 
-[connection signal="body_entered" from="basket_area" to="." method="_on_basket_area_body_entered"]
+[connection signal="body_entered" from="BasketArea" to="." method="_on_basket_area_body_entered"]

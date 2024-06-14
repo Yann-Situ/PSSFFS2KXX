@@ -5,33 +5,42 @@ class_name NewBasket
 signal is_dunked
 signal is_goaled
 
-@export var character_holder : CharacterHolder
+#@export var character_holder : CharacterHolder
 
 @export var speed_ball_threshold = 380 ## speed threshold for power goal
 @export var dunk_position_offset = 16 * Vector2.DOWN ## character offset for dunk position
 @export var dunk_position_radius = 24 ## maximum horizontal radius for dunk position
 #@export var hang_position_offset_y = 16 ## vertical offset for hanging # TODO
 
-@export var can_receive_dunk = true
+@export var can_receive_dunk = true : set = set_can_receive_dunk
 @export var can_receive_dunkjump = true
 @export var can_receive_goal = true
 @export var can_receive_hang = true : set = set_can_receive_hang
 
 @export var dunk_cooldown = 0.75#s
-@export var dunk_free_character_cooldown = 0.4#s
+@export var dunk_free_character_cooldown = 0.5#s
+
+@onready var character_holder : CharacterHolder = $CharacterHolder
+@onready var basket_area : Selectable = $BasketArea
 var dunk_cooldown_timer : Timer
 
 func set_can_receive_hang(b):
 	can_receive_hang = b
-	if character_holder == null:
-		printerr("character_holder is null")
-		return
-	character_holder = can_receive_hang
+	#if character_holder == null:
+		#printerr("character_holder is null")
+		#return
+	character_holder.can_hold = can_receive_hang
+
+func set_can_receive_dunk(b):
+	can_receive_dunk = b
+	basket_area.is_dunk_selectable = can_receive_dunk
+	#print(" --- receivedunk "+str(b))
 
 func _ready():
 	self.z_index = Global.z_indices["foreground_1"]
 	add_to_group("characterholders")
 	assert(character_holder != null)
+	assert(basket_area != null)
 	character_holder.getting_in.connect(_on_character_holder_getting_in)
 	character_holder.getting_out.connect(_on_character_holder_getting_out)
 	character_holder.processing_character.connect(_on_character_holder_processing_character)
@@ -123,6 +132,9 @@ func _on_character_holder_getting_in(belong_handler : BelongHandler):
 	print(belong_handler.character.name+" on "+self.name)
 	# bodies_positions.push_back(Vector2(character.global_position.x, \
 	#     self.global_position.y+hang_position_offset_y))
+	
+	# /!\ important, the timer is probably already running because it was by the
+	# dunk function. The following line prevent an additional call to _on_DunkCooldown_timeout() 
 	dunk_cooldown_timer.stop()
 	can_receive_dunk = false
 
