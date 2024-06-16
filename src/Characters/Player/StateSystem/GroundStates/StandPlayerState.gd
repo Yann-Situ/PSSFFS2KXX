@@ -14,7 +14,7 @@ func _ready():
 	animation_variations = [["idle"], ["walk"], ["grind-30"], ["halfturn"]] # TODO animation_variations[1] should be ["standstop"]
 
 func branch() -> State:
-	if logic.belong.ing:
+	if logic.belong_ing:
 		return belong_state
 	if logic.action.can:
 		return action_state

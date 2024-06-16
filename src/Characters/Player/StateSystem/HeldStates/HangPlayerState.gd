@@ -55,9 +55,9 @@ func physics_process(delta) -> State:
 		apply_accel_alterable(delta, movement)
 		apply_speed_alterable(delta, movement)
 		player.set_velocity(movement.velocity)
-		
+
 		belong_handler.physics_process_character(delta)
-		
+
 		movement.velocity = player.velocity-movement.speed_alterable.get_value()
 	return self
 
@@ -68,5 +68,5 @@ func exit():
 	# if we exit the hang state but we are still on the same holder, get_out
 	if belong_handler.belongs_to(holder_at_enter):
 		belong_handler.get_out()
-	logic.belong.ing = belong_handler.is_belonging()
+	# logic.belong_ing = belong_handler.is_belonging() # not necessary anymore as belong_in calls is_belonging in the getter
 	holder_at_enter = null

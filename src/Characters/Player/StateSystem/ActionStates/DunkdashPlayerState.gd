@@ -21,7 +21,7 @@ func _ready():
 	animation_variations = [["dunkdash"], ["dunkdash_2"]] # [["animation_1", "animation_2"]]
 
 func branch() -> State:
-	if logic.belong.ing:
+	if logic.belong_ing:
 		return belong_state
 	if logic.dunk.can and logic.accept.pressed:
 		return dunk_state

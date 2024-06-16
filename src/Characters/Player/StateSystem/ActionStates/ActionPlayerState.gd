@@ -11,8 +11,8 @@ func branch() -> State:
 	# ordered in priority
 	if logic.dunk.can and logic.accept.pressed:
 		return dunk_state
-#	if logic.dunkjump.can and logic.accept.just_pressed:
-#		return dunkjump_state
+	if logic.dunkjump.can and logic.accept.just_pressed and logic.down.pressed:
+		return dunkjump_state
 	if logic.dunkdash.can and logic.accept.just_pressed:
 		return dunkdash_state
 #	if logic.shoot.can and logic.key_release.pressed:

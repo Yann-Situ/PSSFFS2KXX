@@ -37,4 +37,4 @@ func enter(previous_state : State = null) -> State:
 ## stopping functions
 func exit():
 	super()
-	logic.belong.ing = belong_handler.is_belonging()
+	# logic.belong_ing = belong_handler.is_belonging() # not necessary anymore as belong_in calls is_belonging in the getter

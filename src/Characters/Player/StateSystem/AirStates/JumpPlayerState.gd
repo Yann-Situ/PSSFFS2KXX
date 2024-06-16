@@ -14,7 +14,7 @@ extends PlayerMovementState
 @export var fallwall_state : State
 @export var fall_state : State
 
-var min_duration_timer : Timer # time the duration between the beginning of the 
+var min_duration_timer : Timer # time the duration between the beginning of the
 # jump to the first frame where land/fallwall/fall is possible
 var up_cancelled = false # true if this jump was cancelled by releasing up_button
 var cancelled = false # true if this jump was cancelled by pressing down_button or releasing up_button
@@ -28,7 +28,7 @@ func _ready():
 	add_child(min_duration_timer)
 
 func branch() -> State:
-	if logic.belong.ing:
+	if logic.belong_ing:
 		return belong_state
 	if logic.action.can:
 		return action_state

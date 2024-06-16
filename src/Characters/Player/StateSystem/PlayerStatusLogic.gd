@@ -9,7 +9,18 @@ class_name PlayerStatusLogic
 @export var ray_handler : RayHandler
 @export var belong_handler : BelongHandler
 
-var belong : Status = Status.new("belong") #
+# var belong : Status = Status.new("belong") #
+var belong_ing : bool = false : get = get_belong_ing
+var belong_can : bool = false : set = set_belong_can, get = get_belong_can
+func get_belong_ing():
+	belong_ing = belong_handler.is_belonging()
+	return belong_ing
+func get_belong_can():
+	return belong_handler.can_belong and belong_can
+func set_belong_can(b):
+	belong_can = b
+	belong_handler.can_belong = b
+
 var action : Status = Status.new("action") #
 
 var floor : Status = Status.new("floor") # ray_handler
@@ -146,9 +157,9 @@ func update_status():
 	# action.ing
 	action.ing = dunk.ing or dunkjump.ing or dunkdash.ing or shoot.ing
 
-	# held_handler
-	belong.can = belong_handler.can_belong
-	belong.ing = belong_handler.is_belonging()
+	# held_handler  # not necessary anymore as is_belonging is called in the getter etc.
+	# belong_can = belong_handler.can_belong
+	# belong_ing = belong_handler.is_belonging()
 
 	# ball_handler
 	pickball.can = ball_handler.can_pick
@@ -189,9 +200,9 @@ func update_status():
 	friction.can = no_friction_timer.is_stopped()
 
 	# action.can
-	# action.can = dunk.can or dunkjump.can or dunkdash.can or shoot.can
 	action.can = (dunkdash.can and accept.just_pressed) or \
-		(dunk.can and accept.pressed)# TODO
+		(dunk.can and accept.pressed) or \
+		(dunkjump.can and accept.just_pressed and down.pressed)
 
 	# direction_sprite is 1 or -1 but direction_pressed.x can also be 0:
 	direction_sprite_change.ing = (direction_sprite*direction_pressed.x < 0) and\
@@ -200,7 +211,7 @@ func update_status():
 		# we need to change sprite direction
 		player.set_flip_h(direction_pressed.x < 0)
 		direction_sprite *= -1
-		
+
 ################################################################################
 
 func _on_belong_handler_holder_changed(new_holder):

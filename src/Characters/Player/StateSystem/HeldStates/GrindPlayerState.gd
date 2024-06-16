@@ -19,7 +19,7 @@ var do_grindash = false
 func _ready():
 	animation_variations = [
 		["grind-45"], ["grind-30"], ["grind-15"],
-		["grind0"], 
+		["grind0"],
 		["grind+15"], ["grind+30"], ["grind+45"],
 		["dunkdash"], ["grind_freestyle"]]
 
@@ -43,7 +43,7 @@ func animation_process() -> void:
 		set_variation(7) # grindash
 		do_grindash = false
 		play_animation(true)
-		
+
 	if !animation_player.is_playing() or variation_playing != 7:
 		# do complicated stuff here:
 		var dir = player.velocity
@@ -82,9 +82,9 @@ func physics_process(delta) -> State:
 		apply_accel_alterable(delta, movement)
 		apply_speed_alterable(delta, movement)
 		player.set_velocity(movement.velocity)
-		
+
 		belong_handler.physics_process_character(delta)
-		
+
 		movement.velocity = player.velocity-movement.speed_alterable.get_value()
 	return self
 
@@ -95,7 +95,7 @@ func exit():
 	# if we exit the grind state but we are still on the same holder, get_out
 	if belong_handler.belongs_to(holder_at_enter):
 		belong_handler.get_out()
-	logic.belong.ing = belong_handler.is_belonging()
+	# logic.belong_ing = belong_handler.is_belonging() # not necessary anymore as belong_in calls is_belonging in the getter
 	holder_at_enter = null
 
 func grindash():
@@ -105,12 +105,12 @@ func grindash():
 	else:
 		printerr("grindash but selectable_handler.has_selectable_dunkdash() returned false")
 		return # do nothing
-	
+
 	var target_velocity = target.get("linear_velocity")
 	if target_velocity == null: # if no velocity
 		target_velocity = Vector2.ZERO
-	
-	var dash_velocity = GlobalMaths.anticipate_dash_velocity(player.global_position, 
+
+	var dash_velocity = GlobalMaths.anticipate_dash_velocity(player.global_position,
 		target.global_position, movement.velocity, target_velocity, grindash_speed)
 	movement.velocity = dash_velocity
 	do_grindash = true

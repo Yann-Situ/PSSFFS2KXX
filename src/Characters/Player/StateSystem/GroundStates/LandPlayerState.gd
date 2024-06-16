@@ -16,7 +16,7 @@ func _ready():
 	animation_variations = [["land"], ["land_roll"]]
 
 func branch() -> State:
-	if logic.belong.ing:
+	if logic.belong_ing:
 		return belong_state
 	if logic.action.can:
 		return action_state
