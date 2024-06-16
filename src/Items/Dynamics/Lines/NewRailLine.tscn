@@ -18,6 +18,7 @@ position = Vector2(72, 96)
 curve = SubResource("Curve2D_dsmyg")
 script = ExtResource("1_65u35")
 character_holder = NodePath("CharacterHolder")
+character_offset = Vector2(0, -32)
 
 [node name="Line2D" type="Line2D" parent="."]
 width = 4.0

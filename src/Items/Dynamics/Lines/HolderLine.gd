@@ -138,7 +138,7 @@ func _on_character_holder_physics_processing_character(belong_handler : BelongHa
 
 	character.global_position = path_follow.global_position + position_offset
 	character.set_velocity(new_velocity_length * ropeline_dir)
-	position_offsets[character] = position_offset
+	position_offsets[belong_handler] = position_offset
 
 	if path_follow.get_progress_ratio() >= 1.0 or path_follow.get_progress_ratio() <= 0.0 :
 		belong_handler.get_out()

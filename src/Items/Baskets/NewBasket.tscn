@@ -131,12 +131,15 @@ anim_speed_max = 1.0
 z_index = 16
 z_as_relative = false
 script = ExtResource("1_1qq5r")
+character_offset = Vector2(0, 4)
+dunk_position_offset = Vector2(0, 32)
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 use_parent_material = true
 position = Vector2(0, 6)
 sprite_frames = SubResource("6")
-frame = 5
+autoplay = "default"
+frame_progress = 0.521599
 
 [node name="BasketArea" type="Area2D" parent="." node_paths=PackedStringArray("parent_node")]
 collision_layer = 40

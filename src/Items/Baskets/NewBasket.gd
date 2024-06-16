@@ -5,24 +5,28 @@ class_name NewBasket
 signal is_dunked
 signal is_goaled
 
-#@export var character_holder : CharacterHolder
-
 @export var speed_ball_threshold = 380 ## speed threshold for power goal
-@export var dunk_position_offset = 16 * Vector2.DOWN ## character offset for dunk position
+@export var character_offset : Vector2 = Vector2(0.0, 0.0) ## character offset for hanging
+@export var dunk_position_offset = 16 * Vector2.DOWN ## offset for the dunk position (different from hanging position)
 @export var dunk_position_radius = 24 ## maximum horizontal radius for dunk position
 #@export var hang_position_offset_y = 16 ## vertical offset for hanging # TODO
 
+@export_group("cooldowns")
+@export var dunk_cooldown = 0.75 ## between two consecutive dunks
+@export var dunk_free_character_cooldown = 0.5 ## after a character left the basket
+
+@export_group("can_receive_* booleans", "can_receive_")
 @export var can_receive_dunk = true : set = set_can_receive_dunk
 @export var can_receive_dunkjump = true
 @export var can_receive_goal = true
 @export var can_receive_hang = true : set = set_can_receive_hang
 
-@export var dunk_cooldown = 0.75#s
-@export var dunk_free_character_cooldown = 0.5#s
-
 @onready var character_holder : CharacterHolder = $CharacterHolder
 @onready var basket_area : Selectable = $BasketArea
 var dunk_cooldown_timer : Timer
+
+var character_offsets = {} ## belong_handler current offset
+var character_dunk_positions = {} ## belong_handler dunk position (relative to dunk.global_position)
 
 func set_can_receive_hang(b):
 	can_receive_hang = b
@@ -97,7 +101,6 @@ func goal(ball : Ball, score):
 	else :
 		goal_effects(ball, 1)
 	ball.on_goal()
-
 	is_goaled.emit()
 
 func goal_effects(ball : Ball, force : int = 0):
@@ -137,6 +140,12 @@ func _on_character_holder_getting_in(belong_handler : BelongHandler):
 	# dunk function. The following line prevent an additional call to _on_DunkCooldown_timeout() 
 	dunk_cooldown_timer.stop()
 	can_receive_dunk = false
+	
+	var character = belong_handler.character
+	character_dunk_positions[belong_handler] = \
+		get_dunk_position(character.global_position)-self.global_position
+	character_offsets[belong_handler] = character.global_position-global_position-\
+		character_dunk_positions[belong_handler]
 
 
 func _on_character_holder_getting_out(belong_handler : BelongHandler):
@@ -148,9 +157,16 @@ func _on_character_holder_getting_out(belong_handler : BelongHandler):
 
 ## should update position and velocity (like move and slide)
 func _on_character_holder_physics_processing_character(belong_handler : BelongHandler, delta):
-	assert("velocity" in belong_handler.character)
-	belong_handler.character.set_velocity(Vector2.ZERO)
+	var character = belong_handler.character
+	assert("velocity" in character)
+	character.set_velocity(Vector2.ZERO)
 	# just zero velocity
+	
+	var offset = character_offsets[belong_handler]
+	offset = lerp(offset, character_offset, 0.1)
+	character.global_position = self.global_position +\
+		character_dunk_positions[belong_handler] + offset
+	character_offsets[belong_handler] = offset
 
 func _on_character_holder_processing_character(belong_handler : BelongHandler, delta):
 	pass
