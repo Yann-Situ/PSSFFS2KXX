@@ -55,6 +55,9 @@ func get_in(new_holder : CharacterHolder)-> bool:
 	if not new_holder.can_hold:
 		push_warning(" - "+new_holder.name+".can_hold is false")
 		return false
+	if not self.can_belong:
+		push_warning(" - "+self.name+".can_belong is false")
+		return false
 	if is_belonging():
 		# check priority, with priority to current_holder if equal:
 		if new_holder.get_holder_priority() <= current_holder.get_holder_priority():

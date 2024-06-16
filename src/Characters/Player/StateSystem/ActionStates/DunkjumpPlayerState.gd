@@ -1,9 +1,9 @@
 extends PlayerMovementState
 
 @export var selectable_handler : SelectableHandler
-@export var dunkjump_speed : float = 800.0 #: set = set_dunkjump_speed, get = get_dunkjump_speed ##
+@export var dunkjump_speed : float = -500.0 #: set = set_dunkjump_speed, get = get_dunkjump_speed ##
 @export var dunkjumphalfturn_threshold : float = 32.0 ## minimum distance from the basket at which it is possible to do a dunkjump_halfturn
-@export var min_jump_duration : float = 0.1 ## s # duration between the beginning of the jump to the first frame where land/fallwall/fall is possible
+@export var min_jump_duration : float = 0.1 ## s # duration between the beginning of the jump (just after prejumping) to the first frame where land/fallwall/fall is possible.
 
 @export_group("States")
 @export var belong_state : State
@@ -15,9 +15,9 @@ extends PlayerMovementState
 var min_duration_timer : Timer # time the duration between the beginning of the
 # jump to the first frame where land/fallwall/fall is possible
 var basket_at_enter : NewBasket = null
-var position_tween : Tween
 var is_dunkprejumping = true  # set to false at the end of animation ["dunkprejump"]
 var is_dunkjumphalfturning = false # set at the end of the dunkprejump (see func dunkprejump_end)
+var dunkjump_movement_to_call = false
 
 func _ready():
 	animation_variations = [["dunkjump"], ["dunkjump_halfturn"], ["dunkprejump","dunkjump"]] # [["animation_1", "animation_2"]]
@@ -28,12 +28,12 @@ func _ready():
 	add_child(min_duration_timer)
 
 func branch() -> State:
-	if logic.belong.ing:
+	if logic.belong_ing:
 		return belong_state
 	if logic.dunk.can and logic.accept.pressed:
 		return dunk_state
 
-	if min_duration_timer.is_stopped():
+	if !is_dunkprejumping and min_duration_timer.is_stopped():
 		if logic.floor.ing:
 			return land_state
 		if logic.wall.ing:
@@ -44,9 +44,9 @@ func branch() -> State:
 	return self
 
 func enter(previous_state : State = null) -> State:
-	# end_dunkjump = false
 	is_dunkprejumping = true
 	is_dunkjumphalfturning = false
+	dunkjump_movement_to_call = false
 
 	var next_state = branch()
 	if next_state != self:
@@ -62,25 +62,17 @@ func enter(previous_state : State = null) -> State:
 		printerr("dunk but selectable_handler.has_selectable_dunkjump() returned false")
 		return fall_state
 
-	basket_at_enter = selectable_handler.get_selectable_dunkjumpdash().parent_node
+	basket_at_enter = selectable_handler.get_selectable_dunkjump().parent_node
 	if !basket_at_enter is NewBasket:
 		basket_at_enter = null
 		printerr("dunk but selectable_handler.has_selectable_dunkjump().parent_node is not NewBasket")
 		return fall_state
 
-	var dunk_position = basket_at_enter.get_dunkjump_position(player.global_position)
-	var dunk_dir_x = sign(dunk_position.x - player.global_position.x)
-	player.set_flip_h(dunk_dir_x <0)
-	logic.direction_sprite = -1 if dunk_dir_x < 0 else 1
-	logic.direction_sprite_change.can = false
-
-	if position_tween:
-		position_tween.kill()
-	position_tween = get_tree().create_tween()
-	position_tween.set_parallel(false)
-	position_tween.tween_property(player, "global_position",dunk_position,0.32)\
-		.set_trans(Tween.TRANS_LINEAR).set_ease(Tween.EASE_IN_OUT)
-	#position_tween.start()
+	#var dunk_position = basket_at_enter.get_closest_point(player.global_position)
+	#var dunk_dir_x = sign(dunk_position.x - player.global_position.x)
+	#player.set_flip_h(dunk_dir_x <0)
+	#logic.direction_sprite = -1 if dunk_dir_x < 0 else 1
+	#logic.direction_sprite_change.can = false
 
 	# TODO
 	# if P.flip_h:
@@ -101,6 +93,13 @@ func enter(previous_state : State = null) -> State:
 	print(self.name)
 	return next_state
 
+#func animation_process() -> void:
+	#if is_dunkjumphalfturning:
+		#set_variation(1) # ["halfturningdunkjump"]
+	#else:
+		#set_variation(0) # ["classic"]
+	#play_animation() # without priority
+
 ## Called by the parent StateMachine during the _physics_process call, after
 ## the StatusLogic physics_process call.
 func physics_process(delta) -> State:
@@ -108,17 +107,36 @@ func physics_process(delta) -> State:
 	if next_state != self:
 		return next_state
 
+	if dunkjump_movement_to_call:
+		dunkjump_movement()
+		dunkjump_movement_to_call = false
+
 	# side_move_physics_process(delta) # no side during dunk
 
 	# update player position
-	# if player.physics_enabled:
-	# 	movement_physics_process(delta) # no movement during dunk
+	if player.physics_enabled:
+		if is_dunkprejumping:
+			movement.velocity = Vector2.ZERO
+		else:
+			delta *= movement.ambient.time_scale
+			# apply alterables
+			apply_force_alterable(delta, movement)
+			apply_accel_alterable(delta, movement)
+			# move and slide
+			apply_speed_alterable(delta, movement)
+			player.set_velocity(movement.velocity)
+			player.move_and_slide()	# update player position
+			movement.velocity = player.get_real_velocity()-movement.speed_alterable.get_value()
 	return self
 
-## should be called by animation (end of dunkprejump) at physics frame # WARNING
+## should be called by animation (end of dunkprejump)
 func dunkprejump_end():
 	is_dunkprejumping = false
+	min_duration_timer.start()
+	dunkjump_movement_to_call = true
 
+## should be called at physics frame # WARNING
+func dunkjump_movement():
 	## TODO do the jump: # change gravity stuff
 	# P.PlayerEffects.jump_start()
 	if basket_at_enter == null :
@@ -127,6 +145,7 @@ func dunkprejump_end():
 	var q = basket_at_enter.get_closest_point(player.global_position) - player.global_position
 	var dunk_dir_x = sign(q.x)
 	player.set_flip_h(dunk_dir_x <0)
+	is_dunkjumphalfturning = (q.x*logic.direction_sprite < dunkjumphalfturn_threshold)
 	logic.direction_sprite = -1 if dunk_dir_x < 0 else 1
 
 	if q.y == 0.0:
@@ -147,8 +166,6 @@ func dunkprejump_end():
 			else :
 				movement.velocity.x = velocity_x1
 	movement.velocity.y = dunkjump_speed
-
-	is_dunkjumphalfturning = (q.x*logic.direction_sprite < dunkjumphalfturn_threshold)
 	Global.camera.screen_shake(0.2,10)
 
 ## Called just before entering the next State. Should not contain await or time
@@ -157,7 +174,5 @@ func exit():
 	super()
 	logic.dunkjump.ing = false
 	logic.direction_sprite_change.can = true
-	if position_tween:
-		position_tween.kill()
-	#	if logic.has_ball: # WARNING the ball can change during the dunk!
-	#		logic.active_ball.on_dunkjump_end(P)
+#	if logic.has_ball: # WARNING the ball can change during the dunk!
+#		logic.active_ball.on_dunkjump_end(P)

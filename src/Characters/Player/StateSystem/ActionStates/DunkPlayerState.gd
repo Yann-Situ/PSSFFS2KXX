@@ -15,7 +15,7 @@ func _ready():
 	animation_variations = [["dunk"], ["dunk_2"]] # [["animation_1", "animation_2"]]
 
 func branch() -> State:
-	if logic.belong.ing:
+	if logic.belong_ing:
 		return belong_state
 	# if logic.action.can:
 	# 	return action_state
@@ -32,6 +32,7 @@ func enter(previous_state : State = null) -> State:
 	play_animation()
 
 	logic.dunk.ing = true
+	logic.belong_can = false
 	# logic.action.ing is already set in PlayerStatusLogic.gd
 
 	if !selectable_handler.has_selectable_dunk():
@@ -45,9 +46,10 @@ func enter(previous_state : State = null) -> State:
 		return fall_state
 
 	var dunk_position = basket_at_enter.get_dunk_position(player.global_position)
-	var dunk_dir_x = sign(dunk_position.x - player.global_position.x)
-	player.set_flip_h(dunk_dir_x <0)
-	logic.direction_sprite = -1 if dunk_dir_x < 0 else 1
+	var dunk_dir_x = basket_at_enter.global_position.x - player.global_position.x
+	if dunk_dir_x != 0:
+		player.set_flip_h(dunk_dir_x <0)
+		logic.direction_sprite = -1 if dunk_dir_x < 0 else 1
 	logic.direction_sprite_change.can = false
 
 	if position_tween:
@@ -91,6 +93,7 @@ func dunk_end():
 func exit():
 	super()
 	logic.dunk.ing = false
+	logic.belong_can = true
 	logic.direction_sprite_change.can = true
 	if position_tween:
 		position_tween.kill()
