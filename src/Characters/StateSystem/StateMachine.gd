@@ -110,7 +110,8 @@ func change_state(new_state : State):
 		# if current_state:
 		# 	string += " -> " + current_state.name
 	if i >= MAX_STATE_TRANSITIONS:
-		push_error("change states more than MAX_STATE_TRANSITIONS in a change")
+		push_error("change states more than MAX_STATE_TRANSITIONS in a change. "+\
+			"The two last states were: "+str(current_state)+" --- "+str(new_state))
 	# if i > 0:
 	# 	print(string)
 
