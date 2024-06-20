@@ -59,6 +59,7 @@ func enter(previous_state : State = null) -> State:
 	position_tween.tween_property(player, "global_position",dunk_position,0.32)\
 		.set_trans(Tween.TRANS_LINEAR).set_ease(Tween.EASE_IN_OUT)
 	#position_tween.start()
+	movement.velocity = Vector2.ZERO
 
 	# TODO
 	## WARNING the call to on_dunk has been moved to Basket.gd, it is now supposed
@@ -87,6 +88,13 @@ func physics_process(delta) -> State:
 ## should be called by animation
 func dunk_end():
 	end_dunk = true
+	
+## should be called by animation
+func dunk_impact():
+	if basket_at_enter ==  null:
+		printerr("impact but basket_at_enter is null")
+		return
+	basket_at_enter.dunk(player, player.ball_handler.held_ball) # be careful here, not checking the ball_handler existence
 
 ## Called just before entering the next State. Should not contain await or time
 ## stopping functions

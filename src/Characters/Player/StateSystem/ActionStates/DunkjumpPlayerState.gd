@@ -2,7 +2,7 @@ extends PlayerMovementState
 
 @export var selectable_handler : SelectableHandler
 @export var dunkjump_speed : float = -500.0 #: set = set_dunkjump_speed, get = get_dunkjump_speed ##
-@export var dunkjumphalfturn_threshold : float = 32.0 ## minimum distance from the basket at which it is possible to do a dunkjump_halfturn
+@export var dunkjumphalfturn_threshold : float = 16.0 ## minimum distance from the basket at which it is possible to do a dunkjump_halfturn
 @export var min_jump_duration : float = 0.1 ## s # duration between the beginning of the jump (just after prejumping) to the first frame where land/fallwall/fall is possible.
 
 @export_group("States")
@@ -20,7 +20,7 @@ var is_dunkjumphalfturning = false # set at the end of the dunkprejump (see func
 var dunkjump_movement_to_call = false
 
 func _ready():
-	animation_variations = [["dunkjump"], ["dunkjump_halfturn"], ["dunkprejump","dunkjump"]] # [["animation_1", "animation_2"]]
+	animation_variations = [["dunkprejump"], ["dunkjump"], ["dunkjump_halfturn"], ["dunkprejump","dunkjump"]] # [["animation_1", "animation_2"]]
 	min_duration_timer = Timer.new()
 	min_duration_timer.autostart = false
 	min_duration_timer.one_shot = true
@@ -51,9 +51,11 @@ func enter(previous_state : State = null) -> State:
 	var next_state = branch()
 	if next_state != self:
 		return next_state
+	set_variation(0) # dunkprejump
 	play_animation()
 
 	logic.dunkjump.ing = true
+	logic.direction_sprite_change.can = false
 	# logic.no_jump_timer.start(no_jump_delay)
 	# logic.jump_press_timer.stop() ## TODO see delays and stuff
 	# logic.action.ing is already set in PlayerStatusLogic.gd
@@ -72,7 +74,6 @@ func enter(previous_state : State = null) -> State:
 	#var dunk_dir_x = sign(dunk_position.x - player.global_position.x)
 	#player.set_flip_h(dunk_dir_x <0)
 	#logic.direction_sprite = -1 if dunk_dir_x < 0 else 1
-	#logic.direction_sprite_change.can = false
 
 	# TODO
 	# if P.flip_h:
@@ -143,11 +144,19 @@ func dunkjump_movement():
 		push_warning("basket_at_enter is null at the end of dunkprejumping")
 
 	var q = basket_at_enter.get_closest_point(player.global_position) - player.global_position
+	
 	var dunk_dir_x = sign(q.x)
+	logic.direction_sprite_change.can = true
 	player.set_flip_h(dunk_dir_x <0)
-	is_dunkjumphalfturning = (q.x*logic.direction_sprite < dunkjumphalfturn_threshold)
+	is_dunkjumphalfturning = (q.x*logic.direction_sprite < -dunkjumphalfturn_threshold)
+	if is_dunkjumphalfturning:
+		set_variation(2)
+	else:
+		set_variation(1)
+	play_animation() # bof, better if it is called in process frame, more consistent...
 	logic.direction_sprite = -1 if dunk_dir_x < 0 else 1
-
+	logic.direction_sprite_change.can = false
+	
 	if q.y == 0.0:
 		movement.velocity.x = -0.5*q.x*Global.default_gravity.y/dunkjump_speed
 	else : # standard case
