@@ -44,6 +44,12 @@ func animation_process() -> void:
 		do_grindash = false
 		play_animation(true)
 
+	logic.direction_sprite_change.can = true
+	var movement_dir_x = movement.velocity.x > 0
+	player.set_flip_h(not movement_dir_x)
+	logic.direction_sprite = 1 if movement_dir_x else -1
+	logic.direction_sprite_change.can = false
+
 	if !animation_player.is_playing() or variation_playing != 7:
 		# do complicated stuff here:
 		var dir = player.velocity
@@ -61,6 +67,11 @@ func enter(previous_state : State = null) -> State:
 	if next_state != self:
 		return next_state
 	play_animation()
+
+	var movement_dir_x = movement.velocity.x > 0
+	player.set_flip_h(not movement_dir_x)
+	logic.direction_sprite = 1 if movement_dir_x else -1
+	logic.direction_sprite_change.can = false
 	print(self.name)
 
 	return next_state
@@ -93,6 +104,7 @@ func physics_process(delta) -> State:
 func exit():
 	super()
 	# if we exit the grind state but we are still on the same holder, get_out
+	logic.direction_sprite_change.can = true
 	if belong_handler.belongs_to(holder_at_enter):
 		belong_handler.get_out()
 	# logic.belong_ing = belong_handler.is_belonging() # not necessary anymore as belong_in calls is_belonging in the getter
