@@ -1,10 +1,12 @@
-[gd_scene load_steps=9 format=3 uid="uid://dthba6oq5gc2c"]
+[gd_scene load_steps=13 format=3 uid="uid://dthba6oq5gc2c"]
 
 [ext_resource type="PackedScene" uid="uid://dlfptvxh6yjwm" path="res://src/Characters/Player/NewPlayer.tscn" id="1_3s5ex"]
 [ext_resource type="PackedScene" uid="uid://kvm1pfg6ben5" path="res://src/Items/Dynamics/Lines/NewRopeLine.tscn" id="4_fjfub"]
 [ext_resource type="PackedScene" uid="uid://rmukvjwyiahu" path="res://src/Items/Interactive/DashTarget.tscn" id="4_vquou"]
 [ext_resource type="PackedScene" uid="uid://dxk7u2jsgah5u" path="res://src/Items/Dynamics/Lines/NewRailLine.tscn" id="5_8x7ov"]
 [ext_resource type="PackedScene" uid="uid://cckqoik18dppx" path="res://src/Items/Baskets/NewBasket.tscn" id="5_jehtm"]
+[ext_resource type="PackedScene" uid="uid://bcnnkalot4kb0" path="res://src/Items/Dynamics/Jumper.tscn" id="6_w2oyr"]
+[ext_resource type="PackedScene" uid="uid://babjtotux2mv3" path="res://src/Map/MovingPlatform.tscn" id="7_3dtyc"]
 
 [sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_sdft1"]
 
@@ -21,6 +23,18 @@ _data = {
 "points": PackedVector2Array(0, 0, 0, 0, -328, -72, 0, 0, 0, 0, 0, -40, 0, 0, 0, 0, 208, -40, 0, 0, 0, 0, 544, -256, 0, 0, 0, 0, 760, -256)
 }
 point_count = 5
+
+[sub_resource type="Curve2D" id="Curve2D_4hk3p"]
+_data = {
+"points": PackedVector2Array(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 632, 0)
+}
+point_count = 2
+
+[sub_resource type="Curve2D" id="Curve2D_yud7h"]
+_data = {
+"points": PackedVector2Array(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, -312)
+}
+point_count = 2
 
 [node name="TestNewPlayer" type="Node2D"]
 
@@ -43,10 +57,43 @@ collision_layer = 2
 shape = SubResource("WorldBoundaryShape2D_sdft1")
 
 [node name="Polygon2D" type="Polygon2D" parent="StaticBody2D"]
+position = Vector2(-1920, 0)
+scale = Vector2(7, 1)
+color = Color(0.529067, 0.529067, 0.529067, 1)
 polygon = PackedVector2Array(-320, 0, 320, 0, 320, 64, -320, 64)
 
+[node name="Slope1" type="StaticBody2D" parent="."]
+position = Vector2(-1664, 320)
+scale = Vector2(4, 4)
+collision_layer = 2
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Slope1"]
+position = Vector2(448, -320)
+polygon = PackedVector2Array(-448, 320, -448, 256, -384, 320)
+
+[node name="Polygon" type="Polygon2D" parent="Slope1"]
+position = Vector2(-1152, 0)
+scale = Vector2(7, 1)
+color = Color(0.529067, 0.529067, 0.529067, 1)
+polygon = PackedVector2Array(164.571, 0, 164.571, -64, 173.714, 0)
+
+[node name="Slope2" type="StaticBody2D" parent="."]
+position = Vector2(-1664, 320)
+scale = Vector2(-4, 2)
+collision_layer = 2
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Slope2"]
+position = Vector2(448, -320)
+polygon = PackedVector2Array(-448, 320, -448, 256, -384, 320)
+
+[node name="Polygon" type="Polygon2D" parent="Slope2"]
+position = Vector2(-1152, 0)
+scale = Vector2(7, 1)
+color = Color(0.529067, 0.529067, 0.529067, 1)
+polygon = PackedVector2Array(164.571, 0, 164.571, -64, 173.714, 0)
+
 [node name="NewPlayer" parent="." instance=ExtResource("1_3s5ex")]
-position = Vector2(320, 184)
+position = Vector2(-568, 288)
 
 [node name="DashTarget" parent="." instance=ExtResource("4_vquou")]
 position = Vector2(168, 288)
@@ -67,3 +114,28 @@ position = Vector2(-168, 184)
 
 [node name="NewBasket2" parent="." instance=ExtResource("5_jehtm")]
 position = Vector2(504, 168)
+
+[node name="Jumper" parent="." instance=ExtResource("6_w2oyr")]
+position = Vector2(-496, 304)
+jump_velocity = 700
+no_friction_time = 0.1
+
+[node name="Jumper3" parent="." instance=ExtResource("6_w2oyr")]
+position = Vector2(-608, 304)
+jump_velocity = 600
+no_friction_time = 0.1
+
+[node name="Jumper2" parent="." instance=ExtResource("6_w2oyr")]
+position = Vector2(-512, 144)
+rotation = 1.5708
+jump_velocity = 800
+cant_go_time = 0.5
+no_friction_time = 0.1
+
+[node name="MovingPlatform" parent="." instance=ExtResource("7_3dtyc")]
+position = Vector2(-1272, 256)
+curve = SubResource("Curve2D_4hk3p")
+
+[node name="MovingPlatform2" parent="." instance=ExtResource("7_3dtyc")]
+position = Vector2(-1272, 256)
+curve = SubResource("Curve2D_yud7h")

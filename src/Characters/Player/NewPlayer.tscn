@@ -1430,8 +1430,8 @@ light_mask = 4
 z_index = 100
 z_as_relative = false
 collision_mask = 514
-floor_max_angle = 0.886627
-platform_on_leave = 2
+floor_max_angle = 0.872665
+floor_snap_length = 16.0
 script = ExtResource("1_b7wqc")
 movement = SubResource("Resource_5o1rd")
 label_state = NodePath("UI/DebugInterface/HBoxContainer/LabelState")
@@ -1779,11 +1779,12 @@ player = NodePath("../../..")
 logic = NodePath("../../StatusLogic")
 animation_player = NodePath("../../../Flipper/Sprite2D/PlayerAnimation")
 
-[node name="Jump" type="Node" parent="StateMachine/AirStates" node_paths=PackedStringArray("belong_state", "action_state", "land_state", "fallwall_state", "fall_state", "player", "logic", "animation_player")]
+[node name="Jump" type="Node" parent="StateMachine/AirStates" node_paths=PackedStringArray("belong_state", "action_state", "land_state", "stand_state", "fallwall_state", "fall_state", "player", "logic", "animation_player")]
 script = ExtResource("27_fitg4")
 belong_state = NodePath("../../BelongStates")
 action_state = NodePath("../../ActionStates")
 land_state = NodePath("../../GroundStates/Land")
+stand_state = NodePath("../../GroundStates/Stand")
 fallwall_state = NodePath("../Fallwall")
 fall_state = NodePath("../Fall")
 player = NodePath("../../..")
@@ -2005,14 +2006,17 @@ texture = ExtResource("44_s6k41")
 [node name="HBoxContainer" type="HBoxContainer" parent="UI/DebugInterface"]
 layout_mode = 2
 
-[node name="LabelState" type="Label" parent="UI/DebugInterface/HBoxContainer"]
-layout_mode = 2
-text = "state"
-
 [node name="LabelVelocity" type="Label" parent="UI/DebugInterface/HBoxContainer"]
 layout_mode = 2
+size_flags_horizontal = 0
 text = "velocity
 "
+
+[node name="LabelState" type="Label" parent="UI/DebugInterface/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 8
+text = "state"
+horizontal_alignment = 2
 
 [node name="Combos" type="Node" parent="."]
 
