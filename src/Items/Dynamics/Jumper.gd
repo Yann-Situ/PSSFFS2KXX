@@ -5,6 +5,7 @@ extends Node2D
 ## instant vertical velocity when a body enter the area
 @export var jump_velocity = 500#pix/s
 @export var cant_go_time : float = 0#s
+@export var no_friction_time : float = 0#s
 var jump_direction = Vector2.UP
 
 func _set(property, value):
@@ -23,13 +24,27 @@ func _on_Area2D_body_entered(body):
 		$AnimationPlayer.stop(true)
 		$AnimationPlayer.play("jump")
 	elif body.is_in_group("characters"):
-		# first delete the normal velocity of the body
 		var velocity_change = Vector2.ZERO
-		velocity_change -= body.S.velocity.dot(jump_direction)*jump_direction
-		# then apply the jump impulse
-		velocity_change += jump_velocity*jump_direction
-		body.add_impulse(body.mass*velocity_change)
-		if cant_go_time > 0:
-			body.S.get_node("CanGoTimer").start(cant_go_time)
+		## TODO workaround because multiple players
+		if body is Player:
+			# first delete the normal velocity of the body
+			velocity_change -= body.S.velocity.dot(jump_direction)*jump_direction
+			# then apply the jump impulse
+			velocity_change += jump_velocity*jump_direction
+			body.add_impulse(body.mass*velocity_change)
+			if cant_go_time > 0:
+				body.S.get_node("CanGoTimer").start(cant_go_time)
+		
+		elif body is NewPlayer:
+			# first delete the normal velocity of the body
+			velocity_change -= body.movement.velocity.dot(jump_direction)*jump_direction
+			## then apply the jump impulse
+			velocity_change += jump_velocity*jump_direction
+			print("before: "+str(body.movement.velocity))
+			body.add_impulse(body.movement.mass*velocity_change)
+			print("after : "+str(body.movement.velocity))
+			if cant_go_time > 0:
+				body.S.no_side_timer.start(cant_go_time)
+				body.S.no_friction_timer.start(no_friction_time)
 		$AnimationPlayer.stop(true)
 		$AnimationPlayer.play("jump")
