@@ -11,6 +11,7 @@ extends PlayerMovementState
 @export var belong_state : State
 @export var action_state : State
 @export var land_state : State
+@export var stand_state : State # used for the horizontal velocity hack (see in enter())
 @export var fallwall_state : State
 @export var fall_state : State
 
@@ -55,6 +56,15 @@ func enter(previous_state : State = null) -> State:
 	logic.no_jump_timer.start(no_jump_delay)
 	logic.jump_press_timer.stop()
 	movement.velocity.y = jump_speed
+	print(self.name)
+	
+	# movement.velocity.x = player.get_real_velocity().x 
+	## TODO : the previous commented line is appropriate when jumping from a slope or moving 
+	##platform, but not when jumping from grind or hang... I need to find a solution. Here is a hack:
+	if previous_state == land_state or previous_state == stand_state:
+		movement.velocity.x = player.get_real_velocity().x 
+		print("  | jump hack")
+	
 	if !logic.up.pressed:
 		# TODO special animation for a mini jump?
 		movement.velocity.y *= jump_speed_up_cancelled_ratio
@@ -65,7 +75,6 @@ func enter(previous_state : State = null) -> State:
 	#player.PlayerEffects.dust_start()
 	#player.PlayerEffects.jump_start()
 
-	print(self.name)
 	return next_state
 
 ## Called by the parent StateMachine during the _physics_process call, after

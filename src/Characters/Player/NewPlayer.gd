@@ -101,7 +101,11 @@ func _process(delta):
 	
 func _physics_process(delta):
 	if Global.DEBUG and state_machine.current_state != null:
-		label_velocity.text = "("+str(movement.velocity.x).pad_decimals(1)+", "+str(movement.velocity.y).pad_decimals(1)+")"
+		label_velocity.text = "("+str(movement.velocity.x).pad_decimals(0)+", "\
+			+str(movement.velocity.y).pad_decimals(0)+")     "+str(movement.velocity.length()).pad_decimals(0)
+		var v = get_real_velocity()
+		label_velocity.text += "\n("+str(v.x).pad_decimals(0)+", "\
+			+str(v.y).pad_decimals(0)+")     "+str(v.length()).pad_decimals(0)
 	update_collision()
 	update_ambient_data()
 	update_selectable_handler()
