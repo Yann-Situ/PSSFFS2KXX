@@ -1,7 +1,7 @@
 extends PlayerMovementState
 
 @export var belong_handler : BelongHandler
-@export var selectable_handler : SelectableHandler
+@export var selectable_handler : SelectableHandler ## This is useful for the grindash, which is handled in this state node
 
 @export var no_side_delay : float = 0.2#s
 @export var grindash_speed : float = 600#pix/s

@@ -46,7 +46,7 @@ func get_throw_position():
 	# position of the player and the flip value :
 	return $ThrowPosition.global_position
 
-func set_has_ball_position():
+func set_has_ball_position(): # TODO it might be interesting to do it with a Remote2D node
 	if held_ball != null:
 		var sprite = held_ball.get_node("Visuals")
 		sprite.position = $HasBallPosition.global_position - P.global_position # maybe should be optimize TODO

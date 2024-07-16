@@ -46,13 +46,12 @@ var release : Status = Status.new("release") #
 var pickball : Status = Status.new("pickball") #
 var power : Status = Status.new("power") #
 
-var has_ball : bool = false # ball_handler
-
 var up : Trigger = Trigger.new("up") #
 var down : Trigger = Trigger.new("down") #
 var left : Trigger = Trigger.new("left") #
 var right : Trigger = Trigger.new("right") #
 var accept : Trigger = Trigger.new("accept") #
+var power : Trigger = Trigger.new("power") #
 var key_release : Trigger = Trigger.new("release") #
 
 var direction_pressed : Vector2 = Vector2.ZERO
@@ -105,6 +104,7 @@ func _ready():
 	left = input_controller.left
 	right = input_controller.right
 	accept = input_controller.accept
+	power = input_controller.power
 	key_release = input_controller.release
 
 	stand.can = true
