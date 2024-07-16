@@ -40,9 +40,8 @@ func _on_Area2D_body_entered(body):
 			velocity_change -= body.movement.velocity.dot(jump_direction)*jump_direction
 			## then apply the jump impulse
 			velocity_change += jump_velocity*jump_direction
-			print("before: "+str(body.movement.velocity))
 			body.add_impulse(body.movement.mass*velocity_change)
-			print("after : "+str(body.movement.velocity))
+			print("--- Jumper : "+str(body.movement.velocity))
 			if cant_go_time > 0:
 				body.S.no_side_timer.start(cant_go_time)
 				body.S.no_friction_timer.start(no_friction_time)

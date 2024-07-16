@@ -26,9 +26,11 @@ func movement_physics_process(delta, m : MovementData = movement):
 	apply_accel_alterable(delta, m)
 
 	# friction
-	if logic.side.can and logic.friction.can and sign(m.velocity.x) != sign(m.direction_pressed.x): # if not moving in the same dir as input # TODO handle m.direction_pressed.x
+	if logic.side.can and logic.friction.can and sign(m.velocity.x) != sign(m.direction_pressed.x):
 		m.velocity.x = GlobalMaths.apply_friction(m.velocity.x, m.ambient.friction.x, delta)
-	if logic.friction.can and sign(m.velocity.y) != sign(m.direction_pressed.y): # if not moving in the same dir as input # TODO handle m.direction_pressed.y
+	## About vertical friction:
+	# we want friction when up is pressed and falling so:
+	if logic.friction.can and m.velocity.y > 0 and m.direction_pressed.y < 0:
 		m.velocity.y = GlobalMaths.apply_friction(m.velocity.y, m.ambient.friction.y, delta)
 
 	# move and slide
@@ -38,6 +40,7 @@ func movement_physics_process(delta, m : MovementData = movement):
 	## TODO think about those two alternatives: get_velocity seems to be working well with moving platform and slopes
 	#m.velocity = player.get_real_velocity()-m.speed_alterable.get_value() 
 	m.velocity = player.get_velocity()-m.speed_alterable.get_value()
+	
 
 ## WARNING this function doesn't multiply delta by time_scale, as it is meant to be used in movement_physics_process
 func apply_force_alterable(scaled_delta, m : MovementData = movement):

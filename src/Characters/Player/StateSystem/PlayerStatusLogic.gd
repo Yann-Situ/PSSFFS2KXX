@@ -24,7 +24,7 @@ func set_belong_can(b):
 var action : Status = Status.new("action") #
 
 var floor : Status = Status.new("floor") # ray_handler
-var wall : Status = Status.new("wall") # ray_handler
+var wall : Status = Status.new("wall") # ray_handler + direction pressed
 var stand : Status = Status.new("stand") # ray_handler for can_stand
 var side : Status = Status.new("side") #
 
@@ -171,7 +171,7 @@ func update_status():
 	floor.ing = ray_handler.is_on_floor()
 	if floor.ing:
 		$JumpFloorTimer.start()
-	wall.ing = ray_handler.is_on_wall()
+	wall.ing = ray_handler.is_on_wall() and direction_sprite == sign(direction_pressed.x)
 	if wall.ing:
 		direction_wall = direction_sprite
 		$JumpWallTimer.start()
