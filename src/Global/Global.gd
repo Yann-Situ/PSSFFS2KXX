@@ -9,7 +9,7 @@ var gravity_alterer = AltererAdditive.new(default_gravity)
 var cinematic_playing = false: set=set_cinematic_state, get=is_cinematic_playing
 var camera : Camera2D = null : set = set_current_camera, get = get_current_camera
 var current_room : Room2D = null : set = set_current_room, get = get_current_room
-var current_player : Player = null : set = set_current_player, get = get_current_player
+var current_player = null : set = set_current_player, get = get_current_player # TODO types for newplayer
 
 var playing = true
 var list_of_physical_nodes = []
@@ -76,9 +76,9 @@ func get_current_room() -> Room2D:
 		push_error("current_room is null")
 	return current_room
 	
-func set_current_player(player : Player):
+func set_current_player(player):
 	current_player = player
-func get_current_player() -> Player:
+func get_current_player(): # -> Player: # TODO newplayer change types
 	if current_player == null:
 		push_error("current_player is null")
 	return current_player

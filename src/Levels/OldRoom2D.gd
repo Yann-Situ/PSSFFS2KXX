@@ -1,12 +1,10 @@
 @tool
 @icon("res://assets/art/icons/house.png")
 extends Node2D
-class_name Room2D
+class_name OldRoom2D
 
 signal is_exiting_room
 signal is_exiting_level
-
-@export var using_new_player : bool = false 
 
 @export var limit_left : int = -10000000 # : set = set_limit_left
 @export var limit_top : int = -10000000 # : set = set_limit_top
@@ -80,12 +78,8 @@ func _enter_tree():
 	#print("METAPLAYER : " + str(meta_player))
 	if not has_node(meta_player): # when room is run alone from the editor for tests
 		#print("No meta player : create one and assign meta_player")
-		Global.set_current_room(self)
-		var player_scene = null
-		if using_new_player:
-			player_scene = load("res://src/Characters/Player/NewPlayer.tscn")
-		else:
-			player_scene = load("res://src/Player/Player.tscn")
+		## Global.set_current_room(self) TODO saves To uncomment
+		var player_scene = load("res://src/Player/Player.tscn")
 		var player = player_scene.instantiate()
 		self.add_child(player) #move it to the appropriate position
 		meta_player = player.get_path()

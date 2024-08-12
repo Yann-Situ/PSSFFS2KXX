@@ -1,0 +1,179 @@
+[gd_scene load_steps=17 format=3 uid="uid://eq50gyc1bs85"]
+
+[ext_resource type="PackedScene" uid="uid://b5emf4je4tnag" path="res://src/Levels/Room2D.tscn" id="1_6to1r"]
+[ext_resource type="PackedScene" uid="uid://rmukvjwyiahu" path="res://src/Items/Interactive/DashTarget.tscn" id="2_x00i2"]
+[ext_resource type="PackedScene" uid="uid://kvm1pfg6ben5" path="res://src/Items/Dynamics/Lines/NewRopeLine.tscn" id="3_3x1wr"]
+[ext_resource type="PackedScene" uid="uid://dxk7u2jsgah5u" path="res://src/Items/Dynamics/Lines/NewRailLine.tscn" id="4_bt87n"]
+[ext_resource type="PackedScene" uid="uid://cckqoik18dppx" path="res://src/Items/Baskets/NewBasket.tscn" id="5_h1nqp"]
+[ext_resource type="PackedScene" uid="uid://bcnnkalot4kb0" path="res://src/Items/Dynamics/Jumper.tscn" id="6_tb8pt"]
+[ext_resource type="PackedScene" uid="uid://babjtotux2mv3" path="res://src/Map/MovingPlatform.tscn" id="7_ddpj5"]
+[ext_resource type="PackedScene" uid="uid://cxn2m3havcmil" path="res://src/Items/Balls/Ball.tscn" id="8_huh8k"]
+
+[sub_resource type="Gradient" id="Gradient_wwss0"]
+resource_local_to_scene = true
+colors = PackedColorArray(0.971008, 1, 0.851562, 1, 0.238892, 0.751644, 0.804688, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_7hk6a"]
+resource_local_to_scene = true
+gradient = SubResource("Gradient_wwss0")
+width = 500
+
+[sub_resource type="Environment" id="Environment_wlpjs"]
+resource_local_to_scene = true
+background_mode = 4
+glow_enabled = true
+glow_intensity = 0.96
+glow_strength = 1.01
+glow_bloom = 0.01
+glow_blend_mode = 1
+glow_hdr_threshold = 0.95
+glow_hdr_scale = 0.98
+glow_hdr_luminance_cap = 1.0
+adjustment_enabled = true
+adjustment_contrast = 1.08
+adjustment_saturation = 1.01
+
+[sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_oorwg"]
+
+[sub_resource type="Curve2D" id="Curve2D_rjgdv"]
+resource_local_to_scene = true
+_data = {
+"points": PackedVector2Array(0, 0, 0, 0, -232, -96, 0, 0, 0, 0, 152, 16, 0, 0, 0, 0, 376, -64)
+}
+point_count = 3
+
+[sub_resource type="Curve2D" id="Curve2D_6gk4l"]
+resource_local_to_scene = true
+_data = {
+"points": PackedVector2Array(0, 0, 0, 0, -328, -72, 0, 0, 0, 0, 0, -40, 0, 0, 0, 0, 208, -40, 0, 0, 0, 0, 544, -256, 0, 0, 0, 0, 760, -256)
+}
+point_count = 5
+
+[sub_resource type="Curve2D" id="Curve2D_8bbvy"]
+_data = {
+"points": PackedVector2Array(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 632, 0)
+}
+point_count = 2
+
+[sub_resource type="Curve2D" id="Curve2D_ptpn8"]
+_data = {
+"points": PackedVector2Array(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, -312)
+}
+point_count = 2
+
+[node name="RoomTestNewPlayer" instance=ExtResource("1_6to1r")]
+using_new_player = true
+
+[node name="ParallaxBackground" parent="." index="1"]
+visible = false
+
+[node name="TextureRect" parent="ParallaxBackground/ParallaxLayer" index="0"]
+texture = SubResource("GradientTexture2D_7hk6a")
+
+[node name="WorldEnvironment" parent="." index="5"]
+environment = SubResource("Environment_wlpjs")
+
+[node name="StaticBody2D2" type="StaticBody2D" parent="Environment" index="5"]
+position = Vector2(640, 64)
+rotation = -1.57079
+collision_layer = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Environment/StaticBody2D2" index="0"]
+shape = SubResource("WorldBoundaryShape2D_oorwg")
+
+[node name="Polygon2D" type="Polygon2D" parent="Environment/StaticBody2D2" index="1"]
+polygon = PackedVector2Array(-320, 0, 320, 0, 320, 64, -320, 64)
+
+[node name="StaticBody2D" type="StaticBody2D" parent="Environment" index="6"]
+position = Vector2(320, 320)
+collision_layer = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Environment/StaticBody2D" index="0"]
+shape = SubResource("WorldBoundaryShape2D_oorwg")
+
+[node name="Polygon2D" type="Polygon2D" parent="Environment/StaticBody2D" index="1"]
+position = Vector2(-1920, 0)
+scale = Vector2(7, 1)
+color = Color(0.529067, 0.529067, 0.529067, 1)
+polygon = PackedVector2Array(-320, 0, 320, 0, 320, 64, -320, 64)
+
+[node name="Slope1" type="StaticBody2D" parent="Environment" index="7"]
+position = Vector2(-1664, 320)
+scale = Vector2(4, 4)
+collision_layer = 2
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Environment/Slope1" index="0"]
+position = Vector2(448, -320)
+polygon = PackedVector2Array(-448, 320, -448, 256, -384, 320)
+
+[node name="Polygon" type="Polygon2D" parent="Environment/Slope1" index="1"]
+position = Vector2(-1152, 0)
+scale = Vector2(7, 1)
+color = Color(0.529067, 0.529067, 0.529067, 1)
+polygon = PackedVector2Array(164.571, 0, 164.571, -64, 173.714, 0)
+
+[node name="Slope2" type="StaticBody2D" parent="Environment" index="8"]
+position = Vector2(-1664, 320)
+scale = Vector2(-4, 2)
+collision_layer = 2
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Environment/Slope2" index="0"]
+position = Vector2(448, -320)
+polygon = PackedVector2Array(-448, 320, -448, 256, -384, 320)
+
+[node name="Polygon" type="Polygon2D" parent="Environment/Slope2" index="1"]
+position = Vector2(-1152, 0)
+scale = Vector2(7, 1)
+color = Color(0.529067, 0.529067, 0.529067, 1)
+polygon = PackedVector2Array(164.571, 0, 164.571, -64, 173.714, 0)
+
+[node name="DashTarget" parent="Environment" index="9" instance=ExtResource("2_x00i2")]
+position = Vector2(168, 288)
+
+[node name="DashTarget2" parent="Environment" index="10" instance=ExtResource("2_x00i2")]
+position = Vector2(-16, 176)
+
+[node name="NewRopeLine" parent="Environment" index="11" instance=ExtResource("3_3x1wr")]
+position = Vector2(232, 200)
+curve = SubResource("Curve2D_rjgdv")
+
+[node name="NewRailLine" parent="Environment" index="12" instance=ExtResource("4_bt87n")]
+position = Vector2(-128, 312)
+curve = SubResource("Curve2D_6gk4l")
+
+[node name="NewBasket" parent="Environment" index="13" instance=ExtResource("5_h1nqp")]
+position = Vector2(-168, 184)
+
+[node name="NewBasket2" parent="Environment" index="14" instance=ExtResource("5_h1nqp")]
+position = Vector2(504, 168)
+
+[node name="Jumper" parent="Environment" index="15" instance=ExtResource("6_tb8pt")]
+position = Vector2(-496, 304)
+jump_velocity = 700
+no_friction_time = 0.1
+
+[node name="Jumper3" parent="Environment" index="16" instance=ExtResource("6_tb8pt")]
+position = Vector2(-608, 304)
+jump_velocity = 600
+no_friction_time = 0.1
+
+[node name="Jumper2" parent="Environment" index="17" instance=ExtResource("6_tb8pt")]
+position = Vector2(-512, 144)
+rotation = 1.5708
+jump_velocity = 800
+cant_go_time = 0.5
+no_friction_time = 0.1
+
+[node name="MovingPlatform" parent="Environment" index="18" instance=ExtResource("7_ddpj5")]
+position = Vector2(-1272, 256)
+curve = SubResource("Curve2D_8bbvy")
+
+[node name="MovingPlatform2" parent="Environment" index="19" instance=ExtResource("7_ddpj5")]
+position = Vector2(-1272, 256)
+curve = SubResource("Curve2D_ptpn8")
+
+[node name="Ball" parent="Environment" index="20" instance=ExtResource("8_huh8k")]
+position = Vector2(-1400, 192)
+
+[node name="Ball2" parent="Environment" index="21" instance=ExtResource("8_huh8k")]
+position = Vector2(-1088, 192)
