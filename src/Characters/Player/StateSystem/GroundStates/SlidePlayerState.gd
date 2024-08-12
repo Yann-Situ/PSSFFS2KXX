@@ -55,6 +55,10 @@ func enter(previous_state : State = null) -> State:
 	# timer = self.get_tree().create_timer(2.0)
 	timer.start()
 	# change hitbox
+	
+	# effects
+	player.effect_handler.dust_start()
+	
 	return next_state
 
 func slide_end_finished():

@@ -1,4 +1,4 @@
-[gd_scene load_steps=117 format=3 uid="uid://dlfptvxh6yjwm"]
+[gd_scene load_steps=113 format=3 uid="uid://dlfptvxh6yjwm"]
 
 [ext_resource type="Script" path="res://src/Characters/Player/NewPlayer.gd" id="1_b7wqc"]
 [ext_resource type="Script" path="res://src/Characters/Player/MovementData.gd" id="2_0ukhp"]
@@ -14,6 +14,7 @@
 [ext_resource type="Script" path="res://src/Characters/Player/AmbientData.gd" id="17_iaaq0"]
 [ext_resource type="Script" path="res://src/Characters/Player/StateSystem/PlayerStatusLogic.gd" id="17_sct0s"]
 [ext_resource type="Script" path="res://src/Characters/Player/BelongHandler.gd" id="18_360yc"]
+[ext_resource type="Script" path="res://src/Characters/Player/EffectHandler.gd" id="19_kc1o0"]
 [ext_resource type="Script" path="res://src/Characters/Player/StateSystem/GroundStates/SlidePlayerState.gd" id="21_fmd78"]
 [ext_resource type="Script" path="res://src/Characters/Player/AmbientDataScaler.gd" id="22_bni2i"]
 [ext_resource type="Script" path="res://src/Characters/Player/StateSystem/GroundStates/LandPlayerState.gd" id="22_bsg40"]
@@ -37,8 +38,6 @@
 [ext_resource type="PackedScene" uid="uid://bs8ju42cns0vf" path="res://src/Effects/GhostHandler.tscn" id="33_v1led"]
 [ext_resource type="Script" path="res://src/Characters/Player/StateSystem/HeldStates/GrindPlayerState.gd" id="34_ft0io"]
 [ext_resource type="Script" path="res://src/Characters/Player/StateSystem/ActionStates/DunkjumpPlayerState.gd" id="34_luedr"]
-[ext_resource type="PackedScene" uid="uid://cq1tfkkoni136" path="res://src/Effects/TrailHandler.tscn" id="34_qh28p"]
-[ext_resource type="Texture2D" uid="uid://c0e3bm1u8mxw8" path="res://assets/art/effects/trail.png" id="35_uq32a"]
 [ext_resource type="Script" path="res://src/Characters/Player/StateSystem/HeldStates/HangPlayerState.gd" id="35_wqoei"]
 [ext_resource type="PackedScene" uid="uid://bhw3riwbqaxpk" path="res://src/Effects/DustParticle1.tscn" id="36_iawlq"]
 [ext_resource type="PackedScene" uid="uid://br3tr8mssgqev" path="res://src/Effects/GrindParticles.tscn" id="37_3xxkx"]
@@ -818,20 +817,6 @@ tracks/1/keys = {
 "update": 1,
 "values": [Vector2(-10, -1), Vector2(-4, -1), Vector2(-3, -3)]
 }
-tracks/2/type = "method"
-tracks/2/imported = false
-tracks/2/enabled = true
-tracks/2/path = NodePath("../../PlayerEffects")
-tracks/2/interp = 1
-tracks/2/loop_wrap = true
-tracks/2/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"values": [{
-"args": [],
-"method": &"cloud_start"
-}]
-}
 
 [sub_resource type="Animation" id="26"]
 length = 0.8
@@ -1015,24 +1000,10 @@ tracks/1/keys = {
 tracks/2/type = "method"
 tracks/2/imported = false
 tracks/2/enabled = true
-tracks/2/path = NodePath("../../PlayerEffects")
+tracks/2/path = NodePath("../../StateMachine/GroundStates/Land")
 tracks/2/interp = 1
 tracks/2/loop_wrap = true
 tracks/2/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"values": [{
-"args": [],
-"method": &"cloud_start"
-}]
-}
-tracks/3/type = "method"
-tracks/3/imported = false
-tracks/3/enabled = true
-tracks/3/path = NodePath("../../StateMachine/GroundStates/Land")
-tracks/3/interp = 1
-tracks/3/loop_wrap = true
-tracks/3/keys = {
 "times": PackedFloat32Array(0.42),
 "transitions": PackedFloat32Array(1),
 "values": [{
@@ -1084,20 +1055,6 @@ tracks/1/keys = {
 "transitions": PackedFloat32Array(1, 1),
 "update": 1,
 "values": [Vector2(15, 3), Vector2(12, 6)]
-}
-tracks/2/type = "method"
-tracks/2/imported = false
-tracks/2/enabled = false
-tracks/2/path = NodePath("../../PlayerEffects")
-tracks/2/interp = 1
-tracks/2/loop_wrap = true
-tracks/2/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"values": [{
-"args": [],
-"method": &"cloud_start"
-}]
 }
 
 [sub_resource type="Animation" id="61"]
@@ -1171,20 +1128,6 @@ tracks/1/keys = {
 "transitions": PackedFloat32Array(1, 1, 1, 1, 1),
 "update": 1,
 "values": [Vector2(9, 12), Vector2(9, 11), Vector2(10, 13), Vector2(10, 12), Vector2(9, 12)]
-}
-tracks/2/type = "method"
-tracks/2/imported = false
-tracks/2/enabled = true
-tracks/2/path = NodePath("../../PlayerEffects")
-tracks/2/interp = 1
-tracks/2/loop_wrap = true
-tracks/2/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"values": [{
-"args": [],
-"method": &"cloud_start"
-}]
 }
 
 [sub_resource type="Animation" id="33"]
@@ -1342,6 +1285,51 @@ base_speed = Vector2(0, 0)
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_qctp2"]
 height = 64.0
 
+[sub_resource type="CanvasItemMaterial" id="48"]
+particles_animation = true
+particles_anim_h_frames = 4
+particles_anim_v_frames = 1
+particles_anim_loop = false
+
+[sub_resource type="CanvasItemMaterial" id="51"]
+particles_animation = true
+particles_anim_h_frames = 10
+particles_anim_v_frames = 1
+particles_anim_loop = true
+
+[sub_resource type="Gradient" id="52"]
+offsets = PackedFloat32Array(0, 0.55, 1)
+colors = PackedColorArray(1, 1, 1, 0.913725, 0.90625, 0.90625, 0.90625, 0.745098, 1, 1, 1, 0)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_gkqo0"]
+gradient = SubResource("52")
+width = 20
+
+[sub_resource type="ParticleProcessMaterial" id="54"]
+lifetime_randomness = 0.39
+emission_shape_scale = Vector3(1, 1, 0)
+emission_shape = 3
+emission_box_extents = Vector3(24, 4, 1)
+angle_max = 720.0
+direction = Vector3(0, 1, 0)
+spread = 180.0
+angular_velocity_min = -720.0
+gravity = Vector3(0, -40, 0)
+linear_accel_min = 29.31
+linear_accel_max = 46.55
+radial_accel_min = 8.62
+radial_accel_max = 24.13
+color_ramp = SubResource("GradientTexture2D_gkqo0")
+anim_speed_min = 0.86
+anim_speed_max = 1.1
+
+[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_je7vb"]
+resource_local_to_scene = true
+particles_animation = true
+particles_anim_h_frames = 6
+particles_anim_v_frames = 1
+particles_anim_loop = true
+
 [sub_resource type="Resource" id="Resource_neovj"]
 script = ExtResource("22_bni2i")
 friction = 0.05
@@ -1378,51 +1366,6 @@ base_force = 1.0
 base_accel = 1.0
 base_speed = 1.0
 
-[sub_resource type="CanvasItemMaterial" id="48"]
-particles_animation = true
-particles_anim_h_frames = 4
-particles_anim_v_frames = 1
-particles_anim_loop = false
-
-[sub_resource type="Gradient" id="49"]
-offsets = PackedFloat32Array(0.00858369, 0.424893, 0.824034, 1)
-colors = PackedColorArray(0, 0, 0, 0, 0.582031, 0.316025, 0.316025, 1, 1, 0.803528, 0.660156, 1, 2, 1, 2, 1)
-
-[sub_resource type="Curve" id="50"]
-_data = [Vector2(0, 1), 0.0, -1.46686, 0, 0, Vector2(1, 0.481818), 0.95065, 0.0, 0, 0]
-point_count = 2
-
-[sub_resource type="CanvasItemMaterial" id="51"]
-particles_animation = true
-particles_anim_h_frames = 10
-particles_anim_v_frames = 1
-particles_anim_loop = true
-
-[sub_resource type="Gradient" id="52"]
-offsets = PackedFloat32Array(0, 0.55, 1)
-colors = PackedColorArray(1, 1, 1, 0.913725, 0.90625, 0.90625, 0.90625, 0.745098, 1, 1, 1, 0)
-
-[sub_resource type="GradientTexture2D" id="53"]
-gradient = SubResource("52")
-width = 20
-
-[sub_resource type="ParticleProcessMaterial" id="54"]
-emission_shape = 2
-emission_sphere_radius = 1.0
-direction = Vector3(0, 1, 0)
-spread = 180.0
-gravity = Vector3(0, -40, 0)
-color_ramp = SubResource("53")
-
-[sub_resource type="CompressedTexture2D" id="55"]
-
-[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_je7vb"]
-resource_local_to_scene = true
-particles_animation = true
-particles_anim_h_frames = 6
-particles_anim_v_frames = 1
-particles_anim_loop = true
-
 [sub_resource type="CapsuleShape2D" id="58"]
 radius = 5.0
 height = 42.0
@@ -1440,6 +1383,7 @@ label_state = NodePath("UI/DebugInterface/HBoxContainer/LabelState")
 label_velocity = NodePath("UI/DebugInterface/HBoxContainer/LabelVelocity")
 
 [node name="Collision" type="CollisionShape2D" parent="."]
+visible = false
 position = Vector2(0, 3.5)
 shape = SubResource("RectangleShape2D_0vsxb")
 
@@ -1637,6 +1581,7 @@ rotation = 0.523599
 scale = Vector2(0.3, 0.3)
 
 [node name="AmbientHandler" type="Node2D" parent="Flipper"]
+visible = false
 script = ExtResource("16_tgr41")
 ambient_data_floor = SubResource("Resource_cq5vr")
 ambient_data_air = SubResource("Resource_y4wjx")
@@ -1653,6 +1598,42 @@ character = NodePath("../..")
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Flipper/BelongHandler"]
 shape = SubResource("CapsuleShape2D_qctp2")
 debug_color = Color(0.682353, 0.356863, 1, 0.419608)
+
+[node name="EffectHandler" type="Node2D" parent="Flipper" node_paths=PackedStringArray("player")]
+position = Vector2(0, 32)
+script = ExtResource("19_kc1o0")
+player = NodePath("../..")
+
+[node name="DustParticle" parent="Flipper/EffectHandler" instance=ExtResource("31_45wht")]
+modulate = Color(0.85098, 0.85098, 0.85098, 1)
+material = SubResource("48")
+amount = 9
+lifetime = 0.4
+explosiveness = 0.67
+randomness = 0.24
+lifetime_randomness = 0.3
+texture = ExtResource("32_qmg4m")
+emission_shape = 1
+emission_sphere_radius = 4.0
+gravity = Vector2(0, 2)
+initial_velocity_max = 7.57
+radial_accel_min = 7.94
+radial_accel_max = 38.09
+
+[node name="GhostHandler" parent="Flipper/EffectHandler" instance=ExtResource("33_v1led")]
+position = Vector2(0, -32)
+
+[node name="CloudParticles" parent="Flipper/EffectHandler" instance=ExtResource("36_iawlq")]
+z_index = -1
+material = SubResource("51")
+amount_ratio = 0.6515
+process_material = SubResource("54")
+lifetime = 0.65
+explosiveness = 0.6
+randomness = 0.33
+
+[node name="GrindParticles" parent="Flipper/EffectHandler" instance=ExtResource("37_3xxkx")]
+material = SubResource("CanvasItemMaterial_je7vb")
 
 [node name="StateMachine" type="Node" parent="." node_paths=PackedStringArray("status_logic", "init_state")]
 script = ExtResource("8_sco1u")
@@ -1906,44 +1887,6 @@ player = NodePath("../../..")
 logic = NodePath("../../StatusLogic")
 ball_handler = NodePath("../../../Flipper/BallHandler")
 
-[node name="PlayerEffects" type="Node2D" parent="."]
-metadata/_edit_lock_ = true
-metadata/_edit_group_ = true
-
-[node name="DustParticle" parent="PlayerEffects" instance=ExtResource("31_45wht")]
-modulate = Color(0.85098, 0.85098, 0.85098, 1)
-material = SubResource("48")
-position = Vector2(0, 28)
-amount = 9
-lifetime = 0.4
-explosiveness = 0.67
-randomness = 0.24
-lifetime_randomness = 0.3
-texture = ExtResource("32_qmg4m")
-gravity = Vector2(0, 2)
-
-[node name="GhostHandler" parent="PlayerEffects" instance=ExtResource("33_v1led")]
-
-[node name="TrailHandler" parent="PlayerEffects" instance=ExtResource("34_qh28p")]
-wildness = 50.0
-gradient_col = SubResource("49")
-width_curve = SubResource("50")
-texture = ExtResource("35_uq32a")
-
-[node name="CloudParticles" parent="PlayerEffects" instance=ExtResource("36_iawlq")]
-z_index = -1
-material = SubResource("51")
-position = Vector2(0, 32)
-amount = 4
-process_material = SubResource("54")
-texture = SubResource("55")
-lifetime = 0.65
-explosiveness = 0.9
-
-[node name="GrindParticles" parent="PlayerEffects" instance=ExtResource("37_3xxkx")]
-material = SubResource("CanvasItemMaterial_je7vb")
-position = Vector2(0, 16)
-
 [node name="UI" type="CanvasLayer" parent="."]
 layer = 10
 
@@ -2043,6 +1986,7 @@ horizontal_alignment = 2
 [node name="Combos" type="Node" parent="."]
 
 [node name="LifeHandler" type="Node2D" parent="."]
+visible = false
 script = ExtResource("45_031g1")
 
 [node name="HitBox" type="Area2D" parent="LifeHandler"]

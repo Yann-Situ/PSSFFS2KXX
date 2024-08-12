@@ -11,6 +11,7 @@ var impact_scenes = [\
 	preload("res://src/Effects/Impacts/ImpactBounce.tscn"),\
 	preload("res://src/Effects/Impacts/ImpactCircles.tscn")
 	]
+var puff_scene = preload("res://src/Effects/PuffParticles.tscn")
 
 var tween_pause : Tween
 
@@ -44,6 +45,14 @@ func make_impact(global_position : Vector2, impact_type : IMPACT_TYPE = IMPACT_T
 	Global.get_current_room().add_child(impact)
 	impact.global_position = global_position
 	impact.start(normal)
+
+func make_puff(global_position : Vector2, amount : int = 6, length : float = 20.0):
+	var puff : GPUParticles2D = puff_scene.instantiate()
+	Global.get_current_room().add_child(puff)
+	puff.global_position = global_position
+	puff.amount = amount
+	puff.process_material.emission_box_extents.x = length
+	puff.start()
 
 func make_explosion(global_position : Vector2, explosion_data : ExplosionData):
 	var explosion = Explosion.new()

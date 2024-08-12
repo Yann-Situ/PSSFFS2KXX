@@ -1733,9 +1733,8 @@ libraries = {
 
 [node name="AnimationTree" type="AnimationTree" parent="Sprite2D"]
 tree_root = SubResource("39")
-anim_player = NodePath("../Player_Animation")
 advance_expression_base_node = NodePath("../../State")
-active = true
+anim_player = NodePath("../Player_Animation")
 parameters/cancelable/stance/grind/blend_position = 0
 parameters/cancelable/stance/stancetransition/current_state = ""
 parameters/cancelable/stance/stancetransition/transition_request = "air"

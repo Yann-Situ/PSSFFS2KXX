@@ -43,6 +43,9 @@ func enter(previous_state : State = null) -> State:
 
 #	var timer = get_tree().create_timer(0.5) # TODO remove for animation handling
 #	timer.timeout.connect(self.on_land_finished)
+	
+	# effects
+	player.effect_handler.cloud_start()
 
 	return next_state
 

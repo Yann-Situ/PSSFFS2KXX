@@ -20,7 +20,6 @@ class_name NewPlayer
 @onready var S : PlayerStatusLogic = get_node("StateMachine/StatusLogic")
 @onready var state_machine = get_node("StateMachine")
 @onready var collision = get_node("Collision")
-@onready var player_effects = get_node("PlayerEffects")
 @onready var Camera = get_node("Camera")
 
 @onready var ball_handler = get_node("Flipper/BallHandler")
@@ -35,6 +34,7 @@ class_name NewPlayer
 @onready var life_bar = get_node("UI/MarginContainer/HBoxContainer/VBoxContainer/Bar")
 @onready var sprite = get_node("Flipper/Sprite2D")
 @onready var flipper = get_node("Flipper")
+@onready var effect_handler = get_node("Flipper/EffectHandler")
 
 ################################################################################
 

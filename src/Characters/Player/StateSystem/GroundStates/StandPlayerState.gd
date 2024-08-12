@@ -37,6 +37,7 @@ func animation_process() -> void:
 	set_variation(0) # ["idle"]
 	if logic.direction_sprite_change.ing:
 		set_variation(3) # ["turn"]
+		player.effect_handler.dust_start()
 	elif logic.side.ing :
 		if (logic.direction_pressed.x == 0):
 			set_variation(2) # ["standstop"]

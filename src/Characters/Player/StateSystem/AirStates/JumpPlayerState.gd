@@ -71,9 +71,10 @@ func enter(previous_state : State = null) -> State:
 		print("  | enter cancelled jump")
 		up_cancelled = true
 
-	# TODO
-	#player.PlayerEffects.dust_start()
-	#player.PlayerEffects.jump_start()
+	# effects
+	player.effect_handler.dust_start()
+	GlobalEffect.make_impact(player.effect_handler.global_position, \
+		GlobalEffect.IMPACT_TYPE.JUMP1, Vector2.UP)
 
 	return next_state
 

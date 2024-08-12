@@ -168,7 +168,7 @@ tracks/0/path = NodePath("Visuals/Reconstruction")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
-"times": PackedFloat32Array(0.4),
+"times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "values": [{
 "args": [],
@@ -182,7 +182,7 @@ tracks/1/path = NodePath("Visuals/Reconstruction:emitting")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
-"times": PackedFloat32Array(0.4),
+"times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 1,
 "values": [true]
@@ -194,7 +194,7 @@ tracks/2/path = NodePath("Visuals/DunkParticles")
 tracks/2/interp = 1
 tracks/2/loop_wrap = true
 tracks/2/keys = {
-"times": PackedFloat32Array(0.35),
+"times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "values": [{
 "args": [],
@@ -208,7 +208,7 @@ tracks/3/path = NodePath("Visuals/DunkParticles:emitting")
 tracks/3/interp = 1
 tracks/3/loop_wrap = true
 tracks/3/keys = {
-"times": PackedFloat32Array(0.35),
+"times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 1,
 "values": [true]
@@ -220,10 +220,10 @@ tracks/4/path = NodePath("Visuals:modulate")
 tracks/4/interp = 1
 tracks/4/loop_wrap = true
 tracks/4/keys = {
-"times": PackedFloat32Array(0, 0.3, 0.5, 1.25, 1.5),
-"transitions": PackedFloat32Array(1, 1, 1, 1, 1),
+"times": PackedFloat32Array(0, 0.25, 1, 1.25),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
 "update": 0,
-"values": [Color(1, 1, 1, 1), Color(1, 1, 1, 1), Color(1, 1, 1, 0), Color(1, 1, 1, 0), Color(1, 1, 1, 1)]
+"values": [Color(1, 1, 1, 1), Color(1, 1, 1, 0), Color(1, 1, 1, 0), Color(1, 1, 1, 1)]
 }
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_mtq5y"]
@@ -314,7 +314,6 @@ dust_threshold = 15.0
 impact_threshold = 35.0
 
 [node name="Visuals" parent="." index="0"]
-modulate = Color(1.5, 1.5, 1.5, 1)
 material = SubResource("ShaderMaterial_fa8v6")
 texture = ExtResource("2")
 hframes = 4
@@ -345,10 +344,10 @@ visible = false
 shape = SubResource("CircleShape2D_gwi7s")
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="." index="5"]
-autoplay = "idle"
 libraries = {
 "": SubResource("AnimationLibrary_lctft")
 }
+autoplay = "idle"
 
 [node name="Timer" type="Timer" parent="." index="6"]
 one_shot = true
