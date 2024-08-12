@@ -3,12 +3,12 @@
 extends Path2D
 class_name HolderLine
 
-@export var character_holder : CharacterHolder
 @export var invert_line_direction : bool = false
 @onready var segment_collision_offset = Vector2(0.0,0.0)
 @export_group("Character parameters", "character_")
 @export var character_offset : Vector2 = Vector2(0.0, 0.0)
 @export var character_cant_get_in_again_delay : float = 0.2#s
+@onready var character_holder : CharacterHolder = get_node("CharacterHolder")
 
 const tolerance_annoying_case = 4.0
 

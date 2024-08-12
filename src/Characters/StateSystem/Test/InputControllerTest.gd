@@ -16,3 +16,6 @@ func update_triggers():
 	left.set_from_input_action('ui_left')
 	right.set_from_input_action('ui_right')
 	accept.set_from_input_action('ui_accept')
+	power.set_from_input_action('ui_power')
+	release.set_from_input_action('ui_release')
+	interact.set_from_input_action('ui_interact')

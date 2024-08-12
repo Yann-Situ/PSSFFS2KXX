@@ -51,7 +51,7 @@ var down : Trigger = Trigger.new("down") #
 var left : Trigger = Trigger.new("left") #
 var right : Trigger = Trigger.new("right") #
 var accept : Trigger = Trigger.new("accept") #
-var power_t : Trigger = Trigger.new("power") #
+var key_power : Trigger = Trigger.new("power") #
 var key_release : Trigger = Trigger.new("release") #
 
 var direction_pressed : Vector2 = Vector2.ZERO
@@ -104,7 +104,7 @@ func _ready():
 	left = input_controller.left
 	right = input_controller.right
 	accept = input_controller.accept
-	power_t = input_controller.power
+	key_power = input_controller.power
 	key_release = input_controller.release
 
 	stand.can = true
