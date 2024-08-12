@@ -194,11 +194,22 @@ func apply_damage(damage : float, duration : float = 0.0):
 func power_p(player,delta):
 	if holder == Global.get_current_room() :
 		attract_alterer.set_value(attract_force*(player.global_position - global_position).normalized())
+func power_p_hold(player,delta):
+	power_p(player,delta)
+
+func power_p_physics(player,delta):
+	pass
+func power_p_physics_hold(player,delta):
+	power_p_physics(player,delta)
 
 func power_jp(player,delta):
 	if holder == Global.get_current_room() :
 		add_force(attract_alterer)
+func power_jp_hold(player,delta):
+	power_jp(player,delta)
 
 func power_jr(player,delta):
 	if has_force(attract_alterer) :
 		remove_force(attract_alterer)
+func power_jr_hold(player,delta):
+	power_jr(player,delta)

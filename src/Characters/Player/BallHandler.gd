@@ -23,6 +23,8 @@ func has_ball() -> bool:
 	return held_ball != null and held_ball is Ball
 func has_selected_ball() -> bool:
 	return selected_ball != null and selected_ball is Ball
+func has_ball_and_is_selected():
+	return has_ball() and selected_ball == held_ball
 
 func _on_Ball_Handler_body_entered(body):
 	#print(body.name+" entering "+Player.name+" ballhandler area")
