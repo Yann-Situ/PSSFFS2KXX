@@ -85,7 +85,7 @@ func pickup_ball(ball : Ball):
 		P.set_collision_mask_value(10, true) #ball_wall collision layer
 	P.collision_mask_save |= 1<<10 # same as set_collision_mask_value(10,true)
 	ball.pickup(P)
-	ball.select(P)
+	ball.select(P) # will then deselect the current ball by calling P.deselect_ball which calls self.deselect_ball
 
 func free_ball(ball : Ball): # set out  active_ball and has_ball
 	# called by ball when thrown or deleted
@@ -105,18 +105,20 @@ func free_ball(ball : Ball): # set out  active_ball and has_ball
 
 
 func throw_ball(throw_global_position : Vector2, speed : Vector2):
-	if has_ball():
-		print("throw "+held_ball.name)
-		released_ball = held_ball
-		held_ball.get_node("Visuals").position = Vector2.ZERO
-		held_ball.throw(throw_global_position, speed) # will call free_ball
+	if !has_ball():
+		printerr("throw_ball but ball_handler.has_ball() is false")
+		return
+	print("throw "+held_ball.name)
+	released_ball = held_ball
+	held_ball.get_node("Visuals").position = Vector2.ZERO
+	held_ball.throw(throw_global_position, speed) # will call free_ball
 
-		var tween = get_tree().create_tween()
-		tween.tween_interval(released_ball_delay)
-		tween.tween_callback(self._set_released_ball_null)
-		# Ugly old alternative:
-		# await get_tree().create_timer(released_ball_delay).timeout
-		# released_ball = null
+	var tween = get_tree().create_tween()
+	tween.tween_interval(released_ball_delay)
+	tween.tween_callback(self._set_released_ball_null)
+	# Ugly old alternative:
+	# await get_tree().create_timer(released_ball_delay).timeout
+	# released_ball = null
 func _set_released_ball_null():
 	released_ball = null
 
@@ -125,7 +127,7 @@ func shoot_ball(): # called by animation
 
 ####################################################################################################
 
-func select_ball(ball : Ball): # called by ball.select(P)
+func select_ball(ball : Ball): # called by player.select_ball, which is called by ball.select(P)
 	if selected_ball != null and selected_ball != ball:
 			selected_ball.deselect(P)
 	selected_ball = ball
@@ -143,10 +145,8 @@ func select_ball(ball : Ball): # called by ball.select(P)
 		# ball_label.newline()
 		# ball_label.add_text("Ball posit : "+str(ball.position - P.position))
 
-func deselect_ball(ball : Ball): # called by ball.deselect(P)
+func deselect_ball(ball : Ball): # called by player.deselect_ball, which is called by ball.deselect(P)
 	assert(selected_ball != null)
-	if P.S.power_p: # Ugly to look for P.S.power_p TODO
-		selected_ball.power_jr(P,0.0)
 	selected_ball = null
 
 	#TEMPORARY CONTROL NODE

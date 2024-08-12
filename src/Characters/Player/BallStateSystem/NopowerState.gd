@@ -12,13 +12,16 @@ func process(delta) -> State:
 	return self
 
 func physics_process(delta) -> State:
+	if logic.release.can and logic.key_release.pressed:
+		release_ball()
+	#print("nopower " + str(ball_handler.has_selected_ball()) + " " + str(ball_handler.has_ball()) + " " + str(logic.key_release.pressed))
 	var next_state = branch()
 	if next_state != self:
 		return next_state
 	return self
 
 func branch() -> State:
-	if logic.power.can and logic.power.pressed and ball_handler.has_selected_ball():
+	if logic.power.can and logic.key_power.pressed and ball_handler.has_selected_ball():
 		return power_state
 	return self
 

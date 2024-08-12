@@ -25,6 +25,9 @@ func process(delta) -> State:
 ## Called by the parent StateMachine during the _physics_process call, after
 ## the StatusLogic process call.
 func physics_process(delta) -> State:
+	if logic.release.can and logic.key_release.pressed:
+		release_ball()
+
 	var next_state = branch()
 	if next_state != self:
 		return next_state
@@ -36,20 +39,21 @@ func physics_process(delta) -> State:
 	return self
 
 func branch() -> State:
-	if !logic.power.can or !logic.power.pressed or\
+	if !logic.power.can or !logic.key_power.pressed or\
 			!ball_handler.has_selected_ball() or\
 			ball_at_enter != ball_handler.selected_ball:
 		return nopower_state
 	return self
 
 func enter(previous_state : State = null) -> State:
-	ball_at_enter == ball_handler.selected_ball # might be null
+	ball_at_enter = ball_handler.selected_ball # might be null
 	var next_state = branch()
 	if next_state != self:
 		return next_state
 	print("                "+self.name)
 
 	assert(ball_at_enter != null)
+	#print(ball_at_enter.name + "jp")
 	if ball_handler.has_ball_and_is_selected():
 		ball_at_enter.power_jp_hold(player, 0.0)
 	else:
@@ -59,8 +63,9 @@ func enter(previous_state : State = null) -> State:
 
 func exit():
 	if ball_at_enter == null:
-		printerr("ball_at_enter is null at exit()")
+		push_error("ball_at_enter is null at exit()")
 		return
+	#print(ball_at_enter.name + "jr")
 	if ball_handler.has_ball_and_is_selected():
 		ball_at_enter.power_jr_hold(player, 0.0)
 	else:

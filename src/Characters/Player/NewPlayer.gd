@@ -21,7 +21,7 @@ class_name NewPlayer
 @onready var state_machine = get_node("StateMachine")
 @onready var collision = get_node("Collision")
 @onready var player_effects = get_node("PlayerEffects")
-@onready var camera = get_node("Camera")
+@onready var Camera = get_node("Camera")
 
 @onready var ball_handler = get_node("Flipper/BallHandler")
 @onready var shoot_handler = get_node("Flipper/ShootHandler")
@@ -57,7 +57,7 @@ func _ready():
 	if !Global.playing:
 		Global.toggle_playing()
 	# movement.accel_alterable.add_alterer(Global.gravity_alterer)
-	Global.camera = camera
+	Global.camera = Camera
 
 	set_up_direction(Vector2.UP)
 	set_floor_stop_on_slope_enabled(true)
@@ -132,7 +132,7 @@ func update_camera() -> void:
 	if S.aim.ing:
 		pass
 #		var shoot = Vector2.ZERO
-#		var target = (camera.get_global_mouse_position() - global_position)
+#		var target = (Camera.get_global_mouse_position() - global_position)
 #		shoot_handler.update_target(target)
 #		if shoot_handler.can_shoot_to_target():
 #			shoot_handler.update_effective_can_shoot(0.0,0)
@@ -143,17 +143,17 @@ func update_camera() -> void:
 #
 #		shoot_predictor.draw_prediction(Vector2.ZERO, shoot,
 #			(shoot_handler.global_gravity_scale_TODO*Global.default_gravity.y)*Vector2.DOWN)
-#		camera.set_offset_from_aim(target)
+#		Camera.set_offset_from_aim(target)
 #		if shoot.x > 0 :
 #			S.aim_direction = 1
 #		else :
 #			S.aim_direction = -1
 	elif S.crouch.ing :
-		camera.set_offset_x_from_velocity(movement.velocity.x, 0.4)
-		camera.set_offset_y_from_crouch(0.2)
+		Camera.set_offset_x_from_velocity(movement.velocity.x, 0.4)
+		Camera.set_offset_y_from_crouch(0.2)
 	else :
-		camera.set_offset_x_from_velocity(movement.velocity.x, 0.4)
-		camera.set_offset_y_from_velocity(movement.velocity.y, 0.4)
+		Camera.set_offset_x_from_velocity(movement.velocity.x, 0.4)
+		Camera.set_offset_y_from_velocity(movement.velocity.y, 0.4)
 
 ## update the SelectorTargets depending on S and using the selectables from selectable_handler.
 ## should be called in _process()

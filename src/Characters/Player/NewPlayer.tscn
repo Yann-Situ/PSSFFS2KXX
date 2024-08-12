@@ -1,4 +1,4 @@
-[gd_scene load_steps=115 format=3 uid="uid://dlfptvxh6yjwm"]
+[gd_scene load_steps=117 format=3 uid="uid://dlfptvxh6yjwm"]
 
 [ext_resource type="Script" path="res://src/Characters/Player/NewPlayer.gd" id="1_b7wqc"]
 [ext_resource type="Script" path="res://src/Characters/Player/MovementData.gd" id="2_0ukhp"]
@@ -43,7 +43,9 @@
 [ext_resource type="PackedScene" uid="uid://bhw3riwbqaxpk" path="res://src/Effects/DustParticle1.tscn" id="36_iawlq"]
 [ext_resource type="PackedScene" uid="uid://br3tr8mssgqev" path="res://src/Effects/GrindParticles.tscn" id="37_3xxkx"]
 [ext_resource type="Script" path="res://src/Player/Camera.gd" id="38_244q6"]
+[ext_resource type="Script" path="res://src/Characters/Player/BallStateSystem/PowerState.gd" id="38_k30y4"]
 [ext_resource type="Script" path="res://src/Characters/GUI/LifeBar.gd" id="39_4v41g"]
+[ext_resource type="Script" path="res://src/Characters/Player/BallStateSystem/NopowerState.gd" id="39_hb04j"]
 [ext_resource type="Texture2D" uid="uid://0bfw4lu2js4b" path="res://assets/art/gui/life_bar_bg.png" id="40_acvag"]
 [ext_resource type="Texture2D" uid="uid://scghoxayo4du" path="res://assets/art/gui/life_bar_fill.png" id="41_1ojdj"]
 [ext_resource type="Texture2D" uid="uid://c40av4lxtnfbo" path="res://assets/art/gui/ball_info_bg.png" id="42_xmomu"]
@@ -1641,6 +1643,7 @@ ambient_data_air = SubResource("Resource_y4wjx")
 ambient_data_wall = SubResource("Resource_aiv1j")
 
 [node name="BelongHandler" type="Area2D" parent="Flipper" node_paths=PackedStringArray("character")]
+visible = false
 collision_layer = 4096
 collision_mask = 0
 monitoring = false
@@ -1883,6 +1886,25 @@ jump_state = NodePath("../../AirStates/Jump")
 player = NodePath("../../..")
 logic = NodePath("../../StatusLogic")
 animation_player = NodePath("../../../Flipper/Sprite2D/PlayerAnimation")
+
+[node name="BallStateMachine" type="Node" parent="StateMachine" node_paths=PackedStringArray("status_logic", "init_state")]
+script = ExtResource("8_sco1u")
+status_logic = NodePath("../StatusLogic")
+init_state = NodePath("Nopower")
+
+[node name="Power" type="Node" parent="StateMachine/BallStateMachine" node_paths=PackedStringArray("nopower_state", "player", "logic", "ball_handler")]
+script = ExtResource("38_k30y4")
+nopower_state = NodePath("../Nopower")
+player = NodePath("../../..")
+logic = NodePath("../../StatusLogic")
+ball_handler = NodePath("../../../Flipper/BallHandler")
+
+[node name="Nopower" type="Node" parent="StateMachine/BallStateMachine" node_paths=PackedStringArray("power_state", "player", "logic", "ball_handler")]
+script = ExtResource("39_hb04j")
+power_state = NodePath("../Power")
+player = NodePath("../../..")
+logic = NodePath("../../StatusLogic")
+ball_handler = NodePath("../../../Flipper/BallHandler")
 
 [node name="PlayerEffects" type="Node2D" parent="."]
 metadata/_edit_lock_ = true

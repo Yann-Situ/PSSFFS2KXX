@@ -25,3 +25,7 @@ func enter(previous_state : State = null) -> State:
 
 func exit():
 	pass
+
+func release_ball():
+	ball_handler.throw_ball(player.global_position, Vector2.ZERO)
+	print("                release ball")
