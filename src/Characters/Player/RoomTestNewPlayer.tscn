@@ -1,4 +1,4 @@
-[gd_scene load_steps=17 format=3 uid="uid://eq50gyc1bs85"]
+[gd_scene load_steps=19 format=3 uid="uid://eq50gyc1bs85"]
 
 [ext_resource type="PackedScene" uid="uid://b5emf4je4tnag" path="res://src/Levels/Room2D.tscn" id="1_6to1r"]
 [ext_resource type="PackedScene" uid="uid://rmukvjwyiahu" path="res://src/Items/Interactive/DashTarget.tscn" id="2_x00i2"]
@@ -8,6 +8,8 @@
 [ext_resource type="PackedScene" uid="uid://bcnnkalot4kb0" path="res://src/Items/Dynamics/Jumper.tscn" id="6_tb8pt"]
 [ext_resource type="PackedScene" uid="uid://babjtotux2mv3" path="res://src/Map/MovingPlatform.tscn" id="7_ddpj5"]
 [ext_resource type="PackedScene" uid="uid://cxn2m3havcmil" path="res://src/Items/Balls/Ball.tscn" id="8_huh8k"]
+[ext_resource type="PackedScene" uid="uid://cd2wyj207og8s" path="res://src/Items/Balls/BallDash.tscn" id="9_8da21"]
+[ext_resource type="PackedScene" uid="uid://27jkgoi43hoq" path="res://src/Items/Balls/BallShock.tscn" id="10_i18ti"]
 
 [sub_resource type="Gradient" id="Gradient_wwss0"]
 resource_local_to_scene = true
@@ -177,3 +179,9 @@ position = Vector2(-1400, 192)
 
 [node name="Ball2" parent="Environment" index="21" instance=ExtResource("8_huh8k")]
 position = Vector2(-1088, 192)
+
+[node name="BallDash" parent="." index="9" instance=ExtResource("9_8da21")]
+position = Vector2(-612, 251)
+
+[node name="BallShock" parent="." index="10" instance=ExtResource("10_i18ti")]
+position = Vector2(444, 295)

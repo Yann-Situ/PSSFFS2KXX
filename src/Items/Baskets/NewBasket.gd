@@ -8,7 +8,7 @@ signal is_goaled
 @export var speed_ball_threshold = 380 ## speed threshold for power goal
 @export var character_offset : Vector2 = Vector2(0.0, 0.0) ## character offset for hanging
 @export var dunk_position_offset = 16 * Vector2.DOWN ## offset for the dunk position (different from hanging position)
-@export var dunk_position_radius = 24 ## maximum horizontal radius for dunk position
+@export var dunk_position_radius = 20 ## maximum horizontal radius for dunk position
 #@export var hang_position_offset_y = 16 ## vertical offset for hanging # TODO
 
 @export_group("cooldowns")

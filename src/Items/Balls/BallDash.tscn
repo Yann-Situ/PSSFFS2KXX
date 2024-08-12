@@ -260,6 +260,7 @@ script = ExtResource("4")
 parent_node = NodePath("..")
 is_shoot_selectable = false
 is_jump_selectable = false
+is_dunk_selectable = false
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="DashArea" index="0"]
 shape = SubResource("7")
