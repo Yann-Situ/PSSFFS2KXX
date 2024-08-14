@@ -69,6 +69,7 @@ physics_material_override = SubResource("PhysicsMaterial_kiy7j")
 script = ExtResource("7")
 enabled = false
 impact_effect = 5
+metadata/_edit_group_ = true
 
 [node name="Visuals" parent="." index="0"]
 material = SubResource("ShaderMaterial_00eub")

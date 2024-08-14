@@ -24,11 +24,24 @@ func on_dunk(basket : Node = null):
 	$Animation.play("dunk")
 	$AnimationPlayer.play("flash_light")
 
+################################################################################
+
 func power_p(player,delta):
+	pass
+func power_p_hold(player,delta):
+	pass
+
+func power_p_physics(player,delta):
+	pass
+func power_p_physics_hold(player,delta):
 	pass
 
 func power_jp(player,delta):
 	set_enabled(!enabled)
+func power_jp_hold(player,delta):
+	power_jp(player,delta)
 
 func power_jr(player,delta):
+	pass
+func power_jr_hold(player,delta):
 	pass

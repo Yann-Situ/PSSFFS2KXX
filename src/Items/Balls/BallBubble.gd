@@ -26,29 +26,6 @@ func make_electric_trail():
 	# Warning: We're not calling $Visuals.add_child(trail_instance) because
 	# the ball can be reparented during the tween of the trail, which
 	# results in canceling the tween. (see https://www.reddit.com/r/godot/comments/vjkaun/reparenting_node_without_removing_it_from_tree/)
-	
-
-func power_p(player,delta):
-	pass
-
-func power_jp(player,delta):
-	if holder != player :
-		disable_physics()
-		var tween = self.create_tween() # problems when the ball is not in scenetree
-		tween.tween_method(self.tween_follow_property.bind(global_position,player),\
-		0.0, 1.0, 0.16)
-		tween.tween_callback(self._on_tween_completed)
-		# tween.start()
-		
-		throw(global_position, Vector2.ZERO)
-		$Animation.play("teleport")
-	else :
-		#player.position.y -= 100
-		player.time_scale = 0.5
-
-func power_jr(player,delta):
-	pass
-	player.time_scale = 1.0
 
 func tween_follow_property(t : float, src_pos : Vector2, trg : Node2D) -> void:
 	self.global_position = src_pos.lerp(trg.global_position,t)
@@ -63,3 +40,33 @@ func on_throw(previous_holder : Node):
 func on_dunkdash_start(player: Player):
 	make_electric_trail()
 	make_electric_trail()
+
+################################################################################
+
+func power_p(player,delta):
+	pass
+func power_p_hold(player,delta):
+	pass
+
+func power_p_physics(player,delta):
+	pass
+func power_p_physics_hold(player,delta):
+	pass
+
+func power_jp(player,delta):
+	disable_physics()
+	var tween = self.create_tween() # problems when the ball is not in scenetree
+	tween.tween_method(self.tween_follow_property.bind(global_position,player),\
+	0.0, 1.0, 0.16)
+	tween.tween_callback(self._on_tween_completed)
+	# tween.start()
+	
+	throw(global_position, Vector2.ZERO)
+	$Animation.play("teleport")
+func power_jp_hold(player,delta):
+	make_electric_trail()
+
+func power_jr(player,delta):
+	pass
+func power_jr_hold(player,delta):
+	pass

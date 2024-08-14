@@ -40,22 +40,10 @@ func boum(use_min_explosion : bool, boum_global_position : Vector2):
 		GlobalEffect.make_explosion(boum_global_position, max_explosion_data)
 	return true
 
-func power_p(player,delta):
-	pass
-
-func power_jp(player,delta):
-	if holder == player:
-		boum(false, player.global_position)
-	else :
-		boum(true, self.global_position)
-
-func power_jr(player,delta):
-	pass
-
-func on_dunkdash_start(player: Player):
+func on_dunkdash_start(player):
 	$BoumParticles.global_position = player.global_position
 	$BoumParticles.restart()
-	player.add_impulse(impulse_dash_boum*player.S.velocity.normalized())
+	player.add_impulse(impulse_dash_boum*player.movement.velocity.normalized())
 
 func on_destruction(): # call before changing holder, disable_physics and deleting selectors
 	boum(true, self.global_position)
@@ -63,3 +51,25 @@ func on_destruction(): # call before changing holder, disable_physics and deleti
 func _on_impulse(impulse : Vector2):
 	if impulse.length() > speed_threshold*invmass:
 		boum(true, self.global_position)
+
+################################################################################
+
+func power_p(player,delta):
+	pass
+func power_p_hold(player,delta):
+	pass
+
+func power_p_physics(player,delta):
+	pass
+func power_p_physics_hold(player,delta):
+	pass
+
+func power_jp(player,delta):
+	boum(true, self.global_position)
+func power_jp_hold(player,delta):
+	boum(false, player.global_position)
+
+func power_jr(player,delta):
+	pass
+func power_jr_hold(player,delta):
+	pass

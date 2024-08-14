@@ -25,7 +25,7 @@ func process(delta) -> State:
 ## Called by the parent StateMachine during the _physics_process call, after
 ## the StatusLogic process call.
 func physics_process(delta) -> State:
-	if logic.release.can and logic.key_release.pressed:
+	if logic.release.can and logic.key_release.just_pressed:
 		release_ball()
 
 	var next_state = branch()

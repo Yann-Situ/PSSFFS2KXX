@@ -27,5 +27,5 @@ func exit():
 	pass
 
 func release_ball():
-	ball_handler.throw_ball(player.global_position, Vector2.ZERO)
-	print("                release ball")
+	if ball_handler.throw_ball(player.global_position, Vector2.ZERO):
+		print("                release ball")

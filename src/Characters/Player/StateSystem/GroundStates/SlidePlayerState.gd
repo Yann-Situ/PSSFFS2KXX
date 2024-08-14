@@ -52,6 +52,7 @@ func enter(previous_state : State = null) -> State:
 	play_animation()
 	print(self.name)
 	logic.slide.ing = true
+	logic.crouch.ing = true
 	# timer = self.get_tree().create_timer(2.0)
 	timer.start()
 	# change hitbox
@@ -92,3 +93,4 @@ func exit():
 	if timer:
 		timer.stop()
 	logic.slide.ing = false
+	logic.crouch.ing = false

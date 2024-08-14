@@ -162,7 +162,8 @@ func update_status():
 	# belong_ing = belong_handler.is_belonging()
 
 	# ball_handler
-	pickball.can = ball_handler.can_pick
+	pickball.can = !ball_handler.has_ball()
+	ball_handler.can_pick = pickball.can
 	release.can = ball_handler.has_ball()
 	power.can = ball_handler.has_selected_ball()
 

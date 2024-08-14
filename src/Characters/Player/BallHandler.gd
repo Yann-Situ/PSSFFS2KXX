@@ -14,7 +14,7 @@ var selected_ball : Ball = null
 var released_ball : Ball = null
 
 const collision_mask_balls = 4
-const released_ball_delay = 0.3
+const released_ball_delay = 0.5
 
 func _ready():
 	assert(is_instance_valid(P))
@@ -78,7 +78,8 @@ func pickup_ball(ball : Ball):
 		push_warning(name+" pickup_ball on held_ball")
 		return
 	elif has_ball() :
-		throw_ball(P.global_position, Vector2.ZERO)
+		push_warning(name+" pickup_ball but has_ball() is true")
+		return
 	# has_ball() = true
 	held_ball = ball
 	if P.physics_enabled:
@@ -93,9 +94,8 @@ func free_ball(ball : Ball): # set out  active_ball and has_ball
 		held_ball = null
 		# has_ball() = false
 		if P.physics_enabled:
-			P.set_collision_mask_value(10, false) #ball_wall collision layer
+			P.set_collision_mask_value(10, false) #ball_wall collision layer # TODO rework
 		P.collision_mask_save &= ~(1<<10) # same as set_collision_mask_value(10, false)
-
 		#print(str(P.collision_layer)+" "+str(P.collision_layer_save))
 		print(P.name+" free_ball")
 	elif has_ball() :
@@ -103,12 +103,15 @@ func free_ball(ball : Ball): # set out  active_ball and has_ball
 	else :
 		printerr(P.name+" free_ball but doesn't have ball")
 
-
-func throw_ball(throw_global_position : Vector2, speed : Vector2):
+## return if the ball.throw() was called
+func throw_ball(throw_global_position : Vector2, speed : Vector2) -> bool:
 	if !has_ball():
 		printerr("throw_ball but ball_handler.has_ball() is false")
-		return
-	print("throw "+held_ball.name)
+		return false
+	if held_ball._is_reparenting:
+		printerr("throw_ball but held_ball._is_reparenting is true")
+		return false
+	print("throw_ball "+held_ball.name)
 	released_ball = held_ball
 	held_ball.get_node("Visuals").position = Vector2.ZERO
 	held_ball.throw(throw_global_position, speed) # will call free_ball
@@ -119,6 +122,8 @@ func throw_ball(throw_global_position : Vector2, speed : Vector2):
 	# Ugly old alternative:
 	# await get_tree().create_timer(released_ball_delay).timeout
 	# released_ball = null
+	return true
+	
 func _set_released_ball_null():
 	released_ball = null
 

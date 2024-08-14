@@ -1,13 +1,15 @@
 extends Ball
 
-@export var shock_jump : float = 1850 ## m*pix/s : jump impulse.
-@export var shock_fall : float = 5000 ## m*pix/s : fall impulse.
+@export var shock_jump : float = 500 ## m*pix/s : jump impulse.
+@export var shock_fall : float = 700 ## m*pix/s : fall impulse.
 @export var shock_timer : float = 0.25##s : time before next shock possible.
 
 @export var distortion_resource : DistortionResource
 @export var explosion_data : ExplosionData
 #explosion_data.body_explode.connect(self.apply_body_impulse)
 #GlobalEffect.make_explosion(shock_global_position, explosion_data)
+
+const CROUCH_SHOCK_OFFSET = Vector2(0.0,40.0)
 
 func _ready():
 	super()
@@ -50,30 +52,6 @@ func shock(shock_global_position : Vector2):
 	GlobalEffect.make_explosion(shock_global_position, explosion_data)
 	print("shock !")
 
-func power_p(player,delta):
-	pass
-
-func power_jp(player,delta):
-	if $Timer.is_stopped():
-		if holder == player:
-			if player.S.can_jump and player.S.is_crouching:
-				if player.has_node("Actions/Jump"):
-					player.get_node("Actions/Jump").move(0.001,-player.invmass*shock_jump)
-				else :
-					printerr("In "+name+" : player doesn't have a node Actions/Jump")
-					player.add_impulse(shock_jump*Vector2.UP)
-				shock(player.global_position+40*Vector2.DOWN)
-			elif !player.S.is_onfloor and player.S.crouch_p:
-				player.add_impulse(shock_fall*Vector2.DOWN)
-				shock(player.global_position)
-			else :
-				shock(player.global_position)
-		else :
-			shock(self.global_position)
-
-func power_jr(player,delta):
-	pass
-
 func _on_AnimationPlayer_animation_finished(anim_name):
 	if anim_name == "shockwave":
 		$AnimationPlayer.play("idle")
@@ -82,3 +60,33 @@ func shockwave_distortion(distortion_glob_position : Vector2):
 	distortion_resource.make_instance(distortion_glob_position)
 	#GlobalEffect.make_distortion(distortion_glob_position, 0.5,\
 	#	"fast", Vector2(110,110), 250)
+
+################################################################################
+
+func power_p(player,delta):
+	pass
+func power_p_hold(player,delta):
+	pass
+
+func power_p_physics(player,delta):
+	pass
+func power_p_physics_hold(player,delta):
+	pass
+
+func power_jp(player,delta):
+	shock(self.global_position)
+func power_jp_hold(player,delta):
+	if $Timer.is_stopped():
+		if player.S.jump.can and player.S.crouch.ing:
+			player.add_impulse(shock_jump*Vector2.UP)
+			shock(player.global_position+CROUCH_SHOCK_OFFSET)
+		elif !player.S.floor.ing and player.S.down.pressed:
+			player.add_impulse(shock_fall*Vector2.DOWN)
+			shock(player.global_position)
+		else :
+			shock(player.global_position)
+
+func power_jr(player,delta):
+	pass
+func power_jr_hold(player,delta):
+	pass
