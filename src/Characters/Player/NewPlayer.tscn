@@ -1,4 +1,4 @@
-[gd_scene load_steps=113 format=3 uid="uid://dlfptvxh6yjwm"]
+[gd_scene load_steps=114 format=3 uid="uid://dlfptvxh6yjwm"]
 
 [ext_resource type="Script" path="res://src/Characters/Player/NewPlayer.gd" id="1_b7wqc"]
 [ext_resource type="Script" path="res://src/Characters/Player/MovementData.gd" id="2_0ukhp"]
@@ -1186,6 +1186,22 @@ tracks/1/keys = {
 "values": [Vector2(7, -0.999998), Vector2(4, -0.999998), Vector2(-7, -11), Vector2(0, -7), Vector2(3, -6)]
 }
 
+[sub_resource type="Animation" id="Animation_ukh6q"]
+resource_name = "stand_stop"
+length = 0.2
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [227]
+}
+
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_y1wwd"]
 _data = {
 "RESET": SubResource("59"),
@@ -1222,6 +1238,7 @@ _data = {
 "slide": SubResource("60"),
 "slide_end": SubResource("61"),
 "slide_loop": SubResource("62"),
+"stand_stop": SubResource("Animation_ukh6q"),
 "walk": SubResource("33"),
 "walljump1": SubResource("34")
 }
@@ -1248,7 +1265,7 @@ size = Vector2(17, 57)
 
 [sub_resource type="Resource" id="Resource_cq5vr"]
 script = ExtResource("17_iaaq0")
-friction = Vector2(0.4, 0.5)
+friction = Vector2(0.94, 1)
 time_scale = 1.0
 side_speed_max = 380.0
 side_instant_speed = 100.0
@@ -1260,7 +1277,7 @@ base_speed = Vector2(0, 0)
 
 [sub_resource type="Resource" id="Resource_y4wjx"]
 script = ExtResource("17_iaaq0")
-friction = Vector2(0.15, 0.02)
+friction = Vector2(0.9, 0.38)
 time_scale = 1.0
 side_speed_max = 400.0
 side_instant_speed = 50.0
@@ -1272,7 +1289,7 @@ base_speed = Vector2(0, 0)
 
 [sub_resource type="Resource" id="Resource_aiv1j"]
 script = ExtResource("17_iaaq0")
-friction = Vector2(0.15, 0.1)
+friction = Vector2(1, 0.38)
 time_scale = 1.0
 side_speed_max = 300.0
 side_instant_speed = 100.0
