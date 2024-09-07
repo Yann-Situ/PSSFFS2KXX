@@ -6,7 +6,7 @@ class_name Room2D
 signal is_exiting_room
 signal is_exiting_level
 
-@export var using_new_player : bool = false 
+@export var using_new_player : bool = true
 
 @export var limit_left : int = -10000000 # : set = set_limit_left
 @export var limit_top : int = -10000000 # : set = set_limit_top

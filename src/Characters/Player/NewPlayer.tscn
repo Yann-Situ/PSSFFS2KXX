@@ -6,7 +6,6 @@
 [ext_resource type="Script" path="res://src/Characters/Player/BallHandler.gd" id="5_w4h74"]
 [ext_resource type="PackedScene" uid="uid://dnxamlpvh6e70" path="res://src/Items/Interactive/SelectorTarget.tscn" id="6_g08i7"]
 [ext_resource type="Script" path="res://src/Characters/Player/SelectableHandler.gd" id="8_ms0lc"]
-[ext_resource type="Script" path="res://src/Characters/StateSystem/StateMachine.gd" id="8_sco1u"]
 [ext_resource type="Script" path="res://src/Characters/Player/RayHandler.gd" id="9_ltm6u"]
 [ext_resource type="Script" path="res://src/Characters/StateSystem/Test/InputControllerTest.gd" id="10_ytx1q"]
 [ext_resource type="Script" path="res://src/Characters/Player/TargetHandler.gd" id="14_7sb52"]
@@ -22,6 +21,7 @@
 [ext_resource type="Shader" path="res://assets/shader/shoot_viewer.gdshader" id="24_3m0tt"]
 [ext_resource type="Script" path="res://src/Characters/Player/StateSystem/GroundStates/StandPlayerState.gd" id="24_f6vqg"]
 [ext_resource type="Script" path="res://src/Characters/Player/ShootHandler.gd" id="24_kckqt"]
+[ext_resource type="Script" path="res://src/Characters/StateSystem/MultiStateMachine.gd" id="25_bslge"]
 [ext_resource type="Script" path="res://src/Characters/Player/StateSystem/AirStates/FallPlayerState.gd" id="25_uoqxj"]
 [ext_resource type="Shader" path="res://assets/shader/contour.gdshader" id="26_qq73j"]
 [ext_resource type="Script" path="res://src/Characters/Player/StateSystem/AirStates/FallwallPlayerState.gd" id="26_s5g3d"]
@@ -1130,6 +1130,22 @@ tracks/1/keys = {
 "values": [Vector2(9, 12), Vector2(9, 11), Vector2(10, 13), Vector2(10, 12), Vector2(9, 12)]
 }
 
+[sub_resource type="Animation" id="Animation_ukh6q"]
+resource_name = "stand_stop"
+length = 0.2
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [227]
+}
+
 [sub_resource type="Animation" id="33"]
 length = 0.8
 loop_mode = 1
@@ -1184,22 +1200,6 @@ tracks/1/keys = {
 "transitions": PackedFloat32Array(1, 1, 1, 1, 1),
 "update": 1,
 "values": [Vector2(7, -0.999998), Vector2(4, -0.999998), Vector2(-7, -11), Vector2(0, -7), Vector2(3, -6)]
-}
-
-[sub_resource type="Animation" id="Animation_ukh6q"]
-resource_name = "stand_stop"
-length = 0.2
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath(".:frame")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [227]
 }
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_y1wwd"]
@@ -1267,10 +1267,10 @@ size = Vector2(17, 57)
 script = ExtResource("17_iaaq0")
 friction = Vector2(0.94, 1)
 time_scale = 1.0
-side_speed_max = 380.0
-side_instant_speed = 100.0
-side_instant_speed_return_thresh = 50.0
-side_accel = 190.0
+side_speed_max = 400.0
+side_instant_speed = 150.0
+side_instant_speed_return_thresh = 70.0
+side_accel = 200.0
 base_force = Vector2(0, 0)
 base_accel = Vector2(0, 0)
 base_speed = Vector2(0, 0)
@@ -1279,17 +1279,17 @@ base_speed = Vector2(0, 0)
 script = ExtResource("17_iaaq0")
 friction = Vector2(0.9, 0.38)
 time_scale = 1.0
-side_speed_max = 400.0
-side_instant_speed = 50.0
-side_instant_speed_return_thresh = 30.0
-side_accel = 100.0
+side_speed_max = 440.0
+side_instant_speed = 80.0
+side_instant_speed_return_thresh = 50.0
+side_accel = 110.0
 base_force = Vector2(0, 0)
 base_accel = Vector2(0, 625)
 base_speed = Vector2(0, 0)
 
 [sub_resource type="Resource" id="Resource_aiv1j"]
 script = ExtResource("17_iaaq0")
-friction = Vector2(1, 0.38)
+friction = Vector2(1, 0.8)
 time_scale = 1.0
 side_speed_max = 300.0
 side_instant_speed = 100.0
@@ -1409,9 +1409,10 @@ z_index = 100
 position = Vector2(0, -35)
 limit_smoothed = true
 script = ExtResource("38_244q6")
-initial_position = Vector2(0, -32)
+initial_position = Vector2(0, -28)
 velocity_max_offset_DOWN_RIGHT = Vector2(128, 160)
-velocity_speed_threshold = Vector2(600, 500)
+velocity_max_offset_UP_LEFT = Vector2(128, 24)
+velocity_speed_threshold = Vector2(600, 400)
 
 [node name="Flipper" type="Marker2D" parent="."]
 
@@ -1652,10 +1653,10 @@ randomness = 0.33
 [node name="GrindParticles" parent="Flipper/EffectHandler" instance=ExtResource("37_3xxkx")]
 material = SubResource("CanvasItemMaterial_je7vb")
 
-[node name="StateMachine" type="Node" parent="." node_paths=PackedStringArray("status_logic", "init_state")]
-script = ExtResource("8_sco1u")
+[node name="StateMachine" type="Node" parent="." node_paths=PackedStringArray("status_logic", "init_states")]
+script = ExtResource("25_bslge")
 status_logic = NodePath("StatusLogic")
-init_state = NodePath("AirStates/Fall")
+init_states = [NodePath("AirStates/Fall"), NodePath("BallStates/Nopower")]
 
 [node name="StatusLogic" type="Node" parent="StateMachine" node_paths=PackedStringArray("player", "ball_handler", "shoot_handler", "selectable_handler", "ray_handler", "belong_handler", "input_controller")]
 script = ExtResource("17_sct0s")
@@ -1746,6 +1747,7 @@ animation_player = NodePath("../../../Flipper/Sprite2D/PlayerAnimation")
 
 [node name="Stand" type="Node" parent="StateMachine/GroundStates" node_paths=PackedStringArray("belong_state", "action_state", "jump_state", "fall_state", "slide_state", "crouch_state", "player", "logic", "animation_player")]
 script = ExtResource("24_f6vqg")
+slide_speed_thresh = 250.0
 belong_state = NodePath("../../BelongStates")
 action_state = NodePath("../../ActionStates")
 jump_state = NodePath("../../AirStates/Jump")
@@ -1885,19 +1887,16 @@ player = NodePath("../../..")
 logic = NodePath("../../StatusLogic")
 animation_player = NodePath("../../../Flipper/Sprite2D/PlayerAnimation")
 
-[node name="BallStateMachine" type="Node" parent="StateMachine" node_paths=PackedStringArray("status_logic", "init_state")]
-script = ExtResource("8_sco1u")
-status_logic = NodePath("../StatusLogic")
-init_state = NodePath("Nopower")
+[node name="BallStates" type="Node" parent="StateMachine"]
 
-[node name="Power" type="Node" parent="StateMachine/BallStateMachine" node_paths=PackedStringArray("nopower_state", "player", "logic", "ball_handler")]
+[node name="Power" type="Node" parent="StateMachine/BallStates" node_paths=PackedStringArray("nopower_state", "player", "logic", "ball_handler")]
 script = ExtResource("38_k30y4")
 nopower_state = NodePath("../Nopower")
 player = NodePath("../../..")
 logic = NodePath("../../StatusLogic")
 ball_handler = NodePath("../../../Flipper/BallHandler")
 
-[node name="Nopower" type="Node" parent="StateMachine/BallStateMachine" node_paths=PackedStringArray("power_state", "player", "logic", "ball_handler")]
+[node name="Nopower" type="Node" parent="StateMachine/BallStates" node_paths=PackedStringArray("power_state", "player", "logic", "ball_handler")]
 script = ExtResource("39_hb04j")
 power_state = NodePath("../Power")
 player = NodePath("../../..")

@@ -92,15 +92,16 @@ func reset_position():
 ################################################################################
 
 func _process(delta):
-	if Global.DEBUG and state_machine.current_state != null:
-		label_state.text = state_machine.current_state.name + "\n" + str(state_machine.current_state.variation)
+	if Global.DEBUG and state_machine.current_states[0] != null:
+		label_state.text = state_machine.current_states[0].name + "\n" + str(state_machine.current_states[0].variation)+\
+			" \t" + str(state_machine.current_states[0].variation_playing)
 	update_life()
 	# update_shooter()
 	update_camera()
 	update_target_handler()
 	
 func _physics_process(delta):
-	if Global.DEBUG and state_machine.current_state != null:
+	if Global.DEBUG and state_machine.current_states[0] != null:
 		label_velocity.text = "("+str(movement.velocity.x).pad_decimals(0)+", "\
 			+str(movement.velocity.y).pad_decimals(0)+")     "+str(movement.velocity.length()).pad_decimals(0)
 		var v = get_real_velocity()

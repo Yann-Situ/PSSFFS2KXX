@@ -72,7 +72,6 @@ _data = {
 point_count = 2
 
 [node name="RoomTestNewPlayer" instance=ExtResource("1_6to1r")]
-using_new_player = true
 
 [node name="ParallaxBackground" parent="." index="1"]
 visible = false
