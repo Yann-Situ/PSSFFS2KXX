@@ -1,34 +1,29 @@
-[gd_scene load_steps=29 format=3 uid="uid://bola66fqnywdi"]
+[gd_scene load_steps=21 format=3 uid="uid://cckqoik18dppx"]
 
-[ext_resource type="Texture2D" uid="uid://bx70alc2tdq28" path="res://assets/art/environment/environment-interactive.png" id="1"]
-[ext_resource type="Script" path="res://src/Items/Baskets/Basket.gd" id="2"]
-[ext_resource type="Texture2D" uid="uid://cntdvutmbk0dn" path="res://assets/art/ball/ball_particle.png" id="3"]
-[ext_resource type="Texture2D" uid="uid://dfut2gplenar" path="res://assets/art/effects/light5_5.png" id="4"]
-[ext_resource type="Texture2D" uid="uid://bo1cx5blctfm5" path="res://assets/art/effects/light5_4.png" id="5"]
-[ext_resource type="Texture2D" uid="uid://df3tf1mx1ga2y" path="res://assets/art/effects/light5_1.png" id="6"]
-[ext_resource type="Texture2D" uid="uid://kuyoddmpp4nh" path="res://assets/art/effects/light5_3.png" id="7"]
-[ext_resource type="Texture2D" uid="uid://icukigpgr52w" path="res://assets/art/effects/light5_2.png" id="8"]
-[ext_resource type="Script" path="res://src/Items/Interactive/Selectable.gd" id="9"]
-[ext_resource type="PackedScene" uid="uid://d4icnmnguyjv3" path="res://src/Effects/LineParticle.tscn" id="10"]
+[ext_resource type="Script" path="res://src/Items/Baskets/Basket.gd" id="1_1qq5r"]
+[ext_resource type="Texture2D" uid="uid://bx70alc2tdq28" path="res://assets/art/environment/environment-interactive.png" id="2_k3vjr"]
+[ext_resource type="Script" path="res://src/Items/Interactive/Selectable.gd" id="3_562au"]
+[ext_resource type="Script" path="res://src/Characters/Player/CharacterHolder.gd" id="5_gfmst"]
+[ext_resource type="PackedScene" uid="uid://d4icnmnguyjv3" path="res://src/Effects/LineParticle.tscn" id="10_5spoj"]
 
 [sub_resource type="AtlasTexture" id="1"]
-atlas = ExtResource("1")
+atlas = ExtResource("2_k3vjr")
 region = Rect2(0, 0, 32, 16)
 
 [sub_resource type="AtlasTexture" id="2"]
-atlas = ExtResource("1")
+atlas = ExtResource("2_k3vjr")
 region = Rect2(32, 0, 32, 16)
 
 [sub_resource type="AtlasTexture" id="3"]
-atlas = ExtResource("1")
+atlas = ExtResource("2_k3vjr")
 region = Rect2(64, 0, 32, 16)
 
 [sub_resource type="AtlasTexture" id="4"]
-atlas = ExtResource("1")
+atlas = ExtResource("2_k3vjr")
 region = Rect2(96, 0, 32, 16)
 
 [sub_resource type="AtlasTexture" id="5"]
-atlas = ExtResource("1")
+atlas = ExtResource("2_k3vjr")
 region = Rect2(128, 0, 32, 16)
 
 [sub_resource type="SpriteFrames" id="6"]
@@ -69,14 +64,6 @@ animations = [{
 a = Vector2(-13, 0)
 b = Vector2(13, 0)
 
-[sub_resource type="Curve" id="8"]
-_data = [Vector2(0, 0.618182), 0.0, 5.21322, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
-point_count = 2
-
-[sub_resource type="Gradient" id="9"]
-offsets = PackedFloat32Array(0.00469484, 0.41958, 0.657343, 0.99061)
-colors = PackedColorArray(2, 1, 1.4, 0, 1, 1, 1, 0.639216, 0.105469, 0.140411, 1, 0.784314, 0.363281, 0.00709534, 0.00709534, 0)
-
 [sub_resource type="Animation" id="10"]
 resource_name = "dunk_left"
 tracks/0/type = "value"
@@ -113,18 +100,6 @@ _data = {
 "dunk_right": SubResource("11")
 }
 
-[sub_resource type="AnimatedTexture" id="12"]
-frames = 5
-frame_0/texture = ExtResource("6")
-frame_1/texture = ExtResource("8")
-frame_1/duration = 1.0
-frame_2/texture = ExtResource("7")
-frame_2/duration = 1.0
-frame_3/texture = ExtResource("5")
-frame_3/duration = 1.0
-frame_4/texture = ExtResource("4")
-frame_4/duration = 1.0
-
 [sub_resource type="SegmentShape2D" id="13"]
 a = Vector2(0, -2)
 b = Vector2(-1, -1)
@@ -152,64 +127,36 @@ color_ramp = SubResource("18")
 anim_speed_min = 1.0
 anim_speed_max = 1.0
 
-[node name="Basket" type="Node2D"]
-z_index = 16
+[node name="NewBasket" type="Node2D"]
+z_index = 160
 z_as_relative = false
-script = ExtResource("2")
-dunk_position_offset = Vector2(0, 24)
-dunk_position_radius = 14
-hang_position_offset_y = 36
+script = ExtResource("1_1qq5r")
+character_offset = Vector2(0, 4)
+dunk_position_offset = Vector2(0, 32)
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 use_parent_material = true
 position = Vector2(0, 6)
 sprite_frames = SubResource("6")
-frame = 5
+autoplay = "default"
+frame_progress = 0.521599
 
-[node name="basket_area" type="Area2D" parent="." node_paths=PackedStringArray("parent_node")]
+[node name="BasketArea" type="Area2D" parent="." node_paths=PackedStringArray("parent_node")]
 collision_layer = 40
 collision_mask = 4
-script = ExtResource("9")
+script = ExtResource("3_562au")
 parent_node = NodePath("..")
 is_dash_selectable = false
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="basket_area"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="BasketArea"]
 modulate = Color(0, 1, 0.0392157, 1)
 position = Vector2(0, 2)
 shape = SubResource("7")
-
-[node name="CPUParticles2D" type="CPUParticles2D" parent="."]
-position = Vector2(0, 6)
-emitting = false
-amount = 60
-lifetime = 0.8
-one_shot = true
-explosiveness = 0.53
-randomness = 0.05
-lifetime_randomness = 0.29
-fract_delta = false
-texture = ExtResource("3")
-emission_shape = 2
-emission_sphere_radius = 1.0
-direction = Vector2(0, -1)
-spread = 0.0
-gravity = Vector2(0, 0)
-scale_amount_curve = SubResource("8")
-color_ramp = SubResource("9")
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 libraries = {
 "": SubResource("AnimationLibrary_v6sce")
 }
-
-[node name="LightSmall" type="PointLight2D" parent="."]
-z_as_relative = false
-position = Vector2(-3.8147e-06, 7.62939e-06)
-scale = Vector2(1.11855, 1.11855)
-energy = 0.0
-range_z_max = 160
-range_item_cull_mask = 3
-texture = SubResource("12")
 
 [node name="StaticBody2D" type="StaticBody2D" parent="."]
 collision_layer = 4
@@ -225,12 +172,9 @@ position = Vector2(15, 0)
 shape = SubResource("14")
 one_way_collision = true
 
-[node name="DunkCooldown" type="Timer" parent="."]
-one_shot = true
-
 [node name="Effects" type="Node2D" parent="."]
 
-[node name="LineParticle" parent="Effects" instance=ExtResource("10")]
+[node name="LineParticle" parent="Effects" instance=ExtResource("10_5spoj")]
 z_index = -1
 material = SubResource("15")
 emitting = false
@@ -239,5 +183,8 @@ process_material = SubResource("19")
 one_shot = true
 explosiveness = 0.41
 
-[connection signal="body_entered" from="basket_area" to="." method="_on_basket_area_body_entered"]
-[connection signal="timeout" from="DunkCooldown" to="." method="_on_DunkCooldown_timeout"]
+[node name="CharacterHolder" type="Node2D" parent="."]
+script = ExtResource("5_gfmst")
+holder_type = 2
+
+[connection signal="body_entered" from="BasketArea" to="." method="_on_basket_area_body_entered"]

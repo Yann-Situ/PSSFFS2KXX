@@ -124,8 +124,7 @@ func transition_out():
 
 func exit_portal():
 	transition_out()
-	P.S.disable_input()
-	P.S.reset_state()
+	#P.S.disable_input() ## TODO find a solution for Player enable and disable input
 	await get_node("AnimationPlayer").animation_finished
 	exit_portal_finished.emit()
 
@@ -138,7 +137,7 @@ func exit_portal():
 func enter_portal():
 	P.set_start_position(self.global_position)
 	P.reset_move()
-	P.S.enable_input()
+	#P.S.enable_input() ## TODO find a solution for Player enable and disable input
 	transition_in()
 	await get_node("AnimationPlayer").animation_finished
 	enter_portal_finished.emit()

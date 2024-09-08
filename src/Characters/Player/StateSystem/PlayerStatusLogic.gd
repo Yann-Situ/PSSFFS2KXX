@@ -152,6 +152,7 @@ func update_triggers():
 		jump_press_timer.start()
 	if accept.just_pressed:
 		dunkjump_press_timer.start()
+
 ## update the status using logic.
 func update_status():
 	# action.ing

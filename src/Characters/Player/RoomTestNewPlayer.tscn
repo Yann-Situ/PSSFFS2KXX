@@ -4,7 +4,7 @@
 [ext_resource type="PackedScene" uid="uid://rmukvjwyiahu" path="res://src/Items/Interactive/DashTarget.tscn" id="2_x00i2"]
 [ext_resource type="PackedScene" uid="uid://kvm1pfg6ben5" path="res://src/Items/Dynamics/Lines/NewRopeLine.tscn" id="3_3x1wr"]
 [ext_resource type="PackedScene" uid="uid://dxk7u2jsgah5u" path="res://src/Items/Dynamics/Lines/NewRailLine.tscn" id="4_bt87n"]
-[ext_resource type="PackedScene" uid="uid://cckqoik18dppx" path="res://src/Items/Baskets/NewBasket.tscn" id="5_h1nqp"]
+[ext_resource type="PackedScene" uid="uid://cckqoik18dppx" path="res://src/Items/Baskets/Basket.tscn" id="5_h1nqp"]
 [ext_resource type="PackedScene" uid="uid://bcnnkalot4kb0" path="res://src/Items/Dynamics/Jumper.tscn" id="6_tb8pt"]
 [ext_resource type="PackedScene" uid="uid://babjtotux2mv3" path="res://src/Map/MovingPlatform.tscn" id="7_ddpj5"]
 [ext_resource type="PackedScene" uid="uid://cxn2m3havcmil" path="res://src/Items/Balls/Ball.tscn" id="8_huh8k"]
