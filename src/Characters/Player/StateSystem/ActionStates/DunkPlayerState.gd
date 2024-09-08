@@ -66,7 +66,7 @@ func enter(previous_state : State = null) -> State:
 	## to be called at the moment of the dunk impact.
 	# if S.active_ball != null:
 	# 	S.active_ball.on_dunk(dunking_basket)
-	# GodotParadiseGeneralUtilities.frame_freeze(0.2, 0.2)
+	GodotParadiseGeneralUtilities.frame_freeze(0.2, 0.2)
 
 	print(self.name)
 	return next_state

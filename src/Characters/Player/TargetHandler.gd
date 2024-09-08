@@ -3,7 +3,7 @@ extends Node2D
 class_name TargetHandler
 # TODO: rework to delete the S dependency
 
-@export var P: NewPlayer
+@export var P: Player
 @onready var S = P.get_state_node()
 
 var names = ["Shoot", "Dash", "Jump", "Dunk"]

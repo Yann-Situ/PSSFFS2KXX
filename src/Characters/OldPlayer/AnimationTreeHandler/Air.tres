@@ -1,0 +1,70 @@
+[gd_resource type="AnimationNodeStateMachine" load_steps=16 format=3 uid="uid://cnywf2cxx1om3"]
+
+[sub_resource type="AnimationNodeAnimation" id="1"]
+animation = &"air_wall"
+
+[sub_resource type="AnimationNodeAnimation" id="2"]
+animation = &"fall"
+
+[sub_resource type="AnimationNodeAnimation" id="3"]
+animation = &"fall_loop"
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="4"]
+switch_mode = 2
+advance_mode = 2
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_g3ym4"]
+advance_mode = 2
+
+[sub_resource type="AnimationNodeStateMachine" id="5"]
+states/fall/node = SubResource("2")
+states/fall/position = Vector2(605, 145)
+states/fall_loop/node = SubResource("3")
+states/fall_loop/position = Vector2(596, 242)
+transitions = ["fall", "fall_loop", SubResource("4"), "Start", "fall", SubResource("AnimationNodeStateMachineTransition_g3ym4")]
+
+[sub_resource type="AnimationNodeAnimation" id="6"]
+animation = &"jump1"
+
+[sub_resource type="AnimationNodeAnimation" id="7"]
+animation = &"walljump1"
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="8"]
+advance_mode = 2
+advance_expression = "is_onwall"
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="9"]
+advance_mode = 2
+advance_expression = "is_jumping"
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="10"]
+switch_mode = 2
+advance_mode = 2
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="11"]
+advance_mode = 2
+advance_expression = "is_jumping"
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="12"]
+switch_mode = 2
+advance_mode = 2
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="13"]
+advance_mode = 2
+advance_expression = "!is_onwall"
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_71tuk"]
+advance_mode = 2
+
+[resource]
+states/Start/position = Vector2(638, 170)
+states/air_wall/node = SubResource("1")
+states/air_wall/position = Vector2(786, 431)
+states/fall/node = SubResource("5")
+states/fall/position = Vector2(786, 261)
+states/jump1/node = SubResource("6")
+states/jump1/position = Vector2(499, 261)
+states/walljump1/node = SubResource("7")
+states/walljump1/position = Vector2(499, 431)
+transitions = ["fall", "air_wall", SubResource("8"), "fall", "jump1", SubResource("9"), "jump1", "fall", SubResource("10"), "air_wall", "walljump1", SubResource("11"), "walljump1", "fall", SubResource("12"), "air_wall", "fall", SubResource("13"), "Start", "fall", SubResource("AnimationNodeStateMachineTransition_71tuk")]
+graph_offset = Vector2(0, 116.72)

@@ -1,0 +1,50 @@
+[gd_scene load_steps=7 format=3 uid="uid://qsa2vhushndm"]
+
+[ext_resource type="Texture2D" uid="uid://btc7tkcvg5xa1" path="res://assets/art/effects/dust_0.png" id="1_yg3oh"]
+[ext_resource type="Script" path="res://src/Effects/OneShotParticle.gd" id="2_0tp1x"]
+
+[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_3tvhg"]
+particles_animation = true
+particles_anim_h_frames = 10
+particles_anim_v_frames = 1
+particles_anim_loop = true
+
+[sub_resource type="Gradient" id="Gradient_p6vt4"]
+offsets = PackedFloat32Array(0, 0.55, 1)
+colors = PackedColorArray(1, 1, 1, 0.913725, 0.90625, 0.90625, 0.90625, 0.745098, 1, 1, 1, 0)
+
+[sub_resource type="GradientTexture2D" id="53"]
+gradient = SubResource("Gradient_p6vt4")
+width = 20
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_dos8w"]
+lifetime_randomness = 0.39
+emission_shape_scale = Vector3(1, 1, 0)
+emission_shape = 3
+emission_box_extents = Vector3(24, 4, 1)
+angle_max = 720.0
+direction = Vector3(0, 1, 0)
+spread = 180.0
+angular_velocity_min = -720.0
+gravity = Vector3(0, -40, 0)
+linear_accel_min = 29.31
+linear_accel_max = 46.55
+radial_accel_min = 8.62
+radial_accel_max = 24.13
+color_ramp = SubResource("53")
+anim_speed_min = 0.86
+anim_speed_max = 1.1
+
+[node name="PuffParticles" type="GPUParticles2D"]
+z_index = -1
+material = SubResource("CanvasItemMaterial_3tvhg")
+emitting = false
+amount = 6
+amount_ratio = 0.6515
+process_material = SubResource("ParticleProcessMaterial_dos8w")
+texture = ExtResource("1_yg3oh")
+lifetime = 0.65
+one_shot = true
+explosiveness = 0.6
+randomness = 0.33
+script = ExtResource("2_0tp1x")

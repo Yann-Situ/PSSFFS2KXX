@@ -36,6 +36,9 @@ func enter(previous_state : State = null) -> State:
 	play_animation()
 	print(self.name)
 
+	# effects
+	player.effect_handler.dust_start()
+
 	return next_state
 
 ## Called by the parent StateMachine during the _physics_process call, after

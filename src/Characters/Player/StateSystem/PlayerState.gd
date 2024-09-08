@@ -1,7 +1,7 @@
 extends State
 class_name PlayerState
 
-@export var player : NewPlayer
+@export var player : Player
 @export var logic : PlayerStatusLogic
 
 @export var animation_player : AnimationPlayer

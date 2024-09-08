@@ -5,6 +5,8 @@ extends PlayerMovementState
 
 @export var no_side_delay : float = 0.2#s
 @export var grindash_speed : float = 600#pix/s
+@export var grind_particles_speed_threshold : float = 100 ## minimum speed for grind particles emitting
+@export var ghost_modulate : Color# (Color, RGBA)
 
 @export_group("States")
 @export var action_state : State
@@ -43,6 +45,15 @@ func animation_process() -> void:
 		set_variation(7) # grindash
 		do_grindash = false
 		play_animation(true)
+		player.effect_handler.grind_stop()
+	else:
+		if movement.velocity.length_squared() < grind_particles_speed_threshold*grind_particles_speed_threshold:
+			if player.effect_handler.grind_emitting():
+				player.effect_handler.grind_stop()
+		else:
+			if not player.effect_handler.grind_emitting():
+				player.effect_handler.grind_start()
+			
 
 	logic.direction_sprite_change.can = true
 	var movement_dir_x = movement.velocity.x > 0
@@ -73,6 +84,11 @@ func enter(previous_state : State = null) -> State:
 	logic.direction_sprite = 1 if movement_dir_x else -1
 	logic.direction_sprite_change.can = false
 	print(self.name)
+	
+	# effects:
+	#player.effect_handler.grind_start() # handled in process_animation()
+	player.effect_handler.dust_start()
+	player.effect_handler.cloud_start()
 
 	return next_state
 
@@ -109,6 +125,9 @@ func exit():
 		belong_handler.get_out()
 	# logic.belong_ing = belong_handler.is_belonging() # not necessary anymore as belong_in calls is_belonging in the getter
 	holder_at_enter = null
+	
+	# effects:
+	player.effect_handler.grind_stop()
 
 func grindash():
 	var target : Node2D = null
@@ -126,3 +145,14 @@ func grindash():
 		target.global_position, movement.velocity, target_velocity, grindash_speed)
 	movement.velocity = dash_velocity
 	do_grindash = true
+	
+	# effects
+	if logic.ball_handler.has_ball():
+		var ball = logic.ball_handler.held_ball
+		ball.on_dunkdash_start(player)
+		player.effect_handler.ghost_start(0.21,0.05, Color.WHITE,ball.get_dash_gradient())
+	else:
+		player.effect_handler.ghost_start(0.21,0.05, ghost_modulate)
+	player.effect_handler.cloud_start()
+	GlobalEffect.make_distortion(player.global_position, 0.75, "fast_soft")
+	Global.camera.screen_shake(0.2,10)

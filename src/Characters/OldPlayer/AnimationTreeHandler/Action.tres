@@ -1,0 +1,105 @@
+[gd_resource type="AnimationNodeStateMachine" load_steps=23 format=3 uid="uid://dcviqtnkvq3ry"]
+
+[sub_resource type="AnimationNodeAnimation" id="1"]
+animation = &"dunk"
+
+[sub_resource type="AnimationNodeAnimation" id="2"]
+animation = &"dunkdash"
+
+[sub_resource type="AnimationNodeAnimation" id="3"]
+animation = &"dunkjump"
+
+[sub_resource type="AnimationNodeAnimation" id="4"]
+animation = &"dunkjump_halfturn"
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="5"]
+reset = false
+switch_mode = 1
+advance_mode = 2
+advance_expression = "is_dunkjumphalfturning"
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_jnowj"]
+advance_mode = 2
+
+[sub_resource type="AnimationNodeStateMachine" id="6"]
+states/Start/position = Vector2(112, 328)
+states/dunkjump/node = SubResource("3")
+states/dunkjump/position = Vector2(273, 328)
+states/dunkjump_halfturn/node = SubResource("4")
+states/dunkjump_halfturn/position = Vector2(273, 159)
+transitions = ["dunkjump", "dunkjump_halfturn", SubResource("5"), "Start", "dunkjump", SubResource("AnimationNodeStateMachineTransition_jnowj")]
+
+[sub_resource type="AnimationNodeAnimation" id="7"]
+animation = &"grind+45"
+
+[sub_resource type="AnimationNodeAnimation" id="8"]
+animation = &"air_shoot"
+
+[sub_resource type="AnimationNodeAnimation" id="9"]
+animation = &"floor_shoot"
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="10"]
+switch_mode = 1
+advance_mode = 2
+advance_expression = "is_onfloor"
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_apcni"]
+advance_mode = 2
+
+[sub_resource type="AnimationNodeStateMachine" id="11"]
+states/Start/position = Vector2(176, 243)
+states/air_shoot/node = SubResource("8")
+states/air_shoot/position = Vector2(336, 359)
+states/floor_shoot/node = SubResource("9")
+states/floor_shoot/position = Vector2(336, 223)
+transitions = ["air_shoot", "floor_shoot", SubResource("10"), "Start", "air_shoot", SubResource("AnimationNodeStateMachineTransition_apcni")]
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="12"]
+advance_mode = 2
+advance_expression = "is_dunkjumping"
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="13"]
+advance_mode = 2
+advance_expression = "is_dunkdashing"
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="14"]
+advance_mode = 2
+advance_expression = "is_dunking"
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="15"]
+advance_mode = 2
+advance_expression = "is_shooting"
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="16"]
+switch_mode = 2
+advance_mode = 2
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="17"]
+switch_mode = 2
+advance_mode = 2
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="18"]
+advance_mode = 2
+advance_expression = "!is_dunkdashing"
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="19"]
+advance_mode = 2
+advance_expression = "!is_dunkjumping"
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_lminj"]
+advance_mode = 2
+
+[resource]
+states/Start/position = Vector2(773, 221)
+states/dunk/node = SubResource("1")
+states/dunk/position = Vector2(267, 514)
+states/dunkdash/node = SubResource("2")
+states/dunkdash/position = Vector2(202, 243)
+states/dunkjump/node = SubResource("6")
+states/dunkjump/position = Vector2(445, 61)
+states/hub/node = SubResource("7")
+states/hub/position = Vector2(639, 312)
+states/shoot/node = SubResource("11")
+states/shoot/position = Vector2(639, 551)
+transitions = ["hub", "dunkjump", SubResource("12"), "hub", "dunkdash", SubResource("13"), "hub", "dunk", SubResource("14"), "hub", "shoot", SubResource("15"), "shoot", "hub", SubResource("16"), "dunk", "hub", SubResource("17"), "dunkdash", "hub", SubResource("18"), "dunkjump", "hub", SubResource("19"), "Start", "hub", SubResource("AnimationNodeStateMachineTransition_lminj")]
+graph_offset = Vector2(0, -124.629)

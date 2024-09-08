@@ -26,10 +26,8 @@ func unfriction_to_friction(unfriction : float) -> float:
 	return 1.0-pow(0.1, 1.0/unfriction)
 
 func apply_friction(velocity, friction : float, delta : float):
-	return lerp(velocity, 0.0, friction)
-#	var friction_pow_delta = 0.0 if friction >= 1.0 else pow(1.0-friction, delta)
-#	return velocity*friction_pow_delta
-# works for flat and vector2
+	#return lerp(velocity, 0.0, friction)
+	return velocity*0.0 if friction >= 1.0 else velocity*exp(-(friction/(1-friction))*delta)
 
 ## the polar coordinates are given as (radius, theta)
 func polar_to_cartesian(c : Vector2) -> Vector2:

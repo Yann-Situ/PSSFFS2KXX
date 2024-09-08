@@ -56,6 +56,7 @@ func enter(previous_state : State = null) -> State:
 		print(self.name+" mount*")
 		movement.velocity.y = mountwalljump_velocity.y
 		movement.velocity.x = -logic.direction_wall * mountwalljump_velocity.x
+		player.effect_handler.cloud_start(8, 8)
 	else:
 		print(self.name)
 		movement.velocity.y = walljump_velocity.y
@@ -66,9 +67,8 @@ func enter(previous_state : State = null) -> State:
 		print("  | enter cancelled jump")
 		up_cancelled = true
 
-	# TODO
-	#player.PlayerEffects.dust_start()
-	#player.PlayerEffects.jump_start()
+	# effects
+	player.effect_handler.dust_start()
 	return next_state
 
 ## Called by the parent StateMachine during the _physics_process call, after

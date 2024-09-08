@@ -1,54 +1,64 @@
 extends Node2D
-class_name Basket
+class_name NewBasket
 # @icon("res://assets/art/icons/basket.png")
 
 signal is_dunked
 signal is_goaled
 
-@export var speed_ball_threshold = 380 #velocity value
-@export var dunk_position_offset = 16 * Vector2.DOWN
-@export var dunk_position_radius = 24
-@export var hang_position_offset_y = 16
-@export var can_receive_dunk = true
+@export var speed_ball_threshold = 380 ## speed threshold for power goal
+@export var character_offset : Vector2 = Vector2(0.0, 0.0) ## character offset for hanging
+@export var dunk_position_offset = 16 * Vector2.DOWN ## offset for the dunk position (different from hanging position)
+@export var dunk_position_radius = 20 ## maximum horizontal radius for dunk position
+#@export var hang_position_offset_y = 16 ## vertical offset for hanging # TODO
+
+@export_group("cooldowns")
+@export var dunk_cooldown = 0.75 ## between two consecutive dunks
+@export var dunk_free_character_cooldown = 0.5 ## after a character left the basket
+
+@export_group("can_receive_* booleans", "can_receive_")
+@export var can_receive_dunk = true : set = set_can_receive_dunk
 @export var can_receive_dunkjump = true
 @export var can_receive_goal = true
-@export var can_receive_hang = true
+@export var can_receive_hang = true : set = set_can_receive_hang
 
-@export var dunk_cooldown = 0.75#s
-@export var dunk_free_character_cooldown = 0.4#s
+@onready var character_holder : CharacterHolder = $CharacterHolder
+@onready var basket_area : Selectable = $BasketArea
+var dunk_cooldown_timer : Timer
 
-var inside_bodies = []
-var bodies_positions = []
-var distortion_scene = preload("res://src/Effects/Distortion.tscn")
-var tween_light : Tween
+var character_offsets = {} ## belong_handler current offset
+var character_dunk_positions = {} ## belong_handler dunk position (relative to dunk.global_position)
 
-@onready var start_position = global_position
+func set_can_receive_hang(b):
+	can_receive_hang = b
+	#if character_holder == null:
+		#printerr("character_holder is null")
+		#return
+	character_holder.can_hold = can_receive_hang
 
-# Should be in any items that can be picked/placed :
-func set_start_position(_position):
-	start_position = _position
-	global_position = _position
+func set_can_receive_dunk(b):
+	can_receive_dunk = b
+	basket_area.is_dunk_selectable = can_receive_dunk
+	#print(" --- receivedunk "+str(b))
 
 func _ready():
 	self.z_index = Global.z_indices["foreground_1"]
 	add_to_group("characterholders")
+	assert(character_holder != null)
+	assert(basket_area != null)
+	character_holder.getting_in.connect(_on_character_holder_getting_in)
+	character_holder.getting_out.connect(_on_character_holder_getting_out)
+	character_holder.processing_character.connect(_on_character_holder_processing_character)
+	character_holder.physics_processing_character.connect(_on_character_holder_physics_processing_character)
 
-func _draw():
-	pass
+	dunk_cooldown_timer = Timer.new()
+	dunk_cooldown_timer.autostart = false
+	dunk_cooldown_timer.one_shot = true
+	dunk_cooldown_timer.timeout.connect(_on_DunkCooldown_timeout)
+	add_child(dunk_cooldown_timer)
+
+# func _draw():
+# 	pass
 	#draw_line(position+$basket_area/CollisionShape2D.shape.a, position+$basket_area/CollisionShape2D.shape.b, color2)
-
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-#func _process(delta):
-#	queue_redraw()
-func _physics_process(delta):
-	var j = 0 # int because we're deleting nodes in a list we're browsing
-	for i in range(inside_bodies.size()):
-		var body = inside_bodies[i-j]
-		if !body.S.is_hanging:
-			body.get_out(body.global_position, Vector2.ZERO)
-			j += 1
-		else :
-			body.global_position = bodies_positions[i-j]
 
 func _on_basket_area_body_entered(body):
 	#print("basket :"+body.name)
@@ -65,9 +75,13 @@ func dunk(dunker : Node2D, ball : Ball = null):
 	if not can_receive_dunk:
 		push_warning("can_receive_dunk is false but basket.dunk() was called.")
 		return
-	print_debug("DUUUNK!")
+	print_debug(self.name + "dunk! with dunker "+dunker.name)
 	if ball != null:
 		goal_effects(ball, 3)
+		## WARNING the call to on_dunk has been moved to this script, it is now supposed
+		## to be called at the moment of the dunk impact. It used to be called by the
+		## player Dunk node at the beginning of the player's dunk animation
+		ball.on_dunk(self)
 	else :
 		Global.camera.screen_shake(0.3,8)
 
@@ -76,29 +90,18 @@ func dunk(dunker : Node2D, ball : Ball = null):
 	else :
 		$AnimationPlayer.play("dunk_left")
 
-	$DunkCooldown.stop()
 	can_receive_dunk = false
-	$DunkCooldown.start(dunk_cooldown)
+	dunk_cooldown_timer.start(dunk_cooldown) # restart timer
 	is_dunked.emit()
 
-
-func get_hanged(character : Node):
-	if !character.has_node("Actions/Hang"):
-		printerr(character.name + " doesn't have a node called Actions/Hang")
-		return 1
-	if !character.S.can_hang:
-		print(character.name+" cannot hang on "+self.name)
-		return 1
-	pickup_character(character)
-
 func goal(ball : Ball, score):
-	print("GOOOAL!")
+	print_debug(self.name + "goal! with ball "+ball.name)
 	if score > speed_ball_threshold:
 		goal_effects(ball, 2)
 	else :
 		goal_effects(ball, 1)
-	is_goaled.emit()
 	ball.on_goal()
+	is_goaled.emit()
 
 func goal_effects(ball : Ball, force : int = 0):
 	$Effects/LineParticle.amount = force * 16
@@ -110,6 +113,8 @@ func goal_effects(ball : Ball, force : int = 0):
 		Global.camera.screen_shake(0.3,5.0+(force-2)*20.0)
 	if force > 2:
 		GlobalEffect.make_distortion(self.global_position, 0.75, "fast_subtle")
+
+################################################################################
 
 func get_closest_point(point_global_position : Vector2):
 	var p = point_global_position - self.global_position
@@ -123,62 +128,53 @@ func get_dunk_position(player_global_position : Vector2):
 	return get_closest_point(player_global_position) + dunk_position_offset
 
 ################################################################################
-# For `characterholders` group
-func pickup_character(character : Node):
-	character.get_in(self)
-	print(character.name+" on "+self.name)
-	inside_bodies.push_back(character)
-	bodies_positions.push_back(Vector2(character.global_position.x, \
-		self.global_position.y+hang_position_offset_y))
+## For `characterholders` group
+## functions are connected to character_holder signals in _ready()
 
-	character.get_node("Actions/Hang").move(0.01)
-
-	$DunkCooldown.stop()
+func _on_character_holder_getting_in(belong_handler : BelongHandler):
+	print(belong_handler.character.name+" on "+self.name)
+	# bodies_positions.push_back(Vector2(character.global_position.x, \
+	#     self.global_position.y+hang_position_offset_y))
+	
+	# /!\ important, the timer is probably already running because it was by the
+	# dunk function. The following line prevent an additional call to _on_DunkCooldown_timeout() 
+	dunk_cooldown_timer.stop()
 	can_receive_dunk = false
+	
+	var character = belong_handler.character
+	character_dunk_positions[belong_handler] = \
+		get_dunk_position(character.global_position)-self.global_position
+	character_offsets[belong_handler] = character.global_position-global_position-\
+		character_dunk_positions[belong_handler]
 
-func free_character(character : Node):
-	# called by character when getting out
-	var i = 0
-	for body in inside_bodies:
-		if body == character:
-			print(name+" free_character("+character.name+")")
-			if character.has_node("Actions/Hang"):
-				character.get_node("Actions/Hang").move_stop()
-			else :
-				printerr(body.name + " doesn't have a node called Actions/Hang")
-			remove_body(i)
-		i += 1
-	$DunkCooldown.stop()
+
+func _on_character_holder_getting_out(belong_handler : BelongHandler):
+	# when getting out
+	print(belong_handler.character.name+" out "+self.name)
+
 	can_receive_dunk = false
-	$DunkCooldown.start(dunk_free_character_cooldown)
+	dunk_cooldown_timer.start(dunk_free_character_cooldown)  # restart timer
+
+## should update position and velocity (like move and slide)
+func _on_character_holder_physics_processing_character(belong_handler : BelongHandler, delta):
+	var character = belong_handler.character
+	assert("velocity" in character)
+	character.set_velocity(Vector2.ZERO)
+	# just zero velocity
+	
+	var offset = character_offsets[belong_handler]
+	offset = lerp(offset, character_offset, 0.1)
+	character.global_position = self.global_position +\
+		character_dunk_positions[belong_handler] + offset
+	character_offsets[belong_handler] = offset
+
+func _on_character_holder_processing_character(belong_handler : BelongHandler, delta):
+	pass
 
 func _on_DunkCooldown_timeout():
 	can_receive_dunk = true
 
-func remove_body(i : int):
-	assert(i < inside_bodies.size())
-	inside_bodies.remove_at(i)
-	bodies_positions.remove_at(i)
-
 ################################################################################
 
 func set_selection(type : int, value : bool):
-	if $basket_area.selected:
-		enable_contour()
-	else:
-		disable_contour()
-
-func enable_contour():
-	var light = $LightSmall
-	if tween_light:
-		tween_light.kill()
-	tween_light = self.create_tween()
-	tween_light.tween_property(light, "energy", 0.8, 0.15).set_ease(Tween.EASE_OUT)
-
-
-func disable_contour():
-	var light = $LightSmall
-	if tween_light:
-		tween_light.kill()
-	tween_light = self.create_tween()
-	tween_light.tween_property(light, "energy", 0.0, 0.15).set_ease(Tween.EASE_OUT)
+	pass # TODO

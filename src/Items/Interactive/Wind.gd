@@ -25,11 +25,11 @@ func _ready():
 
 func _physics_process(delta):
 	for body in $Area2D.get_overlapping_bodies():
-		if body is PhysicBody or body is Player:
+		if body is PhysicBody or body is Player: # or OldPlayer
 			var velocity = Vector2.ZERO
 			var penetration = 0.0
-			if body is Player:
-				velocity = body.S.velocity
+			if body is Player: # or OldPlayer
+				velocity = body.movement.velocity
 				penetration = 0.35
 			else :
 				velocity = body.linear_velocity

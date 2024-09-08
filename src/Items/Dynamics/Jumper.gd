@@ -26,7 +26,7 @@ func _on_Area2D_body_entered(body):
 	elif body.is_in_group("characters"):
 		var velocity_change = Vector2.ZERO
 		## TODO workaround because multiple players
-		if body is Player:
+		if body is OldPlayer:
 			# first delete the normal velocity of the body
 			velocity_change -= body.S.velocity.dot(jump_direction)*jump_direction
 			# then apply the jump impulse
@@ -34,8 +34,8 @@ func _on_Area2D_body_entered(body):
 			body.add_impulse(body.mass*velocity_change)
 			if cant_go_time > 0:
 				body.S.get_node("CanGoTimer").start(cant_go_time)
-		
-		elif body is NewPlayer:
+
+		elif body is Player:
 			# first delete the normal velocity of the body
 			velocity_change -= body.movement.velocity.dot(jump_direction)*jump_direction
 			## then apply the jump impulse

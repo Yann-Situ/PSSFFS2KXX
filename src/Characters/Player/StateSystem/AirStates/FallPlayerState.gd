@@ -7,6 +7,7 @@ extends PlayerMovementState
 @export var action_state : State
 @export var land_state : State
 @export var fallwall_state : State
+@export var jump_state : State
 
 # var belong : Status = Status.new(["belong"]) # appropriate declaration
 # var action : Status = Status.new(["belong"]) # appropriate declaration
@@ -22,6 +23,8 @@ func branch() -> State:
 	if logic.action.can:
 		return action_state
 
+	if logic.jump.can and !logic.jump_press_timer.is_stopped():
+		return jump_state # eventually coyote time, or double jump ?
 	if logic.floor.ing:
 		if abs(movement.velocity.x) > roll_speed_thresh:
 			land_state.set_variation(1)

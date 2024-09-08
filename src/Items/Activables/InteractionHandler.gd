@@ -65,3 +65,5 @@ func interact():
 		nearest_interaction.interact.call(self)
 		interacted.emit(nearest_interaction)
 		set_enabled(true)
+	else:
+		print("interact but no interaction")

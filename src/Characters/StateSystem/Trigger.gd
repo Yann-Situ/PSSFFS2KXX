@@ -44,19 +44,19 @@ func _init(s : String, _pressed = false, _just_pressed = false, _just_released =
 
 func set_pressed(b : bool):
 	if _locked:
-		push_warning("pressed not modified because the Status is locked")
+		push_warning("pressed not modified because the Trigger is locked")
 		return
 	pressed = b
 
 func set_just_pressed(b : bool):
 	if _locked:
-		push_warning("just_pressed not modified because the Status is locked")
+		push_warning("just_pressed not modified because the Trigger is locked")
 		return
 	just_pressed = b
 
 func set_just_released(b : bool):
 	if _locked:
-		push_warning("just_released not modified because the Status is locked")
+		push_warning("just_released not modified because the Trigger is locked")
 		return
 	just_released = b
 

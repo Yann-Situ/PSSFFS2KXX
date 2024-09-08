@@ -1,15 +1,23 @@
-[gd_scene load_steps=19 format=3 uid="uid://eq50gyc1bs85"]
+[gd_scene load_steps=27 format=3 uid="uid://eq50gyc1bs85"]
 
 [ext_resource type="PackedScene" uid="uid://b5emf4je4tnag" path="res://src/Levels/Room2D.tscn" id="1_6to1r"]
 [ext_resource type="PackedScene" uid="uid://rmukvjwyiahu" path="res://src/Items/Interactive/DashTarget.tscn" id="2_x00i2"]
 [ext_resource type="PackedScene" uid="uid://kvm1pfg6ben5" path="res://src/Items/Dynamics/Lines/NewRopeLine.tscn" id="3_3x1wr"]
 [ext_resource type="PackedScene" uid="uid://dxk7u2jsgah5u" path="res://src/Items/Dynamics/Lines/NewRailLine.tscn" id="4_bt87n"]
-[ext_resource type="PackedScene" uid="uid://cckqoik18dppx" path="res://src/Items/Baskets/NewBasket.tscn" id="5_h1nqp"]
+[ext_resource type="PackedScene" uid="uid://cckqoik18dppx" path="res://src/Items/Baskets/Basket.tscn" id="5_h1nqp"]
 [ext_resource type="PackedScene" uid="uid://bcnnkalot4kb0" path="res://src/Items/Dynamics/Jumper.tscn" id="6_tb8pt"]
 [ext_resource type="PackedScene" uid="uid://babjtotux2mv3" path="res://src/Map/MovingPlatform.tscn" id="7_ddpj5"]
 [ext_resource type="PackedScene" uid="uid://cxn2m3havcmil" path="res://src/Items/Balls/Ball.tscn" id="8_huh8k"]
 [ext_resource type="PackedScene" uid="uid://cd2wyj207og8s" path="res://src/Items/Balls/BallDash.tscn" id="9_8da21"]
 [ext_resource type="PackedScene" uid="uid://27jkgoi43hoq" path="res://src/Items/Balls/BallShock.tscn" id="10_i18ti"]
+[ext_resource type="PackedScene" uid="uid://clducx30br87q" path="res://src/Items/Balls/BallRolling.tscn" id="11_6iewx"]
+[ext_resource type="PackedScene" uid="uid://8alv0hbdmh5e" path="res://src/Items/Balls/BallMetal.tscn" id="12_aiskn"]
+[ext_resource type="PackedScene" uid="uid://bp35noq8krghh" path="res://src/Items/Balls/BallLight.tscn" id="13_u5qcv"]
+[ext_resource type="PackedScene" uid="uid://dalyby7b6ctua" path="res://src/Items/Balls/BallGravity.tscn" id="14_blgso"]
+[ext_resource type="PackedScene" uid="uid://c4ein3aak14an" path="res://src/Items/Balls/BallFire.tscn" id="15_vd7wt"]
+[ext_resource type="PackedScene" uid="uid://bjy7nt7bd313e" path="res://src/Items/Balls/BallBubble.tscn" id="16_2xjqm"]
+[ext_resource type="PackedScene" uid="uid://imtw5v2qrplf" path="res://src/Items/Balls/BallBouncy.tscn" id="17_axh6n"]
+[ext_resource type="PackedScene" uid="uid://bdhkn6l5lcxe0" path="res://src/Items/Balls/BallBoum.tscn" id="18_cblx7"]
 
 [sub_resource type="Gradient" id="Gradient_wwss0"]
 resource_local_to_scene = true
@@ -64,7 +72,6 @@ _data = {
 point_count = 2
 
 [node name="RoomTestNewPlayer" instance=ExtResource("1_6to1r")]
-using_new_player = true
 
 [node name="ParallaxBackground" parent="." index="1"]
 visible = false
@@ -74,6 +81,51 @@ texture = SubResource("GradientTexture2D_7hk6a")
 
 [node name="WorldEnvironment" parent="." index="5"]
 environment = SubResource("Environment_wlpjs")
+
+[node name="PlayerPosition" parent="." index="6"]
+position = Vector2(-1751, 154)
+
+[node name="Ball" parent="Environment/Balls" index="0" instance=ExtResource("8_huh8k")]
+position = Vector2(-1969, 230)
+
+[node name="Ball2" parent="Environment/Balls" index="1" instance=ExtResource("8_huh8k")]
+position = Vector2(-1088, 192)
+
+[node name="BallDash" parent="Environment/Balls" index="2" instance=ExtResource("9_8da21")]
+position = Vector2(-612, 251)
+
+[node name="BallShock" parent="Environment/Balls" index="3" instance=ExtResource("10_i18ti")]
+position = Vector2(-2068, 227)
+
+[node name="BallRolling" parent="Environment/Balls" index="4" instance=ExtResource("11_6iewx")]
+position = Vector2(-1817, 200)
+
+[node name="BallMetal" parent="Environment/Balls" index="5" instance=ExtResource("12_aiskn")]
+position = Vector2(-2228, 170)
+
+[node name="BallLight" parent="Environment/Balls" index="6" instance=ExtResource("13_u5qcv")]
+position = Vector2(-2366, 228)
+
+[node name="BallGravity" parent="Environment/Balls" index="7" instance=ExtResource("14_blgso")]
+position = Vector2(-2422, 200)
+
+[node name="BallFire" parent="Environment/Balls" index="8" instance=ExtResource("15_vd7wt")]
+position = Vector2(-1752, 67)
+
+[node name="BallFire2" parent="Environment/Balls" index="9" instance=ExtResource("15_vd7wt")]
+position = Vector2(-1709, -24)
+
+[node name="BallDash2" parent="Environment/Balls" index="10" instance=ExtResource("9_8da21")]
+position = Vector2(-2548, 225)
+
+[node name="BallBubble" parent="Environment/Balls" index="11" instance=ExtResource("16_2xjqm")]
+position = Vector2(-2636, 225)
+
+[node name="BallBouncy" parent="Environment/Balls" index="12" instance=ExtResource("17_axh6n")]
+position = Vector2(-2704, 218)
+
+[node name="BallBoum" parent="Environment/Balls" index="13" instance=ExtResource("18_cblx7")]
+position = Vector2(-2777, 193)
 
 [node name="StaticBody2D2" type="StaticBody2D" parent="Environment" index="5"]
 position = Vector2(640, 64)
@@ -144,7 +196,7 @@ position = Vector2(-128, 312)
 curve = SubResource("Curve2D_6gk4l")
 
 [node name="NewBasket" parent="Environment" index="13" instance=ExtResource("5_h1nqp")]
-position = Vector2(-168, 184)
+position = Vector2(-102, 176)
 
 [node name="NewBasket2" parent="Environment" index="14" instance=ExtResource("5_h1nqp")]
 position = Vector2(504, 168)
@@ -173,15 +225,3 @@ curve = SubResource("Curve2D_8bbvy")
 [node name="MovingPlatform2" parent="Environment" index="19" instance=ExtResource("7_ddpj5")]
 position = Vector2(-1272, 256)
 curve = SubResource("Curve2D_ptpn8")
-
-[node name="Ball" parent="Environment" index="20" instance=ExtResource("8_huh8k")]
-position = Vector2(-1400, 192)
-
-[node name="Ball2" parent="Environment" index="21" instance=ExtResource("8_huh8k")]
-position = Vector2(-1088, 192)
-
-[node name="BallDash" parent="." index="9" instance=ExtResource("9_8da21")]
-position = Vector2(-612, 251)
-
-[node name="BallShock" parent="." index="10" instance=ExtResource("10_i18ti")]
-position = Vector2(444, 295)

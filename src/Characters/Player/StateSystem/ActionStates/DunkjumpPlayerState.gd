@@ -4,6 +4,7 @@ extends PlayerMovementState
 @export var dunkjump_speed : float = -500.0 #: set = set_dunkjump_speed, get = get_dunkjump_speed ##
 @export var dunkjumphalfturn_threshold : float = 16.0 ## minimum distance from the basket at which it is possible to do a dunkjump_halfturn
 @export var min_jump_duration : float = 0.1 ## s # duration between the beginning of the jump (just after prejumping) to the first frame where land/fallwall/fall is possible.
+@export var ghost_modulate : Color# (Color, RGBA)
 
 @export_group("States")
 @export var belong_state : State
@@ -75,21 +76,10 @@ func enter(previous_state : State = null) -> State:
 	#player.set_flip_h(dunk_dir_x <0)
 	#logic.direction_sprite = -1 if dunk_dir_x < 0 else 1
 
-	# TODO
-	# if P.flip_h:
-	# S.is_dunkprejumping = true
-	# P.PlayerEffects.dust_start()
-	# basket = S.dunkjump_basket
-	# S.is_dunkjumphalfturning = false
-	# 	direction = -1
-	# else:
-	# 	direction = 1
-	# S.direction_sprite = direction
-	#
-	# if S.has_ball:
-	# 	P.PlayerEffects.ghost_start(0.8,0.1, Color.WHITE,S.active_ball.get_dash_gradient())
-	# else:
-	# 	P.PlayerEffects.ghost_start(0.8,0.1, ghost_modulate)
+	# effects
+	player.effect_handler.cloud_start(12)
+	Global.camera.screen_shake(0.1,6)
+	GodotParadiseGeneralUtilities.frame_freeze(0.2, 0.2)
 
 	print(self.name)
 	return next_state
@@ -138,8 +128,18 @@ func dunkprejump_end():
 
 ## should be called at physics frame # WARNING
 func dunkjump_movement():
-	## TODO do the jump: # change gravity stuff
-	# P.PlayerEffects.jump_start()
+	# effects
+	if logic.ball_handler.has_ball():
+		var ball = logic.ball_handler.held_ball
+		ball.on_dunkdash_start(player)
+		player.effect_handler.ghost_start(0.8,0.1, Color.WHITE,ball.get_dash_gradient())
+	else:
+		player.effect_handler.ghost_start(0.8,0.1, ghost_modulate)
+	GlobalEffect.make_distortion(player.global_position, 0.75, "fast_soft")
+	player.effect_handler.dust_start()
+	GlobalEffect.make_impact(player.effect_handler.global_position, \
+		GlobalEffect.IMPACT_TYPE.JUMP1, Vector2.UP)
+	
 	if basket_at_enter == null :
 		push_warning("basket_at_enter is null at the end of dunkprejumping")
 

@@ -11,7 +11,7 @@ extends PlayerMovementState
 @export var crouch_state : State
 
 func _ready():
-	animation_variations = [["idle"], ["walk"], ["grind-30"], ["halfturn"]] # TODO animation_variations[1] should be ["standstop"]
+	animation_variations = [["idle"], ["walk"], ["stand_stop"], ["halfturn"]]
 
 func branch() -> State:
 	if logic.belong_ing:
@@ -37,6 +37,7 @@ func animation_process() -> void:
 	set_variation(0) # ["idle"]
 	if logic.direction_sprite_change.ing:
 		set_variation(3) # ["turn"]
+		player.effect_handler.dust_start()
 	elif logic.side.ing :
 		if (logic.direction_pressed.x == 0):
 			set_variation(2) # ["standstop"]

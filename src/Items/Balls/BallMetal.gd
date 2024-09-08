@@ -38,20 +38,31 @@ func collision_effect(collider, collider_velocity, collision_point, collision_no
 					) * collision_normal)
 			add_impulse(mass*linear_velocity)
 
+func on_pickup(holder):
+	$Visuals/SpeedParticles.emitting = false
+
+################################################################################
+
 func power_p(player,delta):
-	if holder == Global.get_current_room() :
-		attract_alterer.set_value(attract_force*(player.global_position - global_position).normalized())
+	attract_alterer.set_value(attract_force*(player.global_position - global_position).normalized())
+func power_p_hold(player,delta):
+	pass
+
+func power_p_physics(player,delta):
+	pass
+func power_p_physics_hold(player,delta):
+	pass
 
 func power_jp(player,delta):
-	if holder == Global.get_current_room() :
-		add_accel(attract_alterer)
-		remove_accel(Global.gravity_alterer)
+	add_accel(attract_alterer)
+	remove_accel(Global.gravity_alterer)
+	GlobalEffect.make_impact(self.global_position, impact_effect)
+func power_jp_hold(player,delta):
+	pass
 
 func power_jr(player,delta):
 	if has_accel(attract_alterer) :
 		remove_accel(attract_alterer)
 		add_accel(Global.gravity_alterer)
-
-
-func on_pickup(holder):
-	$Visuals/SpeedParticles.emitting = false
+func power_jr_hold(player,delta):
+	power_jr(player,delta)

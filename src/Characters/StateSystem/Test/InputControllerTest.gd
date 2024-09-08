@@ -19,3 +19,13 @@ func update_triggers():
 	power.set_from_input_action('ui_power')
 	release.set_from_input_action('ui_release')
 	interact.set_from_input_action('ui_interact')
+
+func force_release_triggers():
+	Input.action_release('ui_up')
+	Input.action_release('ui_down')
+	Input.action_release('ui_left')
+	Input.action_release('ui_right')
+	Input.action_release('ui_accept')
+	Input.action_release('ui_power')
+	Input.action_release('ui_release')
+	Input.action_release('ui_interact')

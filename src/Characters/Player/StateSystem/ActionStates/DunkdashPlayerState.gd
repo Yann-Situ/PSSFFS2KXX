@@ -7,6 +7,7 @@ extends PlayerMovementState
 @export var dunkdash_speed : float = 800#pix/s
 @export var dunkdash_speed_belong : float = 600## when the dunkdash end by entering belong_state (e.g grind or hang) (in pix/s)
 @export var end_speed_ratio : float = 0.35 ## velocity will be multiplied by this amount at the end of the dunkdash
+@export var ghost_modulate : Color# (Color, RGBA)
 
 @export_group("States")
 @export var belong_state : State
@@ -71,16 +72,16 @@ func enter(previous_state : State = null) -> State:
 	logic.direction_sprite = -1 if dash_dir_x <0 else 1
 	logic.direction_sprite_change.can = false
 
-	# TODO
-	# if logic.has_ball:
-	# 	logic.active_ball.on_dunkdash_start(P)
-	# 	player.PlayerEffects.ghost_start(0.21,0.05, Color.WHITE,logic.active_ball.get_dash_gradient())
-	# else:
-	# 	player.PlayerEffects.ghost_start(0.21,0.05, ghost_modulate)
-	# player.PlayerEffects.cloud_start()
-	# player.PlayerEffects.jump_start()
-	# player.PlayerEffects.distortion_start("fast_soft",0.75)
-	# Global.camera.screen_shake(0.2,10)
+	# effects
+	if logic.ball_handler.has_ball():
+		var ball = logic.ball_handler.held_ball
+		ball.on_dunkdash_start(player)
+		player.effect_handler.ghost_start(0.21,0.05, Color.WHITE,ball.get_dash_gradient())
+	else:
+		player.effect_handler.ghost_start(0.21,0.05, ghost_modulate)
+	player.effect_handler.cloud_start()
+	GlobalEffect.make_distortion(player.global_position, 0.75, "fast_soft")
+	Global.camera.screen_shake(0.2,10)
 
 	print(self.name + " - velocity: " + str(dash_velocity.length()))
 	return next_state

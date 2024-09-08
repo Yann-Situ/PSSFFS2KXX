@@ -37,7 +37,7 @@ func branch() -> State:
 	if min_duration_timer.is_stopped():
 		if logic.floor.ing:
 			return land_state
-		if logic.wall.ing:
+		if logic.wall.ing: ## WARNING jump cancel won't be available after entering fallwall state, this can lead to undesired behavior
 			return fallwall_state
 		if movement.velocity.y > 0.0:
 			return fall_state
@@ -71,9 +71,10 @@ func enter(previous_state : State = null) -> State:
 		print("  | enter cancelled jump")
 		up_cancelled = true
 
-	# TODO
-	#player.PlayerEffects.dust_start()
-	#player.PlayerEffects.jump_start()
+	# effects
+	player.effect_handler.dust_start()
+	GlobalEffect.make_impact(player.effect_handler.global_position, \
+		GlobalEffect.IMPACT_TYPE.JUMP1, Vector2.UP)
 
 	return next_state
 

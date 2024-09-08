@@ -10,7 +10,7 @@
 [ext_resource type="PackedScene" uid="uid://c6cdyqr51vbxh" path="res://src/Items/Interactive/GraffSpray.tscn" id="9_jtj4e"]
 [ext_resource type="PackedScene" uid="uid://bbnppjd77snlx" path="res://src/Items/Interactive/Spikes.tscn" id="10_vd7sn"]
 [ext_resource type="PackedScene" uid="uid://bcnnkalot4kb0" path="res://src/Items/Dynamics/Jumper.tscn" id="11_681ud"]
-[ext_resource type="PackedScene" uid="uid://bola66fqnywdi" path="res://src/Items/Baskets/Basket.tscn" id="12_0ml8f"]
+[ext_resource type="PackedScene" uid="uid://cckqoik18dppx" path="res://src/Items/Baskets/Basket.tscn" id="12_0ml8f"]
 [ext_resource type="Material" uid="uid://dm1r5jw2hwj3c" path="res://assets/shader/material/graff_shadermaterial.tres" id="13_aksi2"]
 [ext_resource type="PackedScene" uid="uid://cxn2m3havcmil" path="res://src/Items/Balls/Ball.tscn" id="13_cmx4c"]
 [ext_resource type="Texture2D" uid="uid://ciao3pci3c3ax" path="res://assets/art/environment/environment-graff.png" id="13_e387i"]

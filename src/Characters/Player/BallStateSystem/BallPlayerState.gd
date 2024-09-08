@@ -1,7 +1,7 @@
 extends State
 class_name BallPlayerState
 
-@export var player : NewPlayer
+@export var player : Player
 @export var logic : PlayerStatusLogic
 @export var ball_handler : BallHandler
 
@@ -27,5 +27,5 @@ func exit():
 	pass
 
 func release_ball():
-	ball_handler.throw_ball(player.global_position, Vector2.ZERO)
-	print("                release ball")
+	if ball_handler.throw_ball(player.global_position, Vector2.ZERO):
+		print("                release ball")

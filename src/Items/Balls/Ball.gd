@@ -176,10 +176,10 @@ func on_goal():
 	pass
 
 # call by the dunkdash script
-func on_dunkdash_start(player: Player):
+func on_dunkdash_start(player):
 	pass
 # call by the dunkdash script
-func on_dunkdash_end(player: Player):
+func on_dunkdash_end(player):
 	pass
 
 func on_destruction(): # call before changing holder, disable_physics and deleting selectors

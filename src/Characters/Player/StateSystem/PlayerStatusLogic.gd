@@ -1,7 +1,7 @@
 extends StatusLogic
 class_name PlayerStatusLogic
 
-@export var player : NewPlayer
+@export var player : Player
 
 @export var ball_handler : BallHandler
 @export var shoot_handler : ShootHandler
@@ -46,6 +46,7 @@ var release : Status = Status.new("release") #
 var pickball : Status = Status.new("pickball") #
 var power : Status = Status.new("power") #
 
+var trigger_enabled : bool = true
 var up : Trigger = Trigger.new("up") #
 var down : Trigger = Trigger.new("down") #
 var left : Trigger = Trigger.new("left") #
@@ -53,6 +54,7 @@ var right : Trigger = Trigger.new("right") #
 var accept : Trigger = Trigger.new("accept") #
 var key_power : Trigger = Trigger.new("power") #
 var key_release : Trigger = Trigger.new("release") #
+var key_interact : Trigger = Trigger.new("interact") #
 
 var direction_pressed : Vector2 = Vector2.ZERO
 var direction_sprite = 1
@@ -106,6 +108,7 @@ func _ready():
 	accept = input_controller.accept
 	key_power = input_controller.power
 	key_release = input_controller.release
+	key_interact = input_controller.interact
 
 	stand.can = true
 	side.can = true
@@ -118,24 +121,31 @@ func _ready():
 
 	super._ready()
 
+func disable_input():
+	print_debug("disable_input")
+	trigger_enabled = false
+	input_controller.force_release_triggers()
+	update_triggers()
+func enable_input():
+	print_debug("enable_input")
+	trigger_enabled = true
+	
+
 ## Called by the parent StateMachine during the _physics_process call, before
 ## the State nodes physics_process calls.
 func physics_process(delta):
-	update_triggers()
+	if trigger_enabled:
+		update_triggers()
 	update_status()
-	# TODO add power, release, interact here? (targethandler?)
+	# TODO add interact here? (targethandler?)
 	# collision(?), life, camera and shooter are handled by player (targethandler?)
 	# the choice is a bit arbitrary, I would handle non-state stuff in player._process
+
+################################################################################
 
 ## update the triggers from the input_controller Node.
 func update_triggers():
 	input_controller.update_triggers()
-	# up = input_controller.up
-	# down = input_controller.down
-	# left = input_controller.left
-	# right = input_controller.right
-	# accept = input_controller.accept
-	# not necessary
 
 	direction_pressed = Vector2.ZERO
 	if up.pressed:
@@ -152,6 +162,7 @@ func update_triggers():
 		jump_press_timer.start()
 	if accept.just_pressed:
 		dunkjump_press_timer.start()
+
 ## update the status using logic.
 func update_status():
 	# action.ing
@@ -162,7 +173,8 @@ func update_status():
 	# belong_ing = belong_handler.is_belonging()
 
 	# ball_handler
-	pickball.can = ball_handler.can_pick
+	pickball.can = !ball_handler.has_ball()
+	ball_handler.can_pick = pickball.can
 	release.can = ball_handler.has_ball()
 	power.can = ball_handler.has_selected_ball()
 
@@ -192,6 +204,9 @@ func update_status():
 	shoot.can = shoot_handler.can_shoot_to_target() and\
 		no_shoot_timer.is_stopped() and\
 		(not action.ing)
+
+	# interaction_handler
+	interact.can = not action.ing # for the moment, interact is handled in Player.gd (handle_interaction()), but maybe it will be suitable to incorporate it in a state_machine?
 
 	# timer dependent
 	jump.can = not floor_timer.is_stopped() and no_jump_timer.is_stopped()
