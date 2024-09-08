@@ -2,8 +2,7 @@
 extends Node2D
 class_name RayHandler
 
-@export var P: NewPlayer ## P is only used for position
-@export var color : Color = Color(1.0,0.3,0.1)
+@export var P: Player ## P is only used for position
 
 var rays = []
 var rays_flip = []
@@ -15,8 +14,8 @@ var space_state : PhysicsDirectSpaceState2D
 func _ready():
 	rays_not_flip = [$Ray_fwd_down, $Ray_fwd_up, $Ray_up_fwd, $Ray_up_bwd, \
 		$Ray_down_fwd, $Ray_down_bwd, $Ray_slope_fwd, $Ray_slope_bwd]
-	rays_flip = [$Ray_fwd_down_f, $Ray_fwd_up_f, $Ray_up_bwd, $Ray_up_fwd, \
-		$Ray_down_bwd, $Ray_down_fwd, $Ray_slope_bwd, $Ray_slope_fwd]
+	#rays_flip = [$Ray_fwd_down_f, $Ray_fwd_up_f, $Ray_up_bwd, $Ray_up_fwd, \
+		#$Ray_down_bwd, $Ray_down_fwd, $Ray_slope_bwd, $Ray_slope_fwd]
 	rays = rays_not_flip
 
 func update_space_state(): # TODO change the following behavior : update_space_state() need to be called before
@@ -26,8 +25,11 @@ func update_space_state(): # TODO change the following behavior : update_space_s
 
 func cast(r): #we must have updated the space_state before
 	if not r.updated:
-		var query = PhysicsRayQueryParameters2D.create(P.position+r.position, \
-			P.position+r.position+r.target_position, P.collision_mask, [P])
+		## WARNING in the following line we use here P.collision_mask instead of r.collision mask 
+		# in order to take into account the changes in the playerwall layer
+		var target_position = r.target_position * P.flipper.scale # vector component multiplication
+		var query = PhysicsRayQueryParameters2D.create(r.global_position, \
+			r.global_position + target_position, P.collision_mask, [P])
 		r.intersection_info = space_state.intersect_ray(query)
 		r.result = r.intersection_info != {}
 		r.updated = true
@@ -54,7 +56,7 @@ func is_on_slope():
 	return (rays[4].result and not rays[5].result and rays[7].result) or \
 			(rays[5].result and not rays[4].result and rays[6].result)
 
-## not used yet
+## WARNING not used yet
 func can_wall_dive():
 	# update_space_state()
 	cast(rays[0])#fwd down
@@ -69,16 +71,3 @@ func can_stand():
 	cast(rays[3])#up bwd
 	return !(rays[2].result or rays[3].result)
 
-#############################
-
-func _draw():
-	if Global.DEBUG:
-		for r in rays:
-			if r.result:#r.is_colliding():
-				draw_circle(r.result.position-P.position, 2, color)
-				draw_line(r.position, r.position+r.target_position, color)
-
- # Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta):
-	if Global.DEBUG:
-		queue_redraw()
