@@ -1,7 +1,7 @@
 extends State
 class_name BallPlayerState
 
-@export var player : NewPlayer
+@export var player : Player
 @export var logic : PlayerStatusLogic
 @export var ball_handler : BallHandler
 

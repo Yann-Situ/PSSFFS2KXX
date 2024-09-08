@@ -2,7 +2,7 @@
 extends Node2D
 class_name EffectHandler
 
-@export var player: NewPlayer
+@export var player: Player
 var ghost_anim = preload("res://src/Effects/GhostAnim.tscn")
 var distortion_scene = preload("res://src/Effects/Distortion.tscn")
 #var jump_particles1 = preload("res://src/Effects/JumpParticles1.tscn")

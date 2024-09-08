@@ -2,5 +2,5 @@
 extends Node
 class_name Action
 
-@export var P: Player
+@export var P: OldPlayer
 @onready var S = P.get_state_node()

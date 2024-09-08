@@ -1,54 +1,54 @@
 [gd_scene load_steps=109 format=3 uid="uid://djjfl0v3y2pw5"]
 
-[ext_resource type="Script" path="res://src/Player/Player.gd" id="1"]
-[ext_resource type="Texture2D" uid="uid://fu53nbwvypbd" path="res://assets/art/characters/Player.png" id="2"]
-[ext_resource type="Script" path="res://src/Player/Shoot_predictor.gd" id="3"]
-[ext_resource type="Texture2D" uid="uid://cuuns5ibc34gj" path="res://assets/art/ball/ball_test.png" id="4"]
-[ext_resource type="PackedScene" uid="uid://b6mk7ytgxiui" path="res://src/Player/Player_State.tscn" id="5"]
-[ext_resource type="Script" path="res://src/Player/Ball_Handler.gd" id="6"]
-[ext_resource type="Script" path="res://src/Player/Special_Action_Handler.gd" id="9"]
-[ext_resource type="Script" path="res://src/Player/Ray.gd" id="10"]
-[ext_resource type="Texture2D" uid="uid://b4ujrsln765de" path="res://assets/art/ball/dust.png" id="11"]
-[ext_resource type="PackedScene" uid="uid://26l3hifm7i6c" path="res://src/Effects/DustParticle.tscn" id="12"]
-[ext_resource type="Script" path="res://src/Player/Player_Effects.gd" id="13"]
-[ext_resource type="PackedScene" uid="uid://bs8ju42cns0vf" path="res://src/Effects/GhostHandler.tscn" id="14"]
-[ext_resource type="Script" path="res://src/Player/Actions/Side.gd" id="15"]
-[ext_resource type="Script" path="res://src/Player/Actions/Jump.gd" id="16"]
-[ext_resource type="Script" path="res://src/Player/Actions/Walljump.gd" id="17"]
-[ext_resource type="Script" path="res://src/Player/Actions/Aim.gd" id="18"]
-[ext_resource type="Script" path="res://src/Player/Actions/Dunk.gd" id="19"]
-[ext_resource type="Script" path="res://src/Player/Actions/Shoot.gd" id="20"]
-[ext_resource type="Script" path="res://src/Player/Actions/Dunkjump.gd" id="21"]
-[ext_resource type="Script" path="res://src/Player/Actions/SelectBall.gd" id="22"]
-[ext_resource type="Script" path="res://src/Player/Actions/Interact.gd" id="22_qbwmr"]
-[ext_resource type="Script" path="res://src/Player/Actions/Adherence.gd" id="23"]
-[ext_resource type="Script" path="res://src/Player/Actions/Crouch.gd" id="24"]
-[ext_resource type="PackedScene" uid="uid://cq1tfkkoni136" path="res://src/Effects/TrailHandler.tscn" id="25"]
-[ext_resource type="Texture2D" uid="uid://c0e3bm1u8mxw8" path="res://assets/art/effects/trail.png" id="26"]
-[ext_resource type="PackedScene" uid="uid://br3tr8mssgqev" path="res://src/Effects/GrindParticles.tscn" id="27"]
-[ext_resource type="Shader" path="res://assets/shader/contour.gdshader" id="28"]
-[ext_resource type="Script" path="res://src/Player/Actions/Release.gd" id="29"]
-[ext_resource type="Script" path="res://src/Characters/LifeHandler.gd" id="30"]
-[ext_resource type="PackedScene" uid="uid://dnxamlpvh6e70" path="res://src/Items/Interactive/SelectorTarget.tscn" id="31"]
-[ext_resource type="Script" path="res://src/Player/Actions/Grind.gd" id="32"]
-[ext_resource type="Texture2D" uid="uid://scghoxayo4du" path="res://assets/art/gui/life_bar_fill.png" id="33"]
-[ext_resource type="Texture2D" uid="uid://c40av4lxtnfbo" path="res://assets/art/gui/ball_info_bg.png" id="34"]
-[ext_resource type="Texture2D" uid="uid://0bfw4lu2js4b" path="res://assets/art/gui/life_bar_bg.png" id="35"]
-[ext_resource type="Script" path="res://src/Characters/GUI/LifeBar.gd" id="36"]
-[ext_resource type="Script" path="res://src/Items/Interactive/Damageable.gd" id="37"]
-[ext_resource type="Script" path="res://src/Player/Actions/Dunkdash.gd" id="38"]
-[ext_resource type="Script" path="res://src/Player/Actions/Hang.gd" id="39"]
-[ext_resource type="Script" path="res://src/Player/Selector.gd" id="40"]
-[ext_resource type="Script" path="res://src/Player/Shooter.gd" id="41"]
-[ext_resource type="Script" path="res://src/Player/Camera.gd" id="41_uyfov"]
-[ext_resource type="Shader" path="res://assets/shader/shoot_viewer.gdshader" id="42"]
-[ext_resource type="PackedScene" uid="uid://bhw3riwbqaxpk" path="res://src/Effects/DustParticle1.tscn" id="43"]
-[ext_resource type="Script" path="res://src/Player/Actions/Slide.gd" id="44"]
-[ext_resource type="Texture2D" uid="uid://dhyhbly78c7qp" path="res://assets/art/icons/character.png" id="44_a1agg"]
-[ext_resource type="Script" path="res://src/Player/DebugGUI.gd" id="44_d6hbp"]
-[ext_resource type="AnimationNodeStateMachine" uid="uid://dcviqtnkvq3ry" path="res://src/Player/AnimationTreeHandler/Action.tres" id="45"]
-[ext_resource type="AnimationNodeBlendTree" uid="uid://cmsxpc5f28w5c" path="res://src/Player/AnimationTreeHandler/Stance.tres" id="46"]
-[ext_resource type="Script" path="res://src/Items/Activables/InteractionHandler.gd" id="48_8n6it"]
+[ext_resource type="Script" path="res://src/Characters/OldPlayer/OldPlayer.gd" id="1_8m2nb"]
+[ext_resource type="PackedScene" uid="uid://b6mk7ytgxiui" path="res://src/Characters/OldPlayer/Player_State.tscn" id="2_e7a61"]
+[ext_resource type="Script" path="res://src/Characters/OldPlayer/Special_Action_Handler.gd" id="3_rp2hy"]
+[ext_resource type="Script" path="res://src/Characters/Ray.gd" id="4_bxb38"]
+[ext_resource type="Script" path="res://src/Characters/OldPlayer/Selector.gd" id="5_03lfb"]
+[ext_resource type="PackedScene" uid="uid://dnxamlpvh6e70" path="res://src/Items/Interactive/SelectorTarget.tscn" id="6_rugwv"]
+[ext_resource type="Script" path="res://src/Characters/OldPlayer/Actions/Side.gd" id="7_jvol5"]
+[ext_resource type="Script" path="res://src/Characters/OldPlayer/Actions/Jump.gd" id="8_6apu6"]
+[ext_resource type="Script" path="res://src/Characters/OldPlayer/Actions/Walljump.gd" id="9_ftj7p"]
+[ext_resource type="Script" path="res://src/Characters/OldPlayer/Actions/Slide.gd" id="10_yyiju"]
+[ext_resource type="Script" path="res://src/Characters/OldPlayer/Actions/Crouch.gd" id="11_c6ahw"]
+[ext_resource type="Script" path="res://src/Characters/OldPlayer/Actions/Dunk.gd" id="12_p8o5n"]
+[ext_resource type="Script" path="res://src/Characters/OldPlayer/Actions/Dunkjump.gd" id="13_pic6r"]
+[ext_resource type="Script" path="res://src/Characters/OldPlayer/Actions/Dunkdash.gd" id="14_656qk"]
+[ext_resource type="Script" path="res://src/Characters/OldPlayer/Actions/Aim.gd" id="15_gkwxq"]
+[ext_resource type="Script" path="res://src/Characters/OldPlayer/Actions/Shoot.gd" id="16_xqwyf"]
+[ext_resource type="Script" path="res://src/Characters/OldPlayer/Actions/Adherence.gd" id="17_5pmey"]
+[ext_resource type="Script" path="res://src/Characters/OldPlayer/Actions/SelectBall.gd" id="18_mvdlr"]
+[ext_resource type="Script" path="res://src/Characters/OldPlayer/Actions/Release.gd" id="19_iuv18"]
+[ext_resource type="Script" path="res://src/Characters/OldPlayer/Actions/Grind.gd" id="20_fcxc6"]
+[ext_resource type="Script" path="res://src/Characters/OldPlayer/Actions/Hang.gd" id="21_ptofo"]
+[ext_resource type="Script" path="res://src/Characters/OldPlayer/Actions/Interact.gd" id="22_j040b"]
+[ext_resource type="Script" path="res://src/Characters/OldPlayer/Shooter.gd" id="23_swekb"]
+[ext_resource type="Shader" path="res://assets/shader/shoot_viewer.gdshader" id="24_j0jau"]
+[ext_resource type="Script" path="res://src/Characters/OldPlayer/Shoot_predictor.gd" id="25_we5gd"]
+[ext_resource type="Shader" path="res://assets/shader/contour.gdshader" id="26_n7xqu"]
+[ext_resource type="Texture2D" uid="uid://fu53nbwvypbd" path="res://assets/art/characters/Player.png" id="27_arvx7"]
+[ext_resource type="AnimationNodeStateMachine" uid="uid://dcviqtnkvq3ry" path="res://src/Characters/OldPlayer/AnimationTreeHandler/Action.tres" id="28_nx8pr"]
+[ext_resource type="AnimationNodeBlendTree" uid="uid://cmsxpc5f28w5c" path="res://src/Characters/OldPlayer/AnimationTreeHandler/Stance.tres" id="29_444ws"]
+[ext_resource type="Script" path="res://src/Characters/OldPlayer/Player_Effects.gd" id="30_4tdyl"]
+[ext_resource type="PackedScene" uid="uid://26l3hifm7i6c" path="res://src/Effects/DustParticle.tscn" id="31_3udgx"]
+[ext_resource type="Texture2D" uid="uid://b4ujrsln765de" path="res://assets/art/ball/dust.png" id="32_a33sf"]
+[ext_resource type="PackedScene" uid="uid://bs8ju42cns0vf" path="res://src/Effects/GhostHandler.tscn" id="33_uuufg"]
+[ext_resource type="PackedScene" uid="uid://cq1tfkkoni136" path="res://src/Effects/TrailHandler.tscn" id="34_vb0cl"]
+[ext_resource type="Texture2D" uid="uid://c0e3bm1u8mxw8" path="res://assets/art/effects/trail.png" id="35_a6sqq"]
+[ext_resource type="PackedScene" uid="uid://bhw3riwbqaxpk" path="res://src/Effects/DustParticle1.tscn" id="36_t12o1"]
+[ext_resource type="PackedScene" uid="uid://br3tr8mssgqev" path="res://src/Effects/GrindParticles.tscn" id="37_3qhnr"]
+[ext_resource type="Script" path="res://src/Characters/Player/Camera.gd" id="38_da3r7"]
+[ext_resource type="Script" path="res://src/Characters/GUI/LifeBar.gd" id="39_51kdo"]
+[ext_resource type="Texture2D" uid="uid://0bfw4lu2js4b" path="res://assets/art/gui/life_bar_bg.png" id="40_7b0dw"]
+[ext_resource type="Texture2D" uid="uid://scghoxayo4du" path="res://assets/art/gui/life_bar_fill.png" id="41_2rhbe"]
+[ext_resource type="Texture2D" uid="uid://c40av4lxtnfbo" path="res://assets/art/gui/ball_info_bg.png" id="42_j3ujs"]
+[ext_resource type="Script" path="res://src/Characters/OldPlayer/DebugGUI.gd" id="43_u638p"]
+[ext_resource type="Texture2D" uid="uid://dhyhbly78c7qp" path="res://assets/art/icons/character.png" id="44_bcc7o"]
+[ext_resource type="Script" path="res://src/Characters/LifeHandler.gd" id="45_qg8o2"]
+[ext_resource type="Script" path="res://src/Items/Interactive/Damageable.gd" id="46_x54il"]
+[ext_resource type="Script" path="res://src/Characters/OldPlayer/Ball_Handler.gd" id="47_hvnja"]
+[ext_resource type="Texture2D" uid="uid://cuuns5ibc34gj" path="res://assets/art/ball/ball_test.png" id="48_qli5f"]
+[ext_resource type="Script" path="res://src/Items/Activables/InteractionHandler.gd" id="49_pm0y7"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_0vsxb"]
 size = Vector2(17, 57)
@@ -62,13 +62,13 @@ resource_local_to_scene = true
 radius = 56.0
 
 [sub_resource type="ShaderMaterial" id="4"]
-shader = ExtResource("42")
+shader = ExtResource("24_j0jau")
 shader_parameter/parameter = 300.0
 shader_parameter/throw_position = null
 shader_parameter/tolerance = 15.0
 
 [sub_resource type="ShaderMaterial" id="67"]
-shader = ExtResource("28")
+shader = ExtResource("26_n7xqu")
 shader_parameter/activated = true
 shader_parameter/contour_color = Color(1, 1, 0.9, 0.9)
 
@@ -1413,9 +1413,9 @@ advance_expression = "is_non_cancelable"
 [sub_resource type="AnimationNodeStateMachine" id="38"]
 states/End/position = Vector2(462, 124)
 states/Start/position = Vector2(183, 119)
-states/action/node = ExtResource("45")
+states/action/node = ExtResource("28_nx8pr")
 states/action/position = Vector2(338, 101)
-states/stance/node = ExtResource("46")
+states/stance/node = ExtResource("29_444ws")
 states/stance/position = Vector2(323, 270.611)
 transitions = ["Start", "action", SubResource("AnimationNodeStateMachineTransition_p8a3c"), "action", "stance", SubResource("AnimationNodeStateMachineTransition_1362h"), "stance", "action", SubResource("AnimationNodeStateMachineTransition_eq5wl")]
 graph_offset = Vector2(0, -33.389)
@@ -1485,14 +1485,14 @@ size = Vector2(17, 57)
 [sub_resource type="CircleShape2D" id="CircleShape2D_s7vxl"]
 radius = 24.0
 
-[node name="Player" type="CharacterBody2D"]
+[node name="OldPlayer" type="CharacterBody2D"]
 light_mask = 4
 z_index = 100
 z_as_relative = false
 collision_mask = 514
 floor_max_angle = 0.886627
 platform_on_leave = 2
-script = ExtResource("1")
+script = ExtResource("1_8m2nb")
 crouch_speed_max = 200.0
 crouch_instant_speed = 50.0
 crouch_return_instant_speed_thresh = 85.0
@@ -1508,7 +1508,7 @@ landing_velocity_thresh = 310.0
 dunkjump_speed = -510.0
 dunkdash_speed = 700.0
 
-[node name="State" parent="." node_paths=PackedStringArray("player") instance=ExtResource("5")]
+[node name="State" parent="." node_paths=PackedStringArray("player") instance=ExtResource("2_e7a61")]
 visible = false
 player = NodePath("..")
 is_jumping = true
@@ -1521,7 +1521,10 @@ shape = SubResource("RectangleShape2D_0vsxb")
 
 [node name="SpecialActionHandler" type="Node2D" parent="Actions" node_paths=PackedStringArray("selectors", "P")]
 visible = false
-script = ExtResource("9")
+script = ExtResource("3_rp2hy")
+distaction = null
+color = null
+flip_h = null
 selectors = NodePath("../Selectors")
 P = NodePath("../..")
 
@@ -1530,70 +1533,70 @@ position = Vector2(0, -16)
 enabled = false
 target_position = Vector2(9, 0)
 collision_mask = 514
-script = ExtResource("10")
+script = ExtResource("4_bxb38")
 
 [node name="Ray_fwd_down" type="RayCast2D" parent="Actions/SpecialActionHandler"]
 position = Vector2(0, 32)
 enabled = false
 target_position = Vector2(9, 0)
 collision_mask = 514
-script = ExtResource("10")
+script = ExtResource("4_bxb38")
 
 [node name="Ray_fwd_up_f" type="RayCast2D" parent="Actions/SpecialActionHandler"]
 position = Vector2(0, -16)
 enabled = false
 target_position = Vector2(-9, 0)
 collision_mask = 514
-script = ExtResource("10")
+script = ExtResource("4_bxb38")
 
 [node name="Ray_fwd_down_f" type="RayCast2D" parent="Actions/SpecialActionHandler"]
 position = Vector2(0, 32)
 enabled = false
 target_position = Vector2(-9, 0)
 collision_mask = 514
-script = ExtResource("10")
+script = ExtResource("4_bxb38")
 
 [node name="Ray_up_fwd" type="RayCast2D" parent="Actions/SpecialActionHandler"]
 position = Vector2(8, 0)
 enabled = false
 target_position = Vector2(0, -20)
 collision_mask = 514
-script = ExtResource("10")
+script = ExtResource("4_bxb38")
 
 [node name="Ray_up_bwd" type="RayCast2D" parent="Actions/SpecialActionHandler"]
 position = Vector2(-8, 0)
 enabled = false
 target_position = Vector2(0, -20)
 collision_mask = 514
-script = ExtResource("10")
+script = ExtResource("4_bxb38")
 
 [node name="Ray_down_fwd" type="RayCast2D" parent="Actions/SpecialActionHandler"]
 position = Vector2(8, 28)
 enabled = false
 target_position = Vector2(0, 5)
 collision_mask = 514
-script = ExtResource("10")
+script = ExtResource("4_bxb38")
 
 [node name="Ray_down_bwd" type="RayCast2D" parent="Actions/SpecialActionHandler"]
 position = Vector2(-8, 28)
 enabled = false
 target_position = Vector2(0, 5)
 collision_mask = 514
-script = ExtResource("10")
+script = ExtResource("4_bxb38")
 
 [node name="Ray_slope_fwd" type="RayCast2D" parent="Actions/SpecialActionHandler"]
 position = Vector2(8, 32)
 enabled = false
 target_position = Vector2(0, 17)
 collision_mask = 514
-script = ExtResource("10")
+script = ExtResource("4_bxb38")
 
 [node name="Ray_slope_bwd" type="RayCast2D" parent="Actions/SpecialActionHandler"]
 position = Vector2(-8, 32)
 enabled = false
 target_position = Vector2(0, 17)
 collision_mask = 514
-script = ExtResource("10")
+script = ExtResource("4_bxb38")
 
 [node name="dunkjump_area" type="Area2D" parent="Actions/SpecialActionHandler"]
 visible = false
@@ -1615,92 +1618,93 @@ shape = SubResource("3")
 
 [node name="Selectors" type="Node2D" parent="Actions" node_paths=PackedStringArray("P")]
 visible = false
-script = ExtResource("40")
+script = ExtResource("5_03lfb")
 P = NodePath("../..")
 
-[node name="ShootTarget" parent="Actions/Selectors" instance=ExtResource("31")]
+[node name="ShootTarget" parent="Actions/Selectors" instance=ExtResource("6_rugwv")]
 modulate = Color(0.45098, 0.921569, 1, 1)
 rotation = 1.5708
 scale = Vector2(0.5, 0.5)
 
-[node name="DashTarget" parent="Actions/Selectors" instance=ExtResource("31")]
+[node name="DashTarget" parent="Actions/Selectors" instance=ExtResource("6_rugwv")]
 modulate = Color(1, 0.572549, 0.121569, 1)
 rotation = 0.785398
 scale = Vector2(0.75, 0.75)
 
-[node name="JumpTarget" parent="Actions/Selectors" instance=ExtResource("31")]
+[node name="JumpTarget" parent="Actions/Selectors" instance=ExtResource("6_rugwv")]
 modulate = Color(1.1, 0.3, 0.7, 1)
 
 [node name="Side" type="Node" parent="Actions" node_paths=PackedStringArray("P")]
-script = ExtResource("15")
+script = ExtResource("7_jvol5")
 P = NodePath("../..")
 
 [node name="Jump" type="Node" parent="Actions" node_paths=PackedStringArray("P")]
-script = ExtResource("16")
+script = ExtResource("8_6apu6")
 P = NodePath("../..")
 
 [node name="Walljump" type="Node" parent="Actions" node_paths=PackedStringArray("P")]
-script = ExtResource("17")
+script = ExtResource("9_ftj7p")
 P = NodePath("../..")
 
 [node name="Slide" type="Node" parent="Actions" node_paths=PackedStringArray("P")]
-script = ExtResource("44")
+script = ExtResource("10_yyiju")
 P = NodePath("../..")
 
 [node name="Crouch" type="Node" parent="Actions" node_paths=PackedStringArray("P")]
-script = ExtResource("24")
+script = ExtResource("11_c6ahw")
 P = NodePath("../..")
 
 [node name="Dunk" type="Node" parent="Actions" node_paths=PackedStringArray("P")]
-script = ExtResource("19")
+script = ExtResource("12_p8o5n")
 P = NodePath("../..")
 
 [node name="Dunkjump" type="Node" parent="Actions" node_paths=PackedStringArray("P")]
-script = ExtResource("21")
+script = ExtResource("13_pic6r")
 ghost_modulate = Color(1, 0.317647, 0.509804, 0.545098)
 dunkjumphalfturn_threshold = -48.0
 P = NodePath("../..")
 
 [node name="Dunkdash" type="Node" parent="Actions" node_paths=PackedStringArray("P")]
-script = ExtResource("38")
+script = ExtResource("14_656qk")
 ghost_modulate = Color(1, 0.803922, 0.435294, 0.52549)
 P = NodePath("../..")
 
 [node name="Aim" type="Node" parent="Actions" node_paths=PackedStringArray("P")]
-script = ExtResource("18")
+script = ExtResource("15_gkwxq")
 P = NodePath("../..")
 
 [node name="Shoot" type="Node" parent="Actions" node_paths=PackedStringArray("P")]
-script = ExtResource("20")
+script = ExtResource("16_xqwyf")
 P = NodePath("../..")
 
 [node name="Adherence" type="Node" parent="Actions" node_paths=PackedStringArray("P")]
-script = ExtResource("23")
+script = ExtResource("17_5pmey")
 P = NodePath("../..")
 
 [node name="SelectBall" type="Node" parent="Actions" node_paths=PackedStringArray("P")]
-script = ExtResource("22")
+script = ExtResource("18_mvdlr")
 P = NodePath("../..")
 
 [node name="Release" type="Node" parent="Actions" node_paths=PackedStringArray("P")]
-script = ExtResource("29")
+script = ExtResource("19_iuv18")
 P = NodePath("../..")
 
 [node name="Grind" type="Node" parent="Actions" node_paths=PackedStringArray("P")]
-script = ExtResource("32")
+script = ExtResource("20_fcxc6")
 P = NodePath("../..")
 
 [node name="Hang" type="Node" parent="Actions" node_paths=PackedStringArray("P")]
-script = ExtResource("39")
+script = ExtResource("21_ptofo")
 P = NodePath("../..")
 
 [node name="Interact" type="Node" parent="Actions" node_paths=PackedStringArray("interaction_handler", "P")]
-script = ExtResource("22_qbwmr")
+script = ExtResource("22_j040b")
 interaction_handler = NodePath("../../HorizontalFlipper/InteractionHandler")
 P = NodePath("../..")
 
 [node name="Shooter" type="Node2D" parent="." node_paths=PackedStringArray("P")]
-script = ExtResource("41")
+script = ExtResource("23_swekb")
+aim_tau_radius = null
 P = NodePath("..")
 
 [node name="ShootScreen" type="CanvasLayer" parent="Shooter"]
@@ -1714,13 +1718,13 @@ mouse_filter = 2
 color = Color(1, 1, 1, 0)
 
 [node name="ShootPredictor" type="Node2D" parent="Shooter" node_paths=PackedStringArray("P")]
-script = ExtResource("3")
+script = ExtResource("25_we5gd")
 P = NodePath("../..")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 light_mask = 4
 material = SubResource("67")
-texture = ExtResource("2")
+texture = ExtResource("27_arvx7")
 offset = Vector2(0.5, 0)
 hframes = 16
 vframes = 20
@@ -1741,12 +1745,12 @@ parameters/cancelable/stance/stancetransition/transition_request = "air"
 parameters/cancelable/stance/stancetransition/current_index = -1
 
 [node name="PlayerEffects" type="Node2D" parent="." node_paths=PackedStringArray("P")]
-script = ExtResource("13")
+script = ExtResource("30_4tdyl")
 P = NodePath("..")
 metadata/_edit_lock_ = true
 metadata/_edit_group_ = true
 
-[node name="DustParticle" parent="PlayerEffects" instance=ExtResource("12")]
+[node name="DustParticle" parent="PlayerEffects" instance=ExtResource("31_3udgx")]
 modulate = Color(0.85098, 0.85098, 0.85098, 1)
 material = SubResource("48")
 position = Vector2(0, 28)
@@ -1755,18 +1759,18 @@ lifetime = 0.4
 explosiveness = 0.67
 randomness = 0.24
 lifetime_randomness = 0.3
-texture = ExtResource("11")
+texture = ExtResource("32_a33sf")
 gravity = Vector2(0, 2)
 
-[node name="GhostHandler" parent="PlayerEffects" instance=ExtResource("14")]
+[node name="GhostHandler" parent="PlayerEffects" instance=ExtResource("33_uuufg")]
 
-[node name="TrailHandler" parent="PlayerEffects" instance=ExtResource("25")]
+[node name="TrailHandler" parent="PlayerEffects" instance=ExtResource("34_vb0cl")]
 wildness = 50.0
 gradient_col = SubResource("49")
 width_curve = SubResource("50")
-texture = ExtResource("26")
+texture = ExtResource("35_a6sqq")
 
-[node name="CloudParticles" parent="PlayerEffects" instance=ExtResource("43")]
+[node name="CloudParticles" parent="PlayerEffects" instance=ExtResource("36_t12o1")]
 z_index = -1
 material = SubResource("51")
 position = Vector2(0, 32)
@@ -1776,7 +1780,7 @@ texture = SubResource("55")
 lifetime = 0.65
 explosiveness = 0.9
 
-[node name="GrindParticles" parent="PlayerEffects" instance=ExtResource("27")]
+[node name="GrindParticles" parent="PlayerEffects" instance=ExtResource("37_3qhnr")]
 material = SubResource("CanvasItemMaterial_8s2w0")
 position = Vector2(0, 16)
 
@@ -1784,7 +1788,7 @@ position = Vector2(0, 16)
 z_index = 100
 position = Vector2(0, -35)
 limit_smoothed = true
-script = ExtResource("41_uyfov")
+script = ExtResource("38_da3r7")
 initial_position = Vector2(0, -32)
 velocity_max_offset_DOWN_RIGHT = Vector2(128, 128)
 
@@ -1804,7 +1808,7 @@ layout_mode = 2
 
 [node name="Bar" type="HBoxContainer" parent="UI/MarginContainer/HBoxContainer/VBoxContainer"]
 layout_mode = 2
-script = ExtResource("36")
+script = ExtResource("39_51kdo")
 label_path = NodePath("../../MarginContainer/TextureRect/RichTextLabel")
 
 [node name="LifeBar" type="TextureProgressBar" parent="UI/MarginContainer/HBoxContainer/VBoxContainer/Bar"]
@@ -1812,8 +1816,8 @@ layout_mode = 2
 max_value = 10.0
 step = 0.0
 value = 10.0
-texture_under = ExtResource("35")
-texture_progress = ExtResource("33")
+texture_under = ExtResource("40_7b0dw")
+texture_progress = ExtResource("41_2rhbe")
 tint_under = Color(1, 0.552941, 0.890196, 1)
 
 [node name="MarginContainer" type="MarginContainer" parent="UI/MarginContainer/HBoxContainer"]
@@ -1823,7 +1827,7 @@ size_flags_horizontal = 3
 [node name="TextureRect" type="TextureRect" parent="UI/MarginContainer/HBoxContainer/MarginContainer"]
 layout_mode = 2
 size_flags_horizontal = 8
-texture = ExtResource("34")
+texture = ExtResource("42_j3ujs")
 stretch_mode = 3
 
 [node name="RichTextLabel" type="RichTextLabel" parent="UI/MarginContainer/HBoxContainer/MarginContainer/TextureRect"]
@@ -1846,38 +1850,38 @@ offset_right = 20.0
 offset_bottom = 47.0
 grow_horizontal = 2
 size_flags_horizontal = 4
-script = ExtResource("44_d6hbp")
+script = ExtResource("43_u638p")
 
 [node name="SpriteVelocity" type="Sprite2D" parent="UI/DebugGUI"]
 visible = false
 modulate = Color(0.403922, 0.811765, 0.886275, 1)
 position = Vector2(-150, 52)
 scale = Vector2(0.5, 1)
-texture = ExtResource("44_a1agg")
+texture = ExtResource("44_bcc7o")
 
 [node name="SpriteSVelocity" type="Sprite2D" parent="UI/DebugGUI"]
 visible = false
 modulate = Color(1, 0.54902, 0.580392, 1)
 position = Vector2(150, 52)
 scale = Vector2(0.5, 1)
-texture = ExtResource("44_a1agg")
+texture = ExtResource("44_bcc7o")
 
 [node name="SpriteDeviation" type="Sprite2D" parent="UI/DebugGUI"]
 visible = false
 modulate = Color(0.65098, 0.941176, 0.219608, 1)
 position = Vector2(0, 52)
 scale = Vector2(0.5, 1)
-texture = ExtResource("44_a1agg")
+texture = ExtResource("44_bcc7o")
 
 [node name="Combos" type="Node" parent="."]
 
 [node name="LifeHandler" type="Node2D" parent="."]
-script = ExtResource("30")
+script = ExtResource("45_qg8o2")
 
 [node name="HitBox" type="Area2D" parent="LifeHandler"]
 collision_layer = 256
 collision_mask = 0
-script = ExtResource("37")
+script = ExtResource("46_x54il")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="LifeHandler/HitBox"]
 modulate = Color(1, 0, 0, 1)
@@ -1889,7 +1893,7 @@ shape = SubResource("58")
 [node name="BallHandler" type="Area2D" parent="HorizontalFlipper" node_paths=PackedStringArray("P", "ball_label")]
 collision_layer = 0
 collision_mask = 4
-script = ExtResource("6")
+script = ExtResource("47_hvnja")
 P = NodePath("../..")
 ball_label = NodePath("../../UI/MarginContainer/HBoxContainer/MarginContainer/TextureRect/RichTextLabel")
 
@@ -1903,7 +1907,7 @@ position = Vector2(4, -6)
 [node name="HasBallPosition" type="Sprite2D" parent="HorizontalFlipper/BallHandler"]
 visible = false
 position = Vector2(9, 12)
-texture = ExtResource("4")
+texture = ExtResource("48_qli5f")
 
 [node name="BallWallDetector" type="Area2D" parent="HorizontalFlipper/BallHandler"]
 collision_layer = 0
@@ -1920,7 +1924,7 @@ position = Vector2(9, 0)
 collision_layer = 0
 collision_mask = 2048
 monitorable = false
-script = ExtResource("48_8n6it")
+script = ExtResource("49_pm0y7")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="HorizontalFlipper/InteractionHandler"]
 shape = SubResource("CircleShape2D_s7vxl")

@@ -1,7 +1,7 @@
 extends Control
 
 @export var activated : bool = false : set = set_activated
-@export var player : NewPlayer
+@export var player : Player
 
 func set_activated(v:bool):
 	activated = v

@@ -1,7 +1,7 @@
 extends Node2D
 
 @export var selectors : Selectors
-@export var P: Player
+@export var P: OldPlayer
 @onready var S = P.get_state_node()
 
 @export var distaction = Vector2(8.1,0)

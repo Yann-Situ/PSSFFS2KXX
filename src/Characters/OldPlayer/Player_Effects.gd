@@ -1,6 +1,6 @@
 extends Node2D
 
-@export var P: Player
+@export var P: OldPlayer
 @onready var S = P.get_state_node()
 
 var ghost_anim = preload("res://src/Effects/GhostAnim.tscn")

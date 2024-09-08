@@ -1,7 +1,7 @@
 extends StatusLogic
 class_name PlayerStatusLogic
 
-@export var player : NewPlayer
+@export var player : Player
 
 @export var ball_handler : BallHandler
 @export var shoot_handler : ShootHandler

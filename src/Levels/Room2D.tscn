@@ -1,6 +1,6 @@
 [gd_scene load_steps=26 format=3 uid="uid://b5emf4je4tnag"]
 
-[ext_resource type="PackedScene" uid="uid://cjbsx2kbm5qhk" path="res://src/Player/PlayerPosition.tscn" id="1"]
+[ext_resource type="PackedScene" uid="uid://cjbsx2kbm5qhk" path="res://src/Characters/OldPlayer/PlayerPosition.tscn" id="1"]
 [ext_resource type="Script" path="res://src/Levels/RoomAnimations.gd" id="3"]
 [ext_resource type="Shader" path="res://assets/shader/cinematic.gdshader" id="5_ct7gl"]
 [ext_resource type="TileSet" uid="uid://berkn1bildrf3" path="res://src/Map/TileSet.tres" id="5_q68b4"]

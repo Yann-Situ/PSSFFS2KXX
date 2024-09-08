@@ -2,7 +2,7 @@ extends Node2D
 
 @export_range(0.0,500) var aim_tau_radius : float = 100 ## I don't remember what is it for...
 
-@export var P: Player
+@export var P: OldPlayer
 @onready var S = P.get_state_node()
 @onready var shader = $ShootScreen/ShootScreenShader.material
 

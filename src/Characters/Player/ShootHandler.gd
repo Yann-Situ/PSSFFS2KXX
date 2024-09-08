@@ -2,8 +2,6 @@
 extends Node2D
 class_name ShootHandler
 
-# @export var P: Player ## not necessary
-
 @export_range(0.0,500) var aim_tau_radius : float = 100 ## I don't remember what is it for...
 @export var throw_impulse : float = 600.0 ## kg.pix/s
 @export var global_gravity_scale_TODO : float = 1.0 ## TODO implement extended shooter, with arbitrary forces/accel.

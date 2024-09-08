@@ -20,7 +20,7 @@ func collision_effect(collider, collider_velocity, collision_point, collision_no
 	set_local_gravity(Vector2.DOWN.angle_to(-collision_normal))
 
 func on_throw(previous_holder : Node):
-	if previous_holder is NewPlayer :
+	if previous_holder is Player :
 		power_jr_hold(previous_holder,0.0)
 
 ################################################################################

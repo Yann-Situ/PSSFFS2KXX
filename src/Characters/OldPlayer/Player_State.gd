@@ -1,6 +1,6 @@
 extends Node
 
-@export var player: Player
+@export var player: OldPlayer
 @onready var actions = player.get_node("Actions")
 
 var frame_time_ms = 1.0/60.0 #s
@@ -167,7 +167,7 @@ func _input(event):
 	power_jr =  Input.is_action_just_released("ui_power")
 	release_jp =  Input.is_action_just_pressed("ui_release")
 	interact_jp =  Input.is_action_just_pressed("ui_interact")
-	
+
 	if jump_jp:
 		$ToleranceJumpPressTimer.start(tolerance_jump_press)
 	if dunk_jp:
@@ -331,7 +331,7 @@ func disable_input():
 	dunk_p = false
 	power_p = false
 	set_one_shot_inputs_false()
-	
+
 ## Called at the end of process in order to have the just_pressed and just_release
 ## inputs used once.
 func set_one_shot_inputs_false():

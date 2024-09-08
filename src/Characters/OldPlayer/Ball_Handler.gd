@@ -2,7 +2,7 @@ extends Area2D
 # Ball pickup, thrower, shooter, selector, ballwaller
 ## TODO: rework to put the ball in this class
 
-@export var P: Player
+@export var P: OldPlayer
 @export var ball_label: RichTextLabel
 @onready var S = P.get_state_node()
 
@@ -13,7 +13,6 @@ func _ready():
 	assert(is_instance_valid(P))
 
 func _on_Ball_Handler_body_entered(body):
-	#print(body.name+" entering "+Player.name+" ballhandler area")
 	if body.is_in_group("balls"):
 		if body.is_reparenting():
 			print_debug(" - ballhandler "+body.name+" is ignored because reparenting")
@@ -101,7 +100,7 @@ func select_ball(ball : Ball): # called by ball.select(P)
 	if S.selected_ball != null and S.selected_ball != ball:
 			S.selected_ball.deselect(P)
 	S.selected_ball = ball
-	
+
 	#TEMPORARY CONTROL NODE
 	if ball_label:
 		ball_label.clear()
@@ -120,7 +119,7 @@ func deselect_ball(ball : Ball): # called by ball.deselect(P)
 	if S.power_p:
 		S.selected_ball.power_jr(P,0.0)
 	S.selected_ball = null
-	
+
 	#TEMPORARY CONTROL NODE
 	if ball_label:
 		ball_label.clear()

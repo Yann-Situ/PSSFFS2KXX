@@ -9,7 +9,7 @@ class_name Level
 
 var rooms = {} # map : name -> Room2D
 var current_room_instance = null : set = set_current_room_instance
-var player_scene = preload("res://src/Player/Player.tscn")
+var player_scene = preload("res://src/Characters/Player/Player.tscn")
 var meta_player = null
 var player_save = null
 

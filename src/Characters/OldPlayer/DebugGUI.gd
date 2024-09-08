@@ -1,7 +1,7 @@
 extends Control
 
 @export var activated : bool = false : set = set_activated
-@onready var player : Player = get_parent().get_parent()
+@onready var player : OldPlayer = get_parent().get_parent()
 
 func set_activated(v:bool):
 	activated = v

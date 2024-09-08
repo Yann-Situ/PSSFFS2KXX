@@ -1,9 +1,9 @@
 [gd_resource type="AnimationNodeBlendTree" load_steps=6 format=3 uid="uid://cmsxpc5f28w5c"]
 
-[ext_resource type="AnimationNodeStateMachine" uid="uid://brgg417mdoma0" path="res://src/Player/AnimationTreeHandler/Ground.tres" id="1"]
-[ext_resource type="AnimationNodeAnimation" path="res://src/Player/AnimationTreeHandler/Hang.tres" id="2"]
-[ext_resource type="AnimationNodeBlendSpace1D" uid="uid://ce5frftffl5k" path="res://src/Player/AnimationTreeHandler/Grind.tres" id="3"]
-[ext_resource type="AnimationNodeStateMachine" uid="uid://cnywf2cxx1om3" path="res://src/Player/AnimationTreeHandler/Air.tres" id="4"]
+[ext_resource type="AnimationNodeStateMachine" uid="uid://brgg417mdoma0" path="res://src/Characters/OldPlayer/AnimationTreeHandler/Ground.tres" id="1"]
+[ext_resource type="AnimationNodeAnimation" path="res://src/Characters/OldPlayer/AnimationTreeHandler/Hang.tres" id="2"]
+[ext_resource type="AnimationNodeBlendSpace1D" uid="uid://ce5frftffl5k" path="res://src/Characters/OldPlayer/AnimationTreeHandler/Grind.tres" id="3"]
+[ext_resource type="AnimationNodeStateMachine" uid="uid://cnywf2cxx1om3" path="res://src/Characters/OldPlayer/AnimationTreeHandler/Air.tres" id="4"]
 
 [sub_resource type="AnimationNodeTransition" id="1"]
 input_0/name = "ground"

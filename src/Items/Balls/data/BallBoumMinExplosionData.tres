@@ -15,6 +15,6 @@ collision_shape = SubResource("CircleShape2D_606rb")
 path_exceptions = Array[NodePath]([])
 momentum_breakable = 400.0
 momentum_electric = 0.0
-momentum_physicbody = 500.0
+momentum_physicbody = 300.0
 damage_value = 1.0
 damage_duration = 1.0

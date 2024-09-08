@@ -37,7 +37,7 @@ func branch() -> State:
 	if min_duration_timer.is_stopped():
 		if logic.floor.ing:
 			return land_state
-		if logic.wall.ing:
+		if logic.wall.ing: ## WARNING jump cancel won't be available after entering fallwall state, this can lead to undesired behavior
 			return fallwall_state
 		if movement.velocity.y > 0.0:
 			return fall_state

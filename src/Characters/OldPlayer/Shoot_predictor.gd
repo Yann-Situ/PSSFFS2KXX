@@ -1,6 +1,6 @@
 extends Node2D
 
-@export var P: Player
+@export var P: OldPlayer
 @onready var S = P.get_state_node()
 
 var points = Array()
@@ -31,7 +31,7 @@ func shoot_vector(): # return shoot vector if player not moving
 	if S.active_ball != null: # to be sure
 		t = t/S.active_ball.mass
 	return t * (Global.camera.get_global_mouse_position() -
-					Player.position).normalized()
+					P.position).normalized()
 
 func _draw():
 	for i in range(0, points.size() - 1, coeff_display):

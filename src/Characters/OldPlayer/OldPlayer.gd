@@ -1,6 +1,6 @@
 @icon("res://assets/art/icons/popol.png")
 extends CharacterBody2D
-class_name Player
+class_name OldPlayer
 
 var _zero_velocity_workaround = false
 

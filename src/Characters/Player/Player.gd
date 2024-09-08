@@ -1,6 +1,6 @@
 @icon("res://assets/art/icons/popol.png")
 extends CharacterBody2D
-class_name NewPlayer
+class_name Player
 
 @export var movement : MovementData
 ## movement is modified by several nodes:
@@ -88,6 +88,11 @@ func set_start_position(_position):
 
 func reset_position():
 	global_position = start_position
+
+func reset_move():
+	global_position = start_position
+	state_machine.reset_states()
+	movement.velocity = Vector2.ZERO
 
 ################################################################################
 
