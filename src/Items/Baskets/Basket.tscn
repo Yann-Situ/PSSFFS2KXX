@@ -127,7 +127,7 @@ color_ramp = SubResource("18")
 anim_speed_min = 1.0
 anim_speed_max = 1.0
 
-[node name="NewBasket" type="Node2D"]
+[node name="Basket" type="Node2D"]
 z_index = 160
 z_as_relative = false
 script = ExtResource("1_1qq5r")

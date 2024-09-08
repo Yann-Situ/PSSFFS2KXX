@@ -23,10 +23,11 @@ class_name Player
 @onready var Camera = get_node("Camera")
 
 @onready var ball_handler = get_node("Flipper/BallHandler")
+@onready var interaction_handler = get_node("Flipper/InteractionHandler")
 @onready var shoot_handler = get_node("Flipper/ShootHandler")
 @onready var selectable_handler = get_node("Flipper/SelectableHandler")
 @onready var ray_handler = get_node("Flipper/RayHandler")
-#@onready var held_handler = get_node("Flipper/HeldHandler")
+@onready var belong_handler = get_node("Flipper/BelongHandler")
 @onready var target_handler = get_node("Flipper/TargetHandler")
 @onready var ambient_handler = get_node("Flipper/AmbientHandler")
 
@@ -115,6 +116,8 @@ func _physics_process(delta):
 	update_collision()
 	update_ambient_data()
 	update_selectable_handler()
+	handle_interaction()
+	
 ################################################################################
 # updates of some sub nodes (mostly, handlers) whose behavior depends on S or each other
 
@@ -154,7 +157,7 @@ func update_camera() -> void:
 #			S.aim_direction = 1
 #		else :
 #			S.aim_direction = -1
-	elif S.crouch.ing :
+	elif S.crouch.ing and S.down.pressed:
 		Camera.set_offset_x_from_velocity(movement.velocity.x, 0.4)
 		Camera.set_offset_y_from_crouch(0.2)
 	else :
@@ -212,6 +215,11 @@ func update_ambient_data() -> void:
 		else:
 			movement.ambient = ambient_handler.ambient_data_air
 
+## TEMPORARY handling of interaction. called in _physics_process
+func handle_interaction():
+	if S.interact.can and S.key_interact.just_pressed:
+		interaction_handler.interact()
+ # for the moment, interact is handled in Player.gd (handle_interaction()), but maybe it will be suitable to incorporate it in a state_machine?
 ################################################################################
 # For physicbody
 

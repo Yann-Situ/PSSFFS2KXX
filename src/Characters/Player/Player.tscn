@@ -1431,7 +1431,6 @@ libraries = {
 }
 
 [node name="InteractionHandler" type="Area2D" parent="Flipper"]
-visible = false
 modulate = Color(0.176, 0.922, 0.51, 0.804)
 position = Vector2(9, 0)
 collision_layer = 0

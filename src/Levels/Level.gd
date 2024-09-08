@@ -78,7 +78,7 @@ func change_room(next_room : String, next_room_portal : String):
 #		current_room_instance.remove_child(player_save)
 #		current_room_instance.add_child(meta_player)
 
-		current_room_instance.enter_room(next_room_portal) #move it to the appropriate position
 		self.add_child(current_room_instance)
+		current_room_instance.enter_room(next_room_portal) #move it to the appropriate position
 	else :
 		printerr(name+" doesn't have a preloaded room named "+next_room)

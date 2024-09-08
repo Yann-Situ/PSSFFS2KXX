@@ -9,7 +9,7 @@ var gravity_alterer = AltererAdditive.new(default_gravity)
 var cinematic_playing = false: set=set_cinematic_state, get=is_cinematic_playing
 var camera : Camera2D = null : set = set_current_camera, get = get_current_camera
 var current_room : Room2D = null : set = set_current_room, get = get_current_room
-var current_player = null : set = set_current_player, get = get_current_player # TODO types for newplayer
+var current_player : Player = null : set = set_current_player, get = get_current_player # 
 
 var playing = true
 var list_of_physical_nodes = []
