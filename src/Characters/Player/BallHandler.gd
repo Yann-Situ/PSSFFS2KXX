@@ -4,6 +4,9 @@ class_name BallHandler
 # Ball pickup, thrower, shooter, selector, ballwaller
 ## TODO: rework to put the ball in this class
 
+signal is_picking(ball : Ball)
+signal is_freeing(ball : Ball)
+
 @export var P: Player
 @export var ball_label: RichTextLabel
 @export var can_pick: bool = true ## can_pick must be set by S, depending on has_ball and actions like is_shooting
@@ -59,17 +62,20 @@ func set_has_ball_position(): # TODO it might be interesting to do it with a Rem
 # Ball Holder call order:
 # Pickup:
 #- holder.pickup_ball(ball)
+# - is_picking.emit
 #	- ball.pickup(holder)
 #		- old_holder.free_ball(ball) # if the old_holder was not the current room
+#				- old_holder.is_freeing.emit
 #		- reparenting system
 #		- ball.disable_physics()
 #		- ball.on_pickup(holder) # additional effect
 # Throw:
 #- old_holder.throw_ball(...) # or any function that calls ball.throw(...)
 #	- ball.throw(position, velocity)
-#		- ball.enable_physics()
 #		- old_holder.free_ball(ball)
+#				- old_holder.is_freeing.emit
 #		- reparenting system
+#		- ball.enable_physics()
 #		- ball.on_throw(old_holder) # additional effect
 
 func pickup_ball(ball : Ball):
@@ -82,9 +88,8 @@ func pickup_ball(ball : Ball):
 		return
 	# has_ball() = true
 	held_ball = ball
-	if P.physics_enabled:
-		P.set_collision_mask_value(10, true) #ball_wall collision layer
-	P.collision_mask_save |= 1<<10 # same as set_collision_mask_value(10,true)
+	
+	self.is_picking.emit(ball)
 	ball.pickup(P)
 	ball.select(P) # will then deselect the current ball by calling P.deselect_ball which calls self.deselect_ball
 
@@ -92,11 +97,7 @@ func free_ball(ball : Ball): # set out  active_ball and has_ball
 	# called by ball when thrown or deleted
 	if has_ball() and held_ball == ball:
 		held_ball = null
-		# has_ball() = false
-		if P.physics_enabled:
-			P.set_collision_mask_value(10, false) #ball_wall collision layer # TODO rework
-		P.collision_mask_save &= ~(1<<10) # same as set_collision_mask_value(10, false)
-		#print(str(P.collision_layer)+" "+str(P.collision_layer_save))
+		self.is_freeing.emit(ball)
 		print(P.name+" free_ball")
 	elif has_ball() :
 		printerr(P.name+" free_ball on other ball")

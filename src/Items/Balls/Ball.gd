@@ -103,8 +103,10 @@ func pickup(holder_node):
 	assert(holder_node != null)
 	change_holder(holder_node)
 	self.disable_physics()
+	
 	self.transform.origin = Vector2.ZERO
 	self.z_index = holder_node.z_index+1
+	
 	on_pickup(holder_node)
 	is_picked_up.emit()
 	$Visuals/Reconstruction.restart()
@@ -119,6 +121,7 @@ func throw(_position, velo):
 	linear_velocity = velo
 	self.z_index = Global.z_indices["ball_0"]
 	self.enable_physics()
+	
 	on_throw(previous_holder)
 	is_thrown.emit()
 
