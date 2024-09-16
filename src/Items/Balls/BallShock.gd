@@ -77,7 +77,7 @@ func power_jp(player,delta):
 	shock(self.global_position)
 func power_jp_hold(player,delta):
 	if $Timer.is_stopped():
-		if player.S.jump.can and player.S.crouch.ing:
+		if player.S.jump.can and player.S.crouch.ing and player.S.down.pressed:
 			player.add_impulse(shock_jump*Vector2.UP)
 			shock(player.global_position+CROUCH_SHOCK_OFFSET)
 		elif !player.S.floor.ing and player.S.down.pressed:
