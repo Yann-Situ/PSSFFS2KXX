@@ -194,8 +194,11 @@ func update_selectable_handler() -> void:
 ## TODO maybe this should be handled by State nodes.
 ## should be called in _physics_process()
 func update_collision() -> void:
+	# LAYERS
+	
+	
 	# HITBOX:
-	if S.crouch.ing or not S.stand.can:
+	if S.crouch.ing or not S.stand.can or S.dunkdash.ing:
 		collision.shape.set_size(Vector2(17,31))
 		collision.position.y = 16.5
 	else :
@@ -220,6 +223,7 @@ func handle_interaction():
 	if S.interact.can and S.key_interact.just_pressed:
 		interaction_handler.interact()
  # for the moment, interact is handled in Player.gd (handle_interaction()), but maybe it will be suitable to incorporate it in a state_machine?
+
 ################################################################################
 # For physicbody
 
@@ -284,9 +288,17 @@ func free_ball(ball : Ball):
 	# set out  active_ball and has_ball
 	ball_handler.free_ball(ball)
 
-################################################################################
+	################################################################################
 # For ball selection
 func select_ball(ball : Ball):
 	ball_handler.select_ball(ball)
 func deselect_ball(ball : Ball):
 	ball_handler.deselect_ball(ball)
+
+################################################################################
+# For ballwall handling
+func collision_mask_remove_ballwall():
+	set_collision_mask_value(11, false) #ball_wall collision layer
+		
+func collision_mask_add_ballwall():
+	set_collision_mask_value(11, true) #ball_wall collision layer
