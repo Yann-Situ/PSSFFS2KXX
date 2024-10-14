@@ -25,7 +25,7 @@ func branch() -> State:
 
 	if logic.jump.can and !logic.jump_press_timer.is_stopped():
 		return jump_state # eventually coyote time, or double jump ?
-	if logic.floor.ing:
+	if (logic.floor.ing or logic.ray_handler.is_above_floor()) and movement.velocity.y >= 0.0: # floor.ing and locally falling
 		if abs(movement.velocity.x) > roll_speed_thresh:
 			land_state.set_variation(1)
 		else:

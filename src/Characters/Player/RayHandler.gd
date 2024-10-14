@@ -17,6 +17,7 @@ func _ready():
 	#rays_flip = [$Ray_fwd_down_f, $Ray_fwd_up_f, $Ray_up_bwd, $Ray_up_fwd, \
 		#$Ray_down_bwd, $Ray_down_fwd, $Ray_slope_bwd, $Ray_slope_fwd]
 	rays = rays_not_flip
+	update_space_state()
 
 func update_space_state(): # TODO change the following behavior : update_space_state() need to be called before
 	space_state = get_world_2d().direct_space_state
@@ -46,7 +47,14 @@ func is_on_floor():
 	cast(rays[4])#down fwd
 	cast(rays[5])#down bwd
 	return (rays[4].result or rays[5].result)
+	
+func is_above_floor():
+	# update_space_state()
+	cast(rays[6])#down fwd
+	cast(rays[7])#down bwd
+	return (rays[6].result or rays[7].result)
 
+## WARNING not used yet
 func is_on_slope():
 	# update_space_state()
 	cast(rays[4])#down fwd

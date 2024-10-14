@@ -27,7 +27,10 @@ func branch() -> State:
 	if logic.action.can:
 		return action_state
 	if !logic.floor.ing:
-		return fall_state
+		if !logic.ray_handler.is_above_floor():
+			return fall_state
+		else :
+			print("--- slide above floor")
 
 	if !logic.down.pressed:
 		end_slide = true

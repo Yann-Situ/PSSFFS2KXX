@@ -276,7 +276,7 @@ saturation_distribution = SubResource("33")
 lightness_distribution = SubResource("39")
 weight = 1.0
 
-[sub_resource type="Resource" id="Resource_cub8c"]
+[sub_resource type="Resource" id="Resource_6j4kx"]
 resource_local_to_scene = true
 script = ExtResource("6_71oce")
 color_samplers = Array[Resource("res://src/Global/CustomResources/ColorSampler.gd")]([SubResource("19"), SubResource("23"), SubResource("31"), SubResource("35")])
@@ -457,7 +457,7 @@ position = Vector2(1664, 0)
 [node name="PedestrianGenerator" parent="." index="7" instance=ExtResource("11")]
 position = Vector2(1248, 0)
 x_radius = 700.0
-palette_scheme_sampler = SubResource("Resource_cub8c")
+palette_scheme_sampler = SubResource("Resource_6j4kx")
 walk_speed_min = 35.0
 
 [node name="CanvasModulate" parent="Map" index="0"]

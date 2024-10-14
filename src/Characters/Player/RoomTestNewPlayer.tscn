@@ -1,4 +1,4 @@
-[gd_scene load_steps=28 format=3 uid="uid://eq50gyc1bs85"]
+[gd_scene load_steps=29 format=3 uid="uid://eq50gyc1bs85"]
 
 [ext_resource type="PackedScene" uid="uid://b5emf4je4tnag" path="res://src/Levels/Room2D.tscn" id="1_6to1r"]
 [ext_resource type="PackedScene" uid="uid://rmukvjwyiahu" path="res://src/Items/Interactive/DashTarget.tscn" id="2_x00i2"]
@@ -48,6 +48,9 @@ adjustment_saturation = 1.01
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_mer8j"]
 size = Vector2(128, 256)
 
+[sub_resource type="SegmentShape2D" id="SegmentShape2D_m0gmd"]
+b = Vector2(32, 0)
+
 [sub_resource type="Curve2D" id="Curve2D_rjgdv"]
 resource_local_to_scene = true
 _data = {
@@ -70,9 +73,9 @@ point_count = 2
 
 [sub_resource type="Curve2D" id="Curve2D_ptpn8"]
 _data = {
-"points": PackedVector2Array(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, -312)
+"points": PackedVector2Array(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, -4.892, -237.071, 0, 0, 0, 0, 0, -312, 0, 0, 0, 0, 0, -448, 0, 0, 0, 0, 16, -448, 0, 0, 0, 0, 16, 0, 0, 0, 0, 0, 32, 0, 0, 0, 0, 0, 32, -448)
 }
-point_count = 2
+point_count = 8
 
 [node name="RoomTestNewPlayer" instance=ExtResource("1_6to1r")]
 
@@ -86,7 +89,7 @@ texture = SubResource("GradientTexture2D_7hk6a")
 environment = SubResource("Environment_wlpjs")
 
 [node name="PlayerPosition" parent="." index="6"]
-position = Vector2(-1751, 154)
+position = Vector2(-1056, 32)
 
 [node name="Ball" parent="Environment/Balls" index="0" instance=ExtResource("8_huh8k")]
 position = Vector2(-1969, 230)
@@ -116,7 +119,7 @@ position = Vector2(-2422, 200)
 position = Vector2(-1752, 67)
 
 [node name="BallFire2" parent="Environment/Balls" index="9" instance=ExtResource("15_vd7wt")]
-position = Vector2(-1709, -24)
+position = Vector2(-1056, -8)
 
 [node name="BallDash2" parent="Environment/Balls" index="10" instance=ExtResource("9_8da21")]
 position = Vector2(-2548, 225)
@@ -242,7 +245,119 @@ scale = Vector2(7, 1)
 color = Color(0.529067, 0.529067, 0.529067, 1)
 polygon = PackedVector2Array(164.571, 0, 164.571, -64, 173.714, 0)
 
-[node name="Slope2" type="StaticBody2D" parent="Environment" index="13"]
+[node name="OneWayPlatform" type="StaticBody2D" parent="Environment" index="13"]
+position = Vector2(-704, 128)
+scale = Vector2(4, 4)
+collision_layer = 2
+metadata/_edit_group_ = true
+
+[node name="Polygon" type="Polygon2D" parent="Environment/OneWayPlatform" index="0"]
+position = Vector2(-1152, 2)
+scale = Vector2(7, 1)
+color = Color(0.899258, 0.899258, 0.899258, 1)
+polygon = PackedVector2Array(169.143, -2, 169.143, 0, 164.571, 0, 164.571, -2)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Environment/OneWayPlatform" index="1"]
+shape = SubResource("SegmentShape2D_m0gmd")
+one_way_collision = true
+
+[node name="OneWayPlatform2" type="StaticBody2D" parent="Environment" index="14"]
+position = Vector2(-704, 64)
+scale = Vector2(4, 4)
+collision_layer = 2
+metadata/_edit_group_ = true
+
+[node name="Polygon" type="Polygon2D" parent="Environment/OneWayPlatform2" index="0"]
+position = Vector2(-1152, 2)
+scale = Vector2(7, 1)
+color = Color(0.899258, 0.899258, 0.899258, 1)
+polygon = PackedVector2Array(169.143, -2, 169.143, 0, 164.571, 0, 164.571, -2)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Environment/OneWayPlatform2" index="1"]
+shape = SubResource("SegmentShape2D_m0gmd")
+one_way_collision = true
+
+[node name="OneWayPlatform3" type="StaticBody2D" parent="Environment" index="15"]
+position = Vector2(-352, 64)
+scale = Vector2(4, 4)
+collision_layer = 2
+metadata/_edit_group_ = true
+
+[node name="Polygon" type="Polygon2D" parent="Environment/OneWayPlatform3" index="0"]
+position = Vector2(-1152, 2)
+scale = Vector2(7, 1)
+color = Color(0.899258, 0.899258, 0.899258, 1)
+polygon = PackedVector2Array(169.143, -2, 169.143, 0, 164.571, 0, 164.571, -2)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Environment/OneWayPlatform3" index="1"]
+shape = SubResource("SegmentShape2D_m0gmd")
+one_way_collision = true
+
+[node name="OneWayPlatform4" type="StaticBody2D" parent="Environment" index="16"]
+position = Vector2(-224, 48)
+scale = Vector2(4, 4)
+collision_layer = 2
+metadata/_edit_group_ = true
+
+[node name="Polygon" type="Polygon2D" parent="Environment/OneWayPlatform4" index="0"]
+position = Vector2(-1152, 2)
+scale = Vector2(7, 1)
+color = Color(0.899258, 0.899258, 0.899258, 1)
+polygon = PackedVector2Array(169.143, -2, 169.143, 0, 164.571, 0, 164.571, -2)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Environment/OneWayPlatform4" index="1"]
+shape = SubResource("SegmentShape2D_m0gmd")
+one_way_collision = true
+
+[node name="OneWayPlatform5" type="StaticBody2D" parent="Environment" index="17"]
+position = Vector2(-96, 48)
+scale = Vector2(4, 4)
+collision_layer = 2
+metadata/_edit_group_ = true
+
+[node name="Polygon" type="Polygon2D" parent="Environment/OneWayPlatform5" index="0"]
+position = Vector2(-1152, 2)
+scale = Vector2(7, 1)
+color = Color(0.899258, 0.899258, 0.899258, 1)
+polygon = PackedVector2Array(169.143, -2, 169.143, 0, 164.571, 0, 164.571, -2)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Environment/OneWayPlatform5" index="1"]
+shape = SubResource("SegmentShape2D_m0gmd")
+one_way_collision = true
+
+[node name="OneWayPlatform6" type="StaticBody2D" parent="Environment" index="18"]
+position = Vector2(32, 24)
+scale = Vector2(4, 4)
+collision_layer = 2
+metadata/_edit_group_ = true
+
+[node name="Polygon" type="Polygon2D" parent="Environment/OneWayPlatform6" index="0"]
+position = Vector2(-1152, 2)
+scale = Vector2(7, 1)
+color = Color(0.899258, 0.899258, 0.899258, 1)
+polygon = PackedVector2Array(169.143, -2, 169.143, 0, 164.571, 0, 164.571, -2)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Environment/OneWayPlatform6" index="1"]
+shape = SubResource("SegmentShape2D_m0gmd")
+one_way_collision = true
+
+[node name="OneWayPlatform7" type="StaticBody2D" parent="Environment" index="19"]
+position = Vector2(160, 24)
+scale = Vector2(4, 4)
+collision_layer = 2
+metadata/_edit_group_ = true
+
+[node name="Polygon" type="Polygon2D" parent="Environment/OneWayPlatform7" index="0"]
+position = Vector2(-1152, 2)
+scale = Vector2(7, 1)
+color = Color(0.899258, 0.899258, 0.899258, 1)
+polygon = PackedVector2Array(169.143, -2, 169.143, 0, 164.571, 0, 164.571, -2)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Environment/OneWayPlatform7" index="1"]
+shape = SubResource("SegmentShape2D_m0gmd")
+one_way_collision = true
+
+[node name="Slope2" type="StaticBody2D" parent="Environment" index="20"]
 position = Vector2(-1664, 320)
 scale = Vector2(-4, 2)
 collision_layer = 2
@@ -257,47 +372,55 @@ scale = Vector2(7, 1)
 color = Color(0.529067, 0.529067, 0.529067, 1)
 polygon = PackedVector2Array(164.571, 0, 164.571, -64, 173.714, 0)
 
-[node name="DashTarget" parent="Environment" index="14" instance=ExtResource("2_x00i2")]
+[node name="DashTarget" parent="Environment" index="21" instance=ExtResource("2_x00i2")]
 position = Vector2(168, 288)
 
-[node name="DashTarget2" parent="Environment" index="15" instance=ExtResource("2_x00i2")]
+[node name="DashTarget2" parent="Environment" index="22" instance=ExtResource("2_x00i2")]
 position = Vector2(-16, 176)
 
-[node name="NewRopeLine" parent="Environment" index="16" instance=ExtResource("3_3x1wr")]
+[node name="NewRopeLine" parent="Environment" index="23" instance=ExtResource("3_3x1wr")]
 position = Vector2(232, 200)
 curve = SubResource("Curve2D_rjgdv")
 
-[node name="NewRailLine" parent="Environment" index="17" instance=ExtResource("4_bt87n")]
+[node name="NewRailLine" parent="Environment" index="24" instance=ExtResource("4_bt87n")]
 position = Vector2(-128, 312)
 curve = SubResource("Curve2D_6gk4l")
 
-[node name="NewBasket" parent="Environment" index="18" instance=ExtResource("5_h1nqp")]
+[node name="NewBasket" parent="Environment" index="25" instance=ExtResource("5_h1nqp")]
 position = Vector2(-102, 176)
 
-[node name="NewBasket2" parent="Environment" index="19" instance=ExtResource("5_h1nqp")]
+[node name="NewBasket2" parent="Environment" index="26" instance=ExtResource("5_h1nqp")]
 position = Vector2(504, 168)
 
-[node name="Jumper" parent="Environment" index="20" instance=ExtResource("6_tb8pt")]
+[node name="Jumper" parent="Environment" index="27" instance=ExtResource("6_tb8pt")]
 position = Vector2(-496, 304)
 jump_velocity = 700
 no_friction_time = 0.1
 
-[node name="Jumper3" parent="Environment" index="21" instance=ExtResource("6_tb8pt")]
+[node name="Jumper3" parent="Environment" index="28" instance=ExtResource("6_tb8pt")]
 position = Vector2(-608, 304)
 jump_velocity = 600
 no_friction_time = 0.1
 
-[node name="Jumper2" parent="Environment" index="22" instance=ExtResource("6_tb8pt")]
+[node name="Jumper2" parent="Environment" index="29" instance=ExtResource("6_tb8pt")]
 position = Vector2(-512, 144)
 rotation = 1.5708
 jump_velocity = 800
 cant_go_time = 0.5
 no_friction_time = 0.1
 
-[node name="MovingPlatform" parent="Environment" index="23" instance=ExtResource("7_ddpj5")]
+[node name="MovingPlatform" parent="Environment" index="30" instance=ExtResource("7_ddpj5")]
 position = Vector2(-1272, 256)
 curve = SubResource("Curve2D_8bbvy")
 
-[node name="MovingPlatform2" parent="Environment" index="24" instance=ExtResource("7_ddpj5")]
+[node name="MovingPlatform3" parent="Environment" index="31" instance=ExtResource("7_ddpj5")]
+position = Vector2(-1096, 104)
+curve = SubResource("Curve2D_8bbvy")
+
+[node name="MovingPlatform2" parent="Environment" index="32" instance=ExtResource("7_ddpj5")]
 position = Vector2(-1272, 256)
+curve = SubResource("Curve2D_ptpn8")
+
+[node name="MovingPlatform4" parent="Environment" index="33" instance=ExtResource("7_ddpj5")]
+position = Vector2(592, 320)
 curve = SubResource("Curve2D_ptpn8")

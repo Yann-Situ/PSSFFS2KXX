@@ -2,6 +2,9 @@ extends PlayerMovementState
 
 #need to handle hit/collision box resizing + crouch parameters + jump
 
+# the following var is not working yet
+@export var speed_threshold : float = 0.0 ## pix/s. The minimal vertical downward speed that triggers landing animation
+
 @export_group("States")
 @export var belong_state : State
 @export var action_state : State
@@ -25,13 +28,19 @@ func branch() -> State:
 		#logic.floor.ing = false # TEMPORARY solution to avoid infinite recursion
 		return jump_state
 	if !logic.floor.ing:
-		return fall_state
+		if !logic.ray_handler.is_above_floor():
+			return fall_state
+		else :
+			print("--- land above floor")
 
 	if land_finished:
 		return crouch_state
 	return self
 
 func enter(previous_state : State = null) -> State:
+	# print(movement.velocity.y) # TODO not working yet as the velocity at this time can be 0 or the previous vertical velocity...
+	if movement.velocity.y < speed_threshold:
+		return stand_state
 	land_finished = false
 	var next_state = branch()
 	if next_state != self:

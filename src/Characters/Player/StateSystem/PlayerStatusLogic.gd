@@ -190,7 +190,7 @@ func update_status():
 	stand.can = ray_handler.can_stand()
 
 	side.ing = abs(player.movement.velocity.x) > 30.0
-	crouch.can = floor.ing
+	crouch.can = floor.ing # I though of adding `or ray_handler.is_above_floor()` but I think this is a bad idea...
 	crouch.ing = crouch.ing or (!stand.can and floor.ing)
 
 	# selectable_handler

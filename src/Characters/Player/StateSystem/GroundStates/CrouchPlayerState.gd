@@ -19,7 +19,10 @@ func branch() -> State:
 	if logic.action.can:
 		return action_state
 	if !logic.floor.ing:
-		return fall_state
+		if !logic.ray_handler.is_above_floor():
+			return fall_state
+		else :
+			print("--- crouch above floor")
 
 	if logic.stand.can and !logic.down.pressed:
 		return stand_state

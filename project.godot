@@ -55,6 +55,11 @@ window/energy_saving/keep_screen_on=false
 window/stretch/mode="viewport"
 window/ios/allow_high_refresh_rate=false
 
+[editor]
+
+movie_writer/movie_file="/home/yann-situ/Documents/Games/PSSFFS2KXX/private/video/capture_video.avi"
+naming/scene_name_casing=1
+
 [editor_plugins]
 
 enabled=PackedStringArray("res://addons/dialogue_manager/plugin.cfg", "res://addons/singleton_bundle/plugin.cfg")

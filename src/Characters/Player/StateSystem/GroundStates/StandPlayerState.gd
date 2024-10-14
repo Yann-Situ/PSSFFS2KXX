@@ -23,7 +23,10 @@ func branch() -> State:
 		#logic.floor.ing = false # TEMPORARY solution to avoid infinite recursion
 		return jump_state
 	if !logic.floor.ing:
-		return fall_state
+		if !logic.ray_handler.is_above_floor():
+			return fall_state
+		else :
+			print("--- stand above floor")
 
 	if logic.side.ing and logic.crouch.can and logic.down.pressed and \
 			abs(movement.velocity.x) > slide_speed_thresh:

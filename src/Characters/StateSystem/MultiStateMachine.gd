@@ -70,7 +70,12 @@ func _ready():
 	nb_machines = init_states.size()
 	current_states = []
 	current_states.resize(nb_machines)
-	reset_states()
+	set_process(false)
+	set_physics_process(false)
+	call_deferred("reset_states") # to avoid non ready node being call in state.enter
+	call_deferred("set_process", true)
+	call_deferred("set_physics_process", true)
+	#reset_states()
 
 func process_machine(machine: int, delta : float):
 	if !current_states[machine]:
