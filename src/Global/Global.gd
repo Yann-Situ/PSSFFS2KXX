@@ -83,10 +83,6 @@ func get_current_player(): # -> Player: # TODO newplayer change types
 		push_error("current_player is null")
 	return current_player
 
-# Called when the node enters the scene tree for the first time.
-func _ready():
-	pass
-
 func toggle_playing():
 	playing = !playing
 	if playing :
@@ -98,6 +94,32 @@ func toggle_playing():
 			n.disable_physics()
 			n.reset_position()
 	print("Toggle playing : "+str(playing))
+
+func apply_palette_scheme_to_recolor(palette : PaletteScheme, m : Material):
+	if palette.gradients.size() < 1:
+		return
+	var gt_0 = GradientTexture2D.new()
+	gt_0.width = 64
+	gt_0.set_gradient(palette.get_gradient(0))
+	m.set_shader_parameter("grad_0", gt_0)
+	if palette.gradients.size() < 2:
+		return
+	var gt_1 = GradientTexture2D.new()
+	gt_1.width = 64
+	gt_1.set_gradient(palette.get_gradient(1))
+	m.set_shader_parameter("grad_1", gt_1)
+	if palette.gradients.size() < 3:
+		return
+	var gt_2 = GradientTexture2D.new()
+	gt_2.width = 64
+	gt_2.set_gradient(palette.get_gradient(2))
+	m.set_shader_parameter("grad_2", gt_2)
+	if palette.gradients.size() < 4:
+		return
+	var gt_3 = GradientTexture2D.new()
+	gt_3.width = 64
+	gt_3.set_gradient(palette.get_gradient(3))
+	m.set_shader_parameter("grad_3", gt_3)
 
 var z_indices = {\
 	"parallax_0" : 00, \

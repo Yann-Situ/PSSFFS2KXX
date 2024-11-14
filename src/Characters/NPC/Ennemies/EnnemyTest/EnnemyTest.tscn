@@ -1,0 +1,217 @@
+[gd_scene load_steps=20 format=3 uid="uid://bbn03x0xfgmq8"]
+
+[ext_resource type="Shader" path="res://assets/shader/recolor.gdshader" id="1_xc0s5"]
+[ext_resource type="Texture2D" uid="uid://m1xsfwdn1wc7" path="res://assets/art/characters/ennemies/ennemytest.png" id="2_qoksb"]
+[ext_resource type="Script" path="res://src/Characters/StateSystem/MultiStateMachine.gd" id="3_go43a"]
+[ext_resource type="Script" path="res://src/Characters/NPC/Ennemies/EnnemyTest/Logic.gd" id="4_2x0jf"]
+[ext_resource type="Script" path="res://src/Characters/NPC/Ennemies/EnnemyTest/Fetching.gd" id="5_mhhi5"]
+[ext_resource type="Script" path="res://src/Characters/NPC/Ennemies/EnnemyTest/FollowingBall.gd" id="6_5duco"]
+[ext_resource type="Script" path="res://src/Characters/StateSystem/State.gd" id="6_gvr0g"]
+
+[sub_resource type="Gradient" id="Gradient_l1ux5"]
+offsets = PackedFloat32Array(0, 0.254237, 1)
+colors = PackedColorArray(0.49, 0.3675, 0, 1, 0.737133, 0.244149, 0.246143, 1, 1, 0.92549, 0.847059, 1)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_xya6b"]
+gradient = SubResource("Gradient_l1ux5")
+
+[sub_resource type="Gradient" id="Gradient_orqy7"]
+colors = PackedColorArray(0.101961, 0.0588235, 0, 1, 1, 0.886275, 0.760784, 1)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_3xa4u"]
+gradient = SubResource("Gradient_orqy7")
+
+[sub_resource type="Gradient" id="Gradient_a8ik4"]
+offsets = PackedFloat32Array(1)
+colors = PackedColorArray(1, 1, 0.886275, 1)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_8rk3a"]
+gradient = SubResource("Gradient_a8ik4")
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_0ul68"]
+shader = ExtResource("1_xc0s5")
+shader_parameter/grad_0 = SubResource("GradientTexture1D_xya6b")
+shader_parameter/grad_1 = SubResource("GradientTexture1D_3xa4u")
+shader_parameter/grad_2 = SubResource("GradientTexture1D_8rk3a")
+
+[sub_resource type="Animation" id="Animation_not4p"]
+resource_name = "fetching"
+length = 2.0
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:position")
+tracks/0/interp = 2
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.2),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(0, 0), Vector2(0, 8)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:scale")
+tracks/1/interp = 2
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0.8, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(1, 1), Vector2(0.98, 1.03)]
+}
+
+[sub_resource type="Animation" id="Animation_tsrlh"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(0, 0)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:scale")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(1, 1)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath(".:self_modulate")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 1)]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath(".:rotation")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.0]
+}
+
+[sub_resource type="Animation" id="Animation_5xsdl"]
+resource_name = "following"
+length = 1.5
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:self_modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.8),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 1), Color(0.770656, 3.17663e-05, 0.347242, 1)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:rotation")
+tracks/1/interp = 2
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.8),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [-0.174533, 0.174533]
+}
+
+[sub_resource type="Animation" id="Animation_grmpb"]
+resource_name = "throwing"
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [0.0, 6.28319]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_fq6sd"]
+_data = {
+"RESET": SubResource("Animation_tsrlh"),
+"fetching": SubResource("Animation_not4p"),
+"following": SubResource("Animation_5xsdl"),
+"throwing": SubResource("Animation_grmpb")
+}
+
+[node name="EnnemyTest" type="Node2D"]
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+material = SubResource("ShaderMaterial_0ul68")
+texture = ExtResource("2_qoksb")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="Sprite2D"]
+libraries = {
+"": SubResource("AnimationLibrary_fq6sd")
+}
+
+[node name="StateMachine" type="Node" parent="." node_paths=PackedStringArray("status_logic", "init_states")]
+script = ExtResource("3_go43a")
+status_logic = NodePath("Logic")
+init_states = [NodePath("Fetching")]
+
+[node name="Logic" type="Node" parent="StateMachine" node_paths=PackedStringArray("fetcher")]
+script = ExtResource("4_2x0jf")
+fetcher = NodePath("../../BallFetcher")
+
+[node name="Fetching" type="Node" parent="StateMachine" node_paths=PackedStringArray("entity", "logic", "animation_player", "following_state")]
+script = ExtResource("5_mhhi5")
+entity = NodePath("../..")
+logic = NodePath("../Logic")
+animation_player = NodePath("../../Sprite2D/AnimationPlayer")
+following_state = NodePath("../FollowingBall")
+
+[node name="FollowingBall" type="Node" parent="StateMachine" node_paths=PackedStringArray("entity", "logic", "animation_player", "fetching_state", "throwing_state")]
+script = ExtResource("6_5duco")
+entity = NodePath("../..")
+logic = NodePath("../Logic")
+animation_player = NodePath("../../Sprite2D/AnimationPlayer")
+fetching_state = NodePath("../Fetching")
+throwing_state = NodePath("../ThrowingBall")
+
+[node name="ThrowingBall" type="Node" parent="StateMachine"]
+script = ExtResource("6_gvr0g")
+
+[node name="BallFetcher" type="Area2D" parent="."]
+collision_layer = 0
+collision_mask = 4
+monitorable = false
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="BallFetcher"]
+polygon = PackedVector2Array(0, -64, -256, 256, -128, 384, 0, 384, 128, 384, 256, 256)
+
+[connection signal="body_entered" from="BallFetcher" to="StateMachine/Logic" method="_on_ball_fetcher_body_entered"]
+[connection signal="body_exited" from="BallFetcher" to="StateMachine/Logic" method="_on_ball_fetcher_body_exited"]
