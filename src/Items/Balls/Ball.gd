@@ -105,7 +105,8 @@ func pickup(holder_node):
 	self.disable_physics()
 	
 	self.transform.origin = Vector2.ZERO
-	self.z_index = holder_node.z_index+1
+	if "z_index" in holder_node:
+		self.z_index = holder_node.z_index+1
 	
 	on_pickup(holder_node)
 	is_picked_up.emit()

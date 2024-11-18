@@ -1,4 +1,4 @@
-[gd_scene load_steps=30 format=3 uid="uid://eq50gyc1bs85"]
+[gd_scene load_steps=70 format=3 uid="uid://eq50gyc1bs85"]
 
 [ext_resource type="PackedScene" uid="uid://b5emf4je4tnag" path="res://src/Levels/Room2D.tscn" id="1_6to1r"]
 [ext_resource type="PackedScene" uid="uid://rmukvjwyiahu" path="res://src/Items/Interactive/DashTarget.tscn" id="2_x00i2"]
@@ -19,6 +19,11 @@
 [ext_resource type="PackedScene" uid="uid://imtw5v2qrplf" path="res://src/Items/Balls/BallBouncy.tscn" id="17_axh6n"]
 [ext_resource type="PackedScene" uid="uid://bdhkn6l5lcxe0" path="res://src/Items/Balls/BallBoum.tscn" id="18_cblx7"]
 [ext_resource type="PackedScene" uid="uid://bbn03x0xfgmq8" path="res://src/Characters/NPC/Ennemies/EnnemyTest/EnnemyTest.tscn" id="19_ckf5e"]
+[ext_resource type="PackedScene" uid="uid://b0w1du1nxn0pt" path="res://src/Characters/NPC/Ennemies/Exploder/Exploder.tscn" id="20_qflou"]
+[ext_resource type="PackedScene" uid="uid://bibx4tlfcbuxm" path="res://src/Characters/NPC/PedestrianGenerator.tscn" id="21_hdw07"]
+[ext_resource type="Script" path="res://src/Global/CustomResources/ColorDistribution.gd" id="22_h70sn"]
+[ext_resource type="Script" path="res://src/Global/CustomResources/PaletteSchemeSampler.gd" id="23_63q0b"]
+[ext_resource type="PackedScene" uid="uid://5uiwv0rqds8n" path="res://src/Characters/NPC/Ennemies/ThiefKid/ThiefKid.tscn" id="24_5a8ro"]
 
 [sub_resource type="Gradient" id="Gradient_wwss0"]
 resource_local_to_scene = true
@@ -43,14 +48,6 @@ glow_hdr_luminance_cap = 1.0
 adjustment_enabled = true
 adjustment_contrast = 1.08
 adjustment_saturation = 1.01
-
-[sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_oorwg"]
-
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_mer8j"]
-size = Vector2(128, 256)
-
-[sub_resource type="SegmentShape2D" id="SegmentShape2D_m0gmd"]
-b = Vector2(32, 0)
 
 [sub_resource type="Curve2D" id="Curve2D_rjgdv"]
 resource_local_to_scene = true
@@ -78,6 +75,203 @@ _data = {
 }
 point_count = 8
 
+[sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_oorwg"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_mer8j"]
+size = Vector2(128, 256)
+
+[sub_resource type="SegmentShape2D" id="SegmentShape2D_m0gmd"]
+b = Vector2(32, 0)
+
+[sub_resource type="Curve" id="16"]
+bake_resolution = 1000
+_data = [Vector2(0.0179641, 0), 4.35537, -0.0568181, 0, 0, Vector2(0.036855, 1), 0.0, 0.0, 0, 0, Vector2(0.0658683, 1), 0.0, 0.0, 0, 0, Vector2(0.113772, 0), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+point_count = 5
+
+[sub_resource type="Curve" id="36"]
+bake_resolution = 1000
+_data = [Vector2(0, 0), 0.0, 0.0, 0, 0, Vector2(0.162162, 1), 0.0, 0.0, 0, 0, Vector2(0.299754, 1), 0.0, 0.0, 0, 0, Vector2(0.390374, 0), 0.0, 0.0, 0, 0]
+point_count = 4
+
+[sub_resource type="Curve" id="17"]
+bake_resolution = 1000
+_data = [Vector2(0.802395, 0), 0.0, 1.71463, 0, 0, Vector2(0.880239, 1), 0.0, 0.0, 0, 0, Vector2(0.97006, 0), 0.0, 0.0, 0, 0]
+point_count = 3
+
+[sub_resource type="Resource" id="19"]
+script = ExtResource("22_h70sn")
+hue_distribution = SubResource("16")
+saturation_distribution = SubResource("17")
+lightness_distribution = SubResource("36")
+weight = 1.0
+
+[sub_resource type="Curve" id="20"]
+bake_resolution = 1000
+_data = [Vector2(0.013369, 0), 0.0, 0.0, 0, 0, Vector2(0.0427807, 1), 0.0, 0.0, 0, 0, Vector2(0.0695187, 0), 0.0, 0.0, 0, 0, Vector2(0.109626, 0), 0.0, 0.0, 0, 0, Vector2(0.122995, 0.718182), 0.0, 0.0, 0, 0, Vector2(0.144385, 0), 0.0, 0.0, 0, 0, Vector2(0.941176, 0), 0.0, 0.0, 0, 0, Vector2(0.967914, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+point_count = 9
+
+[sub_resource type="Curve" id="37"]
+_data = [Vector2(0.350267, 0), 0.0, 0.0, 0, 0, Vector2(0.505348, 1), 0.0, 0.0, 0, 0, Vector2(0.786096, 0), -6.93749, 0.0, 0, 0]
+point_count = 3
+
+[sub_resource type="Curve" id="21"]
+_data = [Vector2(0.435829, 0), 0.0, 0.0, 0, 0, Vector2(0.864706, 1), 0.0, 0.0, 0, 0, Vector2(1, 0.5), 0.0, 0.0, 0, 0]
+point_count = 3
+
+[sub_resource type="Resource" id="23"]
+script = ExtResource("22_h70sn")
+hue_distribution = SubResource("20")
+saturation_distribution = SubResource("21")
+lightness_distribution = SubResource("37")
+weight = 1.0
+
+[sub_resource type="Curve" id="28"]
+bake_resolution = 1000
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(0.202749, 0), 0.0, 0.0, 0, 0, Vector2(0.90378, 0), 0.0, 0.0, 0, 0, Vector2(1, 0.772727), 0.0, 0.0, 0, 0]
+point_count = 4
+
+[sub_resource type="Curve" id="38"]
+bake_resolution = 1000
+_data = [Vector2(0.0628415, 0), 0.0, 0.0, 0, 0, Vector2(0.221311, 0.645455), 0.0, 0.0, 0, 0, Vector2(0.385246, 0), 0.0, 0.0, 0, 0, Vector2(0.467213, 0), 0.0, 0.0, 0, 0, Vector2(0.622951, 0.690909), 0.0, 0.0, 0, 0, Vector2(0.775956, 0), 0.0, 0.0, 0, 0]
+point_count = 6
+
+[sub_resource type="Curve" id="29"]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(0.647619, 0), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="Resource" id="31"]
+script = ExtResource("22_h70sn")
+hue_distribution = SubResource("28")
+saturation_distribution = SubResource("29")
+lightness_distribution = SubResource("38")
+weight = 1.0
+
+[sub_resource type="Curve" id="32"]
+_data = [Vector2(0, 1), 0.0, -12.0645, 0, 1, Vector2(0.0828877, 0), 0.0, 0.0, 0, 0, Vector2(0.92246, 0), 0.0, 0.0, 0, 0, Vector2(1, 1), 12.8965, 0.0, 1, 0]
+point_count = 4
+
+[sub_resource type="Curve" id="39"]
+_data = [Vector2(0, 0.472727), 0.0, 0.0, 0, 0, Vector2(0.368984, 1), 0.0, 0.0, 0, 0, Vector2(0.558824, 0), 0.0, 0.0, 0, 0]
+point_count = 3
+
+[sub_resource type="Curve" id="33"]
+_data = [Vector2(0, 0), 0.0, -0.100886, 0, 0, Vector2(0.8877, 1), 0.00703578, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+point_count = 3
+
+[sub_resource type="Resource" id="35"]
+script = ExtResource("22_h70sn")
+hue_distribution = SubResource("32")
+saturation_distribution = SubResource("33")
+lightness_distribution = SubResource("39")
+weight = 1.0
+
+[sub_resource type="Resource" id="Resource_6hd1c"]
+resource_local_to_scene = true
+script = ExtResource("23_63q0b")
+color_samplers = Array[Resource("res://src/Global/CustomResources/ColorSampler.gd")]([SubResource("19"), SubResource("23"), SubResource("31"), SubResource("35")])
+black = Color(0.215686, 0.0509804, 0.168627, 1)
+white = Color(0.976471, 0.952941, 0.713726, 1)
+
+[sub_resource type="Curve" id="Curve_uxb0o"]
+bake_resolution = 1000
+_data = [Vector2(0, 0), 4.35537, -0.0568181, 0, 0, Vector2(0.0335196, 1), 0.0, 0.0, 0, 0, Vector2(0.0614525, 1), 0.0, 0.0, 0, 0, Vector2(0.100559, 0), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+point_count = 5
+
+[sub_resource type="Curve" id="Curve_5gg5s"]
+bake_resolution = 1000
+_data = [Vector2(0, 0), 0.0, 0.0, 0, 0, Vector2(0.134078, 1), 0.0, 0.0, 0, 0, Vector2(0.299754, 1), 0.0, 0.0, 0, 0, Vector2(0.459459, 0.436364), 0.0, 0.0, 0, 0, Vector2(0.625698, 0.552273), 0.0, 0.0, 0, 0, Vector2(0.670391, 0), 0.0, 0.0, 0, 0]
+point_count = 6
+
+[sub_resource type="Curve" id="Curve_adnxr"]
+bake_resolution = 1000
+_data = [Vector2(0.581006, 0), 0.0, 1.71463, 0, 0, Vector2(0.687151, 1), 0.0, 0.0, 0, 0, Vector2(0.769042, 0), 0.0, 0.0, 0, 0]
+point_count = 3
+
+[sub_resource type="Resource" id="Resource_edpie"]
+script = ExtResource("22_h70sn")
+hue_distribution = SubResource("Curve_uxb0o")
+saturation_distribution = SubResource("Curve_adnxr")
+lightness_distribution = SubResource("Curve_5gg5s")
+weight = 1.0
+
+[sub_resource type="Curve" id="Curve_w8reg"]
+bake_resolution = 1000
+_data = [Vector2(0, 0), 0.0, 0.0, 0, 0, Vector2(0.0960699, 0.536364), 0.0, 0.0, 0, 0, Vector2(0.174672, 0), 0.0, 0.0, 0, 0, Vector2(0.469432, 0), 0.0, 0.0, 0, 0, Vector2(0.740175, 0.909091), 0.0, 0.0, 0, 0, Vector2(0.89738, 0), 0.0, 0.0, 0, 0]
+point_count = 6
+
+[sub_resource type="Curve" id="Curve_jxtwq"]
+bake_resolution = 516
+_data = [Vector2(0, 0.263636), 0.0, 0.0, 0, 0, Vector2(0.0797102, 0), 0.0, 0.0, 0, 0, Vector2(0.304348, 0), 0.0, 0.0, 0, 0, Vector2(0.478261, 0), 0.0, 0.0, 0, 0, Vector2(0.76087, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), -6.93749, 0.0, 0, 0]
+point_count = 6
+
+[sub_resource type="Curve" id="Curve_isqv7"]
+bake_resolution = 516
+_data = [Vector2(0, 0.545455), 0.0, 0.0, 0, 0, Vector2(0.449275, 0), 0.0, 0.0, 0, 0, Vector2(0.534935, 0.318182), 0.0, 0.0, 0, 0, Vector2(0.707424, 0), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+point_count = 5
+
+[sub_resource type="Resource" id="Resource_meocb"]
+script = ExtResource("22_h70sn")
+hue_distribution = SubResource("Curve_w8reg")
+saturation_distribution = SubResource("Curve_isqv7")
+lightness_distribution = SubResource("Curve_jxtwq")
+weight = 1.0
+
+[sub_resource type="Curve" id="Curve_qf2xu"]
+bake_resolution = 1000
+_data = [Vector2(0, 0), 0.0, 0.0, 0, 0, Vector2(0.0797102, 0.118182), 0.0, 0.0, 0, 0, Vector2(0.166667, 0), 0.0, 0.0, 0, 0, Vector2(0.442029, 0), 0.0, 0.0, 0, 0, Vector2(0.637681, 1), 0.0, 0.0, 0, 0, Vector2(0.825328, 0), 0.0, 0.0, 0, 0]
+point_count = 6
+
+[sub_resource type="Curve" id="Curve_k18lf"]
+bake_resolution = 1000
+_data = [Vector2(0, 0), 0.0, 6.59504, 0, 0, Vector2(0.122271, 1), 0.0, 0.0, 0, 0, Vector2(0.423581, 0), 0.0, 0.0, 0, 0]
+point_count = 3
+
+[sub_resource type="Curve" id="Curve_a0gkt"]
+bake_resolution = 1000
+_data = [Vector2(0, 0), 0.0, 0.0, 0, 0, Vector2(0.700873, 1), 0.0, 0.0, 0, 0, Vector2(0.893013, 0), 0.0, 0.0, 0, 0]
+point_count = 3
+
+[sub_resource type="Resource" id="Resource_xd7pe"]
+script = ExtResource("22_h70sn")
+hue_distribution = SubResource("Curve_qf2xu")
+saturation_distribution = SubResource("Curve_a0gkt")
+lightness_distribution = SubResource("Curve_k18lf")
+weight = 1.0
+
+[sub_resource type="Curve" id="Curve_stdqh"]
+bake_resolution = 1000
+_data = [Vector2(0, 0), 0.0, 2.92727, 0, 1, Vector2(0.0652174, 0.190909), 0.0, 0.0, 0, 0, Vector2(0.115942, 1), 0.0, 0.0, 0, 0, Vector2(0.224638, 0), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 1, 0]
+point_count = 5
+
+[sub_resource type="Curve" id="Curve_07o2v"]
+_data = [Vector2(0.528256, 0.936364), 0.0, 0.0, 0, 0]
+point_count = 1
+
+[sub_resource type="Curve" id="Curve_4su6a"]
+_data = [Vector2(0, 1), 0.0, -0.100886, 0, 0, Vector2(0.804348, 0), 0.00703578, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="Resource" id="Resource_ljc8l"]
+script = ExtResource("22_h70sn")
+hue_distribution = SubResource("Curve_stdqh")
+saturation_distribution = SubResource("Curve_4su6a")
+lightness_distribution = SubResource("Curve_07o2v")
+weight = 1.0
+
+[sub_resource type="Resource" id="Resource_8bsb4"]
+resource_local_to_scene = true
+script = ExtResource("23_63q0b")
+color_samplers = Array[Resource("res://src/Global/CustomResources/ColorSampler.gd")]([SubResource("Resource_edpie"), SubResource("Resource_meocb"), SubResource("Resource_xd7pe"), SubResource("Resource_ljc8l")])
+black = Color(0, 0, 0, 1)
+white = Color(1, 1, 1, 1)
+
+[sub_resource type="Resource" id="Resource_5jnfv"]
+resource_local_to_scene = true
+script = ExtResource("23_63q0b")
+color_samplers = Array[Resource("res://src/Global/CustomResources/ColorSampler.gd")]([SubResource("Resource_edpie"), SubResource("Resource_meocb"), SubResource("Resource_xd7pe"), SubResource("Resource_ljc8l")])
+black = Color(0, 0, 0, 1)
+white = Color(1, 1, 1, 1)
+
 [node name="RoomTestNewPlayer" instance=ExtResource("1_6to1r")]
 
 [node name="ParallaxBackground" parent="." index="1"]
@@ -90,7 +284,7 @@ texture = SubResource("GradientTexture2D_7hk6a")
 environment = SubResource("Environment_wlpjs")
 
 [node name="PlayerPosition" parent="." index="6"]
-position = Vector2(-1056, 32)
+position = Vector2(-2856, 192)
 
 [node name="Ball" parent="Environment/Balls" index="0" instance=ExtResource("8_huh8k")]
 position = Vector2(-1969, 230)
@@ -120,7 +314,7 @@ position = Vector2(-2422, 200)
 position = Vector2(-1752, 67)
 
 [node name="BallFire2" parent="Environment/Balls" index="9" instance=ExtResource("15_vd7wt")]
-position = Vector2(-1056, -8)
+position = Vector2(-2856, 144)
 
 [node name="BallDash2" parent="Environment/Balls" index="10" instance=ExtResource("9_8da21")]
 position = Vector2(-2548, 225)
@@ -134,297 +328,323 @@ position = Vector2(-2704, 218)
 [node name="BallBoum" parent="Environment/Balls" index="13" instance=ExtResource("18_cblx7")]
 position = Vector2(-2777, 193)
 
-[node name="StaticBody2D2" type="StaticBody2D" parent="Environment" index="5"]
-position = Vector2(640, 64)
-rotation = -1.57079
-collision_layer = 2
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Environment/StaticBody2D2" index="0"]
-shape = SubResource("WorldBoundaryShape2D_oorwg")
-
-[node name="Polygon2D" type="Polygon2D" parent="Environment/StaticBody2D2" index="1"]
-polygon = PackedVector2Array(-320, 0, 320, 0, 320, 64, -320, 64)
-
-[node name="StaticBody2D" type="StaticBody2D" parent="Environment" index="6"]
-position = Vector2(320, 320)
-collision_layer = 2
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Environment/StaticBody2D" index="0"]
-shape = SubResource("WorldBoundaryShape2D_oorwg")
-
-[node name="Polygon2D" type="Polygon2D" parent="Environment/StaticBody2D" index="1"]
-position = Vector2(-1920, 0)
-scale = Vector2(7, 1)
-color = Color(0.529067, 0.529067, 0.529067, 1)
-polygon = PackedVector2Array(-320, 0, 320, 0, 320, 64, -320, 64)
-
-[node name="BallWall" type="StaticBody2D" parent="Environment" index="7"]
-modulate = Color(0.466667, 1, 1, 1)
-position = Vector2(-416, 192)
-collision_layer = 1024
-collision_mask = 4
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Environment/BallWall" index="0"]
-shape = SubResource("RectangleShape2D_mer8j")
-
-[node name="Polygon2D" type="Polygon2D" parent="Environment/BallWall" index="1"]
-position = Vector2(-944, 72)
-scale = Vector2(7, 1)
-color = Color(1, 1, 1, 0.529412)
-polygon = PackedVector2Array(125.714, -200, 144, -200, 144, 56, 125.714, 56)
-
-[node name="BallWall2" type="StaticBody2D" parent="Environment" index="8"]
-modulate = Color(0.466667, 1, 1, 1)
-position = Vector2(-768, 320)
-collision_layer = 1024
-collision_mask = 4
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Environment/BallWall2" index="0"]
-shape = SubResource("RectangleShape2D_mer8j")
-
-[node name="Polygon2D" type="Polygon2D" parent="Environment/BallWall2" index="1"]
-position = Vector2(-944, 72)
-scale = Vector2(7, 1)
-color = Color(1, 1, 1, 0.529412)
-polygon = PackedVector2Array(125.714, -200, 144, -200, 144, 56, 125.714, 56)
-
-[node name="BallWall3" type="StaticBody2D" parent="Environment" index="9"]
-modulate = Color(0.466667, 1, 1, 1)
-position = Vector2(-768, 24)
-collision_layer = 1024
-collision_mask = 4
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Environment/BallWall3" index="0"]
-shape = SubResource("RectangleShape2D_mer8j")
-
-[node name="Polygon2D" type="Polygon2D" parent="Environment/BallWall3" index="1"]
-position = Vector2(-944, 72)
-scale = Vector2(7, 1)
-color = Color(1, 1, 1, 0.529412)
-polygon = PackedVector2Array(125.714, -200, 144, -200, 144, 56, 125.714, 56)
-
-[node name="PlayerWall" type="StaticBody2D" parent="Environment" index="10"]
-modulate = Color(0.999991, 0.419415, 0.407208, 1)
-position = Vector2(-1472, 320)
-collision_layer = 512
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Environment/PlayerWall" index="0"]
-shape = SubResource("RectangleShape2D_mer8j")
-
-[node name="Polygon2D" type="Polygon2D" parent="Environment/PlayerWall" index="1"]
-position = Vector2(-944, 72)
-scale = Vector2(7, 1)
-color = Color(1, 1, 1, 0.529412)
-polygon = PackedVector2Array(125.714, -200, 144, -200, 144, 56, 125.714, 56)
-
-[node name="PlayerWall2" type="StaticBody2D" parent="Environment" index="11"]
-modulate = Color(0.999991, 0.419415, 0.407208, 1)
-position = Vector2(-1984, 392)
-collision_layer = 512
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Environment/PlayerWall2" index="0"]
-shape = SubResource("RectangleShape2D_mer8j")
-
-[node name="Polygon2D" type="Polygon2D" parent="Environment/PlayerWall2" index="1"]
-position = Vector2(-944, 72)
-scale = Vector2(7, 1)
-color = Color(1, 1, 1, 0.529412)
-polygon = PackedVector2Array(125.714, -200, 144, -200, 144, 56, 125.714, 56)
-
-[node name="Slope1" type="StaticBody2D" parent="Environment" index="12"]
-position = Vector2(-1664, 320)
-scale = Vector2(4, 4)
-collision_layer = 2
-
-[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Environment/Slope1" index="0"]
-position = Vector2(448, -320)
-polygon = PackedVector2Array(-448, 320, -448, 256, -384, 320)
-
-[node name="Polygon" type="Polygon2D" parent="Environment/Slope1" index="1"]
-position = Vector2(-1152, 0)
-scale = Vector2(7, 1)
-color = Color(0.529067, 0.529067, 0.529067, 1)
-polygon = PackedVector2Array(164.571, 0, 164.571, -64, 173.714, 0)
-
-[node name="OneWayPlatform" type="StaticBody2D" parent="Environment" index="13"]
-position = Vector2(-704, 128)
-scale = Vector2(4, 4)
-collision_layer = 2
-metadata/_edit_group_ = true
-
-[node name="Polygon" type="Polygon2D" parent="Environment/OneWayPlatform" index="0"]
-position = Vector2(-1152, 2)
-scale = Vector2(7, 1)
-color = Color(0.899258, 0.899258, 0.899258, 1)
-polygon = PackedVector2Array(169.143, -2, 169.143, 0, 164.571, 0, 164.571, -2)
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Environment/OneWayPlatform" index="1"]
-shape = SubResource("SegmentShape2D_m0gmd")
-one_way_collision = true
-
-[node name="OneWayPlatform2" type="StaticBody2D" parent="Environment" index="14"]
-position = Vector2(-704, 64)
-scale = Vector2(4, 4)
-collision_layer = 2
-metadata/_edit_group_ = true
-
-[node name="Polygon" type="Polygon2D" parent="Environment/OneWayPlatform2" index="0"]
-position = Vector2(-1152, 2)
-scale = Vector2(7, 1)
-color = Color(0.899258, 0.899258, 0.899258, 1)
-polygon = PackedVector2Array(169.143, -2, 169.143, 0, 164.571, 0, 164.571, -2)
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Environment/OneWayPlatform2" index="1"]
-shape = SubResource("SegmentShape2D_m0gmd")
-one_way_collision = true
-
-[node name="OneWayPlatform3" type="StaticBody2D" parent="Environment" index="15"]
-position = Vector2(-352, 64)
-scale = Vector2(4, 4)
-collision_layer = 2
-metadata/_edit_group_ = true
-
-[node name="Polygon" type="Polygon2D" parent="Environment/OneWayPlatform3" index="0"]
-position = Vector2(-1152, 2)
-scale = Vector2(7, 1)
-color = Color(0.899258, 0.899258, 0.899258, 1)
-polygon = PackedVector2Array(169.143, -2, 169.143, 0, 164.571, 0, 164.571, -2)
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Environment/OneWayPlatform3" index="1"]
-shape = SubResource("SegmentShape2D_m0gmd")
-one_way_collision = true
-
-[node name="OneWayPlatform4" type="StaticBody2D" parent="Environment" index="16"]
-position = Vector2(-224, 48)
-scale = Vector2(4, 4)
-collision_layer = 2
-metadata/_edit_group_ = true
-
-[node name="Polygon" type="Polygon2D" parent="Environment/OneWayPlatform4" index="0"]
-position = Vector2(-1152, 2)
-scale = Vector2(7, 1)
-color = Color(0.899258, 0.899258, 0.899258, 1)
-polygon = PackedVector2Array(169.143, -2, 169.143, 0, 164.571, 0, 164.571, -2)
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Environment/OneWayPlatform4" index="1"]
-shape = SubResource("SegmentShape2D_m0gmd")
-one_way_collision = true
-
-[node name="OneWayPlatform5" type="StaticBody2D" parent="Environment" index="17"]
-position = Vector2(-96, 48)
-scale = Vector2(4, 4)
-collision_layer = 2
-metadata/_edit_group_ = true
-
-[node name="Polygon" type="Polygon2D" parent="Environment/OneWayPlatform5" index="0"]
-position = Vector2(-1152, 2)
-scale = Vector2(7, 1)
-color = Color(0.899258, 0.899258, 0.899258, 1)
-polygon = PackedVector2Array(169.143, -2, 169.143, 0, 164.571, 0, 164.571, -2)
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Environment/OneWayPlatform5" index="1"]
-shape = SubResource("SegmentShape2D_m0gmd")
-one_way_collision = true
-
-[node name="OneWayPlatform6" type="StaticBody2D" parent="Environment" index="18"]
-position = Vector2(32, 24)
-scale = Vector2(4, 4)
-collision_layer = 2
-metadata/_edit_group_ = true
-
-[node name="Polygon" type="Polygon2D" parent="Environment/OneWayPlatform6" index="0"]
-position = Vector2(-1152, 2)
-scale = Vector2(7, 1)
-color = Color(0.899258, 0.899258, 0.899258, 1)
-polygon = PackedVector2Array(169.143, -2, 169.143, 0, 164.571, 0, 164.571, -2)
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Environment/OneWayPlatform6" index="1"]
-shape = SubResource("SegmentShape2D_m0gmd")
-one_way_collision = true
-
-[node name="OneWayPlatform7" type="StaticBody2D" parent="Environment" index="19"]
-position = Vector2(160, 24)
-scale = Vector2(4, 4)
-collision_layer = 2
-metadata/_edit_group_ = true
-
-[node name="Polygon" type="Polygon2D" parent="Environment/OneWayPlatform7" index="0"]
-position = Vector2(-1152, 2)
-scale = Vector2(7, 1)
-color = Color(0.899258, 0.899258, 0.899258, 1)
-polygon = PackedVector2Array(169.143, -2, 169.143, 0, 164.571, 0, 164.571, -2)
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Environment/OneWayPlatform7" index="1"]
-shape = SubResource("SegmentShape2D_m0gmd")
-one_way_collision = true
-
-[node name="Slope2" type="StaticBody2D" parent="Environment" index="20"]
-position = Vector2(-1664, 320)
-scale = Vector2(-4, 2)
-collision_layer = 2
-
-[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Environment/Slope2" index="0"]
-position = Vector2(448, -320)
-polygon = PackedVector2Array(-448, 320, -448, 256, -384, 320)
-
-[node name="Polygon" type="Polygon2D" parent="Environment/Slope2" index="1"]
-position = Vector2(-1152, 0)
-scale = Vector2(7, 1)
-color = Color(0.529067, 0.529067, 0.529067, 1)
-polygon = PackedVector2Array(164.571, 0, 164.571, -64, 173.714, 0)
-
-[node name="DashTarget" parent="Environment" index="21" instance=ExtResource("2_x00i2")]
+[node name="DashTarget" parent="Environment/Interactive" index="0" instance=ExtResource("2_x00i2")]
 position = Vector2(168, 288)
 
-[node name="DashTarget2" parent="Environment" index="22" instance=ExtResource("2_x00i2")]
+[node name="DashTarget2" parent="Environment/Interactive" index="1" instance=ExtResource("2_x00i2")]
 position = Vector2(-16, 176)
 
-[node name="NewRopeLine" parent="Environment" index="23" instance=ExtResource("3_3x1wr")]
+[node name="NewRopeLine" parent="Environment/Interactive" index="2" instance=ExtResource("3_3x1wr")]
 position = Vector2(232, 200)
 curve = SubResource("Curve2D_rjgdv")
 
-[node name="NewRailLine" parent="Environment" index="24" instance=ExtResource("4_bt87n")]
+[node name="NewRailLine" parent="Environment/Interactive" index="3" instance=ExtResource("4_bt87n")]
 position = Vector2(-128, 312)
 curve = SubResource("Curve2D_6gk4l")
 
-[node name="NewBasket" parent="Environment" index="25" instance=ExtResource("5_h1nqp")]
+[node name="NewBasket" parent="Environment/Interactive" index="4" instance=ExtResource("5_h1nqp")]
 position = Vector2(-102, 176)
 
-[node name="NewBasket2" parent="Environment" index="26" instance=ExtResource("5_h1nqp")]
+[node name="NewBasket2" parent="Environment/Interactive" index="5" instance=ExtResource("5_h1nqp")]
 position = Vector2(504, 168)
 
-[node name="Jumper" parent="Environment" index="27" instance=ExtResource("6_tb8pt")]
+[node name="Jumper" parent="Environment/Interactive" index="6" instance=ExtResource("6_tb8pt")]
 position = Vector2(-496, 304)
 jump_velocity = 700
 no_friction_time = 0.1
 
-[node name="Jumper3" parent="Environment" index="28" instance=ExtResource("6_tb8pt")]
+[node name="Jumper3" parent="Environment/Interactive" index="7" instance=ExtResource("6_tb8pt")]
 position = Vector2(-608, 304)
 jump_velocity = 600
 no_friction_time = 0.1
 
-[node name="Jumper2" parent="Environment" index="29" instance=ExtResource("6_tb8pt")]
+[node name="Jumper2" parent="Environment/Interactive" index="8" instance=ExtResource("6_tb8pt")]
 position = Vector2(-512, 144)
 rotation = 1.5708
 jump_velocity = 800
 cant_go_time = 0.5
 no_friction_time = 0.1
 
-[node name="MovingPlatform" parent="Environment" index="30" instance=ExtResource("7_ddpj5")]
+[node name="MovingPlatform" parent="Environment/Interactive" index="9" instance=ExtResource("7_ddpj5")]
 position = Vector2(-1272, 256)
 curve = SubResource("Curve2D_8bbvy")
 
-[node name="MovingPlatform3" parent="Environment" index="31" instance=ExtResource("7_ddpj5")]
+[node name="MovingPlatform3" parent="Environment/Interactive" index="10" instance=ExtResource("7_ddpj5")]
 position = Vector2(-1096, 104)
 curve = SubResource("Curve2D_8bbvy")
 
-[node name="MovingPlatform2" parent="Environment" index="32" instance=ExtResource("7_ddpj5")]
+[node name="MovingPlatform2" parent="Environment/Interactive" index="11" instance=ExtResource("7_ddpj5")]
 position = Vector2(-1272, 256)
 curve = SubResource("Curve2D_ptpn8")
 
-[node name="MovingPlatform4" parent="Environment" index="33" instance=ExtResource("7_ddpj5")]
+[node name="MovingPlatform4" parent="Environment/Interactive" index="12" instance=ExtResource("7_ddpj5")]
 position = Vector2(592, 320)
 curve = SubResource("Curve2D_ptpn8")
 
+[node name="Walls" type="Node2D" parent="Environment" index="5"]
+
+[node name="StaticBody2D2" type="StaticBody2D" parent="Environment/Walls" index="0"]
+position = Vector2(640, 64)
+rotation = -1.57079
+collision_layer = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Environment/Walls/StaticBody2D2" index="0"]
+shape = SubResource("WorldBoundaryShape2D_oorwg")
+
+[node name="Polygon2D" type="Polygon2D" parent="Environment/Walls/StaticBody2D2" index="1"]
+polygon = PackedVector2Array(-320, 0, 320, 0, 320, 64, -320, 64)
+
+[node name="StaticBody2D" type="StaticBody2D" parent="Environment/Walls" index="1"]
+position = Vector2(320, 320)
+collision_layer = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Environment/Walls/StaticBody2D" index="0"]
+shape = SubResource("WorldBoundaryShape2D_oorwg")
+
+[node name="Polygon2D" type="Polygon2D" parent="Environment/Walls/StaticBody2D" index="1"]
+position = Vector2(-1920, 0)
+scale = Vector2(7, 1)
+color = Color(0.529067, 0.529067, 0.529067, 1)
+polygon = PackedVector2Array(-320, 0, 320, 0, 320, 64, -320, 64)
+
+[node name="BallWall" type="StaticBody2D" parent="Environment/Walls" index="2"]
+modulate = Color(0.466667, 1, 1, 1)
+position = Vector2(-416, 192)
+collision_layer = 1024
+collision_mask = 4
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Environment/Walls/BallWall" index="0"]
+shape = SubResource("RectangleShape2D_mer8j")
+
+[node name="Polygon2D" type="Polygon2D" parent="Environment/Walls/BallWall" index="1"]
+position = Vector2(-944, 72)
+scale = Vector2(7, 1)
+color = Color(1, 1, 1, 0.529412)
+polygon = PackedVector2Array(125.714, -200, 144, -200, 144, 56, 125.714, 56)
+
+[node name="BallWall2" type="StaticBody2D" parent="Environment/Walls" index="3"]
+modulate = Color(0.466667, 1, 1, 1)
+position = Vector2(-768, 320)
+collision_layer = 1024
+collision_mask = 4
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Environment/Walls/BallWall2" index="0"]
+shape = SubResource("RectangleShape2D_mer8j")
+
+[node name="Polygon2D" type="Polygon2D" parent="Environment/Walls/BallWall2" index="1"]
+position = Vector2(-944, 72)
+scale = Vector2(7, 1)
+color = Color(1, 1, 1, 0.529412)
+polygon = PackedVector2Array(125.714, -200, 144, -200, 144, 56, 125.714, 56)
+
+[node name="BallWall3" type="StaticBody2D" parent="Environment/Walls" index="4"]
+modulate = Color(0.466667, 1, 1, 1)
+position = Vector2(-768, 24)
+collision_layer = 1024
+collision_mask = 4
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Environment/Walls/BallWall3" index="0"]
+shape = SubResource("RectangleShape2D_mer8j")
+
+[node name="Polygon2D" type="Polygon2D" parent="Environment/Walls/BallWall3" index="1"]
+position = Vector2(-944, 72)
+scale = Vector2(7, 1)
+color = Color(1, 1, 1, 0.529412)
+polygon = PackedVector2Array(125.714, -200, 144, -200, 144, 56, 125.714, 56)
+
+[node name="PlayerWall" type="StaticBody2D" parent="Environment/Walls" index="5"]
+modulate = Color(0.999991, 0.419415, 0.407208, 1)
+position = Vector2(-1472, 320)
+collision_layer = 512
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Environment/Walls/PlayerWall" index="0"]
+shape = SubResource("RectangleShape2D_mer8j")
+
+[node name="Polygon2D" type="Polygon2D" parent="Environment/Walls/PlayerWall" index="1"]
+position = Vector2(-944, 72)
+scale = Vector2(7, 1)
+color = Color(1, 1, 1, 0.529412)
+polygon = PackedVector2Array(125.714, -200, 144, -200, 144, 56, 125.714, 56)
+
+[node name="PlayerWall2" type="StaticBody2D" parent="Environment/Walls" index="6"]
+modulate = Color(0.999991, 0.419415, 0.407208, 1)
+position = Vector2(-1984, 392)
+collision_layer = 512
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Environment/Walls/PlayerWall2" index="0"]
+shape = SubResource("RectangleShape2D_mer8j")
+
+[node name="Polygon2D" type="Polygon2D" parent="Environment/Walls/PlayerWall2" index="1"]
+position = Vector2(-944, 72)
+scale = Vector2(7, 1)
+color = Color(1, 1, 1, 0.529412)
+polygon = PackedVector2Array(125.714, -200, 144, -200, 144, 56, 125.714, 56)
+
+[node name="Slope1" type="StaticBody2D" parent="Environment/Walls" index="7"]
+position = Vector2(-1664, 320)
+scale = Vector2(4, 4)
+collision_layer = 2
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Environment/Walls/Slope1" index="0"]
+position = Vector2(448, -320)
+polygon = PackedVector2Array(-448, 320, -448, 256, -384, 320)
+
+[node name="Polygon" type="Polygon2D" parent="Environment/Walls/Slope1" index="1"]
+position = Vector2(-1152, 0)
+scale = Vector2(7, 1)
+color = Color(0.529067, 0.529067, 0.529067, 1)
+polygon = PackedVector2Array(164.571, 0, 164.571, -64, 173.714, 0)
+
+[node name="OneWayPlatform" type="StaticBody2D" parent="Environment/Walls" index="8"]
+position = Vector2(-704, 128)
+scale = Vector2(4, 4)
+collision_layer = 2
+metadata/_edit_group_ = true
+
+[node name="Polygon" type="Polygon2D" parent="Environment/Walls/OneWayPlatform" index="0"]
+position = Vector2(-1152, 2)
+scale = Vector2(7, 1)
+color = Color(0.899258, 0.899258, 0.899258, 1)
+polygon = PackedVector2Array(169.143, -2, 169.143, 0, 164.571, 0, 164.571, -2)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Environment/Walls/OneWayPlatform" index="1"]
+shape = SubResource("SegmentShape2D_m0gmd")
+one_way_collision = true
+
+[node name="OneWayPlatform2" type="StaticBody2D" parent="Environment/Walls" index="9"]
+position = Vector2(-704, 64)
+scale = Vector2(4, 4)
+collision_layer = 2
+metadata/_edit_group_ = true
+
+[node name="Polygon" type="Polygon2D" parent="Environment/Walls/OneWayPlatform2" index="0"]
+position = Vector2(-1152, 2)
+scale = Vector2(7, 1)
+color = Color(0.899258, 0.899258, 0.899258, 1)
+polygon = PackedVector2Array(169.143, -2, 169.143, 0, 164.571, 0, 164.571, -2)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Environment/Walls/OneWayPlatform2" index="1"]
+shape = SubResource("SegmentShape2D_m0gmd")
+one_way_collision = true
+
+[node name="OneWayPlatform3" type="StaticBody2D" parent="Environment/Walls" index="10"]
+position = Vector2(-352, 64)
+scale = Vector2(4, 4)
+collision_layer = 2
+metadata/_edit_group_ = true
+
+[node name="Polygon" type="Polygon2D" parent="Environment/Walls/OneWayPlatform3" index="0"]
+position = Vector2(-1152, 2)
+scale = Vector2(7, 1)
+color = Color(0.899258, 0.899258, 0.899258, 1)
+polygon = PackedVector2Array(169.143, -2, 169.143, 0, 164.571, 0, 164.571, -2)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Environment/Walls/OneWayPlatform3" index="1"]
+shape = SubResource("SegmentShape2D_m0gmd")
+one_way_collision = true
+
+[node name="OneWayPlatform4" type="StaticBody2D" parent="Environment/Walls" index="11"]
+position = Vector2(-224, 48)
+scale = Vector2(4, 4)
+collision_layer = 2
+metadata/_edit_group_ = true
+
+[node name="Polygon" type="Polygon2D" parent="Environment/Walls/OneWayPlatform4" index="0"]
+position = Vector2(-1152, 2)
+scale = Vector2(7, 1)
+color = Color(0.899258, 0.899258, 0.899258, 1)
+polygon = PackedVector2Array(169.143, -2, 169.143, 0, 164.571, 0, 164.571, -2)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Environment/Walls/OneWayPlatform4" index="1"]
+shape = SubResource("SegmentShape2D_m0gmd")
+one_way_collision = true
+
+[node name="OneWayPlatform5" type="StaticBody2D" parent="Environment/Walls" index="12"]
+position = Vector2(-96, 48)
+scale = Vector2(4, 4)
+collision_layer = 2
+metadata/_edit_group_ = true
+
+[node name="Polygon" type="Polygon2D" parent="Environment/Walls/OneWayPlatform5" index="0"]
+position = Vector2(-1152, 2)
+scale = Vector2(7, 1)
+color = Color(0.899258, 0.899258, 0.899258, 1)
+polygon = PackedVector2Array(169.143, -2, 169.143, 0, 164.571, 0, 164.571, -2)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Environment/Walls/OneWayPlatform5" index="1"]
+shape = SubResource("SegmentShape2D_m0gmd")
+one_way_collision = true
+
+[node name="OneWayPlatform6" type="StaticBody2D" parent="Environment/Walls" index="13"]
+position = Vector2(32, 24)
+scale = Vector2(4, 4)
+collision_layer = 2
+metadata/_edit_group_ = true
+
+[node name="Polygon" type="Polygon2D" parent="Environment/Walls/OneWayPlatform6" index="0"]
+position = Vector2(-1152, 2)
+scale = Vector2(7, 1)
+color = Color(0.899258, 0.899258, 0.899258, 1)
+polygon = PackedVector2Array(169.143, -2, 169.143, 0, 164.571, 0, 164.571, -2)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Environment/Walls/OneWayPlatform6" index="1"]
+shape = SubResource("SegmentShape2D_m0gmd")
+one_way_collision = true
+
+[node name="OneWayPlatform7" type="StaticBody2D" parent="Environment/Walls" index="14"]
+position = Vector2(160, 24)
+scale = Vector2(4, 4)
+collision_layer = 2
+metadata/_edit_group_ = true
+
+[node name="Polygon" type="Polygon2D" parent="Environment/Walls/OneWayPlatform7" index="0"]
+position = Vector2(-1152, 2)
+scale = Vector2(7, 1)
+color = Color(0.899258, 0.899258, 0.899258, 1)
+polygon = PackedVector2Array(169.143, -2, 169.143, 0, 164.571, 0, 164.571, -2)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Environment/Walls/OneWayPlatform7" index="1"]
+shape = SubResource("SegmentShape2D_m0gmd")
+one_way_collision = true
+
+[node name="Slope2" type="StaticBody2D" parent="Environment/Walls" index="15"]
+position = Vector2(-1664, 320)
+rotation = 3.14159
+scale = Vector2(4, -2)
+collision_layer = 2
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Environment/Walls/Slope2" index="0"]
+position = Vector2(448, -320)
+polygon = PackedVector2Array(-448, 320, -448, 256, -384, 320)
+
+[node name="Polygon" type="Polygon2D" parent="Environment/Walls/Slope2" index="1"]
+position = Vector2(-1152, 0)
+scale = Vector2(7, 1)
+color = Color(0.529067, 0.529067, 0.529067, 1)
+polygon = PackedVector2Array(164.571, 0, 164.571, -64, 173.714, 0)
+
 [node name="EnnemyTest" parent="." index="9" instance=ExtResource("19_ckf5e")]
-position = Vector2(-3064, 40)
+position = Vector2(-3064, 64)
+
+[node name="Exploder" parent="." index="10" instance=ExtResource("20_qflou")]
+position = Vector2(-3632, 64)
+
+[node name="Exploder2" parent="." index="11" instance=ExtResource("20_qflou")]
+position = Vector2(-3400, 64)
+
+[node name="Exploder3" parent="." index="12" instance=ExtResource("20_qflou")]
+position = Vector2(-1400, 88)
+
+[node name="PedestrianGenerator" parent="." index="13" instance=ExtResource("21_hdw07")]
+position = Vector2(-3640, 288)
+initial_sample_number = 3
+x_radius = 200.0
+palette_scheme_sampler = SubResource("Resource_6hd1c")
+
+[node name="ThiefKid" parent="." index="14" instance=ExtResource("24_5a8ro")]
+position = Vector2(-192, -176)
+palette_scheme_sampler = SubResource("Resource_8bsb4")
+
+[node name="ThiefKid2" parent="." index="15" instance=ExtResource("24_5a8ro")]
+position = Vector2(-3056, 288)
+palette_scheme_sampler = SubResource("Resource_5jnfv")
