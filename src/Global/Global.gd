@@ -4,7 +4,7 @@ extends Node
 @export var max_trail_points : int = 5000
 @export var DEBUG : bool = true
 
-var default_gravity = Vector2(0.0,ProjectSettings.get_setting("physics/2d/default_gravity")) # pix/s²
+var default_gravity : Vector2 = Vector2(0.0,ProjectSettings.get_setting("physics/2d/default_gravity")) # pix/s²
 var gravity_alterer = AltererAdditive.new(default_gravity)
 var cinematic_playing = false: set=set_cinematic_state, get=is_cinematic_playing
 var camera : Camera2D = null : set = set_current_camera, get = get_current_camera

@@ -5,10 +5,8 @@ class_name ExplosionData
 ## Emitted when a body enter the explosion
 signal body_explode(body, direction)
 
-## Whether or not connect the `default_explode_body` function to the `body_explode` signal.
-@export var use_default_explosion : bool = true : set = set_use_default_explosion
-## The explosion goes from 'initial_scale_factor * momentum' at the center, to  'momentum' at the radius. Doesn't apply to damages.
-@export var initial_scale_factor : float = 1.0
+@export var use_default_explosion : bool = true : set = set_use_default_explosion ## Whether or not connect the `default_explode_body` function to the `body_explode` signal.
+@export var initial_scale_factor : float = 1.0 ## The explosion goes from 'initial_scale_factor * momentum' at the center, to  'momentum' at the radius. Doesn't apply to damages.
 
 @export var explosion_duration : float = 0.5 ##s
 @export_range(1,10) var explosion_steps : int = 5
