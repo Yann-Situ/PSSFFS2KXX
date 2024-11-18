@@ -6,7 +6,6 @@ extends State
 @export var speed : float = 100##pix/s
 
 @export var fetching_state : State
-@export var throwing_state : State
 
 ## Called when entering this State.
 ## If there is an immediate transition, return the next State, otherwise return
@@ -30,5 +29,7 @@ func process(delta) -> State:
 func physics_process(delta) -> State:
 	if not logic.found_ball():
 		return fetching_state
-	entity.global_position += speed*delta * (logic.ball.global_position - entity.global_position).normalized()
+	var q = logic.ball.global_position - entity.global_position
+	var vel = min(speed, q.length())
+	entity.global_position += vel*delta * q.normalized()
 	return self

@@ -1,4 +1,4 @@
-[gd_scene load_steps=20 format=3 uid="uid://bbn03x0xfgmq8"]
+[gd_scene load_steps=19 format=3 uid="uid://bbn03x0xfgmq8"]
 
 [ext_resource type="Shader" path="res://assets/shader/recolor.gdshader" id="1_xc0s5"]
 [ext_resource type="Texture2D" uid="uid://m1xsfwdn1wc7" path="res://assets/art/characters/ennemies/ennemytest.png" id="2_qoksb"]
@@ -6,7 +6,6 @@
 [ext_resource type="Script" path="res://src/Characters/NPC/Ennemies/EnnemyTest/Logic.gd" id="4_2x0jf"]
 [ext_resource type="Script" path="res://src/Characters/NPC/Ennemies/EnnemyTest/Fetching.gd" id="5_mhhi5"]
 [ext_resource type="Script" path="res://src/Characters/NPC/Ennemies/EnnemyTest/FollowingBall.gd" id="6_5duco"]
-[ext_resource type="Script" path="res://src/Characters/StateSystem/State.gd" id="6_gvr0g"]
 
 [sub_resource type="Gradient" id="Gradient_l1ux5"]
 offsets = PackedFloat32Array(0, 0.254237, 1)
@@ -33,35 +32,6 @@ shader = ExtResource("1_xc0s5")
 shader_parameter/grad_0 = SubResource("GradientTexture1D_xya6b")
 shader_parameter/grad_1 = SubResource("GradientTexture1D_3xa4u")
 shader_parameter/grad_2 = SubResource("GradientTexture1D_8rk3a")
-
-[sub_resource type="Animation" id="Animation_not4p"]
-resource_name = "fetching"
-length = 2.0
-loop_mode = 1
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath(".:position")
-tracks/0/interp = 2
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.2),
-"transitions": PackedFloat32Array(1, 1),
-"update": 0,
-"values": [Vector2(0, 0), Vector2(0, 8)]
-}
-tracks/1/type = "value"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath(".:scale")
-tracks/1/interp = 2
-tracks/1/loop_wrap = true
-tracks/1/keys = {
-"times": PackedFloat32Array(0.8, 1),
-"transitions": PackedFloat32Array(1, 1),
-"update": 0,
-"values": [Vector2(1, 1), Vector2(0.98, 1.03)]
-}
 
 [sub_resource type="Animation" id="Animation_tsrlh"]
 length = 0.001
@@ -112,6 +82,35 @@ tracks/3/keys = {
 "transitions": PackedFloat32Array(1),
 "update": 0,
 "values": [0.0]
+}
+
+[sub_resource type="Animation" id="Animation_not4p"]
+resource_name = "fetching"
+length = 2.0
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:position")
+tracks/0/interp = 2
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.2),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(0, 0), Vector2(0, 8)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:scale")
+tracks/1/interp = 2
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0.8, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(1, 1), Vector2(0.98, 1.03)]
 }
 
 [sub_resource type="Animation" id="Animation_5xsdl"]
@@ -194,16 +193,12 @@ logic = NodePath("../Logic")
 animation_player = NodePath("../../Sprite2D/AnimationPlayer")
 following_state = NodePath("../FollowingBall")
 
-[node name="FollowingBall" type="Node" parent="StateMachine" node_paths=PackedStringArray("entity", "logic", "animation_player", "fetching_state", "throwing_state")]
+[node name="FollowingBall" type="Node" parent="StateMachine" node_paths=PackedStringArray("entity", "logic", "animation_player", "fetching_state")]
 script = ExtResource("6_5duco")
 entity = NodePath("../..")
 logic = NodePath("../Logic")
 animation_player = NodePath("../../Sprite2D/AnimationPlayer")
 fetching_state = NodePath("../Fetching")
-throwing_state = NodePath("../ThrowingBall")
-
-[node name="ThrowingBall" type="Node" parent="StateMachine"]
-script = ExtResource("6_gvr0g")
 
 [node name="BallFetcher" type="Area2D" parent="."]
 collision_layer = 0
