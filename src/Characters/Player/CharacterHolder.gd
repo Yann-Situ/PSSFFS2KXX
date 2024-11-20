@@ -13,10 +13,10 @@ class_name CharacterHolder
 # 	- To get out, call belonghandler.get_out(), it will call
 # 		holder._get_out(character), which will emit a signal
 
-signal processing_character(belong_handler, delta)
-signal physics_processing_character(belong_handler, delta)
-signal getting_in(belong_handler)
-signal getting_out(belong_handler)
+signal processing_character(belong_handler : BelongHandler, delta : float)
+signal physics_processing_character(belong_handler : BelongHandler, delta : float)
+signal getting_in(belong_handler : BelongHandler)
+signal getting_out(belong_handler : BelongHandler)
 
 enum HOLDER_TYPE {NO_TYPE, GRIND, HANG, FOLLOW, ROLL}
 

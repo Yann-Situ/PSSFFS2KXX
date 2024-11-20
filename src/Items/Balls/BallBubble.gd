@@ -31,7 +31,7 @@ func tween_follow_property(t : float, src_pos : Vector2, trg : Node2D) -> void:
 	self.global_position = src_pos.lerp(trg.global_position,t)
 
 func _on_tween_completed():
-	if holder == Global.get_current_room() :
+	if !is_belonging():
 		enable_physics()
 	#position == player.position
 

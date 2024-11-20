@@ -63,9 +63,9 @@ func _ready():
 func _on_basket_area_body_entered(body):
 	#print("basket :"+body.name)
 	if body.is_in_group("balls"):
-		if body.is_reparenting():
-			print(" - basket "+body.name+" is ignored because reparenting")
-			return # Workaround because of https://www.reddit.com/r/godot/comments/vjkaun/reparenting_node_without_removing_it_from_tree/
+		#if body.is_reparenting():
+			#print(" - basket "+body.name+" is ignored because reparenting")
+			#return # Workaround because of https://www.reddit.com/r/godot/comments/vjkaun/reparenting_node_without_removing_it_from_tree/
 		var dunk_dir = Vector2.DOWN.rotated(global_rotation)
 		var score = body.linear_velocity.dot(dunk_dir)
 		if score > 0.0:

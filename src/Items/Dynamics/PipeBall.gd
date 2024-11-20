@@ -62,9 +62,9 @@ func update_entrance_rotation():
 func _on_Area_body_entered(ball):
 	if self.activated and ball.is_in_group("balls") and \
 		(pipe_type == PIPE_TYPE.TO_EXIT or pipe_type == PIPE_TYPE.BOTH_SIDES):
-		if ball.is_reparenting():
-			print(" - pipe "+ball.name+" is ignored because reparenting")
-			return # Workaround because of https://www.reddit.com/r/godot/comments/vjkaun/reparenting_node_without_removing_it_from_tree/
+		# if ball.is_reparenting():
+		# 	print(" - pipe "+ball.name+" is ignored because reparenting")
+		# 	return # Workaround because of https://www.reddit.com/r/godot/comments/vjkaun/reparenting_node_without_removing_it_from_tree/
 
 		for body in inside_bodies:
 			if body == ball:

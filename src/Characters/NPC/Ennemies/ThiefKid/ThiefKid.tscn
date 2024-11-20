@@ -1,4 +1,4 @@
-[gd_scene load_steps=29 format=3 uid="uid://5uiwv0rqds8n"]
+[gd_scene load_steps=30 format=3 uid="uid://5uiwv0rqds8n"]
 
 [ext_resource type="Script" path="res://src/Characters/NPC/Ennemies/ThiefKid/ThiefKid.gd" id="1_80j50"]
 [ext_resource type="Shader" path="res://assets/shader/recolor.gdshader" id="2_rhrsc"]
@@ -9,6 +9,7 @@
 [ext_resource type="Script" path="res://src/Characters/NPC/Ennemies/ThiefKid/Logic.gd" id="5_aapnc"]
 [ext_resource type="Texture2D" uid="uid://bdkxpfm14ft1r" path="res://assets/art/effects/interrogation_bubble.png" id="5_krst4"]
 [ext_resource type="Script" path="res://src/Characters/NPC/Ennemies/ThiefKid/Idle.gd" id="6_gxwnp"]
+[ext_resource type="Script" path="res://src/Items/Balls/BallHolder.gd" id="7_qdd23"]
 [ext_resource type="Script" path="res://src/Characters/NPC/Ennemies/ThiefKid/FollowingBall.gd" id="10_nyag0"]
 [ext_resource type="Script" path="res://src/Characters/NPC/Ennemies/ThiefKid/Passing.gd" id="10_qav1v"]
 
@@ -371,6 +372,9 @@ monitorable = false
 position = Vector2(112, 4)
 shape = SubResource("RectangleShape2D_qs8le")
 
+[node name="BallHolder" type="Node2D" parent="Flipper"]
+script = ExtResource("7_qdd23")
+
 [node name="BallPicker" type="Area2D" parent="Flipper"]
 collision_layer = 0
 collision_mask = 4
@@ -382,6 +386,7 @@ shape = SubResource("RectangleShape2D_8xdo6")
 debug_color = Color(0.729412, 1, 0.733333, 0.419608)
 
 [node name="BallPositioner" type="RemoteTransform2D" parent="Flipper"]
+position = Vector2(-8, 8)
 update_rotation = false
 update_scale = false
 
@@ -395,12 +400,13 @@ script = ExtResource("4_36x6c")
 status_logic = NodePath("Logic")
 init_states = [NodePath("Idle")]
 
-[node name="Logic" type="Node" parent="StateMachine" node_paths=PackedStringArray("fetcher", "picker", "positioner", "flipper")]
+[node name="Logic" type="Node" parent="StateMachine" node_paths=PackedStringArray("fetcher", "picker", "positioner", "flipper", "holder")]
 script = ExtResource("5_aapnc")
 fetcher = NodePath("../../Flipper/BallFetcher")
 picker = NodePath("../../Flipper/BallPicker")
 positioner = NodePath("../../Flipper/BallPositioner")
 flipper = NodePath("../../Flipper")
+holder = NodePath("../../Flipper/BallHolder")
 can_go = true
 
 [node name="ReleasedBallTimer" type="Timer" parent="StateMachine/Logic"]
