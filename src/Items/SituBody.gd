@@ -43,7 +43,9 @@ func _ready():
 
 func disable_physics():
 	physics_enabled = false
-	set_freeze_enabled(true)
+	call_deferred("set_freeze_enabled", true)
+	# set_freeze_enabled(true) # throw an error: 
+	# Can't change this state while flushing queries. Use call_deferred() or set_deferred() to change monitoring state instead
 	collision_layer = 0
 	collision_mask = 0
 	set_linear_velocity(Vector2.ZERO)
@@ -53,8 +55,10 @@ func enable_physics():
 	physics_enabled = true
 	collision_layer = collision_layer_save
 	collision_mask = collision_mask_save
-	set_freeze_enabled(false)
-
+	call_deferred("set_freeze_enabled", false)
+	# set_freeze_enabled(false) # throw an error: 
+	# Can't change this state while flushing queries. Use call_deferred() or set_deferred() to change monitoring state instead
+	
 func reset_physics():
 	disable_physics()
 	global_position = start_position

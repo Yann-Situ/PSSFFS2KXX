@@ -4,9 +4,9 @@ class_name BelongHandler
 ## handle how a character can belong to another node
 # The call are as follows:
 # 	- the holder wants to pickup the character and call belonghandler.get_in(holder)
-# 	- get_in(holder) check if the holder is able to pickup the character.
-# 		If yes, it returns true and update the current_holder and
-#		call holder._get_in(character), which will emit a signal
+# 	- get_in(holder) checks if the holder is able to pickup the character.
+# 		If yes, it returns true and updates the current_holder and
+#		calls holder._get_in(character), which will emit a signal
 # 	- Then belonghandler call holder._process_character(character, delta) and
 # 		holder._physics_process_character(character, delta) each frames,
 #		which will emit a signal each time

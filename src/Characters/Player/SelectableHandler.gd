@@ -31,7 +31,7 @@ var selectable_shoot : Selectable = null : get = get_selectable_shoot
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	assert(selectable_area != null)
+	assert(is_instance_valid(selectable_area))
 
 ####################################################################################################
 

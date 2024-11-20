@@ -2,7 +2,7 @@
 extends Node2D
 class_name RayHandler
 
-@export var P: Player ## P is only used for position
+@export var P: Player
 
 var rays = []
 var rays_flip = []
@@ -12,6 +12,7 @@ var space_state : PhysicsDirectSpaceState2D
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
+	assert(is_instance_valid(P))
 	rays_not_flip = [$Ray_fwd_down, $Ray_fwd_up, $Ray_up_fwd, $Ray_up_bwd, \
 		$Ray_down_fwd, $Ray_down_bwd, $Ray_slope_fwd, $Ray_slope_bwd]
 	#rays_flip = [$Ray_fwd_down_f, $Ray_fwd_up_f, $Ray_up_bwd, $Ray_up_fwd, \
