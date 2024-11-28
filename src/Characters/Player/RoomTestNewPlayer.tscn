@@ -1,4 +1,4 @@
-[gd_scene load_steps=70 format=3 uid="uid://eq50gyc1bs85"]
+[gd_scene load_steps=72 format=3 uid="uid://eq50gyc1bs85"]
 
 [ext_resource type="PackedScene" uid="uid://b5emf4je4tnag" path="res://src/Levels/Room2D.tscn" id="1_6to1r"]
 [ext_resource type="PackedScene" uid="uid://rmukvjwyiahu" path="res://src/Items/Interactive/DashTarget.tscn" id="2_x00i2"]
@@ -21,6 +21,7 @@
 [ext_resource type="PackedScene" uid="uid://bbn03x0xfgmq8" path="res://src/Characters/NPC/Ennemies/EnnemyTest/EnnemyTest.tscn" id="19_ckf5e"]
 [ext_resource type="PackedScene" uid="uid://b0w1du1nxn0pt" path="res://src/Characters/NPC/Ennemies/Exploder/Exploder.tscn" id="20_qflou"]
 [ext_resource type="PackedScene" uid="uid://bibx4tlfcbuxm" path="res://src/Characters/NPC/PedestrianGenerator.tscn" id="21_hdw07"]
+[ext_resource type="PackedScene" uid="uid://cn3mh5kug88g3" path="res://src/Items/Dynamics/PipeBall.tscn" id="21_v58gt"]
 [ext_resource type="Script" path="res://src/Global/CustomResources/ColorDistribution.gd" id="22_h70sn"]
 [ext_resource type="Script" path="res://src/Global/CustomResources/PaletteSchemeSampler.gd" id="23_63q0b"]
 [ext_resource type="PackedScene" uid="uid://5uiwv0rqds8n" path="res://src/Characters/NPC/Ennemies/ThiefKid/ThiefKid.tscn" id="24_5a8ro"]
@@ -82,6 +83,12 @@ size = Vector2(128, 256)
 
 [sub_resource type="SegmentShape2D" id="SegmentShape2D_m0gmd"]
 b = Vector2(32, 0)
+
+[sub_resource type="Curve2D" id="Curve2D_rnr1g"]
+_data = {
+"points": PackedVector2Array(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 72, 0, 0, 0, 0, 80, 72, 0, 0, 0, 0, 80, -240, 0, 0, 0, 0, 216, -368, 0, 0, 0, 0, 0, -368, 0, 0, 0, 0, 0, -304)
+}
+point_count = 7
 
 [sub_resource type="Curve" id="16"]
 bake_resolution = 1000
@@ -165,7 +172,7 @@ saturation_distribution = SubResource("33")
 lightness_distribution = SubResource("39")
 weight = 1.0
 
-[sub_resource type="Resource" id="Resource_yq11a"]
+[sub_resource type="Resource" id="Resource_lcb1m"]
 resource_local_to_scene = true
 script = ExtResource("23_63q0b")
 color_samplers = Array[Resource("res://src/Global/CustomResources/ColorSampler.gd")]([SubResource("19"), SubResource("23"), SubResource("31"), SubResource("35")])
@@ -635,16 +642,24 @@ position = Vector2(-3400, 64)
 [node name="Exploder3" parent="." index="12" instance=ExtResource("20_qflou")]
 position = Vector2(-1400, 88)
 
-[node name="PedestrianGenerator" parent="." index="13" instance=ExtResource("21_hdw07")]
+[node name="PipeBall" parent="." index="13" instance=ExtResource("21_v58gt")]
+z_index = 160
+position = Vector2(-1752, 240)
+curve = SubResource("Curve2D_rnr1g")
+speed_at_exit = 20.0
+speed_inside = 200.0
+pipe_z = 1
+
+[node name="PedestrianGenerator" parent="." index="14" instance=ExtResource("21_hdw07")]
 position = Vector2(-3640, 288)
 initial_sample_number = 3
 x_radius = 200.0
-palette_scheme_sampler = SubResource("Resource_yq11a")
+palette_scheme_sampler = SubResource("Resource_lcb1m")
 
-[node name="ThiefKid" parent="." index="14" instance=ExtResource("24_5a8ro")]
+[node name="ThiefKid" parent="." index="15" instance=ExtResource("24_5a8ro")]
 position = Vector2(-192, -176)
 palette_scheme_sampler = SubResource("Resource_8bsb4")
 
-[node name="ThiefKid2" parent="." index="15" instance=ExtResource("24_5a8ro")]
+[node name="ThiefKid2" parent="." index="16" instance=ExtResource("24_5a8ro")]
 position = Vector2(-3056, 288)
 palette_scheme_sampler = SubResource("Resource_5jnfv")

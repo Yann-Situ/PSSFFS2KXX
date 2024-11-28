@@ -46,7 +46,7 @@ func _on_ball_fetcher_body_exited(body):
 func _on_ball_picker_body_entered(body):
 	if not just_released_ball and body is Ball:
 		if body.pick(holder):
-			positioner.remote_path = body.get_path() # ERROR: E 0:00:33:0626   Logic.gd:84 @ pickup_ball(): Cannot get path of node as it is not in a scene tree.
+			positioner.remote_path = body.get_path() 
 
 func throw_ball(throw_global_position : Vector2, speed : Vector2) -> bool:
 	if !has_ball():

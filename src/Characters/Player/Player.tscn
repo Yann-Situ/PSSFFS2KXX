@@ -2029,6 +2029,8 @@ position = Vector2(0, 6)
 shape = SubResource("58")
 
 [connection signal="body_entered" from="Flipper/BallHandler" to="Flipper/BallHandler" method="_on_Ball_Handler_body_entered"]
+[connection signal="picking" from="Flipper/BallHandler/BallHolder" to="." method="collision_mask_add_ballwall" unbinds=1]
 [connection signal="processing_ball" from="Flipper/BallHandler/BallHolder" to="Flipper/BallHandler" method="set_has_ball_position" unbinds=1]
+[connection signal="releasing" from="Flipper/BallHandler/BallHolder" to="." method="collision_mask_remove_ballwall" unbinds=1]
 [connection signal="body_entered" from="Flipper/BallHandler/BallWallDetector" to="Flipper/BallHandler" method="_on_BallWallDetector_body_entered"]
 [connection signal="body_exited" from="Flipper/BallHandler/BallWallDetector" to="Flipper/BallHandler" method="_on_BallWallDetector_body_exited"]

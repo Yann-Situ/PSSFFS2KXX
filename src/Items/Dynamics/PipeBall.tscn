@@ -1,9 +1,10 @@
-[gd_scene load_steps=14 format=3 uid="uid://cn3mh5kug88g3"]
+[gd_scene load_steps=15 format=3 uid="uid://cn3mh5kug88g3"]
 
 [ext_resource type="Script" path="res://src/Items/Dynamics/PipeBall.gd" id="1"]
-[ext_resource type="Texture2D" uid="uid://bcddludfh8obw" path="res://assets/art/environment/environment-interactive.png" id="2"]
+[ext_resource type="Texture2D" uid="uid://bx70alc2tdq28" path="res://assets/art/environment/environment-interactive.png" id="2"]
 [ext_resource type="Texture2D" uid="uid://cntdvutmbk0dn" path="res://assets/art/ball/ball_particle.png" id="3"]
 [ext_resource type="Script" path="res://src/Items/Interactive/Electric.gd" id="4"]
+[ext_resource type="Script" path="res://src/Items/Balls/BallHolder.gd" id="5_rg2x4"]
 
 [sub_resource type="RectangleShape2D" id="1"]
 size = Vector2(32, 32)
@@ -86,11 +87,11 @@ shape = SubResource("1")
 sprite_frames = SubResource("7")
 animation = &"active"
 
-[node name="Area3D" type="Area2D" parent="Entrance"]
+[node name="Area2D" type="Area2D" parent="Entrance"]
 collision_layer = 8
 collision_mask = 4
 
-[node name="CollisionShape3D" type="CollisionShape2D" parent="Entrance/Area3D"]
+[node name="CollisionShape3D" type="CollisionShape2D" parent="Entrance/Area2D"]
 modulate = Color(0, 0.694118, 1, 1)
 position = Vector2(0, -16)
 shape = SubResource("8")
@@ -113,4 +114,12 @@ spread = 0.0
 gravity = Vector2(0, 0)
 color_ramp = SubResource("9")
 
-[connection signal="body_entered" from="Entrance/Area3D" to="." method="_on_Area_body_entered"]
+[node name="BallHolder" type="Node2D" parent="."]
+script = ExtResource("5_rg2x4")
+holder_priority = 5
+max_ball = 20
+
+[connection signal="body_entered" from="Entrance/Area2D" to="." method="_on_Area_body_entered"]
+[connection signal="physics_processing_ball" from="BallHolder" to="." method="_on_ball_holder_physics_processing_ball"]
+[connection signal="picking" from="BallHolder" to="." method="_on_ball_holder_picking"]
+[connection signal="releasing" from="BallHolder" to="." method="_on_ball_holder_releasing"]

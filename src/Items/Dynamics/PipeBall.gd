@@ -10,8 +10,9 @@ enum PIPE_TYPE {TO_EXIT, TO_ENTRANCE, BOTH_SIDES}
 enum PIPE_Z {BACK, FRONT}
 @export var pipe_z : PIPE_Z = PIPE_Z.BACK
 
-var inside_bodies = []
-var path_follows = []
+@onready var ball_holder : BallHolder = $BallHolder
+#var inside_bodies = []
+var path_follows = {}
 
 func _ready():
 	if pipe_z == PIPE_Z.BACK:
@@ -24,24 +25,6 @@ func _ready():
 	update_entrance_rotation()
 	update_entrance_sprite()
 
-func _process(delta):
-	if !self.activated :
-		return
-
-	var j = 0 # int because we're deleting nodes in a list we're browsing
-	for i in range(inside_bodies.size()):
-		var body = inside_bodies[i-j]
-		var path_follow = path_follows[i-j]
-		path_follow.progress += speed_inside * delta
-		body.global_position = path_follow.global_position
-		if path_follow.get_progress_ratio() == 1.0:
-			body.throw(path_follow.global_position,
-						path_follow.transform.x * speed_at_exit)
-			# note that throw also call self.free_ball and remove it from the
-			# inside_bodies list
-
-			# transform.x is the direction (vec2D) of the pathfollow
-			j += 1 # because we deleted a node in the list we're browsing
 
 func update_entrance_sprite():
 	if self.activated :
@@ -60,48 +43,38 @@ func update_entrance_rotation():
 ##############################
 
 func _on_Area_body_entered(ball):
-	if self.activated and ball.is_in_group("balls") and \
+	if self.activated and ball is Ball and \
 		(pipe_type == PIPE_TYPE.TO_EXIT or pipe_type == PIPE_TYPE.BOTH_SIDES):
-		# if ball.is_reparenting():
-		# 	print(" - pipe "+ball.name+" is ignored because reparenting")
-		# 	return # Workaround because of https://www.reddit.com/r/godot/comments/vjkaun/reparenting_node_without_removing_it_from_tree/
+		ball.pick(ball_holder)
 
-		for body in inside_bodies:
-			if body == ball:
-				print(ball.name+" already in pipe")
-				return
+func _on_ball_holder_picking(ball):
+	var new_path_follow : PathFollow2D = PathFollow2D.new()
+	new_path_follow.progress = 0
+	new_path_follow.loop = false
+	self.add_child(new_path_follow)
+	path_follows[ball] = new_path_follow
 
-		var new_path_follow : PathFollow2D = PathFollow2D.new()
-		new_path_follow.progress = 0
-		new_path_follow.loop = false
-		self.add_child(new_path_follow)
-		# WARNING : due to the issue in Ball.gd func change_holder, this part can freeze/crash.
-		# https://www.reddit.com/r/godot/comments/vjkaun/reparenting_node_without_removing_it_from_tree/
-		inside_bodies.push_back(ball)
-		ball.pickup(self)
-		ball.z_index = z_index-1
-		path_follows.push_back(new_path_follow)
+	print(ball.name+" enter the pipe: "+str(ball_holder.held_balls.size())+" bodies")
 
-		print(ball.name+" enter the pipe: "+str(inside_bodies.size())+" bodies")
+func _on_ball_holder_physics_processing_ball(ball : Ball, delta):
+	assert(path_follows.has(ball))
+	if !self.activated :
+		return
+	var path_follow : PathFollow2D = path_follows[ball]
+	path_follow.progress += speed_inside * delta
+	ball.global_position = path_follow.global_position
+	if path_follow.get_progress_ratio() == 1.0:
+		ball.throw(path_follow.global_position,
+					path_follow.transform.x * speed_at_exit)
+		# note that throw also call self.free_ball and remove it from the
+		# ball_holder.held_balls list
 
+		# transform.x is the direction (vec2D) of the pathfollow
 
-################################################################################
-# For `holders` group
-func free_ball(ball): # set out  active_ball and has_ball
-	# called by ball when thrown or deleted
-	var i = 0
-	for body in inside_bodies:
-		if body == ball:
-			print("pipe free_ball("+ball.name+")")
-			remove_ball(i)
-		i += 1
-
-func remove_ball(i : int):
-	assert(i < inside_bodies.size())
-	inside_bodies[i].z_index = Global.z_indices["ball_0"]
-	inside_bodies.remove_at(i)
-	path_follows[i].queue_free()
-	path_follows.remove_at(i)
+func _on_ball_holder_releasing(ball : Ball):
+	assert(path_follows.has(ball))
+	path_follows[ball].call_deferred("queue_free")
+	path_follows.erase(ball)
 
 ################################################################################
 
@@ -110,7 +83,7 @@ func on_enable():
 	#[https://github.com/godotengine/godot-proposals/issues/325]
 	if is_inside_tree():
 		update_entrance_sprite()
-		for ball in $Entrance/Area3D.get_overlapping_bodies():
+		for ball in $Entrance/Area2D.get_overlapping_bodies():
 			_on_Area_body_entered(ball)
 
 func on_disable():
