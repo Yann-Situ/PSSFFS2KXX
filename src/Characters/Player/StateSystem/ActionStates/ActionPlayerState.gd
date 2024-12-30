@@ -15,8 +15,8 @@ func branch() -> State:
 		return dunkjump_state
 	if logic.dunkdash.can and logic.accept.just_pressed:
 		return dunkdash_state
-#	if logic.shoot.can and logic.key_release.pressed:
-#		return shoot_state
+	if logic.shoot.can and logic.key_release.just_pressed:
+		return shoot_state
 	printerr("branch action state but no action possible")
 	return fall_state
 

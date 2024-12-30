@@ -67,7 +67,6 @@ func _ready():
 
 func set_flip_h(b : bool):
 	flip_h = b
-#	shoot_predictor.set_flip_h(b) # TODO reuse shoot_predictor
 	if b:
 		flipper.scale.x = -1.0
 	else:
@@ -181,7 +180,11 @@ func update_target_handler() -> void:
 		target_handler.update_selection(Selectable.SelectionType.DUNK, selectable_handler.selectable_dunk)
 	else:
 		target_handler.update_selection(Selectable.SelectionType.DUNK, null)
-	# target_handler.update_selection(Selectable.SelectionType.SHOOT, selectable_handler.selectable_shoot)
+	
+	if S.shoot.can:
+		target_handler.update_selection(Selectable.SelectionType.SHOOT, selectable_handler.selectable_shoot)
+	else:
+		target_handler.update_selection(Selectable.SelectionType.SHOOT, null)
 
 ## update the Selectables (calling the method from SelectableHandler)
 ## should be called in _physics_process()
@@ -195,7 +198,7 @@ func update_selectable_handler() -> void:
 ## should be called in _physics_process()
 func update_collision() -> void:
 	# LAYERS
-	
+	pass
 	
 	# HITBOX:
 	if S.crouch.ing or not S.stand.can or S.dunkdash.ing:
@@ -250,37 +253,6 @@ func add_speed(speed_alterer : Alterer):
 	movement.speed_alterable.add_alterer(speed_alterer)
 func remove_speed(speed_alterer : Alterer):
 	movement.speed_alterable.remove_alterer(speed_alterer)
-
-################################################################################
-# For `characters` group
-## TODO: change to put character_holder in S (status_logic node)
-## Rework all of this with the new state_system
-# my idea is to create a "held" state that will call the functions of a state
-# that is linked by the character holder.
-# Example: player enter the condition for a trail -> trail is a character
-# holder and has a variable "State", which corresponds to the grind state ->
-# trail is set to be the character holder and the state machine goes to state
-# "held", which will call the functions of the "State" of the character holder.
-# The player get_out of the holder when exitting the state.
-
-# func is_hold() -> bool:
-# 	return character_holder != null
-#
-# func get_in(new_holder : Node):
-# 	if not new_holder.is_in_group("characterholders"):
-# 		printerr("new_holder ("+new_holder.name+") is not in group `characterholders`.")
-# 	if is_hold():
-# 		character_holder.free_character(self)
-# 	self.disable_physics()
-# 	character_holder = new_holder
-#
-# func get_out(out_global_position : Vector2, _velocity : Vector2):
-# 	self.enable_physics()
-# 	global_position = out_global_position
-# 	S.set_velocity_safe(_velocity)
-# 	if is_hold():
-# 		character_holder.free_character(self)
-# 	character_holder = null
 
 ################################################################################
 # For `holders` group

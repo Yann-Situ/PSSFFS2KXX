@@ -47,17 +47,60 @@ func has_selectable_dunk():
 func has_selectable_shoot():
 	return selectable_shoot != null
 
-func get_selectable_dunkjump():
+func get_selectable_dunkjump() -> Selectable:
 	return selectable_dunkjump
 
-func get_selectable_dunkdash():
+func get_selectable_dunkdash() -> Selectable:
 	return selectable_dunkdash
 
-func get_selectable_dunk():
+func get_selectable_dunk() -> Selectable:
 	return selectable_dunk
 
-func get_selectable_shoot():
+func get_selectable_shoot() -> Selectable:
 	return selectable_shoot
+
+################################################################################
+
+## target_direction_x should not be 0
+## should be called in physics_process
+func update_selectables(target_direction_x : int):
+	if target_direction_x == 0:
+		target_direction_x = 1
+
+	selectable_dunkjump = null
+	selectable_dunkdash = null
+	selectable_dunk = null
+	selectable_shoot = null
+
+	# WARNING selectable_area could be null if something bad happens:
+	if !selectable_area:
+		push_error("selectable_area is null")
+		return
+	var selectables = selectable_area.get_overlapping_areas()
+	if selectables.is_empty():
+		return
+
+	dunkjump_criteria_init()
+	dunkdash_criteria_init()
+	dunk_criteria_init()
+	shoot_criteria_init()
+
+	for i in range(selectables.size()):
+		var selectable = selectables[i]
+		var q = (selectable.global_position-global_position)
+
+		if selectable.is_jump_selectable and dunkjump_criteria(q, target_direction_x):
+			selectable_dunkjump = selectable
+
+		if selectable.is_dash_selectable and dunkdash_criteria(q, target_direction_x):
+			selectable_dunkdash = selectable
+
+		if selectable.is_dunk_selectable and dunk_criteria(q, target_direction_x):
+			selectable_dunk = selectable
+
+		if selectable.is_shoot_selectable and shoot_criteria(q, target_direction_x):
+			selectable_shoot = selectable
+
 ####################################################################################################
 
 # DUNK
@@ -98,7 +141,7 @@ func shoot_criteria_init():
 ## - q is basket_position - player_position
 ## - target_direction is the favorite direction
 func shoot_criteria(q : Vector2, target_direction : int) -> bool:
-	var dir = target_direction # not 0 in order to make target_direction*dir=1 if q.x=0
+	var dir : int = target_direction # not 0 in order to make target_direction*dir=1 if q.x=0
 	if q.x > 0.0:
 		dir = 1
 	if q.x < 0.0:
@@ -172,44 +215,3 @@ func dunkdash_criteria(q : Vector2, target_direction : int) -> bool:
 	dunkdash_criteria_bests[1] = target_direction*dir
 	return true
 
-################################################################################
-
-## target_direction_x should not be 0
-## should be called in physics_process
-func update_selectables(target_direction_x : int):
-	if target_direction_x == 0:
-		target_direction_x = 1
-
-	selectable_dunkjump = null
-	selectable_dunkdash = null
-	selectable_dunk = null
-	selectable_shoot = null
-
-	# WARNING selectable_area could be null if something bad happens:
-	if !selectable_area:
-		push_error("selectable_area is null")
-		return
-	var selectables = selectable_area.get_overlapping_areas()
-	if selectables.is_empty():
-		return
-
-	dunkjump_criteria_init()
-	dunkdash_criteria_init()
-	dunk_criteria_init()
-	shoot_criteria_init()
-
-	for i in range(selectables.size()):
-		var selectable = selectables[i]
-		var q = (selectable.global_position-global_position)
-
-		if selectable.is_jump_selectable and dunkjump_criteria(q, target_direction_x):
-			selectable_dunkjump = selectable
-
-		if selectable.is_dash_selectable and dunkdash_criteria(q, target_direction_x):
-			selectable_dunkdash = selectable
-
-		if selectable.is_dunk_selectable and dunk_criteria(q, target_direction_x):
-			selectable_dunk = selectable
-
-		if selectable.is_shoot_selectable and shoot_criteria(q, target_direction_x):
-			selectable_shoot = selectable

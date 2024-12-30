@@ -257,9 +257,9 @@ collision_layer = 40
 collision_mask = 0
 script = ExtResource("4")
 parent_node = NodePath("..")
-is_shoot_selectable = false
 is_jump_selectable = false
 is_dunk_selectable = false
+shoot_bell_ratio = 0.33
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="DashArea" index="0"]
 shape = SubResource("7")

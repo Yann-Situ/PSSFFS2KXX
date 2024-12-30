@@ -11,6 +11,7 @@ signal selection_changed(type, value)
 @export var is_dash_selectable = true : set = set_is_dash_selectable
 @export var is_jump_selectable = true : set = set_is_jump_selectable
 @export var is_dunk_selectable = true : set = set_is_dunk_selectable
+@export_range(0.1,4.0) var shoot_bell_ratio : float = 1.0
 
 var shoot_selected = false # should not be modified by other function than set_selection
 var dash_selected = false # should not be modified by other function than set_selection

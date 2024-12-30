@@ -1,4 +1,4 @@
-[gd_scene load_steps=115 format=3 uid="uid://dlfptvxh6yjwm"]
+[gd_scene load_steps=117 format=3 uid="uid://dlfptvxh6yjwm"]
 
 [ext_resource type="Script" path="res://src/Characters/Player/Player.gd" id="1_b7wqc"]
 [ext_resource type="Script" path="res://src/Characters/Player/MovementData.gd" id="2_0ukhp"]
@@ -46,6 +46,7 @@
 [ext_resource type="Script" path="res://src/Characters/Player/BallStateSystem/PowerState.gd" id="38_k30y4"]
 [ext_resource type="Script" path="res://src/Characters/GUI/LifeBar.gd" id="39_4v41g"]
 [ext_resource type="Script" path="res://src/Characters/Player/BallStateSystem/NopowerState.gd" id="39_hb04j"]
+[ext_resource type="Script" path="res://src/Characters/Player/StateSystem/ActionStates/ShootPlayerState.gd" id="39_wv7j2"]
 [ext_resource type="Texture2D" uid="uid://0bfw4lu2js4b" path="res://assets/art/gui/life_bar_bg.png" id="40_acvag"]
 [ext_resource type="Texture2D" uid="uid://scghoxayo4du" path="res://assets/art/gui/life_bar_fill.png" id="41_1ojdj"]
 [ext_resource type="Texture2D" uid="uid://c40av4lxtnfbo" path="res://assets/art/gui/ball_info_bg.png" id="42_xmomu"]
@@ -550,7 +551,7 @@ tracks/0/keys = {
 }
 tracks/1/type = "method"
 tracks/1/imported = false
-tracks/1/enabled = true
+tracks/1/enabled = false
 tracks/1/path = NodePath("../BallHandler")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
@@ -573,6 +574,20 @@ tracks/2/keys = {
 "transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1),
 "update": 1,
 "values": [Vector2(-14, -21), Vector2(-14, -21), Vector2(-16, -20), Vector2(-12, -23), Vector2(13, -34), Vector2(13, -34)]
+}
+tracks/3/type = "method"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("../../StateMachine/ActionStates/Shoot")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0.24),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [],
+"method": &"shoot_end"
+}]
 }
 
 [sub_resource type="Animation" id="17"]
@@ -1029,6 +1044,37 @@ tracks/0/keys = {
 "values": [16, 17, 18, 19, 20, 21, 22, 23]
 }
 
+[sub_resource type="Animation" id="Animation_1do64"]
+resource_name = "shoot_floor_fwd"
+length = 0.2
+step = 0.01
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [135]
+}
+tracks/1/type = "method"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("../../StateMachine/ActionStates/Shoot")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0.2),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [],
+"method": &"shoot_end"
+}]
+}
+
 [sub_resource type="Animation" id="60"]
 resource_name = "slide"
 length = 0.14
@@ -1236,6 +1282,7 @@ _data = {
 "land": SubResource("30"),
 "land_roll": SubResource("31"),
 "run": SubResource("32"),
+"shoot_floor_fwd": SubResource("Animation_1do64"),
 "slide": SubResource("60"),
 "slide_end": SubResource("61"),
 "slide_loop": SubResource("62"),
@@ -1388,7 +1435,7 @@ base_speed = 1.0
 radius = 5.0
 height = 42.0
 
-[node name="Player" type="CharacterBody2D" node_paths=PackedStringArray("label_state", "label_velocity")]
+[node name="Player" type="CharacterBody2D" node_paths=PackedStringArray("animation_player", "label_state", "label_velocity")]
 light_mask = 4
 z_index = 100
 z_as_relative = false
@@ -1397,6 +1444,7 @@ floor_max_angle = 0.872665
 floor_snap_length = 16.0
 script = ExtResource("1_b7wqc")
 movement = SubResource("Resource_5o1rd")
+animation_player = NodePath("Flipper/Sprite2D/PlayerAnimation")
 label_state = NodePath("UI/DebugInterface/HBoxContainer/LabelState")
 label_velocity = NodePath("UI/DebugInterface/HBoxContainer/LabelVelocity")
 
@@ -1444,11 +1492,11 @@ script = ExtResource("49_ks5k2")
 shape = SubResource("CircleShape2D_s7vxl")
 
 [node name="SelectableHandler" type="Node2D" parent="Flipper" node_paths=PackedStringArray("selectable_area")]
-visible = false
 script = ExtResource("8_ms0lc")
 selectable_area = NodePath("SelectableArea")
 
 [node name="SelectableArea" type="Area2D" parent="Flipper/SelectableHandler"]
+visible = false
 modulate = Color(1, 1, 1, 0.176471)
 collision_layer = 0
 collision_mask = 32
@@ -1820,17 +1868,28 @@ player = NodePath("../../..")
 logic = NodePath("../../StatusLogic")
 animation_player = NodePath("../../../Flipper/Sprite2D/PlayerAnimation")
 
-[node name="ActionStates" type="Node" parent="StateMachine" node_paths=PackedStringArray("dunk_state", "dunkdash_state", "dunkjump_state", "fall_state", "player", "logic", "animation_player")]
+[node name="ActionStates" type="Node" parent="StateMachine" node_paths=PackedStringArray("dunk_state", "dunkdash_state", "dunkjump_state", "shoot_state", "fall_state", "player", "logic", "animation_player")]
 script = ExtResource("30_lyykl")
 dunk_state = NodePath("Dunk")
 dunkdash_state = NodePath("Dunkdash")
 dunkjump_state = NodePath("Dunkjump")
+shoot_state = NodePath("Shoot")
 fall_state = NodePath("../AirStates/Fall")
 player = NodePath("../..")
 logic = NodePath("../StatusLogic")
 animation_player = NodePath("../../Flipper/Sprite2D/PlayerAnimation")
 
-[node name="Shoot" type="Node" parent="StateMachine/ActionStates"]
+[node name="Shoot" type="Node" parent="StateMachine/ActionStates" node_paths=PackedStringArray("selectable_handler", "belong_state", "dunk_state", "dunkdash_state", "dunkjump_state", "fall_state", "player", "logic", "animation_player")]
+script = ExtResource("39_wv7j2")
+selectable_handler = NodePath("../../../Flipper/SelectableHandler")
+belong_state = NodePath("../../BelongStates")
+dunk_state = NodePath("../Dunk")
+dunkdash_state = NodePath("../Dunkdash")
+dunkjump_state = NodePath("../Dunkjump")
+fall_state = NodePath("../../AirStates/Fall")
+player = NodePath("../../..")
+logic = NodePath("../../StatusLogic")
+animation_player = NodePath("../../../Flipper/Sprite2D/PlayerAnimation")
 
 [node name="Dunk" type="Node" parent="StateMachine/ActionStates" node_paths=PackedStringArray("selectable_handler", "belong_handler", "belong_state", "fall_state", "player", "logic", "animation_player")]
 script = ExtResource("32_irkkr")

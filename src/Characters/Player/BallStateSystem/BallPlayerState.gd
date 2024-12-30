@@ -28,4 +28,4 @@ func exit():
 
 func release_ball():
 	if ball_handler.throw_ball(player.global_position, Vector2.ZERO):
-		print("                release ball")
+		print("               " + self.name + " release ball")

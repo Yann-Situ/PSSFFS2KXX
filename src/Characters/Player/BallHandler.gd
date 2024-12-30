@@ -87,7 +87,7 @@ func _set_released_ball_null():
 	released_ball = null
 
 func shoot_ball(): # called by animation
-	throw_ball(get_throw_position(), P.ShootPredictor.shoot_vector_save)
+	throw_ball(get_throw_position(), Vector2.ZERO)
 
 ## connected to ball_holder.processing_ball(ball, delta)
 func set_has_ball_position(ball : Ball) -> void: # TODO it might be interesting to do it with a Remote2D node

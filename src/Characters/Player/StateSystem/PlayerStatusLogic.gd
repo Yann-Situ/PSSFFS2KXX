@@ -201,8 +201,8 @@ func update_status():
 	dunkjump.can = selectable_handler.has_selectable_dunkjump() and floor.ing
 
 	# shoot_handler
-	shoot.can = shoot_handler.can_shoot_to_target() and\
-		no_shoot_timer.is_stopped() and\
+	shoot.can = ball_handler.has_ball() and\
+		selectable_handler.has_selectable_shoot() and\
 		(not action.ing)
 
 	# interaction_handler
@@ -217,7 +217,8 @@ func update_status():
 	# action.can
 	action.can = (dunkdash.can and accept.just_pressed) or \
 		(dunk.can and accept.pressed) or \
-		(dunkjump.can and accept.just_pressed and down.pressed)
+		(dunkjump.can and accept.just_pressed and down.pressed) or \
+		(shoot.can and key_release.just_pressed and not down.pressed)
 
 	# direction_sprite is 1 or -1 but direction_pressed.x can also be 0:
 	direction_sprite_change.ing = (direction_sprite*direction_pressed.x < 0) and\

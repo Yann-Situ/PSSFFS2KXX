@@ -45,3 +45,26 @@ func anticipate_dash_velocity(current_position : Vector2, target_position : Vect
 	var dash_speed = max(dunkdash_speed, current_velocity.dot(target_dir))
 	var anticipated_position = target_position + ql/dash_speed * target_velocity
 	return dash_speed * (anticipated_position - current_position).normalized()
+
+###############################################################################
+## Balistic
+
+## see https://www.desmos.com/calculator/7ad0ypexxd?lang=fr
+## here is the general formula. Note that `eigen_distance` should be strictly positive
+func shoot_velocity_formula(position:Vector2, eigen_distance:float=0.0, gravity:int=-1) -> Vector2:
+	if position == Vector2.ZERO or eigen_distance <= 0:
+		push_warning("non valid arguments: position="+str(position)+" eigen_distance="+str(eigen_distance))
+		return Vector2.ZERO
+	if gravity <= 0:
+		gravity = Global.default_gravity.y
+	var freq = sqrt(0.5 * abs(gravity) / eigen_distance)
+	return Vector2(position.x*freq, position.y*freq-eigen_distance*freq)
+
+func shoot_velocity_optimal(position:Vector2, gravity:int=-1) -> Vector2:
+	return shoot_velocity_formula(position, position.length(), gravity)
+
+## bell_ratio is equal to eigen_distance/position.length()
+# bell_ratio > 1 gives a nice bell curve (higher curvature), whereas
+# bell_ratio > 1 gives a straighter curve (lower curvature)
+func shoot_velocity_bell_ratio(position:Vector2, bell_ratio:float = 1.0, gravity:int=-1) -> Vector2:
+	return shoot_velocity_formula(position, bell_ratio * position.length(), gravity)
