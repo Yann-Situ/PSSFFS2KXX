@@ -45,6 +45,11 @@ func on_dunkdash_start(player):
 	$BoumParticles.restart()
 	player.add_impulse(impulse_dash_boum*player.movement.velocity.normalized())
 
+func on_dunkjump_start(player):
+	$BoumParticles.global_position = player.effect_handler.global_position + 32.0*Vector2.DOWN
+	$BoumParticles.restart()
+	GlobalEffect.make_explosion(player.effect_handler.global_position + 8.0*Vector2.DOWN, min_explosion_data)
+	
 func on_destruction(): # call before changing holder, disable_physics and deleting selectors
 	boum(true, self.global_position)
 

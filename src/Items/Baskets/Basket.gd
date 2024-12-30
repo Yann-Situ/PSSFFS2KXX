@@ -22,7 +22,8 @@ signal is_goaled
 @export var can_receive_hang = true : set = set_can_receive_hang
 
 @onready var character_holder : CharacterHolder = $CharacterHolder
-@onready var basket_area : Selectable = $BasketArea
+@onready var basket_area : Area2D = $BasketArea
+@onready var selectable : Selectable = $Selectable
 var dunk_cooldown_timer : Timer
 
 var character_offsets = {} ## belong_handler current offset
@@ -37,7 +38,7 @@ func set_can_receive_hang(b):
 
 func set_can_receive_dunk(b):
 	can_receive_dunk = b
-	basket_area.is_dunk_selectable = can_receive_dunk
+	selectable.is_dunk_selectable = can_receive_dunk
 	#print(" --- receivedunk "+str(b))
 
 func _ready():
@@ -45,6 +46,7 @@ func _ready():
 	add_to_group("characterholders")
 	assert(character_holder != null)
 	assert(basket_area != null)
+	assert(selectable != null)
 	character_holder.getting_in.connect(_on_character_holder_getting_in)
 	character_holder.getting_out.connect(_on_character_holder_getting_out)
 	character_holder.processing_character.connect(_on_character_holder_processing_character)

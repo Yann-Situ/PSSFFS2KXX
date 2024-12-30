@@ -276,7 +276,7 @@ saturation_distribution = SubResource("33")
 lightness_distribution = SubResource("39")
 weight = 1.0
 
-[sub_resource type="Resource" id="Resource_ucyku"]
+[sub_resource type="Resource" id="Resource_i33p1"]
 resource_local_to_scene = true
 script = ExtResource("6_71oce")
 color_samplers = Array[Resource("res://src/Global/CustomResources/ColorSampler.gd")]([SubResource("19"), SubResource("23"), SubResource("31"), SubResource("35")])
@@ -457,7 +457,7 @@ position = Vector2(1664, 0)
 [node name="PedestrianGenerator" parent="." index="7" instance=ExtResource("11")]
 position = Vector2(1248, 0)
 x_radius = 700.0
-palette_scheme_sampler = SubResource("Resource_ucyku")
+palette_scheme_sampler = SubResource("Resource_i33p1")
 walk_speed_min = 35.0
 
 [node name="CanvasModulate" parent="Map" index="0"]
@@ -614,7 +614,7 @@ texture = ExtResource("27_tjpql")
 texture_scale = 2.56
 
 [node name="YS" parent="." index="14" instance=ExtResource("28_5sjrw")]
-position = Vector2(1488, 0)
+position = Vector2(1568, 0)
 
 [node name="DashTarget2" parent="Environment/Dynamics" index="0" instance=ExtResource("5")]
 position = Vector2(16, -32)

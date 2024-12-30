@@ -205,9 +205,13 @@ func on_goal():
 func on_dunkdash_start(player):
 	pass
 # call by the dunkdash script
-func on_dunkdash_end(player):
-	pass
+#func on_dunkdash_end(player):
+#	pass
 
+# call by the dunkjump script (just after pre-jump)
+func on_dunkjump_start(player):
+	pass
+	
 func on_destruction(): # call before changing holder, disable_physics and deleting selectors
 	pass
 

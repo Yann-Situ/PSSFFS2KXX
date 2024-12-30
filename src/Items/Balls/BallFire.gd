@@ -9,9 +9,10 @@ func _ready():
 	super()
 
 func collision_effect(collider, collider_velocity, collision_point, collision_normal):
-	destruction(0.01)
 	if collider.is_in_group("breakables"):
 		return !collider.apply_explosion(destruction_momentum  * collision_normal)
+	else:
+		destruction(0.01)
 
 func on_pickup(holder):
 	pass

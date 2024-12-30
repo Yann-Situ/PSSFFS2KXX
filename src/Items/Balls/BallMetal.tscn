@@ -37,14 +37,14 @@ radius = 6.0
 
 [node name="BallMetal" instance=ExtResource("1_6yfdj")]
 script = ExtResource("2")
-attract_speed = 350
 attract_player_radius = 45
-destruction_speed_thresh = 300
+destruction_speed_thresh = 175
 destruction_momentum_min = 500
 destruction_momentum_max = 900
 impact_effect = 6
 dust_threshold = 100.0
 impact_threshold = 200.0
+attract_force = 1500.0
 
 [node name="Visuals" parent="." index="0"]
 material = SubResource("ShaderMaterial_h21k7")

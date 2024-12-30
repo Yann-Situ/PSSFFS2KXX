@@ -23,7 +23,7 @@ width = 500
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_3571c"]
 shader = ExtResource("5_ct7gl")
 shader_parameter/ratio = 0.0
-shader_parameter/margin_size = 0.2
+shader_parameter/margin_size = 0.15
 shader_parameter/center_offset = null
 
 [sub_resource type="Animation" id="Animation_uw7sm"]

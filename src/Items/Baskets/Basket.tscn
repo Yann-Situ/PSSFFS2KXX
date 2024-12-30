@@ -1,4 +1,4 @@
-[gd_scene load_steps=21 format=3 uid="uid://cckqoik18dppx"]
+[gd_scene load_steps=22 format=3 uid="uid://cckqoik18dppx"]
 
 [ext_resource type="Script" path="res://src/Items/Baskets/Basket.gd" id="1_1qq5r"]
 [ext_resource type="Texture2D" uid="uid://bx70alc2tdq28" path="res://assets/art/environment/environment-interactive.png" id="2_k3vjr"]
@@ -63,6 +63,9 @@ animations = [{
 [sub_resource type="SegmentShape2D" id="7"]
 a = Vector2(-13, 0)
 b = Vector2(13, 0)
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_55xpc"]
+radius = 8.0
 
 [sub_resource type="Animation" id="10"]
 resource_name = "dunk_left"
@@ -141,17 +144,30 @@ sprite_frames = SubResource("6")
 autoplay = "default"
 frame_progress = 0.521599
 
-[node name="BasketArea" type="Area2D" parent="." node_paths=PackedStringArray("parent_node")]
-collision_layer = 40
+[node name="BasketArea" type="Area2D" parent="."]
+collision_layer = 8
 collision_mask = 4
-script = ExtResource("3_562au")
-parent_node = NodePath("..")
-is_dash_selectable = false
+monitorable = false
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="BasketArea"]
 modulate = Color(0, 1, 0.0392157, 1)
 position = Vector2(0, 2)
 shape = SubResource("7")
+
+[node name="Selectable" type="Area2D" parent="." node_paths=PackedStringArray("parent_node")]
+position = Vector2(0, -7)
+collision_layer = 40
+collision_mask = 0
+monitoring = false
+script = ExtResource("3_562au")
+parent_node = NodePath("..")
+is_dash_selectable = false
+shoot_bell_ratio = 3.0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Selectable"]
+modulate = Color(0, 1, 0.0392157, 1)
+position = Vector2(0, 2)
+shape = SubResource("CircleShape2D_55xpc")
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 libraries = {

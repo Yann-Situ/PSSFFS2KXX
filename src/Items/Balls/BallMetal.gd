@@ -1,8 +1,7 @@
 extends Ball
 # Metal ball, with no bouncing and large mass
 
-#export var attract_force = 2000#kg*pix/s^2
-@export var attract_speed = 350#pix/s
+#@export var attract_speed = 350#pix/s
 @export var attract_player_radius = 45#pix
 @export var destruction_speed_thresh = 300#pix/s
 @export var destruction_momentum_min = 500##kg*pix/s
@@ -36,7 +35,7 @@ func collision_effect(collider, collider_velocity, collision_point, collision_no
 					smoothstep(destruction_speed_thresh, 2*destruction_speed_thresh,
 						linear_velocity.length())
 					) * collision_normal)
-			add_impulse(mass*linear_velocity)
+			#add_impulse(mass*linear_velocity) # rebond or not rebond
 
 func on_pickup(holder):
 	$Visuals/SpeedParticles.emitting = false
