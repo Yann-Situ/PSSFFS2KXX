@@ -4,7 +4,7 @@
 [ext_resource type="PackedScene" uid="uid://b45hldwkibtqb" path="res://src/Levels/Portal.tscn" id="2"]
 [ext_resource type="PackedScene" uid="uid://cxn2m3havcmil" path="res://src/Items/Balls/Ball.tscn" id="3"]
 [ext_resource type="PackedScene" uid="uid://27jkgoi43hoq" path="res://src/Items/Balls/BallShock.tscn" id="4"]
-[ext_resource type="PackedScene" path="res://src/Items/Interactive/DashTarget.tscn" id="5"]
+[ext_resource type="PackedScene" uid="uid://rmukvjwyiahu" path="res://src/Items/Interactive/DashTarget.tscn" id="5"]
 [ext_resource type="Texture2D" uid="uid://bj0utyh77boe" path="res://assets/art/background/ShopBackground2.png" id="6"]
 [ext_resource type="Texture2D" uid="uid://ctiuc3lmtrgkb" path="res://assets/art/effects/light2.png" id="7"]
 [ext_resource type="PackedScene" uid="uid://bp35noq8krghh" path="res://src/Items/Balls/BallLight.tscn" id="8"]
@@ -91,31 +91,6 @@ offset_top = -500.0
 offset_bottom = 524.0
 texture = ExtResource("6")
 
-[node name="CanvasModulate" parent="Map" index="0"]
-visible = true
-light_mask = 0
-z_index = 500
-z_as_relative = false
-color = Color(0.054902, 0.0431373, 0.160784, 1)
-
-[node name="Ball" parent="Environment/Balls" index="0" instance=ExtResource("3")]
-position = Vector2(216, -8)
-
-[node name="BallShock" parent="Environment/Balls" index="1" instance=ExtResource("4")]
-position = Vector2(-88, -8)
-
-[node name="BallLight" parent="Environment/Balls" index="2" instance=ExtResource("8")]
-position = Vector2(384, -8)
-
-[node name="DashTarget" parent="Environment/Interactive" index="0" instance=ExtResource("5")]
-position = Vector2(544, -96)
-
-[node name="DashTarget2" parent="Environment/Interactive" index="1" instance=ExtResource("5")]
-position = Vector2(-80, -336)
-
-[node name="DashTarget3" parent="Environment/Interactive" index="2" instance=ExtResource("5")]
-position = Vector2(272, -112)
-
 [node name="WorldEnvironment" parent="." index="5"]
 environment = SubResource("3")
 
@@ -182,5 +157,30 @@ texture_scale = 2.56
 [node name="PlayerPosition" parent="." index="12"]
 position = Vector2(352, -32)
 
+[node name="CanvasModulate" parent="Map" index="0"]
+visible = true
+light_mask = 0
+z_index = 500
+z_as_relative = false
+color = Color(0.054902, 0.0431373, 0.160784, 1)
+
 [node name="GraffSpray" parent="." index="14" instance=ExtResource("9")]
 position = Vector2(296, -48)
+
+[node name="Ball" parent="Environment/Balls" index="0" instance=ExtResource("3")]
+position = Vector2(216, -8)
+
+[node name="BallShock" parent="Environment/Balls" index="1" instance=ExtResource("4")]
+position = Vector2(-88, -8)
+
+[node name="BallLight" parent="Environment/Balls" index="2" instance=ExtResource("8")]
+position = Vector2(384, -8)
+
+[node name="DashTarget" parent="Environment/Interactive" index="0" instance=ExtResource("5")]
+position = Vector2(544, -96)
+
+[node name="DashTarget2" parent="Environment/Interactive" index="1" instance=ExtResource("5")]
+position = Vector2(-80, -336)
+
+[node name="DashTarget3" parent="Environment/Interactive" index="2" instance=ExtResource("5")]
+position = Vector2(272, -112)

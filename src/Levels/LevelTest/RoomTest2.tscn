@@ -1,8 +1,8 @@
 [gd_scene load_steps=7 format=3 uid="uid://dune6v20j0eyq"]
 
 [ext_resource type="PackedScene" uid="uid://b5emf4je4tnag" path="res://src/Levels/Room2D.tscn" id="1"]
-[ext_resource type="PackedScene" path="res://src/Levels/Portal.tscn" id="2"]
-[ext_resource type="Texture2D" uid="uid://0q8qxsby5sw5" path="res://assets/art/effects/light2.png" id="3"]
+[ext_resource type="PackedScene" uid="uid://b45hldwkibtqb" path="res://src/Levels/Portal.tscn" id="2"]
+[ext_resource type="Texture2D" uid="uid://ctiuc3lmtrgkb" path="res://assets/art/effects/light2.png" id="3"]
 
 [sub_resource type="Gradient" id="1"]
 resource_local_to_scene = true
@@ -55,10 +55,6 @@ visible = false
 [node name="ParallaxLayer4" parent="ParallaxBackground" index="3"]
 visible = false
 
-[node name="CanvasModulate" parent="Map" index="0"]
-visible = true
-color = Color(0.521569, 0.443137, 0.423529, 1)
-
 [node name="WorldEnvironment" parent="." index="5"]
 environment = SubResource("3")
 
@@ -86,3 +82,7 @@ shadow_enabled = true
 shadow_filter = 1
 texture = ExtResource("3")
 texture_scale = 2.56
+
+[node name="CanvasModulate" parent="Map" index="0"]
+visible = true
+color = Color(0.521569, 0.443137, 0.423529, 1)

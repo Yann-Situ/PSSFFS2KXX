@@ -1,4 +1,4 @@
-[gd_scene load_steps=72 format=3 uid="uid://eq50gyc1bs85"]
+[gd_scene load_steps=73 format=3 uid="uid://eq50gyc1bs85"]
 
 [ext_resource type="PackedScene" uid="uid://b5emf4je4tnag" path="res://src/Levels/Room2D.tscn" id="1_6to1r"]
 [ext_resource type="PackedScene" uid="uid://rmukvjwyiahu" path="res://src/Items/Interactive/DashTarget.tscn" id="2_x00i2"]
@@ -24,6 +24,7 @@
 [ext_resource type="PackedScene" uid="uid://cn3mh5kug88g3" path="res://src/Items/Dynamics/PipeBall.tscn" id="21_v58gt"]
 [ext_resource type="Script" path="res://src/Global/CustomResources/ColorDistribution.gd" id="22_h70sn"]
 [ext_resource type="Script" path="res://src/Global/CustomResources/PaletteSchemeSampler.gd" id="23_63q0b"]
+[ext_resource type="Script" path="res://src/Global/CustomResources/ColorSampler.gd" id="23_bnytk"]
 [ext_resource type="PackedScene" uid="uid://5uiwv0rqds8n" path="res://src/Characters/NPC/Ennemies/ThiefKid/ThiefKid.tscn" id="24_5a8ro"]
 
 [sub_resource type="Gradient" id="Gradient_wwss0"]
@@ -172,10 +173,10 @@ saturation_distribution = SubResource("33")
 lightness_distribution = SubResource("39")
 weight = 1.0
 
-[sub_resource type="Resource" id="Resource_wqe3c"]
+[sub_resource type="Resource" id="Resource_ybw34"]
 resource_local_to_scene = true
 script = ExtResource("23_63q0b")
-color_samplers = Array[Resource("res://src/Global/CustomResources/ColorSampler.gd")]([SubResource("19"), SubResource("23"), SubResource("31"), SubResource("35")])
+color_samplers = Array[ExtResource("23_bnytk")]([SubResource("19"), SubResource("23"), SubResource("31"), SubResource("35")])
 black = Color(0.215686, 0.0509804, 0.168627, 1)
 white = Color(0.976471, 0.952941, 0.713726, 1)
 
@@ -268,14 +269,14 @@ weight = 1.0
 [sub_resource type="Resource" id="Resource_8bsb4"]
 resource_local_to_scene = true
 script = ExtResource("23_63q0b")
-color_samplers = Array[Resource("res://src/Global/CustomResources/ColorSampler.gd")]([SubResource("Resource_edpie"), SubResource("Resource_meocb"), SubResource("Resource_xd7pe"), SubResource("Resource_ljc8l")])
+color_samplers = Array[ExtResource("23_bnytk")]([SubResource("Resource_edpie"), SubResource("Resource_meocb"), SubResource("Resource_xd7pe"), SubResource("Resource_ljc8l")])
 black = Color(0, 0, 0, 1)
 white = Color(1, 1, 1, 1)
 
 [sub_resource type="Resource" id="Resource_5jnfv"]
 resource_local_to_scene = true
 script = ExtResource("23_63q0b")
-color_samplers = Array[Resource("res://src/Global/CustomResources/ColorSampler.gd")]([SubResource("Resource_edpie"), SubResource("Resource_meocb"), SubResource("Resource_xd7pe"), SubResource("Resource_ljc8l")])
+color_samplers = Array[ExtResource("23_bnytk")]([SubResource("Resource_edpie"), SubResource("Resource_meocb"), SubResource("Resource_xd7pe"), SubResource("Resource_ljc8l")])
 black = Color(0, 0, 0, 1)
 white = Color(1, 1, 1, 1)
 
@@ -482,7 +483,7 @@ collision_layer = 512
 shape = SubResource("RectangleShape2D_mer8j")
 
 [node name="Polygon2D" type="Polygon2D" parent="Environment/Walls/PlayerWall2" index="1"]
-position = Vector2(-944, 72)
+position = Vector2(-944, 66)
 scale = Vector2(7, 1)
 color = Color(1, 1, 1, 0.529412)
 polygon = PackedVector2Array(125.714, -200, 144, -200, 144, 56, 125.714, 56)
@@ -654,7 +655,7 @@ pipe_z = 1
 position = Vector2(-3640, 288)
 initial_sample_number = 3
 x_radius = 200.0
-palette_scheme_sampler = SubResource("Resource_wqe3c")
+palette_scheme_sampler = SubResource("Resource_ybw34")
 
 [node name="ThiefKid" parent="." index="15" instance=ExtResource("24_5a8ro")]
 position = Vector2(-192, -176)

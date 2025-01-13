@@ -1,6 +1,6 @@
 [gd_scene load_steps=3 format=3 uid="uid://cjrs0hleolbs1"]
 
-[ext_resource type="TileSet" uid="uid://berkn1bildrf3" path="res://src/Map/TileSet.tres" id="1_dc0y4"]
+[ext_resource type="TileSet" uid="uid://berkn1bildrf3" path="res://src/Map/TileSet32-base.tres" id="1_dc0y4"]
 [ext_resource type="Script" path="res://src/Map/Environment/HiddenPlace.gd" id="2_qnhr7"]
 
 [node name="HiddenPlace" type="TileMap"]

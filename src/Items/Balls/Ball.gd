@@ -315,4 +315,3 @@ func power_jr_hold(player,delta):
 # 
 # 	on_throw(previous_holder)
 # 	is_thrown.emit()
-

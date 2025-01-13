@@ -94,7 +94,7 @@ func dunk_impact():
 	if basket_at_enter ==  null:
 		printerr("impact but basket_at_enter is null")
 		return
-	basket_at_enter.dunk(player, player.ball_handler.held_ball) # be careful here, not checking the ball_handler existence
+	basket_at_enter.dunk(player, logic.ball_handler.held_ball) # be careful here, not checking the ball_handler existence
 
 ## Called just before entering the next State. Should not contain await or time
 ## stopping functions
