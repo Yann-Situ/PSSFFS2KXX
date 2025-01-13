@@ -68,3 +68,34 @@ func shoot_velocity_optimal(position:Vector2, gravity:int=-1) -> Vector2:
 # bell_ratio > 1 gives a straighter curve (lower curvature)
 func shoot_velocity_bell_ratio(position:Vector2, bell_ratio:float = 1.0, gravity:int=-1) -> Vector2:
 	return shoot_velocity_formula(position, bell_ratio * position.length(), gravity)
+	
+## eigen_distance from position and velocity formula.
+# if the position is not reachable with velocity, then return -1.
+func eigen_distance_from_velocity_formula(position:Vector2, velocity:Vector2, gravity:int=-1, s:float = 0.0) -> float:
+	if gravity <= 0:
+		gravity = Global.default_gravity.y
+	var r = velocity.length_squared()/gravity + position.y #pix #\frac{r^{2}}{g}-D_{y}
+	var delta = r*r - position.length_squared()
+	if delta < 0:
+		return -1
+	return r + s * sqrt(delta)
+		
+## low eigen_distance (straight shoot) from position and velocity.
+# if the position is not reachable with velocity, then return -1.
+func eigen_distance_from_velocity_low(position:Vector2, velocity:Vector2, gravity:int=-1) -> float:
+	return eigen_distance_from_velocity_formula(position, velocity, gravity, -1.0)
+
+## high eigen_distance (loose shoot) from position and velocity.
+# if the position is not reachable with velocity, then return -1.
+func eigen_distance_from_velocity_high(position:Vector2, velocity:Vector2, gravity:int=-1) -> float:
+	return eigen_distance_from_velocity_formula(position, velocity, gravity, +1.0)
+	
+## nice formula for shoot velocity for a straight shoot with minimal velocity and min bell_ratio
+func shoot_velocity_straigt(position:Vector2, min_velocity:Vector2, bell_ratio:float = 1.0, gravity:int=-1) -> Vector2:
+	if gravity <= 0:
+		gravity = Global.default_gravity.y
+	var eigen_dist = eigen_distance_from_velocity_low(position, min_velocity, gravity)
+	if eigen_dist < 0.0: # if min_velocity is not enough
+		return shoot_velocity_bell_ratio(position, bell_ratio, gravity)
+	eigen_dist = min(eigen_dist, bell_ratio * position.length())
+	return shoot_velocity_formula(position, eigen_dist, gravity)
