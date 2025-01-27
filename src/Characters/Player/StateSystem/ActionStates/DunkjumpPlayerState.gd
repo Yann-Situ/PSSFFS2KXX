@@ -35,7 +35,7 @@ func branch() -> State:
 		return dunk_state
 
 	if !is_dunkprejumping and min_duration_timer.is_stopped():
-		if logic.floor.ing:
+		if logic.floor.ing and player.movement.velocity.y >= 0.0:
 			return land_state
 		if logic.wall.ing:
 			return fallwall_state

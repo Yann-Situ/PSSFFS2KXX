@@ -31,7 +31,7 @@ func cast(r): #we must have updated the space_state before
 		# in order to take into account the changes in the playerwall layer
 		var target_position = r.target_position * P.flipper.scale # vector component multiplication
 		var query = PhysicsRayQueryParameters2D.create(r.global_position, \
-			r.global_position + target_position, P.collision_mask, [P])
+			r.global_position + target_position, r.collision_mask, [P])
 		r.intersection_info = space_state.intersect_ray(query)
 		r.result = r.intersection_info != {}
 		r.updated = true
@@ -79,4 +79,3 @@ func can_stand():
 	cast(rays[2])#up fwd
 	cast(rays[3])#up bwd
 	return !(rays[2].result or rays[3].result)
-

@@ -1593,14 +1593,14 @@ script = ExtResource("13_agtdw")
 position = Vector2(8, 0)
 enabled = false
 target_position = Vector2(0, -20)
-collision_mask = 514
+collision_mask = 8704
 script = ExtResource("13_agtdw")
 
 [node name="Ray_up_bwd" type="RayCast2D" parent="Flipper/RayHandler"]
 position = Vector2(-8, 0)
 enabled = false
 target_position = Vector2(0, -20)
-collision_mask = 514
+collision_mask = 8704
 script = ExtResource("13_agtdw")
 
 [node name="Ray_down_fwd" type="RayCast2D" parent="Flipper/RayHandler"]
