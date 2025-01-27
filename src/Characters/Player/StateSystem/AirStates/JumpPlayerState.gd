@@ -13,6 +13,7 @@ extends PlayerMovementState
 @export var land_state : State
 @export var stand_state : State # used for the horizontal velocity hack (see in enter())
 @export var fallwall_state : State
+@export var walljump_state : State
 @export var fall_state : State
 
 var min_duration_timer : Timer # time the duration between the beginning of the
@@ -38,7 +39,10 @@ func branch() -> State:
 		if logic.floor.ing and movement.velocity.y >= 0.0: # floor.ing and falling 
 			return land_state
 		if logic.wall.ing: ## WARNING jump cancel won't be available after entering fallwall state, this can lead to undesired behavior
-			return fallwall_state
+			if movement.velocity.y >= 0.0:
+				return fallwall_state
+			elif logic.walljump.can and !logic.jump_press_timer.is_stopped():
+				return walljump_state
 		if movement.velocity.y > 0.0:
 			return fall_state
 	return self

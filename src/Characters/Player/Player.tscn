@@ -1315,8 +1315,8 @@ size = Vector2(17, 57)
 script = ExtResource("17_iaaq0")
 friction = Vector2(0.94, 0.38)
 time_scale = 1.0
-side_speed_max = 400.0
-side_instant_speed = 150.0
+side_speed_max = 370.0
+side_instant_speed = 135.0
 side_instant_speed_return_thresh = 70.0
 side_accel = 200.0
 base_force = Vector2(0, 0)
@@ -1325,12 +1325,12 @@ base_speed = Vector2(0, 0)
 
 [sub_resource type="Resource" id="Resource_y4wjx"]
 script = ExtResource("17_iaaq0")
-friction = Vector2(0.9, 0.38)
+friction = Vector2(0.86, 0.38)
 time_scale = 1.0
-side_speed_max = 440.0
-side_instant_speed = 80.0
+side_speed_max = 400.0
+side_instant_speed = 70.0
 side_instant_speed_return_thresh = 50.0
-side_accel = 110.0
+side_accel = 100.0
 base_force = Vector2(0, 0)
 base_accel = Vector2(0, 625)
 base_speed = Vector2(0, 0)
@@ -1555,6 +1555,7 @@ position = Vector2(0, 4)
 shape = SubResource("1")
 
 [node name="RayHandler" type="Node2D" parent="Flipper" node_paths=PackedStringArray("P")]
+visible = false
 script = ExtResource("9_ltm6u")
 P = NodePath("../..")
 
@@ -1841,13 +1842,15 @@ player = NodePath("../../..")
 logic = NodePath("../../StatusLogic")
 animation_player = NodePath("../../../Flipper/Sprite2D/PlayerAnimation")
 
-[node name="Jump" type="Node" parent="StateMachine/AirStates" node_paths=PackedStringArray("belong_state", "action_state", "land_state", "stand_state", "fallwall_state", "fall_state", "player", "logic", "animation_player")]
+[node name="Jump" type="Node" parent="StateMachine/AirStates" node_paths=PackedStringArray("belong_state", "action_state", "land_state", "stand_state", "fallwall_state", "walljump_state", "fall_state", "player", "logic", "animation_player")]
 script = ExtResource("27_fitg4")
+jump_speed = -414.0
 belong_state = NodePath("../../BelongStates")
 action_state = NodePath("../../ActionStates")
 land_state = NodePath("../../GroundStates/Land")
 stand_state = NodePath("../../GroundStates/Stand")
 fallwall_state = NodePath("../Fallwall")
+walljump_state = NodePath("../Walljump")
 fall_state = NodePath("../Fall")
 player = NodePath("../../..")
 logic = NodePath("../../StatusLogic")
@@ -1855,8 +1858,8 @@ animation_player = NodePath("../../../Flipper/Sprite2D/PlayerAnimation")
 
 [node name="Walljump" type="Node" parent="StateMachine/AirStates" node_paths=PackedStringArray("belong_state", "action_state", "land_state", "fallwall_state", "fall_state", "player", "logic", "animation_player")]
 script = ExtResource("28_dt7qh")
-walljump_velocity = Vector2(350, -350)
-mountwalljump_velocity = Vector2(350, -525)
+walljump_velocity = Vector2(290, -330)
+mountwalljump_velocity = Vector2(290, -450)
 mountwalljump_thresh = -100.0
 no_side_delay = 0.25
 belong_state = NodePath("../../BelongStates")
