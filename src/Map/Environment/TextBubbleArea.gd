@@ -1,10 +1,10 @@
 extends TextBubble
 
-@export_flags_2d_physics var collision_layer : int = 1 : set=set_collision_layer
+@export_flags_2d_physics var collision_mask : int = 1 : set=set_collision_mask
 
-func set_collision_layer(v : int):
-	collision_layer = v
-	$Area2D.collision_layer = collision_layer
+func set_collision_mask(v : int):
+	collision_mask = v
+	$Area2D.collision_mask = collision_mask
 
 ## override the current behaviour
 func display():
