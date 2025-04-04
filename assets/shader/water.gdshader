@@ -28,7 +28,7 @@ void fragment() {
 		vec2 water_uv = vec2(uv.x, uv.y * float(wave_harmonics));
 		float noise = texture(noise_texture, vec2(water_uv.x + TIME * water_speed, water_uv.y)).x * wave_distortion;
 		noise -= (0.5 * wave_distortion);
-
+		
 		// water texture
 		if (water_texture_on) {
 			float water_texture_limit = 0.35;
@@ -44,5 +44,9 @@ void fragment() {
 		mirror_screen_uv),blur);
 		COLOR = mix(COLOR, current_texture, water_albedo.a);
 		COLOR = mix(COLOR, water_albedo, water_opacity);
+		
+		if (uv.y-0.5 < 0.005+0.5*noise){
+			COLOR = mix(vec4(0.95,1.0,1.10,1.0),COLOR, 0.4);
+		}
 	}
 }
