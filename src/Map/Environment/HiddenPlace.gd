@@ -1,9 +1,9 @@
 @icon("res://assets/art/icons/star-location.png")
-extends TileMap
+extends TileMapLayer
 class_name HiddenPlace
 
 @export var transition_duration : float = 0.5#s
-@export var connect_area2D : bool = false : set = set_connect_area2D
+@export var connect_area2D : bool = false : set = set_connect_area2D ## whether or not the script connect the inner area2D to the reveal / hide functions.
 #@export var collision_shape : CollisionShape2D : set = set_collision_shape
 # Implementation choice: CollisionShape2D need to be child of HiddenPlace and
 # will be reparented at runtime (in _ready) to be child of Area2D.

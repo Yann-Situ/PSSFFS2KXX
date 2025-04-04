@@ -1480,7 +1480,6 @@ libraries = {
 }
 
 [node name="InteractionHandler" type="Area2D" parent="Flipper"]
-visible = false
 modulate = Color(0.176, 0.922, 0.51, 0.804)
 position = Vector2(9, 0)
 collision_layer = 0
@@ -2060,6 +2059,7 @@ scale = Vector2(0.5, 1)
 texture = ExtResource("44_s6k41")
 
 [node name="HBoxContainer" type="HBoxContainer" parent="UI/DebugInterface"]
+visible = false
 layout_mode = 2
 
 [node name="LabelVelocity" type="Label" parent="UI/DebugInterface/HBoxContainer"]
