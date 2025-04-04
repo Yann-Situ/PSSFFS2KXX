@@ -10,6 +10,7 @@ class_name HolderLine
 @export var character_cant_get_in_again_delay : float = 0.2#s
 @onready var character_holder : CharacterHolder = get_node("CharacterHolder")
 
+const slow_coeff = 0.9
 const tolerance_annoying_case = 4.0
 
 var init_point = Vector2.ZERO
@@ -133,7 +134,7 @@ func _on_character_holder_physics_processing_character(belong_handler : BelongHa
 	var character = belong_handler.character
 	var new_velocity_length = character.velocity.dot(ropeline_dir)
 
-	path_follow.progress += new_velocity_length * delta
+	path_follow.progress += new_velocity_length * delta  * slow_coeff
 	position_offset = lerp(position_offset, character_offset, 0.1)
 
 	character.global_position = path_follow.global_position + position_offset

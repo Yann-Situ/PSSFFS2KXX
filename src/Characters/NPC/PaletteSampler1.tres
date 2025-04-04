@@ -1,6 +1,7 @@
-[gd_resource type="Resource" script_class="PaletteSchemeSampler" load_steps=19 format=3 uid="uid://b5t6nuxuv7s86"]
+[gd_resource type="Resource" script_class="PaletteSchemeSampler" load_steps=20 format=3 uid="uid://b5t6nuxuv7s86"]
 
 [ext_resource type="Script" path="res://src/Global/CustomResources/PaletteSchemeSampler.gd" id="1"]
+[ext_resource type="Script" path="res://src/Global/CustomResources/ColorSampler.gd" id="1_r317v"]
 [ext_resource type="Script" path="res://src/Global/CustomResources/ColorDistribution.gd" id="3"]
 
 [sub_resource type="Curve" id="16"]
@@ -87,6 +88,6 @@ weight = 1.0
 [resource]
 resource_local_to_scene = true
 script = ExtResource("1")
-color_samplers = Array[Resource("res://src/Global/CustomResources/ColorSampler.gd")]([SubResource("19"), SubResource("23"), SubResource("31"), SubResource("35")])
+color_samplers = Array[ExtResource("1_r317v")]([SubResource("19"), SubResource("23"), SubResource("31"), SubResource("35")])
 black = Color(0.215686, 0.0509804, 0.168627, 1)
 white = Color(1, 0.960784, 0.807843, 1)

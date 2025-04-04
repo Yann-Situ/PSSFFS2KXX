@@ -53,6 +53,8 @@ func enter(previous_state : State = null) -> State:
 	if next_state != self:
 		return next_state
 	play_animation()
+	if not player.effect_handler.grind_emitting():
+		player.effect_handler.grind_start()
 	print(self.name)
 	logic.slide.ing = true
 	logic.crouch.ing = true
@@ -69,6 +71,8 @@ func slide_end_finished():
 	end_slide_finished = true
 func end_timer():
 	end_slide = true
+	if player.effect_handler.grind_emitting():
+		player.effect_handler.grind_stop()
 
 ## Called by the parent StateMachine during the _physics_process call, after
 ## the StatusLogic physics_process call.
@@ -95,5 +99,7 @@ func exit():
 	super()
 	if timer:
 		timer.stop()
+	if player.effect_handler.grind_emitting():
+		player.effect_handler.grind_stop()
 	logic.slide.ing = false
 	logic.crouch.ing = false

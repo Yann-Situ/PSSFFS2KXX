@@ -1,6 +1,7 @@
-[gd_resource type="Resource" script_class="PaletteSchemeSampler" load_steps=14 format=3 uid="uid://bm1xsllovgmkc"]
+[gd_resource type="Resource" script_class="PaletteSchemeSampler" load_steps=15 format=3 uid="uid://bm1xsllovgmkc"]
 
 [ext_resource type="Script" path="res://src/Global/CustomResources/SamplerGradient.gd" id="1_blqu2"]
+[ext_resource type="Script" path="res://src/Global/CustomResources/ColorSampler.gd" id="1_fudkb"]
 [ext_resource type="Script" path="res://src/Global/CustomResources/CosineGradient.gd" id="2_hg8bd"]
 [ext_resource type="Script" path="res://src/Global/CustomResources/ColorSamplerUnion.gd" id="3_yg1h1"]
 [ext_resource type="Script" path="res://src/Global/CustomResources/ColorDistribution.gd" id="4_qi7wf"]
@@ -25,7 +26,7 @@ weight = 5.0
 
 [sub_resource type="Resource" id="Resource_63eed"]
 script = ExtResource("3_yg1h1")
-color_samplers = Array[Resource("res://src/Global/CustomResources/ColorSampler.gd")]([SubResource("Resource_cuscw"), SubResource("Resource_vphh8")])
+color_samplers = Array[ExtResource("1_fudkb")]([SubResource("Resource_cuscw"), SubResource("Resource_vphh8")])
 weight = 1.0
 
 [sub_resource type="Curve" id="Curve_sqfy8"]
@@ -52,6 +53,6 @@ weight = 1.0
 
 [resource]
 script = ExtResource("5_6vrjv")
-color_samplers = Array[Resource("res://src/Global/CustomResources/ColorSampler.gd")]([SubResource("Resource_63eed"), SubResource("Resource_jaq00")])
+color_samplers = Array[ExtResource("1_fudkb")]([SubResource("Resource_63eed"), SubResource("Resource_jaq00")])
 black = Color(0, 0, 0, 1)
 white = Color(1, 1, 1, 1)

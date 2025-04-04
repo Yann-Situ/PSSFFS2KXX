@@ -1,10 +1,12 @@
+@tool
 extends Node2D
 
 @export var base_force : Vector2 = Vector2(200.0,0) :
 	set = set_force
 @export var amplitude : float = 20.0  # pix/s
 @export var period : float = 2.0  # s
-@export var rectangle_extents : Vector2 = Vector2(256,128) : set = set_extents
+#@export var rectangle_extents : Vector2 = Vector2(256,128) : set = set_extents
+@export var shape : Shape2D : set = set_shape
 
 @onready var direction = base_force.normalized()
 @onready var force_alterer = AltererAdditive.new(base_force)
@@ -13,12 +15,18 @@ extends Node2D
 func set_force(f : Vector2):
 	base_force = f
 	direction = base_force.normalized()
+	self.material.set_shader_parameter("direction", direction)
 
-func set_extents(e : Vector2):
-	rectangle_extents = e
-	$Area2D/CollisionShape2D.shape.size = rectangle_extents
-	$Sprite2D.texture.width = e.x
-	$Sprite2D.texture.height = e.y
+func set_shape(s : Shape2D):
+	shape = s
+	$Area2D/CollisionShape2D.shape = shape
+	self.material.set_shader_parameter("direction", direction)
+
+#func set_extents(e : Vector2):
+	#rectangle_extents = e
+	#$Area2D/CollisionShape2D.shape.size = rectangle_extents
+	#$Sprite2D.texture.width = e.x
+	#$Sprite2D.texture.height = e.y
 
 func _ready():
 	tween_force.set_trans(Tween.TRANS_SINE)
