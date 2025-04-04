@@ -8,7 +8,7 @@ signal handler_entered
 signal handler_exited
 signal handler_interacted(handler : InteractionHandler)
 
-@export var enabled : bool = true
+@export var enabled : bool = true ## WARNING useless for now
 var enter: Callable = func():
 	handler_entered.emit()
 var exit: Callable = func():

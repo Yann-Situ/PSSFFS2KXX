@@ -30,14 +30,15 @@ func set_activated(b):
 
 func set_portal_type(new_type):
 	portal_type = new_type
-	if portal_type == PortalType.ENTRANCE or portal_type == PortalType.BOTH:
-		pass # TO IMPLEMENT [TODO]
+	if portal_type == PortalType.ENTRANCE:
+		$InteractionArea.monitorable = false
 	if portal_type == PortalType.EXIT or \
 		portal_type == PortalType.BOTH or \
 		portal_type == PortalType.EXIT_LEVEL :
 		if trigger_type == TriggerType.ON_BODY_ENTER:
 			if $InteractionArea.handler_interacted.is_connected(self.interaction_exit_portal):
 				$InteractionArea.handler_interacted.disconnect(self.interaction_exit_portal)
+			$InteractionArea.monitorable = false
 			if not $Area2D.body_entered.is_connected(self.area_body_exit_portal):
 				$Area2D.body_entered.connect(self.area_body_exit_portal)
 		elif trigger_type == TriggerType.ON_INTERACTION :
@@ -45,11 +46,13 @@ func set_portal_type(new_type):
 				$Area2D.body_entered.disconnect(self.area_body_exit_portal)
 			if not $InteractionArea.handler_interacted.is_connected(self.interaction_exit_portal):
 				$InteractionArea.handler_interacted.connect(self.interaction_exit_portal)
+			$InteractionArea.monitorable = true
 		elif trigger_type == TriggerType.NO_TRIGGER :
 			if $Area2D.body_entered.is_connected(self.area_body_exit_portal):
 				$Area2D.body_entered.disconnect(self.area_body_exit_portal)
 			if $InteractionArea.handler_interacted.is_connected(self.interaction_exit_portal):
 				$InteractionArea.handler_interacted.disconnect(self.interaction_exit_portal)
+			$InteractionArea.monitorable = false
 
 
 func set_trigger_type(new_type):
