@@ -1782,6 +1782,7 @@ animation_player = NodePath("../../../Flipper/Sprite2D/PlayerAnimation")
 
 [node name="Land" type="Node" parent="StateMachine/GroundStates" node_paths=PackedStringArray("belong_state", "action_state", "fall_state", "jump_state", "stand_state", "crouch_state", "player", "logic", "animation_player")]
 script = ExtResource("22_bsg40")
+land_threshold = 200.0
 belong_state = NodePath("../../BelongStates")
 action_state = NodePath("../../ActionStates")
 fall_state = NodePath("../../AirStates/Fall")
@@ -1981,7 +1982,6 @@ ball_handler = NodePath("../../../Flipper/BallHandler")
 layer = 10
 
 [node name="MarginContainer" type="MarginContainer" parent="UI"]
-visible = false
 anchors_preset = 10
 anchor_right = 1.0
 offset_bottom = 80.0
@@ -2059,7 +2059,6 @@ scale = Vector2(0.5, 1)
 texture = ExtResource("44_s6k41")
 
 [node name="HBoxContainer" type="HBoxContainer" parent="UI/DebugInterface"]
-visible = false
 layout_mode = 2
 
 [node name="LabelVelocity" type="Label" parent="UI/DebugInterface/HBoxContainer"]

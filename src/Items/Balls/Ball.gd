@@ -229,6 +229,7 @@ func power_p_physics(player,delta):
 	pass
 func power_p_physics_hold(player,delta):
 	power_p_physics(player,delta)
+	
 
 func power_jp(player,delta):
 	if not is_belonging() :

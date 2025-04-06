@@ -80,6 +80,7 @@ func power_jp_hold(player,delta):
 		if player.S.jump.can and player.S.crouch.ing and player.S.down.pressed:
 			player.add_impulse(shock_jump*Vector2.UP)
 			shock(player.global_position+CROUCH_SHOCK_OFFSET)
+			GlobalEffect.make_ground_wave(player.effect_handler.global_position, 1.0, "subtle")
 		elif !player.S.floor.ing and player.S.down.pressed:
 			player.add_impulse(shock_fall*Vector2.DOWN)
 			shock(player.global_position)

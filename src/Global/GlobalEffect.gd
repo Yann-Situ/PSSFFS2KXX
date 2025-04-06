@@ -1,6 +1,7 @@
 extends Node
 
 var distortion_scene = preload("res://src/Effects/Distortion.tscn")
+var ground_wave_scene = preload("res://src/Effects/GroundWave.tscn")
 enum IMPACT_TYPE {ZERO, JUMP0, JUMP1, SPIKES, SPARKS, BOUNCE, CIRCLE}
 var impact_scenes = [\
 	preload("res://src/Effects/Impacts/Impact0.tscn"),\
@@ -27,16 +28,27 @@ func stop_time(duration : float):
 	tween_pause.tween_interval(duration)
 	tween_pause.tween_callback(self.set_pause.bind(false))
 
-func make_distortion(global_position : Vector2, animation_delay : float = 0.75,\
+func make_distortion(global_position : Vector2, time_scale : float = 1.3,\
 animation_name : String = "subtle", size : Vector2 = Vector2(128,128),\
-_z_index : int = Global.z_indices["foreground_2"]):
+_z_index : int = Global.z_indices["foreground_3"]):
 	var distortion = distortion_scene.instantiate()
 	Global.get_current_room().add_child(distortion)
 	distortion.global_position = global_position
 	distortion.z_index = _z_index
-	distortion.animation_delay = animation_delay
+	distortion.time_scale = time_scale
 	distortion.size = size
 	distortion.start(animation_name)
+	
+func make_ground_wave(global_position : Vector2, time_scale : float = 1.0,\
+animation_name : String = "subtle", size_scale : Vector2 = Vector2(1,1),\
+_z_index : int = Global.z_indices["foreground_3"]):
+	var ground_wave = ground_wave_scene.instantiate()
+	Global.get_current_room().add_child(ground_wave)
+	ground_wave.global_position = global_position
+	ground_wave.z_index = _z_index
+	ground_wave.time_scale = time_scale
+	ground_wave.size_scale = size_scale
+	ground_wave.start(animation_name)
 
 func make_impact(global_position : Vector2, impact_type : IMPACT_TYPE = IMPACT_TYPE.ZERO, normal : Vector2 = Vector2.UP):
 	assert(int(impact_type) >= 0)

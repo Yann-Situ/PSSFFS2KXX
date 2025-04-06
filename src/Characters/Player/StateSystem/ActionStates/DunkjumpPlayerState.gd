@@ -135,7 +135,8 @@ func dunkjump_movement():
 		player.effect_handler.ghost_start(0.8,0.1, Color.WHITE,ball.get_dash_gradient())
 	else:
 		player.effect_handler.ghost_start(0.8,0.1, ghost_modulate)
-	GlobalEffect.make_distortion(player.effect_handler.global_position, 0.75, "fast_soft")
+	# GlobalEffect.make_distortion(player.effect_handler.global_position, 0.75, "fast_soft")
+	GlobalEffect.make_ground_wave(player.effect_handler.global_position, 0.75, "soft")
 	player.effect_handler.dust_start()
 	GlobalEffect.make_impact(player.effect_handler.global_position, \
 		GlobalEffect.IMPACT_TYPE.JUMP1, Vector2.UP)

@@ -3,7 +3,8 @@ extends PlayerMovementState
 #need to handle hit/collision box resizing + crouch parameters + jump
 
 # the following var is not working yet
-@export var speed_threshold : float = 0.0 ## pix/s. The minimal vertical downward speed that triggers landing animation
+@export var land_threshold : float = 20.0 ## pix/s. The minimal vertical downward speed that triggers landing animation
+@export var wave_threshold : float = 400.0 ## pix/s. The minimal vertical downward speed that triggers ground_wave
 
 @export_group("States")
 @export var belong_state : State
@@ -39,7 +40,7 @@ func branch() -> State:
 
 func enter(previous_state : State = null) -> State:
 	# print(movement.velocity.y) # TODO not working yet as the velocity at this time can be 0 or the previous vertical velocity...
-	if movement.velocity.y < speed_threshold:
+	if movement.velocity.y < land_threshold:
 		return stand_state
 	land_finished = false
 	var next_state = branch()
@@ -55,7 +56,16 @@ func enter(previous_state : State = null) -> State:
 	
 	# effects
 	player.effect_handler.cloud_start()
-
+	if movement.velocity.y > wave_threshold:
+		var space_state = player.get_world_2d().direct_space_state
+		# use global coordinates, not local to node	
+		var query = PhysicsRayQueryParameters2D.create(player.effect_handler.global_position, 
+			player.effect_handler.global_position+64*Vector2.DOWN,player.collision_mask)
+		var result = space_state.intersect_ray(query)
+		if result:
+			GlobalEffect.make_ground_wave(result.position, 1.0, "subtle")
+		else :
+			push_warning("wave landing but no intersection with raycast")
 	return next_state
 
 func on_land_finished():
