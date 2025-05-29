@@ -59,8 +59,11 @@ func tween_position_follow_property(t : float, src_pos : Vector2, trg : Node2D) 
 #		draw_circle(Vector2.ZERO, 16, Color(1.0,0.8,0.6,1.0))
 #
 func _process(delta):
-	assert(target_selectable != null) # WARNING it seems to work but beware!
-	global_position = target_selectable.global_position
+	if target_selectable != null:
+		global_position = target_selectable.global_position
+	else:
+		push_warning("target_slectable == null, but process is true (likely due to exiting a room next to a target). Setting process to false.")
+		set_process(false)
 
 func _on_tween_position_completed():
 	if target_selectable != null:
