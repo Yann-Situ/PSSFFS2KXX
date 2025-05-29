@@ -1,10 +1,9 @@
-[gd_scene load_steps=17 format=3 uid="uid://b45hldwkibtqb"]
+[gd_scene load_steps=12 format=3 uid="uid://b45hldwkibtqb"]
 
 [ext_resource type="Script" path="res://src/Levels/Portal2D.gd" id="1"]
 [ext_resource type="Shader" path="res://assets/shader/transition_circle.gdshader" id="2"]
 [ext_resource type="Texture2D" uid="uid://cg0uvgbn33p2h" path="res://assets/art/icons/popol.png" id="3"]
-[ext_resource type="Script" path="res://src/Items/Activables/InteractionArea.gd" id="4_4jpwu"]
-[ext_resource type="Texture2D" uid="uid://gofk0vnlkypc" path="res://assets/art/icons/warning.png" id="5_odtd1"]
+[ext_resource type="PackedScene" uid="uid://dyc6sltfnujdf" path="res://src/Items/Activables/InteractionArea.tscn" id="4_5g7fd"]
 
 [sub_resource type="Animation" id="1"]
 resource_name = "transition_in"
@@ -84,134 +83,8 @@ shader_parameter/center_offset = null
 [sub_resource type="RectangleShape2D" id="5"]
 size = Vector2(10, 32)
 
-[sub_resource type="CircleShape2D" id="CircleShape2D_u16rl"]
-radius = 4.0
-
-[sub_resource type="Animation" id="Animation_2gk7m"]
-length = 0.001
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("../Sprite2D:scale")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [Vector2(0.5, 0.5)]
-}
-tracks/1/type = "value"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath("../Sprite2D:position")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [Vector2(0, -32)]
-}
-tracks/2/type = "value"
-tracks/2/imported = false
-tracks/2/enabled = true
-tracks/2/path = NodePath("../Sprite2D:visible")
-tracks/2/interp = 1
-tracks/2/loop_wrap = true
-tracks/2/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [false]
-}
-
-[sub_resource type="Animation" id="Animation_xihav"]
-resource_name = "begin-exclamation"
-length = 0.4
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("../Sprite2D:scale")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.4),
-"transitions": PackedFloat32Array(0.392292, 1),
-"update": 0,
-"values": [Vector2(0, 0), Vector2(0.5, 0.5)]
-}
-tracks/1/type = "value"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath("../Sprite2D:position")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/keys = {
-"times": PackedFloat32Array(0, 0.4),
-"transitions": PackedFloat32Array(0.210224, 1),
-"update": 0,
-"values": [Vector2(0, 0), Vector2(0, -32)]
-}
-tracks/2/type = "value"
-tracks/2/imported = false
-tracks/2/enabled = true
-tracks/2/path = NodePath("../Sprite2D:visible")
-tracks/2/interp = 1
-tracks/2/loop_wrap = true
-tracks/2/keys = {
-"times": PackedFloat32Array(0, 0.0333333),
-"transitions": PackedFloat32Array(1, 1),
-"update": 1,
-"values": [false, true]
-}
-
-[sub_resource type="Animation" id="Animation_o6yd0"]
-resource_name = "end-exclamation"
-length = 0.4
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("../Sprite2D:scale")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.4),
-"transitions": PackedFloat32Array(5, 0.392292),
-"update": 0,
-"values": [Vector2(0.5, 0.5), Vector2(0, 0)]
-}
-tracks/1/type = "value"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath("../Sprite2D:position")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/keys = {
-"times": PackedFloat32Array(0, 0.4),
-"transitions": PackedFloat32Array(3, 0.210224),
-"update": 0,
-"values": [Vector2(0, -32), Vector2(0, 0)]
-}
-tracks/2/type = "value"
-tracks/2/imported = false
-tracks/2/enabled = true
-tracks/2/path = NodePath("../Sprite2D:visible")
-tracks/2/interp = 1
-tracks/2/loop_wrap = true
-tracks/2/keys = {
-"times": PackedFloat32Array(0.4),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [false]
-}
-
-[sub_resource type="AnimationLibrary" id="AnimationLibrary_876mb"]
-_data = {
-"RESET": SubResource("Animation_2gk7m"),
-"begin-exclamation": SubResource("Animation_xihav"),
-"end-exclamation": SubResource("Animation_o6yd0")
-}
+[sub_resource type="CircleShape2D" id="CircleShape2D_gd47b"]
+radius = 16.0
 
 [node name="Portal" type="Node2D"]
 z_index = 300
@@ -254,28 +127,8 @@ shape = SubResource("5")
 self_modulate = Color(0.266667, 0.827451, 1, 0.470588)
 texture = ExtResource("3")
 
-[node name="InteractionArea" type="Area2D" parent="."]
-modulate = Color(0.176, 0.922, 0.51, 0.804)
-collision_layer = 2048
-collision_mask = 0
-monitoring = false
-script = ExtResource("4_4jpwu")
+[node name="InteractionArea" parent="." instance=ExtResource("4_5g7fd")]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="InteractionArea"]
-shape = SubResource("CircleShape2D_u16rl")
-
-[node name="Sprite2D" type="Sprite2D" parent="."]
-visible = false
-position = Vector2(0, -32)
-scale = Vector2(0.5, 0.5)
-texture = ExtResource("5_odtd1")
-
-[node name="AnimationPlayer" type="AnimationPlayer" parent="Sprite2D"]
-root_node = NodePath("../../InteractionArea")
-libraries = {
-"": SubResource("AnimationLibrary_876mb")
-}
-
-[connection signal="handler_entered" from="InteractionArea" to="Sprite2D/AnimationPlayer" method="play" binds= [&"begin-exclamation"]]
-[connection signal="handler_exited" from="InteractionArea" to="Sprite2D/AnimationPlayer" method="play" binds= [&"end-exclamation"]]
-[connection signal="handler_interacted" from="InteractionArea" to="Sprite2D/AnimationPlayer" method="play_backwards" unbinds=1]
+shape = SubResource("CircleShape2D_gd47b")
+debug_color = Color(0.3036, 0.92, 0.406333, 0.419608)

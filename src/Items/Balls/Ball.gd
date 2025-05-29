@@ -190,9 +190,11 @@ func is_selected() -> bool:
 
 func on_pickup(holder_node : Node):
 	$Visuals/Reconstruction.restart()
+	#self.call_deferred("reparent", holder_node) # test
 	
 func on_throw(previous_holder : Node):
 	pass
+	#self.call_deferred("reparent", Global.current_room)#test
 
 func on_dunk(basket : Node2D = null):
 	$Animation.stop()

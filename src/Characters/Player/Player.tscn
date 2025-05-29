@@ -1520,7 +1520,6 @@ mouse_filter = 2
 color = Color(1, 1, 1, 0)
 
 [node name="BallHandler" type="Area2D" parent="Flipper" node_paths=PackedStringArray("P", "ball_label", "ball_holder")]
-visible = false
 collision_layer = 0
 collision_mask = 4
 script = ExtResource("5_w4h74")
@@ -1538,6 +1537,7 @@ position = Vector2(0, 5)
 shape = SubResource("57")
 
 [node name="ThrowPosition" type="Marker2D" parent="Flipper/BallHandler"]
+visible = false
 position = Vector2(4, -6)
 
 [node name="HasBallPosition" type="Sprite2D" parent="Flipper/BallHandler"]
@@ -1546,6 +1546,7 @@ position = Vector2(9, 12)
 texture = ExtResource("48_n7dkg")
 
 [node name="BallWallDetector" type="Area2D" parent="Flipper/BallHandler"]
+visible = false
 collision_layer = 0
 collision_mask = 1024
 

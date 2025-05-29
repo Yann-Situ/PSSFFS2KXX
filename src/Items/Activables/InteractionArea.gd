@@ -21,4 +21,4 @@ func _init():
 	monitoring = false
 	collision_layer = 2048 # interaction layer
 	collision_mask = 0 
-	modulate = Color(0.176, 0.922, 0.51, 0.804)
+	#modulate = Color(0.176, 0.922, 0.51, 0.804)
