@@ -1463,6 +1463,10 @@ velocity_max_offset_DOWN_RIGHT = Vector2(128, 160)
 velocity_max_offset_UP_LEFT = Vector2(128, 24)
 velocity_speed_threshold = Vector2(600, 400)
 
+[node name="BallHolder" type="Node2D" parent="."]
+script = ExtResource("11_yfaov")
+holder_priority = 2
+
 [node name="Flipper" type="Marker2D" parent="."]
 
 [node name="Sprite2D" type="Sprite2D" parent="Flipper"]
@@ -1525,11 +1529,7 @@ collision_mask = 4
 script = ExtResource("5_w4h74")
 P = NodePath("../..")
 ball_label = NodePath("../../UI/MarginContainer/HBoxContainer/MarginContainer/TextureRect/RichTextLabel")
-ball_holder = NodePath("BallHolder")
-
-[node name="BallHolder" type="Node2D" parent="Flipper/BallHandler"]
-script = ExtResource("11_yfaov")
-holder_priority = 2
+ball_holder = NodePath("../../BallHolder")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Flipper/BallHandler"]
 visible = false
@@ -2090,9 +2090,9 @@ modulate = Color(1, 0, 0, 1)
 position = Vector2(0, 6)
 shape = SubResource("58")
 
+[connection signal="picking" from="BallHolder" to="." method="collision_mask_add_ballwall" unbinds=1]
+[connection signal="processing_ball" from="BallHolder" to="Flipper/BallHandler" method="set_has_ball_position" unbinds=1]
+[connection signal="releasing" from="BallHolder" to="." method="collision_mask_remove_ballwall" unbinds=1]
 [connection signal="body_entered" from="Flipper/BallHandler" to="Flipper/BallHandler" method="_on_Ball_Handler_body_entered"]
-[connection signal="picking" from="Flipper/BallHandler/BallHolder" to="." method="collision_mask_add_ballwall" unbinds=1]
-[connection signal="processing_ball" from="Flipper/BallHandler/BallHolder" to="Flipper/BallHandler" method="set_has_ball_position" unbinds=1]
-[connection signal="releasing" from="Flipper/BallHandler/BallHolder" to="." method="collision_mask_remove_ballwall" unbinds=1]
 [connection signal="body_entered" from="Flipper/BallHandler/BallWallDetector" to="Flipper/BallHandler" method="_on_BallWallDetector_body_entered"]
 [connection signal="body_exited" from="Flipper/BallHandler/BallWallDetector" to="Flipper/BallHandler" method="_on_BallWallDetector_body_exited"]

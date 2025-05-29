@@ -94,6 +94,7 @@ func pick(new_holder : BallHolder)-> bool:
 	self.disable_physics()
 	# if "z_index" in holder_node:
 	# 	self.z_index = holder_node.z_index+1
+	self.call_deferred("reparent", new_holder) # test
 	on_pickup(new_holder)
 	is_picked_up.emit()
 	print(self.name+" picked by "+current_holder.name)
@@ -119,6 +120,7 @@ func throw(global_pos : Vector2, velo : Vector2) -> void:
 	# self.z_index = Global.z_indices["ball_0"]
 	self.enable_physics()
 
+	self.call_deferred("reparent", Global.current_room) # test
 	on_throw(previous_holder)
 	is_thrown.emit()
 	if previous_holder == null:
@@ -190,11 +192,9 @@ func is_selected() -> bool:
 
 func on_pickup(holder_node : Node):
 	$Visuals/Reconstruction.restart()
-	#self.call_deferred("reparent", holder_node) # test
 	
 func on_throw(previous_holder : Node):
 	pass
-	#self.call_deferred("reparent", Global.current_room)#test
 
 func on_dunk(basket : Node2D = null):
 	$Animation.stop()
