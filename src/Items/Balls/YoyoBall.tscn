@@ -36,9 +36,13 @@ radius = 6.0
 
 [node name="YoyoBall" instance=ExtResource("1_dg71n")]
 script = ExtResource("2_q85yo")
-follow_damping = 0.01
-follow_speed = 500.0
-radius_stop_follow = 16.0
+follow_player_damping = 0.25
+follow_player_speed = 500.0
+radius_stop_follow_player = 24.0
+follow_ball_damping = 0.4
+follow_ball_speed = 600.0
+radius_stop_follow_ball = 40.0
+follow_ball_max_recall_duration = 0.8
 destruction_momentum = 800
 impact_effect = 6
 dust_threshold = 100.0

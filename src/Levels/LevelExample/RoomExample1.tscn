@@ -968,7 +968,13 @@ curve = SubResource("Curve2D_g7x84")
 
 [node name="YoyoBall" parent="." index="10" instance=ExtResource("32_2sngy")]
 position = Vector2(920, -96)
-follow_damping = 0.4
+follow_player_damping = 0.25
+follow_player_speed = 500.0
+radius_stop_follow_player = 24.0
+follow_ball_damping = 0.4
+follow_ball_speed = 600.0
+radius_stop_follow_ball = 40.0
+follow_ball_max_recall_duration = 0.8
 
 [node name="SnailBall" parent="." index="11" instance=ExtResource("33_wukp4")]
 position = Vector2(-240, -128)
