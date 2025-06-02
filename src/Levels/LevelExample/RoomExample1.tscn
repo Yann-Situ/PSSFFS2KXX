@@ -1,4 +1,4 @@
-[gd_scene load_steps=105 format=4 uid="uid://dgjpons7cu2id"]
+[gd_scene load_steps=107 format=4 uid="uid://dgjpons7cu2id"]
 
 [ext_resource type="PackedScene" uid="uid://b5emf4je4tnag" path="res://src/Levels/Room2D.tscn" id="1"]
 [ext_resource type="PackedScene" uid="uid://b45hldwkibtqb" path="res://src/Levels/Portal.tscn" id="2"]
@@ -31,6 +31,8 @@
 [ext_resource type="PackedScene" uid="uid://co2grsk6s5crx" path="res://src/Characters/NPC/YS.tscn" id="28_5sjrw"]
 [ext_resource type="PackedScene" uid="uid://cckqoik18dppx" path="res://src/Items/Baskets/Basket.tscn" id="29_38ii6"]
 [ext_resource type="Shader" path="res://src/Items/Dynamics/ForceField.gdshader" id="30_ynsv1"]
+[ext_resource type="PackedScene" uid="uid://cse8okfaedvl1" path="res://src/Items/Balls/YoyoBall.tscn" id="32_2sngy"]
+[ext_resource type="PackedScene" uid="uid://cy6ot0oc7dmqp" path="res://src/Items/Balls/SnailBall.tscn" id="33_wukp4"]
 
 [sub_resource type="Gradient" id="1"]
 resource_local_to_scene = true
@@ -278,7 +280,7 @@ saturation_distribution = SubResource("33")
 lightness_distribution = SubResource("39")
 weight = 1.0
 
-[sub_resource type="Resource" id="Resource_f0uxo"]
+[sub_resource type="Resource" id="Resource_mlgyg"]
 resource_local_to_scene = true
 script = ExtResource("6_71oce")
 color_samplers = Array[ExtResource("5_nk508")]([SubResource("19"), SubResource("23"), SubResource("31"), SubResource("35")])
@@ -526,7 +528,7 @@ position = Vector2(1664, 0)
 [node name="PedestrianGenerator" parent="." index="7" instance=ExtResource("11")]
 position = Vector2(1248, 0)
 x_radius = 700.0
-palette_scheme_sampler = SubResource("Resource_f0uxo")
+palette_scheme_sampler = SubResource("Resource_mlgyg")
 walk_speed_min = 35.0
 
 [node name="CanvasModulate" parent="Map" index="0"]
@@ -693,11 +695,10 @@ position = Vector2(16, -32)
 
 [node name="HiddenPlace" parent="Map/Secret" index="0" instance=ExtResource("26_c0fxs")]
 position = Vector2(704, -320)
-layer_0/tile_data = PackedInt32Array(-65534, 196608, 6, -131070, 0, 6, -196606, 196608, 6, -65535, 131072, 6, -131071, 589834, 11, -196607, 131072, 6, -65536, 131072, 6, -131072, 0, 6, -196608, 131072, 6, -1, 131072, 6, -65537, 589834, 11, -131073, 131072, 6, -2, 131072, 6, -65538, 0, 6, -131074, 131072, 6, -3, 131072, 6, -65539, 589834, 11, -131075, 131072, 6, -4, 65536, 6, -65540, 0, 6, -131076, 65536, 6)
 connect_area2D = true
 collision_mask = 5
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Map/Secret/HiddenPlace" index="2"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Map/Secret/HiddenPlace" index="1"]
 z_index = 300
 z_as_relative = false
 position = Vector2(-16, -48)
@@ -964,3 +965,16 @@ curve = SubResource("Curve2D_hjlht")
 [node name="MovingPlatform2" parent="Environment" index="13" instance=ExtResource("24_w6usv")]
 position = Vector2(1336, 64)
 curve = SubResource("Curve2D_g7x84")
+
+[node name="YoyoBall" parent="." index="10" instance=ExtResource("32_2sngy")]
+position = Vector2(920, -96)
+follow_damping = 0.4
+
+[node name="SnailBall" parent="." index="11" instance=ExtResource("33_wukp4")]
+position = Vector2(-240, -128)
+
+[node name="SnailBall2" parent="." index="12" instance=ExtResource("33_wukp4")]
+position = Vector2(-120, 0)
+
+[node name="SnailBall3" parent="." index="13" instance=ExtResource("33_wukp4")]
+position = Vector2(1632, -512)

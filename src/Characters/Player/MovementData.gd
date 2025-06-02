@@ -25,6 +25,7 @@ var direction_pressed : Vector2 = Vector2.ZERO
 var force_alterable = Alterable.new(Vector2.ZERO)
 var speed_alterable = Alterable.new(Vector2.ZERO)
 var accel_alterable = Alterable.new(Vector2.ZERO)
+var speed_scale : float = 1.0
 
 func set_mass(v : float):
 	mass = v
@@ -51,6 +52,7 @@ func duplicate_with_ambient_scaler(scaler : AmbientDataScaler) -> MovementData:
 	m.force_alterable = self.force_alterable
 	m.speed_alterable = self.speed_alterable
 	m.accel_alterable = self.accel_alterable
+	m.speed_scale = self.speed_scale
 	return m
 
 func _to_string() -> String:

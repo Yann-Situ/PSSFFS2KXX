@@ -2,7 +2,7 @@ extends Node2D
 
 var ghost_anim = preload("res://src/Effects/GhostAnim.tscn")
 @export var ghost_sprite : Sprite2D
-@export var environment_node : Room2D
+@export var environment_node : Node2D
 @export var use_gradient : bool = false
 @export var gradient : Gradient
 
@@ -26,7 +26,6 @@ func instance_ghost():
 	ghost.z_as_relative = false
 	ghost.z_index = ghost_sprite.z_index - 1
 	environment_node.add_child(ghost) # add to environment
-	#print(ghost.z_index)
 
 func instance_ghost_gradient(gradient : Gradient):
 	assert(gradient != null)
@@ -42,7 +41,6 @@ func instance_ghost_gradient(gradient : Gradient):
 	ghost.z_as_relative = false
 	ghost.z_index = ghost_sprite.z_index - 1
 	environment_node.add_child(ghost) # add to environment
-	#print(ghost.z_index)
 
 func start(duration, tick_delay):
 	if duration > 0.0:

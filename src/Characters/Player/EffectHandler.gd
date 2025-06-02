@@ -28,7 +28,7 @@ func grind_stop():
 
 func ghost_start(duration, tick_delay, selfmodulate : Color = Color(1.2,1.8,2.2,0.39), gradient : Gradient = null):
 	$GhostHandler.set_ghost_sprite(player.sprite)
-	$GhostHandler.set_environment_node(Global.get_current_room())
+	$GhostHandler.set_environment_node(Global.get_current_room()) # using Global.get_current_room() results in ghost not flipped
 	$GhostHandler.use_gradient = gradient != null
 	if gradient == null:
 		$GhostHandler.self_modulate = selfmodulate

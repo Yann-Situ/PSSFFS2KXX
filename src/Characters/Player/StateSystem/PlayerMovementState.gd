@@ -35,7 +35,7 @@ func movement_physics_process(delta, m : MovementData = movement):
 
 	# move and slide
 	apply_speed_alterable(delta, m)
-	player.set_velocity(m.velocity)
+	player.set_velocity(m.velocity*m.speed_scale)
 	player.move_and_slide()	# update player position
 	## TODO think about those two alternatives: get_velocity seems to be working well with moving platform and slopes
 	#m.velocity = player.get_real_velocity()-m.speed_alterable.get_value() 

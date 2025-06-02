@@ -2,6 +2,7 @@ extends Ball
 # Constant energy ball, with infinite bouncing and no gravity
 
 var trail_scene = preload("res://src/Effects/Trail.tscn")
+@onready var player_speed_save : Vector2 = Vector2.ZERO
 
 func _ready():
 	super()
@@ -47,7 +48,6 @@ func power_p(player,delta):
 	pass
 func power_p_hold(player,delta):
 	pass
-
 func power_p_physics(player,delta):
 	pass
 func power_p_physics_hold(player,delta):
@@ -65,8 +65,15 @@ func power_jp(player,delta):
 	$Animation.play("teleport")
 func power_jp_hold(player,delta):
 	make_electric_trail()
+	make_electric_trail()
+	make_electric_trail()
+	player_speed_save = player.movement.velocity
+	player.movement.speed_scale = 0.0
+	$Animation.play("stase")
 
 func power_jr(player,delta):
-	pass
+	player.movement.velocity = player_speed_save
+	player.movement.speed_scale = 1.0
 func power_jr_hold(player,delta):
-	pass
+	player.movement.velocity = player_speed_save
+	player.movement.speed_scale = 1.0
