@@ -50,20 +50,22 @@ _z_index : int = Global.z_indices["foreground_3"]):
 	ground_wave.size_scale = size_scale
 	ground_wave.start(animation_name)
 
-func make_impact(global_position : Vector2, impact_type : IMPACT_TYPE = IMPACT_TYPE.ZERO, normal : Vector2 = Vector2.UP):
+func make_impact(global_position : Vector2, impact_type : IMPACT_TYPE = IMPACT_TYPE.ZERO, normal : Vector2 = Vector2.UP, z_index = 100):
 	assert(int(impact_type) >= 0)
 	assert(int(impact_type) < impact_scenes.size())
 	var impact = impact_scenes[impact_type].instantiate()
 	Global.get_current_room().add_child(impact)
 	impact.global_position = global_position
+	impact.z_index = z_index
 	impact.start(normal)
 
-func make_puff(global_position : Vector2, amount : int = 6, length : float = 20.0):
+func make_puff(global_position : Vector2, amount : int = 6, length : float = 20.0, z_index = 100):
 	var puff : GPUParticles2D = puff_scene.instantiate()
 	Global.get_current_room().add_child(puff)
 	puff.global_position = global_position
 	puff.amount = amount
 	puff.process_material.emission_box_extents.x = length
+	puff.z_index = z_index
 	puff.start()
 
 func make_explosion(global_position : Vector2, explosion_data : ExplosionData):

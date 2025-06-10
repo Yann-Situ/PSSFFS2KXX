@@ -1,9 +1,13 @@
-[gd_scene load_steps=11 format=3 uid="uid://cse8okfaedvl1"]
+[gd_scene load_steps=12 format=3 uid="uid://cse8okfaedvl1"]
 
 [ext_resource type="PackedScene" uid="uid://cxn2m3havcmil" path="res://src/Items/Balls/Ball.tscn" id="1_dg71n"]
 [ext_resource type="Shader" path="res://assets/shader/contour.gdshader" id="2_8v2ru"]
 [ext_resource type="Script" path="res://src/Items/Balls/YoyoBall.gd" id="2_q85yo"]
 [ext_resource type="Texture2D" uid="uid://d33u8f6bfhj4m" path="res://assets/art/effects/round.png" id="4_bskdd"]
+
+[sub_resource type="Curve" id="Curve_2nxf1"]
+_data = [Vector2(0, 0.989203), 0.0, 0.0, 0, 0, Vector2(0.25, 0.503322), 0.0, 0.0, 0, 0, Vector2(0.754167, 0.505494), 0.0, 0.0, 0, 0, Vector2(1, 0.989011), 0.0, 0.0, 0, 0]
+point_count = 4
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_mf5lq"]
 resource_local_to_scene = true
@@ -34,22 +38,31 @@ colors = PackedColorArray(0.988343, 0.901637, 0.908888, 1, 1, 0.650091, 0.302242
 resource_local_to_scene = true
 radius = 6.0
 
-[node name="YoyoBall" instance=ExtResource("1_dg71n")]
+[node name="YoyoBall" node_paths=PackedStringArray("line") instance=ExtResource("1_dg71n")]
 script = ExtResource("2_q85yo")
+destruction_momentum = 800
+line = NodePath("Line2D")
 follow_player_damping = 0.25
 follow_player_speed = 500.0
-radius_stop_follow_player = 24.0
+follow_player_radius_stop = 24.0
 follow_ball_damping = 0.4
 follow_ball_speed = 600.0
-radius_stop_follow_ball = 40.0
+follow_ball_radius_stop = 40.0
 follow_ball_max_recall_duration = 0.8
-destruction_momentum = 800
 impact_effect = 6
 dust_threshold = 100.0
 impact_threshold = 200.0
 attract_force = 2000.0
 
-[node name="Visuals" parent="." index="0"]
+[node name="Line2D" type="Line2D" parent="." index="0"]
+width = 8.0
+width_curve = SubResource("Curve_2nxf1")
+default_color = Color(0.85, 0.504617, 0.3995, 1)
+joint_mode = 2
+begin_cap_mode = 2
+end_cap_mode = 2
+
+[node name="Visuals" parent="." index="1"]
 material = SubResource("ShaderMaterial_mf5lq")
 col1 = Color(0.979867, 0.756128, 0.72005, 1)
 col2 = Color(0.92, 0.482693, 0.0736, 1)
@@ -78,5 +91,5 @@ scale_amount_max = 0.08
 scale_amount_curve = SubResource("Curve_1hbfl")
 color_ramp = SubResource("Gradient_pc1i1")
 
-[node name="collision" parent="." index="1"]
+[node name="collision" parent="." index="2"]
 shape = SubResource("CircleShape2D_4k2xt")

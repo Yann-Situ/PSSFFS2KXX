@@ -1701,7 +1701,6 @@ radial_accel_max = 38.09
 position = Vector2(0, -32)
 
 [node name="CloudParticles" parent="Flipper/EffectHandler" instance=ExtResource("36_iawlq")]
-z_index = -1
 material = SubResource("51")
 amount_ratio = 0.6515
 process_material = SubResource("54")
