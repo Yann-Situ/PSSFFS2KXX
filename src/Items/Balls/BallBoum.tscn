@@ -1,4 +1,4 @@
-[gd_scene load_steps=20 format=3 uid="uid://bdhkn6l5lcxe0"]
+[gd_scene load_steps=21 format=3 uid="uid://bdhkn6l5lcxe0"]
 
 [ext_resource type="PackedScene" uid="uid://cxn2m3havcmil" path="res://src/Items/Balls/Ball.tscn" id="1_gb5k2"]
 [ext_resource type="Texture2D" uid="uid://c7eow3lih24tb" path="res://assets/art/effects/shockwave_1.png" id="2"]
@@ -19,15 +19,17 @@ shader = ExtResource("3_emvrs")
 shader_parameter/activated = false
 shader_parameter/contour_color = Color(1, 1, 0.9, 0.9)
 
-[sub_resource type="Gradient" id="Gradient_vwehf"]
-resource_local_to_scene = true
-offsets = PackedFloat32Array(0, 0.00699301, 0.244755, 0.468531, 0.839161, 1)
-colors = PackedColorArray(1, 0, 0.580392, 0, 0, 0, 0, 0.258741, 0.535156, 0.535156, 0.535156, 0.705882, 0.839844, 0.839844, 0.839844, 1, 1, 1, 1, 1, 1, 1, 1, 0)
+[sub_resource type="Gradient" id="Gradient_375h7"]
+offsets = PackedFloat32Array(0, 0.25, 0.5, 0.75, 1)
+colors = PackedColorArray(0.192157, 0.192157, 0.192157, 0, 0.192157, 0.192157, 0.192157, 1, 0.458824, 0.392157, 0.341176, 1, 1, 0.54902, 0, 0.8, 1, 0.54902, 0, 0)
 
-[sub_resource type="Gradient" id="Gradient_424qk"]
-resource_local_to_scene = true
-offsets = PackedFloat32Array(0, 0.020202, 0.131313, 0.50505, 0.808081, 1)
-colors = PackedColorArray(1, 0, 0.580392, 0, 1, 1, 1, 0, 1, 1, 1, 1, 0.839844, 0.839844, 0.839844, 1, 0.533333, 0.533333, 0.533333, 0.705882, 0, 0, 0, 0.258824)
+[sub_resource type="Gradient" id="Gradient_mjsnn"]
+offsets = PackedFloat32Array(0, 0.25, 0.5, 0.75, 1)
+colors = PackedColorArray(0.192157, 0.192157, 0.192157, 0, 0.192157, 0.192157, 0.192157, 1, 0.458824, 0.392157, 0.341176, 1, 1, 0.54902, 0, 0.8, 1, 0.54902, 0, 0)
+
+[sub_resource type="Gradient" id="Gradient_bhck0"]
+offsets = PackedFloat32Array(0, 0.2, 0.5, 0.8, 1)
+colors = PackedColorArray(1, 0.54902, 0, 0, 1, 0.54902, 0, 1, 0.458824, 0.392157, 0.341176, 0.68, 0.192157, 0.192157, 0.192157, 0.35, 0.192157, 0.192157, 0.192157, 0)
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_eqgys"]
 resource_local_to_scene = true
@@ -84,10 +86,13 @@ col2 = Color(0.458824, 0.392157, 0.341176, 1)
 col3 = Color(0.192157, 0.192157, 0.192157, 1)
 
 [node name="Reconstruction" parent="Visuals" index="1"]
-color_ramp = SubResource("Gradient_vwehf")
+color_ramp = SubResource("Gradient_375h7")
 
 [node name="Destruction" parent="Visuals" index="2"]
-color_ramp = SubResource("Gradient_424qk")
+color_ramp = SubResource("Gradient_mjsnn")
+
+[node name="DunkParticles" parent="Visuals" index="3"]
+color_ramp = SubResource("Gradient_bhck0")
 
 [node name="collision" parent="." index="1"]
 shape = SubResource("CircleShape2D_eqgys")

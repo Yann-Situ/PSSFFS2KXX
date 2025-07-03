@@ -5,14 +5,16 @@ extends Ball
 @export var destruction_momentum = 800##kg*pix/s
 @export var line : Line2D
 @export_group("follow player parameters", "follow_player_")
-@export var follow_player_damping : float = 0.25# pix/pix
-@export var follow_player_speed : float = 500# pix/s
-@export var follow_player_radius_stop : float = 24.0# pix
+@export var follow_player_damping : float = 0.25 ## pix/pix
+@export var follow_player_speed : float = 500 ## pix/s
+@export var follow_player_radius_stop : float = 24.0 ## pix
+@export var follow_player_delay_before_recall : float = 1.2 ## s
 @export_group("follow ball parameters", "follow_ball_")
-@export var follow_ball_damping : float = 0.4# pix/pix
-@export var follow_ball_speed : float = 600# pix/s
-@export var follow_ball_radius_stop : float = 40.0# pix
-@export var follow_ball_max_recall_duration : float = 0.8# s
+@export var follow_ball_damping : float = 0.4 ## pix/pix
+@export var follow_ball_speed : float = 600 ## pix/s
+@export var follow_ball_radius_stop : float = 40.0 ## pix
+@export var follow_ball_delay_before_recall : float = 0.5 ## s
+@export var follow_ball_max_recall_duration : float = 0.8 ## s
 
 var friction_save
 var collision_mask_save_ : int = collision_mask
@@ -90,7 +92,7 @@ func recall_player():
 	if last_player is Player and !tween_player_follow_ball.is_running():
 		if !last_player.get_state_node().dunk.ing:
 			$Visuals/SpeedParticles.restart()
-			last_player.effect_handler.ghost_start(follow_ball_max_recall_duration, 0.1, Color.BLACK, get_dash_gradient())
+			last_player.effect_handler.ghost_start(follow_ball_max_recall_duration-0.2, 0.1, Color.BLACK, get_dash_gradient())
 			tween_player_follow_ball.play()
 			print("PLAYER YOYO RECALL")
 			#if last_player.has_accel(Global.gravity_alterer) :
@@ -124,7 +126,7 @@ func on_pickup(holder):
 func on_throw(previous_holder):
 	if previous_holder is Node2D:
 		last_holder_2D = previous_holder
-	await get_tree().create_timer(1.2).timeout
+	await get_tree().create_timer(follow_player_delay_before_recall).timeout
 	recall()
 	
 
@@ -153,7 +155,7 @@ func power_jp_hold(player,delta):
 		line.set_point_position(1,player_global_position_save-last_player.global_position)
 		tween_line.play()
 		
-		await get_tree().create_timer(0.6).timeout
+		await get_tree().create_timer(follow_ball_delay_before_recall).timeout
 		recall_player()
 
 func power_jr(player,delta):

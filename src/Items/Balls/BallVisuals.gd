@@ -1,3 +1,4 @@
+@tool
 extends Sprite2D
 
 @export var col1 : Color :
@@ -11,7 +12,11 @@ var gradient_construction := Gradient.new()
 var gradient_dunk := Gradient.new()
 var gradient_main := Gradient.new()
 var gradient_dash := Gradient.new()
+var gradient_shader := Gradient.new()
 
+#func _process(delta):
+	#update_colors()
+	
 func set_col1(c : Color):
 	col1 = c
 	update_colors()
@@ -42,6 +47,13 @@ func update_colors():
 	0.5: col2,
 	1.0: col3
 	}
+	var gradient_data_shader := {
+	0.0: Color(0.2*col3.r,0.2*col3.g,0.2*col3.b,col3.a),
+	0.33: col3,
+	0.6: col2,
+	0.87: col1,
+	1.0: Color(0.7+0.3*col1.r,0.7+0.3*col1.g,0.7+0.3*col1.b,col1.a)
+	}
 
 	var destruction_offsets = gradient_data_destruction.keys()
 	gradient_destruction.offsets = destruction_offsets
@@ -56,6 +68,9 @@ func update_colors():
 
 	gradient_main.offsets = gradient_data_main.keys()
 	gradient_main.colors = gradient_data_main.values()
+	
+	gradient_shader.offsets = gradient_data_shader.keys()
+	gradient_shader.colors = gradient_data_shader.values()
 
 	gradient_dash = gradient_main.duplicate()
 	for i in range(gradient_dash.get_point_count()):
@@ -63,6 +78,23 @@ func update_colors():
 		var col = gradient_dash.get_color(i)
 		col.a *= 0.7
 		gradient_dash.set_color(i, col)
+	
+	if material is ShaderMaterial:
+		var g : GradientTexture1D = GradientTexture1D.new()
+		g.gradient = gradient_shader
+		g.width = 64
+		self.material.set_shader_parameter('gradient', g)
+
+func activate_contour(c : Color = Color.TRANSPARENT):
+	if c != Color.TRANSPARENT:
+		self.material.set_shader_parameter('contour_color', c)
+	self.material.set_shader_parameter('contour_activated', true)
+		
+func desactivate_contour():
+	self.material.set_shader_parameter('contour_activated', false)
+	
+#func _init() -> void:
+	#update_colors()
 
 func _ready():
 	$Reconstruction.color_ramp = gradient_construction

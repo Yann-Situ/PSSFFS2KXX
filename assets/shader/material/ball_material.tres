@@ -1,0 +1,21 @@
+[gd_resource type="ShaderMaterial" load_steps=4 format=3 uid="uid://dbpy4ipgufoe8"]
+
+[ext_resource type="Shader" path="res://assets/shader/ball.gdshader" id="1_dv3f2"]
+
+[sub_resource type="Gradient" id="Gradient_gd7vj"]
+offsets = PackedFloat32Array(0, 0.3, 0.58, 0.86, 1)
+colors = PackedColorArray(0.0854902, 0, 0.0768628, 1, 0.427451, 0, 0.384314, 1, 0.904246, 0.143181, 0.680293, 1, 1, 0.6095, 0.29, 1, 1.1, 1.0219, 0.958, 1)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_13yq7"]
+gradient = SubResource("Gradient_gd7vj")
+width = 64
+
+[resource]
+resource_local_to_scene = true
+shader = ExtResource("1_dv3f2")
+shader_parameter/intensity = 1.0
+shader_parameter/main_color = Color(0.55, 0.52, 0.45, 1)
+shader_parameter/contour_activated = false
+shader_parameter/contour_color = Color(1.2, 1, 0.9, 0.65)
+shader_parameter/hurtbox_activated = false
+shader_parameter/gradient = SubResource("GradientTexture1D_13yq7")

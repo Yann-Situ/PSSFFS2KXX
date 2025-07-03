@@ -173,6 +173,7 @@ func select(selector : Node):
 		return
 	selectors[selector] = true # or whatever
 	$Highlighter.toggle_selection(true)
+	$Visuals.activate_contour()
 	if selector.has_method("select_ball"):
 		selector.select_ball(self)
 
@@ -182,6 +183,7 @@ func deselect(selector : Node):
 		return
 	if selectors.keys().is_empty():
 		Highlighter.toggle_selection(false)
+		$Visuals.desactivate_contour()
 	if selector.has_method("deselect_ball"):
 		selector.deselect_ball(self)
 

@@ -1,29 +1,43 @@
-[gd_scene load_steps=12 format=3 uid="uid://bp35noq8krghh"]
+[gd_scene load_steps=15 format=3 uid="uid://bp35noq8krghh"]
 
 [ext_resource type="PackedScene" uid="uid://cxn2m3havcmil" path="res://src/Items/Balls/Ball.tscn" id="1"]
-[ext_resource type="Shader" path="res://assets/shader/contour.gdshader" id="2"]
 [ext_resource type="Texture2D" uid="uid://ctiuc3lmtrgkb" path="res://assets/art/effects/light2.png" id="3"]
+[ext_resource type="Shader" path="res://assets/shader/ball.gdshader" id="3_cxn44"]
 [ext_resource type="Script" path="res://src/Items/Balls/BallLight.gd" id="7"]
 
 [sub_resource type="PhysicsMaterial" id="PhysicsMaterial_kiy7j"]
 friction = 0.2
 bounce = 0.2
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_00eub"]
-resource_local_to_scene = true
-shader = ExtResource("2")
-shader_parameter/activated = false
-shader_parameter/contour_color = Color(1, 1, 0.9, 0.9)
+[sub_resource type="Gradient" id="Gradient_6tkgh"]
+offsets = PackedFloat32Array(0, 0.31, 0.58, 0.85, 1)
+colors = PackedColorArray(0.2, 0.2, 0, 1, 1, 1, 0, 1, 1, 1, 0.776471, 1, 1, 1, 1, 1, 1, 1, 1, 1)
 
-[sub_resource type="Gradient" id="Gradient_ofuhd"]
-resource_local_to_scene = true
-offsets = PackedFloat32Array(0, 0.00699301, 0.244755, 0.468531, 0.839161, 1)
-colors = PackedColorArray(1, 0, 0.580392, 0, 0, 0, 0, 0.258741, 0.535156, 0.535156, 0.535156, 0.705882, 0.839844, 0.839844, 0.839844, 1, 1, 1, 1, 1, 1, 1, 1, 0)
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_djn65"]
+gradient = SubResource("Gradient_6tkgh")
+width = 64
 
-[sub_resource type="Gradient" id="Gradient_1go1p"]
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_ykfgd"]
 resource_local_to_scene = true
-offsets = PackedFloat32Array(0, 0.020202, 0.131313, 0.50505, 0.808081, 1)
-colors = PackedColorArray(1, 0, 0.580392, 0, 1, 1, 1, 0, 1, 1, 1, 1, 0.839844, 0.839844, 0.839844, 1, 0.533333, 0.533333, 0.533333, 0.705882, 0, 0, 0, 0.258824)
+shader = ExtResource("3_cxn44")
+shader_parameter/intensity = 1.0
+shader_parameter/main_color = Color(0.55, 0.52, 0.45, 1)
+shader_parameter/contour_activated = false
+shader_parameter/contour_color = Color(1.2, 1, 0.9, 0.65)
+shader_parameter/hurtbox_activated = false
+shader_parameter/gradient = SubResource("GradientTexture1D_djn65")
+
+[sub_resource type="Gradient" id="Gradient_t1osa"]
+offsets = PackedFloat32Array(0, 0.25, 0.5, 0.75, 1)
+colors = PackedColorArray(1, 1, 0, 0, 1, 1, 0, 1, 1, 1, 0.776471, 1, 1, 1, 1, 0.8, 1, 1, 1, 0)
+
+[sub_resource type="Gradient" id="Gradient_i0y4m"]
+offsets = PackedFloat32Array(0, 0.25, 0.5, 0.75, 1)
+colors = PackedColorArray(1, 1, 0, 0, 1, 1, 0, 1, 1, 1, 0.776471, 1, 1, 1, 1, 0.8, 1, 1, 1, 0)
+
+[sub_resource type="Gradient" id="Gradient_7dbb2"]
+offsets = PackedFloat32Array(0, 0.2, 0.5, 0.8, 1)
+colors = PackedColorArray(1, 1, 1, 0, 1, 1, 1, 1, 1, 1, 0.776471, 0.68, 1, 1, 0, 0.35, 1, 1, 0, 0)
 
 [sub_resource type="CircleShape2D" id="1"]
 resource_local_to_scene = true
@@ -72,16 +86,19 @@ impact_effect = 5
 metadata/_edit_group_ = true
 
 [node name="Visuals" parent="." index="0"]
-material = SubResource("ShaderMaterial_00eub")
+material = SubResource("ShaderMaterial_ykfgd")
 col1 = Color(1, 1, 1, 1)
 col2 = Color(1, 1, 0.776471, 1)
 col3 = Color(1, 1, 0, 1)
 
 [node name="Reconstruction" parent="Visuals" index="1"]
-color_ramp = SubResource("Gradient_ofuhd")
+color_ramp = SubResource("Gradient_t1osa")
 
 [node name="Destruction" parent="Visuals" index="2"]
-color_ramp = SubResource("Gradient_1go1p")
+color_ramp = SubResource("Gradient_i0y4m")
+
+[node name="DunkParticles" parent="Visuals" index="3"]
+color_ramp = SubResource("Gradient_7dbb2")
 
 [node name="collision" parent="." index="1"]
 shape = SubResource("1")
