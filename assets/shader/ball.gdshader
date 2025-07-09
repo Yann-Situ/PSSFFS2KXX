@@ -8,9 +8,9 @@ uniform bool contour_activated = false;
 uniform vec4 contour_color : source_color = vec4(1.2,1.0,0.9,0.85);
 uniform bool hurtbox_activated = false;
 
-float lightness(vec3 x)
+vec4 hurt_color()
 {
-	return 0.2126 * x.r + 0.7152 * x.g + 0.0722 * x.b;
+	return mix(vec4(1.5,0.0,0.0,1.0), vec4(1.2,0.9,0.5,1.0), fract(-2.0*TIME));
 }
 
 void fragment() {
@@ -38,7 +38,7 @@ void fragment() {
 		{
 			if (hurtbox_activated)
 			{
-				c = mix(vec4(1.0,0.1,0.0,1.0), vec4(1.1,0.9,0.7,1.0), fract(-2.0*TIME));
+				c = hurt_color();
 			}
 			else {
 				c = contour_color;
@@ -46,4 +46,19 @@ void fragment() {
 		}
 	}
     COLOR = c;
+}
+
+
+void light() {
+	if ( LIGHT_ENERGY <= 0.02
+	&& ((hurtbox_activated && COLOR == hurt_color()) || (contour_activated && COLOR == contour_color)) )
+	{
+		if (hurtbox_activated)
+			LIGHT = vec4(COLOR.rgb, min(3.0*LIGHT_COLOR.a, 1.0));
+		else 
+			LIGHT = vec4(LIGHT_COLOR.rgb * COLOR.rgb, LIGHT_COLOR.a);
+	}
+	else {
+		LIGHT = vec4(LIGHT_COLOR.rgb * COLOR.rgb * LIGHT_ENERGY, LIGHT_COLOR.a);
+	}
 }

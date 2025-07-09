@@ -6,12 +6,12 @@
 [ext_resource type="Texture2D" uid="uid://d33u8f6bfhj4m" path="res://assets/art/effects/round.png" id="5"]
 [ext_resource type="Script" path="res://src/Items/Balls/BallFire.gd" id="6"]
 
-[sub_resource type="Gradient" id="Gradient_kwgod"]
-offsets = PackedFloat32Array(0, 0.31, 0.58, 0.85, 1)
+[sub_resource type="Gradient" id="Gradient_n2qg0"]
+offsets = PackedFloat32Array(0, 0.33, 0.6, 0.87, 1)
 colors = PackedColorArray(0.100392, 0.0282352, 0, 1, 0.501961, 0.141176, 0, 1, 1, 0.384314, 0, 1, 1, 0.913725, 0.329412, 1, 1, 0.974118, 0.798824, 1)
 
-[sub_resource type="GradientTexture1D" id="GradientTexture1D_criiu"]
-gradient = SubResource("Gradient_kwgod")
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_n0y65"]
+gradient = SubResource("Gradient_n2qg0")
 width = 64
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_xnccv"]
@@ -22,17 +22,17 @@ shader_parameter/main_color = Color(0.55, 0.52, 0.45, 1)
 shader_parameter/contour_activated = false
 shader_parameter/contour_color = Color(1.2, 1, 0.9, 0.65)
 shader_parameter/hurtbox_activated = true
-shader_parameter/gradient = SubResource("GradientTexture1D_criiu")
+shader_parameter/gradient = SubResource("GradientTexture1D_n0y65")
 
-[sub_resource type="Gradient" id="Gradient_2quml"]
+[sub_resource type="Gradient" id="Gradient_f1csb"]
 offsets = PackedFloat32Array(0, 0.25, 0.5, 0.75, 1)
 colors = PackedColorArray(0.501961, 0.141176, 0, 0, 0.501961, 0.141176, 0, 1, 1, 0.384314, 0, 1, 1, 0.913725, 0.329412, 0.8, 1, 0.913725, 0.329412, 0)
 
-[sub_resource type="Gradient" id="Gradient_7bhwl"]
+[sub_resource type="Gradient" id="Gradient_6iubd"]
 offsets = PackedFloat32Array(0, 0.25, 0.5, 0.75, 1)
 colors = PackedColorArray(0.501961, 0.141176, 0, 0, 0.501961, 0.141176, 0, 1, 1, 0.384314, 0, 1, 1, 0.913725, 0.329412, 0.8, 1, 0.913725, 0.329412, 0)
 
-[sub_resource type="Gradient" id="Gradient_q1c8c"]
+[sub_resource type="Gradient" id="Gradient_jcov4"]
 offsets = PackedFloat32Array(0, 0.2, 0.5, 0.8, 1)
 colors = PackedColorArray(1, 0.913725, 0.329412, 0, 1, 0.913725, 0.329412, 1, 1, 0.384314, 0, 0.68, 0.501961, 0.141176, 0, 0.35, 0.501961, 0.141176, 0, 0)
 
@@ -63,13 +63,13 @@ col2 = Color(1, 0.384314, 0, 1)
 col3 = Color(0.501961, 0.141176, 0, 1)
 
 [node name="Reconstruction" parent="Visuals" index="1"]
-color_ramp = SubResource("Gradient_2quml")
+color_ramp = SubResource("Gradient_f1csb")
 
 [node name="Destruction" parent="Visuals" index="2"]
-color_ramp = SubResource("Gradient_7bhwl")
+color_ramp = SubResource("Gradient_6iubd")
 
 [node name="DunkParticles" parent="Visuals" index="3"]
-color_ramp = SubResource("Gradient_q1c8c")
+color_ramp = SubResource("Gradient_jcov4")
 
 [node name="Fire" type="CPUParticles2D" parent="Visuals" index="5"]
 light_mask = 0

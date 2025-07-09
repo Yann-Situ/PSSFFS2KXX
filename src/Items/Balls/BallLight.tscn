@@ -9,12 +9,12 @@
 friction = 0.2
 bounce = 0.2
 
-[sub_resource type="Gradient" id="Gradient_6tkgh"]
-offsets = PackedFloat32Array(0, 0.31, 0.58, 0.85, 1)
+[sub_resource type="Gradient" id="Gradient_ts4se"]
+offsets = PackedFloat32Array(0, 0.33, 0.6, 0.87, 1)
 colors = PackedColorArray(0.2, 0.2, 0, 1, 1, 1, 0, 1, 1, 1, 0.776471, 1, 1, 1, 1, 1, 1, 1, 1, 1)
 
-[sub_resource type="GradientTexture1D" id="GradientTexture1D_djn65"]
-gradient = SubResource("Gradient_6tkgh")
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_m5yhy"]
+gradient = SubResource("Gradient_ts4se")
 width = 64
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_ykfgd"]
@@ -25,17 +25,17 @@ shader_parameter/main_color = Color(0.55, 0.52, 0.45, 1)
 shader_parameter/contour_activated = false
 shader_parameter/contour_color = Color(1.2, 1, 0.9, 0.65)
 shader_parameter/hurtbox_activated = false
-shader_parameter/gradient = SubResource("GradientTexture1D_djn65")
+shader_parameter/gradient = SubResource("GradientTexture1D_m5yhy")
 
-[sub_resource type="Gradient" id="Gradient_t1osa"]
+[sub_resource type="Gradient" id="Gradient_5bs3c"]
 offsets = PackedFloat32Array(0, 0.25, 0.5, 0.75, 1)
 colors = PackedColorArray(1, 1, 0, 0, 1, 1, 0, 1, 1, 1, 0.776471, 1, 1, 1, 1, 0.8, 1, 1, 1, 0)
 
-[sub_resource type="Gradient" id="Gradient_i0y4m"]
+[sub_resource type="Gradient" id="Gradient_fjfdq"]
 offsets = PackedFloat32Array(0, 0.25, 0.5, 0.75, 1)
 colors = PackedColorArray(1, 1, 0, 0, 1, 1, 0, 1, 1, 1, 0.776471, 1, 1, 1, 1, 0.8, 1, 1, 1, 0)
 
-[sub_resource type="Gradient" id="Gradient_7dbb2"]
+[sub_resource type="Gradient" id="Gradient_mlb8s"]
 offsets = PackedFloat32Array(0, 0.2, 0.5, 0.8, 1)
 colors = PackedColorArray(1, 1, 1, 0, 1, 1, 1, 1, 1, 1, 0.776471, 0.68, 1, 1, 0, 0.35, 1, 1, 0, 0)
 
@@ -92,13 +92,13 @@ col2 = Color(1, 1, 0.776471, 1)
 col3 = Color(1, 1, 0, 1)
 
 [node name="Reconstruction" parent="Visuals" index="1"]
-color_ramp = SubResource("Gradient_t1osa")
+color_ramp = SubResource("Gradient_5bs3c")
 
 [node name="Destruction" parent="Visuals" index="2"]
-color_ramp = SubResource("Gradient_i0y4m")
+color_ramp = SubResource("Gradient_fjfdq")
 
 [node name="DunkParticles" parent="Visuals" index="3"]
-color_ramp = SubResource("Gradient_7dbb2")
+color_ramp = SubResource("Gradient_mlb8s")
 
 [node name="collision" parent="." index="1"]
 shape = SubResource("1")

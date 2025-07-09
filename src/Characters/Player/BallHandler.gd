@@ -70,6 +70,7 @@ func _on_Ball_Handler_body_entered(ball):
 			return
 	if ball.pick(ball_holder):
 		ball.select(P) # will then deselect the current ball by calling P.deselect_ball which calls self.deselect_ball
+		ball.global_position = P.global_position
 
 func throw_ball(throw_global_position : Vector2, speed : Vector2) -> bool:
 	if !has_ball():
@@ -80,7 +81,7 @@ func throw_ball(throw_global_position : Vector2, speed : Vector2) -> bool:
 	tween.tween_interval(released_ball_delay)
 	tween.tween_callback(self._set_released_ball_null)
 	
-	#held_ball.get_node("Visuals").position = Vector2.ZERO
+	held_ball.get_node("Visuals").position = Vector2.ZERO
 	held_ball.throw(throw_global_position, speed)
 	return true
 func _set_released_ball_null():
@@ -92,9 +93,8 @@ func shoot_ball(): # called by animation
 ## connected to ball_holder.processing_ball(ball, delta)
 func set_has_ball_position(ball : Ball) -> void: # TODO it might be interesting to do it with a Remote2D node
 	if ball != null:
-		ball.global_position = $HasBallPosition.global_position
-		#var sprite = ball.get_node("Visuals")
-		#sprite.position = $HasBallPosition.global_position - P.global_position # maybe should be optimize TODO
+		#ball.global_position = $HasBallPosition.global_position
+		ball.get_node("Visuals").position = $HasBallPosition.global_position - P.global_position
 		#held_ball.transform.origin = + $HasBallPosition.position
 
 #func pickup_ball(ball : Ball):

@@ -2,8 +2,8 @@
 *.import
 *~
 *.kra
+**/assets/art/gui/theme-1.tres
 *.psd
 addons/*
 .godot/*
 **/private/*
-assets/art/gui/theme-1.tres

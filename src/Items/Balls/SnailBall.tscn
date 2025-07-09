@@ -5,12 +5,12 @@
 [ext_resource type="Shader" path="res://assets/shader/ball.gdshader" id="3_380db"]
 [ext_resource type="Texture2D" uid="uid://d33u8f6bfhj4m" path="res://assets/art/effects/round.png" id="4_3m01w"]
 
-[sub_resource type="Gradient" id="Gradient_qty0m"]
-offsets = PackedFloat32Array(0, 0.31, 0.58, 0.85, 1)
+[sub_resource type="Gradient" id="Gradient_ojle7"]
+offsets = PackedFloat32Array(0, 0.33, 0.6, 0.87, 1)
 colors = PackedColorArray(0.0606018, 0.0506268, 0.0285714, 1, 0.303009, 0.253134, 0.142857, 1, 0.532092, 0.67, 0.2345, 1, 0.904905, 0.963866, 0.572164, 1, 0.971471, 0.98916, 0.871649, 1)
 
-[sub_resource type="GradientTexture1D" id="GradientTexture1D_7guw4"]
-gradient = SubResource("Gradient_qty0m")
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_caf1u"]
+gradient = SubResource("Gradient_ojle7")
 width = 64
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_lix6a"]
@@ -21,17 +21,17 @@ shader_parameter/main_color = Color(0.55, 0.52, 0.45, 1)
 shader_parameter/contour_activated = false
 shader_parameter/contour_color = Color(1.2, 1, 0.9, 0.65)
 shader_parameter/hurtbox_activated = true
-shader_parameter/gradient = SubResource("GradientTexture1D_7guw4")
+shader_parameter/gradient = SubResource("GradientTexture1D_caf1u")
 
-[sub_resource type="Gradient" id="Gradient_5qvrm"]
+[sub_resource type="Gradient" id="Gradient_dvufx"]
 offsets = PackedFloat32Array(0, 0.25, 0.5, 0.75, 1)
 colors = PackedColorArray(0.303009, 0.253134, 0.142857, 0, 0.303009, 0.253134, 0.142857, 1, 0.532092, 0.67, 0.2345, 1, 0.904905, 0.963866, 0.572164, 0.8, 0.904905, 0.963866, 0.572164, 0)
 
-[sub_resource type="Gradient" id="Gradient_f8smo"]
+[sub_resource type="Gradient" id="Gradient_7a2su"]
 offsets = PackedFloat32Array(0, 0.25, 0.5, 0.75, 1)
 colors = PackedColorArray(0.303009, 0.253134, 0.142857, 0, 0.303009, 0.253134, 0.142857, 1, 0.532092, 0.67, 0.2345, 1, 0.904905, 0.963866, 0.572164, 0.8, 0.904905, 0.963866, 0.572164, 0)
 
-[sub_resource type="Gradient" id="Gradient_w7da3"]
+[sub_resource type="Gradient" id="Gradient_0ru5r"]
 offsets = PackedFloat32Array(0, 0.2, 0.5, 0.8, 1)
 colors = PackedColorArray(0.904905, 0.963866, 0.572164, 0, 0.904905, 0.963866, 0.572164, 1, 0.532092, 0.67, 0.2345, 0.68, 0.303009, 0.253134, 0.142857, 0.35, 0.303009, 0.253134, 0.142857, 0)
 
@@ -67,13 +67,13 @@ col2 = Color(0.532092, 0.67, 0.2345, 1)
 col3 = Color(0.303009, 0.253134, 0.142857, 1)
 
 [node name="Reconstruction" parent="Visuals" index="1"]
-color_ramp = SubResource("Gradient_5qvrm")
+color_ramp = SubResource("Gradient_dvufx")
 
 [node name="Destruction" parent="Visuals" index="2"]
-color_ramp = SubResource("Gradient_f8smo")
+color_ramp = SubResource("Gradient_7a2su")
 
 [node name="DunkParticles" parent="Visuals" index="3"]
-color_ramp = SubResource("Gradient_w7da3")
+color_ramp = SubResource("Gradient_0ru5r")
 
 [node name="SpeedParticles" type="CPUParticles2D" parent="Visuals" index="5"]
 z_index = -1

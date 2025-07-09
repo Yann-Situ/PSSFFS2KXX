@@ -1,4 +1,4 @@
-[gd_scene load_steps=117 format=3 uid="uid://dlfptvxh6yjwm"]
+[gd_scene load_steps=118 format=3 uid="uid://dlfptvxh6yjwm"]
 
 [ext_resource type="Script" path="res://src/Characters/Player/Player.gd" id="1_b7wqc"]
 [ext_resource type="Script" path="res://src/Characters/Player/MovementData.gd" id="2_0ukhp"]
@@ -55,6 +55,7 @@
 [ext_resource type="Script" path="res://src/Items/Interactive/Damageable.gd" id="46_g44sj"]
 [ext_resource type="Texture2D" uid="uid://cuuns5ibc34gj" path="res://assets/art/ball/ball_test.png" id="48_n7dkg"]
 [ext_resource type="Script" path="res://src/Items/Activables/InteractionHandler.gd" id="49_ks5k2"]
+[ext_resource type="Texture2D" uid="uid://2hv3foaeug73" path="res://assets/art/effects/contour-light.png" id="56_4bgwo"]
 
 [sub_resource type="Resource" id="Resource_5o1rd"]
 script = ExtResource("2_0ukhp")
@@ -2088,6 +2089,12 @@ script = ExtResource("46_g44sj")
 modulate = Color(1, 0, 0, 1)
 position = Vector2(0, 6)
 shape = SubResource("58")
+
+[node name="PointLight2D" type="PointLight2D" parent="."]
+energy = 0.01
+range_item_cull_mask = 23
+texture = ExtResource("56_4bgwo")
+metadata/_edit_lock_ = true
 
 [connection signal="picking" from="BallHolder" to="." method="collision_mask_add_ballwall" unbinds=1]
 [connection signal="processing_ball" from="BallHolder" to="Flipper/BallHandler" method="set_has_ball_position" unbinds=1]
