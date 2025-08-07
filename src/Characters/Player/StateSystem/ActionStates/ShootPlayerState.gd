@@ -59,7 +59,7 @@ func enter(previous_state : State = null) -> State:
 	var q = selectable.global_position - throw_position
 	q.x*=1.1
 	q.y*=1.1#px
-	var shoot_velocity = GlobalMaths.shoot_velocity_bell_ratio(q, selectable.shoot_bell_ratio, 625)
+	var shoot_velocity = GlobalMaths.shoot_velocity_bell_ratio(q, selectable.shoot_bell_ratio, 625) # TODO change 625
 	
 	logic.ball_handler.throw_ball(throw_position, shoot_velocity)
 

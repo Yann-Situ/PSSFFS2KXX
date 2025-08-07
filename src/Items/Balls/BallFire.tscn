@@ -2,16 +2,16 @@
 
 [ext_resource type="PackedScene" uid="uid://cxn2m3havcmil" path="res://src/Items/Balls/Ball.tscn" id="1_1c2j8"]
 [ext_resource type="Shader" path="res://assets/shader/ball.gdshader" id="3_xmw78"]
-[ext_resource type="Texture2D" uid="uid://ddv6iralrmjtq" path="res://assets/art/effects/light4.png" id="4"]
 [ext_resource type="Texture2D" uid="uid://d33u8f6bfhj4m" path="res://assets/art/effects/round.png" id="5"]
 [ext_resource type="Script" path="res://src/Items/Balls/BallFire.gd" id="6"]
+[ext_resource type="Texture2D" uid="uid://ctiuc3lmtrgkb" path="res://assets/art/effects/light2.png" id="6_qfjho"]
 
-[sub_resource type="Gradient" id="Gradient_n2qg0"]
+[sub_resource type="Gradient" id="Gradient_8ml7n"]
 offsets = PackedFloat32Array(0, 0.33, 0.6, 0.87, 1)
 colors = PackedColorArray(0.100392, 0.0282352, 0, 1, 0.501961, 0.141176, 0, 1, 1, 0.384314, 0, 1, 1, 0.913725, 0.329412, 1, 1, 0.974118, 0.798824, 1)
 
-[sub_resource type="GradientTexture1D" id="GradientTexture1D_n0y65"]
-gradient = SubResource("Gradient_n2qg0")
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_c5il7"]
+gradient = SubResource("Gradient_8ml7n")
 width = 64
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_xnccv"]
@@ -22,17 +22,17 @@ shader_parameter/main_color = Color(0.55, 0.52, 0.45, 1)
 shader_parameter/contour_activated = false
 shader_parameter/contour_color = Color(1.2, 1, 0.9, 0.65)
 shader_parameter/hurtbox_activated = true
-shader_parameter/gradient = SubResource("GradientTexture1D_n0y65")
+shader_parameter/gradient = SubResource("GradientTexture1D_c5il7")
 
-[sub_resource type="Gradient" id="Gradient_f1csb"]
+[sub_resource type="Gradient" id="Gradient_qlr6y"]
 offsets = PackedFloat32Array(0, 0.25, 0.5, 0.75, 1)
 colors = PackedColorArray(0.501961, 0.141176, 0, 0, 0.501961, 0.141176, 0, 1, 1, 0.384314, 0, 1, 1, 0.913725, 0.329412, 0.8, 1, 0.913725, 0.329412, 0)
 
-[sub_resource type="Gradient" id="Gradient_6iubd"]
+[sub_resource type="Gradient" id="Gradient_fi2ep"]
 offsets = PackedFloat32Array(0, 0.25, 0.5, 0.75, 1)
 colors = PackedColorArray(0.501961, 0.141176, 0, 0, 0.501961, 0.141176, 0, 1, 1, 0.384314, 0, 1, 1, 0.913725, 0.329412, 0.8, 1, 0.913725, 0.329412, 0)
 
-[sub_resource type="Gradient" id="Gradient_jcov4"]
+[sub_resource type="Gradient" id="Gradient_ij6bj"]
 offsets = PackedFloat32Array(0, 0.2, 0.5, 0.8, 1)
 colors = PackedColorArray(1, 0.913725, 0.329412, 0, 1, 0.913725, 0.329412, 1, 1, 0.384314, 0, 0.68, 0.501961, 0.141176, 0, 0.35, 0.501961, 0.141176, 0, 0)
 
@@ -63,16 +63,16 @@ col2 = Color(1, 0.384314, 0, 1)
 col3 = Color(0.501961, 0.141176, 0, 1)
 
 [node name="Reconstruction" parent="Visuals" index="1"]
-color_ramp = SubResource("Gradient_f1csb")
+color_ramp = SubResource("Gradient_qlr6y")
 
 [node name="Destruction" parent="Visuals" index="2"]
-color_ramp = SubResource("Gradient_6iubd")
+color_ramp = SubResource("Gradient_fi2ep")
 
 [node name="DunkParticles" parent="Visuals" index="3"]
-color_ramp = SubResource("Gradient_jcov4")
+color_ramp = SubResource("Gradient_ij6bj")
 
 [node name="Fire" type="CPUParticles2D" parent="Visuals" index="5"]
-light_mask = 0
+light_mask = 2
 z_index = -1
 material = SubResource("CanvasItemMaterial_7joit")
 amount = 40
@@ -92,13 +92,23 @@ metadata/_edit_lock_ = true
 [node name="collision" parent="." index="1"]
 shape = SubResource("CircleShape2D_vgylx")
 
-[node name="LightSmall" type="PointLight2D" parent="." index="4"]
+[node name="LightAdd" type="PointLight2D" parent="." index="4"]
 z_as_relative = false
 position = Vector2(-3.8147e-06, 7.62939e-06)
 scale = Vector2(0.25, 0.25)
-color = Color(1, 0.854902, 0.419608, 1)
-energy = 0.5
-range_z_max = 120
+color = Color(1, 0.683333, 0, 1)
+range_z_max = 150
 range_item_cull_mask = 3
-texture = ExtResource("4")
-texture_scale = 2.56
+texture = ExtResource("6_qfjho")
+texture_scale = 4.0
+
+[node name="LightMix" type="PointLight2D" parent="." index="5"]
+z_as_relative = false
+position = Vector2(-3.8147e-06, 7.62939e-06)
+scale = Vector2(0.25, 0.25)
+color = Color(1, 0.937, 0.73, 1)
+blend_mode = 2
+range_z_max = 150
+range_item_cull_mask = 7
+texture = ExtResource("6_qfjho")
+texture_scale = 6.0

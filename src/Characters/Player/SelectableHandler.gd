@@ -214,4 +214,3 @@ func dunkdash_criteria(q : Vector2, target_direction : int) -> bool:
 	dunkdash_criteria_bests[0] = lq2
 	dunkdash_criteria_bests[1] = target_direction*dir
 	return true
-

@@ -2094,6 +2094,7 @@ shape = SubResource("58")
 energy = 0.01
 range_item_cull_mask = 23
 texture = ExtResource("56_4bgwo")
+texture_scale = 1.3
 metadata/_edit_lock_ = true
 
 [connection signal="picking" from="BallHolder" to="." method="collision_mask_add_ballwall" unbinds=1]
