@@ -1,4 +1,4 @@
-[gd_resource type="TileSet" load_steps=58 format=3 uid="uid://berkn1bildrf3"]
+[gd_resource type="TileSet" load_steps=57 format=3 uid="uid://berkn1bildrf3"]
 
 [ext_resource type="Texture2D" uid="uid://dqtsu8dl05vuy" path="res://assets/art/tileset/solid-1-32.png" id="1_muor8"]
 [ext_resource type="Texture2D" uid="uid://g5r6m5cn0bes" path="res://assets/art/environment/shops.png" id="3_ldfti"]
@@ -1691,9 +1691,6 @@ polygon = PackedVector2Array(-16, -16, 16, -16, 16, 16, -16, 16)
 [sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_k52cx"]
 polygon = PackedVector2Array(-16, -16, 16, 16, 0, 16, -16, 0)
 
-[sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_qbua5"]
-polygon = PackedVector2Array(-16, -16, 16, 16, 0, 16, -16, 0)
-
 [sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_eoyci"]
 polygon = PackedVector2Array(-16, -16, 16, -16, 16, 16, -16, 16)
 
@@ -1826,7 +1823,6 @@ texture_region_size = Vector2i(32, 32)
 1:3/0/physics_layer_0/polygon_0/one_way = true
 2:3/0 = 0
 2:3/0/material = SubResource("ShaderMaterial_ij11t")
-2:3/0/occlusion_layer_0/polygon = SubResource("OccluderPolygon2D_qbua5")
 2:3/0/physics_layer_0/polygon_0/points = PackedVector2Array(8, 8, -8, 8, -16, 0, -16, -16)
 2:3/0/physics_layer_0/polygon_0/one_way = true
 4:3/0 = 0

@@ -55,7 +55,7 @@ void light() {
 	{
 		if (hurtbox_activated)
 			LIGHT = vec4(COLOR.rgb, min(3.0*LIGHT_COLOR.a, 1.0));
-		else 
+		else
 			LIGHT = vec4(LIGHT_COLOR.rgb * COLOR.rgb, LIGHT_COLOR.a);
 	}
 	else {
