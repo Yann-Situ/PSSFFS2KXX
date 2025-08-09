@@ -95,6 +95,11 @@ func toggle_playing():
 			n.reset_position()
 	print("Toggle playing : "+str(playing))
 
+func one_shot_call(callable : Callable, delay : float):
+	var timer = get_tree().create_timer(delay)
+	timer.timeout.connect(callable)
+	
+
 func apply_palette_scheme_to_recolor(palette : PaletteScheme, m : Material):
 	if palette.gradients.size() < 1:
 		return

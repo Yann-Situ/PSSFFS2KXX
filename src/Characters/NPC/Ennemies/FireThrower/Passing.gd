@@ -17,8 +17,7 @@ func enter(previous_state : State = null) -> State:
 
 func passing():
 	var direction = Global.get_current_player().global_position - character_body.global_position
-	fire_thrower.throw_ball(character_body.global_position, fire_thrower.throw_speed * direction.normalized()+100*Vector2.UP)
-	print("END_PASSING")
+	fire_thrower.throw_ball(character_body.global_position, fire_thrower.throw_speed * direction.normalized()+50*Vector2.UP)
 	end_passing = true
 
 ## Called by the parent StateMachine during the _physics_process call, after

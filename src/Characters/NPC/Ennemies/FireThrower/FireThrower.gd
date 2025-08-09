@@ -60,6 +60,8 @@ func throw_ball(throw_global_position : Vector2, speed : Vector2) -> bool:
 	ball.throw(positioners[ball_positioner_count].global_position, speed)
 	positioners[ball_positioner_count].remote_path = NodePath("")
 	ball_to_positioner_count.erase(ball)
+	ball.add_collision_exception_with(self)
+	Global.one_shot_call(ball.remove_collision_exception_with.bind(self), 0.4)
 	if !has_ball():
 		spawning_timer.start()
 	return true
