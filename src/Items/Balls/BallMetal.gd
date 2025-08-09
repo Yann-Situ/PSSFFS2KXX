@@ -39,6 +39,7 @@ func collision_effect(collider, collider_velocity, collision_point, collision_no
 
 func on_pickup(holder):
 	$Visuals/SpeedParticles.emitting = false
+	$Visuals/Reconstruction.restart()
 
 ################################################################################
 

@@ -8,6 +8,13 @@ uniform bool contour_activated = false;
 uniform vec4 contour_color : source_color = vec4(1.2,1.0,0.9,0.85);
 uniform bool hurtbox_activated = false;
 
+varying vec4 modulate; // Workaround to apply the modulate after the shader
+
+void vertex()
+{
+	modulate = COLOR;
+}
+
 vec4 hurt_color()
 {
 	return mix(vec4(1.5,0.0,0.0,1.0), vec4(1.2,0.9,0.5,1.0), fract(-2.0*TIME));
@@ -45,7 +52,7 @@ void fragment() {
 			}
 		}
 	}
-    COLOR = c;
+    COLOR = modulate * c;
 }
 
 

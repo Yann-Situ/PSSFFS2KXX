@@ -6,12 +6,12 @@
 [ext_resource type="Script" path="res://src/Items/Balls/BallFire.gd" id="6"]
 [ext_resource type="Texture2D" uid="uid://ctiuc3lmtrgkb" path="res://assets/art/effects/light2.png" id="6_qfjho"]
 
-[sub_resource type="Gradient" id="Gradient_8ml7n"]
+[sub_resource type="Gradient" id="Gradient_j4ehu"]
 offsets = PackedFloat32Array(0, 0.33, 0.6, 0.87, 1)
 colors = PackedColorArray(0.100392, 0.0282352, 0, 1, 0.501961, 0.141176, 0, 1, 1, 0.384314, 0, 1, 1, 0.913725, 0.329412, 1, 1, 0.974118, 0.798824, 1)
 
-[sub_resource type="GradientTexture1D" id="GradientTexture1D_c5il7"]
-gradient = SubResource("Gradient_8ml7n")
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_peavp"]
+gradient = SubResource("Gradient_j4ehu")
 width = 64
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_xnccv"]
@@ -22,17 +22,17 @@ shader_parameter/main_color = Color(0.55, 0.52, 0.45, 1)
 shader_parameter/contour_activated = false
 shader_parameter/contour_color = Color(1.2, 1, 0.9, 0.65)
 shader_parameter/hurtbox_activated = true
-shader_parameter/gradient = SubResource("GradientTexture1D_c5il7")
+shader_parameter/gradient = SubResource("GradientTexture1D_peavp")
 
-[sub_resource type="Gradient" id="Gradient_qlr6y"]
+[sub_resource type="Gradient" id="Gradient_wnqef"]
 offsets = PackedFloat32Array(0, 0.25, 0.5, 0.75, 1)
 colors = PackedColorArray(0.501961, 0.141176, 0, 0, 0.501961, 0.141176, 0, 1, 1, 0.384314, 0, 1, 1, 0.913725, 0.329412, 0.8, 1, 0.913725, 0.329412, 0)
 
-[sub_resource type="Gradient" id="Gradient_fi2ep"]
+[sub_resource type="Gradient" id="Gradient_uiq6l"]
 offsets = PackedFloat32Array(0, 0.25, 0.5, 0.75, 1)
 colors = PackedColorArray(0.501961, 0.141176, 0, 0, 0.501961, 0.141176, 0, 1, 1, 0.384314, 0, 1, 1, 0.913725, 0.329412, 0.8, 1, 0.913725, 0.329412, 0)
 
-[sub_resource type="Gradient" id="Gradient_ij6bj"]
+[sub_resource type="Gradient" id="Gradient_anu4w"]
 offsets = PackedFloat32Array(0, 0.2, 0.5, 0.8, 1)
 colors = PackedColorArray(1, 0.913725, 0.329412, 0, 1, 0.913725, 0.329412, 1, 1, 0.384314, 0, 0.68, 0.501961, 0.141176, 0, 0.35, 0.501961, 0.141176, 0, 0)
 
@@ -63,13 +63,13 @@ col2 = Color(1, 0.384314, 0, 1)
 col3 = Color(0.501961, 0.141176, 0, 1)
 
 [node name="Reconstruction" parent="Visuals" index="1"]
-color_ramp = SubResource("Gradient_qlr6y")
+color_ramp = SubResource("Gradient_wnqef")
 
 [node name="Destruction" parent="Visuals" index="2"]
-color_ramp = SubResource("Gradient_fi2ep")
+color_ramp = SubResource("Gradient_uiq6l")
 
 [node name="DunkParticles" parent="Visuals" index="3"]
-color_ramp = SubResource("Gradient_ij6bj")
+color_ramp = SubResource("Gradient_anu4w")
 
 [node name="Fire" type="CPUParticles2D" parent="Visuals" index="5"]
 light_mask = 2
@@ -89,10 +89,7 @@ scale_amount_curve = SubResource("Curve_ry4tt")
 color_ramp = SubResource("Gradient_7sg7e")
 metadata/_edit_lock_ = true
 
-[node name="collision" parent="." index="1"]
-shape = SubResource("CircleShape2D_vgylx")
-
-[node name="LightAdd" type="PointLight2D" parent="." index="4"]
+[node name="LightAdd" type="PointLight2D" parent="Visuals" index="6"]
 z_as_relative = false
 position = Vector2(-3.8147e-06, 7.62939e-06)
 scale = Vector2(0.25, 0.25)
@@ -102,7 +99,7 @@ range_item_cull_mask = 3
 texture = ExtResource("6_qfjho")
 texture_scale = 4.0
 
-[node name="LightMix" type="PointLight2D" parent="." index="5"]
+[node name="LightMix" type="PointLight2D" parent="Visuals" index="7"]
 z_as_relative = false
 position = Vector2(-3.8147e-06, 7.62939e-06)
 scale = Vector2(0.25, 0.25)
@@ -112,3 +109,6 @@ range_z_max = 150
 range_item_cull_mask = 7
 texture = ExtResource("6_qfjho")
 texture_scale = 6.0
+
+[node name="collision" parent="." index="1"]
+shape = SubResource("CircleShape2D_vgylx")

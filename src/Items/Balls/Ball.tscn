@@ -1,4 +1,4 @@
-[gd_scene load_steps=22 format=3 uid="uid://cxn2m3havcmil"]
+[gd_scene load_steps=23 format=3 uid="uid://cxn2m3havcmil"]
 
 [ext_resource type="Texture2D" uid="uid://fviv8r8636v7" path="res://assets/art/ball/ball_selection.png" id="1"]
 [ext_resource type="Script" path="res://src/Items/Balls/Ball.gd" id="2"]
@@ -17,7 +17,7 @@ bounce = 0.5
 _data = [Vector2(0, 0.0886364), 0.0, 0.215584, 0, 0, Vector2(0.554217, 0.952273), 0.425641, 0.425641, 0, 0, Vector2(1, 1), -0.570101, 0.0, 0, 0]
 point_count = 3
 
-[sub_resource type="Gradient" id="Gradient_87ose"]
+[sub_resource type="Gradient" id="Gradient_fet30"]
 offsets = PackedFloat32Array(0, 0.25, 0.5, 0.75, 1)
 colors = PackedColorArray(0.19, 0.1311, 0.145825, 0, 0.19, 0.1311, 0.145825, 1, 0.465573, 0.431196, 0.460088, 1, 0.9, 0.855, 0.792, 0.8, 0.9, 0.855, 0.792, 0)
 
@@ -25,7 +25,7 @@ colors = PackedColorArray(0.19, 0.1311, 0.145825, 0, 0.19, 0.1311, 0.145825, 1, 
 _data = [Vector2(0, 1), 0.0, 0.215584, 0, 0, Vector2(0.786325, 1), -1.57233, -1.57233, 0, 0, Vector2(1, 0.4), -2.73506, 0.0, 0, 0]
 point_count = 3
 
-[sub_resource type="Gradient" id="Gradient_0u1xu"]
+[sub_resource type="Gradient" id="Gradient_26876"]
 offsets = PackedFloat32Array(0, 0.25, 0.5, 0.75, 1)
 colors = PackedColorArray(0.19, 0.1311, 0.145825, 0, 0.19, 0.1311, 0.145825, 1, 0.465573, 0.431196, 0.460088, 1, 0.9, 0.855, 0.792, 0.8, 0.9, 0.855, 0.792, 0)
 
@@ -33,7 +33,7 @@ colors = PackedColorArray(0.19, 0.1311, 0.145825, 0, 0.19, 0.1311, 0.145825, 1, 
 _data = [Vector2(0, 0.784091), 0.0, 3.55714, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
 point_count = 2
 
-[sub_resource type="Gradient" id="Gradient_is7ly"]
+[sub_resource type="Gradient" id="Gradient_sc7c6"]
 offsets = PackedFloat32Array(0, 0.2, 0.5, 0.8, 1)
 colors = PackedColorArray(0.9, 0.855, 0.792, 0, 0.9, 0.855, 0.792, 1, 0.465573, 0.431196, 0.460088, 0.68, 0.19, 0.1311, 0.145825, 0.35, 0.19, 0.1311, 0.145825, 0)
 
@@ -293,11 +293,55 @@ tracks/4/keys = {
 "values": [Color(1, 1, 1, 1), Color(1, 1, 1, 0), Color(1, 1, 1, 0), Color(1, 1, 1, 1)]
 }
 
+[sub_resource type="Animation" id="Animation_k7rjk"]
+resource_name = "spawn"
+length = 0.8
+step = 0.05
+tracks/0/type = "method"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Visuals/Reconstruction")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [],
+"method": &"restart"
+}]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Visuals/Reconstruction:emitting")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Visuals:modulate")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 0.8),
+"transitions": PackedFloat32Array(2, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 0), Color(1, 1, 1, 1)]
+}
+
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_yfq11"]
 _data = {
 "RESET": SubResource("Animation_4ingn"),
 "destruction": SubResource("Animation_yhsxj"),
-"dunk": SubResource("Animation_jb6dc")
+"dunk": SubResource("Animation_jb6dc"),
+"spawn": SubResource("Animation_k7rjk")
 }
 
 [node name="Ball" type="RigidBody2D"]
@@ -349,7 +393,7 @@ gravity = Vector2(0, 0)
 scale_amount_min = 0.12
 scale_amount_max = 0.12
 scale_amount_curve = SubResource("6")
-color_ramp = SubResource("Gradient_87ose")
+color_ramp = SubResource("Gradient_fet30")
 
 [node name="Destruction" type="CPUParticles2D" parent="Visuals"]
 emitting = false
@@ -376,7 +420,7 @@ damping_max = 80.0
 scale_amount_min = 0.06
 scale_amount_max = 0.06
 scale_amount_curve = SubResource("9")
-color_ramp = SubResource("Gradient_0u1xu")
+color_ramp = SubResource("Gradient_26876")
 
 [node name="DunkParticles" type="CPUParticles2D" parent="Visuals"]
 z_index = 99
@@ -398,7 +442,7 @@ initial_velocity_max = 32.0
 scale_amount_min = 0.16
 scale_amount_max = 0.16
 scale_amount_curve = SubResource("12")
-color_ramp = SubResource("Gradient_is7ly")
+color_ramp = SubResource("Gradient_sc7c6")
 
 [node name="DustParticle" parent="Visuals" instance=ExtResource("5")]
 z_index = -1
@@ -423,6 +467,7 @@ shape = SubResource("2")
 libraries = {
 "": SubResource("AnimationLibrary_yfq11")
 }
+autoplay = "spawn"
 
 [connection signal="mouse_entered" from="Highlighter" to="Highlighter" method="_on_Selector_mouse_entered"]
 [connection signal="mouse_exited" from="Highlighter" to="Highlighter" method="_on_Selector_mouse_exited"]

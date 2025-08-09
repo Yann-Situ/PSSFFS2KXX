@@ -14,9 +14,6 @@ func collision_effect(collider, collider_velocity, collision_point, collision_no
 	else:
 		destruction(0.01)
 
-func on_pickup(holder):
-	pass
-
 ################################################################################
 
 func power_p(player,delta):

@@ -25,15 +25,15 @@ shader = ExtResource("6")
 shader_parameter/activated = false
 shader_parameter/contour_color = Color(1, 1, 0.9, 0.9)
 
-[sub_resource type="Gradient" id="Gradient_t4kxs"]
+[sub_resource type="Gradient" id="Gradient_jdcky"]
 offsets = PackedFloat32Array(0, 0.25, 0.5, 0.75, 1)
 colors = PackedColorArray(0.160784, 0.203922, 0.431373, 0, 0.160784, 0.203922, 0.431373, 1, 0.364706, 0.796078, 0.839216, 1, 0.980392, 1, 0.756863, 0.8, 0.980392, 1, 0.756863, 0)
 
-[sub_resource type="Gradient" id="Gradient_iq4ph"]
+[sub_resource type="Gradient" id="Gradient_ankta"]
 offsets = PackedFloat32Array(0, 0.25, 0.5, 0.75, 1)
 colors = PackedColorArray(0.160784, 0.203922, 0.431373, 0, 0.160784, 0.203922, 0.431373, 1, 0.364706, 0.796078, 0.839216, 1, 0.980392, 1, 0.756863, 0.8, 0.980392, 1, 0.756863, 0)
 
-[sub_resource type="Gradient" id="Gradient_r2qoy"]
+[sub_resource type="Gradient" id="Gradient_vp8w2"]
 offsets = PackedFloat32Array(0, 0.2, 0.5, 0.8, 1)
 colors = PackedColorArray(0.980392, 1, 0.756863, 0, 0.980392, 1, 0.756863, 1, 0.364706, 0.796078, 0.839216, 0.68, 0.160784, 0.203922, 0.431373, 0.35, 0.160784, 0.203922, 0.431373, 0)
 
@@ -311,11 +311,9 @@ shock_fall = 700.0
 shock_timer = 0.25
 distortion_resource = SubResource("Resource_naugh")
 explosion_data = ExtResource("4_md6hr")
-impact_effect = 6
-dust_threshold = 15.0
-impact_threshold = 35.0
 
 [node name="Visuals" parent="." index="0"]
+modulate = Color(1.5, 1.5, 1.5, 1)
 material = SubResource("ShaderMaterial_fa8v6")
 texture = ExtResource("2")
 hframes = 4
@@ -324,13 +322,13 @@ col2 = Color(0.364706, 0.796078, 0.839216, 1)
 col3 = Color(0.160784, 0.203922, 0.431373, 1)
 
 [node name="Reconstruction" parent="Visuals" index="1"]
-color_ramp = SubResource("Gradient_t4kxs")
+color_ramp = SubResource("Gradient_jdcky")
 
 [node name="Destruction" parent="Visuals" index="2"]
-color_ramp = SubResource("Gradient_iq4ph")
+color_ramp = SubResource("Gradient_ankta")
 
 [node name="DunkParticles" parent="Visuals" index="3"]
-color_ramp = SubResource("Gradient_r2qoy")
+color_ramp = SubResource("Gradient_vp8w2")
 
 [node name="collision" parent="." index="1"]
 shape = SubResource("1")
