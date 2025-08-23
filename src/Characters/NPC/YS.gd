@@ -6,8 +6,9 @@ func set_dialogue_title(v : String):
 	dialogue_title = v
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	$InteractionArea.enter = Callable(self, "set_modulate").bind(Color.PLUM)
-	$InteractionArea.exit = Callable(self, "set_modulate").bind(Color.WHITE)
+	#$InteractionArea.enter = Callable(self, "set_modulate").bind(Color.PLUM)
+	#$InteractionArea.exit = Callable(self, "set_modulate").bind(Color.WHITE)
+	pass
 
 func interaction(interaction_handler):
 	GlobalEffect.make_impact(global_position)

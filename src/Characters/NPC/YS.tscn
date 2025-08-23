@@ -94,7 +94,7 @@ shape = SubResource("CircleShape2D_rp7wc")
 debug_color = Color(1, 1, 0.466667, 0.419608)
 
 [node name="Balloon" parent="." instance=ExtResource("5_6vray")]
-position = Vector2(-8, -33)
+position = Vector2(-165, -33)
 
 [connection signal="handler_interacted" from="InteractionArea" to="." method="interaction"]
 [connection signal="pop_finished" from="Balloon" to="." method="_on_balloon_pop_finished"]

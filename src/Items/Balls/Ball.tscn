@@ -1,4 +1,4 @@
-[gd_scene load_steps=23 format=3 uid="uid://cxn2m3havcmil"]
+[gd_scene load_steps=24 format=3 uid="uid://cxn2m3havcmil"]
 
 [ext_resource type="Texture2D" uid="uid://fviv8r8636v7" path="res://assets/art/ball/ball_selection.png" id="1"]
 [ext_resource type="Script" path="res://src/Items/Balls/Ball.gd" id="2"]
@@ -8,6 +8,7 @@
 [ext_resource type="PackedScene" uid="uid://26l3hifm7i6c" path="res://src/Effects/DustParticle.tscn" id="5"]
 [ext_resource type="Texture2D" uid="uid://d33u8f6bfhj4m" path="res://assets/art/effects/round.png" id="7_fisxc"]
 [ext_resource type="Script" path="res://src/Items/Balls/Highlighter.gd" id="8"]
+[ext_resource type="AudioStream" uid="uid://t0emerns6jih" path="res://assets/sound/impacts/p0.mp3" id="9_jfygu"]
 
 [sub_resource type="PhysicsMaterial" id="PhysicsMaterial_j8ut1"]
 friction = 0.5
@@ -17,7 +18,7 @@ bounce = 0.5
 _data = [Vector2(0, 0.0886364), 0.0, 0.215584, 0, 0, Vector2(0.554217, 0.952273), 0.425641, 0.425641, 0, 0, Vector2(1, 1), -0.570101, 0.0, 0, 0]
 point_count = 3
 
-[sub_resource type="Gradient" id="Gradient_fet30"]
+[sub_resource type="Gradient" id="Gradient_fquqj"]
 offsets = PackedFloat32Array(0, 0.25, 0.5, 0.75, 1)
 colors = PackedColorArray(0.19, 0.1311, 0.145825, 0, 0.19, 0.1311, 0.145825, 1, 0.465573, 0.431196, 0.460088, 1, 0.9, 0.855, 0.792, 0.8, 0.9, 0.855, 0.792, 0)
 
@@ -25,7 +26,7 @@ colors = PackedColorArray(0.19, 0.1311, 0.145825, 0, 0.19, 0.1311, 0.145825, 1, 
 _data = [Vector2(0, 1), 0.0, 0.215584, 0, 0, Vector2(0.786325, 1), -1.57233, -1.57233, 0, 0, Vector2(1, 0.4), -2.73506, 0.0, 0, 0]
 point_count = 3
 
-[sub_resource type="Gradient" id="Gradient_26876"]
+[sub_resource type="Gradient" id="Gradient_nyrx8"]
 offsets = PackedFloat32Array(0, 0.25, 0.5, 0.75, 1)
 colors = PackedColorArray(0.19, 0.1311, 0.145825, 0, 0.19, 0.1311, 0.145825, 1, 0.465573, 0.431196, 0.460088, 1, 0.9, 0.855, 0.792, 0.8, 0.9, 0.855, 0.792, 0)
 
@@ -33,7 +34,7 @@ colors = PackedColorArray(0.19, 0.1311, 0.145825, 0, 0.19, 0.1311, 0.145825, 1, 
 _data = [Vector2(0, 0.784091), 0.0, 3.55714, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
 point_count = 2
 
-[sub_resource type="Gradient" id="Gradient_sc7c6"]
+[sub_resource type="Gradient" id="Gradient_e4sy3"]
 offsets = PackedFloat32Array(0, 0.2, 0.5, 0.8, 1)
 colors = PackedColorArray(0.9, 0.855, 0.792, 0, 0.9, 0.855, 0.792, 1, 0.465573, 0.431196, 0.460088, 0.68, 0.19, 0.1311, 0.145825, 0.35, 0.19, 0.1311, 0.145825, 0)
 
@@ -101,6 +102,18 @@ tracks/4/path = NodePath("Visuals:modulate")
 tracks/4/interp = 1
 tracks/4/loop_wrap = true
 tracks/4/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 1)]
+}
+tracks/5/type = "value"
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/path = NodePath("Visuals:self_modulate")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 0,
@@ -282,12 +295,24 @@ tracks/3/keys = {
 }
 tracks/4/type = "value"
 tracks/4/imported = false
-tracks/4/enabled = false
+tracks/4/enabled = true
 tracks/4/path = NodePath("Visuals:modulate")
 tracks/4/interp = 1
 tracks/4/loop_wrap = true
 tracks/4/keys = {
-"times": PackedFloat32Array(0, 0.2, 0.95, 1.2),
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 1)]
+}
+tracks/5/type = "value"
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/path = NodePath("Visuals:self_modulate")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/keys = {
+"times": PackedFloat32Array(0, 0.15, 0.8, 1),
 "transitions": PackedFloat32Array(1, 1, 1, 1),
 "update": 0,
 "values": [Color(1, 1, 1, 1), Color(1, 1, 1, 0), Color(1, 1, 1, 0), Color(1, 1, 1, 1)]
@@ -393,7 +418,7 @@ gravity = Vector2(0, 0)
 scale_amount_min = 0.12
 scale_amount_max = 0.12
 scale_amount_curve = SubResource("6")
-color_ramp = SubResource("Gradient_fet30")
+color_ramp = SubResource("Gradient_fquqj")
 
 [node name="Destruction" type="CPUParticles2D" parent="Visuals"]
 emitting = false
@@ -420,7 +445,7 @@ damping_max = 80.0
 scale_amount_min = 0.06
 scale_amount_max = 0.06
 scale_amount_curve = SubResource("9")
-color_ramp = SubResource("Gradient_26876")
+color_ramp = SubResource("Gradient_nyrx8")
 
 [node name="DunkParticles" type="CPUParticles2D" parent="Visuals"]
 z_index = 99
@@ -442,7 +467,7 @@ initial_velocity_max = 32.0
 scale_amount_min = 0.16
 scale_amount_max = 0.16
 scale_amount_curve = SubResource("12")
-color_ramp = SubResource("Gradient_sc7c6")
+color_ramp = SubResource("Gradient_e4sy3")
 
 [node name="DustParticle" parent="Visuals" instance=ExtResource("5")]
 z_index = -1
@@ -468,6 +493,11 @@ libraries = {
 "": SubResource("AnimationLibrary_yfq11")
 }
 autoplay = "spawn"
+
+[node name="Bonk" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("9_jfygu")
+max_distance = 512.0
+max_polyphony = 4
 
 [connection signal="mouse_entered" from="Highlighter" to="Highlighter" method="_on_Selector_mouse_entered"]
 [connection signal="mouse_exited" from="Highlighter" to="Highlighter" method="_on_Selector_mouse_exited"]

@@ -1,21 +1,40 @@
-[gd_scene load_steps=8 format=3 uid="uid://imtw5v2qrplf"]
+[gd_scene load_steps=12 format=3 uid="uid://imtw5v2qrplf"]
 
 [ext_resource type="PackedScene" uid="uid://cxn2m3havcmil" path="res://src/Items/Balls/Ball.tscn" id="1"]
 [ext_resource type="Script" path="res://src/Items/Balls/BallBouncy.gd" id="2"]
+[ext_resource type="Shader" path="res://assets/shader/ball.gdshader" id="3_elmh3"]
 
 [sub_resource type="PhysicsMaterial" id="PhysicsMaterial_ucddd"]
 friction = 0.0
 bounce = 1.0
 
-[sub_resource type="Gradient" id="Gradient_082dk"]
+[sub_resource type="Gradient" id="Gradient_g03x0"]
+offsets = PackedFloat32Array(0, 0.33, 0.6, 0.87, 1)
+colors = PackedColorArray(0.0854902, 0, 0.0768628, 1, 0.427451, 0, 0.384314, 1, 0.904246, 0.143181, 0.680293, 1, 1, 0.6095, 0.29, 1, 1, 0.88285, 0.787, 1)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_r3miu"]
+gradient = SubResource("Gradient_g03x0")
+width = 64
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_bjxhi"]
+resource_local_to_scene = true
+shader = ExtResource("3_elmh3")
+shader_parameter/intensity = 1.0
+shader_parameter/main_color = Color(0.55, 0.52, 0.45, 1)
+shader_parameter/contour_activated = false
+shader_parameter/contour_color = Color(1.2, 1, 0.9, 0.65)
+shader_parameter/hurtbox_activated = false
+shader_parameter/gradient = SubResource("GradientTexture1D_r3miu")
+
+[sub_resource type="Gradient" id="Gradient_5lemy"]
 offsets = PackedFloat32Array(0, 0.25, 0.5, 0.75, 1)
 colors = PackedColorArray(0.427451, 0, 0.384314, 0, 0.427451, 0, 0.384314, 1, 0.904246, 0.143181, 0.680293, 1, 1, 0.6095, 0.29, 0.8, 1, 0.6095, 0.29, 0)
 
-[sub_resource type="Gradient" id="Gradient_gx7xo"]
+[sub_resource type="Gradient" id="Gradient_wq05p"]
 offsets = PackedFloat32Array(0, 0.25, 0.5, 0.75, 1)
 colors = PackedColorArray(0.427451, 0, 0.384314, 0, 0.427451, 0, 0.384314, 1, 0.904246, 0.143181, 0.680293, 1, 1, 0.6095, 0.29, 0.8, 1, 0.6095, 0.29, 0)
 
-[sub_resource type="Gradient" id="Gradient_gawpe"]
+[sub_resource type="Gradient" id="Gradient_lxx88"]
 offsets = PackedFloat32Array(0, 0.2, 0.5, 0.8, 1)
 colors = PackedColorArray(1, 0.6095, 0.29, 0, 1, 0.6095, 0.29, 1, 0.904246, 0.143181, 0.680293, 0.68, 0.427451, 0, 0.384314, 0.35, 0.427451, 0, 0.384314, 0)
 
@@ -30,18 +49,19 @@ script = ExtResource("2")
 impact_effect = 5
 
 [node name="Visuals" parent="." index="0"]
+material = SubResource("ShaderMaterial_bjxhi")
 col1 = Color(1, 0.6095, 0.29, 1)
 col2 = Color(0.904246, 0.143181, 0.680293, 1)
 col3 = Color(0.427451, 0, 0.384314, 1)
 
 [node name="Reconstruction" parent="Visuals" index="1"]
-color_ramp = SubResource("Gradient_082dk")
+color_ramp = SubResource("Gradient_5lemy")
 
 [node name="Destruction" parent="Visuals" index="2"]
-color_ramp = SubResource("Gradient_gx7xo")
+color_ramp = SubResource("Gradient_wq05p")
 
 [node name="DunkParticles" parent="Visuals" index="3"]
-color_ramp = SubResource("Gradient_gawpe")
+color_ramp = SubResource("Gradient_lxx88")
 
 [node name="collision" parent="." index="1"]
 shape = SubResource("1")

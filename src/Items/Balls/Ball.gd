@@ -145,6 +145,9 @@ func collision_effect(collider, collider_velocity, collision_point, collision_no
 	var speed = (linear_velocity-collider_velocity).dot(collision_normal)
 	if speed >= dust_threshold:
 		$Visuals/DustParticle.restart()
+		$Bonk.pitch_scale = 0.95 + 0.1*randf()
+		$Bonk.volume_db = lerp(-30, -3,smoothstep(0.0, 2.0*impact_threshold, speed))
+		$Bonk.play()
 		if speed >= impact_threshold:
 			GlobalEffect.make_impact(collision_point, impact_effect, collision_normal)
 
