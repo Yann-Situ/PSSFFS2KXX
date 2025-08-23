@@ -82,6 +82,7 @@ func enter(previous_state : State = null) -> State:
 	player.effect_handler.cloud_start()
 	GlobalEffect.make_distortion(player.global_position, 0.75, "fast_soft")
 	Global.camera.screen_shake(0.2,10)
+	GlobalEffect.bus_low_pass_fade_out("MusicMaster", 0.05, 6000)
 
 	print(self.name + " - velocity: " + str(dash_velocity.length()))
 	return next_state
@@ -113,6 +114,7 @@ func exit():
 	player.remove_accel(accel_alterer)
 	logic.dunkdash.ing = false
 	logic.direction_sprite_change.can = true
+	GlobalEffect.bus_low_pass_fade_in("MusicMaster", 0.05, 6000)
 
 	# if not logic.is_grinding and not logic.is_hanging : # TODO, translate this:
 	

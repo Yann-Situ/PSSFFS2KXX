@@ -6,6 +6,7 @@ signal spray_collected(graffspray_node)
 @export var color : Color :
 	set = set_color # (Color, RGBA)
 var color_dark = Color.BLACK
+var collected = false
 
 func set_color(c : Color):
 	color = c
@@ -30,12 +31,18 @@ func _ready():
 
 ################################################################################
 func _on_Area2D_body_entered(body):
-	collect()
+	if not collected:
+		collect()
 
 func collect():
 	print(name+" collected!")
+	collected = true
 	spray_collected.emit(self)
 	GlobalEffect.make_distortion(self.global_position, 0.5, "subtle")
 	$AnimationPlayer.play("collect")
-	await $AnimationPlayer.animation_finished
+	$AudioGoal.play()
+	GlobalEffect.bus_fade_out("MusicMaster", 0.5)
+	#await $AnimationPlayer.animation_finished
+	GlobalEffect.bus_fade_in("MusicMaster", 5.0)
+	await $AudioGoal.finished
 	queue_free()

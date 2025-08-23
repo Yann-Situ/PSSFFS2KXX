@@ -23,42 +23,7 @@ func add_trail_point() -> void:
 func remove_trail_point() -> void:
 		_nb_trail_points -= 1
 
-func set_cinematic_state(state : bool)->void:
-	if state and !cinematic_playing:
-		# start cinmeatic
-		cinematic_playing = state
-		if get_current_room():
-			current_room.start_cinematic()
-		if get_current_player():
-			current_player.get_state_node().disable_input()
-		print("cinematic starting")
-
-	if !state and cinematic_playing:
-		# stop cinematic
-		cinematic_playing = state
-		# stop cinematic shader
-		if get_current_room():
-			current_room.stop_cinematic()
-		if get_current_player():
-			current_player.get_state_node().enable_input()
-		print("cinematic stopping")
-
-func is_cinematic_playing()-> bool:
-	return cinematic_playing
-## start a cinematic: stop players input, use cinematic shader on camera and stop updating camera 
-# in player's process.
-func start_cinematic() -> void:
-	if is_cinematic_playing():
-		push_warning("cannot start because cinematic already playing")
-		return
-	set_cinematic_state(true)
-## stop a cinematic: restore players input, unuse cinematic shader on camera and start reupdating camera 
-# in player's process.
-func stop_cinematic() -> void:
-	if !is_cinematic_playing():
-		push_warning("cannot stop because cinematic is not playing")
-		return
-	set_cinematic_state(false)
+############################## Setup ###########################################
 
 func set_current_camera(_camera : Camera2D):
 	if _camera == null:
@@ -95,10 +60,50 @@ func toggle_playing():
 			n.reset_position()
 	print("Toggle playing : "+str(playing))
 
+############################# Cinematic ########################################
+
+func set_cinematic_state(state : bool)->void:
+	if state and !cinematic_playing:
+		# start cinmeatic
+		cinematic_playing = state
+		if get_current_room():
+			current_room.start_cinematic()
+		if get_current_player():
+			current_player.get_state_node().disable_input()
+		print("cinematic starting")
+
+	if !state and cinematic_playing:
+		# stop cinematic
+		cinematic_playing = state
+		# stop cinematic shader
+		if get_current_room():
+			current_room.stop_cinematic()
+		if get_current_player():
+			current_player.get_state_node().enable_input()
+		print("cinematic stopping")
+
+func is_cinematic_playing()-> bool:
+	return cinematic_playing
+## start a cinematic: stop players input, use cinematic shader on camera and stop updating camera 
+# in player's process.
+func start_cinematic() -> void:
+	if is_cinematic_playing():
+		push_warning("cannot start because cinematic already playing")
+		return
+	set_cinematic_state(true)
+## stop a cinematic: restore players input, unuse cinematic shader on camera and start reupdating camera 
+# in player's process.
+func stop_cinematic() -> void:
+	if !is_cinematic_playing():
+		push_warning("cannot stop because cinematic is not playing")
+		return
+	set_cinematic_state(false)
+	
+	############################# Tools ##########################################
+
 func one_shot_call(callable : Callable, delay : float):
 	var timer = get_tree().create_timer(delay)
 	timer.timeout.connect(callable)
-	
 
 func apply_palette_scheme_to_recolor(palette : PaletteScheme, m : Material):
 	if palette.gradients.size() < 1:

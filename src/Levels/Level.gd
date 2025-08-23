@@ -4,6 +4,7 @@ class_name Level
 
 #export (String) var dir_path = "res://src/Levels/LevelExample/"
 #export var rooms # (Array, PackedScene)
+@export var music_default : AudioStream ## The music that is assigned to the player and play by default in this level
 @export_file("*.tscn") var first_room
 @export var first_room_portal : String
 
@@ -56,6 +57,8 @@ func browse_rooms(room_name : String):
 
 func enter_level():
 	Global.set_current_player($Player)
+	$Player.audio_handler.set_music_default(music_default)
+	$Player.audio_handler.play_music()
 	change_room(first_room, first_room_portal)
 
 func exit_level(exit_room : String, exit_room_portal : String):

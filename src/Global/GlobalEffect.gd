@@ -93,3 +93,76 @@ path_exceptions : Array[NodePath] = []):
 	explosion_data.damage_duration = damage_duration
 	explosion_data.path_exceptions = path_exceptions
 	make_explosion(global_position, explosion_data)
+
+######################### SOUND and AUDIO #####################################
+var bus_to_filter : Dictionary
+func bus_low_pass_fade_in(bus : StringName, duration : float, cutoff_hz : float = 1760):
+	var bus_idx = AudioServer.get_bus_index(bus)
+	if bus_idx < 0:
+		push_error("no audio bus named : '"+bus+"'")
+		return
+	
+	var filter : AudioEffectLowPassFilter = AudioEffectLowPassFilter.new()
+	if bus_to_filter.has(bus_idx):
+		filter = bus_to_filter[bus_idx]
+	else:
+		filter = AudioEffectLowPassFilter.new()
+		filter.cutoff_hz = cutoff_hz
+		filter.resonance = 0.66
+		bus_to_filter[bus_idx] = filter
+	AudioServer.add_bus_effect(bus_idx,filter)
+	var tween_fade : Tween
+	tween_fade = self.create_tween().set_parallel(false)
+	tween_fade.tween_property(filter,"cutoff_hz",10000, duration).set_trans(Tween.TRANS_EXPO).set_ease(Tween.EASE_IN)
+	tween_fade.tween_callback(self._set_bus_effect_enabled.bind(bus_idx, filter, false))
+	
+func bus_low_pass_fade_out(bus : StringName, duration : float, cutoff_hz : float = 1760):
+	var bus_idx = AudioServer.get_bus_index(bus)
+	if bus_idx < 0:
+		push_error("no audio bus named : '"+bus+"'")
+		return
+	
+	var filter : AudioEffectLowPassFilter = AudioEffectLowPassFilter.new()
+	if bus_to_filter.has(bus_idx):
+		filter = bus_to_filter[bus_idx]
+	else:
+		filter = AudioEffectLowPassFilter.new()
+		filter.cutoff_hz = 10000
+		filter.resonance = 0.66
+		bus_to_filter[bus_idx] = filter
+	
+	AudioServer.add_bus_effect(bus_idx,filter)
+	var tween_fade : Tween
+	tween_fade = self.create_tween().set_parallel(false)
+	tween_fade.tween_property(filter,"cutoff_hz",cutoff_hz, duration).set_trans(Tween.TRANS_EXPO).set_ease(Tween.EASE_OUT)
+	tween_fade.tween_callback(self._set_bus_effect_enabled.bind(bus_idx, filter, true))
+
+func _set_bus_effect_enabled(bus_idx : int, effect : AudioEffect, enabled : bool):
+	for effect_idx in AudioServer.get_bus_effect_count(bus_idx):
+		if AudioServer.get_bus_effect(bus_idx, effect_idx) == effect:
+			AudioServer.set_bus_effect_enabled(bus_idx, effect_idx, enabled)
+
+func bus_fade_in(bus : StringName, duration : float = 0.5):
+	var bus_idx = AudioServer.get_bus_index(bus)
+	if bus_idx < 0:
+		push_error("no audio bus named : '"+bus+"'")
+		return
+	var tween_fade : Tween
+	tween_fade = self.create_tween()
+	var callable: Callable = func(value): AudioServer.set_bus_volume_db(bus_idx, value) # lambda function to bypass the lack of bind_left
+	tween_fade.tween_method(callable, -60.0, 0.0, duration)
+
+func bus_fade_out(bus : StringName, duration : float = 0.5):
+	var bus_idx = AudioServer.get_bus_index(bus)
+	if bus_idx < 0:
+		push_error("no audio bus named : '"+bus+"'")
+		return
+	var tween_fade : Tween
+	tween_fade = self.create_tween()
+	var callable: Callable = func(value): AudioServer.set_bus_volume_db(bus_idx, value) # lambda function to bypass the lack of bind_left
+	tween_fade.tween_method(callable, 0.0, -60.0, duration)
+	
+	#for effect_idx in AudioServer.get_bus_effect_count(bus_idx):
+		#AudioServer.set_bus_effect_enabled(bus_idx, effect_idx, true)
+	
+#func bus_fade_out()

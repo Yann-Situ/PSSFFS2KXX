@@ -1,10 +1,11 @@
-[gd_scene load_steps=15 format=3 uid="uid://c6cdyqr51vbxh"]
+[gd_scene load_steps=16 format=3 uid="uid://c6cdyqr51vbxh"]
 
 [ext_resource type="Texture2D" uid="uid://cmdquuanqily4" path="res://assets/art/environment/graff-spray.png" id="1"]
 [ext_resource type="Shader" path="res://assets/shader/graff-spray.gdshader" id="2"]
 [ext_resource type="Script" path="res://src/Items/Interactive/GraffSpray.gd" id="3"]
 [ext_resource type="Texture2D" uid="uid://ctiuc3lmtrgkb" path="res://assets/art/effects/light2.png" id="4"]
 [ext_resource type="Texture2D" uid="uid://d33u8f6bfhj4m" path="res://assets/art/effects/round.png" id="5"]
+[ext_resource type="AudioStream" uid="uid://um1etgxk0vfd" path="res://assets/music/goal1.mp3" id="6_ldpk6"]
 
 [sub_resource type="CanvasItemMaterial" id="24"]
 
@@ -256,11 +257,11 @@ range_item_cull_mask = 7
 texture = ExtResource("4")
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
-autoplay = "idle"
 reset_on_save = false
 libraries = {
 "": SubResource("AnimationLibrary_fj5sp")
 }
+autoplay = "idle"
 
 [node name="Area2D" type="Area2D" parent="."]
 collision_layer = 0
@@ -268,5 +269,10 @@ collision_mask = 5
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
 shape = SubResource("21")
+
+[node name="AudioGoal" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("6_ldpk6")
+volume_db = -13.0
+bus = &"Effects"
 
 [connection signal="body_entered" from="Area2D" to="." method="_on_Area2D_body_entered"]

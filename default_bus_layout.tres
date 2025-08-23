@@ -1,0 +1,51 @@
+[gd_resource type="AudioBusLayout" load_steps=4 format=3 uid="uid://dvn2o6lrtbxnc"]
+
+[sub_resource type="AudioEffectLowPassFilter" id="AudioEffectLowPassFilter_qtm8x"]
+resource_name = "LowPassFilter"
+cutoff_hz = 880.0
+resonance = 0.68
+
+[sub_resource type="AudioEffectLowPassFilter" id="AudioEffectLowPassFilter_wc57f"]
+resource_name = "LowPassFilter"
+
+[sub_resource type="AudioEffectAmplify" id="AudioEffectAmplify_203nv"]
+resource_name = "Amplify"
+volume_db = -23.71
+
+[resource]
+bus/1/name = &"Muffler"
+bus/1/solo = false
+bus/1/mute = false
+bus/1/bypass_fx = false
+bus/1/volume_db = 0.464998
+bus/1/send = &"Master"
+bus/1/effect/0/effect = SubResource("AudioEffectLowPassFilter_qtm8x")
+bus/1/effect/0/enabled = true
+bus/2/name = &"MusicMaster"
+bus/2/solo = false
+bus/2/mute = false
+bus/2/bypass_fx = false
+bus/2/volume_db = 0.0
+bus/2/send = &"Master"
+bus/2/effect/0/effect = SubResource("AudioEffectLowPassFilter_wc57f")
+bus/2/effect/0/enabled = false
+bus/2/effect/1/effect = SubResource("AudioEffectAmplify_203nv")
+bus/2/effect/1/enabled = false
+bus/3/name = &"MusicDefault"
+bus/3/solo = false
+bus/3/mute = false
+bus/3/bypass_fx = false
+bus/3/volume_db = 0.0
+bus/3/send = &"MusicMaster"
+bus/4/name = &"MusicArea"
+bus/4/solo = false
+bus/4/mute = false
+bus/4/bypass_fx = false
+bus/4/volume_db = 0.0
+bus/4/send = &"MusicMaster"
+bus/5/name = &"Effects"
+bus/5/solo = false
+bus/5/mute = false
+bus/5/bypass_fx = false
+bus/5/volume_db = 0.0
+bus/5/send = &"Master"

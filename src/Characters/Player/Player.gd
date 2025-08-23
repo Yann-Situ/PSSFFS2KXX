@@ -31,6 +31,7 @@ class_name Player
 @onready var target_handler = get_node("Flipper/TargetHandler")
 @onready var ambient_handler = get_node("Flipper/AmbientHandler")
 
+@onready var audio_handler = get_node("AudioHandler")
 @onready var life_handler = get_node("LifeHandler")
 @onready var life_bar = get_node("UI/MarginContainer/HBoxContainer/VBoxContainer/Bar")
 @onready var sprite = get_node("Flipper/Sprite2D")
