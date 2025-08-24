@@ -31,8 +31,8 @@ func branch() -> State:
 	if !logic.floor.ing:
 		if !logic.ray_handler.is_above_floor():
 			return fall_state
-		else :
-			print("--- land above floor")
+		#else :
+			#print("--- land above floor")
 
 	if land_finished:
 		return crouch_state

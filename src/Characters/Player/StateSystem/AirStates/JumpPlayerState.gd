@@ -6,6 +6,8 @@ extends PlayerMovementState
 @export var jump_speed_down_cancelled_ratio : float = 0.1
 @export var no_jump_delay : float = 0.2 ## s
 @export var min_jump_duration : float = 0.1 ## s # duration between the beginning of the jump to the first frame where land/fallwall/fall is possible
+@export var fall_state_velocity_y_threshold : float = -100.0 ## pix # downward velocity from which the fall state is triggered
+
 
 @export_group("States")
 @export var belong_state : State
@@ -39,11 +41,11 @@ func branch() -> State:
 		if logic.floor.ing and movement.velocity.y >= 0.0: # floor.ing and falling 
 			return land_state
 		if logic.wall.ing: ## WARNING jump cancel won't be available after entering fallwall state, this can lead to undesired behavior
-			if movement.velocity.y >= 0.0:
+			if movement.velocity.y >= fall_state_velocity_y_threshold:
 				return fallwall_state
 			elif logic.walljump.can and !logic.jump_press_timer.is_stopped():
 				return walljump_state
-		if movement.velocity.y > 0.0:
+		if movement.velocity.y >= fall_state_velocity_y_threshold:
 			return fall_state
 	return self
 

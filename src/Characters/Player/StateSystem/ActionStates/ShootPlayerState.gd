@@ -64,7 +64,22 @@ func enter(previous_state : State = null) -> State:
 	logic.ball_handler.throw_ball(throw_position, shoot_velocity)
 
 	# choose animation depending on shoot direction and state
-	set_variation(0)
+	if logic.floor.ing:
+		var angle = shoot_velocity.angle()
+		if angle > PI/6.0 and angle < 5.0*PI/6.0:
+			set_variation(2)
+		elif shoot_velocity.x * logic.direction_sprite < 0:
+			set_variation(1)
+		else: 
+			set_variation(0)
+	else :
+		var angle = shoot_velocity.angle()
+		if angle > PI/6.0 and angle < 5.0*PI/6.0:
+			set_variation(5)
+		elif shoot_velocity.x * logic.direction_sprite < 0:
+			set_variation(4)
+		else: 
+			set_variation(3)
 	play_animation()
 
 	print(self.name + " - velocity: " + str(shoot_velocity))

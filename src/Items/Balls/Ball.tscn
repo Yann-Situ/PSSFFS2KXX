@@ -18,7 +18,7 @@ bounce = 0.5
 _data = [Vector2(0, 0.0886364), 0.0, 0.215584, 0, 0, Vector2(0.554217, 0.952273), 0.425641, 0.425641, 0, 0, Vector2(1, 1), -0.570101, 0.0, 0, 0]
 point_count = 3
 
-[sub_resource type="Gradient" id="Gradient_fquqj"]
+[sub_resource type="Gradient" id="Gradient_hb2s2"]
 offsets = PackedFloat32Array(0, 0.25, 0.5, 0.75, 1)
 colors = PackedColorArray(0.19, 0.1311, 0.145825, 0, 0.19, 0.1311, 0.145825, 1, 0.465573, 0.431196, 0.460088, 1, 0.9, 0.855, 0.792, 0.8, 0.9, 0.855, 0.792, 0)
 
@@ -26,7 +26,7 @@ colors = PackedColorArray(0.19, 0.1311, 0.145825, 0, 0.19, 0.1311, 0.145825, 1, 
 _data = [Vector2(0, 1), 0.0, 0.215584, 0, 0, Vector2(0.786325, 1), -1.57233, -1.57233, 0, 0, Vector2(1, 0.4), -2.73506, 0.0, 0, 0]
 point_count = 3
 
-[sub_resource type="Gradient" id="Gradient_nyrx8"]
+[sub_resource type="Gradient" id="Gradient_wx2ad"]
 offsets = PackedFloat32Array(0, 0.25, 0.5, 0.75, 1)
 colors = PackedColorArray(0.19, 0.1311, 0.145825, 0, 0.19, 0.1311, 0.145825, 1, 0.465573, 0.431196, 0.460088, 1, 0.9, 0.855, 0.792, 0.8, 0.9, 0.855, 0.792, 0)
 
@@ -34,7 +34,7 @@ colors = PackedColorArray(0.19, 0.1311, 0.145825, 0, 0.19, 0.1311, 0.145825, 1, 
 _data = [Vector2(0, 0.784091), 0.0, 3.55714, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
 point_count = 2
 
-[sub_resource type="Gradient" id="Gradient_e4sy3"]
+[sub_resource type="Gradient" id="Gradient_pmus5"]
 offsets = PackedFloat32Array(0, 0.2, 0.5, 0.8, 1)
 colors = PackedColorArray(0.9, 0.855, 0.792, 0, 0.9, 0.855, 0.792, 1, 0.465573, 0.431196, 0.460088, 0.68, 0.19, 0.1311, 0.145825, 0.35, 0.19, 0.1311, 0.145825, 0)
 
@@ -418,7 +418,7 @@ gravity = Vector2(0, 0)
 scale_amount_min = 0.12
 scale_amount_max = 0.12
 scale_amount_curve = SubResource("6")
-color_ramp = SubResource("Gradient_fquqj")
+color_ramp = SubResource("Gradient_hb2s2")
 
 [node name="Destruction" type="CPUParticles2D" parent="Visuals"]
 emitting = false
@@ -445,7 +445,7 @@ damping_max = 80.0
 scale_amount_min = 0.06
 scale_amount_max = 0.06
 scale_amount_curve = SubResource("9")
-color_ramp = SubResource("Gradient_nyrx8")
+color_ramp = SubResource("Gradient_wx2ad")
 
 [node name="DunkParticles" type="CPUParticles2D" parent="Visuals"]
 z_index = 99
@@ -467,7 +467,7 @@ initial_velocity_max = 32.0
 scale_amount_min = 0.16
 scale_amount_max = 0.16
 scale_amount_curve = SubResource("12")
-color_ramp = SubResource("Gradient_e4sy3")
+color_ramp = SubResource("Gradient_pmus5")
 
 [node name="DustParticle" parent="Visuals" instance=ExtResource("5")]
 z_index = -1

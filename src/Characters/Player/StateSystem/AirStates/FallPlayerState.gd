@@ -1,6 +1,7 @@
 extends PlayerMovementState
 
 @export var roll_speed_thresh : float = 50.0
+@export var fall_run_speed_thresh : float = 350.0
 
 @export_group("States")
 @export var belong_state : State
@@ -15,7 +16,7 @@ extends PlayerMovementState
 # var wall : Status = Status.new(["belong"]) # appropriate declaration
 
 func _ready():
-	animation_variations = [["fall"], ["fall_loop"]]
+	animation_variations = [["fall","fall_loop"],["fall_run","fall_loop"],["fall_swag1","fall_loop"],["fall_swag2","fall_loop"]]
 
 func branch() -> State:
 	if logic.belong_ing:
@@ -37,3 +38,22 @@ func branch() -> State:
 
 # func animation_process() -> void:
 # 	pass
+
+func enter(previous_state : State = null) -> State:
+	var next_state = branch()
+	if next_state != self:
+		return next_state
+	print(self.name)
+	# choose animation depending on shoot direction and state
+	
+	var r = randf()
+	if r > 0.92:
+		set_variation(2)
+	elif r < 0.08:
+		set_variation(3)
+	elif abs(movement.velocity.x) > fall_run_speed_thresh :
+		set_variation(1)
+	else: 
+		set_variation(0)
+	play_animation()
+	return next_state
