@@ -20,6 +20,8 @@ enum TriggerType {ON_BODY_ENTER, ON_INTERACTION, NO_TRIGGER}
 @export_group("Transition", "transition_")
 @export var transition_color : Color = Color.BLACK : set = set_transition_color
 @export_range(0.1, 3.0) var transition_speed : float = 1.0 : set = set_transition_speed
+@export var transition_music_fade_in : float = 0.5 ## s # positive is fade in transition duration, negative is no fade in
+@export var transition_music_fade_out : float = 1.0 ## s # positive is fade in transition duration, negative is no fade in
 
 @onready var is_locked = false
 var P = null # set in enter tree
@@ -112,6 +114,8 @@ func transition_in():
 	#Transition.material.set("shader_parameter/center_offset", Vector2(0.0,0.0))
 	$AnimationPlayer.play("transition_in")
 	$AnimationPlayer.advance(0.0) # to avoid jitter issues
+	if transition_music_fade_in > 0.0:
+		GlobalEffect.bus_fade_in("MusicMaster", transition_music_fade_in)
 
 func transition_out():
 	#var img = get_viewport().get_texture().get_data()
@@ -124,6 +128,8 @@ func transition_out():
 	#$Tween.start()
 	$AnimationPlayer.play("transition_out")
 	$AnimationPlayer.advance(0.0) # to avoid jitter issues
+	if transition_music_fade_out > 0.0:
+		GlobalEffect.bus_fade_out("MusicMaster", transition_music_fade_out)
 
 func exit_portal():
 	transition_out()

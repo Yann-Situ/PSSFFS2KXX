@@ -90,7 +90,7 @@ func enter(previous_state : State = null) -> State:
 	player.effect_handler.dust_start()
 	player.effect_handler.cloud_start()
 	#AudioServer.set_bus_send(AudioServer.get_bus_index("MusicMaster"),"Muffler") ## TEST
-	GlobalEffect.bus_low_pass_fade_out("MusicMaster", 0.8)
+	GlobalEffect.bus_highpass_fade_out("MusicMaster", 0.1)
 
 	return next_state
 
@@ -131,7 +131,7 @@ func exit():
 	# effects:
 	player.effect_handler.grind_stop()
 	#AudioServer.set_bus_send(AudioServer.get_bus_index("MusicMaster"),"Master") ## TEST
-	GlobalEffect.bus_low_pass_fade_in("MusicMaster", 0.8)
+	GlobalEffect.bus_highpass_fade_in("MusicMaster", 0.6)
 
 func grindash():
 	var target : Node2D = null

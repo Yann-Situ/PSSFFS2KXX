@@ -38,6 +38,7 @@ func enter(previous_state : State = null) -> State:
 
 	# effects
 	player.effect_handler.dust_start()
+	GlobalEffect.bus_highpass_fade_out("MusicMaster", 0.6, 440)
 
 	return next_state
 
@@ -73,3 +74,4 @@ func exit():
 		belong_handler.get_out()
 	# logic.belong_ing = belong_handler.is_belonging() # not necessary anymore as belong_in calls is_belonging in the getter
 	holder_at_enter = null
+	GlobalEffect.bus_highpass_fade_in("MusicMaster", 0.6)
