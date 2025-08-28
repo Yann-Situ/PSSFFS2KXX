@@ -13,6 +13,8 @@ var variation_playing = -1
 
 func set_variation(v : int):
 	variation = v % max(animation_variations.size(),1)
+func set_variation_priority(v : int):
+	variation = max(v % max(animation_variations.size(),1), variation)
 
 func play_animation(priority = false):
 	if !animation_player or animation_variations.is_empty():

@@ -18,6 +18,7 @@ extends PlayerMovementState
 @export var walljump_state : State
 @export var fall_state : State
 
+var coyote_flip : bool = false
 var min_duration_timer : Timer # time the duration between the beginning of the
 # jump to the first frame where land/fallwall/fall is possible
 var up_cancelled = false # true if this jump was cancelled by releasing up_button
@@ -46,6 +47,9 @@ func branch() -> State:
 			elif logic.walljump.can and !logic.jump_press_timer.is_stopped():
 				return walljump_state
 		if movement.velocity.y >= fall_state_velocity_y_threshold:
+			if coyote_flip:
+				fall_state.set_variation(3)
+				print(" - coyote-flip!")
 			return fall_state
 	return self
 
@@ -113,4 +117,5 @@ func physics_process(delta) -> State:
 func exit():
 	super()
 	logic.jump.ing = false
+	coyote_flip = false
 	min_duration_timer.stop()

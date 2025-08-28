@@ -26,7 +26,8 @@ func branch() -> State:
 		if !logic.ray_handler.is_above_floor():
 			return fall_state
 		else :
-			print("--- stand above floor")
+			#print("--- stand above floor")
+			pass
 
 	if logic.side.ing and logic.crouch.can and logic.down.pressed and \
 			abs(movement.velocity.x) > slide_speed_thresh:

@@ -25,7 +25,10 @@ func branch() -> State:
 		return action_state
 
 	if logic.jump.can and !logic.jump_press_timer.is_stopped():
-		return jump_state # eventually coyote time, or double jump ?
+		# eventually coyote time, or double jump ?
+		if "coyote_flip" in jump_state:
+			jump_state.coyote_flip = true
+		return jump_state
 	if (logic.floor.ing or logic.ray_handler.is_above_floor()) and movement.velocity.y >= 0.0: # floor.ing and locally falling
 		if abs(movement.velocity.x) > roll_speed_thresh:
 			land_state.set_variation(1)
@@ -47,13 +50,13 @@ func enter(previous_state : State = null) -> State:
 	# choose animation depending on shoot direction and state
 	
 	var r = randf()
-	if r > 0.92:
-		set_variation(2)
-	elif r < 0.08:
-		set_variation(3)
-	elif abs(movement.velocity.x) > fall_run_speed_thresh :
-		set_variation(1)
+	#if r > 0.92:
+		#set_variation_priority(2)
+	#elif r < 0.08:
+		#set_variation_priority(3)
+	if abs(movement.velocity.x) > fall_run_speed_thresh :
+		set_variation_priority(1)
 	else: 
-		set_variation(0)
-	play_animation()
+		set_variation_priority(0)
+	play_animation(true)
 	return next_state

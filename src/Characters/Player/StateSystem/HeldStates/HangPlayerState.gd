@@ -38,7 +38,7 @@ func enter(previous_state : State = null) -> State:
 
 	# effects
 	player.effect_handler.dust_start()
-	GlobalEffect.bus_highpass_fade_out("MusicMaster", 0.6, 440)
+	GlobalEffect.bus_highpass_fade("MusicMaster", 5.5, -1, 1760, true, Tween.TRANS_LINEAR)
 
 	return next_state
 

@@ -81,6 +81,7 @@ func enter(previous_state : State = null) -> State:
 	Global.camera.screen_shake(0.1,6)
 	GodotParadiseGeneralUtilities.frame_freeze(0.2, 0.2)
 	GlobalEffect.bus_lowpass_fade_out("MusicMaster", 0.03)
+	GlobalEffect.bus_highpass_fade_out("MusicMaster", 0.03, 880)
 
 	print(self.name)
 	return next_state
@@ -126,7 +127,8 @@ func dunkprejump_end():
 	is_dunkprejumping = false
 	min_duration_timer.start()
 	dunkjump_movement_to_call = true
-	GlobalEffect.bus_lowpass_fade_in("MusicMaster", 0.5)
+	GlobalEffect.bus_lowpass_fade_in("MusicMaster", 0.8)
+	GlobalEffect.bus_highpass_fade_in("MusicMaster", 0.8)
 
 ## should be called at physics frame # WARNING
 func dunkjump_movement():

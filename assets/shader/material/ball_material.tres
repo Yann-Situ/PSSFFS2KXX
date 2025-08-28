@@ -2,12 +2,12 @@
 
 [ext_resource type="Shader" path="res://assets/shader/ball.gdshader" id="1_dv3f2"]
 
-[sub_resource type="Gradient" id="Gradient_arhb5"]
+[sub_resource type="Gradient" id="Gradient_vk5pt"]
 offsets = PackedFloat32Array(0, 0.33, 0.6, 0.87, 1)
 colors = PackedColorArray(0.038, 0.02622, 0.029165, 1, 0.19, 0.1311, 0.145825, 1, 0.465573, 0.431196, 0.460088, 1, 0.9, 0.855, 0.792, 1, 0.97, 0.9565, 0.9376, 1)
 
-[sub_resource type="GradientTexture1D" id="GradientTexture1D_vvva2"]
-gradient = SubResource("Gradient_arhb5")
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_scpor"]
+gradient = SubResource("Gradient_vk5pt")
 width = 64
 
 [resource]
@@ -18,4 +18,4 @@ shader_parameter/main_color = Color(0.55, 0.52, 0.45, 1)
 shader_parameter/contour_activated = false
 shader_parameter/contour_color = Color(1.2, 1, 0.9, 0.65)
 shader_parameter/hurtbox_activated = false
-shader_parameter/gradient = SubResource("GradientTexture1D_vvva2")
+shader_parameter/gradient = SubResource("GradientTexture1D_scpor")

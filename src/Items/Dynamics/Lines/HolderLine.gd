@@ -71,7 +71,7 @@ func belong_handler_pickup(belong_handler : Area2D):
 		push_warning(belong_handler.name+" is not BelongHandler")
 		return 1
 	if path_follows.has(belong_handler):
-		push_warning(belong_handler.name+" already in "+self.name)
+		#push_warning(belong_handler.name+" already in "+self.name)
 		return 1
 	if released_bodies.has(belong_handler):
 		print_debug(belong_handler.name+" just got out from "+self.name)

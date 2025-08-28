@@ -13,15 +13,15 @@
 _data = [Vector2(0, 1), 0.0, 1.22899, 0, 0, Vector2(1, 0.0545454), -0.658523, 0.0, 0, 0]
 point_count = 2
 
-[sub_resource type="Gradient" id="Gradient_ggvhg"]
-offsets = PackedFloat32Array(0, 0.5, 0.8, 1)
-colors = PackedColorArray(1, 1, 1, 1, 1, 1, 1, 1, 0.0235294, 0.52549, 0.588235, 1, 0.0235294, 0.52549, 0.588235, 1)
+[sub_resource type="Gradient" id="Gradient_wqujg"]
+offsets = PackedFloat32Array(0, 0.3, 0.7, 1)
+colors = PackedColorArray(1, 1, 1, 1, 1, 1, 1, 1, 0.0236, 0.52392, 0.59, 1, 0.0236, 0.52392, 0.59, 1)
 
 [sub_resource type="ShaderMaterial" id="1"]
 resource_local_to_scene = true
 shader = ExtResource("2")
-shader_parameter/color_light = Color(0.0235294, 0.52549, 0.588235, 1)
-shader_parameter/color_dark = Color(0.0192941, 0.430902, 0.482353, 1)
+shader_parameter/color_light = Color(0.0236, 0.52392, 0.59, 1)
+shader_parameter/color_dark = Color(0.019352, 0.429614, 0.4838, 1)
 
 [sub_resource type="Animation" id="2"]
 length = 0.001
@@ -218,7 +218,7 @@ light_mask = 4
 z_index = 120
 z_as_relative = false
 script = ExtResource("3")
-color = Color(0.0235294, 0.52549, 0.588235, 1)
+color = Color(0.0236, 0.52392, 0.59, 1)
 metadata/_edit_group_ = true
 
 [node name="CloudParticles" type="CPUParticles2D" parent="."]
@@ -232,10 +232,10 @@ emission_sphere_radius = 8.0
 direction = Vector2(0, 1)
 gravity = Vector2(0, -110)
 initial_velocity_max = 50.0
-scale_amount_min = 0.16
-scale_amount_max = 0.21
+scale_amount_min = 0.14
+scale_amount_max = 0.17
 scale_amount_curve = SubResource("25")
-color_ramp = SubResource("Gradient_ggvhg")
+color_ramp = SubResource("Gradient_wqujg")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 light_mask = 4
@@ -249,7 +249,7 @@ vframes = 2
 z_as_relative = false
 position = Vector2(0, -4)
 scale = Vector2(1.5, 1.5)
-color = Color(0.901961, 0.952941, 0.960784, 1)
+color = Color(0.90236, 0.952392, 0.959, 1)
 energy = 1.08
 blend_mode = 2
 range_z_max = 160
@@ -272,7 +272,7 @@ shape = SubResource("21")
 
 [node name="AudioGoal" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("6_ldpk6")
-volume_db = -13.0
+volume_db = -80.0
 bus = &"Effects"
 
 [connection signal="body_entered" from="Area2D" to="." method="_on_Area2D_body_entered"]

@@ -90,7 +90,8 @@ func enter(previous_state : State = null) -> State:
 	player.effect_handler.dust_start()
 	player.effect_handler.cloud_start()
 	#AudioServer.set_bus_send(AudioServer.get_bus_index("MusicMaster"),"Muffler") ## TEST
-	GlobalEffect.bus_highpass_fade_out("MusicMaster", 0.1)
+	#GlobalEffect.bus_highpass_fade_out("MusicMaster", 4.0, 2000)
+	GlobalEffect.bus_highpass_fade("MusicMaster", 5.5, -1, 1760, true, Tween.TRANS_LINEAR)
 
 	return next_state
 

@@ -67,7 +67,8 @@ func enter(previous_state : State = null) -> State:
 	# if S.active_ball != null:
 	# 	S.active_ball.on_dunk(dunking_basket)
 	GodotParadiseGeneralUtilities.frame_freeze(0.2, 0.2)
-	GlobalEffect.bus_lowpass_fade_out("MusicMaster", 0.05, 3000)
+	GlobalEffect.bus_lowpass_fade_out("MusicMaster", 0.05, 5000)
+	#GlobalEffect.bus_fade("MusicMaster", 0.02, NAN, -12)
 	#GlobalEffect.bus_lowpass_fade("MusicMaster", 0.3, 220, 10000, false)
 
 	print(self.name)
@@ -97,7 +98,8 @@ func dunk_impact():
 		printerr("impact but basket_at_enter is null")
 		return
 	basket_at_enter.dunk(player, logic.ball_handler.held_ball) # be careful here, not checking the ball_handler existence
-	GlobalEffect.bus_lowpass_fade_in("MusicMaster", 0.05)
+	GlobalEffect.bus_lowpass_fade_in("MusicMaster", 0.03)
+	#GlobalEffect.bus_fade_in("MusicMaster", 0.02)
 
 ## Called just before entering the next State. Should not contain await or time
 ## stopping functions

@@ -59,22 +59,26 @@ func enter(previous_state : State = null) -> State:
 	var q = selectable.global_position - throw_position
 	q.x*=1.1
 	q.y*=1.1#px
-	var shoot_velocity = GlobalMaths.shoot_velocity_bell_ratio(q, selectable.shoot_bell_ratio, 625) # TODO change 625
+	var bell_ratio = selectable.shoot_bell_ratio
+	var angle = q.angle()
+	if angle > PI/6.0 and angle < 5.0*PI/6.0:
+		bell_ratio = min(bell_ratio, 0.8)
+	var shoot_velocity = GlobalMaths.shoot_velocity_bell_ratio(q, bell_ratio, 625) # TODO change 625
 	
 	logic.ball_handler.throw_ball(throw_position, shoot_velocity)
 
 	# choose animation depending on shoot direction and state
 	if logic.floor.ing:
-		var angle = shoot_velocity.angle()
-		if angle > PI/6.0 and angle < 5.0*PI/6.0:
+		var angle_shoot = shoot_velocity.angle()
+		if angle_shoot > PI/8.0 and angle_shoot < 7.0*PI/6.0:
 			set_variation(2)
 		elif shoot_velocity.x * logic.direction_sprite < 0:
 			set_variation(1)
 		else: 
 			set_variation(0)
 	else :
-		var angle = shoot_velocity.angle()
-		if angle > PI/6.0 and angle < 5.0*PI/6.0:
+		var angle_shoot = shoot_velocity.angle()
+		if angle_shoot > PI/8.0 and angle_shoot < 7.0*PI/8.0:
 			set_variation(5)
 		elif shoot_velocity.x * logic.direction_sprite < 0:
 			set_variation(4)

@@ -1,4 +1,4 @@
-# @tool # some temporary tool problems
+#@tool # some temporary tool problems
 extends Node2D
 
 signal spray_collected(graffspray_node)
@@ -21,8 +21,8 @@ func update_color():
 	var g = Gradient.new()
 	g.set_color(0, Color.WHITE)
 	g.set_color(1, color)
-	g.add_point(0.5, Color.WHITE)
-	g.add_point(0.8, color)
+	g.add_point(0.3, Color.WHITE)
+	g.add_point(0.7, color)
 	$CloudParticles.color_ramp = g
 	$Sprite2D/LightSmall.color = color.lightened(0.9)
 
@@ -41,8 +41,8 @@ func collect():
 	GlobalEffect.make_distortion(self.global_position, 0.5, "subtle")
 	$AnimationPlayer.play("collect")
 	$AudioGoal.play()
-	GlobalEffect.bus_fade_out("MusicMaster", 0.5)
-	#await $AnimationPlayer.animation_finished
-	GlobalEffect.bus_fade_in("MusicMaster", 5.0)
+	#GlobalEffect.bus_fade_out("MusicMaster", 0.5)
+	##await $AnimationPlayer.animation_finished
+	#GlobalEffect.bus_fade_in("MusicMaster", 5.0)
 	await $AudioGoal.finished
 	queue_free()
