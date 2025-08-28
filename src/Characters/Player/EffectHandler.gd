@@ -37,3 +37,22 @@ func ghost_start(duration, tick_delay, selfmodulate : Color = Color(1.2,1.8,2.2,
 	$GhostHandler.start(duration,tick_delay)
 func ghost_stop(duration, tick_delay):
 	$GhostHandler.stop()
+
+##############################
+
+func speed_ghost_is_running() -> bool:
+	return $SpeedGhostHandler.is_running()
+
+func speed_ghost_start(tick_delay:float = 0.1, selfmodulate : Color = Color(1.2,1.8,2.2,0.39), gradient : Gradient = null):
+	$SpeedGhostHandler.set_ghost_sprite(player.sprite)
+	$SpeedGhostHandler.set_environment_node(Global.get_current_room()) # using Global.get_current_room() results in ghost not flipped
+	$SpeedGhostHandler.use_gradient = gradient != null
+	if gradient == null:
+		$SpeedGhostHandler.self_modulate = selfmodulate
+	else :
+		$SpeedGhostHandler.gradient = gradient
+	$SpeedGhostHandler.start(-1.0,tick_delay)
+	print(" >>>> SPEED GHOST !")
+func speed_ghost_stop():
+	$SpeedGhostHandler.stop()
+	print(" >>>> SPEED GHOST stopped")

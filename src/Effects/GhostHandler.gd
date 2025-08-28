@@ -6,6 +6,9 @@ var ghost_anim = preload("res://src/Effects/GhostAnim.tscn")
 @export var use_gradient : bool = false
 @export var gradient : Gradient
 
+func is_running():
+	return !$Ghost_Tick_Timer.is_stopped()
+
 func set_ghost_sprite(sprite_node):
 	ghost_sprite = sprite_node
 

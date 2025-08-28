@@ -106,7 +106,8 @@ var lowpass_to_tween : Dictionary
 
 ## if cutoff_hz_begin is negative, then start the tween with the current value
 ## if enable_lowpass_at_end is false, will disable the lowpass at the end
-func bus_lowpass_fade(bus : StringName, duration : float, cutoff_hz_begin : float = 1760, cutoff_hz_end : float = 10000, enable_lowpass_at_end : bool = false):
+func bus_lowpass_fade(bus : StringName, duration : float, cutoff_hz_begin : float = 1760, cutoff_hz_end : float = 10000,
+	  enable_lowpass_at_end : bool = false, trans_type : Tween.TransitionType = Tween.TRANS_EXPO):
 	var bus_idx = AudioServer.get_bus_index(bus)
 	if bus_idx < 0:
 		push_error("no audio bus named : '"+bus+"'")
@@ -129,6 +130,7 @@ func bus_lowpass_fade(bus : StringName, duration : float, cutoff_hz_begin : floa
 		if tween_fade:
 			tween_fade.kill()
 		tween_fade = self.create_tween().set_parallel(false)
+		lowpass_to_tween[filter] = tween_fade
 	else:
 		tween_fade = self.create_tween().set_parallel(false)
 		lowpass_to_tween[filter] = tween_fade
@@ -136,9 +138,9 @@ func bus_lowpass_fade(bus : StringName, duration : float, cutoff_hz_begin : floa
 	if cutoff_hz_begin > 0.0:
 		filter.cutoff_hz = cutoff_hz_begin
 	if filter.cutoff_hz < cutoff_hz_end:
-		tween_fade.tween_property(filter,"cutoff_hz",cutoff_hz_end, duration).set_trans(Tween.TRANS_EXPO).set_ease(Tween.EASE_IN)
+		tween_fade.tween_property(filter,"cutoff_hz",cutoff_hz_end, duration).set_trans(trans_type).set_ease(Tween.EASE_IN)
 	else:
-		tween_fade.tween_property(filter,"cutoff_hz",cutoff_hz_end, duration).set_trans(Tween.TRANS_EXPO).set_ease(Tween.EASE_OUT)
+		tween_fade.tween_property(filter,"cutoff_hz",cutoff_hz_end, duration).set_trans(trans_type).set_ease(Tween.EASE_OUT)
 	tween_fade.tween_callback(self._set_bus_effect_enabled.bind(bus_idx, filter, enable_lowpass_at_end))
 	
 func bus_lowpass_fade_in(bus : StringName, duration : float):
@@ -152,7 +154,8 @@ var highpass_to_tween : Dictionary
 
 ## if cutoff_hz_begin is negative, then start the tween with the current value
 ## if enable_highpass_at_end is false, will disable the highpass at the end
-func bus_highpass_fade(bus : StringName, duration : float, cutoff_hz_begin : float = 1760, cutoff_hz_end : float = 40, enable_highpass_at_end : bool = false):
+func bus_highpass_fade(bus : StringName, duration : float, cutoff_hz_begin : float = 1760, cutoff_hz_end : float = 40, 
+	  enable_highpass_at_end : bool = false, trans_type : Tween.TransitionType = Tween.TRANS_EXPO):
 	var bus_idx = AudioServer.get_bus_index(bus)
 	if bus_idx < 0:
 		push_error("no audio bus named : '"+bus+"'")
@@ -164,7 +167,10 @@ func bus_highpass_fade(bus : StringName, duration : float, cutoff_hz_begin : flo
 		self._set_bus_effect_enabled(bus_idx, filter, true)
 	else:
 		filter = AudioEffectHighPassFilter.new()
-		filter.cutoff_hz = cutoff_hz_begin
+		if cutoff_hz_begin < 40.0:
+			filter.cutoff_hz = 40.0
+		else: 
+			filter.cutoff_hz = cutoff_hz_begin
 		filter.resonance = 0.66
 		bus_to_highpass[bus_idx] = filter
 		AudioServer.add_bus_effect(bus_idx,filter)
@@ -175,16 +181,18 @@ func bus_highpass_fade(bus : StringName, duration : float, cutoff_hz_begin : flo
 		if tween_fade:
 			tween_fade.kill()
 		tween_fade = self.create_tween().set_parallel(false)
+		highpass_to_tween[filter] = tween_fade
 	else:
+		lowpass_to_tween[filter] = tween_fade
 		tween_fade = self.create_tween().set_parallel(false)
 		highpass_to_tween[filter] = tween_fade
 	
 	if cutoff_hz_begin > 0.0:
 		filter.cutoff_hz = cutoff_hz_begin
 	if filter.cutoff_hz < cutoff_hz_end:
-		tween_fade.tween_property(filter,"cutoff_hz",cutoff_hz_end, duration).set_trans(Tween.TRANS_EXPO).set_ease(Tween.EASE_IN)
+		tween_fade.tween_property(filter,"cutoff_hz",cutoff_hz_end, duration).set_trans(trans_type).set_ease(Tween.EASE_IN)
 	else:
-		tween_fade.tween_property(filter,"cutoff_hz",cutoff_hz_end, duration).set_trans(Tween.TRANS_EXPO).set_ease(Tween.EASE_OUT)
+		tween_fade.tween_property(filter,"cutoff_hz",cutoff_hz_end, duration).set_trans(trans_type).set_ease(Tween.EASE_OUT)
 	tween_fade.tween_callback(self._set_bus_effect_enabled.bind(bus_idx, filter, enable_highpass_at_end))
 	
 func bus_highpass_fade_in(bus : StringName, duration : float):
@@ -192,8 +200,8 @@ func bus_highpass_fade_in(bus : StringName, duration : float):
 func bus_highpass_fade_out(bus : StringName, duration : float, cutoff_hz : float = 1760):
 	bus_highpass_fade(bus, duration, -1, cutoff_hz, true)
 
-# Fade in using volume
-func bus_fade_in(bus : StringName, duration : float = 0.5):
+# Fade in using volume TODO: use only one tween
+func bus_fade(bus : StringName, duration : float = 0.5, db_begin : float = 0.0, db_end : float = -60.0):
 	var bus_idx = AudioServer.get_bus_index(bus)
 	if bus_idx < 0:
 		push_error("no audio bus named : '"+bus+"'")
@@ -201,17 +209,15 @@ func bus_fade_in(bus : StringName, duration : float = 0.5):
 	var tween_fade : Tween
 	tween_fade = self.create_tween()
 	var callable: Callable = func(value): AudioServer.set_bus_volume_db(bus_idx, value) # lambda function to bypass the lack of bind_left
-	tween_fade.tween_method(callable, -60.0, 0.0, duration)
+	if is_nan(db_begin):
+		db_begin = AudioServer.get_bus_volume_db(bus_idx)
+	tween_fade.tween_method(callable, db_begin, db_end, duration)
+	
+func bus_fade_in(bus : StringName, duration : float = 0.5):
+	bus_fade(bus, duration, -60.0, 0.0)
 
 func bus_fade_out(bus : StringName, duration : float = 0.5):
-	var bus_idx = AudioServer.get_bus_index(bus)
-	if bus_idx < 0:
-		push_error("no audio bus named : '"+bus+"'")
-		return
-	var tween_fade : Tween
-	tween_fade = self.create_tween()
-	var callable: Callable = func(value): AudioServer.set_bus_volume_db(bus_idx, value) # lambda function to bypass the lack of bind_left
-	tween_fade.tween_method(callable, 0.0, -60.0, duration)
+	bus_fade(bus, duration, 0.0, -60.0)
 	
 	#for effect_idx in AudioServer.get_bus_effect_count(bus_idx):
 		#AudioServer.set_bus_effect_enabled(bus_idx, effect_idx, true)

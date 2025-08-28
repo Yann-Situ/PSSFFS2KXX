@@ -117,6 +117,14 @@ func _physics_process(delta):
 	update_ambient_data()
 	update_selectable_handler()
 	handle_interaction()
+	var v = movement.velocity#get_real_velocity()
+	v.y *= 0.8
+	if v.length() >= 510:
+		if !effect_handler.speed_ghost_is_running():
+			effect_handler.speed_ghost_start()
+	else:
+		if effect_handler.speed_ghost_is_running():
+			effect_handler.speed_ghost_stop()
 	
 ################################################################################
 # updates of some sub nodes (mostly, handlers) whose behavior depends on S or each other
