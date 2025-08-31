@@ -1,7 +1,7 @@
 [gd_scene load_steps=7 format=3 uid="uid://jpj5ghucw7l5"]
 
 [ext_resource type="Texture2D" uid="uid://o7px2pnukts5" path="res://assets/art/effects/impact/impact_circle.png" id="1_jyh7x"]
-[ext_resource type="Script" path="res://src/Effects/OneShotParticle.gd" id="2_uk7pv"]
+[ext_resource type="Script" uid="uid://by6uoo5412abj" path="res://src/Effects/OneShotParticle.gd" id="2_uk7pv"]
 
 [sub_resource type="CanvasItemMaterial" id="1"]
 particles_animation = true
@@ -19,12 +19,10 @@ width = 64
 
 [sub_resource type="ParticleProcessMaterial" id="4"]
 particle_flag_disable_z = true
+angle_max = 360.0
 direction = Vector3(0, 1, 0)
 spread = 180.0
 gravity = Vector3(0, 0, 0)
-orbit_velocity_min = 0.0
-orbit_velocity_max = 0.0
-angle_max = 360.0
 color_ramp = SubResource("GradientTexture1D_g4w3a")
 anim_speed_min = 1.0
 anim_speed_max = 1.0

@@ -1,7 +1,7 @@
 [gd_scene load_steps=14 format=3 uid="uid://b23h1vkgriaef"]
 
-[ext_resource type="Script" path="res://src/Effects/GroundWave.gd" id="1_yoad7"]
-[ext_resource type="Shader" path="res://assets/shader/ground_wave.gdshader" id="2_sawiy"]
+[ext_resource type="Script" uid="uid://wjy1qwyfemog" path="res://src/Effects/GroundWave.gd" id="1_yoad7"]
+[ext_resource type="Shader" uid="uid://cw6ji2rr855gj" path="res://assets/shader/ground_wave.gdshader" id="2_sawiy"]
 [ext_resource type="Texture2D" uid="uid://dvipof75ggcdx" path="res://assets/art/environment/TileMap.png" id="3_u1h5g"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_xxx0v"]
@@ -251,12 +251,12 @@ tracks/1/keys = {
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_a6b4w"]
 _data = {
-"RESET": SubResource("Animation_w2opg"),
-"fast": SubResource("Animation_aga5x"),
-"massive": SubResource("Animation_1gd4u"),
-"soft": SubResource("4"),
-"subtle": SubResource("Animation_cixbo"),
-"test": SubResource("Animation_kfc1f")
+&"RESET": SubResource("Animation_w2opg"),
+&"fast": SubResource("Animation_aga5x"),
+&"massive": SubResource("Animation_1gd4u"),
+&"soft": SubResource("4"),
+&"subtle": SubResource("Animation_cixbo"),
+&"test": SubResource("Animation_kfc1f")
 }
 
 [node name="GroundWave" type="BackBufferCopy"]

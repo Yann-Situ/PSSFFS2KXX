@@ -8,6 +8,7 @@ extends PlayerMovementState
 @export var dunkdash_speed_belong : float = 600## when the dunkdash end by entering belong_state (e.g grind or hang) (in pix/s)
 @export var end_speed_ratio : float = 0.35 ## velocity will be multiplied by this amount at the end of the dunkdash
 @export var ghost_modulate : Color# (Color, RGBA)
+@export var sound_effect : AudioStreamPlayer2D
 
 @export_group("States")
 @export var belong_state : State
@@ -84,6 +85,8 @@ func enter(previous_state : State = null) -> State:
 	Global.camera.screen_shake(0.2,10)
 	GlobalEffect.bus_lowpass_fade_out("MusicMaster", 0.05, 2520)
 	GlobalEffect.bus_highpass_fade_out("MusicMaster", 0.05, 220)
+	if sound_effect:
+		sound_effect.play()
 
 	print(self.name + " - velocity: " + str(dash_velocity.length()))
 	return next_state

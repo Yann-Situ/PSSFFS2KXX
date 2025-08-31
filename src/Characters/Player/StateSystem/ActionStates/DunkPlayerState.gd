@@ -3,6 +3,8 @@ extends PlayerMovementState
 @export var selectable_handler : SelectableHandler
 @export var belong_handler : BelongHandler
 
+@export var sound_effect : AudioStreamPlayer2D
+
 @export_group("States")
 @export var belong_state : State
 @export var fall_state : State
@@ -68,6 +70,8 @@ func enter(previous_state : State = null) -> State:
 	# 	S.active_ball.on_dunk(dunking_basket)
 	GodotParadiseGeneralUtilities.frame_freeze(0.2, 0.2)
 	GlobalEffect.bus_lowpass_fade_out("MusicMaster", 0.05, 5000)
+	if sound_effect:
+		sound_effect.play()
 	#GlobalEffect.bus_fade("MusicMaster", 0.02, NAN, -12)
 	#GlobalEffect.bus_lowpass_fade("MusicMaster", 0.3, 220, 10000, false)
 

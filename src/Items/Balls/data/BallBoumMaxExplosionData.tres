@@ -1,6 +1,6 @@
 [gd_resource type="Resource" script_class="ExplosionData" load_steps=3 format=3 uid="uid://dsw2scc7dw804"]
 
-[ext_resource type="Script" path="res://src/Global/CustomResources/ExplosionData.gd" id="1_cxhvj"]
+[ext_resource type="Script" uid="uid://b3a02tijn6msv" path="res://src/Global/CustomResources/ExplosionData.gd" id="1_cxhvj"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_606rb"]
 radius = 64.0

@@ -1,6 +1,6 @@
 [gd_scene load_steps=2 format=3 uid="uid://bibx4tlfcbuxm"]
 
-[ext_resource type="Script" path="res://src/Characters/NPC/PedestrianGenerator.gd" id="1"]
+[ext_resource type="Script" uid="uid://luclcbwvknwq" path="res://src/Characters/NPC/PedestrianGenerator.gd" id="1"]
 
 [node name="PedestrianGenerator" type="Node2D"]
 z_index = 100

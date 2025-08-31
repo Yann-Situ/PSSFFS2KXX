@@ -1,10 +1,10 @@
 [gd_scene load_steps=12 format=3 uid="uid://8alv0hbdmh5e"]
 
 [ext_resource type="PackedScene" uid="uid://cxn2m3havcmil" path="res://src/Items/Balls/Ball.tscn" id="1_6yfdj"]
-[ext_resource type="Script" path="res://src/Items/Balls/BallMetal.gd" id="2"]
+[ext_resource type="Script" uid="uid://cnes4upubh7nt" path="res://src/Items/Balls/BallMetal.gd" id="2"]
 [ext_resource type="Texture2D" uid="uid://b8qmmywp6yo2t" path="res://assets/art/ball/ball_heavy.png" id="3"]
 [ext_resource type="Texture2D" uid="uid://d33u8f6bfhj4m" path="res://assets/art/effects/round.png" id="4"]
-[ext_resource type="Shader" path="res://assets/shader/contour.gdshader" id="5"]
+[ext_resource type="Shader" uid="uid://smacwdl1qw5a" path="res://assets/shader/contour.gdshader" id="5"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_h21k7"]
 resource_local_to_scene = true

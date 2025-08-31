@@ -1,8 +1,8 @@
 [gd_scene load_steps=5 format=3 uid="uid://kvm1pfg6ben5"]
 
-[ext_resource type="Script" path="res://src/Items/Dynamics/Lines/HolderLine.gd" id="1_a4cij"]
+[ext_resource type="Script" uid="uid://qh4p2qene7la" path="res://src/Items/Dynamics/Lines/HolderLine.gd" id="1_a4cij"]
 [ext_resource type="Texture2D" uid="uid://b57mxnmbc7bm0" path="res://assets/art/environment/zipline.png" id="2_nsrs5"]
-[ext_resource type="Script" path="res://src/Characters/Player/CharacterHolder.gd" id="3_30lw3"]
+[ext_resource type="Script" uid="uid://drolsmb2kbofa" path="res://src/Characters/Player/CharacterHolder.gd" id="3_30lw3"]
 
 [sub_resource type="Curve2D" id="Curve2D_dsmyg"]
 resource_local_to_scene = true

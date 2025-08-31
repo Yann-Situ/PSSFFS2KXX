@@ -1,9 +1,9 @@
 [gd_scene load_steps=11 format=3 uid="uid://d1iceb4hkwose"]
 
-[ext_resource type="Script" path="res://src/Items/Interactive/BreakableBloc.gd" id="1"]
+[ext_resource type="Script" uid="uid://oum4fv2t7p1k" path="res://src/Items/Interactive/BreakableBloc.gd" id="1"]
 [ext_resource type="Texture2D" uid="uid://bx70alc2tdq28" path="res://assets/art/environment/environment-interactive.png" id="2"]
 [ext_resource type="PackedScene" uid="uid://6uemq1bkxgpn" path="res://src/Effects/DebrisParticule.tscn" id="3"]
-[ext_resource type="Script" path="res://src/Items/Interactive/Breakable.gd" id="4"]
+[ext_resource type="Script" uid="uid://bm35cpgchfcc3" path="res://src/Items/Interactive/Breakable.gd" id="4"]
 
 [sub_resource type="OccluderPolygon2D" id="1"]
 resource_local_to_scene = true
@@ -40,7 +40,7 @@ tracks/1/keys = {
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_r88ga"]
 _data = {
-"explode": SubResource("2")
+&"explode": SubResource("2")
 }
 
 [sub_resource type="RectangleShape2D" id="3"]

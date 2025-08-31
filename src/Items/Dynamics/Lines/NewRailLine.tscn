@@ -1,8 +1,8 @@
 [gd_scene load_steps=5 format=3 uid="uid://dxk7u2jsgah5u"]
 
-[ext_resource type="Script" path="res://src/Items/Dynamics/Lines/HolderLine.gd" id="1_65u35"]
+[ext_resource type="Script" uid="uid://qh4p2qene7la" path="res://src/Items/Dynamics/Lines/HolderLine.gd" id="1_65u35"]
 [ext_resource type="Texture2D" uid="uid://d33auw4sup6l3" path="res://assets/art/environment/railline.png" id="2_5ubs8"]
-[ext_resource type="Script" path="res://src/Characters/Player/CharacterHolder.gd" id="3_5p0ip"]
+[ext_resource type="Script" uid="uid://drolsmb2kbofa" path="res://src/Characters/Player/CharacterHolder.gd" id="3_5p0ip"]
 
 [sub_resource type="Curve2D" id="Curve2D_dsmyg"]
 resource_local_to_scene = true

@@ -1,7 +1,7 @@
 [gd_scene load_steps=13 format=3 uid="uid://bcnnkalot4kb0"]
 
 [ext_resource type="Texture2D" uid="uid://bx70alc2tdq28" path="res://assets/art/environment/environment-interactive.png" id="1"]
-[ext_resource type="Script" path="res://src/Items/Dynamics/Jumper.gd" id="2"]
+[ext_resource type="Script" uid="uid://b5raitxfxa76y" path="res://src/Items/Dynamics/Jumper.gd" id="2"]
 [ext_resource type="PackedScene" uid="uid://d4icnmnguyjv3" path="res://src/Effects/LineParticle.tscn" id="3"]
 
 [sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_qgnjc"]
@@ -63,8 +63,8 @@ tracks/0/keys = {
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_a0svt"]
 _data = {
-"RESET": SubResource("12"),
-"jump": SubResource("13")
+&"RESET": SubResource("12"),
+&"jump": SubResource("13")
 }
 
 [node name="Jumper" type="Node2D"]

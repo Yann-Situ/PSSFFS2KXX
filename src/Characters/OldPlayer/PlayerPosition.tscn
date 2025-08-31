@@ -1,7 +1,7 @@
 [gd_scene load_steps=4 format=3 uid="uid://cjbsx2kbm5qhk"]
 
 [ext_resource type="Texture2D" uid="uid://fu53nbwvypbd" path="res://assets/art/characters/Player.png" id="1"]
-[ext_resource type="Shader" path="res://assets/shader/contour.gdshader" id="2"]
+[ext_resource type="Shader" uid="uid://smacwdl1qw5a" path="res://assets/shader/contour.gdshader" id="2"]
 
 [sub_resource type="ShaderMaterial" id="1"]
 shader = ExtResource("2")

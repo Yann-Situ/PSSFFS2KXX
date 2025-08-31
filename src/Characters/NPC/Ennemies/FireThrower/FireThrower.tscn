@@ -1,16 +1,16 @@
 [gd_scene load_steps=32 format=3 uid="uid://dgsb17wmfpqq0"]
 
-[ext_resource type="Script" path="res://src/Characters/NPC/Ennemies/FireThrower/FireThrower.gd" id="1_irlix"]
-[ext_resource type="Shader" path="res://assets/shader/recolor.gdshader" id="3_nb4s5"]
+[ext_resource type="Script" uid="uid://bte826katrmld" path="res://src/Characters/NPC/Ennemies/FireThrower/FireThrower.gd" id="1_irlix"]
+[ext_resource type="Shader" uid="uid://dis4rpkeisnth" path="res://assets/shader/recolor.gdshader" id="3_nb4s5"]
 [ext_resource type="Texture2D" uid="uid://66u5d77uha86" path="res://assets/art/characters/Pedestrian_1.png" id="4_0s2ev"]
 [ext_resource type="Texture2D" uid="uid://yhnhpyvb7d70" path="res://assets/art/effects/exclamation_bubble.png" id="5_08ex5"]
 [ext_resource type="Texture2D" uid="uid://bdkxpfm14ft1r" path="res://assets/art/effects/interrogation_bubble.png" id="6_d50wu"]
-[ext_resource type="Script" path="res://src/Items/Balls/BallHolder.gd" id="7_bfato"]
-[ext_resource type="Script" path="res://src/Characters/StateSystem/MultiStateMachine.gd" id="8_6t0f2"]
-[ext_resource type="Script" path="res://src/Characters/NPC/Ennemies/FireThrower/Logic.gd" id="8_wpj8g"]
-[ext_resource type="Script" path="res://src/Characters/NPC/Ennemies/FireThrower/Idle.gd" id="9_ooxju"]
-[ext_resource type="Script" path="res://src/Items/Interactive/Selectable.gd" id="11_80r25"]
-[ext_resource type="Script" path="res://src/Characters/NPC/Ennemies/FireThrower/Passing.gd" id="11_w5p4d"]
+[ext_resource type="Script" uid="uid://03omjk1utll" path="res://src/Items/Balls/BallHolder.gd" id="7_bfato"]
+[ext_resource type="Script" uid="uid://b4k5l1qt3nyhh" path="res://src/Characters/StateSystem/MultiStateMachine.gd" id="8_6t0f2"]
+[ext_resource type="Script" uid="uid://nik6qj0ud6w2" path="res://src/Characters/NPC/Ennemies/FireThrower/Logic.gd" id="8_wpj8g"]
+[ext_resource type="Script" uid="uid://b40fy2gd78y7k" path="res://src/Characters/NPC/Ennemies/FireThrower/Idle.gd" id="9_ooxju"]
+[ext_resource type="Script" uid="uid://b1rhv6w7mjfdo" path="res://src/Items/Interactive/Selectable.gd" id="11_80r25"]
+[ext_resource type="Script" uid="uid://b6lwajyypnuit" path="res://src/Characters/NPC/Ennemies/FireThrower/Passing.gd" id="11_w5p4d"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_ccph8"]
 radius = 8.0
@@ -337,12 +337,12 @@ tracks/1/keys = {
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_fq6sd"]
 _data = {
-"RESET": SubResource("Animation_tsrlh"),
-"exclamation": SubResource("Animation_sbffs"),
-"idle": SubResource("Animation_qmipg"),
-"interrogation": SubResource("Animation_edu05"),
-"passing": SubResource("Animation_o4y5e"),
-"walk": SubResource("Animation_gpr2a")
+&"RESET": SubResource("Animation_tsrlh"),
+&"exclamation": SubResource("Animation_sbffs"),
+&"idle": SubResource("Animation_qmipg"),
+&"interrogation": SubResource("Animation_edu05"),
+&"passing": SubResource("Animation_o4y5e"),
+&"walk": SubResource("Animation_gpr2a")
 }
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_tcs1k"]
@@ -406,8 +406,8 @@ tracks/1/keys = {
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_7lp3v"]
 _data = {
-"RESET": SubResource("Animation_2n8eg"),
-"cycle": SubResource("Animation_0qsww")
+&"RESET": SubResource("Animation_2n8eg"),
+&"cycle": SubResource("Animation_0qsww")
 }
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_4jimj"]

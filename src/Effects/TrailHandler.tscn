@@ -1,6 +1,6 @@
 [gd_scene load_steps=2 format=3 uid="uid://cq1tfkkoni136"]
 
-[ext_resource type="Script" path="res://src/Effects/TrailHandler.gd" id="1"]
+[ext_resource type="Script" uid="uid://cuiexbqibeuyn" path="res://src/Effects/TrailHandler.gd" id="1"]
 
 [node name="TrailHandler" type="Node2D"]
 script = ExtResource("1")

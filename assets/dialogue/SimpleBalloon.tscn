@@ -1,6 +1,6 @@
 [gd_scene load_steps=8 format=3 uid="uid://bkqmakllertlv"]
 
-[ext_resource type="Script" path="res://assets/dialogue/SimpleBalloon.gd" id="1_k6gwo"]
+[ext_resource type="Script" uid="uid://c6m3ovsanlldj" path="res://assets/dialogue/SimpleBalloon.gd" id="1_k6gwo"]
 [ext_resource type="Theme" uid="uid://b8qe788vvlgia" path="res://assets/art/gui/theme-1.tres" id="2_vaq6x"]
 [ext_resource type="PackedScene" uid="uid://ckvgyvclnwggo" path="res://addons/dialogue_manager/dialogue_label.tscn" id="3_dtjhh"]
 
@@ -55,9 +55,9 @@ tracks/0/keys = {
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_8amah"]
 _data = {
-"RESET": SubResource("Animation_352l8"),
-"appear": SubResource("Animation_bby0t"),
-"disappear": SubResource("Animation_7sugg")
+&"RESET": SubResource("Animation_352l8"),
+&"appear": SubResource("Animation_bby0t"),
+&"disappear": SubResource("Animation_7sugg")
 }
 
 [node name="SimpleBalloon" type="Node2D"]

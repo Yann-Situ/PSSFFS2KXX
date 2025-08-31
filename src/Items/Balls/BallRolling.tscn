@@ -1,27 +1,54 @@
-[gd_scene load_steps=8 format=3 uid="uid://clducx30br87q"]
+[gd_scene load_steps=14 format=3 uid="uid://clducx30br87q"]
 
 [ext_resource type="PackedScene" uid="uid://cxn2m3havcmil" path="res://src/Items/Balls/Ball.tscn" id="1"]
-[ext_resource type="Script" path="res://src/Items/Balls/BallRolling.gd" id="2"]
+[ext_resource type="Script" uid="uid://b4dtdv87cy7rq" path="res://src/Items/Balls/BallRolling.gd" id="2"]
+[ext_resource type="Shader" uid="uid://cvx1fiykdb7p1" path="res://assets/shader/ball.gdshader" id="3_q7dbv"]
+[ext_resource type="AudioStream" uid="uid://c5ualyyimdgcy" path="res://assets/sound/impacts/p1.mp3" id="4_3ubtf"]
 
 [sub_resource type="PhysicsMaterial" id="PhysicsMaterial_f05u8"]
 friction = 0.0
 absorbent = true
 
-[sub_resource type="Gradient" id="Gradient_yc01d"]
+[sub_resource type="Gradient" id="Gradient_q7dbv"]
+offsets = PackedFloat32Array(0, 0.33, 0.6, 0.87, 1)
+colors = PackedColorArray(0.0682352, 0.0329412, 0, 1, 0.341176, 0.164706, 0, 1, 0.619608, 0.317647, 0.317647, 1, 0.847059, 0.54902, 0.639216, 1, 0.954118, 0.864706, 0.891765, 1)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_3ubtf"]
+gradient = SubResource("Gradient_q7dbv")
+width = 64
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_8mlgc"]
+resource_local_to_scene = true
+shader = ExtResource("3_q7dbv")
+shader_parameter/intensity = 1.0
+shader_parameter/main_color = Color(0.55, 0.52, 0.45, 1)
+shader_parameter/gradient = SubResource("GradientTexture1D_3ubtf")
+shader_parameter/contour_activated = false
+shader_parameter/contour_color = Color(1.2, 1, 0.9, 0.65)
+shader_parameter/hurtbox_activated = false
+
+[sub_resource type="Gradient" id="Gradient_xl4pl"]
 offsets = PackedFloat32Array(0, 0.25, 0.5, 0.75, 1)
 colors = PackedColorArray(0.341176, 0.164706, 0, 0, 0.341176, 0.164706, 0, 1, 0.619608, 0.317647, 0.317647, 1, 0.847059, 0.54902, 0.639216, 0.8, 0.847059, 0.54902, 0.639216, 0)
 
-[sub_resource type="Gradient" id="Gradient_ctlgb"]
+[sub_resource type="Gradient" id="Gradient_5jl4y"]
 offsets = PackedFloat32Array(0, 0.25, 0.5, 0.75, 1)
 colors = PackedColorArray(0.341176, 0.164706, 0, 0, 0.341176, 0.164706, 0, 1, 0.619608, 0.317647, 0.317647, 1, 0.847059, 0.54902, 0.639216, 0.8, 0.847059, 0.54902, 0.639216, 0)
 
-[sub_resource type="Gradient" id="Gradient_h4h26"]
+[sub_resource type="Gradient" id="Gradient_8mlgc"]
 offsets = PackedFloat32Array(0, 0.2, 0.5, 0.8, 1)
 colors = PackedColorArray(0.847059, 0.54902, 0.639216, 0, 0.847059, 0.54902, 0.639216, 1, 0.619608, 0.317647, 0.317647, 0.68, 0.341176, 0.164706, 0, 0.35, 0.341176, 0.164706, 0, 0)
 
 [sub_resource type="CircleShape2D" id="1"]
 resource_local_to_scene = true
 radius = 6.0
+
+[sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_e12ak"]
+playback_mode = 1
+random_pitch = 1.05
+random_volume_offset_db = 1.0
+streams_count = 1
+stream_0/stream = ExtResource("4_3ubtf")
 
 [node name="BallRolling" instance=ExtResource("1")]
 mass = 2.5
@@ -32,18 +59,22 @@ dust_threshold = 10.0
 impact_threshold = 15.0
 
 [node name="Visuals" parent="." index="0"]
+material = SubResource("ShaderMaterial_8mlgc")
 col1 = Color(0.847059, 0.54902, 0.639216, 1)
 col2 = Color(0.619608, 0.317647, 0.317647, 1)
 col3 = Color(0.341176, 0.164706, 0, 1)
 
 [node name="Reconstruction" parent="Visuals" index="1"]
-color_ramp = SubResource("Gradient_yc01d")
+color_ramp = SubResource("Gradient_xl4pl")
 
 [node name="Destruction" parent="Visuals" index="2"]
-color_ramp = SubResource("Gradient_ctlgb")
+color_ramp = SubResource("Gradient_5jl4y")
 
 [node name="DunkParticles" parent="Visuals" index="3"]
-color_ramp = SubResource("Gradient_h4h26")
+color_ramp = SubResource("Gradient_8mlgc")
 
 [node name="collision" parent="." index="1"]
 shape = SubResource("1")
+
+[node name="Bonk" parent="." index="4"]
+stream = SubResource("AudioStreamRandomizer_e12ak")

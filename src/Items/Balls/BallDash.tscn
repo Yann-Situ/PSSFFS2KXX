@@ -1,9 +1,9 @@
 [gd_scene load_steps=17 format=3 uid="uid://cd2wyj207og8s"]
 
 [ext_resource type="PackedScene" uid="uid://cxn2m3havcmil" path="res://src/Items/Balls/Ball.tscn" id="1"]
-[ext_resource type="Script" path="res://src/Items/Balls/BallDash.gd" id="2"]
-[ext_resource type="Shader" path="res://assets/shader/ball.gdshader" id="3_1vb0o"]
-[ext_resource type="Script" path="res://src/Items/Interactive/Selectable.gd" id="4"]
+[ext_resource type="Script" uid="uid://dxwebvwgdvd6p" path="res://src/Items/Balls/BallDash.gd" id="2"]
+[ext_resource type="Shader" uid="uid://cvx1fiykdb7p1" path="res://assets/shader/ball.gdshader" id="3_1vb0o"]
+[ext_resource type="Script" uid="uid://b1rhv6w7mjfdo" path="res://src/Items/Interactive/Selectable.gd" id="4"]
 
 [sub_resource type="PhysicsMaterial" id="PhysicsMaterial_tvgov"]
 friction = 0.7
@@ -22,10 +22,10 @@ resource_local_to_scene = true
 shader = ExtResource("3_1vb0o")
 shader_parameter/intensity = 1.0
 shader_parameter/main_color = Color(0.55, 0.52, 0.45, 1)
+shader_parameter/gradient = SubResource("GradientTexture1D_l6kbn")
 shader_parameter/contour_activated = false
 shader_parameter/contour_color = Color(1.2, 1, 0.9, 0.65)
 shader_parameter/hurtbox_activated = false
-shader_parameter/gradient = SubResource("GradientTexture1D_l6kbn")
 
 [sub_resource type="Gradient" id="Gradient_2ow2a"]
 offsets = PackedFloat32Array(0, 0.25, 0.5, 0.75, 1)
@@ -230,8 +230,8 @@ tracks/4/keys = {
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_hmq33"]
 _data = {
-"destruction": SubResource("Animation_yhsxj"),
-"dunk": SubResource("Animation_jb6dc")
+&"destruction": SubResource("Animation_yhsxj"),
+&"dunk": SubResource("Animation_jb6dc")
 }
 
 [sub_resource type="CircleShape2D" id="7"]

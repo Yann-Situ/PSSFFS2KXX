@@ -1,6 +1,6 @@
 [gd_scene load_steps=7 format=3 uid="uid://dyc6sltfnujdf"]
 
-[ext_resource type="Script" path="res://src/Items/Activables/InteractionArea.gd" id="1_femdo"]
+[ext_resource type="Script" uid="uid://lesr85hdhncw" path="res://src/Items/Activables/InteractionArea.gd" id="1_femdo"]
 [ext_resource type="Texture2D" uid="uid://gofk0vnlkypc" path="res://assets/art/icons/warning.png" id="2_704tn"]
 
 [sub_resource type="Animation" id="Animation_omhky"]
@@ -124,9 +124,9 @@ tracks/2/keys = {
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_ok3mf"]
 _data = {
-"RESET": SubResource("Animation_omhky"),
-"bubble-pop": SubResource("Animation_e0ywb"),
-"bubble-unpop": SubResource("Animation_58ect")
+&"RESET": SubResource("Animation_omhky"),
+&"bubble-pop": SubResource("Animation_e0ywb"),
+&"bubble-unpop": SubResource("Animation_58ect")
 }
 
 [node name="InteractionArea" type="Area2D"]

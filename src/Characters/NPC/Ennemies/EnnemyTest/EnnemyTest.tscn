@@ -1,11 +1,11 @@
 [gd_scene load_steps=19 format=3 uid="uid://bbn03x0xfgmq8"]
 
-[ext_resource type="Shader" path="res://assets/shader/recolor.gdshader" id="1_xc0s5"]
+[ext_resource type="Shader" uid="uid://dis4rpkeisnth" path="res://assets/shader/recolor.gdshader" id="1_xc0s5"]
 [ext_resource type="Texture2D" uid="uid://m1xsfwdn1wc7" path="res://assets/art/characters/ennemies/ennemytest.png" id="2_qoksb"]
-[ext_resource type="Script" path="res://src/Characters/StateSystem/MultiStateMachine.gd" id="3_go43a"]
-[ext_resource type="Script" path="res://src/Characters/NPC/Ennemies/EnnemyTest/Logic.gd" id="4_2x0jf"]
-[ext_resource type="Script" path="res://src/Characters/NPC/Ennemies/EnnemyTest/Fetching.gd" id="5_mhhi5"]
-[ext_resource type="Script" path="res://src/Characters/NPC/Ennemies/EnnemyTest/FollowingBall.gd" id="6_5duco"]
+[ext_resource type="Script" uid="uid://b4k5l1qt3nyhh" path="res://src/Characters/StateSystem/MultiStateMachine.gd" id="3_go43a"]
+[ext_resource type="Script" uid="uid://d163wc5jj8jf3" path="res://src/Characters/NPC/Ennemies/EnnemyTest/Logic.gd" id="4_2x0jf"]
+[ext_resource type="Script" uid="uid://oj3257u6f8ge" path="res://src/Characters/NPC/Ennemies/EnnemyTest/Fetching.gd" id="5_mhhi5"]
+[ext_resource type="Script" uid="uid://ddyubwnvdxuri" path="res://src/Characters/NPC/Ennemies/EnnemyTest/FollowingBall.gd" id="6_5duco"]
 
 [sub_resource type="Gradient" id="Gradient_l1ux5"]
 offsets = PackedFloat32Array(0, 0.254237, 1)
@@ -160,10 +160,10 @@ tracks/0/keys = {
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_fq6sd"]
 _data = {
-"RESET": SubResource("Animation_tsrlh"),
-"fetching": SubResource("Animation_not4p"),
-"following": SubResource("Animation_5xsdl"),
-"throwing": SubResource("Animation_grmpb")
+&"RESET": SubResource("Animation_tsrlh"),
+&"fetching": SubResource("Animation_not4p"),
+&"following": SubResource("Animation_5xsdl"),
+&"throwing": SubResource("Animation_grmpb")
 }
 
 [node name="EnnemyTest" type="Node2D"]

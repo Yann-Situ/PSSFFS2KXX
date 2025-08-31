@@ -1,35 +1,35 @@
 [gd_scene load_steps=109 format=3 uid="uid://djjfl0v3y2pw5"]
 
-[ext_resource type="Script" path="res://src/Characters/OldPlayer/OldPlayer.gd" id="1_8m2nb"]
+[ext_resource type="Script" uid="uid://b61g1tn2tytgp" path="res://src/Characters/OldPlayer/OldPlayer.gd" id="1_8m2nb"]
 [ext_resource type="PackedScene" uid="uid://b6mk7ytgxiui" path="res://src/Characters/OldPlayer/Player_State.tscn" id="2_e7a61"]
-[ext_resource type="Script" path="res://src/Characters/OldPlayer/Special_Action_Handler.gd" id="3_rp2hy"]
-[ext_resource type="Script" path="res://src/Characters/Ray.gd" id="4_bxb38"]
-[ext_resource type="Script" path="res://src/Characters/OldPlayer/Selector.gd" id="5_03lfb"]
+[ext_resource type="Script" uid="uid://b72jkdbcd85jl" path="res://src/Characters/OldPlayer/Special_Action_Handler.gd" id="3_rp2hy"]
+[ext_resource type="Script" uid="uid://bv2dityj1owgn" path="res://src/Characters/Ray.gd" id="4_bxb38"]
+[ext_resource type="Script" uid="uid://nchdl56787ud" path="res://src/Characters/OldPlayer/Selector.gd" id="5_03lfb"]
 [ext_resource type="PackedScene" uid="uid://dnxamlpvh6e70" path="res://src/Items/Interactive/SelectorTarget.tscn" id="6_rugwv"]
-[ext_resource type="Script" path="res://src/Characters/OldPlayer/Actions/Side.gd" id="7_jvol5"]
-[ext_resource type="Script" path="res://src/Characters/OldPlayer/Actions/Jump.gd" id="8_6apu6"]
-[ext_resource type="Script" path="res://src/Characters/OldPlayer/Actions/Walljump.gd" id="9_ftj7p"]
-[ext_resource type="Script" path="res://src/Characters/OldPlayer/Actions/Slide.gd" id="10_yyiju"]
-[ext_resource type="Script" path="res://src/Characters/OldPlayer/Actions/Crouch.gd" id="11_c6ahw"]
-[ext_resource type="Script" path="res://src/Characters/OldPlayer/Actions/Dunk.gd" id="12_p8o5n"]
-[ext_resource type="Script" path="res://src/Characters/OldPlayer/Actions/Dunkjump.gd" id="13_pic6r"]
-[ext_resource type="Script" path="res://src/Characters/OldPlayer/Actions/Dunkdash.gd" id="14_656qk"]
-[ext_resource type="Script" path="res://src/Characters/OldPlayer/Actions/Aim.gd" id="15_gkwxq"]
-[ext_resource type="Script" path="res://src/Characters/OldPlayer/Actions/Shoot.gd" id="16_xqwyf"]
-[ext_resource type="Script" path="res://src/Characters/OldPlayer/Actions/Adherence.gd" id="17_5pmey"]
-[ext_resource type="Script" path="res://src/Characters/OldPlayer/Actions/SelectBall.gd" id="18_mvdlr"]
-[ext_resource type="Script" path="res://src/Characters/OldPlayer/Actions/Release.gd" id="19_iuv18"]
-[ext_resource type="Script" path="res://src/Characters/OldPlayer/Actions/Grind.gd" id="20_fcxc6"]
-[ext_resource type="Script" path="res://src/Characters/OldPlayer/Actions/Hang.gd" id="21_ptofo"]
-[ext_resource type="Script" path="res://src/Characters/OldPlayer/Actions/Interact.gd" id="22_j040b"]
-[ext_resource type="Script" path="res://src/Characters/OldPlayer/Shooter.gd" id="23_swekb"]
-[ext_resource type="Shader" path="res://assets/shader/shoot_viewer.gdshader" id="24_j0jau"]
-[ext_resource type="Script" path="res://src/Characters/OldPlayer/Shoot_predictor.gd" id="25_we5gd"]
-[ext_resource type="Shader" path="res://assets/shader/contour.gdshader" id="26_n7xqu"]
+[ext_resource type="Script" uid="uid://blpxel6tweue3" path="res://src/Characters/OldPlayer/Actions/Side.gd" id="7_jvol5"]
+[ext_resource type="Script" uid="uid://dh0gmm24s08tm" path="res://src/Characters/OldPlayer/Actions/Jump.gd" id="8_6apu6"]
+[ext_resource type="Script" uid="uid://c2uou4r5jyr1e" path="res://src/Characters/OldPlayer/Actions/Walljump.gd" id="9_ftj7p"]
+[ext_resource type="Script" uid="uid://cbvxo4ujqgb14" path="res://src/Characters/OldPlayer/Actions/Slide.gd" id="10_yyiju"]
+[ext_resource type="Script" uid="uid://dnndvmsou5gw5" path="res://src/Characters/OldPlayer/Actions/Crouch.gd" id="11_c6ahw"]
+[ext_resource type="Script" uid="uid://xj7pfgwjbsom" path="res://src/Characters/OldPlayer/Actions/Dunk.gd" id="12_p8o5n"]
+[ext_resource type="Script" uid="uid://bjfjlxqr2gsl5" path="res://src/Characters/OldPlayer/Actions/Dunkjump.gd" id="13_pic6r"]
+[ext_resource type="Script" uid="uid://dva0lnx7ucryv" path="res://src/Characters/OldPlayer/Actions/Dunkdash.gd" id="14_656qk"]
+[ext_resource type="Script" uid="uid://b2ujrsu4flpcq" path="res://src/Characters/OldPlayer/Actions/Aim.gd" id="15_gkwxq"]
+[ext_resource type="Script" uid="uid://dvnsa2v1sr482" path="res://src/Characters/OldPlayer/Actions/Shoot.gd" id="16_xqwyf"]
+[ext_resource type="Script" uid="uid://d3252183xqchb" path="res://src/Characters/OldPlayer/Actions/Adherence.gd" id="17_5pmey"]
+[ext_resource type="Script" uid="uid://bps02lko5vth7" path="res://src/Characters/OldPlayer/Actions/SelectBall.gd" id="18_mvdlr"]
+[ext_resource type="Script" uid="uid://tu2k0ihmwaav" path="res://src/Characters/OldPlayer/Actions/Release.gd" id="19_iuv18"]
+[ext_resource type="Script" uid="uid://ugcllk1ijug3" path="res://src/Characters/OldPlayer/Actions/Grind.gd" id="20_fcxc6"]
+[ext_resource type="Script" uid="uid://dyuh70r510m00" path="res://src/Characters/OldPlayer/Actions/Hang.gd" id="21_ptofo"]
+[ext_resource type="Script" uid="uid://cy1800widhd2f" path="res://src/Characters/OldPlayer/Actions/Interact.gd" id="22_j040b"]
+[ext_resource type="Script" uid="uid://7jxioe7dinur" path="res://src/Characters/OldPlayer/Shooter.gd" id="23_swekb"]
+[ext_resource type="Shader" uid="uid://fwtt4c5ns8m4" path="res://assets/shader/shoot_viewer.gdshader" id="24_j0jau"]
+[ext_resource type="Script" uid="uid://hd4tuxscmisb" path="res://src/Characters/OldPlayer/Shoot_predictor.gd" id="25_we5gd"]
+[ext_resource type="Shader" uid="uid://smacwdl1qw5a" path="res://assets/shader/contour.gdshader" id="26_n7xqu"]
 [ext_resource type="Texture2D" uid="uid://fu53nbwvypbd" path="res://assets/art/characters/Player.png" id="27_arvx7"]
 [ext_resource type="AnimationNodeStateMachine" uid="uid://dcviqtnkvq3ry" path="res://src/Characters/OldPlayer/AnimationTreeHandler/Action.tres" id="28_nx8pr"]
 [ext_resource type="AnimationNodeBlendTree" uid="uid://cmsxpc5f28w5c" path="res://src/Characters/OldPlayer/AnimationTreeHandler/Stance.tres" id="29_444ws"]
-[ext_resource type="Script" path="res://src/Characters/OldPlayer/Player_Effects.gd" id="30_4tdyl"]
+[ext_resource type="Script" uid="uid://cs6fmeji33gpb" path="res://src/Characters/OldPlayer/Player_Effects.gd" id="30_4tdyl"]
 [ext_resource type="PackedScene" uid="uid://26l3hifm7i6c" path="res://src/Effects/DustParticle.tscn" id="31_3udgx"]
 [ext_resource type="Texture2D" uid="uid://b4ujrsln765de" path="res://assets/art/ball/dust.png" id="32_a33sf"]
 [ext_resource type="PackedScene" uid="uid://bs8ju42cns0vf" path="res://src/Effects/GhostHandler.tscn" id="33_uuufg"]
@@ -37,18 +37,18 @@
 [ext_resource type="Texture2D" uid="uid://c0e3bm1u8mxw8" path="res://assets/art/effects/trail.png" id="35_a6sqq"]
 [ext_resource type="PackedScene" uid="uid://bhw3riwbqaxpk" path="res://src/Effects/DustParticle1.tscn" id="36_t12o1"]
 [ext_resource type="PackedScene" uid="uid://br3tr8mssgqev" path="res://src/Effects/GrindParticles.tscn" id="37_3qhnr"]
-[ext_resource type="Script" path="res://src/Characters/Player/Camera.gd" id="38_da3r7"]
-[ext_resource type="Script" path="res://src/Characters/GUI/LifeBar.gd" id="39_51kdo"]
+[ext_resource type="Script" uid="uid://by4x4y0inwr7j" path="res://src/Characters/Player/Camera.gd" id="38_da3r7"]
+[ext_resource type="Script" uid="uid://ej0vgigcvcus" path="res://src/Characters/GUI/LifeBar.gd" id="39_51kdo"]
 [ext_resource type="Texture2D" uid="uid://0bfw4lu2js4b" path="res://assets/art/gui/life_bar_bg.png" id="40_7b0dw"]
 [ext_resource type="Texture2D" uid="uid://scghoxayo4du" path="res://assets/art/gui/life_bar_fill.png" id="41_2rhbe"]
 [ext_resource type="Texture2D" uid="uid://c40av4lxtnfbo" path="res://assets/art/gui/ball_info_bg.png" id="42_j3ujs"]
-[ext_resource type="Script" path="res://src/Characters/OldPlayer/DebugGUI.gd" id="43_u638p"]
+[ext_resource type="Script" uid="uid://dn6rlmgt12g2d" path="res://src/Characters/OldPlayer/DebugGUI.gd" id="43_u638p"]
 [ext_resource type="Texture2D" uid="uid://dhyhbly78c7qp" path="res://assets/art/icons/character.png" id="44_bcc7o"]
-[ext_resource type="Script" path="res://src/Characters/LifeHandler.gd" id="45_qg8o2"]
-[ext_resource type="Script" path="res://src/Items/Interactive/Damageable.gd" id="46_x54il"]
-[ext_resource type="Script" path="res://src/Characters/OldPlayer/Ball_Handler.gd" id="47_hvnja"]
+[ext_resource type="Script" uid="uid://c783iimfnd4rb" path="res://src/Characters/LifeHandler.gd" id="45_qg8o2"]
+[ext_resource type="Script" uid="uid://ibpljupiafmt" path="res://src/Items/Interactive/Damageable.gd" id="46_x54il"]
+[ext_resource type="Script" uid="uid://dossqb4qbbsa0" path="res://src/Characters/OldPlayer/Ball_Handler.gd" id="47_hvnja"]
 [ext_resource type="Texture2D" uid="uid://cuuns5ibc34gj" path="res://assets/art/ball/ball_test.png" id="48_qli5f"]
-[ext_resource type="Script" path="res://src/Items/Activables/InteractionHandler.gd" id="49_pm0y7"]
+[ext_resource type="Script" uid="uid://bgnset7sdq8fl" path="res://src/Items/Activables/InteractionHandler.gd" id="49_pm0y7"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_0vsxb"]
 size = Vector2(17, 57)
@@ -64,7 +64,7 @@ radius = 56.0
 [sub_resource type="ShaderMaterial" id="4"]
 shader = ExtResource("24_j0jau")
 shader_parameter/parameter = 300.0
-shader_parameter/throw_position = null
+shader_parameter/throw_position = Vector2(0, 0)
 shader_parameter/tolerance = 15.0
 
 [sub_resource type="ShaderMaterial" id="67"]
@@ -1362,41 +1362,41 @@ tracks/3/keys = {
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_y1wwd"]
 _data = {
-"RESET": SubResource("59"),
-"air_shoot": SubResource("5"),
-"air_wall": SubResource("6"),
-"crouch": SubResource("7"),
-"crouch_idle": SubResource("8"),
-"dunk": SubResource("9"),
-"dunkdash": SubResource("10"),
-"dunkdash_2": SubResource("Animation_v6wwf"),
-"dunkjump": SubResource("11"),
-"dunkjump_halfturn": SubResource("12"),
-"fall": SubResource("13"),
-"fall_loop": SubResource("14"),
-"floor_attack": SubResource("15"),
-"floor_shoot": SubResource("16"),
-"floor_wall": SubResource("17"),
-"grind+15": SubResource("18"),
-"grind+30": SubResource("19"),
-"grind+45": SubResource("20"),
-"grind-15": SubResource("21"),
-"grind-30": SubResource("22"),
-"grind-45": SubResource("23"),
-"grind0": SubResource("24"),
-"halfturn": SubResource("25"),
-"hang": SubResource("26"),
-"idle": SubResource("27"),
-"idle_dribble": SubResource("28"),
-"jump1": SubResource("29"),
-"land": SubResource("30"),
-"land_roll": SubResource("31"),
-"run": SubResource("32"),
-"slide": SubResource("60"),
-"slide_end": SubResource("61"),
-"slide_loop": SubResource("62"),
-"walk": SubResource("33"),
-"walljump1": SubResource("34")
+&"RESET": SubResource("59"),
+&"air_shoot": SubResource("5"),
+&"air_wall": SubResource("6"),
+&"crouch": SubResource("7"),
+&"crouch_idle": SubResource("8"),
+&"dunk": SubResource("9"),
+&"dunkdash": SubResource("10"),
+&"dunkdash_2": SubResource("Animation_v6wwf"),
+&"dunkjump": SubResource("11"),
+&"dunkjump_halfturn": SubResource("12"),
+&"fall": SubResource("13"),
+&"fall_loop": SubResource("14"),
+&"floor_attack": SubResource("15"),
+&"floor_shoot": SubResource("16"),
+&"floor_wall": SubResource("17"),
+&"grind+15": SubResource("18"),
+&"grind+30": SubResource("19"),
+&"grind+45": SubResource("20"),
+&"grind-15": SubResource("21"),
+&"grind-30": SubResource("22"),
+&"grind-45": SubResource("23"),
+&"grind0": SubResource("24"),
+&"halfturn": SubResource("25"),
+&"hang": SubResource("26"),
+&"idle": SubResource("27"),
+&"idle_dribble": SubResource("28"),
+&"jump1": SubResource("29"),
+&"land": SubResource("30"),
+&"land_roll": SubResource("31"),
+&"run": SubResource("32"),
+&"slide": SubResource("60"),
+&"slide_end": SubResource("61"),
+&"slide_loop": SubResource("62"),
+&"walk": SubResource("33"),
+&"walljump1": SubResource("34")
 }
 
 [sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_p8a3c"]

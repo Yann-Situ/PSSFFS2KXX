@@ -1,7 +1,7 @@
 [gd_scene load_steps=7 format=3 uid="uid://dalyby7b6ctua"]
 
 [ext_resource type="PackedScene" uid="uid://cxn2m3havcmil" path="res://src/Items/Balls/Ball.tscn" id="1_ysam6"]
-[ext_resource type="Script" path="res://src/Items/Balls/BallGravity.gd" id="2_ju1rt"]
+[ext_resource type="Script" uid="uid://8u5eb5v7d6tu" path="res://src/Items/Balls/BallGravity.gd" id="2_ju1rt"]
 
 [sub_resource type="Gradient" id="Gradient_4owqt"]
 offsets = PackedFloat32Array(0, 0.25, 0.5, 0.75, 1)

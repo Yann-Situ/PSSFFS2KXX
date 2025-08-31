@@ -1,6 +1,6 @@
 [gd_scene load_steps=5 format=3 uid="uid://y2rliud1ufhc"]
 
-[ext_resource type="Script" path="res://src/Effects/Trail.gd" id="1"]
+[ext_resource type="Script" uid="uid://dv4fay4wtpwrl" path="res://src/Effects/Trail.gd" id="1"]
 [ext_resource type="Texture2D" uid="uid://c0e3bm1u8mxw8" path="res://assets/art/effects/trail.png" id="2"]
 
 [sub_resource type="Curve" id="1"]

@@ -1,6 +1,6 @@
 [gd_scene load_steps=4 format=3 uid="uid://0jgk1uwov2y0"]
 
-[ext_resource type="Script" path="res://src/Map/Environment/TextBubbleArea.gd" id="1_mjgpd"]
+[ext_resource type="Script" uid="uid://wpscxd7veo5j" path="res://src/Map/Environment/TextBubbleArea.gd" id="1_mjgpd"]
 [ext_resource type="PackedScene" uid="uid://bkqmakllertlv" path="res://assets/dialogue/SimpleBalloon.tscn" id="2_fdjrg"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_ta4h8"]

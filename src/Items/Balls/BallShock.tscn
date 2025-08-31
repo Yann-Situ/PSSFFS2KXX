@@ -2,11 +2,11 @@
 
 [ext_resource type="PackedScene" uid="uid://cxn2m3havcmil" path="res://src/Items/Balls/Ball.tscn" id="1"]
 [ext_resource type="Texture2D" uid="uid://dw0p1sffybm16" path="res://assets/art/ball/ball_shock.png" id="2"]
-[ext_resource type="Script" path="res://src/Effects/Resources/DistortionResource.gd" id="3_wuggy"]
+[ext_resource type="Script" uid="uid://ja7onbkv0y1o" path="res://src/Effects/Resources/DistortionResource.gd" id="3_wuggy"]
 [ext_resource type="Texture2D" uid="uid://jqkx4uejqbjr" path="res://assets/art/effects/shockwave_0.png" id="4"]
 [ext_resource type="Resource" uid="uid://b1j23x2kvb01e" path="res://src/Items/Balls/data/BallShockExplosionData.tres" id="4_md6hr"]
-[ext_resource type="Script" path="res://src/Items/Balls/BallShock.gd" id="5"]
-[ext_resource type="Shader" path="res://assets/shader/contour.gdshader" id="6"]
+[ext_resource type="Script" uid="uid://c3dvcsupni0ph" path="res://src/Items/Balls/BallShock.gd" id="5"]
+[ext_resource type="Shader" uid="uid://smacwdl1qw5a" path="res://assets/shader/contour.gdshader" id="6"]
 
 [sub_resource type="PhysicsMaterial" id="PhysicsMaterial_wloox"]
 friction = 0.85
@@ -230,8 +230,8 @@ tracks/4/keys = {
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_mtq5y"]
 _data = {
-"destruction": SubResource("3"),
-"dunk": SubResource("4")
+&"destruction": SubResource("3"),
+&"dunk": SubResource("4")
 }
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_gwi7s"]
@@ -275,9 +275,9 @@ tracks/0/keys = {
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_lctft"]
 _data = {
-"RESET": SubResource("Animation_w87na"),
-"idle": SubResource("5"),
-"shockwave": SubResource("6")
+&"RESET": SubResource("Animation_w87na"),
+&"idle": SubResource("5"),
+&"shockwave": SubResource("6")
 }
 
 [sub_resource type="CanvasItemMaterial" id="7"]

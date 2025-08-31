@@ -1,7 +1,7 @@
 [gd_scene load_steps=9 format=3 uid="uid://dqh3hjimrqhgl"]
 
-[ext_resource type="Script" path="res://src/Items/Interactive/Wind.gd" id="1"]
-[ext_resource type="Shader" path="res://assets/shader/fog.gdshader" id="2"]
+[ext_resource type="Script" uid="uid://5yogh1332s5w" path="res://src/Items/Interactive/Wind.gd" id="1"]
+[ext_resource type="Shader" uid="uid://cnkh7fxb82qgk" path="res://assets/shader/fog.gdshader" id="2"]
 
 [sub_resource type="RectangleShape2D" id="1"]
 resource_local_to_scene = true

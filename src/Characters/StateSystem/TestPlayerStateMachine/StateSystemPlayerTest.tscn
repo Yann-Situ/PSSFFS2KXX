@@ -1,19 +1,19 @@
 [gd_scene load_steps=36 format=3 uid="uid://7we1xpq4ltji"]
 
-[ext_resource type="Script" path="res://src/Characters/StateSystem/TestPlayerStateMachine/FakePlayer.gd" id="1_jpwa8"]
+[ext_resource type="Script" uid="uid://bk0bx325ffc6o" path="res://src/Characters/StateSystem/TestPlayerStateMachine/FakePlayer.gd" id="1_jpwa8"]
 [ext_resource type="Resource" uid="uid://syr8dljufw4f" path="res://src/Characters/StateSystem/TestPlayerStateMachine/MD.tres" id="2_h73fj"]
-[ext_resource type="Script" path="res://src/Characters/StateSystem/TestPlayerStateMachine/FakePlayerPolygon.gd" id="3_iko4c"]
+[ext_resource type="Script" uid="uid://cbmuu2bao7y6y" path="res://src/Characters/StateSystem/TestPlayerStateMachine/FakePlayerPolygon.gd" id="3_iko4c"]
 [ext_resource type="Texture2D" uid="uid://cuuns5ibc34gj" path="res://assets/art/ball/ball_test.png" id="4_evkw0"]
-[ext_resource type="Script" path="res://src/Characters/StateSystem/StateMachine.gd" id="5_xwlcx"]
-[ext_resource type="Script" path="res://src/Characters/StateSystem/TestPlayerStateMachine/StatusLogicPlayer.gd" id="6_wkcug"]
-[ext_resource type="Script" path="res://src/Characters/StateSystem/Test/InputControllerTest.gd" id="7_07fpl"]
-[ext_resource type="Script" path="res://src/Characters/StateSystem/TestPlayerStateMachine/StandPlayerState.gd" id="8_b4u4i"]
-[ext_resource type="Script" path="res://src/Characters/StateSystem/TestPlayerStateMachine/JumpPlayerState.gd" id="9_ee502"]
-[ext_resource type="Script" path="res://src/Characters/StateSystem/TestPlayerStateMachine/FallPlayerState.gd" id="10_5cdyi"]
-[ext_resource type="Script" path="res://src/Characters/StateSystem/TestPlayerStateMachine/CrouchPlayerState.gd" id="11_7lnpk"]
-[ext_resource type="Script" path="res://src/Characters/StateSystem/TestPlayerStateMachine/MovementDataModifier.gd" id="12_ln2rm"]
-[ext_resource type="Script" path="res://src/Characters/StateSystem/TestPlayerStateMachine/LandPlayerState.gd" id="13_wfw28"]
-[ext_resource type="Script" path="res://src/Characters/StateSystem/TestPlayerStateMachine/SlidePlayerState.gd" id="14_i3xj1"]
+[ext_resource type="Script" uid="uid://bp3dv7334o854" path="res://src/Characters/StateSystem/StateMachine.gd" id="5_xwlcx"]
+[ext_resource type="Script" uid="uid://wo0uqq3t8yux" path="res://src/Characters/StateSystem/TestPlayerStateMachine/StatusLogicPlayer.gd" id="6_wkcug"]
+[ext_resource type="Script" uid="uid://b4wfpheaih2ep" path="res://src/Characters/StateSystem/Test/InputControllerTest.gd" id="7_07fpl"]
+[ext_resource type="Script" uid="uid://db25amdjuly2u" path="res://src/Characters/StateSystem/TestPlayerStateMachine/StandPlayerState.gd" id="8_b4u4i"]
+[ext_resource type="Script" uid="uid://bpwwdtq3n1adm" path="res://src/Characters/StateSystem/TestPlayerStateMachine/JumpPlayerState.gd" id="9_ee502"]
+[ext_resource type="Script" uid="uid://c4impl2afie76" path="res://src/Characters/StateSystem/TestPlayerStateMachine/FallPlayerState.gd" id="10_5cdyi"]
+[ext_resource type="Script" uid="uid://qiakkq0uok36" path="res://src/Characters/StateSystem/TestPlayerStateMachine/CrouchPlayerState.gd" id="11_7lnpk"]
+[ext_resource type="Script" uid="uid://82hei7ohqqm6" path="res://src/Characters/StateSystem/TestPlayerStateMachine/MovementDataModifier.gd" id="12_ln2rm"]
+[ext_resource type="Script" uid="uid://dxefrqo0ihm3b" path="res://src/Characters/StateSystem/TestPlayerStateMachine/LandPlayerState.gd" id="13_wfw28"]
+[ext_resource type="Script" uid="uid://cstd4gqqervgu" path="res://src/Characters/StateSystem/TestPlayerStateMachine/SlidePlayerState.gd" id="14_i3xj1"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_elcga"]
 size = Vector2(32, 32)
@@ -940,22 +940,22 @@ tracks/4/keys = {
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_f8044"]
 _data = {
-"RESET": SubResource("Animation_upwdd"),
-"begin_slide": SubResource("Animation_fkq1w"),
-"crouch_idle": SubResource("Animation_wse1u"),
-"crouch_walk": SubResource("Animation_7qhrd"),
-"end_slide": SubResource("Animation_k3s2o"),
-"fall": SubResource("Animation_k1qjm"),
-"fall_loop": SubResource("Animation_necy4"),
-"frontflip": SubResource("Animation_txnhd"),
-"idle": SubResource("Animation_4qni5"),
-"jump": SubResource("Animation_ah2ul"),
-"land": SubResource("Animation_dk0i6"),
-"land_roll": SubResource("Animation_ej5ur"),
-"slide_loop": SubResource("Animation_sg2ls"),
-"standstop": SubResource("Animation_b7rib"),
-"turn": SubResource("Animation_xea1r"),
-"walk": SubResource("Animation_oce65")
+&"RESET": SubResource("Animation_upwdd"),
+&"begin_slide": SubResource("Animation_fkq1w"),
+&"crouch_idle": SubResource("Animation_wse1u"),
+&"crouch_walk": SubResource("Animation_7qhrd"),
+&"end_slide": SubResource("Animation_k3s2o"),
+&"fall": SubResource("Animation_k1qjm"),
+&"fall_loop": SubResource("Animation_necy4"),
+&"frontflip": SubResource("Animation_txnhd"),
+&"idle": SubResource("Animation_4qni5"),
+&"jump": SubResource("Animation_ah2ul"),
+&"land": SubResource("Animation_dk0i6"),
+&"land_roll": SubResource("Animation_ej5ur"),
+&"slide_loop": SubResource("Animation_sg2ls"),
+&"standstop": SubResource("Animation_b7rib"),
+&"turn": SubResource("Animation_xea1r"),
+&"walk": SubResource("Animation_oce65")
 }
 
 [sub_resource type="Resource" id="Resource_kwrvl"]

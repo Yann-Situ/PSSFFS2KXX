@@ -5,9 +5,9 @@
 [ext_resource type="PackedScene" uid="uid://0jgk1uwov2y0" path="res://src/Map/Environment/TextBubbleArea.tscn" id="3_0bwgq"]
 [ext_resource type="PackedScene" uid="uid://2g6648a4qrng" path="res://src/Map/Environment/TextBubbleInteraction.tscn" id="4_wc2b0"]
 [ext_resource type="PackedScene" uid="uid://bibx4tlfcbuxm" path="res://src/Characters/NPC/PedestrianGenerator.tscn" id="5_pp1xi"]
-[ext_resource type="Script" path="res://src/Global/CustomResources/ColorSampler.gd" id="6_v7pcb"]
-[ext_resource type="Script" path="res://src/Global/CustomResources/ColorDistribution.gd" id="7_lrduh"]
-[ext_resource type="Script" path="res://src/Global/CustomResources/PaletteSchemeSampler.gd" id="8_kxaff"]
+[ext_resource type="Script" uid="uid://rhh7r0qpulhk" path="res://src/Global/CustomResources/ColorSampler.gd" id="6_v7pcb"]
+[ext_resource type="Script" uid="uid://43uhm8cqaqhy" path="res://src/Global/CustomResources/ColorDistribution.gd" id="7_lrduh"]
+[ext_resource type="Script" uid="uid://bj3hqhx5ewhlm" path="res://src/Global/CustomResources/PaletteSchemeSampler.gd" id="8_kxaff"]
 
 [sub_resource type="Gradient" id="1"]
 resource_local_to_scene = true

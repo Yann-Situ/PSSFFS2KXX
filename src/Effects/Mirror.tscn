@@ -1,7 +1,7 @@
 [gd_scene load_steps=6 format=3 uid="uid://dfka4lp6t6tym"]
 
-[ext_resource type="Script" path="res://src/Effects/Mirror.gd" id="1_qwf2l"]
-[ext_resource type="Shader" path="res://assets/shader/water.gdshader" id="2_gefvg"]
+[ext_resource type="Script" uid="uid://d4a4agl8l4ibv" path="res://src/Effects/Mirror.gd" id="1_qwf2l"]
+[ext_resource type="Shader" uid="uid://b6igxveqgnmvv" path="res://assets/shader/water.gdshader" id="2_gefvg"]
 
 [sub_resource type="FastNoiseLite" id="FastNoiseLite_a0s1y"]
 

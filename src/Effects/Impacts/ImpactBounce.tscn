@@ -1,7 +1,7 @@
 [gd_scene load_steps=7 format=3 uid="uid://bprm53dx8o8n4"]
 
 [ext_resource type="Texture2D" uid="uid://cdwrt37rro404" path="res://assets/art/effects/impact/impact_bounce.png" id="1_0gyc5"]
-[ext_resource type="Script" path="res://src/Effects/OneShotParticle.gd" id="2_00ocl"]
+[ext_resource type="Script" uid="uid://by6uoo5412abj" path="res://src/Effects/OneShotParticle.gd" id="2_00ocl"]
 
 [sub_resource type="CanvasItemMaterial" id="1"]
 particles_animation = true

@@ -1,6 +1,6 @@
 [gd_scene load_steps=5 format=3 uid="uid://bgye6alyyon70"]
 
-[ext_resource type="Script" path="res://src/Global/CustomResources/PaletteSchemeTester.gd" id="1_pwk1h"]
+[ext_resource type="Script" uid="uid://dgqtfo4rwu5rh" path="res://src/Global/CustomResources/PaletteSchemeTester.gd" id="1_pwk1h"]
 [ext_resource type="Resource" uid="uid://b1sqjl338o38w" path="res://src/Characters/NPC/PaletteSamplerDocks.tres" id="2_e1hit"]
 
 [sub_resource type="Gradient" id="Gradient_7p66x"]

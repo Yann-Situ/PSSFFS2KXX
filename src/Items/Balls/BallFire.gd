@@ -15,7 +15,9 @@ func collision_effect(collider, collider_velocity, collision_point, collision_no
 		destruction(0.01)
 
 ################################################################################
-
+func on_throw(previous_holder : Node):
+	$AudioFire.play()
+	
 func power_p(player,delta):
 	attract_alterer.set_value(attract_force*(player.global_position - global_position).normalized())
 func power_p_hold(player,delta):

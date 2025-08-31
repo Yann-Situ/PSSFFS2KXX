@@ -16,7 +16,7 @@ config/godotenv/root_directory="res://"
 
 config/name="PSSFFS2KXX"
 run/main_scene="res://src/Levels/LevelExample/LevelExample.tscn"
-config/features=PackedStringArray("4.3")
+config/features=PackedStringArray("4.4")
 run/max_fps=60
 config/icon="res://assets/art/icons/popol.png"
 
@@ -25,12 +25,12 @@ config/icon="res://assets/art/icons/popol.png"
 Global="*res://src/Global/Global.gd"
 GlobalEffect="*res://src/Global/GlobalEffect.gd"
 GlobalMaths="*res://src/Global/GlobalMaths.gd"
-DialogueManager="*res://addons/dialogue_manager/dialogue_manager.gd"
 GodotParadiseAudioManager="*res://addons/singleton_bundle/audio/audio.gd"
 GodotParadiseEnvironment="*res://addons/singleton_bundle/dotenv/godotenv.gd"
 GodotParadiseGeneralUtilities="*res://addons/singleton_bundle/utils/general_utilities.gd"
 GodotParadiseVectorWizard="*res://addons/singleton_bundle/utils/vector_wizard.gd"
 GodotParadiseSceneTransitioner="*res://addons/singleton_bundle/scene_transition/scene_transitioner.gd"
+DialogueManager="*res://addons/dialogue_manager/dialogue_manager.gd"
 
 [debug]
 
@@ -42,7 +42,6 @@ gdscript/warnings/unused_signal=false
 gdscript/warnings/shadowed_variable=0
 gdscript/warnings/return_value_discarded=false
 gdscript/warnings/deprecated_keyword=2
-gdscript/warnings/renamed_in_godot_4_hint=true
 shapes/collision/shape_color=Color(1, 1, 1, 0.419608)
 gdscript/warnings/unused_argument=false
 

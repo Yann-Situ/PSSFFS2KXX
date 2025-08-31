@@ -1,7 +1,7 @@
 [gd_scene load_steps=7 format=3 uid="uid://ccumhjla47fuk"]
 
 [ext_resource type="Texture2D" uid="uid://caqwvbyrw3bdt" path="res://assets/art/effects/jumpcloud1.png" id="1_ylmvd"]
-[ext_resource type="Script" path="res://src/Effects/OneShotParticle.gd" id="2_8oucv"]
+[ext_resource type="Script" uid="uid://by6uoo5412abj" path="res://src/Effects/OneShotParticle.gd" id="2_8oucv"]
 
 [sub_resource type="CanvasItemMaterial" id="1"]
 resource_local_to_scene = true

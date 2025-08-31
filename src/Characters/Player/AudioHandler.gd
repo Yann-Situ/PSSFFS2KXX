@@ -17,3 +17,10 @@ func play_music():
 func stop_music():
 	# TODO fade out
 	$AudioMusic.stop()
+
+########## Effects
+
+func play_dash():
+	$AudioDash.play()
+func play_inspiration():
+	$AudioInspiration.play()

@@ -1,9 +1,9 @@
 [gd_scene load_steps=8 format=3 uid="uid://dwfq2eojd3kcq"]
 
 [ext_resource type="Texture2D" uid="uid://bx70alc2tdq28" path="res://assets/art/environment/environment-interactive.png" id="1"]
-[ext_resource type="Script" path="res://src/Items/Activables/Spawner.gd" id="2"]
+[ext_resource type="Script" uid="uid://bcisnijocv2ij" path="res://src/Items/Activables/Spawner.gd" id="2"]
 [ext_resource type="PackedScene" uid="uid://cxn2m3havcmil" path="res://src/Items/Balls/Ball.tscn" id="3"]
-[ext_resource type="Script" path="res://src/Items/Interactive/Electric.gd" id="4"]
+[ext_resource type="Script" uid="uid://ddxijw44okbnf" path="res://src/Items/Interactive/Electric.gd" id="4"]
 
 [sub_resource type="Animation" id="1"]
 resource_name = "spawn"
@@ -24,7 +24,7 @@ tracks/0/keys = {
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_blrqg"]
 _data = {
-"spawn": SubResource("1")
+&"spawn": SubResource("1")
 }
 
 [sub_resource type="RectangleShape2D" id="2"]

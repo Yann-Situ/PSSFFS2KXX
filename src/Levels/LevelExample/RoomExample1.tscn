@@ -5,10 +5,10 @@
 [ext_resource type="PackedScene" uid="uid://cxn2m3havcmil" path="res://src/Items/Balls/Ball.tscn" id="3"]
 [ext_resource type="PackedScene" uid="uid://27jkgoi43hoq" path="res://src/Items/Balls/BallShock.tscn" id="4"]
 [ext_resource type="PackedScene" uid="uid://rmukvjwyiahu" path="res://src/Items/Interactive/DashTarget.tscn" id="5"]
-[ext_resource type="Script" path="res://src/Global/CustomResources/ColorDistribution.gd" id="5_cxk5i"]
-[ext_resource type="Script" path="res://src/Global/CustomResources/ColorSampler.gd" id="5_nk508"]
-[ext_resource type="Shader" path="res://assets/shader/fog.gdshader" id="6"]
-[ext_resource type="Script" path="res://src/Global/CustomResources/PaletteSchemeSampler.gd" id="6_71oce"]
+[ext_resource type="Script" uid="uid://43uhm8cqaqhy" path="res://src/Global/CustomResources/ColorDistribution.gd" id="5_cxk5i"]
+[ext_resource type="Script" uid="uid://rhh7r0qpulhk" path="res://src/Global/CustomResources/ColorSampler.gd" id="5_nk508"]
+[ext_resource type="Shader" uid="uid://cnkh7fxb82qgk" path="res://assets/shader/fog.gdshader" id="6"]
+[ext_resource type="Script" uid="uid://bj3hqhx5ewhlm" path="res://src/Global/CustomResources/PaletteSchemeSampler.gd" id="6_71oce"]
 [ext_resource type="Texture2D" uid="uid://b6xy57w6vd0mf" path="res://assets/art/environment/chain0.png" id="8"]
 [ext_resource type="PackedScene" uid="uid://bdepe4j1x2ie8" path="res://src/Map/Environment/ParabolaCatenary.tscn" id="9"]
 [ext_resource type="PackedScene" uid="uid://c6cdyqr51vbxh" path="res://src/Items/Interactive/GraffSpray.tscn" id="10"]
@@ -30,7 +30,7 @@
 [ext_resource type="Texture2D" uid="uid://ctiuc3lmtrgkb" path="res://assets/art/effects/light2.png" id="27_tjpql"]
 [ext_resource type="PackedScene" uid="uid://co2grsk6s5crx" path="res://src/Characters/NPC/YS.tscn" id="28_5sjrw"]
 [ext_resource type="PackedScene" uid="uid://cckqoik18dppx" path="res://src/Items/Baskets/Basket.tscn" id="29_38ii6"]
-[ext_resource type="Shader" path="res://src/Items/Dynamics/ForceField.gdshader" id="30_ynsv1"]
+[ext_resource type="Shader" uid="uid://dovljdyybj36e" path="res://src/Items/Dynamics/ForceField.gdshader" id="30_ynsv1"]
 [ext_resource type="PackedScene" uid="uid://cse8okfaedvl1" path="res://src/Items/Balls/YoyoBall.tscn" id="32_2sngy"]
 [ext_resource type="PackedScene" uid="uid://cy6ot0oc7dmqp" path="res://src/Items/Balls/SnailBall.tscn" id="33_wukp4"]
 [ext_resource type="PackedScene" uid="uid://dgsb17wmfpqq0" path="res://src/Characters/NPC/Ennemies/FireThrower/FireThrower.tscn" id="34_kamwx"]
@@ -180,10 +180,10 @@ tracks/0/keys = {
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_m5lmj"]
 _data = {
-"RESET": SubResource("Animation_vmc0s"),
-"calm": SubResource("9"),
-"start_cinematic": SubResource("Animation_adokn"),
-"stop_cinematic": SubResource("Animation_ecsde")
+&"RESET": SubResource("Animation_vmc0s"),
+&"calm": SubResource("9"),
+&"start_cinematic": SubResource("Animation_adokn"),
+&"stop_cinematic": SubResource("Animation_ecsde")
 }
 
 [sub_resource type="Environment" id="6"]
@@ -283,7 +283,7 @@ saturation_distribution = SubResource("33")
 lightness_distribution = SubResource("39")
 weight = 1.0
 
-[sub_resource type="Resource" id="Resource_t7u5j"]
+[sub_resource type="Resource" id="Resource_8ehin"]
 resource_local_to_scene = true
 script = ExtResource("6_71oce")
 color_samplers = Array[ExtResource("5_nk508")]([SubResource("19"), SubResource("23"), SubResource("31"), SubResource("35")])
@@ -519,7 +519,7 @@ mouse_filter = 2
 
 [node name="RoomAnimations" parent="." index="4"]
 libraries = {
-"": SubResource("AnimationLibrary_m5lmj")
+&"": SubResource("AnimationLibrary_m5lmj")
 }
 
 [node name="WorldEnvironment" parent="." index="5"]
@@ -531,7 +531,7 @@ position = Vector2(1664, 0)
 [node name="PedestrianGenerator" parent="." index="7" instance=ExtResource("11")]
 position = Vector2(1248, 0)
 x_radius = 700.0
-palette_scheme_sampler = SubResource("Resource_t7u5j")
+palette_scheme_sampler = SubResource("Resource_8ehin")
 walk_speed_min = 35.0
 
 [node name="CanvasModulate" parent="Map" index="0"]

@@ -1,7 +1,7 @@
 [gd_scene load_steps=13 format=3 uid="uid://bjy7nt7bd313e"]
 
 [ext_resource type="PackedScene" uid="uid://cxn2m3havcmil" path="res://src/Items/Balls/Ball.tscn" id="1"]
-[ext_resource type="Script" path="res://src/Items/Balls/BallBubble.gd" id="2"]
+[ext_resource type="Script" uid="uid://bcxdkwc26bwrc" path="res://src/Items/Balls/BallBubble.gd" id="2"]
 
 [sub_resource type="PhysicsMaterial" id="PhysicsMaterial_ihk3h"]
 friction = 0.0
@@ -334,10 +334,10 @@ tracks/2/keys = {
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_n7p6h"]
 _data = {
-"destruction": SubResource("Animation_yhsxj"),
-"dunk": SubResource("Animation_jb6dc"),
-"stase": SubResource("Animation_rvl7c"),
-"teleport": SubResource("2")
+&"destruction": SubResource("Animation_yhsxj"),
+&"dunk": SubResource("Animation_jb6dc"),
+&"stase": SubResource("Animation_rvl7c"),
+&"teleport": SubResource("2")
 }
 
 [node name="BallBubble" instance=ExtResource("1")]

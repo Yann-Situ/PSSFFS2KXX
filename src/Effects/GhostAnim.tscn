@@ -1,7 +1,7 @@
 [gd_scene load_steps=4 format=3 uid="uid://b0pxgq2y6is2j"]
 
-[ext_resource type="Script" path="res://src/Effects/GhostAnim.gd" id="1"]
-[ext_resource type="Shader" path="res://assets/shader/ghost_anim.gdshader" id="2"]
+[ext_resource type="Script" uid="uid://blhtwm6bec4y6" path="res://src/Effects/GhostAnim.gd" id="1"]
+[ext_resource type="Shader" uid="uid://dtnflx1vhlmhs" path="res://assets/shader/ghost_anim.gdshader" id="2"]
 
 [sub_resource type="ShaderMaterial" id="1"]
 resource_local_to_scene = true

@@ -1,9 +1,9 @@
 [gd_scene load_steps=9 format=3 uid="uid://35w4ymx61dbi"]
 
-[ext_resource type="Script" path="res://assets/dialogue/PopBalloon.gd" id="1_qa1sy"]
+[ext_resource type="Script" uid="uid://dgiifiyi0gexp" path="res://assets/dialogue/PopBalloon.gd" id="1_qa1sy"]
 [ext_resource type="Theme" uid="uid://b8qe788vvlgia" path="res://assets/art/gui/theme-1.tres" id="2_3yhot"]
 [ext_resource type="PackedScene" uid="uid://ckvgyvclnwggo" path="res://addons/dialogue_manager/dialogue_label.tscn" id="3_d81mh"]
-[ext_resource type="Script" path="res://addons/dialogue_manager/dialogue_reponses_menu.gd" id="4_w8t0g"]
+[ext_resource type="Script" uid="uid://bb52rsfwhkxbn" path="res://addons/dialogue_manager/dialogue_responses_menu.gd" id="4_w8t0g"]
 
 [sub_resource type="Animation" id="Animation_352l8"]
 length = 0.001
@@ -56,9 +56,9 @@ tracks/0/keys = {
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_8amah"]
 _data = {
-"RESET": SubResource("Animation_352l8"),
-"appear": SubResource("Animation_bby0t"),
-"disappear": SubResource("Animation_7sugg")
+&"RESET": SubResource("Animation_352l8"),
+&"appear": SubResource("Animation_bby0t"),
+&"disappear": SubResource("Animation_7sugg")
 }
 
 [node name="PopBalloon" type="Node2D"]
@@ -140,7 +140,7 @@ text = "Response example"
 [node name="AnimationPlayer" type="AnimationPlayer" parent="CanvasLayer"]
 unique_name_in_owner = true
 libraries = {
-"": SubResource("AnimationLibrary_8amah")
+&"": SubResource("AnimationLibrary_8amah")
 }
 
 [connection signal="gui_input" from="CanvasLayer/Balloon" to="." method="_on_balloon_gui_input"]

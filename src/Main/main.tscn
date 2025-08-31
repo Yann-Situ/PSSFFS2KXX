@@ -1,35 +1,34 @@
-[gd_scene load_steps=45 format=3 uid="uid://d1vmfw2uc4eox"]
+[gd_scene load_steps=46 format=3 uid="uid://d1vmfw2uc4eox"]
 
-[ext_resource type="Script" path="res://src/Levels/Room2D.gd" id="1"]
-[ext_resource type="PackedScene" uid="uid://yco4prlcetlu" path="res://src/Items/Balls/BallBoum.tscn" id="3"]
+[ext_resource type="Script" uid="uid://bw1frjo60ivqp" path="res://src/Levels/Room2D.gd" id="1"]
+[ext_resource type="PackedScene" uid="uid://bdhkn6l5lcxe0" path="res://src/Items/Balls/BallBoum.tscn" id="3"]
 [ext_resource type="PackedScene" uid="uid://cn3mh5kug88g3" path="res://src/Items/Dynamics/PipeBall.tscn" id="4"]
 [ext_resource type="PackedScene" uid="uid://cxn2m3havcmil" path="res://src/Items/Balls/Ball.tscn" id="5"]
-[ext_resource type="Texture2D" uid="uid://b4ydi56jhjt5p" path="res://assets/art/background/ShopBackground2.png" id="6"]
-[ext_resource type="Texture2D" uid="uid://b8cfr623fwqvh" path="res://assets/art/background/pixelBackground3.png" id="7"]
-[ext_resource type="Texture2D" uid="uid://bkmlsn4n074ia" path="res://assets/art/background/ShopBackground4.png" id="8"]
+[ext_resource type="Texture2D" uid="uid://bj0utyh77boe" path="res://assets/art/background/ShopBackground2.png" id="6"]
+[ext_resource type="Texture2D" uid="uid://dcc4ug032gw0y" path="res://assets/art/background/pixelBackground3.png" id="7"]
+[ext_resource type="Texture2D" uid="uid://dbjsnkck6v8iv" path="res://assets/art/background/ShopBackground4.png" id="8"]
 [ext_resource type="PackedScene" uid="uid://c4ein3aak14an" path="res://src/Items/Balls/BallFire.tscn" id="11"]
-[ext_resource type="PackedScene" path="res://src/Items/Interactive/DashTarget.tscn" id="14"]
+[ext_resource type="PackedScene" uid="uid://rmukvjwyiahu" path="res://src/Items/Interactive/DashTarget.tscn" id="14"]
 [ext_resource type="PackedScene" uid="uid://bcnnkalot4kb0" path="res://src/Items/Dynamics/Jumper.tscn" id="15"]
-[ext_resource type="Texture2D" uid="uid://dlxo8jxb21u55" path="res://assets/art/effects/light5_4.png" id="16"]
-[ext_resource type="Texture2D" uid="uid://dph4cpsym7lcb" path="res://assets/art/effects/light5_5.png" id="17"]
-[ext_resource type="Texture2D" uid="uid://bcxflf7dbeb4w" path="res://assets/art/effects/light5_1.png" id="18"]
+[ext_resource type="Texture2D" uid="uid://bo1cx5blctfm5" path="res://assets/art/effects/light5_4.png" id="16"]
+[ext_resource type="Texture2D" uid="uid://dfut2gplenar" path="res://assets/art/effects/light5_5.png" id="17"]
+[ext_resource type="Texture2D" uid="uid://df3tf1mx1ga2y" path="res://assets/art/effects/light5_1.png" id="18"]
 [ext_resource type="PackedScene" uid="uid://dwfq2eojd3kcq" path="res://src/Items/Activables/Spawner.tscn" id="19"]
-[ext_resource type="PackedScene" path="res://src/Items/Activables/Button0.tscn" id="20"]
-[ext_resource type="PackedScene" uid="uid://0oao7gw1q1bh" path="res://src/Items/Dynamics/ZipLine.tscn" id="21"]
-[ext_resource type="Texture2D" uid="uid://b41scft6p0qto" path="res://assets/art/effects/light5_3.png" id="22"]
-[ext_resource type="Texture2D" uid="uid://pcstif3roi0k" path="res://assets/art/effects/light5_2.png" id="23"]
+[ext_resource type="PackedScene" uid="uid://ctnc1m88pj7rq" path="res://src/Items/Activables/Button0.tscn" id="20"]
+[ext_resource type="Texture2D" uid="uid://kuyoddmpp4nh" path="res://assets/art/effects/light5_3.png" id="22"]
+[ext_resource type="Texture2D" uid="uid://icukigpgr52w" path="res://assets/art/effects/light5_2.png" id="23"]
 [ext_resource type="PackedScene" uid="uid://imtw5v2qrplf" path="res://src/Items/Balls/BallBouncy.tscn" id="25"]
 [ext_resource type="PackedScene" uid="uid://bjy7nt7bd313e" path="res://src/Items/Balls/BallBubble.tscn" id="26"]
 [ext_resource type="PackedScene" uid="uid://clducx30br87q" path="res://src/Items/Balls/BallRolling.tscn" id="27"]
 [ext_resource type="PackedScene" uid="uid://8alv0hbdmh5e" path="res://src/Items/Balls/BallMetal.tscn" id="28"]
-[ext_resource type="Texture2D" uid="uid://b4meqionddno3" path="res://assets/art/effects/light3.png" id="29"]
+[ext_resource type="Texture2D" uid="uid://bg8ajopecg30j" path="res://assets/art/effects/light3.png" id="29"]
 [ext_resource type="PackedScene" uid="uid://cjv8hfeex2clu" path="res://src/Items/Dynamics/RailLine.tscn" id="33"]
 [ext_resource type="PackedScene" uid="uid://d1iceb4hkwose" path="res://src/Items/Interactive/BreakableBloc.tscn" id="35"]
 [ext_resource type="PackedScene" uid="uid://dshbchrglyje0" path="res://src/Items/Interactive/Door.tscn" id="37"]
 [ext_resource type="PackedScene" uid="uid://27jkgoi43hoq" path="res://src/Items/Balls/BallShock.tscn" id="44"]
-[ext_resource type="PackedScene" uid="uid://cjbsx2kbm5qhk" path="res://src/Player/PlayerPosition.tscn" id="45"]
+[ext_resource type="PackedScene" uid="uid://cjbsx2kbm5qhk" path="res://src/Characters/OldPlayer/PlayerPosition.tscn" id="45"]
 [ext_resource type="PackedScene" uid="uid://cd2wyj207og8s" path="res://src/Items/Balls/BallDash.tscn" id="47"]
-[ext_resource type="PackedScene" path="res://src/Items/Interactive/Wind.tscn" id="48"]
+[ext_resource type="PackedScene" uid="uid://dqh3hjimrqhgl" path="res://src/Items/Interactive/Wind.tscn" id="48"]
 
 [sub_resource type="Gradient" id="1"]
 offsets = PackedFloat32Array(0, 0.565574, 1)
@@ -40,6 +39,12 @@ gradient = SubResource("1")
 width = 516
 
 [sub_resource type="ShaderMaterial" id="3"]
+
+[sub_resource type="Resource" id="Resource_sq1si"]
+metadata/__load_path__ = "res://src/Items/Dynamics/ZipLine.tscn"
+
+[sub_resource type="Resource" id="Resource_tc6km"]
+metadata/__load_path__ = "res://src/Items/Dynamics/ZipLine.tscn"
 
 [sub_resource type="Curve2D" id="13"]
 _data = {
@@ -368,11 +373,11 @@ position = Vector2(840, -72)
 rotation = 0.785397
 cant_go_time = 1.0
 
-[node name="ZipLine" parent="Environment/Dynamics" instance=ExtResource("21")]
+[node name="ZipLine" parent="Environment/Dynamics"]
 position = Vector2(-248, -216)
 final_point = Vector2(2000, 200)
 
-[node name="ZipLine2" parent="Environment/Dynamics" instance=ExtResource("21")]
+[node name="ZipLine2" parent="Environment/Dynamics"]
 position = Vector2(288, 152)
 zipline_type = 1
 final_point = Vector2(510, 140)

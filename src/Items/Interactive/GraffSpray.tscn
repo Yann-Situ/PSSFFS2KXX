@@ -1,11 +1,11 @@
 [gd_scene load_steps=16 format=3 uid="uid://c6cdyqr51vbxh"]
 
 [ext_resource type="Texture2D" uid="uid://cmdquuanqily4" path="res://assets/art/environment/graff-spray.png" id="1"]
-[ext_resource type="Shader" path="res://assets/shader/graff-spray.gdshader" id="2"]
-[ext_resource type="Script" path="res://src/Items/Interactive/GraffSpray.gd" id="3"]
+[ext_resource type="Shader" uid="uid://cu5kmhnjvihef" path="res://assets/shader/graff-spray.gdshader" id="2"]
+[ext_resource type="Script" uid="uid://n8uf8obgcjrp" path="res://src/Items/Interactive/GraffSpray.gd" id="3"]
 [ext_resource type="Texture2D" uid="uid://ctiuc3lmtrgkb" path="res://assets/art/effects/light2.png" id="4"]
 [ext_resource type="Texture2D" uid="uid://d33u8f6bfhj4m" path="res://assets/art/effects/round.png" id="5"]
-[ext_resource type="AudioStream" uid="uid://um1etgxk0vfd" path="res://assets/music/goal1.mp3" id="6_ldpk6"]
+[ext_resource type="AudioStream" uid="uid://c3v24lptcfs3u" path="res://assets/sound/cheer1.mp3" id="6_dhhxn"]
 
 [sub_resource type="CanvasItemMaterial" id="24"]
 
@@ -205,9 +205,9 @@ tracks/1/keys = {
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_fj5sp"]
 _data = {
-"RESET": SubResource("2"),
-"collect": SubResource("27"),
-"idle": SubResource("3")
+&"RESET": SubResource("2"),
+&"collect": SubResource("27"),
+&"idle": SubResource("3")
 }
 
 [sub_resource type="CircleShape2D" id="21"]
@@ -259,7 +259,7 @@ texture = ExtResource("4")
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 reset_on_save = false
 libraries = {
-"": SubResource("AnimationLibrary_fj5sp")
+&"": SubResource("AnimationLibrary_fj5sp")
 }
 autoplay = "idle"
 
@@ -271,8 +271,7 @@ collision_mask = 5
 shape = SubResource("21")
 
 [node name="AudioGoal" type="AudioStreamPlayer" parent="."]
-stream = ExtResource("6_ldpk6")
-volume_db = -80.0
+stream = ExtResource("6_dhhxn")
 bus = &"Effects"
 
 [connection signal="body_entered" from="Area2D" to="." method="_on_Area2D_body_entered"]

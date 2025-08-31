@@ -1,13 +1,13 @@
 [gd_scene load_steps=24 format=3 uid="uid://b0w1du1nxn0pt"]
 
-[ext_resource type="Shader" path="res://assets/shader/recolor.gdshader" id="1_j1koo"]
+[ext_resource type="Shader" uid="uid://dis4rpkeisnth" path="res://assets/shader/recolor.gdshader" id="1_j1koo"]
 [ext_resource type="Texture2D" uid="uid://m1xsfwdn1wc7" path="res://assets/art/characters/ennemies/ennemytest.png" id="2_wlqem"]
-[ext_resource type="Script" path="res://src/Characters/StateSystem/MultiStateMachine.gd" id="3_jx6ut"]
-[ext_resource type="Script" path="res://src/Characters/NPC/Ennemies/EnnemyTest/Logic.gd" id="4_18b86"]
-[ext_resource type="Script" path="res://src/Characters/NPC/Ennemies/EnnemyTest/Fetching.gd" id="5_etksm"]
-[ext_resource type="Script" path="res://src/Characters/NPC/Ennemies/Exploder/FollowingBall.gd" id="6_y0jpu"]
-[ext_resource type="Script" path="res://src/Characters/NPC/Ennemies/Exploder/Explodes.gd" id="7_chhv0"]
-[ext_resource type="Script" path="res://src/Global/CustomResources/ExplosionData.gd" id="8_n8ptc"]
+[ext_resource type="Script" uid="uid://b4k5l1qt3nyhh" path="res://src/Characters/StateSystem/MultiStateMachine.gd" id="3_jx6ut"]
+[ext_resource type="Script" uid="uid://d163wc5jj8jf3" path="res://src/Characters/NPC/Ennemies/EnnemyTest/Logic.gd" id="4_18b86"]
+[ext_resource type="Script" uid="uid://oj3257u6f8ge" path="res://src/Characters/NPC/Ennemies/EnnemyTest/Fetching.gd" id="5_etksm"]
+[ext_resource type="Script" uid="uid://hvigxwellmo5" path="res://src/Characters/NPC/Ennemies/Exploder/FollowingBall.gd" id="6_y0jpu"]
+[ext_resource type="Script" uid="uid://p5j566enc0go" path="res://src/Characters/NPC/Ennemies/Exploder/Explodes.gd" id="7_chhv0"]
+[ext_resource type="Script" uid="uid://b3a02tijn6msv" path="res://src/Global/CustomResources/ExplosionData.gd" id="8_n8ptc"]
 
 [sub_resource type="Gradient" id="Gradient_l1ux5"]
 offsets = PackedFloat32Array(0, 0.344633, 1)
@@ -218,11 +218,11 @@ tracks/0/keys = {
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_fq6sd"]
 _data = {
-"RESET": SubResource("Animation_tsrlh"),
-"explodes": SubResource("Animation_ab1n6"),
-"fetching": SubResource("Animation_not4p"),
-"following": SubResource("Animation_5xsdl"),
-"throwing": SubResource("Animation_grmpb")
+&"RESET": SubResource("Animation_tsrlh"),
+&"explodes": SubResource("Animation_ab1n6"),
+&"fetching": SubResource("Animation_not4p"),
+&"following": SubResource("Animation_5xsdl"),
+&"throwing": SubResource("Animation_grmpb")
 }
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_q7qg1"]

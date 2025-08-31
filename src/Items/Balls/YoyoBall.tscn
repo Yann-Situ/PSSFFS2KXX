@@ -1,7 +1,7 @@
 [gd_scene load_steps=11 format=3 uid="uid://cse8okfaedvl1"]
 
 [ext_resource type="PackedScene" uid="uid://cxn2m3havcmil" path="res://src/Items/Balls/Ball.tscn" id="1_dg71n"]
-[ext_resource type="Script" path="res://src/Items/Balls/YoyoBall.gd" id="2_q85yo"]
+[ext_resource type="Script" uid="uid://op03w7wr07fy" path="res://src/Items/Balls/YoyoBall.gd" id="2_q85yo"]
 [ext_resource type="Texture2D" uid="uid://d33u8f6bfhj4m" path="res://assets/art/effects/round.png" id="4_bskdd"]
 
 [sub_resource type="Curve" id="Curve_2nxf1"]

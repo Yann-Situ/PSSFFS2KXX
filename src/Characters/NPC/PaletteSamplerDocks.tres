@@ -1,8 +1,8 @@
 [gd_resource type="Resource" script_class="PaletteSchemeSampler" load_steps=20 format=3 uid="uid://b1sqjl338o38w"]
 
-[ext_resource type="Script" path="res://src/Global/CustomResources/ColorDistribution.gd" id="1_qftfe"]
-[ext_resource type="Script" path="res://src/Global/CustomResources/ColorSampler.gd" id="1_s4nbu"]
-[ext_resource type="Script" path="res://src/Global/CustomResources/PaletteSchemeSampler.gd" id="2_rrue4"]
+[ext_resource type="Script" uid="uid://43uhm8cqaqhy" path="res://src/Global/CustomResources/ColorDistribution.gd" id="1_qftfe"]
+[ext_resource type="Script" uid="uid://rhh7r0qpulhk" path="res://src/Global/CustomResources/ColorSampler.gd" id="1_s4nbu"]
+[ext_resource type="Script" uid="uid://bj3hqhx5ewhlm" path="res://src/Global/CustomResources/PaletteSchemeSampler.gd" id="2_rrue4"]
 
 [sub_resource type="Curve" id="16"]
 bake_resolution = 1000

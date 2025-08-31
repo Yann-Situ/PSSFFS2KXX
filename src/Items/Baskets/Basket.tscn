@@ -1,9 +1,9 @@
 [gd_scene load_steps=22 format=3 uid="uid://cckqoik18dppx"]
 
-[ext_resource type="Script" path="res://src/Items/Baskets/Basket.gd" id="1_1qq5r"]
+[ext_resource type="Script" uid="uid://clpqpwqv88jgd" path="res://src/Items/Baskets/Basket.gd" id="1_1qq5r"]
 [ext_resource type="Texture2D" uid="uid://bx70alc2tdq28" path="res://assets/art/environment/environment-interactive.png" id="2_k3vjr"]
-[ext_resource type="Script" path="res://src/Items/Interactive/Selectable.gd" id="3_562au"]
-[ext_resource type="Script" path="res://src/Characters/Player/CharacterHolder.gd" id="5_gfmst"]
+[ext_resource type="Script" uid="uid://b1rhv6w7mjfdo" path="res://src/Items/Interactive/Selectable.gd" id="3_562au"]
+[ext_resource type="Script" uid="uid://drolsmb2kbofa" path="res://src/Characters/Player/CharacterHolder.gd" id="5_gfmst"]
 [ext_resource type="PackedScene" uid="uid://d4icnmnguyjv3" path="res://src/Effects/LineParticle.tscn" id="10_5spoj"]
 
 [sub_resource type="AtlasTexture" id="1"]
@@ -99,8 +99,8 @@ tracks/0/keys = {
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_v6sce"]
 _data = {
-"dunk_left": SubResource("10"),
-"dunk_right": SubResource("11")
+&"dunk_left": SubResource("10"),
+&"dunk_right": SubResource("11")
 }
 
 [sub_resource type="SegmentShape2D" id="13"]

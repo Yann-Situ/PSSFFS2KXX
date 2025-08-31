@@ -39,7 +39,7 @@ var dialogue_line: DialogueLine:
 		dialogue_label.dialogue_line = dialogue_line
 
 		responses_menu.hide()
-		responses_menu.set_responses(dialogue_line.responses)
+		responses_menu.responses = dialogue_line.responses
 
 		# Show our balloon
 		balloon.show()

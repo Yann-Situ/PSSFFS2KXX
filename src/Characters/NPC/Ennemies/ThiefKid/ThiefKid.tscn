@@ -1,17 +1,17 @@
 [gd_scene load_steps=30 format=3 uid="uid://5uiwv0rqds8n"]
 
-[ext_resource type="Script" path="res://src/Characters/NPC/Ennemies/ThiefKid/ThiefKid.gd" id="1_80j50"]
-[ext_resource type="Shader" path="res://assets/shader/recolor.gdshader" id="2_rhrsc"]
+[ext_resource type="Script" uid="uid://1fjnthfvcgv3" path="res://src/Characters/NPC/Ennemies/ThiefKid/ThiefKid.gd" id="1_80j50"]
+[ext_resource type="Shader" uid="uid://dis4rpkeisnth" path="res://assets/shader/recolor.gdshader" id="2_rhrsc"]
 [ext_resource type="Resource" uid="uid://b1sqjl338o38w" path="res://src/Characters/NPC/PaletteSamplerDocks.tres" id="2_wlwla"]
 [ext_resource type="Texture2D" uid="uid://dl341tiikvywf" path="res://assets/art/characters/Pedestrian_7.png" id="3_2oygl"]
-[ext_resource type="Script" path="res://src/Characters/StateSystem/MultiStateMachine.gd" id="4_36x6c"]
+[ext_resource type="Script" uid="uid://b4k5l1qt3nyhh" path="res://src/Characters/StateSystem/MultiStateMachine.gd" id="4_36x6c"]
 [ext_resource type="Texture2D" uid="uid://yhnhpyvb7d70" path="res://assets/art/effects/exclamation_bubble.png" id="4_odo55"]
-[ext_resource type="Script" path="res://src/Characters/NPC/Ennemies/ThiefKid/Logic.gd" id="5_aapnc"]
+[ext_resource type="Script" uid="uid://w1ymahbrg3ey" path="res://src/Characters/NPC/Ennemies/ThiefKid/Logic.gd" id="5_aapnc"]
 [ext_resource type="Texture2D" uid="uid://bdkxpfm14ft1r" path="res://assets/art/effects/interrogation_bubble.png" id="5_krst4"]
-[ext_resource type="Script" path="res://src/Characters/NPC/Ennemies/ThiefKid/Idle.gd" id="6_gxwnp"]
-[ext_resource type="Script" path="res://src/Items/Balls/BallHolder.gd" id="7_qdd23"]
-[ext_resource type="Script" path="res://src/Characters/NPC/Ennemies/ThiefKid/FollowingBall.gd" id="10_nyag0"]
-[ext_resource type="Script" path="res://src/Characters/NPC/Ennemies/ThiefKid/Passing.gd" id="10_qav1v"]
+[ext_resource type="Script" uid="uid://cb5lnao1slxeg" path="res://src/Characters/NPC/Ennemies/ThiefKid/Idle.gd" id="6_gxwnp"]
+[ext_resource type="Script" uid="uid://03omjk1utll" path="res://src/Items/Balls/BallHolder.gd" id="7_qdd23"]
+[ext_resource type="Script" uid="uid://d2nkm7jyi3uge" path="res://src/Characters/NPC/Ennemies/ThiefKid/FollowingBall.gd" id="10_nyag0"]
+[ext_resource type="Script" uid="uid://drt2yb6jqsfo1" path="res://src/Characters/NPC/Ennemies/ThiefKid/Passing.gd" id="10_qav1v"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_ccph8"]
 radius = 8.0
@@ -326,12 +326,12 @@ tracks/1/keys = {
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_fq6sd"]
 _data = {
-"RESET": SubResource("Animation_tsrlh"),
-"exclamation": SubResource("Animation_sbffs"),
-"idle": SubResource("Animation_qmipg"),
-"interrogation": SubResource("Animation_edu05"),
-"passing": SubResource("Animation_o4y5e"),
-"walk": SubResource("Animation_gpr2a")
+&"RESET": SubResource("Animation_tsrlh"),
+&"exclamation": SubResource("Animation_sbffs"),
+&"idle": SubResource("Animation_qmipg"),
+&"interrogation": SubResource("Animation_edu05"),
+&"passing": SubResource("Animation_o4y5e"),
+&"walk": SubResource("Animation_gpr2a")
 }
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_qs8le"]

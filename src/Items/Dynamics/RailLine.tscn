@@ -1,7 +1,7 @@
 [gd_scene load_steps=4 format=3 uid="uid://cjv8hfeex2clu"]
 
-[ext_resource type="Script" path="res://src/Items/Dynamics/RailLine.gd" id="1"]
-[ext_resource type="Texture2D" uid="uid://cwvp5ndheat8q" path="res://assets/art/environment/railline.png" id="3"]
+[ext_resource type="Script" uid="uid://54x48gr6vcil" path="res://src/Items/Dynamics/RailLine.gd" id="1"]
+[ext_resource type="Texture2D" uid="uid://d33auw4sup6l3" path="res://assets/art/environment/railline.png" id="3"]
 
 [sub_resource type="Curve2D" id="1"]
 resource_local_to_scene = true

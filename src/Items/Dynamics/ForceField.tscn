@@ -1,7 +1,7 @@
 [gd_scene load_steps=4 format=3 uid="uid://ceqtyb2ekket"]
 
-[ext_resource type="Script" path="res://src/Items/Dynamics/ForceField.gd" id="1_u3ypm"]
-[ext_resource type="Shader" path="res://src/Items/Dynamics/ForceField.gdshader" id="2_scy45"]
+[ext_resource type="Script" uid="uid://o034mbx6cu3c" path="res://src/Items/Dynamics/ForceField.gd" id="1_u3ypm"]
+[ext_resource type="Shader" uid="uid://dovljdyybj36e" path="res://src/Items/Dynamics/ForceField.gdshader" id="2_scy45"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_yunhd"]
 resource_local_to_scene = true

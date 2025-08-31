@@ -1,8 +1,8 @@
 [gd_scene load_steps=15 format=3 uid="uid://cy6ot0oc7dmqp"]
 
 [ext_resource type="PackedScene" uid="uid://cxn2m3havcmil" path="res://src/Items/Balls/Ball.tscn" id="1_wrgi1"]
-[ext_resource type="Script" path="res://src/Items/Balls/SnailBall.gd" id="2_gphui"]
-[ext_resource type="Shader" path="res://assets/shader/ball.gdshader" id="3_380db"]
+[ext_resource type="Script" uid="uid://dsc55a08lch82" path="res://src/Items/Balls/SnailBall.gd" id="2_gphui"]
+[ext_resource type="Shader" uid="uid://cvx1fiykdb7p1" path="res://assets/shader/ball.gdshader" id="3_380db"]
 [ext_resource type="Texture2D" uid="uid://d33u8f6bfhj4m" path="res://assets/art/effects/round.png" id="4_3m01w"]
 
 [sub_resource type="Gradient" id="Gradient_ojle7"]
@@ -18,10 +18,10 @@ resource_local_to_scene = true
 shader = ExtResource("3_380db")
 shader_parameter/intensity = 1.0
 shader_parameter/main_color = Color(0.55, 0.52, 0.45, 1)
+shader_parameter/gradient = SubResource("GradientTexture1D_caf1u")
 shader_parameter/contour_activated = false
 shader_parameter/contour_color = Color(1.2, 1, 0.9, 0.65)
 shader_parameter/hurtbox_activated = true
-shader_parameter/gradient = SubResource("GradientTexture1D_caf1u")
 
 [sub_resource type="Gradient" id="Gradient_dvufx"]
 offsets = PackedFloat32Array(0, 0.25, 0.5, 0.75, 1)

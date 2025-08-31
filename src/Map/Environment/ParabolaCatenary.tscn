@@ -1,6 +1,6 @@
 [gd_scene load_steps=4 format=3 uid="uid://bdepe4j1x2ie8"]
 
-[ext_resource type="Script" path="res://src/Map/Environment/ParabolaCatenary.gd" id="1"]
+[ext_resource type="Script" uid="uid://txrmdwuct0f3" path="res://src/Map/Environment/ParabolaCatenary.gd" id="1"]
 [ext_resource type="Texture2D" uid="uid://b57mxnmbc7bm0" path="res://assets/art/environment/zipline.png" id="2"]
 
 [sub_resource type="Curve2D" id="1"]

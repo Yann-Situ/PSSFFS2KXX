@@ -1,11 +1,11 @@
 [gd_resource type="Resource" script_class="PaletteSchemeSampler" load_steps=15 format=3 uid="uid://bm1xsllovgmkc"]
 
-[ext_resource type="Script" path="res://src/Global/CustomResources/SamplerGradient.gd" id="1_blqu2"]
-[ext_resource type="Script" path="res://src/Global/CustomResources/ColorSampler.gd" id="1_fudkb"]
-[ext_resource type="Script" path="res://src/Global/CustomResources/CosineGradient.gd" id="2_hg8bd"]
-[ext_resource type="Script" path="res://src/Global/CustomResources/ColorSamplerUnion.gd" id="3_yg1h1"]
-[ext_resource type="Script" path="res://src/Global/CustomResources/ColorDistribution.gd" id="4_qi7wf"]
-[ext_resource type="Script" path="res://src/Global/CustomResources/PaletteSchemeSampler.gd" id="5_6vrjv"]
+[ext_resource type="Script" uid="uid://dq3dop3lvpdao" path="res://src/Global/CustomResources/SamplerGradient.gd" id="1_blqu2"]
+[ext_resource type="Script" uid="uid://rhh7r0qpulhk" path="res://src/Global/CustomResources/ColorSampler.gd" id="1_fudkb"]
+[ext_resource type="Script" uid="uid://iicdrjx3tg5b" path="res://src/Global/CustomResources/CosineGradient.gd" id="2_hg8bd"]
+[ext_resource type="Script" uid="uid://b6rmipgqvhhs1" path="res://src/Global/CustomResources/ColorSamplerUnion.gd" id="3_yg1h1"]
+[ext_resource type="Script" uid="uid://43uhm8cqaqhy" path="res://src/Global/CustomResources/ColorDistribution.gd" id="4_qi7wf"]
+[ext_resource type="Script" uid="uid://bj3hqhx5ewhlm" path="res://src/Global/CustomResources/PaletteSchemeSampler.gd" id="5_6vrjv"]
 
 [sub_resource type="Gradient" id="Gradient_2hhr2"]
 offsets = PackedFloat32Array(0, 0.51831, 1)

@@ -1,9 +1,9 @@
 [gd_scene load_steps=10 format=3 uid="uid://b3b7vve7s4lu4"]
 
 [ext_resource type="Texture2D" uid="uid://ys51lldiwr5x" path="res://assets/art/characters/Pedestrian_2.png" id="1"]
-[ext_resource type="Shader" path="res://assets/shader/pedestrian.gdshader" id="2"]
-[ext_resource type="Script" path="res://src/Characters/NPC/Pedestrian.gd" id="3"]
-[ext_resource type="Script" path="res://src/Characters/NPC/PedestrianAI.gd" id="4"]
+[ext_resource type="Shader" uid="uid://bydumetbl288g" path="res://assets/shader/pedestrian.gdshader" id="2"]
+[ext_resource type="Script" uid="uid://cthf1xuwftvhc" path="res://src/Characters/NPC/Pedestrian.gd" id="3"]
+[ext_resource type="Script" uid="uid://e13e2jenjduh" path="res://src/Characters/NPC/PedestrianAI.gd" id="4"]
 
 [sub_resource type="ShaderMaterial" id="38"]
 resource_local_to_scene = true
@@ -62,9 +62,9 @@ tracks/0/keys = {
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_tip3l"]
 _data = {
-"RESET": SubResource("39"),
-"idle": SubResource("40"),
-"walk": SubResource("41")
+&"RESET": SubResource("39"),
+&"idle": SubResource("40"),
+&"walk": SubResource("41")
 }
 
 [node name="Pedestrian" type="Node2D"]

@@ -1,6 +1,6 @@
 [gd_scene load_steps=2 format=3 uid="uid://bs8ju42cns0vf"]
 
-[ext_resource type="Script" path="res://src/Effects/GhostHandler.gd" id="1"]
+[ext_resource type="Script" uid="uid://ddj3wq6dmvnfj" path="res://src/Effects/GhostHandler.gd" id="1"]
 
 [node name="GhostHandler" type="Node2D"]
 self_modulate = Color(1.2, 1.8, 2.2, 0.39)

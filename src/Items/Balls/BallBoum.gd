@@ -43,6 +43,7 @@ func boum(use_min_explosion : bool, boum_global_position : Vector2):
 func on_dunkdash_start(player):
 	$BoumParticles.global_position = player.global_position
 	$BoumParticles.restart()
+	$AudioFire.play()
 	player.add_impulse(impulse_dash_boum*player.movement.velocity.normalized())
 
 func on_dunkjump_start(player):

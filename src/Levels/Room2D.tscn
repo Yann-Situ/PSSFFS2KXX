@@ -1,15 +1,15 @@
 [gd_scene load_steps=19 format=3 uid="uid://b5emf4je4tnag"]
 
 [ext_resource type="PackedScene" uid="uid://cjbsx2kbm5qhk" path="res://src/Characters/OldPlayer/PlayerPosition.tscn" id="1"]
-[ext_resource type="Script" path="res://src/Levels/RoomAnimations.gd" id="3"]
-[ext_resource type="Shader" path="res://assets/shader/cinematic.gdshader" id="5_ct7gl"]
+[ext_resource type="Script" uid="uid://c0i7enuhfndt5" path="res://src/Levels/RoomAnimations.gd" id="3"]
+[ext_resource type="Shader" uid="uid://dhwnqn34yqisg" path="res://assets/shader/cinematic.gdshader" id="5_ct7gl"]
 [ext_resource type="TileSet" uid="uid://berkn1bildrf3" path="res://src/Map/TileSet32-base.tres" id="5_q68b4"]
 [ext_resource type="Texture2D" uid="uid://dndn6ajrce5h1" path="res://assets/art/background/pixelBackground7.png" id="6"]
 [ext_resource type="Texture2D" uid="uid://dcc4ug032gw0y" path="res://assets/art/background/pixelBackground3.png" id="7"]
 [ext_resource type="Texture2D" uid="uid://dyshcen77dpmo" path="res://assets/art/background/pixelBackground6.png" id="8"]
 [ext_resource type="TileSet" uid="uid://d4fjl28mlhsvo" path="res://src/Map/TileSet16-base.tres" id="9_jfdie"]
-[ext_resource type="Script" path="res://src/Map/TilemapCollisionBaker.gd" id="10_kq0sn"]
-[ext_resource type="Script" path="res://src/Levels/Room2D.gd" id="15"]
+[ext_resource type="Script" uid="uid://rv40lu31ihkg" path="res://src/Map/TilemapCollisionBaker.gd" id="10_kq0sn"]
+[ext_resource type="Script" uid="uid://bw1frjo60ivqp" path="res://src/Levels/Room2D.gd" id="15"]
 
 [sub_resource type="Gradient" id="1"]
 resource_local_to_scene = true
@@ -24,7 +24,7 @@ width = 500
 shader = ExtResource("5_ct7gl")
 shader_parameter/ratio = 0.0
 shader_parameter/margin_size = 0.15
-shader_parameter/center_offset = null
+shader_parameter/center_offset = Vector2(0, 0)
 
 [sub_resource type="Animation" id="Animation_uw7sm"]
 resource_name = "RESET"
@@ -76,9 +76,9 @@ tracks/0/keys = {
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_lscg3"]
 _data = {
-"RESET": SubResource("Animation_uw7sm"),
-"start_cinematic": SubResource("Animation_wblad"),
-"stop_cinematic": SubResource("Animation_qjkja")
+&"RESET": SubResource("Animation_uw7sm"),
+&"start_cinematic": SubResource("Animation_wblad"),
+&"stop_cinematic": SubResource("Animation_qjkja")
 }
 
 [sub_resource type="Environment" id="3"]

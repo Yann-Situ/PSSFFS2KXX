@@ -1,8 +1,8 @@
 [gd_scene load_steps=5 format=3 uid="uid://ctnc1m88pj7rq"]
 
 [ext_resource type="Texture2D" uid="uid://bx70alc2tdq28" path="res://assets/art/environment/environment-interactive.png" id="1"]
-[ext_resource type="Script" path="res://src/Items/Activables/Button0.gd" id="2"]
-[ext_resource type="Script" path="res://src/Items/Interactive/Electric.gd" id="3"]
+[ext_resource type="Script" uid="uid://bthqh6umbbbgu" path="res://src/Items/Activables/Button0.gd" id="2"]
+[ext_resource type="Script" uid="uid://ddxijw44okbnf" path="res://src/Items/Interactive/Electric.gd" id="3"]
 
 [sub_resource type="RectangleShape2D" id="1"]
 size = Vector2(10, 6)

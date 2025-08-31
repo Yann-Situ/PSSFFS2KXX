@@ -1,17 +1,18 @@
-[gd_scene load_steps=16 format=3 uid="uid://c4ein3aak14an"]
+[gd_scene load_steps=17 format=3 uid="uid://c4ein3aak14an"]
 
 [ext_resource type="PackedScene" uid="uid://cxn2m3havcmil" path="res://src/Items/Balls/Ball.tscn" id="1_1c2j8"]
-[ext_resource type="Shader" path="res://assets/shader/ball.gdshader" id="3_xmw78"]
+[ext_resource type="Shader" uid="uid://cvx1fiykdb7p1" path="res://assets/shader/ball.gdshader" id="3_xmw78"]
 [ext_resource type="Texture2D" uid="uid://d33u8f6bfhj4m" path="res://assets/art/effects/round.png" id="5"]
-[ext_resource type="Script" path="res://src/Items/Balls/BallFire.gd" id="6"]
+[ext_resource type="Script" uid="uid://dvhmacmm268ox" path="res://src/Items/Balls/BallFire.gd" id="6"]
+[ext_resource type="AudioStream" uid="uid://cc7womyj1jmqc" path="res://assets/sound/fire.mp3" id="6_i5npa"]
 [ext_resource type="Texture2D" uid="uid://ctiuc3lmtrgkb" path="res://assets/art/effects/light2.png" id="6_qfjho"]
 
-[sub_resource type="Gradient" id="Gradient_35dm2"]
+[sub_resource type="Gradient" id="Gradient_a1l5b"]
 offsets = PackedFloat32Array(0, 0.33, 0.6, 0.87, 1)
 colors = PackedColorArray(0.100392, 0.0282352, 0, 1, 0.501961, 0.141176, 0, 1, 1, 0.384314, 0, 1, 1, 0.913725, 0.329412, 1, 1, 0.974118, 0.798824, 1)
 
-[sub_resource type="GradientTexture1D" id="GradientTexture1D_wgl1r"]
-gradient = SubResource("Gradient_35dm2")
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_grmip"]
+gradient = SubResource("Gradient_a1l5b")
 width = 64
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_xnccv"]
@@ -19,20 +20,20 @@ resource_local_to_scene = true
 shader = ExtResource("3_xmw78")
 shader_parameter/intensity = 1.0
 shader_parameter/main_color = Color(0.55, 0.52, 0.45, 1)
+shader_parameter/gradient = SubResource("GradientTexture1D_grmip")
 shader_parameter/contour_activated = false
 shader_parameter/contour_color = Color(1.2, 1, 0.9, 0.65)
 shader_parameter/hurtbox_activated = true
-shader_parameter/gradient = SubResource("GradientTexture1D_wgl1r")
 
-[sub_resource type="Gradient" id="Gradient_ta2hh"]
+[sub_resource type="Gradient" id="Gradient_ohkya"]
 offsets = PackedFloat32Array(0, 0.25, 0.5, 0.75, 1)
 colors = PackedColorArray(0.501961, 0.141176, 0, 0, 0.501961, 0.141176, 0, 1, 1, 0.384314, 0, 1, 1, 0.913725, 0.329412, 0.8, 1, 0.913725, 0.329412, 0)
 
-[sub_resource type="Gradient" id="Gradient_qd2kp"]
+[sub_resource type="Gradient" id="Gradient_db6ji"]
 offsets = PackedFloat32Array(0, 0.25, 0.5, 0.75, 1)
 colors = PackedColorArray(0.501961, 0.141176, 0, 0, 0.501961, 0.141176, 0, 1, 1, 0.384314, 0, 1, 1, 0.913725, 0.329412, 0.8, 1, 0.913725, 0.329412, 0)
 
-[sub_resource type="Gradient" id="Gradient_bdf7t"]
+[sub_resource type="Gradient" id="Gradient_ww24w"]
 offsets = PackedFloat32Array(0, 0.2, 0.5, 0.8, 1)
 colors = PackedColorArray(1, 0.913725, 0.329412, 0, 1, 0.913725, 0.329412, 1, 1, 0.384314, 0, 0.68, 0.501961, 0.141176, 0, 0.35, 0.501961, 0.141176, 0, 0)
 
@@ -63,22 +64,22 @@ col2 = Color(1, 0.384314, 0, 1)
 col3 = Color(0.501961, 0.141176, 0, 1)
 
 [node name="Reconstruction" parent="Visuals" index="1"]
-color_ramp = SubResource("Gradient_ta2hh")
+color_ramp = SubResource("Gradient_ohkya")
 
 [node name="Destruction" parent="Visuals" index="2"]
-color_ramp = SubResource("Gradient_qd2kp")
+color_ramp = SubResource("Gradient_db6ji")
 
 [node name="DunkParticles" parent="Visuals" index="3"]
-color_ramp = SubResource("Gradient_bdf7t")
+color_ramp = SubResource("Gradient_ww24w")
 
 [node name="Fire" type="CPUParticles2D" parent="Visuals" index="5"]
 light_mask = 2
 z_index = -1
 material = SubResource("CanvasItemMaterial_7joit")
 amount = 40
+texture = ExtResource("5")
 lifetime = 0.25
 explosiveness = 0.2
-texture = ExtResource("5")
 direction = Vector2(0, 0)
 spread = 180.0
 gravity = Vector2(0, -100)
@@ -112,3 +113,8 @@ texture_scale = 6.0
 
 [node name="collision" parent="." index="1"]
 shape = SubResource("CircleShape2D_vgylx")
+
+[node name="AudioFire" type="AudioStreamPlayer2D" parent="." index="4"]
+stream = ExtResource("6_i5npa")
+max_polyphony = 2
+bus = &"Effects"

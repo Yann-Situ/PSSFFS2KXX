@@ -1,7 +1,7 @@
 [gd_scene load_steps=12 format=3 uid="uid://b45hldwkibtqb"]
 
-[ext_resource type="Script" path="res://src/Levels/Portal2D.gd" id="1"]
-[ext_resource type="Shader" path="res://assets/shader/transition_circle.gdshader" id="2"]
+[ext_resource type="Script" uid="uid://bfwac0bu1hbkc" path="res://src/Levels/Portal2D.gd" id="1"]
+[ext_resource type="Shader" uid="uid://bysxwafhevere" path="res://assets/shader/transition_circle.gdshader" id="2"]
 [ext_resource type="Texture2D" uid="uid://cg0uvgbn33p2h" path="res://assets/art/icons/popol.png" id="3"]
 [ext_resource type="PackedScene" uid="uid://dyc6sltfnujdf" path="res://src/Items/Activables/InteractionArea.tscn" id="4_5g7fd"]
 
@@ -62,8 +62,8 @@ tracks/1/keys = {
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_iilme"]
 _data = {
-"transition_in": SubResource("1"),
-"transition_out": SubResource("2")
+&"transition_in": SubResource("1"),
+&"transition_out": SubResource("2")
 }
 
 [sub_resource type="ShaderMaterial" id="3"]
@@ -71,14 +71,14 @@ shader = ExtResource("2")
 shader_parameter/circle_size = 0.0
 shader_parameter/screen_width = 800.0
 shader_parameter/screen_height = 400.0
-shader_parameter/center_offset = null
+shader_parameter/center_offset = Vector2(0, 0)
 
 [sub_resource type="ShaderMaterial" id="4"]
 shader = ExtResource("2")
 shader_parameter/circle_size = 0.0
 shader_parameter/screen_width = 800.0
 shader_parameter/screen_height = 400.0
-shader_parameter/center_offset = null
+shader_parameter/center_offset = Vector2(0, 0)
 
 [sub_resource type="RectangleShape2D" id="5"]
 size = Vector2(10, 32)

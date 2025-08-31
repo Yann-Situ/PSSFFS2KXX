@@ -41,8 +41,8 @@ func collect():
 	GlobalEffect.make_distortion(self.global_position, 0.5, "subtle")
 	$AnimationPlayer.play("collect")
 	$AudioGoal.play()
-	#GlobalEffect.bus_fade_out("MusicMaster", 0.5)
+	GlobalEffect.bus_fade("MusicMaster", 0.1, NAN, -10)
 	##await $AnimationPlayer.animation_finished
-	#GlobalEffect.bus_fade_in("MusicMaster", 5.0)
 	await $AudioGoal.finished
+	GlobalEffect.bus_fade_in("MusicMaster", 0.1)
 	queue_free()

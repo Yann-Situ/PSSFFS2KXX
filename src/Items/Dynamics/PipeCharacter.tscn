@@ -1,7 +1,7 @@
 [gd_scene load_steps=14 format=3 uid="uid://dgbgpc7dyrp8r"]
 
-[ext_resource type="Script" path="res://src/Items/Dynamics/PipeCharacter.gd" id="1_xdw77"]
-[ext_resource type="Texture2D" uid="uid://bcddludfh8obw" path="res://assets/art/environment/environment-interactive.png" id="2_6p66f"]
+[ext_resource type="Script" uid="uid://cxa7njtop2jdx" path="res://src/Items/Dynamics/PipeCharacter.gd" id="1_xdw77"]
+[ext_resource type="Texture2D" uid="uid://bx70alc2tdq28" path="res://assets/art/environment/environment-interactive.png" id="2_6p66f"]
 
 [sub_resource type="Curve2D" id="Curve2D_qr2ti"]
 resource_local_to_scene = true

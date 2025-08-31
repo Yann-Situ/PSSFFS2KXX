@@ -1,11 +1,11 @@
 [gd_scene load_steps=7 format=3 uid="uid://cm1lhhup6mwrw"]
 
 [ext_resource type="Texture2D" uid="uid://b7j6v3qs2dqkf" path="res://assets/art/icons/heart.png" id="1_go825"]
-[ext_resource type="Script" path="res://src/Characters/StateSystem/StateMachine.gd" id="2_iueq0"]
-[ext_resource type="Script" path="res://src/Characters/StateSystem/Test/StateTestColor1.gd" id="3_eaq75"]
-[ext_resource type="Script" path="res://src/Characters/StateSystem/Test/StateTestColor2.gd" id="4_y1wxg"]
-[ext_resource type="Script" path="res://src/Characters/StateSystem/Test/InputControllerTest.gd" id="5_uk5xo"]
-[ext_resource type="Script" path="res://src/Characters/StateSystem/Test/StatusLogicTest.gd" id="6_drev0"]
+[ext_resource type="Script" uid="uid://bp3dv7334o854" path="res://src/Characters/StateSystem/StateMachine.gd" id="2_iueq0"]
+[ext_resource type="Script" uid="uid://cgr88udn38i4c" path="res://src/Characters/StateSystem/Test/StateTestColor1.gd" id="3_eaq75"]
+[ext_resource type="Script" uid="uid://78qfm2ojai12" path="res://src/Characters/StateSystem/Test/StateTestColor2.gd" id="4_y1wxg"]
+[ext_resource type="Script" uid="uid://b4wfpheaih2ep" path="res://src/Characters/StateSystem/Test/InputControllerTest.gd" id="5_uk5xo"]
+[ext_resource type="Script" uid="uid://bdts5rnnyvcly" path="res://src/Characters/StateSystem/Test/StatusLogicTest.gd" id="6_drev0"]
 
 [node name="Node2D" type="Node2D"]
 modulate = Color(0.423529, 0.290196, 0, 1)

@@ -22,9 +22,9 @@
 [ext_resource type="PackedScene" uid="uid://b0w1du1nxn0pt" path="res://src/Characters/NPC/Ennemies/Exploder/Exploder.tscn" id="20_qflou"]
 [ext_resource type="PackedScene" uid="uid://bibx4tlfcbuxm" path="res://src/Characters/NPC/PedestrianGenerator.tscn" id="21_hdw07"]
 [ext_resource type="PackedScene" uid="uid://cn3mh5kug88g3" path="res://src/Items/Dynamics/PipeBall.tscn" id="21_v58gt"]
-[ext_resource type="Script" path="res://src/Global/CustomResources/ColorDistribution.gd" id="22_h70sn"]
-[ext_resource type="Script" path="res://src/Global/CustomResources/PaletteSchemeSampler.gd" id="23_63q0b"]
-[ext_resource type="Script" path="res://src/Global/CustomResources/ColorSampler.gd" id="23_bnytk"]
+[ext_resource type="Script" uid="uid://43uhm8cqaqhy" path="res://src/Global/CustomResources/ColorDistribution.gd" id="22_h70sn"]
+[ext_resource type="Script" uid="uid://bj3hqhx5ewhlm" path="res://src/Global/CustomResources/PaletteSchemeSampler.gd" id="23_63q0b"]
+[ext_resource type="Script" uid="uid://rhh7r0qpulhk" path="res://src/Global/CustomResources/ColorSampler.gd" id="23_bnytk"]
 [ext_resource type="PackedScene" uid="uid://5uiwv0rqds8n" path="res://src/Characters/NPC/Ennemies/ThiefKid/ThiefKid.tscn" id="24_5a8ro"]
 
 [sub_resource type="Gradient" id="Gradient_wwss0"]

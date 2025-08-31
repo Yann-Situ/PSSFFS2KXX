@@ -1,6 +1,6 @@
 [gd_scene load_steps=10 format=3 uid="uid://rmukvjwyiahu"]
 
-[ext_resource type="Script" path="res://src/Items/Interactive/Selectable.gd" id="1"]
+[ext_resource type="Script" uid="uid://b1rhv6w7mjfdo" path="res://src/Items/Interactive/Selectable.gd" id="1"]
 [ext_resource type="Texture2D" uid="uid://bx70alc2tdq28" path="res://assets/art/environment/environment-interactive.png" id="2"]
 [ext_resource type="Texture2D" uid="uid://ctiuc3lmtrgkb" path="res://assets/art/effects/light2.png" id="3"]
 [ext_resource type="Material" uid="uid://c4s8oq8n7qd6q" path="res://assets/shader/material/BallRecolor.tres" id="4"]
@@ -61,9 +61,9 @@ tracks/0/keys = {
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_leti4"]
 _data = {
-"RESET": SubResource("5"),
-"idle_expluse": SubResource("7"),
-"idle_impulse": SubResource("6")
+&"RESET": SubResource("5"),
+&"idle_expluse": SubResource("7"),
+&"idle_impulse": SubResource("6")
 }
 
 [node name="DashTarget" type="Node2D"]

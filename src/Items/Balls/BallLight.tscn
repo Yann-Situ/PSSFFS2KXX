@@ -2,8 +2,8 @@
 
 [ext_resource type="PackedScene" uid="uid://cxn2m3havcmil" path="res://src/Items/Balls/Ball.tscn" id="1"]
 [ext_resource type="Texture2D" uid="uid://ctiuc3lmtrgkb" path="res://assets/art/effects/light2.png" id="3"]
-[ext_resource type="Shader" path="res://assets/shader/ball.gdshader" id="3_cxn44"]
-[ext_resource type="Script" path="res://src/Items/Balls/BallLight.gd" id="7"]
+[ext_resource type="Shader" uid="uid://cvx1fiykdb7p1" path="res://assets/shader/ball.gdshader" id="3_cxn44"]
+[ext_resource type="Script" uid="uid://bxrgtms468pn5" path="res://src/Items/Balls/BallLight.gd" id="7"]
 
 [sub_resource type="PhysicsMaterial" id="PhysicsMaterial_kiy7j"]
 friction = 0.2
@@ -22,10 +22,10 @@ resource_local_to_scene = true
 shader = ExtResource("3_cxn44")
 shader_parameter/intensity = 1.0
 shader_parameter/main_color = Color(0.55, 0.52, 0.45, 1)
+shader_parameter/gradient = SubResource("GradientTexture1D_m5yhy")
 shader_parameter/contour_activated = false
 shader_parameter/contour_color = Color(1.2, 1, 0.9, 0.65)
 shader_parameter/hurtbox_activated = false
-shader_parameter/gradient = SubResource("GradientTexture1D_m5yhy")
 
 [sub_resource type="Gradient" id="Gradient_5bs3c"]
 offsets = PackedFloat32Array(0, 0.25, 0.5, 0.75, 1)
@@ -74,7 +74,7 @@ tracks/1/keys = {
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_mgvy3"]
 _data = {
-"flash_light": SubResource("4")
+&"flash_light": SubResource("4")
 }
 
 [node name="BallLight" instance=ExtResource("1")]

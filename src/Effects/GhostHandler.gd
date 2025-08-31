@@ -5,6 +5,7 @@ var ghost_anim = preload("res://src/Effects/GhostAnim.tscn")
 @export var environment_node : Node2D
 @export var use_gradient : bool = false
 @export var gradient : Gradient
+@export var flipper : Node2D
 
 func is_running():
 	return !$Ghost_Tick_Timer.is_stopped()
@@ -22,7 +23,10 @@ func instance_ghost():
 	ghost.vframes = ghost_sprite.vframes
 	ghost.hframes = ghost_sprite.hframes
 	ghost.frame = ghost_sprite.frame
-	ghost.flip_h = ghost_sprite.flip_h
+	if flipper:
+		ghost.flip_h = flipper.scale.x < 0
+	else:
+		ghost.flip_h = ghost_sprite.flip_h
 	ghost.use_gradient = false
 	ghost.self_modulate = self.self_modulate
 	ghost.global_position = self.global_position + Vector2(194,152)
@@ -37,7 +41,10 @@ func instance_ghost_gradient(gradient : Gradient):
 	ghost.vframes = ghost_sprite.vframes
 	ghost.hframes = ghost_sprite.hframes
 	ghost.frame = ghost_sprite.frame
-	ghost.flip_h = ghost_sprite.flip_h
+	if flipper:
+		ghost.flip_h = flipper.scale.x < 0
+	else:
+		ghost.flip_h = ghost_sprite.flip_h
 	ghost.use_gradient = true
 	ghost.gradient = gradient
 	ghost.global_position = self.global_position + Vector2(194,152)
