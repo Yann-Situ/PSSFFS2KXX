@@ -92,7 +92,7 @@ func recall_player():
 	if last_player is Player and !tween_player_follow_ball.is_running():
 		if !last_player.get_state_node().dunk.ing:
 			$Visuals/SpeedParticles.restart()
-			last_player.effect_handler.ghost_start(follow_ball_max_recall_duration-0.2, 0.1, Color.BLACK, get_dash_gradient())
+			#last_player.effect_handler.ghost_start(follow_ball_max_recall_duration-0.2, 0.1)
 			tween_player_follow_ball.play()
 			print("PLAYER YOYO RECALL")
 			#if last_player.has_accel(Global.gravity_alterer) :

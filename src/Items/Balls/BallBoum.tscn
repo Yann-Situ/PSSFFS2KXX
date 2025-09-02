@@ -21,15 +21,15 @@ shader = ExtResource("3_emvrs")
 shader_parameter/activated = false
 shader_parameter/contour_color = Color(1, 1, 0.9, 0.9)
 
+[sub_resource type="Gradient" id="Gradient_8blxy"]
+offsets = PackedFloat32Array(0, 0.25, 0.5, 0.75, 1)
+colors = PackedColorArray(0.192157, 0.192157, 0.192157, 0, 0.192157, 0.192157, 0.192157, 1, 0.458824, 0.392157, 0.341176, 1, 1, 0.54902, 0, 0.8, 1, 0.54902, 0, 0)
+
 [sub_resource type="Gradient" id="Gradient_oal8k"]
 offsets = PackedFloat32Array(0, 0.25, 0.5, 0.75, 1)
 colors = PackedColorArray(0.192157, 0.192157, 0.192157, 0, 0.192157, 0.192157, 0.192157, 1, 0.458824, 0.392157, 0.341176, 1, 1, 0.54902, 0, 0.8, 1, 0.54902, 0, 0)
 
 [sub_resource type="Gradient" id="Gradient_nyc1a"]
-offsets = PackedFloat32Array(0, 0.25, 0.5, 0.75, 1)
-colors = PackedColorArray(0.192157, 0.192157, 0.192157, 0, 0.192157, 0.192157, 0.192157, 1, 0.458824, 0.392157, 0.341176, 1, 1, 0.54902, 0, 0.8, 1, 0.54902, 0, 0)
-
-[sub_resource type="Gradient" id="Gradient_40gmx"]
 offsets = PackedFloat32Array(0, 0.2, 0.5, 0.8, 1)
 colors = PackedColorArray(1, 0.54902, 0, 0, 1, 0.54902, 0, 1, 0.458824, 0.392157, 0.341176, 0.68, 0.192157, 0.192157, 0.192157, 0.35, 0.192157, 0.192157, 0.192157, 0)
 
@@ -95,13 +95,13 @@ col2 = Color(0.458824, 0.392157, 0.341176, 1)
 col3 = Color(0.192157, 0.192157, 0.192157, 1)
 
 [node name="Reconstruction" parent="Visuals" index="1"]
-color_ramp = SubResource("Gradient_oal8k")
+color_ramp = SubResource("Gradient_8blxy")
 
 [node name="Destruction" parent="Visuals" index="2"]
-color_ramp = SubResource("Gradient_nyc1a")
+color_ramp = SubResource("Gradient_oal8k")
 
 [node name="DunkParticles" parent="Visuals" index="3"]
-color_ramp = SubResource("Gradient_40gmx")
+color_ramp = SubResource("Gradient_nyc1a")
 
 [node name="collision" parent="." index="1"]
 shape = SubResource("CircleShape2D_eqgys")

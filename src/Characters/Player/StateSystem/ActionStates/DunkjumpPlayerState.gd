@@ -4,7 +4,6 @@ extends PlayerMovementState
 @export var dunkjump_speed : float = -500.0 #: set = set_dunkjump_speed, get = get_dunkjump_speed ##
 @export var dunkjumphalfturn_threshold : float = 16.0 ## minimum distance from the basket at which it is possible to do a dunkjump_halfturn
 @export var min_jump_duration : float = 0.1 ## s # duration between the beginning of the jump (just after prejumping) to the first frame where land/fallwall/fall is possible.
-@export var ghost_modulate : Color# (Color, RGBA)
 
 @export_group("States")
 @export var belong_state : State
@@ -136,9 +135,9 @@ func dunkjump_movement():
 	if logic.ball_handler.has_ball():
 		var ball = logic.ball_handler.held_ball
 		ball.on_dunkjump_start(player)
-		player.effect_handler.ghost_start(0.8,0.1, Color.WHITE,ball.get_dash_gradient())
+		player.effect_handler.ghost_start(0.8,0.1)
 	else:
-		player.effect_handler.ghost_start(0.8,0.1, ghost_modulate)
+		player.effect_handler.ghost_start(0.8,0.1)
 	# GlobalEffect.make_distortion(player.effect_handler.global_position, 0.75, "fast_soft")
 	GlobalEffect.make_ground_wave(player.effect_handler.global_position, 0.75, "soft")
 	player.effect_handler.dust_start()

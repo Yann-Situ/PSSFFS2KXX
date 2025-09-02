@@ -7,7 +7,6 @@ extends PlayerMovementState
 @export var dunkdash_speed : float = 800#pix/s
 @export var dunkdash_speed_belong : float = 600## when the dunkdash end by entering belong_state (e.g grind or hang) (in pix/s)
 @export var end_speed_ratio : float = 0.35 ## velocity will be multiplied by this amount at the end of the dunkdash
-@export var ghost_modulate : Color# (Color, RGBA)
 @export var sound_effect : AudioStreamPlayer2D
 
 @export_group("States")
@@ -77,9 +76,9 @@ func enter(previous_state : State = null) -> State:
 	if logic.ball_handler.has_ball():
 		var ball = logic.ball_handler.held_ball
 		ball.on_dunkdash_start(player)
-		player.effect_handler.ghost_start(0.21,0.05, Color.WHITE,ball.get_dash_gradient())
+		player.effect_handler.ghost_start(0.21,0.05)
 	else:
-		player.effect_handler.ghost_start(0.21,0.05, ghost_modulate)
+		player.effect_handler.ghost_start(0.21,0.05)
 	player.effect_handler.cloud_start()
 	GlobalEffect.make_distortion(player.global_position, 0.75, "fast_soft")
 	Global.camera.screen_shake(0.2,10)

@@ -68,7 +68,22 @@ func physics_process(delta) -> State:
 		return next_state
 
 	var m : MovementData = movement.duplicate_with_ambient_scaler(ambient_modifier)
-	side_move_physics_process(delta, m)
+	#side_move_physics_process(delta, m)
+	### COPY of side_move_physics_process(delta, m) with slight modifications to prevent crouch state with high velocity
+	if logic.side.can and m.direction_pressed.x != 0.0:
+		if -m.ambient.side_instant_speed_return_thresh < m.velocity.x*m.direction_pressed.x \
+			and m.velocity.x*m.direction_pressed.x < m.ambient.side_instant_speed :
+			m.velocity.x = m.direction_pressed.x*m.ambient.side_instant_speed
+		if (m.velocity.x*m.direction_pressed.x >= m.ambient.side_speed_max) :
+			m.velocity.x -= m.direction_pressed.x * m.ambient.side_accel * \
+				delta * m.ambient.time_scale
+			if (m.velocity.x*m.direction_pressed.x < m.ambient.side_speed_max) :
+				m.velocity.x = m.direction_pressed.x*m.ambient.side_speed_max
+		else :
+			m.velocity.x += m.direction_pressed.x * m.ambient.side_accel * \
+				delta * m.ambient.time_scale
+			if (m.velocity.x*m.direction_pressed.x > m.ambient.side_speed_max) :
+				m.velocity.x = m.direction_pressed.x*m.ambient.side_speed_max
 
 	# update player position
 	if player.physics_enabled:
