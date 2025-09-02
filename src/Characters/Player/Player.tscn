@@ -1,4 +1,4 @@
-[gd_scene load_steps=129 format=3 uid="uid://dlfptvxh6yjwm"]
+[gd_scene load_steps=130 format=3 uid="uid://dlfptvxh6yjwm"]
 
 [ext_resource type="Script" uid="uid://iq3ldov5m6d4" path="res://src/Characters/Player/Player.gd" id="1_b7wqc"]
 [ext_resource type="Script" uid="uid://dfx61mby34ob" path="res://src/Characters/Player/MovementData.gd" id="2_0ukhp"]
@@ -60,6 +60,7 @@
 [ext_resource type="Texture2D" uid="uid://cuuns5ibc34gj" path="res://assets/art/ball/ball_test.png" id="48_n7dkg"]
 [ext_resource type="Script" uid="uid://bgnset7sdq8fl" path="res://src/Items/Activables/InteractionHandler.gd" id="49_ks5k2"]
 [ext_resource type="Texture2D" uid="uid://2hv3foaeug73" path="res://assets/art/effects/contour-light.png" id="56_4bgwo"]
+[ext_resource type="Script" uid="uid://dpqrgqb6ik2xa" path="res://src/Characters/Player/FullSpeedHandler.gd" id="61_vcynt"]
 
 [sub_resource type="Resource" id="Resource_5o1rd"]
 script = ExtResource("2_0ukhp")
@@ -1586,11 +1587,11 @@ size = Vector2(17, 57)
 
 [sub_resource type="Resource" id="Resource_cq5vr"]
 script = ExtResource("17_iaaq0")
-friction = Vector2(0.9, 0.38)
+friction = Vector2(0.81, 0.42)
 time_scale = 1.0
-side_speed_max = 370.0
-side_instant_speed = 135.0
-side_instant_speed_return_thresh = 70.0
+side_speed_max = 360.0
+side_instant_speed = 100.0
+side_instant_speed_return_thresh = 110.0
 side_accel = 200.0
 base_force = Vector2(0, 0)
 base_accel = Vector2(0, 625)
@@ -1598,11 +1599,11 @@ base_speed = Vector2(0, 0)
 
 [sub_resource type="Resource" id="Resource_y4wjx"]
 script = ExtResource("17_iaaq0")
-friction = Vector2(0.86, 0.38)
+friction = Vector2(0.9, 0.42)
 time_scale = 1.0
-side_speed_max = 400.0
-side_instant_speed = 70.0
-side_instant_speed_return_thresh = 50.0
+side_speed_max = 390.0
+side_instant_speed = 60.0
+side_instant_speed_return_thresh = 40.0
 side_accel = 100.0
 base_force = Vector2(0, 0)
 base_accel = Vector2(0, 625)
@@ -1755,6 +1756,10 @@ stream = ExtResource("7_dy30x")
 
 [node name="AudioInspiration" type="AudioStreamPlayer2D" parent="AudioHandler"]
 stream = ExtResource("8_2y2g5")
+
+[node name="FullSpeedHandler" type="Node" parent="." node_paths=PackedStringArray("ghost_handler")]
+script = ExtResource("61_vcynt")
+ghost_handler = NodePath("../Flipper/EffectHandler/SpeedGhostHandler")
 
 [node name="Flipper" type="Marker2D" parent="."]
 
@@ -1987,12 +1992,14 @@ initial_velocity_max = 7.57
 radial_accel_min = 7.94
 radial_accel_max = 38.09
 
-[node name="GhostHandler" parent="Flipper/EffectHandler" node_paths=PackedStringArray("flipper") instance=ExtResource("33_v1led")]
+[node name="GhostHandler" parent="Flipper/EffectHandler" node_paths=PackedStringArray("ghost_sprite", "flipper") instance=ExtResource("33_v1led")]
 position = Vector2(0, -32)
+ghost_sprite = NodePath("../../Sprite2D")
 flipper = NodePath("../..")
 
-[node name="SpeedGhostHandler" parent="Flipper/EffectHandler" node_paths=PackedStringArray("flipper") instance=ExtResource("33_v1led")]
+[node name="SpeedGhostHandler" parent="Flipper/EffectHandler" node_paths=PackedStringArray("ghost_sprite", "flipper") instance=ExtResource("33_v1led")]
 position = Vector2(0, -32)
+ghost_sprite = NodePath("../../Sprite2D")
 flipper = NodePath("../..")
 
 [node name="CloudParticles" parent="Flipper/EffectHandler" instance=ExtResource("36_iawlq")]
@@ -2393,9 +2400,13 @@ texture = ExtResource("56_4bgwo")
 texture_scale = 1.3
 metadata/_edit_lock_ = true
 
+[connection signal="picking" from="BallHolder" to="Flipper/EffectHandler/GhostHandler" method="set_gradient_from_ball"]
+[connection signal="picking" from="BallHolder" to="Flipper/EffectHandler/SpeedGhostHandler" method="set_gradient_from_ball"]
 [connection signal="picking" from="BallHolder" to="." method="collision_mask_add_ballwall" unbinds=1]
 [connection signal="processing_ball" from="BallHolder" to="Flipper/BallHandler" method="set_has_ball_position" unbinds=1]
 [connection signal="releasing" from="BallHolder" to="." method="collision_mask_remove_ballwall" unbinds=1]
+[connection signal="releasing" from="BallHolder" to="Flipper/EffectHandler/GhostHandler" method="set_gradient_to_null" unbinds=1]
+[connection signal="releasing" from="BallHolder" to="Flipper/EffectHandler/SpeedGhostHandler" method="set_gradient_to_null" unbinds=1]
 [connection signal="body_entered" from="Flipper/BallHandler" to="Flipper/BallHandler" method="_on_Ball_Handler_body_entered"]
 [connection signal="body_entered" from="Flipper/BallHandler/BallWallDetector" to="Flipper/BallHandler" method="_on_BallWallDetector_body_entered"]
 [connection signal="body_exited" from="Flipper/BallHandler/BallWallDetector" to="Flipper/BallHandler" method="_on_BallWallDetector_body_exited"]

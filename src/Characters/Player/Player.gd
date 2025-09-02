@@ -32,6 +32,7 @@ class_name Player
 @onready var ambient_handler = get_node("Flipper/AmbientHandler")
 
 @onready var audio_handler = get_node("AudioHandler")
+@onready var fullspeed_handler = get_node("FullSpeedHandler")
 @onready var life_handler = get_node("LifeHandler")
 @onready var life_bar = get_node("UI/MarginContainer/HBoxContainer/VBoxContainer/Bar")
 @onready var sprite = get_node("Flipper/Sprite2D")
@@ -115,15 +116,9 @@ func _physics_process(delta):
 			+str(v.y).pad_decimals(0)+")     "+str(v.length()).pad_decimals(0)
 	update_collision()
 	update_ambient_data()
+	update_fullspeed_handler()
 	update_selectable_handler()
 	handle_interaction()
-	var v = movement.velocity#get_real_velocity()
-	if abs(v.x) >= 510 or abs(v.y) >= 650 or v.length() >= 700:
-		if !effect_handler.speed_ghost_is_running():
-			effect_handler.speed_ghost_start()
-	else:
-		if effect_handler.speed_ghost_is_running():
-			effect_handler.speed_ghost_stop()
 	
 ################################################################################
 # updates of some sub nodes (mostly, handlers) whose behavior depends on S or each other
@@ -228,7 +223,18 @@ func update_ambient_data() -> void:
 			movement.ambient = ambient_handler.ambient_data_wall
 		else:
 			movement.ambient = ambient_handler.ambient_data_air
-
+			
+## update THE FULLSPEED status depending on the velocity.
+## This should be called in physics_process.
+func update_fullspeed_handler() -> void:
+	var v = movement.velocity#get_real_velocity()
+	if !fullspeed_handler.is_activated() and !fullspeed_handler.is_locked():
+		if abs(v.x) >= 500 or abs(v.y) >= 650 or v.length() >= 700:
+			fullspeed_handler.start()
+	elif fullspeed_handler.is_activated():
+		if v.length() <= 420:
+			fullspeed_handler.stop()
+				
 ## TEMPORARY handling of interaction. called in _physics_process
 func handle_interaction():
 	if S.interact.can and S.key_interact.just_pressed:
