@@ -1,4 +1,4 @@
-[gd_scene load_steps=130 format=3 uid="uid://dlfptvxh6yjwm"]
+[gd_scene load_steps=133 format=3 uid="uid://dlfptvxh6yjwm"]
 
 [ext_resource type="Script" uid="uid://iq3ldov5m6d4" path="res://src/Characters/Player/Player.gd" id="1_b7wqc"]
 [ext_resource type="Script" uid="uid://dfx61mby34ob" path="res://src/Characters/Player/MovementData.gd" id="2_0ukhp"]
@@ -60,7 +60,10 @@
 [ext_resource type="Texture2D" uid="uid://cuuns5ibc34gj" path="res://assets/art/ball/ball_test.png" id="48_n7dkg"]
 [ext_resource type="Script" uid="uid://bgnset7sdq8fl" path="res://src/Items/Activables/InteractionHandler.gd" id="49_ks5k2"]
 [ext_resource type="Texture2D" uid="uid://2hv3foaeug73" path="res://assets/art/effects/contour-light.png" id="56_4bgwo"]
+[ext_resource type="Theme" uid="uid://b8qe788vvlgia" path="res://assets/art/gui/theme-1.tres" id="56_gpyx0"]
+[ext_resource type="Script" uid="uid://b7ko74w1yc22g" path="res://src/Global/ComboSystem/ComboDisplayer.gd" id="56_qteqq"]
 [ext_resource type="Script" uid="uid://dpqrgqb6ik2xa" path="res://src/Characters/Player/FullSpeedHandler.gd" id="61_vcynt"]
+[ext_resource type="Script" uid="uid://5f4w57txi2fj" path="res://src/Global/ComboSystem/ComboHandler.gd" id="63_cevr1"]
 
 [sub_resource type="Resource" id="Resource_5o1rd"]
 script = ExtResource("2_0ukhp")
@@ -2310,6 +2313,28 @@ texture_under = ExtResource("40_acvag")
 texture_progress = ExtResource("41_1ojdj")
 tint_under = Color(1, 0.552941, 0.890196, 1)
 
+[node name="ComboInformation" type="Label" parent="UI/MarginContainer/HBoxContainer/VBoxContainer"]
+layout_mode = 2
+theme = ExtResource("56_gpyx0")
+theme_type_variation = &"HeaderSmall"
+
+[node name="TimerLabel" type="Label" parent="UI/MarginContainer/HBoxContainer/VBoxContainer"]
+layout_mode = 2
+theme = ExtResource("56_gpyx0")
+theme_type_variation = &"TooltipLabel"
+
+[node name="ComboDisplayer" type="HBoxContainer" parent="UI/MarginContainer/HBoxContainer/VBoxContainer" node_paths=PackedStringArray("combo_handler", "timer_label", "combo_information_label", "combo_list")]
+layout_mode = 2
+script = ExtResource("56_qteqq")
+combo_handler = NodePath("../../../../../ComboHandler")
+timer_label = NodePath("../TimerLabel")
+combo_information_label = NodePath("../ComboInformation")
+combo_list = NodePath("ComboList")
+
+[node name="ComboList" type="VBoxContainer" parent="UI/MarginContainer/HBoxContainer/VBoxContainer/ComboDisplayer"]
+layout_mode = 2
+theme = ExtResource("56_gpyx0")
+
 [node name="MarginContainer" type="MarginContainer" parent="UI/MarginContainer/HBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
@@ -2377,7 +2402,8 @@ size_flags_horizontal = 8
 text = "state"
 horizontal_alignment = 2
 
-[node name="Combos" type="Node" parent="."]
+[node name="ComboHandler" type="Node" parent="."]
+script = ExtResource("63_cevr1")
 
 [node name="LifeHandler" type="Node2D" parent="."]
 visible = false

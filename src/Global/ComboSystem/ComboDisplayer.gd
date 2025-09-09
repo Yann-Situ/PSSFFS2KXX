@@ -1,0 +1,49 @@
+# ComboDisplayer.gd
+extends Control
+class_name ComboDisplayer
+
+@export var combo_handler: ComboHandler : set = set_combo_handler
+
+@export_category("Associated UI Nodes")
+@export var timer_label: Label
+@export var combo_information_label: Label
+@export var combo_list: VBoxContainer
+
+func _ready() -> void:
+	assert(combo_handler)
+	assert(timer_label)
+	assert(combo_list)
+
+func set_combo_handler(c: ComboHandler) -> void:
+	if combo_handler:
+		combo_handler.disconnect("combo_element_added", self.add_combo_element)
+		combo_handler.disconnect("end_combo", self.end_combo)
+
+	combo_handler = c
+	combo_handler.connect("combo_element_added", self.add_combo_element)
+	combo_handler.connect("end_combo", self.end_combo)
+
+func add_combo_element(combo_element: ComboElement) -> void:
+	var label = Label.new()
+	label.text = "%s (+%d x%.2f)" % [
+		combo_element.name,
+		combo_element.additional_score,
+		combo_element.additional_multiplier
+	]
+	print(" - combo: "+label.text)
+	combo_list.add_child(label)
+
+func end_combo(final_score: int = 0) -> void:
+	timer_label.text = "Combo Ended! Score: %d" % final_score
+	print(" - combo ended: "+str(final_score))
+	for child in combo_list.get_children():
+		combo_list.remove_child(child)
+		child.queue_free() ## TODO change for some animation
+
+func _process(delta: float) -> void:
+	if combo_handler and combo_handler.get_remaining_time() > 0.0:
+		timer_label.text = "Time: %.2f" % combo_handler.get_remaining_time()
+		combo_information_label.text = "%d x%.2f" % [
+		combo_handler.get_current_score(),
+		combo_handler.get_current_multiplier()
+	]

@@ -57,6 +57,13 @@ func enter(previous_state : State = null) -> State:
 		movement.velocity.y = mountwalljump_velocity.y
 		movement.velocity.x = -logic.direction_wall * mountwalljump_velocity.x
 		player.effect_handler.cloud_start(8, 8)
+		
+		var element = ComboElement.new()
+		element.name = "WallMount"
+		element.additional_score = 100
+		element.additional_multiplier = 0.0
+		element.remaining_time = 2.0
+		player.combo_handler.add_combo_element(element)
 	else:
 		print(self.name)
 		movement.velocity.y = walljump_velocity.y

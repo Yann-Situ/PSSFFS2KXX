@@ -93,6 +93,12 @@ func enter(previous_state : State = null) -> State:
 	#GlobalEffect.bus_highpass_fade_out("MusicMaster", 4.0, 2000)
 	GlobalEffect.bus_highpass_fade("MusicMaster", 5.5, -1, 1760, true, Tween.TRANS_LINEAR)
 
+	var element = ComboElement.new()
+	element.name = "Grind"
+	element.additional_score = 100
+	element.additional_multiplier = 0.0
+	element.remaining_time = 2.0
+	player.combo_handler.add_combo_element(element)
 	return next_state
 
 ## Called by the parent StateMachine during the _physics_process call, after
@@ -155,9 +161,9 @@ func grindash():
 	if logic.ball_handler.has_ball():
 		var ball = logic.ball_handler.held_ball
 		ball.on_dunkdash_start(player)
-		player.effect_handler.ghost_start(0.21,0.05, Color.WHITE,ball.get_dash_gradient())
+		player.effect_handler.ghost_start(0.21,0.05)
 	else:
-		player.effect_handler.ghost_start(0.21,0.05, ghost_modulate)
+		player.effect_handler.ghost_start(0.21,0.05)
 	player.effect_handler.cloud_start()
 	GlobalEffect.make_distortion(player.global_position, 0.75, "fast_soft")
 	Global.camera.screen_shake(0.2,10)

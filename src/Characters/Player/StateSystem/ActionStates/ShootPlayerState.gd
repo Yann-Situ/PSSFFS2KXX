@@ -86,6 +86,13 @@ func enter(previous_state : State = null) -> State:
 			set_variation(3)
 	play_animation()
 
+
+	var element = ComboElement.new()
+	element.name = "Shoot"
+	element.additional_score = 100
+	element.additional_multiplier = 0.0
+	element.remaining_time = 1.0
+	player.combo_handler.add_combo_element(element)
 	print(self.name + " - velocity: " + str(shoot_velocity))
 	return next_state
 

@@ -87,6 +87,12 @@ func enter(previous_state : State = null) -> State:
 	if sound_effect:
 		sound_effect.play()
 
+	var element = ComboElement.new()
+	element.name = "Dash"
+	element.additional_score = 100
+	element.additional_multiplier = 0.25
+	element.remaining_time = 2.0
+	player.combo_handler.add_combo_element(element)
 	print(self.name + " - velocity: " + str(dash_velocity.length()))
 	return next_state
 

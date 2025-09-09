@@ -38,6 +38,7 @@ class_name Player
 @onready var sprite = get_node("Flipper/Sprite2D")
 @onready var flipper = get_node("Flipper")
 @onready var effect_handler = get_node("Flipper/EffectHandler")
+@onready var combo_handler = get_node("ComboHandler")
 
 ################################################################################
 
@@ -231,6 +232,14 @@ func update_fullspeed_handler() -> void:
 	if !fullspeed_handler.is_activated() and !fullspeed_handler.is_locked():
 		if abs(v.x) >= 500 or abs(v.y) >= 650 or v.length() >= 700:
 			fullspeed_handler.start()
+			
+			if !S.dunkdash.ing:
+				var element = ComboElement.new()
+				element.name = "FullSpeed"
+				element.additional_score = 100
+				element.additional_multiplier = 0.5
+				element.remaining_time = 4.5
+				self.combo_handler.add_combo_element(element)
 	elif fullspeed_handler.is_activated():
 		if v.length() <= 420:
 			fullspeed_handler.stop()

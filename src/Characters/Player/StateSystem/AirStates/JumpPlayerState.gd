@@ -50,6 +50,12 @@ func branch() -> State:
 			if coyote_flip:
 				fall_state.set_variation(3)
 				print(" - coyote-flip!")
+				var element = ComboElement.new()
+				element.name = "Coyote flip"
+				element.additional_score = 150
+				element.additional_multiplier = 0.0
+				element.remaining_time = 2.0
+				player.combo_handler.add_combo_element(element)
 			return fall_state
 	return self
 
@@ -85,7 +91,7 @@ func enter(previous_state : State = null) -> State:
 	player.effect_handler.dust_start()
 	GlobalEffect.make_impact(player.effect_handler.global_position, \
 		GlobalEffect.IMPACT_TYPE.JUMP1, Vector2.UP)
-
+	
 	return next_state
 
 ## Called by the parent StateMachine during the _physics_process call, after

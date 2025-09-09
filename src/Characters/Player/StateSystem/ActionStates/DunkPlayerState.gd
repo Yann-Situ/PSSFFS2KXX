@@ -74,7 +74,14 @@ func enter(previous_state : State = null) -> State:
 		sound_effect.play()
 	#GlobalEffect.bus_fade("MusicMaster", 0.02, NAN, -12)
 	#GlobalEffect.bus_lowpass_fade("MusicMaster", 0.3, 220, 10000, false)
-
+	
+	var element = ComboElement.new()
+	element.name = "Dunk"
+	element.additional_score = 400
+	element.additional_multiplier = 0.5
+	element.remaining_time = 3.0
+	player.combo_handler.add_combo_element(element)
+	
 	print(self.name)
 	return next_state
 

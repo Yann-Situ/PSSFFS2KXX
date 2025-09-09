@@ -40,6 +40,12 @@ func enter(previous_state : State = null) -> State:
 	player.effect_handler.dust_start()
 	GlobalEffect.bus_highpass_fade("MusicMaster", 5.5, -1, 1760, true, Tween.TRANS_LINEAR)
 
+	var element = ComboElement.new()
+	element.name = "Hang"
+	element.additional_score = 100
+	element.additional_multiplier = 0.0
+	element.remaining_time = 2.0
+	player.combo_handler.add_combo_element(element)
 	return next_state
 
 ## Called by the parent StateMachine during the _physics_process call, after

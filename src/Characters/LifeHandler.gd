@@ -9,8 +9,7 @@ signal is_dead
 @export var max_life = 10.0#hp
 @export var defense = 0.0#hp
 @export var weakness = 1.0#hp/hp
-@export var strength = 0.0#hp
-# the damage of an attack is : damage = trg.weakness * src.strength - trg.defense
+# the damage of an attack is : damage = trg.weakness * damage - trg.defense
 
 # @onready var Character = get_parent()
 # @onready var S = Character.get_node("State")
