@@ -32,9 +32,10 @@ func add_combo_element(combo_element: ComboElement) -> void:
 	]
 	print(" - combo: "+label.text)
 	combo_list.add_child(label)
+	combo_list.move_child(label, 0)
 
 func end_combo(final_score: int = 0) -> void:
-	timer_label.text = "Combo Ended! Score: %d" % final_score
+	timer_label.text = "Final Score: %d" % final_score
 	print(" - combo ended: "+str(final_score))
 	for child in combo_list.get_children():
 		combo_list.remove_child(child)

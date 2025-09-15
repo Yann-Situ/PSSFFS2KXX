@@ -20,9 +20,12 @@ func start_combo(combo_element : ComboElement) -> void :
 	_reset_combo()
 	add_combo_element(combo_element)
 
+func has_combo_element(combo_element : ComboElement) -> bool :
+	return combo_element in combo_elements
+
 func add_combo_element(combo_element : ComboElement) -> void :
 	combo_elements.append(combo_element)
-	update_timer(combo_element.remaining_time)
+	update_timer(max(combo_element.remaining_time, remaining_time+combo_element.remaining_time*0.25))
 	emit_signal("combo_element_added", combo_element)
 
 func update_timer(time : float) -> void :

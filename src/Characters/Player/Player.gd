@@ -243,6 +243,8 @@ func update_fullspeed_handler() -> void:
 	elif fullspeed_handler.is_activated():
 		if v.length() <= 420:
 			fullspeed_handler.stop()
+		else:
+			self.combo_handler.update_timer(2.5)
 				
 ## TEMPORARY handling of interaction. called in _physics_process
 func handle_interaction():

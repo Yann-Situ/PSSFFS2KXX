@@ -1,4 +1,4 @@
-[gd_scene load_steps=133 format=3 uid="uid://dlfptvxh6yjwm"]
+[gd_scene load_steps=134 format=3 uid="uid://dlfptvxh6yjwm"]
 
 [ext_resource type="Script" uid="uid://iq3ldov5m6d4" path="res://src/Characters/Player/Player.gd" id="1_b7wqc"]
 [ext_resource type="Script" uid="uid://dfx61mby34ob" path="res://src/Characters/Player/MovementData.gd" id="2_0ukhp"]
@@ -1708,6 +1708,18 @@ base_force = 1.0
 base_accel = 1.0
 base_speed = 1.0
 
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_gpyx0"]
+content_margin_left = 5.0
+content_margin_top = 5.0
+content_margin_right = 2.0
+content_margin_bottom = 0.0
+bg_color = Color(0.73, 0.56575, 0.365, 0.545098)
+skew = Vector2(0, 0.1)
+border_width_left = 8
+corner_radius_top_left = 16
+corner_radius_bottom_right = 16
+expand_margin_left = 4.0
+
 [sub_resource type="CapsuleShape2D" id="58"]
 radius = 5.0
 height = 42.0
@@ -1759,6 +1771,9 @@ stream = ExtResource("7_dy30x")
 
 [node name="AudioInspiration" type="AudioStreamPlayer2D" parent="AudioHandler"]
 stream = ExtResource("8_2y2g5")
+volume_db = -8.0
+pitch_scale = 0.8
+bus = &"Muffler"
 
 [node name="FullSpeedHandler" type="Node" parent="." node_paths=PackedStringArray("ghost_handler")]
 script = ExtResource("61_vcynt")
@@ -2298,6 +2313,7 @@ layout_mode = 2
 
 [node name="VBoxContainer" type="VBoxContainer" parent="UI/MarginContainer/HBoxContainer"]
 layout_mode = 2
+size_flags_horizontal = 0
 
 [node name="Bar" type="HBoxContainer" parent="UI/MarginContainer/HBoxContainer/VBoxContainer"]
 layout_mode = 2
@@ -2323,21 +2339,30 @@ layout_mode = 2
 theme = ExtResource("56_gpyx0")
 theme_type_variation = &"TooltipLabel"
 
-[node name="ComboDisplayer" type="HBoxContainer" parent="UI/MarginContainer/HBoxContainer/VBoxContainer" node_paths=PackedStringArray("combo_handler", "timer_label", "combo_information_label", "combo_list")]
+[node name="ScrollContainer" type="ScrollContainer" parent="UI/MarginContainer/HBoxContainer/VBoxContainer"]
+custom_minimum_size = Vector2(32, 96)
+layout_mode = 2
+theme = ExtResource("56_gpyx0")
+theme_override_styles/panel = SubResource("StyleBoxFlat_gpyx0")
+follow_focus = true
+horizontal_scroll_mode = 0
+
+[node name="ComboDisplayer" type="HBoxContainer" parent="UI/MarginContainer/HBoxContainer/VBoxContainer/ScrollContainer" node_paths=PackedStringArray("combo_handler", "timer_label", "combo_information_label", "combo_list")]
 layout_mode = 2
 script = ExtResource("56_qteqq")
-combo_handler = NodePath("../../../../../ComboHandler")
-timer_label = NodePath("../TimerLabel")
-combo_information_label = NodePath("../ComboInformation")
+combo_handler = NodePath("../../../../../../ComboHandler")
+timer_label = NodePath("../../TimerLabel")
+combo_information_label = NodePath("../../ComboInformation")
 combo_list = NodePath("ComboList")
 
-[node name="ComboList" type="VBoxContainer" parent="UI/MarginContainer/HBoxContainer/VBoxContainer/ComboDisplayer"]
+[node name="ComboList" type="VBoxContainer" parent="UI/MarginContainer/HBoxContainer/VBoxContainer/ScrollContainer/ComboDisplayer"]
 layout_mode = 2
 theme = ExtResource("56_gpyx0")
 
 [node name="MarginContainer" type="MarginContainer" parent="UI/MarginContainer/HBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
+size_flags_vertical = 0
 
 [node name="TextureRect" type="TextureRect" parent="UI/MarginContainer/HBoxContainer/MarginContainer"]
 layout_mode = 2
