@@ -38,7 +38,7 @@
 [ext_resource type="PackedScene" uid="uid://bhw3riwbqaxpk" path="res://src/Effects/DustParticle1.tscn" id="36_t12o1"]
 [ext_resource type="PackedScene" uid="uid://br3tr8mssgqev" path="res://src/Effects/GrindParticles.tscn" id="37_3qhnr"]
 [ext_resource type="Script" uid="uid://by4x4y0inwr7j" path="res://src/Characters/Player/Camera.gd" id="38_da3r7"]
-[ext_resource type="Script" uid="uid://ej0vgigcvcus" path="res://src/Characters/GUI/LifeBar.gd" id="39_51kdo"]
+[ext_resource type="Script" uid="uid://ej0vgigcvcus" path="res://src/GUI/LifeBar.gd" id="39_51kdo"]
 [ext_resource type="Texture2D" uid="uid://0bfw4lu2js4b" path="res://assets/art/gui/life_bar_bg.png" id="40_7b0dw"]
 [ext_resource type="Texture2D" uid="uid://scghoxayo4du" path="res://assets/art/gui/life_bar_fill.png" id="41_2rhbe"]
 [ext_resource type="Texture2D" uid="uid://c40av4lxtnfbo" path="res://assets/art/gui/ball_info_bg.png" id="42_j3ujs"]

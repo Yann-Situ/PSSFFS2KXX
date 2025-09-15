@@ -48,7 +48,7 @@
 [ext_resource type="PackedScene" uid="uid://bhw3riwbqaxpk" path="res://src/Effects/DustParticle1.tscn" id="36_iawlq"]
 [ext_resource type="PackedScene" uid="uid://br3tr8mssgqev" path="res://src/Effects/GrindParticles.tscn" id="37_3xxkx"]
 [ext_resource type="Script" uid="uid://pe5cg1vea7jt" path="res://src/Characters/Player/BallStateSystem/PowerState.gd" id="38_k30y4"]
-[ext_resource type="Script" uid="uid://ej0vgigcvcus" path="res://src/Characters/GUI/LifeBar.gd" id="39_4v41g"]
+[ext_resource type="Script" uid="uid://ej0vgigcvcus" path="res://src/GUI/LifeBar.gd" id="39_4v41g"]
 [ext_resource type="Script" uid="uid://bg1syixryyrbu" path="res://src/Characters/Player/BallStateSystem/NopowerState.gd" id="39_hb04j"]
 [ext_resource type="Script" uid="uid://ji03tbf46igu" path="res://src/Characters/Player/StateSystem/ActionStates/ShootPlayerState.gd" id="39_wv7j2"]
 [ext_resource type="Texture2D" uid="uid://0bfw4lu2js4b" path="res://assets/art/gui/life_bar_bg.png" id="40_acvag"]
@@ -61,7 +61,7 @@
 [ext_resource type="Script" uid="uid://bgnset7sdq8fl" path="res://src/Items/Activables/InteractionHandler.gd" id="49_ks5k2"]
 [ext_resource type="Texture2D" uid="uid://2hv3foaeug73" path="res://assets/art/effects/contour-light.png" id="56_4bgwo"]
 [ext_resource type="Theme" uid="uid://b8qe788vvlgia" path="res://assets/art/gui/theme-1.tres" id="56_gpyx0"]
-[ext_resource type="Script" uid="uid://b7ko74w1yc22g" path="res://src/Global/ComboSystem/ComboDisplayer.gd" id="56_qteqq"]
+[ext_resource type="Script" uid="uid://b7ko74w1yc22g" path="res://src/GUI/ComboDisplayer.gd" id="56_qteqq"]
 [ext_resource type="Script" uid="uid://dpqrgqb6ik2xa" path="res://src/Characters/Player/FullSpeedHandler.gd" id="61_vcynt"]
 [ext_resource type="Script" uid="uid://5f4w57txi2fj" path="res://src/Global/ComboSystem/ComboHandler.gd" id="63_cevr1"]
 
@@ -2340,7 +2340,7 @@ theme = ExtResource("56_gpyx0")
 theme_type_variation = &"TooltipLabel"
 
 [node name="ScrollContainer" type="ScrollContainer" parent="UI/MarginContainer/HBoxContainer/VBoxContainer"]
-custom_minimum_size = Vector2(32, 96)
+custom_minimum_size = Vector2(32, 112)
 layout_mode = 2
 theme = ExtResource("56_gpyx0")
 theme_override_styles/panel = SubResource("StyleBoxFlat_gpyx0")

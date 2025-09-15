@@ -24,15 +24,19 @@ func set_combo_handler(c: ComboHandler) -> void:
 	combo_handler.connect("end_combo", self.end_combo)
 
 func add_combo_element(combo_element: ComboElement) -> void:
-	var label = Label.new()
+	var label = JuicyControl1.new()
 	label.text = "%s (+%d x%.2f)" % [
 		combo_element.name,
 		combo_element.additional_score,
 		combo_element.additional_multiplier
 	]
+	label.juicy_show()
 	print(" - combo: "+label.text)
 	combo_list.add_child(label)
 	combo_list.move_child(label, 0)
+	if combo_list.get_child_count() > 4:
+		var old_label : JuicyControl1 = combo_list.get_child(4)
+		old_label.juicy_hide()
 
 func end_combo(final_score: int = 0) -> void:
 	timer_label.text = "Final Score: %d" % final_score
