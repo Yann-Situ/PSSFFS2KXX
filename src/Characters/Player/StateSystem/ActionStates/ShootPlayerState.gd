@@ -8,8 +8,11 @@ extends PlayerMovementState
 @export var dunkdash_state : State
 @export var dunkjump_state : State
 @export var fall_state : State
+@export var land_state : State
+@export var jump_state : State
 
 var end_shoot = false # set to true at the end of animation ["shoot"]
+var enter_on_floor = true
 
 func _ready():
 	animation_variations = [["shoot_floor_fwd"], ["shoot_floor_bwd"], ["shoot_floor_down"], 
@@ -28,19 +31,32 @@ func branch() -> State:
 	
 	# handle the end of the shoot
 	# handle shoot in shoot TODO
+	if !enter_on_floor and logic.floor.ing: # floor.ing and locally falling
+		return land_state
+	if enter_on_floor and logic.jump.can and !logic.jump_press_timer.is_stopped():
+		return jump_state
 	if end_shoot:
 		return fall_state
 	return self
 
 func enter(previous_state : State = null) -> State:
 	end_shoot = false
+	var next_state : State = self
+	## short version of branch():
 	if not logic.ball_handler.has_ball():
-		return fall_state
-
-	var next_state = branch()
+		next_state = fall_state
+	if logic.belong_ing:
+		next_state = belong_state
+	if logic.dunk.can and logic.accept.pressed:
+		next_state = dunk_state
+	if logic.dunkjump.can and logic.accept.just_pressed and logic.down.pressed:
+		next_state = dunkjump_state
+	if logic.dunkdash.can and logic.accept.just_pressed:
+		next_state = dunkdash_state
 	if next_state != self:
 		return next_state
-
+		
+	enter_on_floor = logic.floor.ing
 	logic.shoot.ing = true
 	logic.direction_sprite_change.can = false
 	# logic.action.ing is already set in PlayerStatusLogic.gd

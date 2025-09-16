@@ -1,11 +1,11 @@
 [gd_scene load_steps=19 format=3 uid="uid://b5emf4je4tnag"]
 
-[ext_resource type="PackedScene" uid="uid://cjbsx2kbm5qhk" path="res://src/Characters/OldPlayer/PlayerPosition.tscn" id="1"]
 [ext_resource type="Script" uid="uid://c0i7enuhfndt5" path="res://src/Levels/RoomAnimations.gd" id="3"]
 [ext_resource type="Shader" uid="uid://dhwnqn34yqisg" path="res://assets/shader/cinematic.gdshader" id="5_ct7gl"]
 [ext_resource type="TileSet" uid="uid://berkn1bildrf3" path="res://src/Map/TileSet32-base.tres" id="5_q68b4"]
 [ext_resource type="Texture2D" uid="uid://dndn6ajrce5h1" path="res://assets/art/background/pixelBackground7.png" id="6"]
 [ext_resource type="Texture2D" uid="uid://dcc4ug032gw0y" path="res://assets/art/background/pixelBackground3.png" id="7"]
+[ext_resource type="Texture2D" uid="uid://fu53nbwvypbd" path="res://assets/art/characters/Player.png" id="7_ofj87"]
 [ext_resource type="Texture2D" uid="uid://dyshcen77dpmo" path="res://assets/art/background/pixelBackground6.png" id="8"]
 [ext_resource type="TileSet" uid="uid://d4fjl28mlhsvo" path="res://src/Map/TileSet16-base.tres" id="9_jfdie"]
 [ext_resource type="Script" uid="uid://rv40lu31ihkg" path="res://src/Map/TilemapCollisionBaker.gd" id="10_kq0sn"]
@@ -204,15 +204,19 @@ metadata/_edit_use_anchors_ = true
 
 [node name="RoomAnimations" type="AnimationPlayer" parent="."]
 libraries = {
-"": SubResource("AnimationLibrary_lscg3")
+&"": SubResource("AnimationLibrary_lscg3")
 }
 script = ExtResource("3")
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
 environment = SubResource("3")
 
-[node name="PlayerPosition" parent="." instance=ExtResource("1")]
+[node name="PlayerPosition" type="Sprite2D" parent="."]
 position = Vector2(0, -32)
+texture = ExtResource("7_ofj87")
+hframes = 16
+vframes = 20
+frame = 48
 
 [node name="Map" type="Node2D" parent="."]
 z_as_relative = false

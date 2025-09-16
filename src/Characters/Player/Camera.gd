@@ -66,10 +66,10 @@ func set_offset_y_from_crouch(tween_speed = 0.2):
 
 ## set the camera offset x from a velocity
 func set_offset_x_from_velocity(velocity_x : float, tween_speed = 0.2):
-	if velocity_x > 0.0:
+	if velocity_x > 2.0:
 		target_offset.x = velocity_max_offset_DOWN_RIGHT.x * \
 			smoothstep(0.0, \
-			velocity_speed_threshold.x, abs(velocity_x))
+			velocity_speed_threshold.x, velocity_x)
 	else:
 		target_offset.x = - velocity_max_offset_UP_LEFT.x * \
 			smoothstep(0.0, \
@@ -81,7 +81,7 @@ func set_offset_y_from_velocity(velocity_y : float, tween_speed = 0.2):
 	if velocity_y > 0.0:
 		target_offset.y = velocity_max_offset_DOWN_RIGHT.y * \
 			smoothstep(0.0, \
-			velocity_speed_threshold.y, abs(velocity_y))
+			velocity_speed_threshold.y, velocity_y)
 	else:
 		target_offset.y = - velocity_max_offset_UP_LEFT.y * \
 			smoothstep(0.0, \

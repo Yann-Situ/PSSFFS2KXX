@@ -51,28 +51,28 @@ func anticipate_dash_velocity(current_position : Vector2, target_position : Vect
 
 ## see https://www.desmos.com/calculator/7ad0ypexxd?lang=fr
 ## here is the general formula. Note that `eigen_distance` should be strictly positive
-func shoot_velocity_formula(position:Vector2, eigen_distance:float=0.0, gravity:int=-1) -> Vector2:
+func shoot_velocity_formula(position:Vector2, eigen_distance:float=0.0, gravity:float=-1) -> Vector2:
 	if position == Vector2.ZERO or eigen_distance <= 0:
 		push_warning("non valid arguments: position="+str(position)+" eigen_distance="+str(eigen_distance))
 		return Vector2.ZERO
-	if gravity <= 0:
+	if gravity <= 0.0:
 		gravity = Global.default_gravity.y
 	var freq = sqrt(0.5 * abs(gravity) / eigen_distance)
 	return Vector2(position.x*freq, position.y*freq-eigen_distance*freq)
 
-func shoot_velocity_optimal(position:Vector2, gravity:int=-1) -> Vector2:
+func shoot_velocity_optimal(position:Vector2, gravity:float=-1) -> Vector2:
 	return shoot_velocity_formula(position, position.length(), gravity)
 
 ## bell_ratio is equal to eigen_distance/position.length()
 # bell_ratio > 1 gives a nice bell curve (higher curvature), whereas
 # bell_ratio > 1 gives a straighter curve (lower curvature)
-func shoot_velocity_bell_ratio(position:Vector2, bell_ratio:float = 1.0, gravity:int=-1) -> Vector2:
+func shoot_velocity_bell_ratio(position:Vector2, bell_ratio:float = 1.0, gravity:float=-1) -> Vector2:
 	return shoot_velocity_formula(position, bell_ratio * position.length(), gravity)
 	
 ## eigen_distance from position and velocity formula.
 # if the position is not reachable with velocity, then return -1.
-func eigen_distance_from_velocity_formula(position:Vector2, velocity:Vector2, gravity:int=-1, s:float = 0.0) -> float:
-	if gravity <= 0:
+func eigen_distance_from_velocity_formula(position:Vector2, velocity:Vector2, gravity:float=-1, s:float = 0.0) -> float:
+	if gravity <= 0.0:
 		gravity = Global.default_gravity.y
 	var r = velocity.length_squared()/gravity + position.y #pix #\frac{r^{2}}{g}-D_{y}
 	var delta = r*r - position.length_squared()
@@ -82,17 +82,17 @@ func eigen_distance_from_velocity_formula(position:Vector2, velocity:Vector2, gr
 		
 ## low eigen_distance (straight shoot) from position and velocity.
 # if the position is not reachable with velocity, then return -1.
-func eigen_distance_from_velocity_low(position:Vector2, velocity:Vector2, gravity:int=-1) -> float:
+func eigen_distance_from_velocity_low(position:Vector2, velocity:Vector2, gravity:float=-1) -> float:
 	return eigen_distance_from_velocity_formula(position, velocity, gravity, -1.0)
 
 ## high eigen_distance (loose shoot) from position and velocity.
 # if the position is not reachable with velocity, then return -1.
-func eigen_distance_from_velocity_high(position:Vector2, velocity:Vector2, gravity:int=-1) -> float:
+func eigen_distance_from_velocity_high(position:Vector2, velocity:Vector2, gravity:float=-1) -> float:
 	return eigen_distance_from_velocity_formula(position, velocity, gravity, +1.0)
 	
 ## nice formula for shoot velocity for a straight shoot with minimal velocity and min bell_ratio
-func shoot_velocity_straigt(position:Vector2, min_velocity:Vector2, bell_ratio:float = 1.0, gravity:int=-1) -> Vector2:
-	if gravity <= 0:
+func shoot_velocity_straigt(position:Vector2, min_velocity:Vector2, bell_ratio:float = 1.0, gravity:float=-1) -> Vector2:
+	if gravity <= 0.0:
 		gravity = Global.default_gravity.y
 	var eigen_dist = eigen_distance_from_velocity_low(position, min_velocity, gravity)
 	if eigen_dist < 0.0: # if min_velocity is not enough

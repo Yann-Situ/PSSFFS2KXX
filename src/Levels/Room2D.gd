@@ -6,8 +6,6 @@ class_name Room2D
 signal is_exiting_room
 signal is_exiting_level
 
-@export var using_old_player : bool = false
-
 @export var limit_left : int = -10000000 # : set = set_limit_left
 @export var limit_top : int = -10000000 # : set = set_limit_top
 @export var limit_right : int = 10000000 # : set = set_limit_right
@@ -82,10 +80,7 @@ func _enter_tree():
 		#print("No meta player : create one and assign meta_player")
 		Global.set_current_room(self)
 		var player_scene = null
-		if using_old_player:
-			player_scene = load("res://src/Characters/OldPlayer/OldPlayer.tscn")
-		else:
-			player_scene = load("res://src/Characters/Player/Player.tscn")
+		player_scene = load("res://src/Characters/Player/Player.tscn")
 		var player = player_scene.instantiate()
 		self.add_child(player) #move it to the appropriate position
 		meta_player = player.get_path()

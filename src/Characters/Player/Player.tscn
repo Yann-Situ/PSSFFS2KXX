@@ -2202,7 +2202,7 @@ player = NodePath("../..")
 logic = NodePath("../StatusLogic")
 animation_player = NodePath("../../Flipper/Sprite2D/PlayerAnimation")
 
-[node name="Shoot" type="Node" parent="StateMachine/ActionStates" node_paths=PackedStringArray("selectable_handler", "belong_state", "dunk_state", "dunkdash_state", "dunkjump_state", "fall_state", "player", "logic", "animation_player")]
+[node name="Shoot" type="Node" parent="StateMachine/ActionStates" node_paths=PackedStringArray("selectable_handler", "belong_state", "dunk_state", "dunkdash_state", "dunkjump_state", "fall_state", "land_state", "jump_state", "player", "logic", "animation_player")]
 script = ExtResource("39_wv7j2")
 selectable_handler = NodePath("../../../Flipper/SelectableHandler")
 belong_state = NodePath("../../BelongStates")
@@ -2210,6 +2210,8 @@ dunk_state = NodePath("../Dunk")
 dunkdash_state = NodePath("../Dunkdash")
 dunkjump_state = NodePath("../Dunkjump")
 fall_state = NodePath("../../AirStates/Fall")
+land_state = NodePath("../../GroundStates/Land")
+jump_state = NodePath("../../AirStates/Jump")
 player = NodePath("../../..")
 logic = NodePath("../../StatusLogic")
 animation_player = NodePath("../../../Flipper/Sprite2D/PlayerAnimation")
