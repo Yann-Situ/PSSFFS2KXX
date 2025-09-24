@@ -1,10 +1,11 @@
-[gd_scene load_steps=16 format=3 uid="uid://c6cdyqr51vbxh"]
+[gd_scene load_steps=17 format=3 uid="uid://c6cdyqr51vbxh"]
 
 [ext_resource type="Texture2D" uid="uid://cmdquuanqily4" path="res://assets/art/environment/graff-spray.png" id="1"]
 [ext_resource type="Shader" uid="uid://cu5kmhnjvihef" path="res://assets/shader/graff-spray.gdshader" id="2"]
 [ext_resource type="Script" uid="uid://n8uf8obgcjrp" path="res://src/Items/Interactive/GraffSpray.gd" id="3"]
 [ext_resource type="Texture2D" uid="uid://ctiuc3lmtrgkb" path="res://assets/art/effects/light2.png" id="4"]
 [ext_resource type="Texture2D" uid="uid://d33u8f6bfhj4m" path="res://assets/art/effects/round.png" id="5"]
+[ext_resource type="AudioStream" path="res://assets/sound/ping0.mp3" id="6_03jnl"]
 [ext_resource type="AudioStream" uid="uid://c3v24lptcfs3u" path="res://assets/sound/cheer1.mp3" id="6_dhhxn"]
 
 [sub_resource type="CanvasItemMaterial" id="24"]
@@ -270,8 +271,14 @@ collision_mask = 5
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
 shape = SubResource("21")
 
-[node name="AudioGoal" type="AudioStreamPlayer" parent="."]
+[node name="AudioCheers" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("6_dhhxn")
+volume_db = -4.0
+bus = &"Effects"
+
+[node name="AudioPing" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("6_03jnl")
+volume_db = -8.0
 bus = &"Effects"
 
 [connection signal="body_entered" from="Area2D" to="." method="_on_Area2D_body_entered"]

@@ -5,6 +5,8 @@ class_name ComboHandler
 signal end_combo(final_score : int)
 signal combo_element_added(combo_element : ComboElement)
 
+@export var audio_add_element : AudioStreamPlayer
+
 var combo_elements : Array[ComboElement] = []
 var current_score : int = 0 : get = get_current_score
 var current_multiplier : float = 0.0 : get = get_current_multiplier
@@ -27,6 +29,9 @@ func add_combo_element(combo_element : ComboElement) -> void :
 	combo_elements.append(combo_element)
 	update_timer(max(combo_element.remaining_time, remaining_time+combo_element.remaining_time*0.25))
 	emit_signal("combo_element_added", combo_element)
+	if audio_add_element:
+		audio_add_element.play()
+		audio_add_element.pitch_scale += 0.07
 
 func update_timer(time : float) -> void :
 	remaining_time = max(remaining_time, time)
@@ -57,3 +62,5 @@ func _reset_combo() -> void :
 	current_score = 0
 	current_multiplier = 0.0
 	remaining_time = 0.0
+	if audio_add_element:
+		audio_add_element.pitch_scale = 1.0

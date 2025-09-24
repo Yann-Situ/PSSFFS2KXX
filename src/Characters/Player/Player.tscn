@@ -1,4 +1,4 @@
-[gd_scene load_steps=134 format=3 uid="uid://dlfptvxh6yjwm"]
+[gd_scene load_steps=136 format=3 uid="uid://dlfptvxh6yjwm"]
 
 [ext_resource type="Script" uid="uid://iq3ldov5m6d4" path="res://src/Characters/Player/Player.gd" id="1_b7wqc"]
 [ext_resource type="Script" uid="uid://dfx61mby34ob" path="res://src/Characters/Player/MovementData.gd" id="2_0ukhp"]
@@ -63,7 +63,9 @@
 [ext_resource type="Theme" uid="uid://b8qe788vvlgia" path="res://assets/art/gui/theme-1.tres" id="56_gpyx0"]
 [ext_resource type="Script" uid="uid://b7ko74w1yc22g" path="res://src/GUI/ComboDisplayer.gd" id="56_qteqq"]
 [ext_resource type="Script" uid="uid://dpqrgqb6ik2xa" path="res://src/Characters/Player/FullSpeedHandler.gd" id="61_vcynt"]
+[ext_resource type="AudioStream" uid="uid://j7815tpaeyh5" path="res://assets/sound/pings/ping5.mp3" id="62_7urpy"]
 [ext_resource type="Script" uid="uid://5f4w57txi2fj" path="res://src/Global/ComboSystem/ComboHandler.gd" id="63_cevr1"]
+[ext_resource type="AudioStream" uid="uid://bnrbmd8c7fo5q" path="res://assets/sound/pings/ping3.mp3" id="63_cf3i5"]
 
 [sub_resource type="Resource" id="Resource_5o1rd"]
 script = ExtResource("2_0ukhp")
@@ -2429,8 +2431,21 @@ size_flags_horizontal = 8
 text = "state"
 horizontal_alignment = 2
 
-[node name="ComboHandler" type="Node" parent="."]
+[node name="ComboHandler" type="Node" parent="." node_paths=PackedStringArray("audio_add_element")]
 script = ExtResource("63_cevr1")
+audio_add_element = NodePath("AudioAddElement")
+
+[node name="AudioAddElement" type="AudioStreamPlayer" parent="ComboHandler"]
+stream = ExtResource("62_7urpy")
+volume_db = -12.0
+max_polyphony = 6
+bus = &"Effects"
+
+[node name="AudioEndCombo" type="AudioStreamPlayer" parent="ComboHandler"]
+stream = ExtResource("63_cf3i5")
+volume_db = -12.0
+max_polyphony = 3
+bus = &"Effects"
 
 [node name="LifeHandler" type="Node2D" parent="."]
 visible = false
@@ -2463,3 +2478,4 @@ metadata/_edit_lock_ = true
 [connection signal="body_entered" from="Flipper/BallHandler" to="Flipper/BallHandler" method="_on_Ball_Handler_body_entered"]
 [connection signal="body_entered" from="Flipper/BallHandler/BallWallDetector" to="Flipper/BallHandler" method="_on_BallWallDetector_body_entered"]
 [connection signal="body_exited" from="Flipper/BallHandler/BallWallDetector" to="Flipper/BallHandler" method="_on_BallWallDetector_body_exited"]
+[connection signal="end_combo" from="ComboHandler" to="ComboHandler/AudioEndCombo" method="play" unbinds=1]

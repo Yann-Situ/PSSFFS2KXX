@@ -32,6 +32,7 @@ func branch() -> State:
 	# handle the end of the shoot
 	# handle shoot in shoot TODO
 	if !enter_on_floor and logic.floor.ing: # floor.ing and locally falling
+		land_state.set_variation(0)
 		return land_state
 	if enter_on_floor and logic.jump.can and !logic.jump_press_timer.is_stopped():
 		return jump_state

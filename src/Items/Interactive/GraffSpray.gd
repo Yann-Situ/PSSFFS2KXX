@@ -40,9 +40,10 @@ func collect():
 	spray_collected.emit(self)
 	GlobalEffect.make_distortion(self.global_position, 0.5, "subtle")
 	$AnimationPlayer.play("collect")
-	$AudioGoal.play()
+	$AudioCheers.play()
+	$AudioPing.play()
 	GlobalEffect.bus_fade("MusicMaster", 0.1, NAN, -10)
 	##await $AnimationPlayer.animation_finished
-	await $AudioGoal.finished
+	await $AudioCheers.finished
 	GlobalEffect.bus_fade_in("MusicMaster", 0.1)
 	queue_free()
