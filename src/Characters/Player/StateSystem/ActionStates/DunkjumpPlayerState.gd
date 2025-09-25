@@ -83,7 +83,7 @@ func enter(previous_state : State = null) -> State:
 	GlobalEffect.bus_highpass_fade_out("MusicMaster", 0.03, 880)
 
 	var element = ComboElement.new()
-	element.name = "Dunk"
+	element.name = "DunkJump"
 	element.additional_score = 200
 	element.additional_multiplier = 0.25
 	element.remaining_time = 3.0

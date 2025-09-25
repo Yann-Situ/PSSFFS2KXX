@@ -1,4 +1,4 @@
-[gd_scene load_steps=136 format=3 uid="uid://dlfptvxh6yjwm"]
+[gd_scene load_steps=137 format=3 uid="uid://dlfptvxh6yjwm"]
 
 [ext_resource type="Script" uid="uid://iq3ldov5m6d4" path="res://src/Characters/Player/Player.gd" id="1_b7wqc"]
 [ext_resource type="Script" uid="uid://dfx61mby34ob" path="res://src/Characters/Player/MovementData.gd" id="2_0ukhp"]
@@ -62,6 +62,7 @@
 [ext_resource type="Texture2D" uid="uid://2hv3foaeug73" path="res://assets/art/effects/contour-light.png" id="56_4bgwo"]
 [ext_resource type="Theme" uid="uid://b8qe788vvlgia" path="res://assets/art/gui/theme-1.tres" id="56_gpyx0"]
 [ext_resource type="Script" uid="uid://b7ko74w1yc22g" path="res://src/GUI/ComboDisplayer.gd" id="56_qteqq"]
+[ext_resource type="Script" uid="uid://gty33tndku2" path="res://src/GUI/JuicyControl1.gd" id="57_xijkp"]
 [ext_resource type="Script" uid="uid://dpqrgqb6ik2xa" path="res://src/Characters/Player/FullSpeedHandler.gd" id="61_vcynt"]
 [ext_resource type="AudioStream" uid="uid://j7815tpaeyh5" path="res://assets/sound/pings/ping5.mp3" id="62_7urpy"]
 [ext_resource type="Script" uid="uid://5f4w57txi2fj" path="res://src/Global/ComboSystem/ComboHandler.gd" id="63_cevr1"]
@@ -2337,6 +2338,10 @@ tint_under = Color(1, 0.552941, 0.890196, 1)
 layout_mode = 2
 theme = ExtResource("56_gpyx0")
 theme_type_variation = &"HeaderSmall"
+theme_override_font_sizes/font_size = 20
+script = ExtResource("57_xijkp")
+shake_times = 5
+metadata/_custom_type_script = "uid://gty33tndku2"
 
 [node name="TimerLabel" type="Label" parent="UI/MarginContainer/HBoxContainer/VBoxContainer"]
 layout_mode = 2

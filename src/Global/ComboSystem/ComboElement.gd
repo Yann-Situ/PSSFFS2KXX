@@ -7,3 +7,4 @@ class_name ComboElement
 @export var additional_multiplier : float = 0.0
 @export var remaining_time : float = 0.0
 # @export var additional_score_damping : float = 1.0 # not yet implemented TODO
+var count = 0

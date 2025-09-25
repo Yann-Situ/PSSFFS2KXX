@@ -5,7 +5,7 @@
 [ext_resource type="Script" uid="uid://n8uf8obgcjrp" path="res://src/Items/Interactive/GraffSpray.gd" id="3"]
 [ext_resource type="Texture2D" uid="uid://ctiuc3lmtrgkb" path="res://assets/art/effects/light2.png" id="4"]
 [ext_resource type="Texture2D" uid="uid://d33u8f6bfhj4m" path="res://assets/art/effects/round.png" id="5"]
-[ext_resource type="AudioStream" path="res://assets/sound/ping0.mp3" id="6_03jnl"]
+[ext_resource type="AudioStream" uid="uid://bqy1k3beghrpd" path="res://assets/sound/pings/ping0.mp3" id="6_03jnl"]
 [ext_resource type="AudioStream" uid="uid://c3v24lptcfs3u" path="res://assets/sound/cheer1.mp3" id="6_dhhxn"]
 
 [sub_resource type="CanvasItemMaterial" id="24"]
@@ -278,7 +278,7 @@ bus = &"Effects"
 
 [node name="AudioPing" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("6_03jnl")
-volume_db = -8.0
+volume_db = -10.0
 bus = &"Effects"
 
 [connection signal="body_entered" from="Area2D" to="." method="_on_Area2D_body_entered"]

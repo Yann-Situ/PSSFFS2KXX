@@ -16,7 +16,7 @@ func juicy_show():
 	self.visible = true
 	self.scale = Vector2(0.5, 0.5)
 	self.modulate.a = 0.0
-	self.position = Vector2.ZERO
+	#self.position = Vector2.ZERO
 
 	# Animate text pop-in (scale + fade in)
 	tween.tween_property(self, "modulate:a", 1.0, 0.1).set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_OUT)
@@ -26,8 +26,8 @@ func juicy_show():
 		var angle = randf_range(0.0, TAU)
 		var direction = Vector2(cos(angle), sin(angle))
 		var offset = direction * shake_strength
-		tween.parallel().tween_property(self, "position", offset, 0.03).set_delay(0.25 + i * 0.03)
-	tween.parallel().tween_property(self, "position", Vector2.ZERO, 0.05).set_delay(0.25 + shake_times * 0.03)
+		tween.parallel().tween_property(self, "position", self.position+offset, 0.03).set_delay(0.25 + i * 0.03)
+	tween.parallel().tween_property(self, "position", self.position, 0.05).set_delay(0.25 + shake_times * 0.03)
 	tween.tween_property(self, "scale", Vector2(1.0, 1.0), 0.1).set_delay(0.0)
 
 	## Optional: Auto hide
@@ -47,8 +47,8 @@ func juicy_update():
 			var angle = randf_range(0.0, TAU)
 			var direction = Vector2(cos(angle), sin(angle))
 			var offset = direction * shake_strength
-			tween.parallel().tween_property(self, "position", offset, 0.03).set_delay(0.25 + i * 0.03)
-		tween.parallel().tween_property(self, "position", Vector2.ZERO, 0.05).set_delay(0.25 + shake_times * 0.03)
+			tween.parallel().tween_property(self, "position", self.position+offset, 0.03).set_delay(0.25 + i * 0.03)
+		tween.parallel().tween_property(self, "position", self.position, 0.05).set_delay(0.25 + shake_times * 0.03)
 		tween.tween_property(self, "scale", Vector2(1.0, 1.0), 0.1).set_delay(0.0)
 	else:
 		juicy_show()
