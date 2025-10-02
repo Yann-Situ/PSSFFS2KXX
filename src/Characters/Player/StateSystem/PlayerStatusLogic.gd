@@ -64,6 +64,11 @@ var holder_change = false # if the holder just changed # reset to false by belon
 # ing is when the direction changed in this frame
 # can is if the direction can change in this frame
 
+## misc:
+var alleyoop = false # true if on_air and a ball was picked up in the air
+func _on_ball_picked_set_alleyoop(ball : Ball):
+	alleyoop = !floor.ing
+
 ##timers
 @onready var jump_press_timer : Timer = $JumpPressTimer
 @onready var dunkjump_press_timer : Timer = $DunkJumpPressTimer
@@ -227,7 +232,10 @@ func update_status():
 		# we need to change sprite direction
 		player.set_flip_h(direction_pressed.x < 0)
 		direction_sprite *= -1
-
+		
+	# misc, for combos and juice
+	alleyoop = alleyoop and !floor.ing
+	
 ################################################################################
 
 func _on_belong_handler_holder_changed(new_holder):

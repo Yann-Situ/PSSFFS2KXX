@@ -2475,6 +2475,7 @@ metadata/_edit_lock_ = true
 
 [connection signal="picking" from="BallHolder" to="Flipper/EffectHandler/GhostHandler" method="set_gradient_from_ball"]
 [connection signal="picking" from="BallHolder" to="Flipper/EffectHandler/SpeedGhostHandler" method="set_gradient_from_ball"]
+[connection signal="picking" from="BallHolder" to="StateMachine/StatusLogic" method="_on_ball_picked_set_alleyoop"]
 [connection signal="picking" from="BallHolder" to="." method="collision_mask_add_ballwall" unbinds=1]
 [connection signal="processing_ball" from="BallHolder" to="Flipper/BallHandler" method="set_has_ball_position" unbinds=1]
 [connection signal="releasing" from="BallHolder" to="." method="collision_mask_remove_ballwall" unbinds=1]

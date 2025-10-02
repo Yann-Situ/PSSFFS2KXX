@@ -9,12 +9,12 @@
 friction = 0.7
 bounce = 0.4
 
-[sub_resource type="Gradient" id="Gradient_px6ih"]
+[sub_resource type="Gradient" id="Gradient_vrt2x"]
 offsets = PackedFloat32Array(0, 0.33, 0.6, 0.87, 1)
 colors = PackedColorArray(0.02184, 0.02184, 0.104, 1, 0.1092, 0.1092, 0.52, 1, 0.712, 0, 0.89, 1, 0.31, 0.5745, 1, 1, 0.793, 0.87235, 1, 1)
 
-[sub_resource type="GradientTexture1D" id="GradientTexture1D_l6kbn"]
-gradient = SubResource("Gradient_px6ih")
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_vmv3y"]
+gradient = SubResource("Gradient_vrt2x")
 width = 64
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_7n8aa"]
@@ -22,20 +22,20 @@ resource_local_to_scene = true
 shader = ExtResource("3_1vb0o")
 shader_parameter/intensity = 1.0
 shader_parameter/main_color = Color(0.55, 0.52, 0.45, 1)
-shader_parameter/gradient = SubResource("GradientTexture1D_l6kbn")
+shader_parameter/gradient = SubResource("GradientTexture1D_vmv3y")
 shader_parameter/contour_activated = false
 shader_parameter/contour_color = Color(1.2, 1, 0.9, 0.65)
 shader_parameter/hurtbox_activated = false
 
-[sub_resource type="Gradient" id="Gradient_2ow2a"]
+[sub_resource type="Gradient" id="Gradient_yr8oo"]
 offsets = PackedFloat32Array(0, 0.25, 0.5, 0.75, 1)
 colors = PackedColorArray(0.1092, 0.1092, 0.52, 0, 0.1092, 0.1092, 0.52, 1, 0.712, 0, 0.89, 1, 0.31, 0.5745, 1, 0.8, 0.31, 0.5745, 1, 0)
 
-[sub_resource type="Gradient" id="Gradient_rsu40"]
+[sub_resource type="Gradient" id="Gradient_rkyqf"]
 offsets = PackedFloat32Array(0, 0.25, 0.5, 0.75, 1)
 colors = PackedColorArray(0.1092, 0.1092, 0.52, 0, 0.1092, 0.1092, 0.52, 1, 0.712, 0, 0.89, 1, 0.31, 0.5745, 1, 0.8, 0.31, 0.5745, 1, 0)
 
-[sub_resource type="Gradient" id="Gradient_37ylc"]
+[sub_resource type="Gradient" id="Gradient_rguaw"]
 offsets = PackedFloat32Array(0, 0.2, 0.5, 0.8, 1)
 colors = PackedColorArray(0.31, 0.5745, 1, 0, 0.31, 0.5745, 1, 1, 0.712, 0, 0.89, 0.68, 0.1092, 0.1092, 0.52, 0.35, 0.1092, 0.1092, 0.52, 0)
 
@@ -251,20 +251,20 @@ col2 = Color(0.712, 0, 0.89, 1)
 col3 = Color(0.1092, 0.1092, 0.52, 1)
 
 [node name="Reconstruction" parent="Visuals" index="1"]
-color_ramp = SubResource("Gradient_2ow2a")
+color_ramp = SubResource("Gradient_yr8oo")
 
 [node name="Destruction" parent="Visuals" index="2"]
-color_ramp = SubResource("Gradient_rsu40")
+color_ramp = SubResource("Gradient_rkyqf")
 
 [node name="DunkParticles" parent="Visuals" index="3"]
-color_ramp = SubResource("Gradient_37ylc")
+color_ramp = SubResource("Gradient_rguaw")
 
 [node name="collision" parent="." index="1"]
 shape = SubResource("4")
 
 [node name="Animation" parent="." index="3"]
 libraries = {
-"": SubResource("AnimationLibrary_hmq33")
+&"": SubResource("AnimationLibrary_hmq33")
 }
 
 [node name="DashArea" type="Area2D" parent="." index="4" node_paths=PackedStringArray("parent_node")]
@@ -272,6 +272,7 @@ collision_layer = 40
 collision_mask = 0
 script = ExtResource("4")
 parent_node = NodePath("..")
+is_shoot_selectable = false
 is_jump_selectable = false
 is_dunk_selectable = false
 shoot_bell_ratio = 0.33

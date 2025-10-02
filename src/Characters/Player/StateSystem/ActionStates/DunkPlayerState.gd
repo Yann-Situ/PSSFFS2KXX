@@ -76,7 +76,10 @@ func enter(previous_state : State = null) -> State:
 	#GlobalEffect.bus_lowpass_fade("MusicMaster", 0.3, 220, 10000, false)
 	
 	var element = ComboElement.new()
-	element.name = "Dunk"
+	if logic.alleyoop:
+		element.name = "Alley Oop"
+	else:
+		element.name = "Dunk"
 	element.additional_score = 400
 	element.additional_multiplier = 0.5
 	element.remaining_time = 3.0
